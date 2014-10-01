@@ -1,0 +1,143 @@
+/******************************************  
+ CUSTOM STYLESHEET
+*******************************************/
+
+/*
+* You can place your custom CSS statements in this file, after this message.
+* It is better to write everything custom here
+* because this file won't be replaced during updates.
+* 
+* Simply copy an existing style from style.css to this file, 
+* and modify it to your liking.
+*/
+
+.category-banner {
+    margin-bottom: 20px;
+    padding: 5px 0;
+    width: 100%;    
+}
+
+.category-banner a {
+    color: #fff;
+    font-family: Georgia, Times, "Times New Roman", serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.category-banner a:last-child {
+    font-size: 10px;
+}
+
+.category-banner a:first-child {
+    margin-left: 15px;
+    font-size: 18px;
+}
+
+.category-banner a:hover {
+    text-decoration: underline;
+}
+
+/* 
+    Custom Hero Image
+*/
+
+.hero-image,
+.hero-image a {
+    height: 333px;
+}
+
+.hero-image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    float: right;
+    width: 77%;
+}
+
+.hero-image a {
+    display: block;
+    width: 100%;
+}
+
+.hero-post {
+    float: left;
+    width: 22%;
+}
+
+.hero-post p {
+    font-size: 95%;
+}
+
+@media screen and (max-width: 770px) {
+    .hero-post, .hero-image {
+        float: none;
+        width: 100%;
+    }
+
+    .hero-image {
+        margin-bottom: 10px;
+    }
+}
+
+/*
+    Post Titles
+*/
+
+.post-heading,
+.post-meta,
+h1.title {    
+    /* Override/reset post titles. */
+    /* By default these display as table elements. */
+    display: block;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    width: auto;
+}
+
+.post-heading,
+.post-meta,
+.post-meta-alt,
+.title {
+    box-sizing: border-box;
+}
+
+.post-heading {
+    overflow: auto;
+    padding: 0 4%;
+}
+
+.post-heading:after {
+    /* Clear floats. */ 
+    clear: both;
+    display: table;
+}
+
+.post-meta,
+.post-meta-alt,
+.title {
+    float: left;
+}
+
+.post-meta {
+    /* background-image is set in single.php */ 
+    background-origin: content-box;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    padding: 10px 2% 0 0;
+    width: 17%;
+}
+
+.post-meta-alt,
+.title {
+    padding: 0 2%;
+    width: 83%;
+}
+
+.title h1 {
+    font: bold 32px 'Merriweather', Georgia, serif;
+    /* In style.css no unit is given for line-height.
+    The rule is invalid and therefore discarded. */
+    line-height: 1.3em;
+}

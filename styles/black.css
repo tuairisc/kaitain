@@ -1,0 +1,116 @@
+body { 
+	color:#555;
+	background: #1E1E1E;
+}	
+
+a { color: #565656; text-decoration:none; }
+a:hover { color:#FF3E06; text-decoration:none;}
+
+.inner-wrap {
+	border:none;
+}
+
+
+#header {
+ 	background: #000;
+}
+
+#logo a {
+	color: #fff;
+	text-shadow:none;
+}
+
+#menu {
+	border: 1px solid #000;
+	border-bottom: none;
+ 	background: #222;
+}
+
+#header #searchform {
+ 	border: 1px solid #D8D8D8;
+	box-shadow: none;
+}
+
+.dropdown a {
+	color: #fff;
+}
+
+.dropdown a:hover {
+    background:#fff;
+    color:#333;
+}
+
+.dropdown ul {
+	background:#000;
+}
+
+
+.dropdown li:hover a {
+	background:#fff;
+	color:#333;
+}
+
+.dropdown li ul li a {
+    color:#333;
+}
+
+.dropdown li:hover ul a {
+    color:#333;
+}
+
+.dropdown > li:after {
+	content: '|';
+	font-size: 15px;
+	color:#333;
+}
+
+.dropdown .current_page_item a,
+.dropdown .current-cat a,
+.dropdown .current-menu-item a,
+.dropdown .current_page_item a,
+.dropdown .current-cat a,
+.dropdown .current-menu-item a,
+.dropdown .current-post-parent a {
+ 	color: #333;
+ 	background: #fff;
+ }
+
+.dropdown li:hover li a:hover {
+    background:#333;
+}
+
+
+#slider .date {  background-color: #FF3E06; }
+#slider #slides h2 a:hover { color: #FF3E06; }
+#slider_nav .item a:hover { color: #FF3E06; } 
+#slider_nav .item:hover a, #slider_nav .item.current a { color: #FF3E06; }
+
+#slider {background: #F6F6F6;}
+#slider #slides { background: #000; }
+#slider_nav .item { border-bottom: 1px solid #ECECEC; }
+
+#slider_nav .item a { color: #565656; }
+
+.meta-author a { color: #FF3E06; }
+
+ul.tabbernav li a:hover { color: #FF3E06;  }
+ul.tabbernav li.tabberactive { border-right: 1px solid #FF3E06; background: #FF3E06;  }
+ul.tabbernav li.tabberactive a:hover{ color:#fff;}
+ 
+
+#footer a:hover { color: #FF3E06; }
+#footer .widget .title { color:#fff;}
+ 
+.category-widget.dark-skin h2.title {   color:#FF3E06; }
+.category-widget.dark-skin h2.title a { color:#FF3E06; } 
+.category-widget.dark-skin li a:hover { color:#FF3E06; } 
+.wztw-container .tabs li a { color: #FF3E06;  }
+
+
+@media screen and (max-width: 768px) {
+    .btn_menu {   background:#555 url('../images/menu.png') 8px 9px no-repeat !important;   }
+
+     .dropdown li ul li a {
+    color:#fff !important;
+}
+}

@@ -1,0 +1,34 @@
+/* Blame mark@bhalash.com for this. */
+
+/*
+ * .g-1 : header banner
+ * .g-2 : sidebar widgets
+ * .g-3 : footer banner
+ */
+
+.g a {
+    max-width: 100%;
+    overflow: auto;
+    text-align: center;
+}
+
+.g img {
+    display: none;
+    float: left;
+    height: auto;
+    max-width: 100%;
+}
+
+.g img:after {
+    clear: both;
+    display: table;
+}
+
+.g-1, .g-3 {
+    padding: 15px 0 !important;
+}
+
+.g-2 .g-col {
+    margin-bottom: 15px;
+    width: 100%;
+}
