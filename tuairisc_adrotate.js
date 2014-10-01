@@ -23,19 +23,35 @@ var adGroups = {
     footer  : '.g-3'    
 }
 
+function imageExists(img) {
+    // Check if the file exists on the server.
+    var exists = false;
+
+    $.ajax({
+        url: img,
+        type: 'HEAD',
+        dataType: 'image',
+        success:function() {
+            exists = true;
+        }
+    });
+
+    return exists;
+}
+
 function swapAdvertImage(obj) {
     // Swap mobile and desktop image sizes. 
     $(obj).find('img').each(function() {
         var img = $(this).attr('src');
+        console.log(img);
 
-        if ($(window).width() > mobileBreak)
-            if (img.indexOf(imgSuffix.desktop) == -1)
+        if ($(window).width() > mobileBreak) {
+            if (img.indexOf(imgSuffix.desktop) == -1 && imageExists(img))
                 img = img.replace(imgSuffix.mobile, imgSuffix.desktop);  
-
-        
-        if ($(window).width() <= mobileBreak)
-            if (img.indexOf(imgSuffix.mobile) == -1)
+        } else if ($(window).width() <= mobileBreak) {
+            if (img.indexOf(imgSuffix.mobile) == -1 && imageExists(img))
                 img = img.replace(imgSuffix.desktop, imgSuffix.mobile);
+        }
 
         $(this).attr('src', img);
     });

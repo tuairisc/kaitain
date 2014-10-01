@@ -3,14 +3,14 @@
 /* You can add custom functions below, in the empty area
 =========================================================== */
 
-function get_parent_id($cat) {
+function get_parent_id($cat_id) {
     // Return the ID of the top parent of any category.
-    $parent = get_category_parents($cat, false, '/'); 
+    $parent = get_category_parents($cat_id, false, '/'); 
     $parent = preg_replace('/\/.*/', '', $parent); 
     return get_cat_id($parent); 
 }
 
-function get_cat_color($cat) {
+function get_cat_color($cat_id) {
     // Return a unique colour for each given parent category.
 
     /*
@@ -18,22 +18,24 @@ function get_cat_color($cat) {
     -----------------------------------------
     1 Nuacht          #516671     191  
     2 Tuairmíocht     #8eb2d3     154   
-    3 Spoirt          #f1db81     155
+    3 Spoirt          #c54b54     155
     4 Cultúr          #96c381     156
     5 Saol            #e04184     157
     6 Pobal           #7d5e90     159
-    7 Greann          #c54b54     158
+    7 Greann          #e6192a     158
     8 Foghlaimeoirí   #d4bb85     187
     */
 
-    $cat = get_parent_id($cat);
+    // browser_console_log($cat_id);
+
+    $cat_id = get_parent_id($cat_id);
 
     $cat_colors = array(
         154 => '#8eb2d3',
-        155 => '#f1db81',
+        155 => '#c54b54',
         156 => '#96c381',
         157 => '#e04184',
-        158 => '#c54b54',
+        158 => '#e6192a',
         159 => '#7d5e90',
         187 => '#d4bb85',
         191 => '#516671',
@@ -41,20 +43,27 @@ function get_cat_color($cat) {
         999 => '#c7c009',
     );
 
-    switch($cat) {
-        case 154: $color = $cat_colors[$cat]; break;
-        case 155: $color = $cat_colors[$cat]; break;
-        case 156: $color = $cat_colors[$cat]; break;
-        case 157: $color = $cat_colors[$cat]; break;
-        case 158: $color = $cat_colors[$cat]; break;
-        case 159: $color = $cat_colors[$cat]; break;
-        case 187: $color = $cat_colors[$cat]; break;
-        case 187: $color = $cat_colors[$cat]; break;
-        case 191: $color = $cat_colors[$cat]; break;
+    switch($cat_id) {
+        case 154: $color = $cat_colors[$cat_id]; break;
+        case 155: $color = $cat_colors[$cat_id]; break;
+        case 156: $color = $cat_colors[$cat_id]; break;
+        case 157: $color = $cat_colors[$cat_id]; break;
+        case 158: $color = $cat_colors[$cat_id]; break;
+        case 159: $color = $cat_colors[$cat_id]; break;
+        case 187: $color = $cat_colors[$cat_id]; break;
+        case 187: $color = $cat_colors[$cat_id]; break;
+        case 191: $color = $cat_colors[$cat_id]; break;
         default: $color = $cat_colors[999]; break;
     }
 
     return $color;
+}
+
+function asnc_banner($cat_id) {
+    // The asnc category (179) must be taller in order to differentiate content.
+    $asnc_cat = 158;
+    $asnc_banner = 'asnc-category-banner';
+    return ($cat_id == $asnc_cat) ? $asnc_banner : '';
 }
 
 function get_thumbnail_url($post_ID) {
@@ -64,13 +73,13 @@ function get_thumbnail_url($post_ID) {
     return $thumb_url[0];
 }
 
-function get_excerpt($count){
+function get_excerpt($count) {
     // Returns a shortened excerpt of $count characters.
     $permalink = get_permalink($post->ID);
-    $excerpt = get_the_content();
+    $excerpt = get_the_excerpt();
     $excerpt = strip_tags($excerpt);
     $excerpt = substr($excerpt, 0, $count);
-    $excerpt = substr($excerpt, 0, strripos($excerpt, " "));
+    $excerpt = substr($excerpt, 0, strripos($excerpt, ' '));
     $excerpt = $excerpt . '<a class="more-link" href="' . $permalink . '">Read More</a>';
     return $excerpt;
 }
@@ -96,7 +105,7 @@ function has_local_avatar($user_id) {
     $avatar_url = get_avatar_url($user_id, 200);
     return (strpos($avatar_url, $home_url) === false) ? false : true;
 }
- 
+
 /*  Don't add any code below here or the sky will fall down
 =========================================================== */
 

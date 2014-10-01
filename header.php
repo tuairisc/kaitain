@@ -8,10 +8,6 @@
     <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" media="screen" />
     <link href='http://fonts.googleapis.com/css?family=Bitter:400,700,400italic|Merriweather:400,700|Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-
-    <!-- Stylesheet for AdRotate advertisements. -->
-    <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri() . '/tuairisc_adrotate.css'; ?>" />
-
     <?php wp_head(); ?>
     <?php if ( (is_home()) && option::get('featured_enable') == 'on' ) { ui::js("flexslider"); } ?>
 </head>

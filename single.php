@@ -11,7 +11,6 @@
 	 
 	 			<div class="post-heading">
 
-
                     <?php $user_id = get_the_author_meta('ID'); ?>
 
                         <?php if (has_local_avatar($user_id)) : ?>
@@ -25,6 +24,10 @@
                             <?php } ?>
                         <?php endif; ?>
                     </div><!-- /.post-meta -->  
+                    
+                    <div class="title">
+                        <h1><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+                    </div>
 
                     <?php if (has_local_avatar($user_id)) : ?>
                         <div class="post-meta-alt">
@@ -35,10 +38,6 @@
                             <?php } ?>
                         </div>
                     <?php endif; ?>
-                    
-					<div class="title">
-						<h1><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
-					</div>
 				</div>
 				
 				<div class="clear"></div>
@@ -46,6 +45,7 @@
 				<div id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 					 
 					<div class="entry">
+                        <?php the_excerpt(); ?>
 						<?php the_content(); ?>
 						<div class="clear"></div>
 						

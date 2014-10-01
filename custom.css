@@ -11,10 +11,96 @@
 * and modify it to your liking.
 */
 
+/* Blame mark@bhalash.com for this CSS. */
+
+/*
+    General Site Stylings
+*/
+
+.inner-wrap {
+    background: #fff url('images/rainbow_strip.svg') no-repeat -5% top;
+    background-size: 150% auto; 
+}
+
+#footer {
+    background-color: #fff;    
+    background-image: url('images/rainbow_strip.svg'), url('images/foras_na_gaeilge_logo.png'), url('images/rainbow_footer.svg');
+    background-repeat: no-repeat;
+    background-position: left top, 98% 30%, center bottom;
+    background-size: contain, 135px auto, contain; 
+    /* The site is unbalanced. There's no top margin, but there is a bottom one. */
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 770px) {
+    #footer {
+        background-image: url('images/rainbow_strip.svg'), url('images/rainbow_footer.svg');
+        background-repeat: no-repeat;
+        background-position: left top, center bottom;
+        background-size: contain, contain;
+    }
+}
+
+#header {
+    background-image: #none !important;
+}
+
+#logo img {
+    height: 45px;
+    width: auto;
+}
+
+/*
+    AdRotate Groups
+*/
+
+/*
+ * .g-1 : header banner
+ * .g-2 : sidebar widgets
+ * .g-3 : footer banner
+ */
+
+.g a {
+    max-width: 100%;
+    overflow: auto;
+    text-align: center;
+}
+
+.g img {
+    display: none;
+    float: left;
+    height: auto;
+    max-width: 100%;
+}
+
+.g img:after {
+    clear: both;
+    display: table;
+}
+
+.g-1, .g-3 {
+    padding: 15px 0 !important;
+}
+
+.g-2 .g-col {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/*
+    Category Header Banners
+*/
+
 .category-banner {
     margin-bottom: 20px;
-    padding: 5px 0;
+    overflow: auto;
+    padding: 5px 0;  
     width: 100%;    
+}
+
+.category-banner:after{
+    clear: both;
+    display: table;
 }
 
 .category-banner a {
@@ -35,6 +121,32 @@
 
 .category-banner a:hover {
     text-decoration: underline;
+}
+
+.category-banner span {
+    color: #fff;
+    float: right;
+    font: 14px  Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin: 10px 15px 0 0;
+    text-align: right;
+}
+
+.category-banner span::first-line {
+    font-weight: bold;
+}
+
+/* 
+    Wider Banner for ASNC Category (158) 
+*/
+
+.asnc-category-banner {
+    /* The ASNC category (158) must be taller in order to differentiate content. */
+    background-image: url('images/asnc_logo.svg');
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: auto 60px;
+    min-height: 60px;
+    padding: 15px 0;
 }
 
 /* 
@@ -80,7 +192,7 @@
 }
 
 /*
-    Post Titles
+    Single Post Title and Meta
 */
 
 .post-heading,
@@ -134,6 +246,13 @@ h1.title {
     padding: 0 2%;
     width: 83%;
 }
+
+.post-meta-alt a,
+.post-meta-alt span {
+    text-transform: uppercase;
+}
+
+.post-meta-alt .post-e
 
 .title h1 {
     font: bold 32px 'Merriweather', Georgia, serif;

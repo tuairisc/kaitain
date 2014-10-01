@@ -18,9 +18,18 @@
 			<?php /* paged archive */ } elseif (isset($_GET['paged']) && !empty($_GET['paged'])) { ?><?php _e('Archives', 'wpzoom'); } ?>
 		</h3>
 	<? else : ?>
-		<?php $cat_id = get_query_var('cat'); ?>
-		<div class="category-banner" style="<?php echo 'background: ' . get_cat_color($cat_id) . ';'; ?>">
-			<?php echo get_category_parents($cat_id, true, '&nbsp;'); ?>
+		<?php 
+            // Generic-ify the ASNC code to if (has_banner) or if (has_custom_branding)
+            // How best to determine this??
+            $cat_id = get_query_var('cat'); 
+            $asnc_cat = 158;
+        ?>
+		<div class="category-banner <?php echo asnc_banner($cat_id); ?>" style="<?php echo 'background-color: ' . get_cat_color($cat_id) . ';'; ?>">
+			<?php if ($cat_id != $asnc_cat) : ?>
+                <?php echo get_category_parents($cat_id, true, '&nbsp;'); ?>
+            <?php else : ?>
+                <span><?php echo category_description($cat_id); ?></span>
+            <?php endif; ?>
 		</div>
 	<?php endif; ?>
 	   

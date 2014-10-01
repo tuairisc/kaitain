@@ -1083,9 +1083,6 @@ h3#reply-title { font-size: 20px;  margin: 18px 0; color:#373737;}
  
 #footer {
 	color: #999;
-	background-image: url(../../../res/footer-background.gif);
-	background-position: bottom;
-	background-repeat: repeat-x;
 	margin-bottom: 40px;
 	padding-top: 20px;
 	padding-right: 40px;
