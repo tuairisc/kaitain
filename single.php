@@ -10,34 +10,38 @@
 			<div class="post-wrapper">
 	 
 	 			<div class="post-heading">
-
-                    <?php $user_id = get_the_author_meta('ID'); ?>
-
-                        <?php if (has_local_avatar($user_id)) : ?>
-                            <div class="post-meta" style="background-image: url('<?php echo get_avatar_url($user_id, 200); ?>'); height:100px;">
-                        <?php else : ?>
-                            <div class="post-meta"> 
-                            <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') { ?>
-                                <?php if (option::get('post_date') == 'on') { ?><?php echo get_the_date(); ?><?php } ?>
-                                <?php if (option::get('post_author') == 'on') { ?><span class="meta-author"><?php _e('by', 'wpzoom'); ?> <?php the_author_posts_link(); ?></span><?php } ?>
-                                <?php edit_post_link( __('Edit', 'wpzoom'), '', ''); ?> 
-                            <?php } ?>
-                        <?php endif; ?>
-                    </div><!-- /.post-meta -->  
                     
                     <div class="title">
                         <h1><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
                     </div>
 
-                    <?php if (has_local_avatar($user_id)) : ?>
-                        <div class="post-meta-alt">
+                    <?php the_excerpt(); ?>
+
+                    <?php $user_id = get_the_author_meta('ID'); ?>
+
+                    <div class="post-meta">
+                        <?php if (has_local_avatar($user_id)) : ?>
+                            <div class="post-author-avatar" style="background-image: url('<?php echo get_avatar_url($user_id, 200); ?>');"></div>
+                        <?php endif; ?>
+                        <div class="post-meta-text">
                             <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') { ?>
+                                <?php if (option::get('post_author') == 'on') { ?><span class="meta-author"><?php the_author_posts_link(); ?></span><?php } ?>
                                 <?php if (option::get('post_date') == 'on') { ?><?php echo get_the_date(); ?><?php } ?>
-                                <?php if (option::get('post_author') == 'on') { ?><span class="meta-author"><?php _e('by', 'wpzoom'); ?> <?php the_author_posts_link(); ?></span><?php } ?>
-                                <?php edit_post_link( __('Edit', 'wpzoom'), '', ''); ?> 
                             <?php } ?>
-                        </div>
-                    <?php endif; ?>
+                        </div><!-- /.post-meta-text -->
+
+                        <ul class="tuairisc-share">
+                            <li>
+                                <a class="email" href="mailto:?subject=Check out '<?php the_title(); ?>' on <?php bloginfo('name'); ?>&amp;body=<?php the_permalink(); ?>" target="_blank"  title="Share '<?php the_title(); ?>' via email"></a>
+                            </li>
+                            <li>
+                                <a title="Share '<?php the_title(); ?>' via email" class="facebook" href="javascript:void(0)"></a>
+                            </li>
+                            <li>
+                                <a class="twitter" href="https://twitter.com/share?text=<?php the_title(); ?> via @tuairiscnuacht" data-related="twitterdev" data-size="large" data-count="none" target="_blank"></a>
+                            </li>
+                        </ul>
+                    </div><!-- /.post-meta -->  
 				</div>
 				
 				<div class="clear"></div>
@@ -45,7 +49,6 @@
 				<div id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 					 
 					<div class="entry">
-                        <?php the_excerpt(); ?>
 						<?php the_content(); ?>
 						<div class="clear"></div>
 						

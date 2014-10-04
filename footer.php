@@ -139,6 +139,5 @@ if (is_single()) { ?><script type="text/javascript" src="https://apis.google.com
  
 <!-- JavaScript for size of AdRotate advertisements. -->
 <script src="<?php echo get_template_directory_uri() . '/tuairisc_adrotate.js'; ?>"></script>
-
 </body>
 </html>

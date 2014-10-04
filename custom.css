@@ -18,31 +18,51 @@
 */
 
 .inner-wrap {
-    background: #fff url('images/rainbow_strip.svg') no-repeat -5% top;
-    background-size: 150% auto; 
+    background: #fff;
+}
+
+#header {
+    /* Override gradient on header. */ 
+    background: #fff url('images/rainbow_strip.svg') no-repeat center top;
+    background-size: auto 6px;
+    background-origin: border-box;
 }
 
 #footer {
     background-color: #fff;    
-    background-image: url('images/rainbow_strip.svg'), url('images/foras_na_gaeilge_logo.png'), url('images/rainbow_footer.svg');
+	background-image: 
+        url('images/rainbow_strip.svg'),
+        url('images/foras_na_gaeilge_logo.png'),
+        url('images/rainbow_footer.svg');
+    background-origin: 
+        border-box,
+        initial,
+        border-box;
+    background-position: 
+        center top, 
+        98% 30%, 
+        center bottom;
+    background-size: 
+        auto 6px,
+        135px auto, 
+        auto 65px; 
     background-repeat: no-repeat;
-    background-position: left top, 98% 30%, center bottom;
-    background-size: contain, 135px auto, contain; 
     /* The site is unbalanced. There's no top margin, but there is a bottom one. */
     margin-bottom: 0;
 }
 
 @media screen and (max-width: 770px) {
     #footer {
-        background-image: url('images/rainbow_strip.svg'), url('images/rainbow_footer.svg');
-        background-repeat: no-repeat;
-        background-position: left top, center bottom;
-        background-size: contain, contain;
+    	background-image: 
+            url('images/rainbow_strip.svg'),
+            url('images/rainbow_footer.svg');
+        background-position: 
+            left top, 
+            left bottom;
+        background-size: 
+            auto 6px,
+            auto 65px;
     }
-}
-
-#header {
-    background-image: #none !important;
 }
 
 #logo img {
@@ -52,13 +72,11 @@
 
 /*
     AdRotate Groups
+    
+    .g-1 header banner
+    .g-2 sidebar widgets
+    .g-3 footer banner
 */
-
-/*
- * .g-1 : header banner
- * .g-2 : sidebar widgets
- * .g-3 : footer banner
- */
 
 .g a {
     max-width: 100%;
@@ -126,7 +144,7 @@
 .category-banner span {
     color: #fff;
     float: right;
-    font: 14px  Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font: 14px Arial, "Helvetica Neue", Helvetica, sans-serif;
     margin: 10px 15px 0 0;
     text-align: right;
 }
@@ -141,7 +159,8 @@
 
 .asnc-category-banner {
     /* The ASNC category (158) must be taller in order to differentiate content. */
-    background-image: url('images/asnc_logo.svg');
+    background-image:;
+	background-image: url('images/asnc_logo.svg');
     background-position: 10px center;
     background-repeat: no-repeat;
     background-size: auto 60px;
@@ -177,7 +196,7 @@
 }
 
 .hero-post p {
-    font-size: 95%;
+    font-size: center;
 }
 
 @media screen and (max-width: 770px) {
@@ -195,68 +214,201 @@
     Single Post Title and Meta
 */
 
+/* Reset */
 .post-heading,
 .post-meta,
-h1.title {    
+.post-meta span,
+.meta-author,
+.post-heading h1.title {    
     /* Override/reset post titles. */
     /* By default these display as table elements. */
     display: block;
     margin: 0;
     padding: 0;
     vertical-align: baseline;
-    width: auto;
+    text-align: left;
+    width: 100%;
 }
 
-.post-heading,
+/* Contain padding. */
+.single .entry,
 .post-meta,
-.post-meta-alt,
-.title {
+.post-author-avatar,
+.post-meta-text,
+.post-heading .title {
     box-sizing: border-box;
 }
 
-.post-heading {
-    overflow: auto;
-    padding: 0 4%;
+.single .entry,
+.post-meta,
+.post-heading .title {
+    padding: 0 4%;    
 }
 
-.post-heading:after {
+/* Containing post wrapper */
+.post-wrapper {
+    padding: 10px 0;
+}
+
+.post-meta,
+.post-author-avatar {
+    border: 1px solid #f1f1f1;
+}
+
+.post-meta {
+    border-width: 1px 0;
+    overflow: auto;
+    padding: 9px 4%;
+}
+
+.post-meta:after {
     /* Clear floats. */ 
     clear: both;
     display: table;
 }
 
-.post-meta,
-.post-meta-alt,
-.title {
+.post-meta > * {
     float: left;
 }
 
-.post-meta {
+.post-author-avatar {
     /* background-image is set in single.php */ 
-    background-origin: content-box;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 100% auto;
-    padding: 10px 2% 0 0;
-    width: 17%;
+    background-size: auto 100%;
+    height: 50px;
+    width: 67px;
 }
 
-.post-meta-alt,
-.title {
-    padding: 0 2%;
-    width: 83%;
+.post-meta-text {
+    margin-left: 10px;
+    text-transform: initial;
 }
 
-.post-meta-alt a,
-.post-meta-alt span {
+.meta-author a {  
+    color: #000;
     text-transform: uppercase;
 }
 
-.post-meta-alt .post-e
+.meta-author a:hover {
+    color: #3AAA35;
+}
 
-.title h1 {
-    font: bold 32px 'Merriweather', Georgia, serif;
-    /* In style.css no unit is given for line-height.
-    The rule is invalid and therefore discarded. */
-    line-height: 1.3em;
+/* Remove 'read more' link from excerpt/description. */
+.post-heading .more-link {
+    display: none;
+}
+
+.post-heading .title {
+    margin-bottom: 10px;    
+}
+
+.post-heading p {
+    color: #87888a; 
+    font: 500 16px Georgia, serif;
+    line-height: 17px;
+    margin-bottom: 13px;
+    padding: 0 4%;
+}
+
+/* Remove border from top of post conent. */ 
+.single .entry {
+    border: none;
+}
+
+/*
+    Nav Menu Social Links
+ */
+
+ul.tuairisc-share,
+.tuairisc-share li,
+.tuairisc-share a {
+    line-height: initial;
+    margin: 0;
+    overflow: auto;
+    padding: 0;
+}
+
+
+ul.tuairisc-share {
+    float: right;
+}
+
+ul.tuairisc-share:after {
+    clear: both;
+    display: table;
+}
+
+.tuairisc-share li,
+.tuairisc-share a {
+    height: 30px;
+    width: 30px;
+}
+
+.tuairisc-share li {
+    display: inline;
+    list-style-type: none;
+    margin-right: 2px;
+}
+
+.tuairisc-share a {
+    background-size: 90% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.tuairisc-share .email { 
+    background-color: #f5756c;
+	background-image: url('images/social/email.png'); 
+}
+
+.tuairisc-share .facebook { 
+    background-color: #3B5998;
+	background-image: url('images/social/facebook.png');
+}
+
+.tuairisc-share .flickr { 
+    background-color: #ff0084;
+	background-image: url('images/social/flickr.png');
+}
+
+.tuairisc-share .github { 
+    background-color: #333;
+	background-image: url('images/social/github.png');
+}
+
+.tuairisc-share .google { 
+    background-color: #dd4b39;
+	background-image: url('images/social/google.png');
+} 
+
+.tuairisc-share .instagram { 
+    background-color: #3f729b;
+	background-image: url('images/social/instagram.png');
+} 
+
+.tuairisc-share .linkedin { 
+    background-color: #0976b4;
+	background-image: url('images/social/linkedin.png');
+} 
+
+.tuairisc-share .pinterest { 
+    background-color: #cc2127;
+	background-image: url('images/social/pinterest.png');
+} 
+
+.tuairisc-share .tumblr { 
+    background-color: #35465c;
+	background-image: url('images/social/tumblr.png');
+} 
+
+.tuairisc-share .twitter { 
+    background-color: #55acee;
+	background-image: url('images/social/twitter.png');
+} 
+
+.tuairisc-share .twitter .span {
+    display: none;
 }

@@ -106,6 +106,65 @@ function has_local_avatar($user_id) {
     return (strpos($avatar_url, $home_url) === false) ? false : true;
 }
 
+function translate_day($day) {
+    $irish_days = array(
+        'Dé Luain', 'Dé Máirt', 'Dé Céadaoin', 'Déardaoin', 
+        'Dé hAoine', 'Dé Sathairn', 'Dé Domhnaigh'
+    ); 
+
+    switch ($day) {
+        case 'Monday': return $irish_days[0];
+        case 'Tuesday': return $irish_days[1];
+        case 'Wednesday': return $irish_days[2];
+        case 'Thursday': return $irish_days[3];
+        case 'Friday': return $irish_days[4];
+        case 'Saturday': return $irish_days[5];
+        case 'Sunday': return $irish_days[6];
+        default: return false;
+    }
+}
+
+function translate_month($month) {
+    $irish_months = array(
+        'Eanáir', 'Feabhra', 'Márta', 'Aibreán', 'Bealtaine', 'Meitheamh',
+        'Iúil', 'Lúnasa', 'Meán Fómhair', 'Deireadh Fómhair', 'Samhain', 'Nollaig'
+    );
+
+    switch ($month) {
+        case 'January': return $irish_months[0];
+        case 'February': return $irish_months[1];
+        case 'March': return $irish_months[2];
+        case 'April': return $irish_months[3];
+        case 'May': return $irish_months[4];
+        case 'June': return $irish_months[5];
+        case 'July': return $irish_months[6];
+        case 'August': return $irish_months[7];
+        case 'September': return $irish_months[8];
+        case 'October': return $irish_months[9];
+        case 'November': return $irish_months[10];
+        case 'December': return $irish_months[11];
+        default: return false;
+    }
+}
+
+function translate_date($d = '', $post = null) {
+    $post = get_post($post);
+
+    if (!$post) {
+        return false;
+    }
+
+    if ('' == $d) {
+        $the_date = mysql2date(get_option('date_format'), $post->post_date);
+    } else {
+        $the_date = mysql2date($d, $post->post_date);
+    }
+
+    // $post_day = mysql2date('l', $post->post_date);
+    // $post_month = mysql2date('F', $post->post_date);
+    // $the_date = str_replace($post_day, $translate_day($post_day), $the_date);
+}
+
 /*  Don't add any code below here or the sky will fall down
 =========================================================== */
 

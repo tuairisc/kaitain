@@ -5,14 +5,14 @@
 // See here: https://www.adrotateplugin.com/support/forums/topic/deactivate-css/
 
 // Gazeti changes layout at 770px window width.
-var mobileBreak = 770;
+var responsiveBreak = 770;
 
 // Sidebar ID
 var sidebar = '#sidebar';
 var content = '#content';
 
 // Unique string in image name. 
-var imgSuffix = { 
+var suffix = { 
     mobile  : '_mobile_', 
     desktop : '_desktop_'
 }
@@ -23,37 +23,38 @@ var adGroups = {
     footer  : '.g-3'    
 }
 
-function imageExists(img) {
+function replaceIfExists(img, callback) {
     // Check if the file exists on the server.
-    var exists = false;
-
     $.ajax({
         url: img,
         type: 'HEAD',
         dataType: 'image',
         success:function() {
-            exists = true;
+            callback();
         }
     });
-
-    return exists;
 }
 
 function swapAdvertImage(obj) {
     // Swap mobile and desktop image sizes. 
     $(obj).find('img').each(function() {
-        var img = $(this).attr('src');
-        console.log(img);
+        var src = $(this).attr('src');
 
-        if ($(window).width() > mobileBreak) {
-            if (img.indexOf(imgSuffix.desktop) == -1 && imageExists(img))
-                img = img.replace(imgSuffix.mobile, imgSuffix.desktop);  
-        } else if ($(window).width() <= mobileBreak) {
-            if (img.indexOf(imgSuffix.mobile) == -1 && imageExists(img))
-                img = img.replace(imgSuffix.desktop, imgSuffix.mobile);
+        if (src.indexOf(suffix.desktop) > -1 || src.indexOf(suffix.mobile) > -1) {
+            var img = $(this);
+
+            if ($(window).width() > responsiveBreak)
+                if (src.indexOf(suffix.mobile) > -1)
+                    src = src.replace(suffix.mobile, suffix.desktop);  
+
+            if ($(window).width() <= responsiveBreak)
+                if (src.indexOf(suffix.desktop) > -1)
+                    src = src.replace(suffix.desktop, suffix.mobile);
+
+            replaceIfExists(src, function() {
+                $(img).attr('src', src);
+            });
         }
-
-        $(this).attr('src', img);
     });
 }
 
@@ -66,8 +67,7 @@ function resizeAdvert(obj) {
 
         // The margin will be negative if the banner image is greater than the width
         // of the parent container. 
-        if (c < 0) 
-            c = 0;
+        c = (c < 0) ? 0 : c;
 
         $(this).css('margin-left', c  + 'px');
 

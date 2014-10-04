@@ -10,12 +10,19 @@
 	
 	<?php if (!is_category()) : ?>
 		<h3 class="title"> 
-			<?php  /* tag archive */ if( is_tag() ) { ?><?php _e('Post Tagged with:', 'wpzoom'); ?> "<?php single_tag_title(); ?>"
-			<?php /* daily archive */ } elseif (is_day()) { ?><?php _e('Archive for', 'wpzoom'); ?> <?php the_time('F jS, Y'); ?>
-			<?php /* monthly archive */ } elseif (is_month()) { ?><?php _e('Archive for', 'wpzoom'); ?> <?php the_time('F, Y'); ?>
-			<?php /* yearly archive */ } elseif (is_year()) { ?><?php _e('Archive for', 'wpzoom'); ?> <?php the_time('Y'); ?>
-			<?php /* author archive */ } elseif (is_author()) { ?><?php _e( ' Articles by: ', 'wpzoom' ); ?><a href="<?php echo $curauth->user_url; ?>"><?php echo $curauth->display_name; ?></a>  
-			<?php /* paged archive */ } elseif (isset($_GET['paged']) && !empty($_GET['paged'])) { ?><?php _e('Archives', 'wpzoom'); } ?>
+			<?php if(is_tag()) : /* tag archive */ ?>
+                <?php _e('Post Tagged with:', 'wpzoom'); ?> "<?php single_tag_title(); ?>"
+			<?php elseif (is_day()) : /* daily archive */ ?>
+                <?php _e('Archive for', 'wpzoom'); ?> <?php the_time('F jS, Y'); ?>
+			<?php elseif (is_month()) : /* monthly archive */ ?>
+                <?php _e('Archive for', 'wpzoom'); ?> <?php the_time('F, Y'); ?>
+			<?php elseif (is_year()) : /* yearly archive */ ?>
+                <?php _e('Archive for', 'wpzoom'); ?> <?php the_time('Y'); ?>
+		  	<?php elseif (is_author()) : /* author archive */ ?>
+                <?php _e( 'Articles by: ', 'wpzoom' ); ?><a href="<?php echo $curauth->user_url; ?>"><?php echo $curauth->display_name; ?></a>  
+			<?php elseif (isset($_GET['paged']) && !empty($_GET['paged'])) : /* paged archive */ ?>
+                <?php _e('Archives', 'wpzoom'); ?>
+            <?php endif;?>
 		</h3>
 	<? else : ?>
 		<?php 
