@@ -10,7 +10,6 @@
 			<div class="post-wrapper">
 	 
 	 			<div class="post-heading">
-                    
                     <div class="title">
                         <h1><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
                     </div>

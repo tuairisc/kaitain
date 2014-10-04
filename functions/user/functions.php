@@ -106,64 +106,85 @@ function has_local_avatar($user_id) {
     return (strpos($avatar_url, $home_url) === false) ? false : true;
 }
 
-function translate_day($day) {
+function day_to_irish($day) {
+    // Return given day of the week as Gaeilge.
     $irish_days = array(
         'Dé Luain', 'Dé Máirt', 'Dé Céadaoin', 'Déardaoin', 
         'Dé hAoine', 'Dé Sathairn', 'Dé Domhnaigh'
     ); 
 
     switch ($day) {
-        case 'Monday': return $irish_days[0];
-        case 'Tuesday': return $irish_days[1];
-        case 'Wednesday': return $irish_days[2];
-        case 'Thursday': return $irish_days[3];
-        case 'Friday': return $irish_days[4];
-        case 'Saturday': return $irish_days[5];
-        case 'Sunday': return $irish_days[6];
-        default: return false;
+        case 'Monday': 
+            $day = $irish_days[0]; break;
+        case 'Tuesday': 
+            $day = $irish_days[1]; break;
+        case 'Wednesday': 
+            $day = $irish_days[2]; break;
+        case 'Thursday': 
+            $day = $irish_days[3]; break;
+        case 'Friday': 
+            $day = $irish_days[4]; break;
+        case 'Saturday': 
+            $day = $irish_days[5]; break;
+        case 'Sunday': 
+            $day = $irish_days[6]; break;
+        default: break;
     }
+
+    return $day;
 }
 
-function translate_month($month) {
+function month_to_irish($month) {
+    // Return given month of the year as Gaeilge.
     $irish_months = array(
         'Eanáir', 'Feabhra', 'Márta', 'Aibreán', 'Bealtaine', 'Meitheamh',
         'Iúil', 'Lúnasa', 'Meán Fómhair', 'Deireadh Fómhair', 'Samhain', 'Nollaig'
     );
 
     switch ($month) {
-        case 'January': return $irish_months[0];
-        case 'February': return $irish_months[1];
-        case 'March': return $irish_months[2];
-        case 'April': return $irish_months[3];
-        case 'May': return $irish_months[4];
-        case 'June': return $irish_months[5];
-        case 'July': return $irish_months[6];
-        case 'August': return $irish_months[7];
-        case 'September': return $irish_months[8];
-        case 'October': return $irish_months[9];
-        case 'November': return $irish_months[10];
-        case 'December': return $irish_months[11];
-        default: return false;
+        case 'January': 
+            $month = $irish_months[0]; break;
+        case 'February': 
+            $month = $irish_months[1]; break;
+        case 'March': 
+            $month = $irish_months[2]; break;
+        case 'April': 
+            $month = $irish_months[3]; break;
+        case 'May': 
+            $month = $irish_months[4]; break;
+        case 'June': 
+            $month = $irish_months[5]; break;
+        case 'July': 
+            $month = $irish_months[6]; break;
+        case 'August': 
+            $month = $irish_months[7]; break;
+        case 'September': 
+            $month = $irish_months[8]; break;
+        case 'October': 
+            $month = $irish_months[9]; break;
+        case 'November': 
+            $month = $irish_months[10]; break;
+        case 'December': 
+            $month = $irish_months[11]; break;
+        default: 
+            break;
     }
+
+    return $month;
 }
 
-function translate_date($d = '', $post = null) {
-    $post = get_post($post);
-
-    if (!$post) {
-        return false;
-    }
-
-    if ('' == $d) {
-        $the_date = mysql2date(get_option('date_format'), $post->post_date);
-    } else {
-        $the_date = mysql2date($d, $post->post_date);
-    }
-
-    // $post_day = mysql2date('l', $post->post_date);
-    // $post_month = mysql2date('F', $post->post_date);
-    // $the_date = str_replace($post_day, $translate_day($post_day), $the_date);
+function date_to_irish($the_date, $d) {
+    // Changes the day of the week and month of the year to their Irish versions.
+    $day_regex = '/(,.*)/';
+    $month_regex = '/(^.*, | [0-9].*)/'; 
+    $english_month = preg_replace($month_regex, '', $the_date);
+    $english_day = preg_replace($day_regex, '', $the_date);
+    $the_date = str_replace($english_day, day_to_irish($english_day), $the_date);
+    $the_date = str_replace($english_month, month_to_irish($english_month), $the_date);
+    return $the_date;
 }
+
+add_filter('get_the_date', 'date_to_irish');
 
 /*  Don't add any code below here or the sky will fall down
 =========================================================== */
