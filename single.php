@@ -27,18 +27,17 @@
                                 <?php if (option::get('post_author') == 'on') { ?><span class="meta-author"><?php the_author_posts_link(); ?></span><?php } ?>
                                 <?php if (option::get('post_date') == 'on') { ?><?php echo get_the_date(); ?><?php } ?>
                             <?php } ?>
+                            <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
                         </div><!-- /.post-meta-text -->
 
                         <ul class="tuairisc-share">
-                            <li>
-                                <a class="email" href="mailto:?subject=Check out '<?php the_title(); ?>' on <?php bloginfo('name'); ?>&amp;body=<?php the_permalink(); ?>" target="_blank"  title="Share '<?php the_title(); ?>' via email"></a>
-                            </li>
-                            <li>
-                                <a title="Share '<?php the_title(); ?>' via email" class="facebook" href="javascript:void(0)"></a>
-                            </li>
-                            <li>
-                                <a class="twitter" href="https://twitter.com/share?text=<?php the_title(); ?> via @tuairiscnuacht" data-related="twitterdev" data-size="large" data-count="none" target="_blank"></a>
-                            </li>
+                            <?php $site  = urlencode(get_bloginfo('name')); ?>
+                            <?php $url   = urlencode(get_the_permalink()); ?> 
+                            <?php $title = urlencode(get_the_title()); ?>
+
+                            <li><a class="email" href="mailto:?subject=<?php echo $title; ?>&amp;body=<?php echo $url; ?>" target="_blank"  title="Email '<?php the_title(); ?>'"></a></li>
+                            <li><a class="facebook" href="https://www.facebook.com/sharer.php?u=<?php echo $url ?>" target="_blank" title="Share '<?php the_title(); ?>' on Facebook"></a></li>
+                            <li><a class="twitter" href="https://twitter.com/share?text=<?php echo $title; ?>&url=<?php echo $url; ?>" target="_blank" title="Tweet about '<?php the_title(); ?>"></a></li>
                         </ul>
                     </div><!-- /.post-meta -->  
 				</div>

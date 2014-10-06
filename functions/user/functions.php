@@ -61,26 +61,39 @@ function get_cat_color($cat_id) {
 
 function asnc_banner($cat_id) {
     // The asnc category (179) must be taller in order to differentiate content.
-    $asnc_cat = 158;
-    $asnc_banner = 'asnc-category-banner';
-    return ($cat_id == $asnc_cat) ? $asnc_banner : '';
+    $cat = 158;
+    $banner = 'asnc-category-banner';
+    return ($cat_id == $cat) ? $banner : '';
 }
 
 function get_thumbnail_url($post_ID) {
     // Code snippet from http://www.wpbeginner.com/wp-themes/how-to-get-the-post-thumbnail-url-in-wordpress/
     $thumb_id = get_post_thumbnail_id($post_ID);
-    $thumb_url = wp_get_attachment_image_src($thumb_id,'thumbnail-size', true);
+    $thumb_url = wp_get_attachment_image_src($thumb_id,'large', true);
     return $thumb_url[0];
 }
 
-function get_excerpt($count) {
-    // Returns a shortened excerpt of $count characters.
-    $permalink = get_permalink($post->ID);
-    $excerpt = get_the_excerpt();
+function excerpt_char_length($excerpt) {
+    // Returns a shortened excerpt of $ex_length characters.
+    // Optionally add 'read more' link.
+
+    $ex_length = 350;
+
     $excerpt = strip_tags($excerpt);
-    $excerpt = substr($excerpt, 0, $count);
-    $excerpt = substr($excerpt, 0, strripos($excerpt, ' '));
-    $excerpt = $excerpt . '<a class="more-link" href="' . $permalink . '">Read More</a>';
+    $excerpt = preg_replace('/(Read More$)/', '', $excerpt);
+
+    if (!is_single()) {
+        $excerpt = substr($excerpt, 0, $ex_length);
+        $excerpt = substr($excerpt, 0, strripos($excerpt, ' '));
+    }
+
+    $excerpt = preg_replace('/^/', '<p>', $excerpt);
+    $excerpt = preg_replace('/$/', '</p>', $excerpt);
+
+    // if (is_home()) {
+    //     $excerpt = $excerpt . '<a class="more-link" href="' . get_permalink($post->ID) . '">Read More</a>';
+    // }
+
     return $excerpt;
 }
 
@@ -176,7 +189,7 @@ function month_to_irish($month) {
 function date_to_irish($the_date, $d) {
     // Changes the day of the week and month of the year to their Irish versions.
     $day_regex = '/(,.*)/';
-    $month_regex = '/(^.*, | [0-9].*)/'; 
+    $month_regex = '/(^.*, | [0-9].*$)/'; 
     $english_month = preg_replace($month_regex, '', $the_date);
     $english_day = preg_replace($day_regex, '', $the_date);
     $the_date = str_replace($english_day, day_to_irish($english_day), $the_date);
@@ -184,6 +197,47 @@ function date_to_irish($the_date, $d) {
     return $the_date;
 }
 
+function education_category_id($id) {
+    // The education category has five sub-categories.
+    // Fallback is to retrive the parent ID.
+    switch ($id) {
+        case 1: 
+            $id = 202; break;
+        case 2: 
+            $id = 203; break;
+        case 3: 
+            $id = 204; break;
+        case 4: 
+            $id = 205; break;
+        case 5: 
+            $id = 206; break;
+        default: 
+            $id = 187; break;
+    }
+
+    return $id;
+}
+
+function education_landing_shortcode($atts) {
+    // Parse shortcude for the education landing lpage categories. 
+    $a = shortcode_atts(array(
+        'id' => 0,
+    ), $atts);
+
+    // Change it to default value if it falls outside 0-5 range. 
+    $id = ($a['id'] < 0 || $a['id'] > 5) ? 0 : $a['id'];
+    $cat_id = education_category_id($id);
+
+    return '<div class="education-box education-' . $id . '"><p><span><a href="' . get_category_link($cat_id) . '">' . get_cat_name($cat_id) . '</a></span><br />' . category_description($cat_id) . '</p></div>';
+}
+
+// Custom excerpt length limit.
+add_filter('the_excerpt', 'excerpt_char_length');
+// Add shortcode for landing.
+add_shortcode('landing', 'education_landing_shortcode');
+// Page excerpts for SEO and the education landing page. 
+add_action('init', add_post_type_support('page', 'excerpt'));
+// Filter date to return as Gaeilge.
 add_filter('get_the_date', 'date_to_irish');
 
 /*  Don't add any code below here or the sky will fall down

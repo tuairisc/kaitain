@@ -26,7 +26,7 @@
             if ( option::get('display_content') == 'Full Content' ) {
                 the_content( option::get('display_readmore') == 'on' ? __( 'Read More &#8250;', 'wpzoom' ) : '' );
             } elseif ( option::get('display_content') == 'Excerpt' ) {
-                echo get_excerpt(245);
+                the_excerpt();
             }
         ?>
 

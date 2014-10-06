@@ -15,7 +15,6 @@
     		<div class="post-content">	
     			
       			<h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permalink to %s', 'wpzoom'); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
-
      			<div class="recent-meta">
     				<?php if (option::get('display_category') == 'on') { ?><span><?php the_category(', '); ?></span><?php } ?>
     				<?php if (option::get('display_date') == 'on') { ?><span><?php printf( __('%s at %s', 'wpzoom'),  get_the_date(), get_the_time()); ?></span><?php } ?>
@@ -30,7 +29,7 @@
     					if ( option::get('display_content') == 'Full Content' ) {
     						the_content( option::get('display_readmore') == 'on' ? __( 'Read More &#8250;', 'wpzoom' ) : '' );
     					} elseif ( option::get('display_content') == 'Excerpt' ) {
-                            echo get_excerpt(320);
+                            the_excerpt();
      					}
     				?>
      

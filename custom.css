@@ -11,15 +11,47 @@
 * and modify it to your liking.
 */
 
-/* Blame mark@bhalash.com for this CSS. */
+/*
+    Top Navigation Menu
+*/
+
+.dropdown > li:last-child:after {
+    content: '';
+} 
+
+.sf-sub-indicator {
+    display: none;
+}
 
 /*
     General Site Stylings
 */
 
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    color: #999;
+    font-size: 16px;
+}
+
 .inner-wrap {
     background: #fff;
 }
+
+.search_form {
+    float: right;
+    padding-top: 10px;
+}
+
+#searchform {
+    float: none;
+}
+
+/*
+    Header and Footer Images
+*/
 
 #header {
     /* Override gradient on header. */ 
@@ -53,15 +85,12 @@
 
 @media screen and (max-width: 770px) {
     #footer {
-    	background-image: 
-            url('images/rainbow_strip.svg'),
-            url('images/rainbow_footer.svg');
+        /* The footer logo shouldn't display on mobile device. */
         background-position: 
             left top, 
+            center 200%,
             left bottom;
-        background-size: 
-            auto 6px,
-            auto 65px;
+        padding-bottom: 140px;
     }
 }
 
@@ -195,6 +224,11 @@
     width: 22%;
 }
 
+.hero-post span:first-child {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
 .hero-post p {
     font-size: center;
 }
@@ -295,7 +329,7 @@
 }
 
 /* Remove 'read more' link from excerpt/description. */
-.post-heading .more-link {
+.post-heading .more-link a {
     display: none;
 }
 
@@ -303,6 +337,7 @@
     margin-bottom: 10px;    
 }
 
+.entry .wp-caption-text,
 .post-heading p {
     color: #87888a; 
     font: 500 16px Georgia, serif;
@@ -311,10 +346,87 @@
     padding: 0 4%;
 }
 
+.entry .wp-caption img {
+    margin-bottom: 10px;
+}
+
+.entry .wp-caption-text {
+    padding: 0;
+    text-align: left;
+}
+
 /* Remove border from top of post conent. */ 
 .single .entry {
     border: none;
 }
+
+/*
+    Education Landing Page
+*/
+
+.education-box {
+    color: #fff;
+    box-sizing: border-box;
+    padding: 30px 20% 30px 4%;
+}
+
+.education-box:nth-child(2) {
+    margin-top: 20px;
+}
+
+.education-box:hover {
+    background-image: url('images/placeholder_arrow.svg');
+    background-origin: bounding-box;
+    background-position: 97% center;
+    background-repeat: no-repeat;
+    background-size: auto 80px;
+}
+
+@media screen and (max-width: 770px) {
+    .education-box {
+        padding: 20px;
+    }
+
+    .education-box:hover {
+        background-image: none;
+    }
+}
+
+.education-0:hover { 
+    background-image: none;
+}
+
+.education-box a {    
+    color: inherit;
+    text-decoration: none;
+}
+
+.education-box a:hover {
+    text-decoration: underline;
+}
+
+.education-box h1 {
+    margin-bottom: 25px;
+    width: 50%;
+}
+
+.education-box p {
+    font: 16px Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin-bottom: 0;
+}
+
+.education-box span {
+    font-size: 175%;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.education-0 { background-color: #424045; }
+.education-1 { background-color: #c44b54; }
+.education-2 { background-color: #7c5c91; }
+.education-3 { background-color: #c9ab5f; }
+.education-4 { background-color: #89b0d4; }
+.education-5 { background-color: #e34284; }
 
 /*
     Nav Menu Social Links
@@ -329,7 +441,6 @@ ul.tuairisc-share,
     padding: 0;
 }
 
-
 ul.tuairisc-share {
     float: right;
 }
@@ -343,6 +454,24 @@ ul.tuairisc-share:after {
 .tuairisc-share a {
     height: 30px;
     width: 30px;
+}
+
+#header .tuairisc-share li,
+#header .tuairisc-share a {
+    height: 33px; 
+    width: 33px;
+}
+
+#header .tuairisc-share {
+    padding-top: 27px;
+    margin-right: 5px;
+    float: right;
+}
+
+@media screen and (max-width: 760px) {
+    #header .tuairisc-share {
+        display: none;
+    }
 }
 
 .tuairisc-share li {
@@ -409,6 +538,7 @@ ul.tuairisc-share:after {
 	background-image: url('images/social/twitter.png');
 } 
 
-.tuairisc-share .twitter .span {
-    display: none;
-}
+.tuairisc-share .youtube { 
+    background-color: #b31217;
+    background-image: url('images/social/youtube.png');
+} 

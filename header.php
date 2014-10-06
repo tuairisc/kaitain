@@ -38,7 +38,7 @@
 					<?php if ( option::get('ad_head_code') <> "") {
 						echo stripslashes(option::get('ad_head_code'));
 					} else { ?>
-						<a href="<?php echo option::get('banner_top_url'); ?>"><img src="<?php echo option::get('banner_top'); ?>" alt="<?php echo option::get('banner_top_alt'); ?>" /></a>
+                        <a href="<?php echo option::get('banner_top_url'); ?>"><img src="<?php echo option::get('banner_top'); ?>" alt="<?php echo option::get('banner_top_alt'); ?>" /></a>
 					<?php } ?>
 
 				</div><!-- /.adv --> <div class="clear"></div>
@@ -50,8 +50,13 @@
 				</div>
 			<?php } ?>
 
-			<div class="clear"></div>
+            <ul class="tuairisc-share">
+                <li><a class="facebook" href="https://www.facebook.com/tuairisc.ie" target="_blank" title="Facebook"></a></li>
+                <li><a class="twitter" href="https://twitter.com/tuairiscnuacht" target="_blank" title="Twitter"></a></li>
+                <li><a class="youtube" href="https://www.youtube.com/channel/UCd__CRDmcu3VfhPBwA7geRg" target="_blank" title="YouTube"></a></li>
+            </ul>
 
+			<div class="clear"></div>
 
 			<div id="menu">
 

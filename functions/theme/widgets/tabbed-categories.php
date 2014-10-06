@@ -79,10 +79,8 @@ class Tabbed_Widget extends WP_Widget
 					  	<?php get_the_image( array( 'size' => 'featured-tab', 'width' => 135, 'height' => 135 ) ); ?>
 			  			
 			  			<div class="main_content">
-							<h2><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
-
-							<!--<span class="date"><?php echo get_the_date(); ?></span>-->
-						
+                            <h3><?php echo get_the_author(); ?></h3>
+							<h2><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>						
 						    <?php the_excerpt(); ?> 
 						 
 					    </div>
@@ -95,12 +93,8 @@ class Tabbed_Widget extends WP_Widget
 
 			    	 	<?php } else {  ?>
                      
-							<li>
-							 
-								<h3><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
-								 
-								<!--<span class="date"><span class="date"><?php echo get_the_date(); ?></span>-->
-									 
+							<li>						 
+								<h3><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>	 
 							</li>
             		 	
             		 	<?php } ?>	

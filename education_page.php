@@ -1,8 +1,22 @@
+<?
+    /*
+    Template Name: Education Landing Page
+    */
+?>
+
 <?php get_header(); ?>
 
 <div id="main">
 
 	<div id="content">
+
+        <div class="education-box education-0">
+     		<h1>
+    			<?php the_title(); ?>
+    		</h1>
+            <?php the_excerpt(); ?>
+        </div>
+
   		<?php while (have_posts()) : the_post(); ?>
 
 			<div class="post clearfix">

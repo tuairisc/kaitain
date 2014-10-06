@@ -42,7 +42,7 @@
 				?>
 	 			
 				<a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title_attribute(); ?></a>
-				<span class="date"><?php the_time(get_option('date_format')); ?></span>
+				<span class="date"><?php echo get_the_date(); ?></span>
 				
 				 
 			</li><!-- end #post-<?php the_ID(); ?> -->
