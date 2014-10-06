@@ -77,7 +77,7 @@ function excerpt_char_length($excerpt) {
     // Returns a shortened excerpt of $ex_length characters.
     // Optionally add 'read more' link.
 
-    $ex_length = 350;
+    $ex_length = 250;
 
     $excerpt = strip_tags($excerpt);
     $excerpt = preg_replace('/(Read More$)/', '', $excerpt);
@@ -89,10 +89,6 @@ function excerpt_char_length($excerpt) {
 
     $excerpt = preg_replace('/^/', '<p>', $excerpt);
     $excerpt = preg_replace('/$/', '</p>', $excerpt);
-
-    // if (is_home()) {
-    //     $excerpt = $excerpt . '<a class="more-link" href="' . get_permalink($post->ID) . '">Read More</a>';
-    // }
 
     return $excerpt;
 }

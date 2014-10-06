@@ -145,7 +145,7 @@ h3 {
     width: 100%;    
 }
 
-.category-banner:after{
+.category-banner:after {
     clear: both;
     display: table;
 }
@@ -164,6 +164,11 @@ h3 {
 .category-banner a:first-child {
     margin-left: 15px;
     font-size: 18px;
+}
+
+.category-banner a:nth-child(2):before {
+    content: '» ';
+    font-size: 22px;
 }
 
 .category-banner a:hover {
@@ -211,7 +216,7 @@ h3 {
     background-repeat: no-repeat;
     background-size: cover;
     float: right;
-    width: 77%;
+    width: 71%;
 }
 
 .hero-image a {
@@ -221,7 +226,7 @@ h3 {
 
 .hero-post {
     float: left;
-    width: 22%;
+    width: 27%;
 }
 
 .hero-post span:first-child {

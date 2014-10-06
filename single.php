@@ -25,7 +25,7 @@
                         <div class="post-meta-text">
                             <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') { ?>
                                 <?php if (option::get('post_author') == 'on') { ?><span class="meta-author"><?php the_author_posts_link(); ?></span><?php } ?>
-                                <?php if (option::get('post_date') == 'on') { ?><?php echo get_the_date(); ?><?php } ?>
+                                <?php if (option::get('post_date') == 'on') { ?><?php echo get_the_date() . ' at ' . get_the_time(); ?><?php } ?>
                             <?php } ?>
                             <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
                         </div><!-- /.post-meta-text -->
@@ -54,18 +54,6 @@
 						<div class="clear"></div>
  						
 						<?php if ( option::get('post_tags') == 'on' ) { the_tags( '<div class="tag-list"><strong>' . __('Tags:', 'wpzoom') . '</strong> ', ', ', '</div>' ); } ?>
-
-						<?php if (option::get('post_share') == 'on') { ?>
-				 
-							<div class="share_box">
-								<h3><?php _e('Share this post', 'wpzoom'); ?></h3>
-								<div class="share_btn"><a href="http://twitter.com/share" data-url="<?php the_permalink() ?>" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
-								<div class="share_btn"><iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode(get_permalink($post->ID)); ?>&amp;layout=button_count&amp;show_faces=false&amp;width=1000&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true"></iframe></div>
-								<div class="share_btn"><g:plusone size="medium"></g:plusone></div>
-								<div class="clear"></div>
-							</div> 
-							 
-						<?php } ?>
 				
  					</div><!-- / .entry -->
 					<div class="clear"></div>
