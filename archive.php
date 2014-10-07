@@ -24,23 +24,21 @@
                 <?php _e('Archives', 'wpzoom'); ?>
             <?php endif;?>
 		</h3>
-	<? else : ?>
-		<?php 
-            // Generic-ify the ASNC code to if (has_banner) or if (has_custom_branding)
-            // How best to determine this??
-            $cat_id = get_query_var('cat'); 
-            $asnc_cat = 158;
-        ?>
-		<div class="category-banner <?php echo asnc_banner($cat_id); ?>" style="<?php echo 'background-color: ' . get_cat_color($cat_id) . ';'; ?>">
-			<?php if ($cat_id != $asnc_cat) : ?>
+    <?php endif; ?>
+
+	<?php if (is_category()) : ?> 
+        <?php $cat_id = get_query_var('cat'); ?>
+        <div class="category-banner <?php echo asnc_banner($cat_id); ?>" style="<?php echo 'background-color: ' . get_cat_color($cat_id) . ';'; ?>">
+            <?php // Sorry for magic number: 158 = the mock/funny column. ?>
+            <?php if ($cat_id != 158) : ?>
                 <?php echo get_category_parents($cat_id, true, '&nbsp;'); ?>
             <?php else : ?>
                 <span><?php echo category_description($cat_id); ?></span>
             <?php endif; ?>
-		</div>
+        </div>
 	<?php endif; ?>
 	   
-		<?php get_template_part('loop'); ?>
+	<?php get_template_part('loop'); ?>
  			
 	</div> <!-- /#content -->
 	

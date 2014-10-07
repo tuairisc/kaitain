@@ -10,12 +10,34 @@
 * Simply copy an existing style from style.css to this file, 
 * and modify it to your liking.
 */
+    
+/*
+    Font Selectors
+    --------------
+    Who doesn't love Georgia?
+*/
+
+.entry .wp-caption-text,
+.post-heading p,
+.category-banner a,
+.entry blockquote {    
+    font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+.category-banner span {    
+    font: 14px Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
 
 /*
     Top Navigation Menu
+    -------------------
+    A one-hundred line minified JS file does what I could accomplish with 
+    one line of JS, ironically reversing the norm.
 */
 
 .dropdown > li:last-child:after {
+    /* Each header menu item has a | after it. This removes the | from the
+    last item. */
     content: '';
 } 
 
@@ -25,22 +47,30 @@
 
 /*
     General Site Stylings
+    ---------------------
+    General stylings for generic parts of the site, as directed by
+    Aidan, Ciaran or Sean.
 */
 
 h2 {
+    /* Requested by Ciaran. */
     font-size: 20px;
 }
 
 h3 {
+    /* Requested by Adian. */
     color: #999;
     font-size: 16px;
 }
 
 .inner-wrap {
+    /* Stock colour is grey. */
     background: #fff;
 }
 
 .search_form {
+    /* This had godawful stock CSS. They floated the child inside the parent, 
+    instead of floating the parent. This caused this to break if I made additions. */
     float: right;
     padding-top: 10px;
 }
@@ -49,8 +79,50 @@ h3 {
     float: none;
 }
 
+.slide_content_holder {
+    /* Posts slider on front page. */
+    bottom: 0;
+}
+
+.column_1 a {
+    /* Yay for JS-loaded CSS! */
+    /* Removes bottom margin from homepage widget hyperlinks. 
+    The effect brings the author and title closer together. */
+    margin-bottom: 0 !important;
+}
+
+.entry blockquote,
+.entry blockquote p {
+    margin: 0 0 14px 0;
+}
+
+.entry blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+.entry blockquote {
+    background-image: url('images/quotation_open.svg'), url('images/quotation_close.svg');
+    background-position: -4% 4%, 104% 88%;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-size: auto 25px;
+    border-color: #f1f1f1;
+    border-style: solid;
+    /* The Earth will fall into the sun if you change either quation mark. */
+    border-width: 1px 0 1px 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-style: italic;
+    padding: 15px 30px;
+    position: relative;
+}
+
 /*
-    Header and Footer Images
+    Header and Footer Sections
+    ------------------------
+    The header has a rainbow trim at the bottom. 
+    The footer has a rainbow trim at the top, an Irish organization logo and
+    a big rainbow banner. 
 */
 
 #header {
@@ -62,22 +134,10 @@ h3 {
 
 #footer {
     background-color: #fff;    
-	background-image: 
-        url('images/rainbow_strip.svg'),
-        url('images/foras_na_gaeilge_logo.png'),
-        url('images/rainbow_footer.svg');
-    background-origin: 
-        border-box,
-        initial,
-        border-box;
-    background-position: 
-        center top, 
-        98% 30%, 
-        center bottom;
-    background-size: 
-        auto 6px,
-        135px auto, 
-        auto 65px; 
+	background-image: url('images/rainbow_strip.svg'), url('images/foras_na_gaeilge_logo.png'), url('images/rainbow_footer.svg');
+    background-origin: border-box, initial, border-box;
+    background-position: center top, 98% 30%, center bottom;
+    background-size: auto 6px, 135px auto, auto 65px; 
     background-repeat: no-repeat;
     /* The site is unbalanced. There's no top margin, but there is a bottom one. */
     margin-bottom: 0;
@@ -86,10 +146,8 @@ h3 {
 @media screen and (max-width: 770px) {
     #footer {
         /* The footer logo shouldn't display on mobile device. */
-        background-position: 
-            left top, 
-            center 200%,
-            left bottom;
+        /* It was easier to send it to Africa than duplicate the rules. */
+        background-position: left top, center 2000000000%, left bottom;
         padding-bottom: 140px;
     }
 }
@@ -101,7 +159,11 @@ h3 {
 
 /*
     AdRotate Groups
-    
+    ---------------
+    AdRotate's groups are numeric classes from .g-1 to .g-∞
+    It's stock CSS is awful and loaded at run time via JS. This
+    section hopefully overrides all of those stock rules.
+
     .g-1 header banner
     .g-2 sidebar widgets
     .g-3 footer banner
@@ -126,6 +188,7 @@ h3 {
 }
 
 .g-1, .g-3 {
+    /* Do _not_ touch, please. */
     padding: 15px 0 !important;
 }
 
@@ -136,6 +199,12 @@ h3 {
 
 /*
     Category Header Banners
+    ------------------------
+    Each category has a custom header bannner.
+    Children have the same colour as the parent.
+    Colours are set via PHP. 
+
+    See: gazeti/functions/user/functions.php
 */
 
 .category-banner {
@@ -152,7 +221,6 @@ h3 {
 
 .category-banner a {
     color: #fff;
-    font-family: Georgia, Times, "Times New Roman", serif;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
@@ -171,14 +239,9 @@ h3 {
     font-size: 22px;
 }
 
-.category-banner a:hover {
-    text-decoration: underline;
-}
-
 .category-banner span {
     color: #fff;
     float: right;
-    font: 14px Arial, "Helvetica Neue", Helvetica, sans-serif;
     margin: 10px 15px 0 0;
     text-align: right;
 }
@@ -189,10 +252,11 @@ h3 {
 
 /* 
     Wider Banner for ASNC Category (158) 
+    ------------------------------------
+    The ASNC category (158) must be taller in order to differentiate content. 
 */
 
 .asnc-category-banner {
-    /* The ASNC category (158) must be taller in order to differentiate content. */
     background-image:;
 	background-image: url('images/asnc_logo.svg');
     background-position: 10px center;
@@ -202,8 +266,25 @@ h3 {
     padding: 15px 0;
 }
 
+/*
+    Main Content Widget
+    -------------------
+    The author's name will appear above the widget. 
+*/
+
+.main_content span {
+    text-transform: uppercase;
+}
+
+.main_content span:after {
+    content: ' - ';
+}
+
 /* 
     Custom Hero Image
+    -----------------
+    The lead post on category pages has a different, bigger layout.
+    The placement of text and image are reversed.
 */
 
 .hero-image,
@@ -251,9 +332,13 @@ h3 {
 
 /*
     Single Post Title and Meta
+    --------------------------
+    I rewrote and changed the style of the header. The stock layout
+    is a fucking mess of display:table and display:table-cell. I first
+    reset from this and from there build up layout using the same 
+    containers.
 */
 
-/* Reset */
 .post-heading,
 .post-meta,
 .post-meta span,
@@ -269,12 +354,15 @@ h3 {
     width: 100%;
 }
 
-/* Contain padding. */
 .single .entry,
 .post-meta,
 .post-author-avatar,
 .post-meta-text,
 .post-heading .title {
+    /* Contain padding.
+
+    All post title items requires padding, but horizontal
+    space is limited. */
     box-sizing: border-box;
 }
 
@@ -284,13 +372,15 @@ h3 {
     padding: 0 4%;    
 }
 
-/* Containing post wrapper */
 .post-wrapper {
+    /* Containing post wrapper
+    Even out the padding. */
     padding: 10px 0;
 }
 
 .post-meta,
 .post-author-avatar {
+    /* For legibility when its white-on-white. */
     border: 1px solid #f1f1f1;
 }
 
@@ -307,6 +397,7 @@ h3 {
 }
 
 .post-meta > * {
+    /* Please forive me for the wildcard selector. :/ */
     float: left;
 }
 
@@ -333,8 +424,8 @@ h3 {
     color: #3AAA35;
 }
 
-/* Remove 'read more' link from excerpt/description. */
 .post-heading .more-link a {
+    /* Remove 'read more' link from excerpt/description. */
     display: none;
 }
 
@@ -345,7 +436,7 @@ h3 {
 .entry .wp-caption-text,
 .post-heading p {
     color: #87888a; 
-    font: 500 16px Georgia, serif;
+    font-size: 16px;
     line-height: 17px;
     margin-bottom: 13px;
     padding: 0 4%;
@@ -360,19 +451,29 @@ h3 {
     text-align: left;
 }
 
-/* Remove border from top of post conent. */ 
 .single .entry {
+    /* Remove border from top of post conent. */ 
     border: none;
 }
 
 /*
     Education Landing Page
+    ----------------------
+    The education landing page is a series of five coloured
+    boxes that link into the relevant sections.
 */
 
 .education-box {
     color: #fff;
+}
+
+.education-0,
+.education-box a {
     box-sizing: border-box;
+    display: block;
+    height: 100%;
     padding: 30px 20% 30px 4%;
+    width: 100%;
 }
 
 .education-box:nth-child(2) {
@@ -406,10 +507,6 @@ h3 {
     text-decoration: none;
 }
 
-.education-box a:hover {
-    text-decoration: underline;
-}
-
 .education-box h1 {
     margin-bottom: 25px;
     width: 50%;
@@ -435,6 +532,39 @@ h3 {
 
 /*
     Nav Menu Social Links
+    ----------------------
+    The stock widgets look like crap. These layout better,
+    don't hog the site or break layout when the page is 
+    resized. 
+
+    Triggered to hide at mobile sizes. The rationale is that
+    the links will open in a browser, but not the native 
+    applications. So there is fundamentally no reason to show them.
+
+    You can choose from:
+
+    Colour      Class       Service
+    -------------------------------
+    #f5756c     .email      Email
+    #3b5998     .facebook   Facebook     
+    #ff0084     .flickr     Flickr
+    #333        .github     GitHub
+    #dd4b39     .google     Google+
+    #3f729b     .instagram  Instagram
+    #0976b4     .linkedin   LinkedIn
+    #cc2127     .interest   Pinterest
+    #35465c     .tumblr     Tumblr
+    #55acee     .twitter    Twitter
+    #b31217     .youtube    YouTube
+
+    The menu takes the form of a horizontal ul.
+    Just drop in links as so:
+
+    <ul class="tuairisc-share">
+        <li><a class="email" href="#"></a></li>
+        ...
+        <li><a class="youtube" href="#"></a></li>
+    </ul>
  */
 
 ul.tuairisc-share,

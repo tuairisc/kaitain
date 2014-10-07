@@ -37,7 +37,8 @@ function get_cat_color($cat_id) {
         157 => '#e04184',
         158 => '#e6192a',
         159 => '#7d5e90',
-        187 => '#d4bb85',
+        // 187 => '#d4bb85',
+        187 => '#424045',
         191 => '#516671',
         // Fallback mustard yellow
         999 => '#c7c009',
@@ -112,7 +113,8 @@ function has_local_avatar($user_id) {
     // This function checks to see if the avatar is being served from the local site. 
     $home_url = site_url();
     $avatar_url = get_avatar_url($user_id, 200);
-    return (strpos($avatar_url, $home_url) === false) ? false : true;
+    $has_local_avatar = (strpos($avatar_url, $home_url) === false) ? false : true;
+    return $has_local_avatar;
 }
 
 function day_to_irish($day) {
@@ -224,7 +226,47 @@ function education_landing_shortcode($atts) {
     $id = ($a['id'] < 0 || $a['id'] > 5) ? 0 : $a['id'];
     $cat_id = education_category_id($id);
 
-    return '<div class="education-box education-' . $id . '"><p><span><a href="' . get_category_link($cat_id) . '">' . get_cat_name($cat_id) . '</a></span><br />' . category_description($cat_id) . '</p></div>';
+    return '<div class="education-box education-' . $id . '"><a href="' . get_category_link($cat_id) . '"><p><span>' . get_cat_name($cat_id) . '</span><br />' . category_description($cat_id) . '</a></p></div>';
+}
+
+function parse_columnist_role($author_id) {
+    // Parse the string to a boolean.
+    $meta_tag = get_the_author_meta('columnist', $author_id);
+    $is_columnist = false;
+
+    if (!empty($meta_tag)) {
+        $meta_tag = strtolower($meta_tag);
+        $meta_tag = strip_tags($meta_tag);
+
+        if (strpos('yes', $meta_tag) != -1) {
+            $meta_tag = preg_replace('/([^yes].*$)/', '', $meta_tag);
+        } else {
+            $meta_tag = preg_replace('/([^no].*$)/', '', $meta_tag);
+        }
+
+        if ($meta_tag === 'yes') {
+            $is_columnist = true;
+        }
+    } 
+
+    return $is_columnist;
+}
+
+function author_is_columnist() {
+    // Return the boolean. Is author a designnated columnist?
+    $id = get_the_author_meta('ID');
+    return parse_columnist_role($id);
+}
+
+function is_columnist_article() {
+    $col_article = get_post_meta(get_the_ID(), 'is_column', true);
+    $is_column = false;
+
+    if ($col_article === '1') {
+        $is_column = true;
+    }
+
+    return $is_column;
 }
 
 // Custom excerpt length limit.

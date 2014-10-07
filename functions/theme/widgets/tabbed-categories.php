@@ -79,10 +79,17 @@ class Tabbed_Widget extends WP_Widget
 					  	<?php get_the_image( array( 'size' => 'featured-tab', 'width' => 135, 'height' => 135 ) ); ?>
 			  			
 			  			<div class="main_content">
-                            <h3><?php echo get_the_author(); ?></h3>
-							<h2><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>						
-						    <?php the_excerpt(); ?> 
-						 
+							<h2>
+                                <a href="<?php the_permalink() ?>" title="<?php the_title(); ?>">
+                                    <!-- Begin optional portion. -->
+                                    <?php if (is_columnist_article()) : ?>
+                                        <span><?php echo get_the_author(); ?></span><br />
+                                    <?php endif; ?>
+                                    <!-- End optional portion.   -->
+                                    <?php the_title(); ?>
+                                </a>
+                            </h2>						
+						    <?php the_excerpt(); ?> 						 
 					    </div>
 					    
 				</div> <!-- /.1col -->
