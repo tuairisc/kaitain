@@ -67,16 +67,20 @@ function asnc_banner($cat_id) {
     return ($cat_id == $cat) ? $banner : '';
 }
 
-function get_thumbnail_url($post_ID) {
-    // Code snippet from http://www.wpbeginner.com/wp-themes/how-to-get-the-post-thumbnail-url-in-wordpress/
-    $thumb_id = get_post_thumbnail_id($post_ID);
+function get_thumbnail_url($post_id) {
+    /* Code snippet from http://www.wpbeginner.com/wp-themes/how-to-get-the-post-thumbnail-url-in-wordpress/
+    get_thumbnail_url returns the url for the requested thumbnail, without the wrapped HTML code. */
+    $thumb_id = get_post_thumbnail_id($post_id);
     $thumb_url = wp_get_attachment_image_src($thumb_id,'large', true);
     return $thumb_url[0];
 }
 
 function excerpt_char_length($excerpt) {
-    // Returns a shortened excerpt of $ex_length characters.
-    // Optionally add 'read more' link.
+    /* Overall excerpt length was a concern in spacing and organizing posts, as was the 
+    presense of the 'Read More' link. This function strips the link and constrains the 
+    excerpt length to $ex_length characters.
+
+    excerpt_char_length is a filter for the_excerpt() and returns the excerpt. */
 
     $ex_length = 250;
 
@@ -102,15 +106,18 @@ function get_avatar_url($user_id, $size) {
 }
 
 function has_local_avatar($user_id) {
-    // This site uses 'WP USer Avatar' for avatar control.
-    // It serves avatars in this priority:
-    // 
-    // 1. Local user avatar
-    // 2. Gravatar user avatar
-    // 3. Gravatar stock avatar
-    // 
-    // I need to see if a local avatar is served and switch based on it.
-    // This function checks to see if the avatar is being served from the local site. 
+    /* This site uses 'WP USer Avatar' for avatar control.
+    It serves avatars in this priority:
+    
+    1. Local user avatar
+    2. Gravatar user avatar
+    3. Gravatar stock avatar
+    
+    I need to see if a local avatar is served and switch based on it.
+    This function checks to see if the avatar is being served from the local site. 
+
+    has_local_avatar returns true if the avatar is hosted from the local server. */
+
     $home_url = site_url();
     $avatar_url = get_avatar_url($user_id, 200);
     $has_local_avatar = (strpos($avatar_url, $home_url) === false) ? false : true;
@@ -118,7 +125,9 @@ function has_local_avatar($user_id) {
 }
 
 function day_to_irish($day) {
-    // Return given day of the week as Gaeilge.
+    /* See date to Irish below.
+
+    day_to_irish takes an English day and uses lookup to return the Irish version. */
     $irish_days = array(
         'Dé Luain', 'Dé Máirt', 'Dé Céadaoin', 'Déardaoin', 
         'Dé hAoine', 'Dé Sathairn', 'Dé Domhnaigh'
@@ -146,7 +155,9 @@ function day_to_irish($day) {
 }
 
 function month_to_irish($month) {
-    // Return given month of the year as Gaeilge.
+    /* See date to Irish below.
+
+    month_to_irish takes an English month and uses lookup to return the Irish version. */
     $irish_months = array(
         'Eanáir', 'Feabhra', 'Márta', 'Aibreán', 'Bealtaine', 'Meitheamh',
         'Iúil', 'Lúnasa', 'Meán Fómhair', 'Deireadh Fómhair', 'Samhain', 'Nollaig'
@@ -185,7 +196,10 @@ function month_to_irish($month) {
 }
 
 function date_to_irish($the_date, $d) {
-    // Changes the day of the week and month of the year to their Irish versions.
+    /* Localization attempts fell short as date localization requires files on the server.
+
+    date_to_irish filters the output English date and returns it with day-of-week and month-of-year 
+    converted to Irish. */
     $day_regex = '/(,.*)/';
     $month_regex = '/(^.*, | [0-9].*$)/'; 
     $english_month = preg_replace($month_regex, '', $the_date);
@@ -196,8 +210,10 @@ function date_to_irish($the_date, $d) {
 }
 
 function education_category_id($id) {
-    // The education category has five sub-categories.
-    // Fallback is to retrive the parent ID.
+    /* Used for eduation_landing_shortcode below. Users cannot be expected to know 
+    the actual category. This returns the appropriate category based on 1-5.
+
+    education_category_id returns proper id, and a fallback id. */
     switch ($id) {
         case 1: 
             $id = 202; break;
@@ -217,7 +233,10 @@ function education_category_id($id) {
 }
 
 function education_landing_shortcode($atts) {
-    // Parse shortcude for the education landing lpage categories. 
+    /* The education landing page links through to the five different segments. 
+    These are big boxy clickable boxes complete with title and description. 
+
+    education_landing_shortcode returns the div string when the shortcode is used.*/
     $a = shortcode_atts(array(
         'id' => 0,
     ), $atts);
@@ -230,7 +249,13 @@ function education_landing_shortcode($atts) {
 }
 
 function parse_columnist_role($author_id) {
-    // Parse the string to a boolean.
+    /* See author_is_columnist, below.
+
+    This function takes the string 'yes' or no' and parses it. 
+    I probably go overboard in sanitization, but I've seen the dedication
+    of our local users. 
+
+    parse_columnist_role returns true if the string parses to 'yes' */
     $meta_tag = get_the_author_meta('columnist', $author_id);
     $is_columnist = false;
 
@@ -253,12 +278,20 @@ function parse_columnist_role($author_id) {
 }
 
 function author_is_columnist() {
-    // Return the boolean. Is author a designnated columnist?
+    /* We've (currently unused) added a flag to each user in order to indicate
+    that they have a serial column. 
+
+    parse_columnist_role parses the variable string.
+    author_is_columnist returns true or false. */
     $id = get_the_author_meta('ID');
     return parse_columnist_role($id);
 }
 
 function is_columnist_article() {
+    /* We've added a 'is_column' flag in extended post fields in order to 
+    indicate whether a post is part of an ongoing column. 
+
+    is_columnist_article parses the value and returns true or false. */
     $col_article = get_post_meta(get_the_ID(), 'is_column', true);
     $is_column = false;
 

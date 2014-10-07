@@ -68,7 +68,7 @@ h3 {
     background: #fff;
 }
 
-.search_form {
+#header .search_form {
     /* This had godawful stock CSS. They floated the child inside the parent, 
     instead of floating the parent. This caused this to break if I made additions. */
     float: right;
