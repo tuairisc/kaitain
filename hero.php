@@ -1,14 +1,11 @@
 <div id="post-<?php the_ID(); ?>" class="recent-post">
 
 <?php if (has_post_thumbnail()) : ?>
-    <div class="hero-image" style="background-image: url('<?php echo get_thumbnail_url(get_the_ID()); ?>'); ">
+    <div class="hero-image" style="background-image: url('<?php echo get_thumbnail_url(); ?>'); ">
         <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"></a>
     </div>
 <? endif; ?>
-
-<?php $hero_post_class = (has_post_thumbnail()) ? 'hero-post' : '' ; ?>
-
-<div class="post-content <?php echo $hero_post_class; ?>">  
+<div class="post-content <?php echo hero_post_class(); ?>">  
     
     <h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permalink to %s', 'wpzoom'); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
     <h3><?php echo get_the_author(); ?></h3>

@@ -4,16 +4,17 @@
 =========================================================== */
 
 function get_parent_id($cat_id) {
-    // Return the ID of the top parent of any category.
+    /* Return the ID of the top parent of any category.
+
+    get_parent_id returns the id of the parent category. */
     $parent = get_category_parents($cat_id, false, '/'); 
     $parent = preg_replace('/\/.*/', '', $parent); 
     return get_cat_id($parent); 
 }
 
 function get_cat_color($cat_id) {
-    // Return a unique colour for each given parent category.
+    /* Return a unique colour for each given parent category.
 
-    /*
     # Category Name   Hex Colour  Category ID
     -----------------------------------------
     1 Nuacht          #516671     191  
@@ -24,9 +25,9 @@ function get_cat_color($cat_id) {
     6 Pobal           #7d5e90     159
     7 Greann          #e6192a     158
     8 Foghlaimeoirí   #d4bb85     187
-    */
 
-    // browser_console_log($cat_id);
+    get_cat_color returns the hex color as a string.
+    */
 
     $cat_id = get_parent_id($cat_id);
 
@@ -37,7 +38,6 @@ function get_cat_color($cat_id) {
         157 => '#e04184',
         158 => '#e6192a',
         159 => '#7d5e90',
-        // 187 => '#d4bb85',
         187 => '#424045',
         191 => '#516671',
         // Fallback mustard yellow
@@ -45,67 +45,81 @@ function get_cat_color($cat_id) {
     );
 
     switch($cat_id) {
-        case 154: $color = $cat_colors[$cat_id]; break;
-        case 155: $color = $cat_colors[$cat_id]; break;
-        case 156: $color = $cat_colors[$cat_id]; break;
-        case 157: $color = $cat_colors[$cat_id]; break;
-        case 158: $color = $cat_colors[$cat_id]; break;
-        case 159: $color = $cat_colors[$cat_id]; break;
-        case 187: $color = $cat_colors[$cat_id]; break;
-        case 187: $color = $cat_colors[$cat_id]; break;
-        case 191: $color = $cat_colors[$cat_id]; break;
-        default: $color = $cat_colors[999]; break;
+        case 154: 
+            $color = $cat_colors[$cat_id]; break;
+        case 155: 
+            $color = $cat_colors[$cat_id]; break;
+        case 156: 
+            $color = $cat_colors[$cat_id]; break;
+        case 157: 
+            $color = $cat_colors[$cat_id]; break;
+        case 158: 
+            $color = $cat_colors[$cat_id]; break;
+        case 159: 
+            $color = $cat_colors[$cat_id]; break;
+        case 187: 
+            $color = $cat_colors[$cat_id]; break;
+        case 187: 
+            $color = $cat_colors[$cat_id]; break;
+        case 191: 
+            $color = $cat_colors[$cat_id]; break;
+        default: 
+            $color = $cat_colors[999]; break;
     }
 
     return $color;
 }
 
-function asnc_banner($cat_id) {
-    // The asnc category (179) must be taller in order to differentiate content.
-    $cat = 158;
-    $banner = 'asnc-category-banner';
-    return ($cat_id == $cat) ? $banner : '';
+function hero_post_class() {
+    /* If the lead post has thumbnail images, mark it as a 'hero' post, whose 
+    style is very different than other posts in the cateory loop. 
+
+    hero_post_class returns the correct class as string. */
+    return (has_post_thumbnail()) ? 'hero-post' : '';
 }
 
-function get_thumbnail_url($post_id) {
-    /* Code snippet from http://www.wpbeginner.com/wp-themes/how-to-get-the-post-thumbnail-url-in-wordpress/
-    get_thumbnail_url returns the url for the requested thumbnail, without the wrapped HTML code. */
+function greann_banner() {
+    /* The Greann category is a parody/comedy strip. The banner for this 
+    category is of a different style than other categories. 
+
+    greann_banner returns the class as a string. */
+    $greann_category = 158;
+    $greann_banner = 'greann-category-banner';
+    return (get_query_var('cat') == $greann_category) ? $greann_banner : '';
+}
+
+function get_thumbnail_url() {
+    /* Code snippet from http://goo.gl/NhcEU6
+    get_thumbnail_url returns the anchor url for the requested thumbnail. */
+    $post_id = get_the_ID();
     $thumb_id = get_post_thumbnail_id($post_id);
     $thumb_url = wp_get_attachment_image_src($thumb_id,'large', true);
     return $thumb_url[0];
 }
 
-function excerpt_char_length($excerpt) {
-    /* Overall excerpt length was a concern in spacing and organizing posts, as was the 
-    presense of the 'Read More' link. This function strips the link and constrains the 
-    excerpt length to $ex_length characters.
+function remove_read_more($excerpt) {
+    /* Remove the read more link from page and post excerpts.
 
-    excerpt_char_length is a filter for the_excerpt() and returns the excerpt. */
-
-    $ex_length = 250;
-
-    $excerpt = strip_tags($excerpt);
-    $excerpt = preg_replace('/(Read More$)/', '', $excerpt);
-
-    if (!is_single()) {
-        $excerpt = substr($excerpt, 0, $ex_length);
-        $excerpt = substr($excerpt, 0, strripos($excerpt, ' '));
-    }
-
-    $excerpt = preg_replace('/^/', '<p>', $excerpt);
-    $excerpt = preg_replace('/$/', '</p>', $excerpt);
-
-    return $excerpt;
+    remove_read_more returns the excerpt. */
+    return preg_replace('/(<a class="more.*<\/a>)/', '', $excerpt);
 }
 
-function get_avatar_url($user_id, $size) {
-    // Return URL for user avatar.
+function replace_breaks($excerpt) {
+    /* Replace <br /> tags in excerpts with <paragraphs. 
+
+    except_replace_breaks returns the exerpt. */ 
+    return str_replace('<br />', '</p><p>', $excerpt);
+}
+
+function get_avatar_url($size) {
+    /* Return the hyperlink for the given avatar size without the <img /> code.
+    get_avatar_url returns the URL string. */
+    $user_id = get_the_author_meta('ID');
     $avatar_url = get_avatar($user_id, $size);
-    $regex = '/(^.*src="|" w.*$)/';
-    return preg_replace($regex, '', $avatar_url);
+    return preg_replace('/(^.*src="|" w.*$)/', '', $avatar_url);
 }
 
-function has_local_avatar($user_id) {
+function has_local_avatar() {
     /* This site uses 'WP USer Avatar' for avatar control.
     It serves avatars in this priority:
     
@@ -114,20 +128,19 @@ function has_local_avatar($user_id) {
     3. Gravatar stock avatar
     
     I need to see if a local avatar is served and switch based on it.
-    This function checks to see if the avatar is being served from the local site. 
+    This function checks to see if the avatar is being served from the local 
+    site. 
 
-    has_local_avatar returns true if the avatar is hosted from the local server. */
-
+    has_local_avatar returns true if the avatar is hosted on the site. */
+    $user_id = get_the_author_meta('ID');
     $home_url = site_url();
     $avatar_url = get_avatar_url($user_id, 200);
-    $has_local_avatar = (strpos($avatar_url, $home_url) === false) ? false : true;
-    return $has_local_avatar;
+    return (strpos($avatar_url, $home_url) === false) ? false : true;
 }
 
 function day_to_irish($day) {
     /* See date to Irish below.
-
-    day_to_irish takes an English day and uses lookup to return the Irish version. */
+    day_to_irish returns the Irish translation of the day. */
     $irish_days = array(
         'Dé Luain', 'Dé Máirt', 'Dé Céadaoin', 'Déardaoin', 
         'Dé hAoine', 'Dé Sathairn', 'Dé Domhnaigh'
@@ -157,10 +170,11 @@ function day_to_irish($day) {
 function month_to_irish($month) {
     /* See date to Irish below.
 
-    month_to_irish takes an English month and uses lookup to return the Irish version. */
+    month_to_irish returns the Irish translation of the month. */
     $irish_months = array(
-        'Eanáir', 'Feabhra', 'Márta', 'Aibreán', 'Bealtaine', 'Meitheamh',
-        'Iúil', 'Lúnasa', 'Meán Fómhair', 'Deireadh Fómhair', 'Samhain', 'Nollaig'
+        'Eanáir', 'Feabhra', 'Márta', 'Aibreán', 
+        'Bealtaine', 'Meitheamh', 'Iúil', 'Lúnasa', 
+        'Meán Fómhair', 'Deireadh Fómhair', 'Samhain', 'Nollaig'
     );
 
     switch ($month) {
@@ -195,25 +209,29 @@ function month_to_irish($month) {
     return $month;
 }
 
-function date_to_irish($the_date, $d) {
-    /* Localization attempts fell short as date localization requires files on the server.
+function date_to_irish($the_date) {
+    /* Localization attempts fell short as date localization requires files on 
+    the server.
 
-    date_to_irish filters the output English date and returns it with day-of-week and month-of-year 
-    converted to Irish. */
+    date_to_irish returns the translated date. */
     $day_regex = '/(,.*)/';
     $month_regex = '/(^.*, | [0-9].*$)/'; 
+
     $english_month = preg_replace($month_regex, '', $the_date);
     $english_day = preg_replace($day_regex, '', $the_date);
-    $the_date = str_replace($english_day, day_to_irish($english_day), $the_date);
-    $the_date = str_replace($english_month, month_to_irish($english_month), $the_date);
+    $irish_day = day_to_irish($english_day);
+    $irish_month = month_to_irish($english_month);
+
+    $the_date = str_replace($english_day, $irish_day, $the_date);
+    $the_date = str_replace($english_month, $irish_month, $the_date);
     return $the_date;
 }
 
 function education_category_id($id) {
-    /* Used for eduation_landing_shortcode below. Users cannot be expected to know 
-    the actual category. This returns the appropriate category based on 1-5.
+    /* Used for eduation_landing_shortcode below. Users cannot be expected to 
+    know  the actual category.
 
-    education_category_id returns proper id, and a fallback id. */
+    education_category_id returns proper id or a fallback id. */
     switch ($id) {
         case 1: 
             $id = 202; break;
@@ -236,16 +254,20 @@ function education_landing_shortcode($atts) {
     /* The education landing page links through to the five different segments. 
     These are big boxy clickable boxes complete with title and description. 
 
-    education_landing_shortcode returns the div string when the shortcode is used.*/
+    education_landing_shortcode returns the div as a stribg. */
     $a = shortcode_atts(array(
         'id' => 0,
     ), $atts);
 
-    // Change it to default value if it falls outside 0-5 range. 
+    // Change $id to 0 if it falls outside 0-5 range. 
     $id = ($a['id'] < 0 || $a['id'] > 5) ? 0 : $a['id'];
     $cat_id = education_category_id($id);
 
-    return '<div class="education-box education-' . $id . '"><a href="' . get_category_link($cat_id) . '"><p><span>' . get_cat_name($cat_id) . '</span><br />' . category_description($cat_id) . '</a></p></div>';
+    return 
+        '<div class="education-box education-' . 
+        $id . '"><a href="' . get_category_link($cat_id) . '
+        "><p><span>' . get_cat_name($cat_id) . '</span><br />' . 
+        category_description($cat_id) . '</a></p></div>';
 }
 
 function parse_columnist_role($author_id) {
@@ -262,12 +284,6 @@ function parse_columnist_role($author_id) {
     if (!empty($meta_tag)) {
         $meta_tag = strtolower($meta_tag);
         $meta_tag = strip_tags($meta_tag);
-
-        if (strpos('yes', $meta_tag) != -1) {
-            $meta_tag = preg_replace('/([^yes].*$)/', '', $meta_tag);
-        } else {
-            $meta_tag = preg_replace('/([^no].*$)/', '', $meta_tag);
-        }
 
         if ($meta_tag === 'yes') {
             $is_columnist = true;
@@ -294,6 +310,8 @@ function is_columnist_article() {
     is_columnist_article parses the value and returns true or false. */
     $col_article = get_post_meta(get_the_ID(), 'is_column', true);
     $is_column = false;
+    $col_article = strtolower($col_article);
+    $col_article = strip_tags($col_article);
 
     if ($col_article === '1') {
         $is_column = true;
@@ -302,8 +320,9 @@ function is_columnist_article() {
     return $is_column;
 }
 
-// Custom excerpt length limit.
-add_filter('the_excerpt', 'excerpt_char_length');
+// Remove read more links from excerpts.
+add_filter('the_excerpt', 'remove_read_more');
+add_filter('the_excerpt', 'replace_breaks');
 // Add shortcode for landing.
 add_shortcode('landing', 'education_landing_shortcode');
 // Page excerpts for SEO and the education landing page. 

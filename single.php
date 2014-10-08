@@ -16,11 +16,9 @@
 
                     <?php the_excerpt(); ?>
 
-                    <?php $user_id = get_the_author_meta('ID'); ?>
-
                     <div class="post-meta">
-                        <?php if (has_local_avatar($user_id)) : ?>
-                            <div class="post-author-avatar" style="background-image: url('<?php echo get_avatar_url($user_id, 200); ?>');"></div>
+                        <?php if (has_local_avatar()) : ?>
+                            <div class="post-author-avatar" style="background-image: url('<?php echo get_avatar_url(200); ?>');"></div>
                         <?php endif; ?>
                         <div class="post-meta-text">
                             <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') { ?>

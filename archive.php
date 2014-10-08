@@ -28,7 +28,7 @@
 
 	<?php if (is_category()) : ?> 
         <?php $cat_id = get_query_var('cat'); ?>
-        <div class="category-banner <?php echo asnc_banner($cat_id); ?>" style="<?php echo 'background-color: ' . get_cat_color($cat_id) . ';'; ?>">
+        <div class="category-banner <?php echo greann_banner(); ?>" style="<?php echo 'background-color: ' . get_cat_color($cat_id) . ';'; ?>">
             <?php // Sorry for magic number: 158 = the mock/funny column. ?>
             <?php if ($cat_id != 158) : ?>
                 <?php echo get_category_parents($cat_id, true, '&nbsp;'); ?>
