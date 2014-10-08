@@ -26,8 +26,10 @@
 		</div><!-- /#side_ad -->
 	<?php } ?>
 	
-    <!-- AdRotate sidebar banner. Height proportional to 100% width.  -->
+    <!-- AdRotate sidebar banners.  -->
 	<?php echo adrotate_group(2); ?>	
+    <?php echo adrotate_group(4); ?>    
+    <?php echo adrotate_group(5); ?>    
 
 	<div class="clear"></div>
 </section> 

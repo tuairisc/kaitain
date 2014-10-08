@@ -7,94 +7,96 @@
 // Gazeti changes layout at 770px window width.
 var responsiveBreak = 770;
 
-// Sidebar ID
-var sidebar = '#sidebar';
-var content = '#content';
-
-// Unique string in image name. 
-var suffix = { 
-    mobile  : '_mobile_', 
-    desktop : '_desktop_'
+function stripUrl(url) {
+    // stirpUrl strips url(..) from a background-image attribute.
+    // in:  url(http://domain.com/path-to-image.png)
+    // out: http://domain.com/path-to-image.png
+    return url.replace(/^url\(|\)$/g, '');
 }
 
-var adGroups = {
-    header  : '.g-1',
-    sidebar : '.g-col',
-    footer  : '.g-3'    
+function addUrl(url) {
+    // addUrl adds url(..) to a background-image attribute.
+    // in:  http://domain.com/path-to-image.png
+    // out: url(http://domain.com/path-to-image.png)
+    url = url.replace(/^/,'url(');
+    url = url.replace(/$/,')');
+    return url;
 }
 
-function replaceIfExists(img, callback) {
-    // Check if the file exists on the server.
+function checkServer(url, cb_one, cb_two) {
     $.ajax({
-        url: img,
+        url: url,
         type: 'HEAD',
         dataType: 'image',
         success:function() {
-            callback();
+            cb_one();
+        }, error:function() {
+            cb_two();
         }
     });
 }
 
-function swapAdvertImage(obj) {
+function swapImage(img) {
     // Swap mobile and desktop image sizes. 
-    $(obj).find('img').each(function() {
-        var src = $(this).attr('src');
+    var src = $(img).attr('src');
+    var newSrc = '';
+    var x = '';
 
-        if (src.indexOf(suffix.desktop) > -1 || src.indexOf(suffix.mobile) > -1) {
-            var img = $(this);
+    var suffix = { 
+        // Suffix denotes respective desktop and mobile versions.
+        mobile  : '_mobile_', 
+        desktop : '_desktop_'
+    }
 
-            if ($(window).width() > responsiveBreak)
-                if (src.indexOf(suffix.mobile) > -1)
-                    src = src.replace(suffix.mobile, suffix.desktop);  
-
-            if ($(window).width() <= responsiveBreak)
-                if (src.indexOf(suffix.desktop) > -1)
-                    src = src.replace(suffix.desktop, suffix.mobile);
-
-            replaceIfExists(src, function() {
-                $(img).attr('src', src);
-            });
+    if (src.indexOf(suffix.desktop) > -1 || src.indexOf(suffix.mobile) > -1) {
+        if ($(window).width() > responsiveBreak) {
+            if (src.indexOf(suffix.mobile) > -1)
+                newSrc = src.replace(suffix.mobile, suffix.desktop);  
         }
+
+        if ($(window).width() <= responsiveBreak) {
+            if (src.indexOf(suffix.desktop) > -1)
+                newSrc = src.replace(suffix.desktop, suffix.mobile);
+        }
+    }
+
+    checkServer(newSrc, function() {
+        x = newSrc;
+    }, function() {
+        x = src;
     });
+
+    return x;
 }
 
-function resizeAdvert(obj) {
-    // Overwrite AdRotate CSS. Size anchor element to child image before centering it.
-    $(obj).find('img').each(function() {
-        var a = $(this).width();
-        var b = $(obj).width();
-        var c = b * 0.5 - a * 0.5; 
+function resizeBanner(obj) {
+    $(obj).each(function() {
+        var advert = $(this);
+        var src = stripUrl($(this).css('background-image'));
+        var img = new Image(); 
+        $(img).attr('src', src);
 
-        // The margin will be negative if the banner image is greater than the width
-        // of the parent container. 
-        c = (c < 0) ? 0 : c;
+        $(img).load(function() {
+            var w = img.width;
+            var h = img.height; 
 
-        $(this).css('margin-left', c  + 'px');
+            if (w > $(advert).closest('.g').width())
+                w = $(advert).closest('.g').width() * 0.98;
 
-        if ($(this).css('display') == 'none')
-            $(this).toggle();
+            $(advert).css({
+                'width' : w + 'px',
+                'height' : h + 'px',
+            });
+
+            $(advert).css('background-image', addUrl($(this).attr('src')));
+        });
     });
 }
 
 $(function() {
-    $(adGroups.sidebar).parent().css('width', '100%');
-
-    $.each(adGroups, function(k,v) {
-        // Determine which image needs to be loaded before it is shown.
-        swapAdvertImage(v);
-    });
-});
-
-$(window).load(function() {
-    // Media has to load before you can resize it.
-    $.each(adGroups, function(k,v) {
-        resizeAdvert(v);
-    });
+    resizeBanner('.tuairisc-advert');
 });
 
 $(window).resize(function() {
-    $.each(adGroups, function(k,v) {
-        swapAdvertImage(v);
-        resizeAdvert(v);
-    });
+    resizeBanner('.tuairisc-advert');
 });

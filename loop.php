@@ -8,9 +8,15 @@
     <?php else : ?>
     	<div id="post-<?php the_ID(); ?>" class="recent-post">
 
-    		<?php if (option::get('index_thumb') == 'on') { 
-     			get_the_image( array( 'size' => 'loop', 'width' => option::get('thumb_width'), 'height' => option::get('thumb_height'), 'before' => '<div class="post-thumb">', 'after' => '</div>' ) );
-     		} ?>
+            <?php if (is_columnist_article() && has_local_avatar()) : ?>
+                <div class="post-thumb">
+                    <div class="avatar" style="background-image: url('<?php echo get_avatar_url(200); ?>');"></div>
+                </div>
+            <?php else : ?>
+        		<?php if (option::get('index_thumb') == 'on') { 
+         			get_the_image( array( 'size' => 'loop', 'width' => option::get('thumb_width'), 'height' => option::get('thumb_height'), 'before' => '<div class="post-thumb">', 'after' => '</div>' ) );
+         		} ?>
+            <?php endif; ?>
     		
     		<div class="post-content">	
     			

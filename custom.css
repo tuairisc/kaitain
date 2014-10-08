@@ -169,37 +169,66 @@ h3 {
     It's stock CSS is awful and loaded at run time via JS. This
     section hopefully overrides all of those stock rules.
 
-    .g-1 header banner
-    .g-2 sidebar widgets
-    .g-3 footer banner
+    Group   Location
+    -----------------
+    .g-1    Header
+    .g-2    Sidebar
+    .g-3    Footer
+    .g-4    Sidebar
+    .g-5    Sidebar
+
+    IMPORTANT-READ THIS OR WE WILL ALL DIE:
+    --------------------------------------
+    /Please/ do not change any rule marked with !important. AdRotate
+    loads its own CSS that will overwise override these rules.
+
+    The sidebar adverts will all disappear and a meteor will fall on 
+    Ireland we'll all die.
 */
 
 .g a {
-    max-width: 100%;
-    overflow: auto;
-    text-align: center;
-}
-
-.g img {
-    display: none;
-    float: left;
-    height: auto;
-    max-width: 100%;
-}
-
-.g img:after {
-    clear: both;
-    display: table;
+    display: block;
+    height: 100%;
+    width: 100%;
 }
 
 .g-1, .g-3 {
-    /* Do _not_ touch, please. */
-    padding: 15px 0 !important;
+    /* The moon will fall out of orbit and kill us all if you touch this. */
+    padding: 15px 4% !important;
 }
 
-.g-2 .g-col {
-    margin-bottom: 15px;
-    width: 100%;
+.g-2, .g-4, .g-5 {
+    /* Sidebar column adverts */
+    /* If you change these the Earth will crash into...Pluto and we'll all explode. */
+    margin-bottom: 15px !important;
+    width: 100% !important;
+}
+
+.g-col {
+    /* If you change this Ireland will fall into the sea and we'll all die. */
+    width: 99%;
+}
+
+.g-dyn {
+    /* Dynamic adverts on rotation. */
+    display: none;
+}
+
+.g-5 .g-dyn {
+    display: block;
+}
+
+.tuairisc-advert {
+    /* This is the actual advert div used. Structure is:
+
+        .tuarisic-advert
+            a
+
+    Background image is set in tuairisc_adrotate.js */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    margin: 0 auto;
 }
 
 /*
@@ -383,8 +412,7 @@ h3 {
     padding: 10px 0;
 }
 
-.post-meta,
-.post-author-avatar {
+.post-meta {
     /* For legibility when its white-on-white. */
     border: 1px solid #f1f1f1;
 }
@@ -406,13 +434,22 @@ h3 {
     float: left;
 }
 
-.post-author-avatar {
+.avatar {
     /* background-image is set in single.php */ 
     background-position: center center;
     background-repeat: no-repeat;
     background-size: auto 100%;
-    height: 50px;
+}
+
+.post-meta > .avatar {
+    /* Single post header avatar. */
+    height: 67px;
     width: 67px;
+}
+
+.post-thumb > .avatar {
+    height: 150px;
+    width: 200px;
 }
 
 .post-meta-text {

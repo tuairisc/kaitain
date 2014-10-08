@@ -18,7 +18,7 @@
 
                     <div class="post-meta">
                         <?php if (has_local_avatar()) : ?>
-                            <div class="post-author-avatar" style="background-image: url('<?php echo get_avatar_url(200); ?>');"></div>
+                            <div class="avatar" style="background-image: url('<?php echo get_avatar_url(135); ?>');"></div>
                         <?php endif; ?>
                         <div class="post-meta-text">
                             <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') { ?>
