@@ -118,6 +118,19 @@ h3 {
     padding: 15px 30px;
 }
 
+.entry blockquote cite {
+    color: #444;
+    display: block;
+    font-style: none;
+    font-weight: bold;
+    font-size: 80%;
+    width: 100%;
+}
+
+.entry blockquote cite:before {
+    content: ' -';
+}
+
 /*
     Header and Footer Sections
     ------------------------
@@ -136,12 +149,11 @@ h3 {
 #footer {
     background-color: #fff;    
 	background-image: 
-        url('images/rainbow_strip.svg'), 
         url('images/foras_na_gaeilge_logo.png'), 
         url('images/rainbow_footer.svg');
-    background-origin: border-box, initial, border-box;
-    background-position: center top, 98% 30%, center bottom;
-    background-size: auto 6px, 135px auto, auto 65px; 
+    background-origin: initial, border-box;
+    background-position: 98% 30%, center bottom;
+    background-size: 135px auto, auto 65px; 
     background-repeat: no-repeat;
     /* The site is unbalanced. */
     margin-bottom: 0;
@@ -194,6 +206,13 @@ h3 {
 .g-1, .g-3 {
     /* The moon will fall out of orbit and kill us all if you touch this. */
     padding: 15px 4% !important;
+}
+
+.g-3 {
+    background: url('images/rainbow_strip.svg') no-repeat center top;
+    background-origin: border-box;
+    background-size: auto 6px;     
+    padding-top: 20px !important;
 }
 
 .g-2, .g-4, .g-5 {

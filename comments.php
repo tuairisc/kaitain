@@ -1,6 +1,6 @@
 <div id="comments">
 <?php if ( post_password_required() ) : ?>
-	<p class="nopassword"><?php _e( 'This post is password protected. Enter the password to view any comments.', 'wpzoom' ); ?></p>
+	<p class="nopassword"><?php _e( 'Tá pasfhocal ag teastáil le haghaidh na postála seo. Cuir isteach an pasfhocal chun na tráchtanna a fheiceáil.', 'wpzoom' ); ?></p>
  <?php
 		/* Stop the rest of comments.php from being processed,
 		 * but don't kill the script entirely -- we still have
@@ -16,7 +16,7 @@
 
 <?php if ( have_comments() ) : ?>
 
-	<h3><?php comments_number(__('No Comments','wpzoom'), __('One Comment','wpzoom'), __('% Comments','wpzoom') );?></h3>
+	<h3><?php comments_number(__('Gan Tráchtanna','wpzoom'), __('Trácht Amháin','wpzoom'), __('% Nótaí Tráchta','wpzoom') );?></h3>
  
 	<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
 		<div class="navigation">
@@ -50,7 +50,7 @@
 		 */
 		if ( ! comments_open() ) :
 	?>
-		<p class="nocomments"><?php _e( 'Comments are closed.', 'wpzoom' ); ?></p>
+		<p class="nocomments"><?php _e( 'Tá fóram na dtráchtanna dúnta.', 'wpzoom' ); ?></p>
 	<?php endif; // end ! comments_open() ?>
 
 <?php endif; // end have_comments() ?>

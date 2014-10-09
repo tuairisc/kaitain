@@ -13,7 +13,7 @@
     <div class="recent-meta">
         <?php if (option::get('display_category') == 'on') { ?><span><?php the_category(', '); ?></span><?php } ?>
         <?php if (option::get('display_date') == 'on') { ?><span><?php printf( __('%s', 'wpzoom'),  get_the_date()); ?></span><?php } ?>
-        <?php if (option::get('display_comments') == 'on') { ?><br /><span><?php comments_popup_link( __('0 comments', 'wpzoom'), __('1 comment', 'wpzoom'), __('% comments', 'wpzoom'), '', __('Comments are Disabled', 'wpzoom')); ?></span><?php } ?>
+        <?php if (option::get('display_comments') == 'on') { ?><br /><span><?php comments_popup_link( __('gan tráchtanna', 'wpzoom'), __('trácht amháin', 'wpzoom'), __('% nótaí tráchta', 'wpzoom'), '', __('tá fóram na dtráchtanna dúnta.', 'wpzoom')); ?></span><?php } ?>
          
         <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
     </div><!-- /.post-meta -->  
