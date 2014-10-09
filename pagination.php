@@ -8,7 +8,7 @@
 		'format' => '?paged=%#%',
 		'current' => max( 1, get_query_var('paged') ),
 		'total' => $wp_query->max_num_pages,
-		'prev_text'    => __('Previous', 'wpzoom'),
-		'next_text'    => __('Next', 'wpzoom')
+		'prev_text'    => __('Roimh', 'wpzoom'),
+		'next_text'    => __('Ar Aghaidh', 'wpzoom')
 	 ) );
 	?></div> 
