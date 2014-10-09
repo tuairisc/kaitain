@@ -33,9 +33,9 @@
                             <?php $url   = urlencode(get_the_permalink()); ?> 
                             <?php $title = urlencode(get_the_title()); ?>
 
-                            <li><a class="email" href="mailto:?subject=<?php echo $title; ?>&amp;body=<?php echo $url; ?>" target="_blank"  title="Email '<?php the_title(); ?>'"></a></li>
-                            <li><a class="facebook" href="https://www.facebook.com/sharer.php?u=<?php echo $url ?>" target="_blank" title="Share '<?php the_title(); ?>' on Facebook"></a></li>
-                            <li><a class="twitter" href="https://twitter.com/share?text=<?php echo $title; ?>&url=<?php echo $url; ?>" target="_blank" title="Tweet about '<?php the_title(); ?>"></a></li>
+                            <li><a class="email" href="mailto:?subject=<?php echo $title; ?>&amp;body=<?php echo $url; ?>" rel="0" target="_blank"  title="Email '<?php the_title(); ?>'"></a></li>
+                            <li><a class="facebook" href="https://www.facebook.com/sharer.php?u=<?php echo $url ?>" target="_blank" rel="1" title="Share '<?php the_title(); ?>' on Facebook"></a></li>
+                            <li><a class="twitter" href="https://twitter.com/share?text=<?php echo $title; ?>&url=<?php echo $url; ?>" rel="2" target="_blank" title="Tweet about '<?php the_title(); ?>"></a></li>
                         </ul>
                     </div><!-- /.post-meta -->  
 				</div>

@@ -3,7 +3,7 @@ body {
 }	
 
 a { color: #565656; text-decoration:none; }
-a:hover { color:#3AAA35; text-decoration:none;}
+a:hover { color:#95c37c; text-decoration:none;}
 
 
 #header {
@@ -89,9 +89,9 @@ a:hover { color:#3AAA35; text-decoration:none;}
 }
 
 
-#slider .date {  background-color: #3AAA35; }
-#slider #slides h2 a:hover { color: #3AAA35; }
-#slider_nav .item a:hover { color: #3AAA35; } 
+#slider .date {  background-color: #95c37c; }
+#slider #slides h2 a:hover { color: #95c37c; }
+#slider_nav .item a:hover { color: #95c37c; } 
 #slider_nav .item:hover a, #slider_nav .item.current a {
 	color: #000000;
 	font-weight: 600;
@@ -103,19 +103,19 @@ a:hover { color:#3AAA35; text-decoration:none;}
 
 #slider_nav .item a { color: #516671; }
 
-.meta-author a { color: #3AAA35; }
+.meta-author a { color: #95c37c; }
 
-ul.tabbernav li a:hover { color: #3AAA35;  }
+ul.tabbernav li a:hover { color: #95c37c;  }
 ul.tabbernav li.tabberactive { border-right: 1px solid #C94C52; background: #C94C52;  }
 ul.tabbernav li.tabberactive a:hover{ color:#fff;}
  
 
-#footer a:hover { color: #3AAA35; }
-#footer .widget .title { color:#3AAA35;}
+#footer a:hover { color: #95c37c; }
+#footer .widget .title { color:#95c37c;}
  
-.category-widget.dark-skin h2.title {   color:#3AAA35; }
+.category-widget.dark-skin h2.title {   color:#95c37c; }
 .category-widget.dark-skin h2.title a { color:#000000; } 
-.category-widget.dark-skin li a:hover { color:#3AAA35; } 
+.category-widget.dark-skin li a:hover { color:#95c37c; } 
 .wztw-container .tabs li a { color: #506572;  }
 
 @media screen and (max-width: 768px) {

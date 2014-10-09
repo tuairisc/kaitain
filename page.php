@@ -8,7 +8,6 @@
 			<div class="post clearfix">
 
 				<div class="entry">
-					<?php the_content(); ?>
 					<div class="clear"></div>
 					<?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'wpzoom' ) . '</span>', 'after' => '</div>' ) ); ?>
 					<div class="clear"></div>

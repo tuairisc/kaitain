@@ -25,7 +25,7 @@
 }
 
 .category-banner span {    
-    font: 14px Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font: 14px arial, "helvetica neue", helvetica, sans-serif;
 }
 
 /*
@@ -81,7 +81,7 @@ h3 {
 
 .slide_content_holder {
     /* Posts slider on front page. */
-    bottom: 0;
+    bottom: 10px;
 }
 
 .column_1 a {
@@ -132,7 +132,76 @@ h3 {
 }
 
 /*
-    Header and Footer Sections
+    Education Post Section Headers
+    ------------------------------
+    This area will be fleshed out later.
+*/
+
+.edu-heading,
+.edu-subheading {
+    background: #c44b54;
+    color: #fff;
+}
+
+.edu-heading {
+    margin: 20px 0 !important;    
+    padding: 10px;
+}
+
+.edu-subheading {
+    margin: 10px 0;
+    padding: 5px 30px;
+}
+
+/*
+    Modal Links
+    -----------
+    Aidan uses modal popup links. This is styling per Ciaran for 
+    post-embedded Soundcloud links.
+*/
+
+.modal-box {
+    background-color: #2769A3;
+    float: left;
+    margin-bottom: 4px;
+    width: 33%;
+}
+
+.modal-box:hover {
+    background-color: #5992CF;
+}
+
+.modal-box:active {
+    background-color: #5E83C4;
+}
+
+.modal-box a {
+    color: #fff;
+    display: block;
+    font-size: 175%;
+    font-weight: bold;
+    padding: 30px 0;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+}
+
+.left.modal-box {
+    float: left;
+    margin-right: 1%;
+    width: 32%;
+}
+
+.middle.modal-box {
+    margin: 0 auto;
+}
+
+.right.modal-box {
+    float: right;
+}
+
+/*
+    Header and Footer Area Background Images
     ------------------------
     The header has a rainbow trim at the bottom. 
     The footer has a rainbow trim at the top, an Irish organization logo and
@@ -147,23 +216,20 @@ h3 {
 }
 
 #footer {
-    background-color: #fff;    
-	background-image: 
-        url('images/foras_na_gaeilge_logo.png'), 
-        url('images/rainbow_footer.svg');
-    background-origin: initial, border-box;
-    background-position: 98% 30%, center bottom;
-    background-size: 135px auto, auto 65px; 
-    background-repeat: no-repeat;
+    background: #fff url('images/rainbow_footer.svg') no-repeat left bottom;
+    background-size: auto 65px;
     /* The site is unbalanced. */
     margin-bottom: 0;
 }
 
-@media screen and (max-width: 770px) {
+.content-wrap {
+    background: url('images/rainbow_strip.svg') no-repeat center bottom;
+    background-origin: border-box;
+    background-size: auto 6px;     
+}
+
+@media screen and (max-width: 550px) {
     #footer {
-        /* The footer logo shouldn't display on mobile device. */
-        /* It was easier to send it to Africa than duplicate the rules. */
-        background-position: left top, center 2000000000%, left bottom;
         padding-bottom: 140px;
     }
 }
@@ -206,13 +272,6 @@ h3 {
 .g-1, .g-3 {
     /* The moon will fall out of orbit and kill us all if you touch this. */
     padding: 15px 4% !important;
-}
-
-.g-3 {
-    background: url('images/rainbow_strip.svg') no-repeat center top;
-    background-origin: border-box;
-    background-size: auto 6px;     
-    padding-top: 20px !important;
 }
 
 .g-2, .g-4, .g-5 {
@@ -462,6 +521,7 @@ h3 {
 .post-meta > .avatar {
     /* Single post header avatar. */
     height: 67px;
+    margin-right: 10px;
     width: 67px;
 }
 
@@ -471,7 +531,6 @@ h3 {
 }
 
 .post-meta-text {
-    margin-left: 10px;
     text-transform: initial;
 }
 
@@ -481,7 +540,7 @@ h3 {
 }
 
 .meta-author a:hover {
-    color: #3AAA35;
+    color: #95c37c;
 }
 
 .post-heading .more-link a {
@@ -507,6 +566,7 @@ h3 {
 }
 
 .entry .wp-caption-text {
+    font-size: 14px;
     padding: 0;
     text-align: left;
 }
@@ -525,19 +585,15 @@ h3 {
 
 .education-box {
     color: #fff;
+    margin-bottom: -10px;
 }
 
-.education-0,
 .education-box a {
     box-sizing: border-box;
     display: block;
     height: 100%;
-    padding: 30px 20% 30px 4%;
+    padding: 15px 20% 15px 4%;
     width: 100%;
-}
-
-.education-box:nth-child(2) {
-    margin-top: 20px;
 }
 
 .education-box:hover {
@@ -545,7 +601,7 @@ h3 {
     background-origin: bounding-box;
     background-position: 97% center;
     background-repeat: no-repeat;
-    background-size: auto 80px;
+    background-size: auto 60px;
 }
 
 @media screen and (max-width: 770px) {
@@ -558,10 +614,6 @@ h3 {
     }
 }
 
-.education-0 {
-    padding: 30px 4% 60px 4%;
-}
-
 .education-0:hover { 
     background-image: none;
 }
@@ -572,22 +624,23 @@ h3 {
 }
 
 .education-box h1 {
-    margin-bottom: 25px;
-    width: 50%;
+    margin-bottom: 22px;
+}
+
+.education-box h1,
+.education-box p {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 .education-box p {
-    font: 16px Arial, "Helvetica Neue", Helvetica, sans-serif;
-}
-
-.education-box p:last-child {
+    font-size: 16px;
+    line-height: 21px;
     margin-bottom: 0;
 }
 
 .education-box span {
     font-size: 175%;
     text-transform: uppercase;
-    font-weight: bold;
 }
 
 .education-0 { background-color: #424045; }

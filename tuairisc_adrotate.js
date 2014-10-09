@@ -39,8 +39,7 @@ function checkServer(url, cb_one, cb_two) {
 function swapImage(img) {
     // Swap mobile and desktop image sizes. 
     var src = $(img).attr('src');
-    var newSrc = '';
-    var x = '';
+    var newSrc = src;
 
     var suffix = { 
         // Suffix denotes respective desktop and mobile versions.
@@ -60,19 +59,14 @@ function swapImage(img) {
         }
     }
 
-    checkServer(newSrc, function() {
-        x = newSrc;
-    }, function() {
-        x = src;
-    });
-
-    return x;
+    return $(img).attr('src', newSrc);
 }
 
 function resizeBanner(obj) {
     $(obj).each(function() {
         var advert = $(this);
-        var src = stripUrl($(this).css('background-image'));
+        var src = stripUrl($(advert).css('background-image'));
+
         var img = new Image(); 
         $(img).attr('src', src);
 

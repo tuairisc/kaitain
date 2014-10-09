@@ -1,25 +1,21 @@
-// Pop out window for Twitter and Facebook sharing links.
+// Pop out Facebook and Twitter sharing links when they are clicked. 
 'use strict';
 
-var facebookSpecs = [
-    'width=500',
-    'height=380',
+var sizeArray = [
+    '',
+    'width=500,height=380',
+    'width=450,height=257',
 ];
 
-var twitterSpecs = [
-    'width=450',
-    'height=257',
-];
+$('.post-meta .tuairisc-share a').click(function(e) {
+    var hrefClass = $(this).attr('class');
 
-$('.post-meta .tuairisc-share a').click(function() {
-    var anchorClass = $(this).attr('class');
+    if (hrefClass == 'facebook' | hrefClass == 'twitter') {
+        var href = $(this).attr('href');
+        var name = 'target="_blank';
+        var size = sizeArray[$(this).attr('rel')];
 
-    if (anchorClass == 'facebook' || anchorClass == 'twitter') {
-        var href     = $(this).attr('href');
-        var name     = '_blank';
-        var replace  = false;
-
-        var specs = (anchorClass == 'facebook') ? facebookSpecs : twitterSpecs;
-        window.open(href, name, specs, replace);
+        window.open(href, name, size);
+        e.preventDefault();
     }
 });
