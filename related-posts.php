@@ -14,7 +14,7 @@
 	if ( $loop->have_posts() ) :
 ?>
 	<div class="related_posts">
-		<h3 class="title"><?php _e('More in','wpzoom');?> <?php echo $category[0]->cat_name; ?></h3>
+		<h3 class="title"><?php _e('Tuilleadh','wpzoom');?> <?php echo $category[0]->cat_name; ?></h3>
 
 		<ul>
 

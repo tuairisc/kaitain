@@ -10,6 +10,11 @@
 * Simply copy an existing style from style.css to this file, 
 * and modify it to your liking.
 */
+
+/*
+    Useful generic smartphone media query: 
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) 
+*/
     
 /*
     Font Selectors
@@ -52,6 +57,18 @@
     Aidan, Ciaran or Sean.
 */
 
+.recent-meta span,
+.widget .feature-posts-list small {
+    /* Widgets are capitalized. This causes issues with some Irish 
+    spellings. Removing capitalization affected legibility so I bumped
+    font size. */
+    text-transform: none;
+}
+
+.recent-meta span {    
+    font-size: 14px;
+}
+
 h2 {
     /* Requested by Ciaran. */
     font-size: 20px;
@@ -65,7 +82,7 @@ h3 {
 
 .inner-wrap {
     /* Stock colour is grey. */
-    background: #fff;
+    background-color: #fff;
 }
 
 #header .search_form {
@@ -157,7 +174,8 @@ h3 {
     Modal Links
     -----------
     Aidan uses modal popup links. This is styling per Ciaran for 
-    post-embedded Soundcloud links.
+    post-embedded Soundcloud links. I will flesh this out later for 
+    other segments on the site.
 */
 
 .modal-box {
@@ -210,26 +228,21 @@ h3 {
 
 #header {
     /* Override gradient on header. */ 
-    background: #fff url('images/rainbow_strip.svg') no-repeat center top;
-    background-size: auto 6px;
-    background-origin: border-box;
+    background: #fff center top/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
 }
 
 #footer {
-    background: #fff url('images/rainbow_footer.svg') no-repeat left bottom;
-    background-size: auto 65px;
+    background: #fff left bottom/auto 65px no-repeat url('images/rainbow_footer.svg');
     /* The site is unbalanced. */
     margin-bottom: 0;
 }
 
 .content-wrap {
-    background: url('images/rainbow_strip.svg') no-repeat center bottom;
-    background-origin: border-box;
-    background-size: auto 6px;     
+    background: center bottom/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
 }
 
-@media screen and (max-width: 550px) {
-    #footer {
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) { 
+   #footer {
         padding-bottom: 140px;
     }
 }
@@ -247,65 +260,132 @@ h3 {
     section hopefully overrides all of those stock rules.
 
     Group   Location
-    -----------------
+    ------------------
     .g-1    Header
-    .g-2    Sidebar
+    .g-2    Sidebar #1
     .g-3    Footer
-    .g-4    Sidebar
-    .g-5    Sidebar
+    .g-4    Sidebar #2
+    .g-5    Sidebar #3
 
-    IMPORTANT-READ THIS OR WE WILL ALL DIE:
+    If the AdRotate Pro plugin is ever updated then this CSS will break. 
+    AdRotate injects its own CSS upon page load. I have prevented this behaviour
+    with the following alteration of its files:
+
+    adrotate.php:
+    -------------
+    Commented line 65:
+        Before:
+            add_action('wp_head', 'adrotate_custom_css');
+        After:
+            // add_action('wp_head', 'adrotate_custom_css');
+
+    If this line is uncommented then AdRotate Pro will inject its own CSS on
+    load. This is a Bad Thing which will bork advert display.
+
+    ./library/jquery.adrotate.dyngroup.js:
     --------------------------------------
-    /Please/ do not change any rule marked with !important. AdRotate
-    loads its own CSS that will overwise override these rules.
+    Altered line 58:
+        Before:
+            $cont.find(".c-" + counter).fadeIn(300)
+        After:
+            $cont.find(".c-" + counter).toggle()
 
-    The sidebar adverts will all disappear and a meteor will fall on 
-    Ireland we'll all die.
+    Altered line 61:
+        Before:
+            $cont.find(".c-" + index).fadeOut(300)
+        After:
+            $cont.find(".c-" + index).toggle()
+
+    This stock behaviour causes the next advert in rotation to appear before the
+    previous one disappears. It causes a brief "stack" of one advert atop the 
+    other. It would've made sense to do the second fade as a callback to the 
+    first, but what would I know, eh? 
+
+    Regardless-if AdRotate Pro is updated, these changes will be wiped out. 
 */
 
-.g a {
+/*
+    General Advert Styles
+*/
+
+.g {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.g-2, .g-4, .g-5 {
+    width: 100%;
+}
+
+/*
+    Group Margins and Padding
+*/
+
+.g-1, .g-3 {
+    padding: 15px 4%;
+}
+
+.g-2, .g-4, .g-5 {
+    /* Sidebar column adverts */
+    margin-bottom: 15px;
+}
+
+.g-dyn {
+    /* Dynamic adverts on rotation. AdRotate will toggle each g-dyn block in 
+    sequence, but they initially all need to be hidden. */
+    display: none;
+}
+
+/* This is the actual advert div. Structure is:
+
+    .tuarisic-advert
+        a
+*/
+
+.tuairisc-advert {
+    /* Background image is set via tuairisc_adrotate.js */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    margin: 0 auto;
+}
+
+.tuairisc-advert a {
     display: block;
     height: 100%;
     width: 100%;
 }
 
-.g-1, .g-3 {
-    /* The moon will fall out of orbit and kill us all if you touch this. */
-    padding: 15px 4% !important;
+/*
+    Advert Responsiveness
+*/
+
+@media screen and (max-width: 770px) {
+    /* Standard mobile view. For tablets or small desktop sizes. */
+
+    .g-1, .g-3 {
+        padding: 15px 0;
+    }
+
+    .g-2, .g-4, .g-5 {
+        float: left;
+        width: 32%;
+    }
+
+    .g-2, .g-4 {
+        margin-right: 2%;
+    }
 }
 
-.g-2, .g-4, .g-5 {
-    /* Sidebar column adverts */
-    /* If you change these the Earth will crash into...Pluto and we'll all explode. */
-    margin-bottom: 15px !important;
-    width: 100% !important;
-}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) { 
+    /* Generic smartphone mobile query. */
 
-.g-col {
-    /* If you change this Ireland will fall into the sea and we'll all die. */
-    width: 99%;
-}
-
-.g-dyn {
-    /* Dynamic adverts on rotation. */
-    display: none;
-}
-
-.g-5 .g-dyn {
-    display: block;
-}
-
-.tuairisc-advert {
-    /* This is the actual advert div used. Structure is:
-
-        .tuarisic-advert
-            a
-
-    Background image is set in tuairisc_adrotate.js */
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    margin: 0 auto;
+    .g-2, .g-4, .g-5 {
+        float: none;
+        margin-right: 0;
+        width: 100%;
+    }
 }
 
 /*
@@ -368,11 +448,7 @@ h3 {
 */
 
 .greann-category-banner {
-    background-image:;
-	background-image: url('images/asnc_logo.svg');
-    background-position: 10px center;
-    background-repeat: no-repeat;
-    background-size: auto 60px;
+    background: 10px center/auto 60px no-repeat url('images/asnc_logo.svg');
     min-height: 60px;
     padding: 15px 0;
 }
@@ -404,6 +480,7 @@ h3 {
 }
 
 .hero-image {
+    /* Background image is set via PHP. */
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

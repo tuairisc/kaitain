@@ -7,6 +7,12 @@
 // Gazeti changes layout at 770px window width.
 var responsiveBreak = 770;
 
+var suffix = { 
+    // Suffix denotes respective desktop and mobile versions.
+    mobile  : '_mobile_', 
+    desktop : '_desktop_'
+}
+
 function stripUrl(url) {
     // stirpUrl strips url(..) from a background-image attribute.
     // in:  url(http://domain.com/path-to-image.png)
@@ -36,26 +42,35 @@ function checkServer(url, cb_one, cb_two) {
     });
 }
 
+function suffixSwap(url) {
+    if (url.indexOf(suffix.mobile) > -1)        
+        url = url.replace(suffix.mobile, suffix.desktop);  
+    else if (url.indexOf(suffix.desktop) > -1)
+        url = url.replace(suffix.desktop, suffix.mobile);
+
+    return url;
+}
+
+function getBackgroundImg(obj) {
+    var url = $(obj).css('background-image');
+    url = stripUrl(url);
+    return url;
+}
+
 function swapImage(img) {
     // Swap mobile and desktop image sizes. 
     var src = $(img).attr('src');
     var newSrc = src;
 
-    var suffix = { 
-        // Suffix denotes respective desktop and mobile versions.
-        mobile  : '_mobile_', 
-        desktop : '_desktop_'
-    }
-
     if (src.indexOf(suffix.desktop) > -1 || src.indexOf(suffix.mobile) > -1) {
         if ($(window).width() > responsiveBreak) {
             if (src.indexOf(suffix.mobile) > -1)
-                newSrc = src.replace(suffix.mobile, suffix.desktop);  
+                newSrc = suffixSwap(src);  
         }
 
         if ($(window).width() <= responsiveBreak) {
             if (src.indexOf(suffix.desktop) > -1)
-                newSrc = src.replace(suffix.desktop, suffix.mobile);
+                newSrc = suffixSwap(src);
         }
     }
 
@@ -65,7 +80,7 @@ function swapImage(img) {
 function resizeBanner(obj) {
     $(obj).each(function() {
         var advert = $(this);
-        var src = stripUrl($(advert).css('background-image'));
+        var src = getBackgroundImg(advert);
 
         var img = new Image(); 
         $(img).attr('src', src);
