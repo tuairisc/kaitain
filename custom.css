@@ -323,12 +323,12 @@ h3 {
 */
 
 .g-1, .g-3 {
-    padding: 15px 4%;
+    padding: 20px 4%;
 }
 
 .g-2, .g-4, .g-5 {
     /* Sidebar column adverts */
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .g-dyn {
@@ -347,7 +347,7 @@ h3 {
     /* Background image is set via tuairisc_adrotate.js */
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 100% auto;
+    background-size: contain;
     margin: 0 auto;
 }
 
@@ -363,10 +363,6 @@ h3 {
 
 @media screen and (max-width: 770px) {
     /* Standard mobile view. For tablets or small desktop sizes. */
-
-    .g-1, .g-3 {
-        padding: 15px 0;
-    }
 
     .g-2, .g-4, .g-5 {
         float: left;
@@ -384,7 +380,7 @@ h3 {
     .g-2, .g-4, .g-5 {
         float: none;
         margin-right: 0;
-        width: 100%;
+        width: 99%;
     }
 }
 

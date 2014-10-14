@@ -6,6 +6,8 @@
 
 // Gazeti changes layout at 770px window width.
 var responsiveBreak = 770;
+// The class of the actual advert within each group.
+var advert = '.tuairisc-advert';
 
 var suffix = { 
     // Suffix denotes respective desktop and mobile versions.
@@ -13,11 +15,23 @@ var suffix = {
     desktop : '_desktop_'
 }
 
+var bannerGroups = [
+    '.g-1',
+    '.g-3'
+];
+
+var sidebarGroups = [
+    '.g-2',
+    '.g-4',
+    '.g-5'
+];
+
 function stripUrl(url) {
     // stirpUrl strips url(..) from a background-image attribute.
     // in:  url(http://domain.com/path-to-image.png)
     // out: http://domain.com/path-to-image.png
-    return url.replace(/^url\(|\)$/g, '');
+    url = url.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+    return url;
 }
 
 function addUrl(url) {
@@ -29,26 +43,29 @@ function addUrl(url) {
     return url;
 }
 
-function checkServer(url, cb_one, cb_two) {
-    $.ajax({
-        url: url,
-        type: 'HEAD',
-        dataType: 'image',
-        success:function() {
-            cb_one();
-        }, error:function() {
-            cb_two();
-        }
-    });
+function isResponsiveAdvert(url) {
+    // If the URL contains '_mobile_' or '_desktop_' it is assumed to be 
+    // part of a responsive advert.
+    if (url.indexOf(suffix.desktop) > -1 || url.indexOf(suffix.mobile) > -1)
+        return true;
+
+    return false;
 }
 
-function suffixSwap(url) {
-    if (url.indexOf(suffix.mobile) > -1)        
-        url = url.replace(suffix.mobile, suffix.desktop);  
-    else if (url.indexOf(suffix.desktop) > -1)
-        url = url.replace(suffix.desktop, suffix.mobile);
+function suffixToMobile(url) {
+    // Chnages '_desktop_' to '_mobile_'.
+    if (isResponsiveAdvert(url))
+        return url.replace(suffix.desktop, suffix.mobile);
 
-    return url;
+    return null;
+}
+
+function suffixToDesktop(url) {
+    // Chnages '_mobile_' to '_desktop_'.
+    if (isResponsiveAdvert(url))
+        return url.replace(suffix.mobile, suffix.desktop);
+
+    return null;
 }
 
 function getBackgroundImg(obj) {
@@ -57,55 +74,98 @@ function getBackgroundImg(obj) {
     return url;
 }
 
-function swapImage(img) {
-    // Swap mobile and desktop image sizes. 
-    var src = $(img).attr('src');
-    var newSrc = src;
+function isSmallScreen(url) {
+    // Simple responsive width check based on switchpoint of WPZOOM Gazeti theme.
+    // Testing. Expect it to break.
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    // if ($(window).height() > $(window).width())
+        return true;
 
-    if (src.indexOf(suffix.desktop) > -1 || src.indexOf(suffix.mobile) > -1) {
-        if ($(window).width() > responsiveBreak) {
-            if (src.indexOf(suffix.mobile) > -1)
-                newSrc = suffixSwap(src);  
-        }
-
-        if ($(window).width() <= responsiveBreak) {
-            if (src.indexOf(suffix.desktop) > -1)
-                newSrc = suffixSwap(src);
-        }
-    }
-
-    return $(img).attr('src', newSrc);
+    return false;
 }
 
-function resizeBanner(obj) {
-    $(obj).each(function() {
-        var advert = $(this);
-        var src = getBackgroundImg(advert);
+function checkImageExists(url, successCallback, failCallback) {
+    // Check if the image exists on the server and execute supplied callbacks.
+    successCallback = successCallback || function() {
+        console.log('Success: ' + url + ' found.');
+    }
 
-        var img = new Image(); 
-        $(img).attr('src', src);
+    failCallback = failCallback || function () {
+        console.log('Error: ' + url + ' not found.');
+    }
 
-        $(img).load(function() {
-            var w = img.width;
-            var h = img.height; 
+    $.ajax({
+        url : url,
+        type: 'HEAD',
+        dataType: 'image',
+        success: function() {
+            successCallback();
+        }, 
+        error: function() {
+            failCallback();
+        }
+    });
+}
 
-            if (w > $(advert).closest('.g').width())
-                w = $(advert).closest('.g').width() * 0.98;
+function resizeBannerAdvert(obj) {
+    $(obj).find(advert).each(function() {
+        var curAdvert = $(this);
+        var img = getBackgroundImg(this);
+        img = (isSmallScreen()) ? suffixToMobile(img) : suffixToDesktop(img);
 
-            $(advert).css({
-                'width' : w + 'px',
-                'height' : h + 'px',
+        checkImageExists(img, function() {
+            var blue = new Image();
+            blue.src = img;
+
+            $(blue).load(function() {
+                var w = blue.width;
+                var h = blue.height;
+
+                if (w >= $(advert).parent().width()) {
+                    var resizeRatio = $(advert).parent().width() / w;
+                    w *= resizeRatio;
+                    h *= resizeRatio; 
+                }
+
+                $(curAdvert).css({
+                    'width'  : w + 'px',
+                    'height' : h + 'px',
+                    'background-image' : addUrl(img)
+                });
             });
-
-            $(advert).css('background-image', addUrl($(this).attr('src')));
         });
     });
 }
 
-$(function() {
-    resizeBanner('.tuairisc-advert');
+function resizeSidebarAdvert(obj) {
+    // Elements with display: none set report a width of 0. 
+    // Capture width of first sidebar advert container and set all widths to that.
+    var w = $(obj).width();
+
+    $(obj).find(advert).each(function() {
+        $(this).css({
+            'width'  : w + 'px',
+            'height' : w + 'px'
+        });
+    });
+}
+
+$(function() { 
+    $.each(bannerGroups,function(i,v) {
+        resizeBannerAdvert(v);
+    });
+
+    $.each(sidebarGroups,function(i,v) {
+        resizeSidebarAdvert(v);
+    });
 });
 
 $(window).resize(function() {
-    resizeBanner('.tuairisc-advert');
+    $.each(bannerGroups,function(i,v) {
+        resizeBannerAdvert(v);
+    });
+
+    $.each(sidebarGroups, function(i,v) {
+        resizeSidebarAdvert(v);
+    });
 });
