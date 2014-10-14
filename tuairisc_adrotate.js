@@ -15,11 +15,13 @@ var suffix = {
     desktop : '_desktop_'
 }
 
+// Banner advert groups.
 var bannerGroups = [
     '.g-1',
     '.g-3'
 ];
 
+// Sidebar advert groups.
 var sidebarGroups = [
     '.g-2',
     '.g-4',
@@ -68,7 +70,13 @@ function suffixToDesktop(url) {
     return null;
 }
 
+function setSuffix(url) {
+    // Swap suffix between mobile and desktop.
+    return (isSmallScreen()) ? suffixToMobile(url) : suffixToDesktop(url);
+}
+
 function getBackgroundImg(obj) {
+    // Return background-image from advert as parsed URL.
     var url = $(obj).css('background-image');
     url = stripUrl(url);
     return url;
@@ -87,11 +95,11 @@ function isSmallScreen(url) {
 function checkImageExists(url, successCallback, failCallback) {
     // Check if the image exists on the server and execute supplied callbacks.
     successCallback = successCallback || function() {
-        console.log('Success: ' + url + ' found.');
+        console.log('Success: ' + url + ' found');
     }
 
     failCallback = failCallback || function () {
-        console.log('Error: ' + url + ' not found.');
+        console.log('Error: ' + url + ' not found');
     }
 
     $.ajax({
@@ -107,32 +115,45 @@ function checkImageExists(url, successCallback, failCallback) {
     });
 }
 
+function setBannerImage(obj, img) {
+    // Set image or set fallback image.
+    img = img || function() {
+        img = 'fallback_url.jpg';
+        img = setSuffix(img);
+    }
+
+    var temp = new Image();
+    temp.src = img;
+
+    $(temp).load(function() {
+        var w = temp.width;
+        var h = temp.height;
+
+        if (w >= $(obj).closest('.g').width()) {
+            w = $(obj).closest('.g').width();
+        }
+
+        $(obj).css({
+            'width'  : w + 'px',
+            'height' : h + 'px',
+            'background-image' : addUrl(img)
+        });
+    });
+}
+
 function resizeBannerAdvert(obj) {
+    // Nag Ciaran for fallback images. 
     $(obj).find(advert).each(function() {
         var curAdvert = $(this);
         var img = getBackgroundImg(this);
-        img = (isSmallScreen()) ? suffixToMobile(img) : suffixToDesktop(img);
+        img = setSuffix(img);
 
         checkImageExists(img, function() {
-            var blue = new Image();
-            blue.src = img;
-
-            $(blue).load(function() {
-                var w = blue.width;
-                var h = blue.height;
-
-                if (w >= $(advert).parent().width()) {
-                    var resizeRatio = $(advert).parent().width() / w;
-                    w *= resizeRatio;
-                    h *= resizeRatio; 
-                }
-
-                $(curAdvert).css({
-                    'width'  : w + 'px',
-                    'height' : h + 'px',
-                    'background-image' : addUrl(img)
-                });
-            });
+            // Set image and resize banner if image exists.
+            setBannerImage(curAdvert, img);
+        }, function() {
+            // Set banner to fallback size if image is missing.
+            setBannerImage(curAdvert);
         });
     });
 }
