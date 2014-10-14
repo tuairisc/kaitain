@@ -9,6 +9,8 @@ var responsiveBreak = 770;
 // The class of the actual advert within each group.
 var advert = '.tuairisc-advert';
 
+var fallbackBannerUrl = 'TODO';
+
 var suffix = { 
     // Suffix denotes respective desktop and mobile versions.
     mobile  : '_mobile_', 
@@ -117,10 +119,7 @@ function checkImageExists(url, successCallback, failCallback) {
 
 function setBannerImage(obj, img) {
     // Set image or set fallback image.
-    img = img || function() {
-        img = 'fallback_url.jpg';
-        img = setSuffix(img);
-    }
+    img = img || setSuffix(fallbackBannerUrl);
 
     var temp = new Image();
     temp.src = img;
