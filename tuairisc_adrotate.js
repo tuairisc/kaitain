@@ -8,7 +8,7 @@
 var responsiveBreak = 770;
 // The class of the actual advert within each group.
 var advert = '.tuairisc-advert';
-
+// URL for fallback image. It will be set responsively using suffixes later. 
 var fallbackBannerUrl = 'TODO';
 
 var suffix = { 
@@ -119,7 +119,7 @@ function checkImageExists(url, successCallback, failCallback) {
 
 function setBannerImage(obj, img) {
     // Set image or set fallback image.
-    img = img || setSuffix(fallbackBannerUrl);
+    img = img || setSuffix(fallbackBannerUl);
 
     var temp = new Image();
     temp.src = img;
@@ -128,6 +128,7 @@ function setBannerImage(obj, img) {
         var w = temp.width;
         var h = temp.height;
 
+        // Shrink to parent.
         if (w >= $(obj).closest('.g').width()) {
             w = $(obj).closest('.g').width();
         }
