@@ -3,8 +3,8 @@
  * Copyright (c) 2008 Joel Birch
  *
  * Dual licensed under the MIT and GPL licenses:
- * 	http://www.opensource.org/licenses/mit-license.php
- * 	http://www.gnu.org/licenses/gpl.html
+ *     http://www.opensource.org/licenses/mit-license.php
+ *     http://www.gnu.org/licenses/gpl.html
  *
  * CHANGELOG: http://users.tpg.com.au/j_birch/plugins/superfish/changelog.txt
  */
@@ -12,10 +12,10 @@
 
 jQuery(document).ready(function($) { 
  
-	$('#menu ul.dropdown').superfish({ 
-		delay:       100,								// 0.1 second delay on mouseout 
-		animation:   {opacity:'show',height:'show'},	// fade-in and slide-down animation 
-		dropShadows: false								// disable drop shadows 
-	});
-	
+    $('#menu ul.dropdown').superfish({ 
+        delay:       100,                                // 0.1 second delay on mouseout 
+        animation:   {opacity:'show',height:'show'},    // fade-in and slide-down animation 
+        dropShadows: false                                // disable drop shadows 
+    });
+    
 });

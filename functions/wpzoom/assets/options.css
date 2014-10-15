@@ -397,7 +397,7 @@ div.cleaner {
     border-width: 1px;
     padding: 4px 3px;
     color:#333;
-	margin-right:0;
+    margin-right:0;
 }
 
 .zoomForms input:focus,
@@ -962,36 +962,36 @@ img.layout-select:hover {
 
 
 .zoomForms fieldset table td {
-	padding: 5px 0;
+    padding: 5px 0;
 }
 .zoomForms fieldset {
-	border: solid 1px #DFE0E0;
-	padding: 0 20px;
-	margin: 0 0 20px;
-	background: rgba(248, 248, 248, 0.34);
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+    border: solid 1px #DFE0E0;
+    padding: 0 20px;
+    margin: 0 0 20px;
+    background: rgba(248, 248, 248, 0.34);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .zoomForms legend {
- 	font: bold 14px/14px Arial, Helvetica, sans-serif;
+     font: bold 14px/14px Arial, Helvetica, sans-serif;
 }
 
 .zoomForms fieldset div.cleaner {
-	height: 0;
+    height: 0;
 }
 
 .zoomForms fieldset div.wpz_option_container:last-child div.cleaner {
-	height: 0;
+    height: 0;
 }
 
 .zoomForms fieldset .wpz_option_container div.cleaner {
-	height: 1px;
+    height: 1px;
 }
 
 .zoomForms fieldset label {
-	width:238px;
+    width:238px;
 }
 
 .tgmpa {

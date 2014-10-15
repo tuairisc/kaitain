@@ -24,36 +24,36 @@ class Tabbed_Widget extends WP_Widget
 
     function widget($args, $instance)
     {
-		extract($args);
+        extract($args);
         //print_r($instance);
         $title = apply_filters("widget_title", $instance["title"]);
         $category = $instance['category'];
-		$count = $instance["count"];
+        $count = $instance["count"];
  
-		if ($category) {
-			$category_link = get_category_link($category);
-		}
+        if ($category) {
+            $category_link = get_category_link($category);
+        }
  
-		$rnd = rand();
+        $rnd = rand();
         ?>
 
         <div class="wztw-container">
  
             <ul class="tabs clearfix">
 
-        		<?php if ( $title ) { echo '<h2>';
-		           if ($category) {
-						echo '<a href="'.$category_link.'">';
-				   }
-				   echo $title;
-				   if ($category_link) {
-						echo '</a>';
-				   }
-				   echo '</h2>'; } ?>
+                <?php if ( $title ) { echo '<h2>';
+                   if ($category) {
+                        echo '<a href="'.$category_link.'">';
+                   }
+                   echo $title;
+                   if ($category_link) {
+                        echo '</a>';
+                   }
+                   echo '</h2>'; } ?>
 
-				<?php for ($i = 1; $i <= $instance["count"]; $i++) { ?>
+                <?php for ($i = 1; $i <= $instance["count"]; $i++) { ?>
                 <li><a href="#tab<?php echo $rnd . $i; ?>"><?php echo stripslashes($instance["tab" . $i . "-title"]); ?></a></li>
-				<?php } ?>
+                <?php } ?>
             </ul>
             
             <?php for ($i = 1; $i <= $instance["count"]; $i++) {
@@ -81,9 +81,9 @@ class Tabbed_Widget extends WP_Widget
                         <?php else : ?>
                             <?php get_the_image( array( 'size' => 'featured-tab', 'width' => 135, 'height' => 135 ) ); ?>
                         <?php endif; ?>
-			  			
-			  			<div class="main_content">
-							<h2>
+                          
+                          <div class="main_content">
+                            <h2>
                                 <a href="<?php the_permalink() ?>" title="<?php the_title(); ?>">
                                     <!-- Begin optional portion. -->
                                     <?php if (is_columnist_article()) : ?>
@@ -92,180 +92,180 @@ class Tabbed_Widget extends WP_Widget
                                     <!-- End optional portion.   -->
                                     <?php the_title(); ?>
                                 </a>
-                            </h2>						
-						    <?php the_excerpt(); ?> 						 
-					    </div>
-					    
-				</div> <!-- /.1col -->
+                            </h2>                        
+                            <?php the_excerpt(); ?>                          
+                        </div>
+                        
+                </div> <!-- /.1col -->
  
-				<div class="column_2 col_3">
-       	
-				    <ul class="posts_med">
+                <div class="column_2 col_3">
+           
+                    <ul class="posts_med">
 
-			    	 	<?php } else {  ?>
+                         <?php } else {  ?>
                      
-							<li>						 
-								<h3><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>	 
-							</li>
-            		 	
-            		 	<?php } ?>	
-						<?php endwhile; //  ?>
-						<?php endif; ?>
-					</ul>  
+                            <li>                         
+                                <h3><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>     
+                            </li>
+                         
+                         <?php } ?>    
+                        <?php endwhile; //  ?>
+                        <?php endif; ?>
+                    </ul>  
 
-				 	 
-				</div> <!-- /.2col -->
-			  
-				<?php wp_reset_query(); ?>
-			</div>
+                      
+                </div> <!-- /.2col -->
+              
+                <?php wp_reset_query(); ?>
+            </div>
             <?php } ?>
         </div><!-- end of .wztw-container -->
         <div class="clear"></div>
         <script>jQuery(function($){ $(".wztw-container").tabs(); });</script>
         
         <?php
-		}
-		function form($instance)
-		{
-			$defaults = array(
-				"title" => "Categories (tabs)",
-				"count" => "2",
-				"category" => 0,
-			);
-			$instance = wp_parse_args((array) $instance, $defaults);
-		?>
-			<!-- Widget Title -->
-			<p>
-				<label for="<?php echo $this->get_field_id("title"); ?>">Title</label>
-				<input type="text" style="widefat" size="27" id="<?php echo $this->get_field_id("title"); ?>" name="<?php echo $this->get_field_name("title"); ?>" value="<?php echo $instance["title"]; ?>"   />
-			</p>
+        }
+        function form($instance)
+        {
+            $defaults = array(
+                "title" => "Categories (tabs)",
+                "count" => "2",
+                "category" => 0,
+            );
+            $instance = wp_parse_args((array) $instance, $defaults);
+        ?>
+            <!-- Widget Title -->
+            <p>
+                <label for="<?php echo $this->get_field_id("title"); ?>">Title</label>
+                <input type="text" style="widefat" size="27" id="<?php echo $this->get_field_id("title"); ?>" name="<?php echo $this->get_field_name("title"); ?>" value="<?php echo $instance["title"]; ?>"   />
+            </p>
 
 
-			<p>
-				<label for="<?php echo $this->get_field_id( 'category' ); ?>">Title Links to Category:</label>
-				<select id="<?php echo $this->get_field_id( 'category' ); ?>" name="<?php echo $this->get_field_name( 'category' ); ?>">
-					<option value="0" <?php if ( !$instance['category'] ) echo 'selected="selected"'; ?>>None</option>
-					<?php
-					$categories = get_categories(array('type' => 'post'));
-					
-					foreach( $categories as $cat ) {
-						echo '<option value="' . $cat->cat_ID . '"';
-						
-						if ( $cat->cat_ID == $instance['category'] ) echo  ' selected="selected"';
-						
-						echo '>' . $cat->cat_name . ' (' . $cat->category_count . ')';
-						
-						echo '</option>';
-					}
-					?>
-				</select>
-			</p>
+            <p>
+                <label for="<?php echo $this->get_field_id( 'category' ); ?>">Title Links to Category:</label>
+                <select id="<?php echo $this->get_field_id( 'category' ); ?>" name="<?php echo $this->get_field_name( 'category' ); ?>">
+                    <option value="0" <?php if ( !$instance['category'] ) echo 'selected="selected"'; ?>>None</option>
+                    <?php
+                    $categories = get_categories(array('type' => 'post'));
+                    
+                    foreach( $categories as $cat ) {
+                        echo '<option value="' . $cat->cat_ID . '"';
+                        
+                        if ( $cat->cat_ID == $instance['category'] ) echo  ' selected="selected"';
+                        
+                        echo '>' . $cat->cat_name . ' (' . $cat->category_count . ')';
+                        
+                        echo '</option>';
+                    }
+                    ?>
+                </select>
+            </p>
 
-			
-			<!-- Categories count -->
-			<p>
-				<label for="<?php echo $this->get_field_id("count"); ?>">Number of tabs</label>
-				<select id="<?php echo $this->get_field_id("count"); ?>" name="<?php echo $this->get_field_name("count"); ?>" value="<?php echo $instance["count"]; ?>" style="width: 100%;">
-					<?php for ($i = 2; $i <= 10; $i++) {
-						$active = "";
-						if ($instance["count"] == $i) {
-							$active = "selected=\"selected\"";
-						} ?>
-						<option <?php echo $active; ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
-					<?php } ?>
-				</select>
-			</p>
-			<script>
-			jQuery(function($) {
-				var id = "#<?php echo $this->get_field_id("count"); ?>";
-				$(id).change(function() {
-					$(this).closest("form").find(".widget-control-save").click();
-				});
-			});
-			</script>
+            
+            <!-- Categories count -->
+            <p>
+                <label for="<?php echo $this->get_field_id("count"); ?>">Number of tabs</label>
+                <select id="<?php echo $this->get_field_id("count"); ?>" name="<?php echo $this->get_field_name("count"); ?>" value="<?php echo $instance["count"]; ?>" style="width: 100%;">
+                    <?php for ($i = 2; $i <= 10; $i++) {
+                        $active = "";
+                        if ($instance["count"] == $i) {
+                            $active = "selected=\"selected\"";
+                        } ?>
+                        <option <?php echo $active; ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                    <?php } ?>
+                </select>
+            </p>
+            <script>
+            jQuery(function($) {
+                var id = "#<?php echo $this->get_field_id("count"); ?>";
+                $(id).change(function() {
+                    $(this).closest("form").find(".widget-control-save").click();
+                });
+            });
+            </script>
  
- 		
-			<?php for ($i = 1; $i <= $instance["count"]; $i++) { ?>
-			
-			<div class="widget wpzoom-inner-widget">
-			
-				<div class="widget-top">
-					<div class="widget-title-action">
-						<a class="widget-action"></a>
-					</div>
-					<div class="widget-title">
-						<h4>Tab #<?php echo $i; ?></h4>
-					</div>
-				</div>
-				<div class="widget-inside">
-					
-				 <p>
-					<label for="<?php echo $this->get_field_id("tab" . $i . "-title"); ?>"><strong>Title</strong></label>
-					<input id="<?php echo $this->get_field_id("tab" . $i . "-title"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-title"); ?>" value="<?php echo $instance["tab" . $i . "-title"]; ?>" type="text" size="27"/>
-				</p>
-			
-				<p>
-				<label for="<?php echo $this->get_field_id("tab" . $i . "-type"); ?>"><?php _e('Posts source:', 'wpzoom'); ?></label>
-				<select id="<?php echo $this->get_field_id("tab" . $i . "-type"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-type"); ?>" style="width:90%;">
-				<option value="cat"<?php if ($instance["tab" . $i . "-type"] == 'cat') { echo ' selected="selected"';} ?>>Category(s)</option>
-				<option value="tag"<?php if ($instance["tab" . $i . "-type"] == 'tag') { echo ' selected="selected"';} ?>>Tag(s)</option>
-				</select>
-			</p>
-			<p class="wpzoom_forcat">
-				<label for="<?php echo $this->get_field_id("tab" . $i . "-category"); ?>"><?php _e('Category (if selected above):', 'wpzoom'); ?></label>
-				<?php 
-				$activeoptions = $instance["tab" . $i . "-category"];
-				if (!$activeoptions)
-				{
-					$activeoptions = array();
-				}
-				?>
+         
+            <?php for ($i = 1; $i <= $instance["count"]; $i++) { ?>
+            
+            <div class="widget wpzoom-inner-widget">
+            
+                <div class="widget-top">
+                    <div class="widget-title-action">
+                        <a class="widget-action"></a>
+                    </div>
+                    <div class="widget-title">
+                        <h4>Tab #<?php echo $i; ?></h4>
+                    </div>
+                </div>
+                <div class="widget-inside">
+                    
+                 <p>
+                    <label for="<?php echo $this->get_field_id("tab" . $i . "-title"); ?>"><strong>Title</strong></label>
+                    <input id="<?php echo $this->get_field_id("tab" . $i . "-title"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-title"); ?>" value="<?php echo $instance["tab" . $i . "-title"]; ?>" type="text" size="27"/>
+                </p>
+            
+                <p>
+                <label for="<?php echo $this->get_field_id("tab" . $i . "-type"); ?>"><?php _e('Posts source:', 'wpzoom'); ?></label>
+                <select id="<?php echo $this->get_field_id("tab" . $i . "-type"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-type"); ?>" style="width:90%;">
+                <option value="cat"<?php if ($instance["tab" . $i . "-type"] == 'cat') { echo ' selected="selected"';} ?>>Category(s)</option>
+                <option value="tag"<?php if ($instance["tab" . $i . "-type"] == 'tag') { echo ' selected="selected"';} ?>>Tag(s)</option>
+                </select>
+            </p>
+            <p class="wpzoom_forcat">
+                <label for="<?php echo $this->get_field_id("tab" . $i . "-category"); ?>"><?php _e('Category (if selected above):', 'wpzoom'); ?></label>
+                <?php 
+                $activeoptions = $instance["tab" . $i . "-category"];
+                if (!$activeoptions)
+                {
+                    $activeoptions = array();
+                }
+                ?>
 
-				<select multiple="true" id="<?php echo $this->get_field_id("tab" . $i . "-category"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-category"); ?>[]" style="width:90%; height: 100px;">
+                <select multiple="true" id="<?php echo $this->get_field_id("tab" . $i . "-category"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-category"); ?>[]" style="width:90%; height: 100px;">
 
-				<?php
-					$cats = get_categories('hide_empty=0');
+                <?php
+                    $cats = get_categories('hide_empty=0');
 
-					foreach ($cats as $cat) {
-					$option = '<option value="'.$cat->term_id;
-					if ( in_array($cat->term_id,$activeoptions)) { $option .='" selected="selected'; }
-					$option .= '">';
-					$option .= $cat->cat_name;
-					$option .= ' ('.$cat->category_count.')';
-					$option .= '</option>';
-					echo $option;
-					}
-				?>
-				</select>
-			</p>
+                    foreach ($cats as $cat) {
+                    $option = '<option value="'.$cat->term_id;
+                    if ( in_array($cat->term_id,$activeoptions)) { $option .='" selected="selected'; }
+                    $option .= '">';
+                    $option .= $cat->cat_name;
+                    $option .= ' ('.$cat->category_count.')';
+                    $option .= '</option>';
+                    echo $option;
+                    }
+                ?>
+                </select>
+            </p>
 
-			<p class="wpzoom_fortag">
-				<label for="<?php echo $this->get_field_id("tab" . $i . "-slugs"); ?>"><?php _e('Tag slugs (if selected above):', 'wpzoom'); ?></label>
-				<input type="text" size="27" id="<?php echo $this->get_field_id("tab" . $i . "-slugs"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-slugs"); ?>" value="<?php echo $instance["tab" . $i . "-slugs"]; ?>"  />
-			</p>
-			
-			<p>
-				<label for="<?php echo $this->get_field_id("tab" . $i . "-posts"); ?>"><?php _e('Posts to show:', 'wpzoom'); ?></label>
-				<select id="<?php echo $this->get_field_id("tab" . $i . "-posts"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-posts"); ?>" style="width:90%;">
-				<?php
-					$m = 0;
-					while ($m < 20) {
-					$m++;
-					$option = '<option value="'.$m;
-					if ($m == $instance["tab" . $i . "-posts"]) { $option .='" selected="selected';}
-					$option .= '">';
-					$option .= $m;
-					$option .= '</option>';
-					echo $option;
-					}
-				?>
-				</select>
-				 
-			</p>
-			
-			</div>
-			</div>
-			<?php }  
-		}
+            <p class="wpzoom_fortag">
+                <label for="<?php echo $this->get_field_id("tab" . $i . "-slugs"); ?>"><?php _e('Tag slugs (if selected above):', 'wpzoom'); ?></label>
+                <input type="text" size="27" id="<?php echo $this->get_field_id("tab" . $i . "-slugs"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-slugs"); ?>" value="<?php echo $instance["tab" . $i . "-slugs"]; ?>"  />
+            </p>
+            
+            <p>
+                <label for="<?php echo $this->get_field_id("tab" . $i . "-posts"); ?>"><?php _e('Posts to show:', 'wpzoom'); ?></label>
+                <select id="<?php echo $this->get_field_id("tab" . $i . "-posts"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-posts"); ?>" style="width:90%;">
+                <?php
+                    $m = 0;
+                    while ($m < 20) {
+                    $m++;
+                    $option = '<option value="'.$m;
+                    if ($m == $instance["tab" . $i . "-posts"]) { $option .='" selected="selected';}
+                    $option .= '">';
+                    $option .= $m;
+                    $option .= '</option>';
+                    echo $option;
+                    }
+                ?>
+                </select>
+                 
+            </p>
+            
+            </div>
+            </div>
+            <?php }  
+        }
 }
 ?>

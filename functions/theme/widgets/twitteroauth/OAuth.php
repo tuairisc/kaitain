@@ -420,7 +420,7 @@ class ZOOM_OAuthRequest {
    */
   public function to_header($realm=null) {
     $first = true;
-	if($realm) {
+    if($realm) {
       $out = 'Authorization: OAuth realm="' . ZOOM_OAuthUtil::urlencode_rfc3986($realm) . '"';
       $first = false;
     } else

@@ -12,15 +12,14 @@
 */
 
 /*
-    Useful generic smartphone media query: 
+ Useful generic smartphone media query: 
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) 
 */
     
 /*
-    Font Selectors
-    --------------
-    Who doesn't love Georgia?
-*/
+ * Font Selectors
+ * --------------
+ * Who doesn't love Georgia? */
 
 .entry .wp-caption-text,
 .post-heading p,
@@ -34,11 +33,10 @@
 }
 
 /*
-    Top Navigation Menu
-    -------------------
-    A one-hundred line minified JS file does what I could accomplish with 
-    one line of JS, ironically reversing the norm.
-*/
+ * Top Navigation Menu
+ * -------------------
+ * A one-hundred line minified JS file does what I could accomplish with 
+ * one line of JS, ironically reversing the norm. */
 
 .dropdown > li:last-child:after {
     /* Each header menu item has a | after it. This removes the | from the
@@ -51,22 +49,27 @@
 }
 
 /*
-    General Site Stylings
-    ---------------------
-    General stylings for generic parts of the site, as directed by
-    Aidan, Ciaran or Sean.
-*/
+ * General Site Stylings
+ * ---------------------
+ * General stylings for generic parts of the site, as directed by
+ * Aidan, Ciaran or Sean. */
 
 .recent-meta span,
 .widget .feature-posts-list small {
     /* Widgets are capitalized. This causes issues with some Irish 
-    spellings. Removing capitalization affected legibility so I bumped
-    font size. */
+     * spellings. Removing capitalization affected legibility so I bumped
+     * font size. */
     text-transform: none;
 }
 
 .recent-meta span {    
     font-size: 14px;
+}
+
+.three-columns .widget:nth-child(3n+2) .title  {
+    /* WPZOOM gives the middle column a wider margin because no good reason 
+     * that I can fathom. */
+    margin: 0 0 5px 0;
 }
 
 h2 {
@@ -80,21 +83,21 @@ h3 {
     font-size: 16px;
 }
 
+.related_posts .title {
+    /* Overrides above h3 rule */
+    color: #000;
+}
+
+.content-wrap {
+    /* Make header strip regardless of whether header advert group is blocked. */
+    background: center bottom/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
+}
+
 .inner-wrap {
     /* Stock colour is grey. */
     background-color: #fff;
 }
 
-#header .search_form {
-    /* This had godawful stock CSS. They floated the child inside the parent, 
-    instead of floating the parent. */
-    float: right;
-    padding-top: 10px;
-}
-
-#searchform {
-    float: none;
-}
 
 .slide_content_holder {
     /* Posts slider on front page. */
@@ -103,11 +106,96 @@ h3 {
 
 .column_1 a {
     /* Yay for JS-loaded CSS!
-    Removes bottom margin from homepage widget hyperlinks. 
-    The effect brings the author and title closer together.
-    The Earth will /literally/ fall into the sun if you change this. */
+     * Removes bottom margin from homepage widget hyperlinks. 
+     * The effect brings the author and title closer together.
+     * The Earth will /literally/ fall into the sun if you change this. */
     margin-bottom: 0 !important;
 }
+
+/*
+ * Header Block
+ * ------------ 
+ * The #header block and its many children. */
+
+#header {
+    /* Override gradient on header. */ 
+    background: #fff center top/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
+}
+
+#header #logo img {
+    /* Site logo. */ 
+    height: 45px;
+    width: auto;
+}
+
+#header .search_form {
+    /* This had godawful stock CSS. They floated the child inside the parent, 
+     * instead of floating the parent. */
+    float: right;
+    padding-top: 10px;
+}
+
+#header #searchform {
+    float: none;
+}
+
+/*
+ * Footer Block
+ * ------------
+ * The #footer block and its many children. */
+
+
+#footer {
+    background: #fff left bottom/auto 65px no-repeat url('images/rainbow_footer.svg');
+    height: auto;
+    padding: 0 4% 80px 4%;
+    /* The site is unbalanced. */
+    margin-bottom: 0;
+}
+
+#footer .copyright {
+    /**/
+    padding: 0;
+    text-align: left;
+}
+
+#footer .widget-area {
+    overflow: auto;
+    width: 100%;
+}
+
+#footer .widget-area:after {
+    clear: both;
+    display: table;
+}
+
+#footer .widget-area .column {
+    float: left;
+    min-height: 1px;
+    margin: 0 2% 20px 0;
+    width: 23.5%;
+}
+
+@media screen and (max-width: 770px) {
+    #footer .widget-area .column {
+        width: 48%;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) { 
+    #footer {
+        /* Responsive footer stuff here. */
+    }
+}
+
+#footer .widget-area .column:last-child {
+    margin-right: 0;
+}
+
+/*
+ * Article Element Styles
+ * ----------------------
+ * Styles for elements within articles, such as blockquote. */
 
 .entry blockquote,
 .entry blockquote p {
@@ -149,10 +237,27 @@ h3 {
 }
 
 /*
-    Education Post Section Headers
-    ------------------------------
-    This area will be fleshed out later.
-*/
+ * Foras na Gaeilge Attribution Link
+ * ---------------------------------
+ * Foras na Gaeilge are a major sponsor of Tuairisc Nuacht. The sky /will/ fall
+ * down if this link is ever removed. */
+
+ .foras-attribution {
+    background: left top/contain no-repeat url('images/foras_na_gaeilge_logo.svg');
+    height: 80px;
+    width: 100%;
+ }
+
+ .foras-attribution a {
+     display: block;
+     height: 100%;
+     width: 100%;
+ }
+
+/*
+ * Education Post Section Headers
+ * ------------------------------
+ * This area will be fleshed out later. */
 
 .edu-heading,
 .edu-subheading {
@@ -171,12 +276,11 @@ h3 {
 }
 
 /*
-    Modal Links
-    -----------
-    Aidan uses modal popup links. This is styling per Ciaran for 
-    post-embedded Soundcloud links. I will flesh this out later for 
-    other segments on the site.
-*/
+ * Modal Links
+ * -----------
+ * Aidan uses modal popup links. This is styling per Ciaran for 
+ * post-embedded Soundcloud links. I will flesh this out later for 
+ * other segments on the site. */
 
 .modal-box {
     background-color: #2769A3;
@@ -216,40 +320,6 @@ h3 {
 
 .right.modal-box {
     float: right;
-}
-
-/*
-    Header and Footer Area Background Images
-    ------------------------
-    The header has a rainbow trim at the bottom. 
-    The footer has a rainbow trim at the top, an Irish organization logo and
-    a big rainbow banner. 
-*/
-
-#header {
-    /* Override gradient on header. */ 
-    background: #fff center top/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
-}
-
-#footer {
-    background: #fff left bottom/auto 65px no-repeat url('images/rainbow_footer.svg');
-    /* The site is unbalanced. */
-    margin-bottom: 0;
-}
-
-.content-wrap {
-    background: center bottom/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
-}
-
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) { 
-   #footer {
-        padding-bottom: 140px;
-    }
-}
-
-#logo img {
-    height: 45px;
-    width: auto;
 }
 
 /*
@@ -301,12 +371,9 @@ h3 {
     other. It would've made sense to do the second fade as a callback to the 
     first, but what would I know, eh? 
 
-    Regardless-if AdRotate Pro is updated, these changes will be wiped out. 
-*/
+    Regardless-if AdRotate Pro is updated, these changes will be wiped out. */
 
-/*
-    General Advert Styles
-*/
+/* General Advert Styles */
 
 .g {
     margin: 0;
@@ -318,9 +385,7 @@ h3 {
     width: 100%;
 }
 
-/*
-    Group Margins and Padding
-*/
+/* Group Margins and Padding */
 
 .g-1, .g-3 {
     padding: 20px 4%;
@@ -333,15 +398,15 @@ h3 {
 
 .g-dyn {
     /* Dynamic adverts on rotation. AdRotate will toggle each g-dyn block in 
-    sequence, but they initially all need to be hidden. */
+     * sequence, but they initially all need to be hidden. */
     display: none;
 }
 
 /* This is the actual advert div. Structure is:
-
-    .tuarisic-advert
-        a
-*/
+ * 
+ *  .tuarisic-advert
+ *      a
+ */
 
 .tuairisc-advert {
     /* Background image is set via tuairisc_adrotate.js */
@@ -357,13 +422,10 @@ h3 {
     width: 100%;
 }
 
-/*
-    Advert Responsiveness
-*/
+/* Advert Responsiveness */
 
 @media screen and (max-width: 770px) {
     /* Standard mobile view. For tablets or small desktop sizes. */
-
     .g-2, .g-4, .g-5 {
         float: left;
         width: 32%;
@@ -376,7 +438,6 @@ h3 {
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) { 
     /* Generic smartphone mobile query. */
-
     .g-2, .g-4, .g-5 {
         float: none;
         margin-right: 0;
@@ -385,14 +446,13 @@ h3 {
 }
 
 /*
-    Category Header Banners
-    ------------------------
-    Each category has a custom header bannner.
-    Children have the same colour as the parent.
-    Colours are set via PHP. 
-
-    See: gazeti/functions/user/functions.php
-*/
+ * Category Header Banners
+ * ------------------------
+ * Each category has a custom header bannner.
+ * Children have the same colour as the parent.
+ * Colours are set via PHP. 
+ * 
+ * See: gazeti/functions/user/functions.php */
 
 .category-banner {
     margin-bottom: 20px;
@@ -438,10 +498,9 @@ h3 {
 }
 
 /* 
-    Wider Banner for Greann Category (158) 
-    ------------------------------------
-    The Greann category (158) must be taller in order to differentiate content. 
-*/
+ * Wider Banner for Greann Category (158) 
+ * ------------------------------------
+ * The Greann category (158) must be taller in order to separate content. */
 
 .greann-category-banner {
     background: 10px center/auto 60px no-repeat url('images/asnc_logo.svg');
@@ -450,10 +509,9 @@ h3 {
 }
 
 /*
-    Main Content Widget
-    -------------------
-    The author's name will appear above the widget. 
-*/
+ * Main Content Widget
+ * -------------------
+ * The author's name will appear above the widget. */
 
 .main_content span {
     text-transform: uppercase;
@@ -464,11 +522,10 @@ h3 {
 }
 
 /* 
-    Custom Hero Image
-    -----------------
-    The lead post on category pages has a different, bigger layout.
-    The placement of text and image are reversed.
-*/
+ * Custom Hero Image
+ * -----------------
+ * The lead post on category pages has a different, bigger layout.
+ * The placement of text and image are reversed. */
 
 .hero-image,
 .hero-image a {
@@ -515,13 +572,12 @@ h3 {
 }
 
 /*
-    Single Post Title and Meta
-    --------------------------
-    I rewrote and changed the style of the header. The stock layout
-    is a fucking mess of display:table and display:table-cell. I first
-    reset from this and from there build up layout using the same 
-    containers.
-*/
+ * Single Post Title and Meta
+ * --------------------------
+ * I rewrote and changed the style of the header. The stock layout
+ * is a fucking mess of display:table and display:table-cell. I first
+ * reset from this and from there build up layout using the same 
+ * containers. */
 
 .post-heading,
 .post-meta,
@@ -544,9 +600,9 @@ h3 {
 .post-meta-text,
 .post-heading .title {
     /* Contain padding.
-
-    All post title items requires padding, but horizontal
-    space is limited. */
+     * 
+     * All post title items requires padding, but horizontal
+     * space is limited. */
     box-sizing: border-box;
 }
 
@@ -558,7 +614,7 @@ h3 {
 
 .post-wrapper {
     /* Containing post wrapper
-    Even out the padding. */
+     * Even out the padding. */
     padding: 10px 0;
 }
 
@@ -650,11 +706,10 @@ h3 {
 }
 
 /*
-    Education Landing Page
-    ----------------------
-    The education landing page is a series of five coloured
-    boxes that link into the relevant sections.
-*/
+ * Education Landing Page
+ * ----------------------
+ * The education landing page is a series of five coloured
+ * boxes that link into the relevant sections. */
 
 .education-box {
     color: #fff;
@@ -796,7 +851,7 @@ ul.tuairisc-share:after {
     float: right;
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 800px) {
     #header .tuairisc-share {
         display: none;
     }
@@ -818,52 +873,57 @@ ul.tuairisc-share:after {
 
 .tuairisc-share .email { 
     background-color: #f5756c;
-	background-image: url('images/social/email.png'); 
+    background-image: url('images/social/email.png'); 
 }
 
 .tuairisc-share .facebook { 
     background-color: #3B5998;
-	background-image: url('images/social/facebook.png');
+    background-image: url('images/social/facebook.png');
 }
 
 .tuairisc-share .flickr { 
     background-color: #ff0084;
-	background-image: url('images/social/flickr.png');
+    background-image: url('images/social/flickr.png');
 }
 
 .tuairisc-share .github { 
     background-color: #333;
-	background-image: url('images/social/github.png');
+    background-image: url('images/social/github.png');
 }
 
 .tuairisc-share .google { 
     background-color: #dd4b39;
-	background-image: url('images/social/google.png');
+    background-image: url('images/social/google.png');
 } 
 
 .tuairisc-share .instagram { 
     background-color: #3f729b;
-	background-image: url('images/social/instagram.png');
+    background-image: url('images/social/instagram.png');
 } 
 
 .tuairisc-share .linkedin { 
     background-color: #0976b4;
-	background-image: url('images/social/linkedin.png');
+    background-image: url('images/social/linkedin.png');
 } 
 
 .tuairisc-share .pinterest { 
     background-color: #cc2127;
-	background-image: url('images/social/pinterest.png');
+    background-image: url('images/social/pinterest.png');
+} 
+
+.tuairisc-share .rss { 
+    background-color: #ff6600;
+    background-image: url('images/social/rss.png');
 } 
 
 .tuairisc-share .tumblr { 
     background-color: #35465c;
-	background-image: url('images/social/tumblr.png');
+    background-image: url('images/social/tumblr.png');
 } 
 
 .tuairisc-share .twitter { 
     background-color: #55acee;
-	background-image: url('images/social/twitter.png');
+    background-image: url('images/social/twitter.png');
 } 
 
 .tuairisc-share .youtube { 

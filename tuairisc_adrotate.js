@@ -1,25 +1,29 @@
 'use strict';
 // Blame mark@bhalash.com for this.
-// AdRotate injects its stock CSS on page load.
-// This injection cannot be disabled AFAIK without editing the plugin.
-// See here: https://www.adrotateplugin.com/support/forums/topic/deactivate-css/
 
 // Gazeti changes layout at 770px window width.
 var responsiveBreak = 770;
 // The class of the actual advert within each group.
 var advert = '.tuairisc-advert';
-// URL for fallback image. It will be set responsively using suffixes later. 
-var fallbackBannerUrl = 'TODO';
 
+// Fallback media if an advert is missing an appropriate image.
+var fallback = {
+    image : 'TODO',
+    href  : 'http://tuairisc.ie/glac-forgai-linn',
+    title : 'TODO',
+}
+
+// Suffix denotes respective desktop and mobile versions.
 var suffix = { 
-    // Suffix denotes respective desktop and mobile versions.
-    mobile  : '_mobile_', 
-    desktop : '_desktop_'
+    desktop : '_desktop_',
+    mobile  : '_mobile_'
 }
 
 // Banner advert groups.
 var bannerGroups = [
+    // Header
     '.g-1',
+    // Footer
     '.g-3'
 ];
 
@@ -34,17 +38,14 @@ function stripUrl(url) {
     // stirpUrl strips url(..) from a background-image attribute.
     // in:  url(http://domain.com/path-to-image.png)
     // out: http://domain.com/path-to-image.png
-    url = url.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-    return url;
+    return url.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
 }
 
 function addUrl(url) {
     // addUrl adds url(..) to a background-image attribute.
     // in:  http://domain.com/path-to-image.png
     // out: url(http://domain.com/path-to-image.png)
-    url = url.replace(/^/,'url(');
-    url = url.replace(/$/,')');
-    return url;
+    return url.replace(/^/,'url(').replace(/$/,')');
 }
 
 function isResponsiveAdvert(url) {
@@ -56,20 +57,24 @@ function isResponsiveAdvert(url) {
     return false;
 }
 
+function isSmallScreen(url) {
+    /* Responsive check based on whether a known mobile browser is given in the
+     * user agent string. Testing. Expect it to break. */
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    // if ($(window).height() > $(window).width())
+        return true;
+
+    return false;
+}
+
 function suffixToMobile(url) {
     // Chnages '_desktop_' to '_mobile_'.
-    if (isResponsiveAdvert(url))
-        return url.replace(suffix.desktop, suffix.mobile);
-
-    return null;
+    return url.replace(suffix.desktop, suffix.mobile);
 }
 
 function suffixToDesktop(url) {
     // Chnages '_mobile_' to '_desktop_'.
-    if (isResponsiveAdvert(url))
-        return url.replace(suffix.mobile, suffix.desktop);
-
-    return null;
+    return url.replace(suffix.mobile, suffix.desktop);
 }
 
 function setSuffix(url) {
@@ -79,23 +84,13 @@ function setSuffix(url) {
 
 function getBackgroundImg(obj) {
     // Return background-image from advert as parsed URL.
-    var url = $(obj).css('background-image');
-    url = stripUrl(url);
-    return url;
-}
-
-function isSmallScreen(url) {
-    // Simple responsive width check based on switchpoint of WPZOOM Gazeti theme.
-    // Testing. Expect it to break.
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-    // if ($(window).height() > $(window).width())
-        return true;
-
-    return false;
+    return stripUrl($(obj).css('background-image'));
 }
 
 function checkImageExists(url, successCallback, failCallback) {
-    // Check if the image exists on the server and execute supplied callbacks.
+    /* Check if the image exists on the server by fetching its head with Ajax,
+     * and then execute supplied callbacks. Fallback behaviour is to log 'found'
+     * or 'not found' via console. */
     successCallback = successCallback || function() {
         console.log('Success: ' + url + ' found');
     }
@@ -118,8 +113,10 @@ function checkImageExists(url, successCallback, failCallback) {
 }
 
 function setBannerImage(obj, img) {
-    // Set image or set fallback image.
-    img = img || setSuffix(fallbackBannerUl);
+    /* Banner images display either a scaling banner or a sidebar-style widget 
+     * if the device is a smartphone. setBannerImage handles the setting. If no 
+     * image is input then the fallback.image is used instead. */
+    img = img || setSuffix(fallback.image);
 
     var temp = new Image();
     temp.src = img;
@@ -142,7 +139,10 @@ function setBannerImage(obj, img) {
 }
 
 function resizeBannerAdvert(obj) {
-    // Nag Ciaran for fallback images. 
+    /* resizeBannerAdvert handles the logic behind setting background image. 
+     * Parse the background image to a URL, check if it exists and set it if so.
+     * If no image can be found, then the advert is broken and placeholder text 
+     * is inserted into the advert instead. */
     $(obj).find(advert).each(function() {
         var curAdvert = $(this);
         var img = getBackgroundImg(this);
@@ -153,14 +153,20 @@ function resizeBannerAdvert(obj) {
             setBannerImage(curAdvert, img);
         }, function() {
             // Set banner to fallback size if image is missing.
+            $(curAdvert).children('a').attr({
+                'href'  : fallback.href,
+                'title' : fallback.title,
+            });
+
             setBannerImage(curAdvert);
         });
     });
 }
 
 function resizeSidebarAdvert(obj) {
-    // Elements with display: none set report a width of 0. 
-    // Capture width of first sidebar advert container and set all widths to that.
+    /* Elements with display: none set report a width of 0. 
+     * Capture width of first sidebar advert container and set all widths to 
+     * that. */
     var w = $(obj).width();
 
     $(obj).find(advert).each(function() {

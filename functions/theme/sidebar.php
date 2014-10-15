@@ -1,11 +1,11 @@
 <?php 
 /*-----------------------------------------------------------------------------------*/
-/* Initializing Widgetized Areas (Sidebars)											 */
+/* Initializing Widgetized Areas (Sidebars)                                             */
 /*-----------------------------------------------------------------------------------*/
  
  
 /*----------------------------------*/
-/* Sidebar							*/
+/* Sidebar                            */
 /*----------------------------------*/
  
 register_sidebar(array(
@@ -28,7 +28,7 @@ register_sidebar(array(
 ));
 
 /*----------------------------------*/
-/* Homepage							*/
+/* Homepage                            */
 /*----------------------------------*/
  
 
@@ -56,7 +56,7 @@ register_sidebar(array(
  
 
 /*----------------------------------*/
-/* Footer widgetized areas			*/
+/* Footer widgetized areas            */
 /*----------------------------------*/
 
 register_sidebar(array(

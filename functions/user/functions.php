@@ -5,8 +5,8 @@
 
 function get_parent_id($cat_id) {
     /* Return the ID of the top parent of any category.
-
-    get_parent_id returns the id of the parent category. */
+     *
+     * get_parent_id returns the id of the parent category. */
     $parent = get_category_parents($cat_id, false, '/'); 
     $parent = preg_replace('/\/.*/', '', $parent); 
     return get_cat_id($parent); 
@@ -14,19 +14,19 @@ function get_parent_id($cat_id) {
 
 function get_cat_color($cat_id) {
     /* Return a unique colour for each given parent category.
-
-    # Category Name   Hex Colour  Category ID
-    -----------------------------------------
-    1 Nuacht          #516671     191  
-    2 Tuairmíocht     #8eb2d3     154   
-    3 Spoirt          #c54b54     155
-    4 Cultúr          #96c381     156
-    5 Saol            #e04184     157
-    6 Pobal           #7d5e90     159
-    7 Greann          #e6192a     158
-    8 Foghlaimeoirí   #d4bb85     187
-
-    get_cat_color returns the hex color as a string.
+     * 
+     * # Category Name   Hex Colour  Category ID
+     * -----------------------------------------
+     * 1 Nuacht          #516671     191  
+     * 2 Tuairmíocht     #8eb2d3     154   
+     * 3 Spoirt          #c54b54     155
+     * 4 Cultúr          #96c381     156
+     * 5 Saol            #e04184     157
+     * 6 Pobal           #7d5e90     159
+     * 7 Greann          #e6192a     158
+     * 8 Foghlaimeoirí   #d4bb85     187 
+     *
+     * get_cat_color returns the hex color as a string.
     */
 
     $cat_id = get_parent_id($cat_id);
@@ -72,17 +72,17 @@ function get_cat_color($cat_id) {
 
 function hero_post_class() {
     /* If the lead post has thumbnail images, mark it as a 'hero' post, whose 
-    style is very different than other posts in the cateory loop. 
-
-    hero_post_class returns the correct class as string. */
+     * style is very different than other posts in the cateory loop. 
+     *
+     * hero_post_class returns the correct class as string. */
     return (has_post_thumbnail()) ? 'hero-post' : '';
 }
 
 function greann_banner() {
     /* The Greann category is a parody/comedy strip. The banner for this 
-    category is of a different style than other categories. 
-
-    greann_banner returns the class as a string. */
+     * category is of a different style than other categories. 
+     * 
+     * greann_banner returns the class as a string. */
     $greann_category = 158;
     $greann_banner = 'greann-category-banner';
     return (get_query_var('cat') == $greann_category) ? $greann_banner : '';
@@ -90,7 +90,7 @@ function greann_banner() {
 
 function get_thumbnail_url() {
     /* Code snippet from http://goo.gl/NhcEU6
-    get_thumbnail_url returns the anchor url for the requested thumbnail. */
+     * get_thumbnail_url returns the anchor url for the requested thumbnail. */
     $post_id = get_the_ID();
     $thumb_id = get_post_thumbnail_id($post_id);
     $thumb_url = wp_get_attachment_image_src($thumb_id,'large', true);
@@ -99,21 +99,21 @@ function get_thumbnail_url() {
 
 function remove_read_more($excerpt) {
     /* Remove the read more link from page and post excerpts.
-
-    remove_read_more returns the excerpt. */
+     * 
+     * remove_read_more returns the excerpt. */
     return preg_replace('/(<a class="more.*<\/a>)/', '', $excerpt);
 }
 
 function replace_breaks($excerpt) {
     /* Replace <br /> tags in excerpts with <paragraphs. 
-
-    except_replace_breaks returns the exerpt. */ 
+     *
+     * except_replace_breaks returns the exerpt. */ 
     return str_replace('<br />', '</p><p>', $excerpt);
 }
 
 function get_avatar_url($size) {
     /* Return the hyperlink for the given avatar size without the <img /> code.
-    get_avatar_url returns the URL string. */
+     * get_avatar_url returns the URL string. */
     $user_id = get_the_author_meta('ID');
     $avatar_url = get_avatar($user_id, $size);
     return preg_replace('/(^.*src="|" w.*$)/', '', $avatar_url);
@@ -121,17 +121,17 @@ function get_avatar_url($size) {
 
 function has_local_avatar() {
     /* This site uses 'WP USer Avatar' for avatar control.
-    It serves avatars in this priority:
-    
-    1. Local user avatar
-    2. Gravatar user avatar
-    3. Gravatar stock avatar
-    
-    I need to see if a local avatar is served and switch based on it.
-    This function checks to see if the avatar is being served from the local 
-    site. 
-
-    has_local_avatar returns true if the avatar is hosted on the site. */
+     * It serves avatars in this priority:
+     *  
+     * 1. Local user avatar
+     * 2. Gravatar user avatar
+     * 3. Gravatar stock avatar
+     * 
+     * I need to see if a local avatar is served and switch based on it.
+     * This function checks to see if the avatar is being served from the local 
+     * site. 
+     * 
+     * has_local_avatar returns true if the avatar is hosted on the site. */
     $user_id = get_the_author_meta('ID');
     $home_url = site_url();
     $avatar_url = get_avatar_url($user_id, 200);
@@ -140,7 +140,7 @@ function has_local_avatar() {
 
 function day_to_irish($day) {
     /* See date to Irish below.
-    day_to_irish returns the Irish translation of the day. */
+     * day_to_irish returns the Irish translation of the day. */
     $irish_days = array(
         'Dé Luain', 'Dé Máirt', 'Dé Céadaoin', 'Déardaoin', 
         'Dé hAoine', 'Dé Sathairn', 'Dé Domhnaigh'
@@ -169,8 +169,8 @@ function day_to_irish($day) {
 
 function month_to_irish($month) {
     /* See date to Irish below.
-
-    month_to_irish returns the Irish translation of the month. */
+     * 
+     * month_to_irish returns the Irish translation of the month. */
     $irish_months = array(
         'Eanáir', 'Feabhra', 'Márta', 'Aibreán', 
         'Bealtaine', 'Meitheamh', 'Iúil', 'Lúnasa', 
@@ -211,9 +211,9 @@ function month_to_irish($month) {
 
 function date_to_irish($the_date) {
     /* Localization attempts fell short as date localization requires files on 
-    the server.
-
-    date_to_irish returns the translated date. */
+     * the server.
+     * 
+     * date_to_irish returns the translated date. */
     $day_regex = '/(,.*)/';
     $month_regex = '/(^.*, | [0-9].*$)/'; 
 
@@ -229,9 +229,9 @@ function date_to_irish($the_date) {
 
 function education_category_id($id) {
     /* Used for eduation_landing_shortcode below. Users cannot be expected to 
-    know  the actual category.
-
-    education_category_id returns proper id or a fallback id. */
+     * know the actual category.
+     * 
+     * education_category_id returns proper id or a fallback id. */
     switch ($id) {
         case 1: 
             $id = 202; break;
@@ -252,9 +252,9 @@ function education_category_id($id) {
 
 function education_landing_shortcode($atts) {
     /* The education landing page links through to the five different segments. 
-    These are big boxy clickable boxes complete with title and description. 
-
-    education_landing_shortcode returns the div as a stribg. */
+     * These are big boxy clickable boxes complete with title and description. 
+     * 
+     * education_landing_shortcode returns the div as a string. */
     $a = shortcode_atts(array(
         'id' => 0,
     ), $atts);
@@ -272,12 +272,12 @@ function education_landing_shortcode($atts) {
 
 function parse_columnist_role($author_id) {
     /* See author_is_columnist, below.
-
-    This function takes the string 'yes' or no' and parses it. 
-    I probably go overboard in sanitization, but I've seen the dedication
-    of our local users. 
-
-    parse_columnist_role returns true if the string parses to 'yes' */
+     * 
+     * This function takes the string 'yes' or no' and parses it. 
+     * I probably go overboard in sanitization, but I've seen the dedication
+     * of our local users. 
+     *
+     * parse_columnist_role returns true if the string parses to 'yes' */
     $meta_tag = get_the_author_meta('columnist', $author_id);
     $is_columnist = false;
 
@@ -295,19 +295,19 @@ function parse_columnist_role($author_id) {
 
 function author_is_columnist() {
     /* We've (currently unused) added a flag to each user in order to indicate
-    that they have a serial column. 
-
-    parse_columnist_role parses the variable string.
-    author_is_columnist returns true or false. */
+     * that they have a serial column. 
+     * 
+     * parse_columnist_role parses the variable string.
+     * author_is_columnist returns true or false. */
     $id = get_the_author_meta('ID');
     return parse_columnist_role($id);
 }
 
 function is_columnist_article() {
     /* We've added a 'is_column' flag in extended post fields in order to 
-    indicate whether a post is part of an ongoing column. 
-
-    is_columnist_article parses the value and returns true or false. */
+     * indicate whether a post is part of an ongoing column. 
+     *
+     * is_columnist_article parses the value and returns true or false. */
     $col_article = get_post_meta(get_the_ID(), 'is_column', true);
     $is_column = false;
     $col_article = strtolower($col_article);
@@ -320,6 +320,24 @@ function is_columnist_article() {
     return $is_column;
 }
 
+function tweak_title($title, $sep) {
+    /* Customize the title format so it looks like:
+     * 
+     *  site_title | section_title
+     *
+     * tweak_title returns the title. */
+    $title = str_replace($sep, '', $title); 
+
+    if (!is_home()) {
+        $title = preg_replace('/^/', ' ' . $sep . ' ', $title);
+        $title = preg_replace('/^/', bloginfo('name'), $title);
+    }
+
+    return $title;
+}
+
+// Rearrange title.
+add_filter('wp_title', 'tweak_title', 10, 2);
 // Remove read more links from excerpts.
 add_filter('the_excerpt', 'remove_read_more');
 add_filter('the_excerpt', 'replace_breaks');

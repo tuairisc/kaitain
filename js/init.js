@@ -40,17 +40,17 @@ jQuery(function( $ ) {
 
 
 function getPostIdClass(elem) {
-	var classes = jQuery(elem).attr('class').split(/\s+/),
-	    id = 0;
+    var classes = jQuery(elem).attr('class').split(/\s+/),
+        id = 0;
 
-	for ( var i = 0; i < classes.length; i++ ) {
-		if ( classes[i].match(/^post\-/i) ) {
-			id = classes[i];
-			break;
-		}
-	}
+    for ( var i = 0; i < classes.length; i++ ) {
+        if ( classes[i].match(/^post\-/i) ) {
+            id = classes[i];
+            break;
+        }
+    }
 
-	return id;
+    return id;
 }
 
 

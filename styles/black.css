@@ -1,38 +1,38 @@
 body { 
-	color:#555;
-	background: #1E1E1E;
-}	
+    color:#555;
+    background: #1E1E1E;
+}    
 
 a { color: #565656; text-decoration:none; }
 a:hover { color:#FF3E06; text-decoration:none;}
 
 .inner-wrap {
-	border:none;
+    border:none;
 }
 
 
 #header {
- 	background: #000;
+     background: #000;
 }
 
 #logo a {
-	color: #fff;
-	text-shadow:none;
+    color: #fff;
+    text-shadow:none;
 }
 
 #menu {
-	border: 1px solid #000;
-	border-bottom: none;
- 	background: #222;
+    border: 1px solid #000;
+    border-bottom: none;
+     background: #222;
 }
 
 #header #searchform {
- 	border: 1px solid #D8D8D8;
-	box-shadow: none;
+     border: 1px solid #D8D8D8;
+    box-shadow: none;
 }
 
 .dropdown a {
-	color: #fff;
+    color: #fff;
 }
 
 .dropdown a:hover {
@@ -41,13 +41,13 @@ a:hover { color:#FF3E06; text-decoration:none;}
 }
 
 .dropdown ul {
-	background:#000;
+    background:#000;
 }
 
 
 .dropdown li:hover a {
-	background:#fff;
-	color:#333;
+    background:#fff;
+    color:#333;
 }
 
 .dropdown li ul li a {
@@ -59,9 +59,9 @@ a:hover { color:#FF3E06; text-decoration:none;}
 }
 
 .dropdown > li:after {
-	content: '|';
-	font-size: 15px;
-	color:#333;
+    content: '|';
+    font-size: 15px;
+    color:#333;
 }
 
 .dropdown .current_page_item a,
@@ -71,8 +71,8 @@ a:hover { color:#FF3E06; text-decoration:none;}
 .dropdown .current-cat a,
 .dropdown .current-menu-item a,
 .dropdown .current-post-parent a {
- 	color: #333;
- 	background: #fff;
+     color: #333;
+     background: #fff;
  }
 
 .dropdown li:hover li a:hover {

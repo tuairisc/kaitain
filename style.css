@@ -313,14 +313,14 @@ ul.dropdown li li li.sfHover ul { left: 200px; /* match ul width */ top: 0; }
 .btn_menu { display:none; }
 
 .dropdown a {
-	padding: 10px 10px;
-	margin: 0;
-	text-decoration: none;
-	line-height: 1.5;
-	font-size: 16px;
-	color: #fff;
-	display: inline-block;
-	font-family: "Arial", sans-serif;
+    padding: 10px 10px;
+    margin: 0;
+    text-decoration: none;
+    line-height: 1.5;
+    font-size: 16px;
+    color: #fff;
+    display: inline-block;
+    font-family: "Arial", sans-serif;
 }
 
 .dropdown a:hover {
@@ -571,14 +571,14 @@ h3.title {
 }
 
 .home_widgets .widget {
-	width: 230px;
-	display: inline-block;
-	vertical-align: top;
-	float: none;
-	margin-top: 0;
-	margin-right: 40px;
-	margin-bottom: 0px;
-	margin-left: 0;
+    width: 230px;
+    display: inline-block;
+    vertical-align: top;
+    float: none;
+    margin-top: 0;
+    margin-right: 40px;
+    margin-bottom: 0px;
+    margin-left: 0;
 }
 
 .home_widgets .carousel-slider {
@@ -591,7 +591,7 @@ h3.title {
 }
 
 .three-columns .widget:nth-child(3n+2) .title  {
-    margin:0 -40px 15px;
+    margin: 0 -40px 15px;
     padding: 10px 40px;    
 }
 
@@ -599,11 +599,11 @@ h3.title {
 .wztw-container  { float:left; margin-bottom:0px; overflow:hidden; width:100%;}
 .wztw-container .tabs { font-family: 'Bitter', Georgia, serif; font-size: 12px;font-weight: bold;  text-transform: uppercase; border-top: 1px solid #333; border-bottom: 1px solid #F1F1F1; display:block; list-style: none; margin:0;   width:100%;  }
 .wztw-container .tabs h2 {
-	float: left;
-	padding: 10px 0;
-	width: 175px;
-	font-size: 13px;
-	font-weight: bold;
+    float: left;
+    padding: 10px 0;
+    width: 175px;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 .wztw-container .tabs li { border-bottom: solid 1px transparent; display: inline;float: left; font-size: 13px;  margin: 0 25px -1px 0; overflow:hidden; padding:10px 0; position:relative; }
@@ -897,16 +897,16 @@ img.wp-smiley { border: none; padding: 0; }
 }
 
 .widget .title {
-	font-family: Georgia, serif;
-	font-size: 12px;
-	font-weight: bold;
-	text-transform: uppercase;
-	border-top: 1px solid #333;
-	border-bottom: 1px solid #F1F1F1;
-	display: block;
-	margin: 0 0 5px;
-	padding: 10px 0;
-	color: #000;
+    font-family: Georgia, serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #F1F1F1;
+    display: block;
+    margin: 0 0 5px;
+    padding: 10px 0;
+    color: #000;
 }
 
 .widget { float: left; line-height: 1.5; width: 100%; }
@@ -1082,13 +1082,13 @@ h3#reply-title { font-size: 20px;  margin: 18px 0; color:#373737;}
 *********************************************************************************************/
  
 #footer {
-	color: #999;
-	margin-bottom: 40px;
-	padding-top: 20px;
-	padding-right: 40px;
-	padding-bottom: 0px;
-	padding-left: 40px;
-	height: 222px;
+    color: #999;
+    margin-bottom: 40px;
+    padding-top: 20px;
+    padding-right: 40px;
+    padding-bottom: 0px;
+    padding-left: 40px;
+    height: 222px;
 }
 
 #footer a {
@@ -1102,23 +1102,23 @@ h3#reply-title { font-size: 20px;  margin: 18px 0; color:#373737;}
 #footer div.column {
     display: inline-block;
     vertical-align: top;
-    margin-right: 25px;
+/*    margin-right: 25px;
     width: 250px;
-}
+*/}
 
 #footer div.last {
     margin-right: 0;
 }
 
 #footer .widget-area {
-	margin-top: 0;
-	margin-right: 0;
-	margin-bottom: 0px;
-	margin-left: 0;
-	padding-top: 0;
-	padding-right: 0;
-	padding-bottom: 0px;
-	padding-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0px;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0px;
+    padding-left: 0;
 }
 
 #footer .column .widget {
@@ -1134,10 +1134,10 @@ h3#reply-title { font-size: 20px;  margin: 18px 0; color:#373737;}
 }
 
 .copyright {
-	font-size: 12px;
-	padding: 15px 0 0;
-	color: #000000;
-	text-align: center;
+    font-size: 12px;
+    padding: 15px 0 0;
+    color: #000000;
+    text-align: center;
 }
 
 .copyright .right { 
