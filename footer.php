@@ -100,9 +100,6 @@
 <?php wp_footer(); ?> 
 
 <?php wp_reset_query(); ?>
-<?php if (is_single()) : //Google Plus button ?>
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-<?php endif; ?>
  
 <?php // JavaScript for size of AdRotate advertisements. ?>
 <script src="<?php echo get_template_directory_uri() . '/tuairisc_adrotate.js'; ?>"></script>

@@ -336,6 +336,35 @@ function tweak_title($title, $sep) {
     return $title;
 }
 
+function get_view_count($post_id = null) {
+    if ($post_id == '') {
+        return;
+    }
+
+    $key = 'tuairisc_view_counter';
+    $count = (int) get_post_meta($post_id, $key, true);
+
+    if ($count == '') {
+        update_post_meta($post_id, $key, 0);
+        return 0;
+    }
+
+    return $count;
+}
+
+function increment_view_counter($post_id = null) {
+    if ($post_id == '') {
+        $post_id = get_the_ID();
+    }
+
+    if (is_single()) {
+        $key = 'tuairisc_view_counter';
+        $count = (int) get_post_meta($post_id, $key, true);
+        $count++;
+        update_post_meta($post_id, $key, $count);
+    }
+}
+
 // Rearrange title.
 add_filter('wp_title', 'tweak_title', 10, 2);
 // Remove read more links from excerpts.

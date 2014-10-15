@@ -4,7 +4,9 @@
 
 <?php while (have_posts()) : the_post();?>
     <?php if ($show_hero == true) : ?>
+        <script>console.log('<?php echo $cat; ?>');</script>
         <?php include(locate_template('hero.php')); ?>
+
     <?php else : ?>
         <div id="post-<?php the_ID(); ?>" class="recent-post">
 
