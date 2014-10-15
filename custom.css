@@ -16,8 +16,7 @@
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) 
 */
     
-/*
- * Font Selectors
+/* Font Selectors
  * --------------
  * Who doesn't love Georgia? */
 
@@ -32,8 +31,7 @@
     font: 14px arial, "helvetica neue", helvetica, sans-serif;
 }
 
-/*
- * Top Navigation Menu
+/* Top Navigation Menu
  * -------------------
  * A one-hundred line minified JS file does what I could accomplish with 
  * one line of JS, ironically reversing the norm. */
@@ -48,8 +46,7 @@
     display: none;
 }
 
-/*
- * General Site Stylings
+/* General Site Stylings
  * ---------------------
  * General stylings for generic parts of the site, as directed by
  * Aidan, Ciaran or Sean. */
@@ -112,8 +109,7 @@ h3 {
     margin-bottom: 0 !important;
 }
 
-/*
- * Header Block
+/* Header Block
  * ------------ 
  * The #header block and its many children. */
 
@@ -139,61 +135,126 @@ h3 {
     float: none;
 }
 
-/*
- * Footer Block
+/* Footer Block
  * ------------
  * The #footer block and its many children. */
-
 
 #footer {
     background: #fff left bottom/auto 65px no-repeat url('images/rainbow_footer.svg');
     height: auto;
-    padding: 0 4% 80px 4%;
+    padding: 0 4% 65px 4%;
     /* The site is unbalanced. */
     margin-bottom: 0;
 }
 
-#footer .copyright {
-    /**/
-    padding: 0;
-    text-align: left;
+#footer .interior {
+    border-top: 1px solid #f1f1f1;
+    padding-top: 20px;
 }
 
-#footer .widget-area {
+.copyright, #footer li, #footer p {
+    color: #000;
+    font: 11px Arial, "Helvetica Neue", Helvetica, sans-serif;
+    line-height: 20px;
+}
+
+#footer a {
+    color: inherit;
+}
+
+/* Copyright Block
+ * ----------------
+ * Privacy policy, copyright and all that other good stuff. */
+
+.copyright {
+    padding: 0;
+}
+
+.copyright p {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+/* Footer Widgets and Columns 
+ * --------------------------
+ * Footer widgets are arranged into four columns. These rules override the fixed
+ * default styles. */
+
+.widget-area {
     overflow: auto;
     width: 100%;
 }
 
-#footer .widget-area:after {
+.widget-area:after {
     clear: both;
     display: table;
 }
 
-#footer .widget-area .column {
-    float: left;
+.widget-area .column {
+    box-sizing: border-box;
+    display: block;
     min-height: 1px;
-    margin: 0 2% 20px 0;
-    width: 23.5%;
+    margin: 0 0 20px 0;
+    width: 20%;
+}
+
+.widget-area .column:nth-child(1),
+.widget-area .column:nth-child(2) {
+    float: left;
+}
+
+.widget-area .column:nth-child(3),
+.widget-area .column:nth-child(4) {
+    float: right;
 }
 
 @media screen and (max-width: 770px) {
-    #footer .widget-area .column {
-        width: 48%;
+    .widget-area .column:nth-child(4) {
+        display: none;
     }
-}
+ }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) { 
-    #footer {
-        /* Responsive footer stuff here. */
-    }
-}
-
-#footer .widget-area .column:last-child {
+.widget-area .column:last-child {
+    border: 0;
     margin-right: 0;
 }
 
-/*
- * Article Element Styles
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) {     
+    .widget-area .column {
+        float: none;
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .widget-area .column:last-child {
+        margin-bottom: 20px;
+    }
+}
+
+/* Foras na Gaeilge Attribution Link
+ * ---------------------------------
+ * Foras na Gaeilge are a major sponsor of Tuairisc Nuacht. The sky /will/ fall
+ * down if this link is ever removed. */
+
+ .foras-attribution {
+    background: right top/contain no-repeat url('images/foras_na_gaeilge_logo.svg');
+    height: 60px;
+    width: 100%;
+ }
+
+ .foras-attribution a {
+     display: block;
+     height: 100%;
+     width: 100%;
+ }
+
+@media screen and (max-width: 770px) {
+    .foras-attribution {
+        background-position: left top;
+    }
+}
+
+/* Article Element Styles
  * ----------------------
  * Styles for elements within articles, such as blockquote. */
 
@@ -235,24 +296,6 @@ h3 {
 .entry blockquote cite:before {
     content: ' -';
 }
-
-/*
- * Foras na Gaeilge Attribution Link
- * ---------------------------------
- * Foras na Gaeilge are a major sponsor of Tuairisc Nuacht. The sky /will/ fall
- * down if this link is ever removed. */
-
- .foras-attribution {
-    background: left top/contain no-repeat url('images/foras_na_gaeilge_logo.svg');
-    height: 80px;
-    width: 100%;
- }
-
- .foras-attribution a {
-     display: block;
-     height: 100%;
-     width: 100%;
- }
 
 /*
  * Education Post Section Headers
@@ -445,8 +488,7 @@ h3 {
     }
 }
 
-/*
- * Category Header Banners
+/* Category Header Banners
  * ------------------------
  * Each category has a custom header bannner.
  * Children have the same colour as the parent.
@@ -497,8 +539,7 @@ h3 {
     font-weight: bold;
 }
 
-/* 
- * Wider Banner for Greann Category (158) 
+/* Wider Banner for Greann Category (158) 
  * ------------------------------------
  * The Greann category (158) must be taller in order to separate content. */
 
@@ -521,8 +562,7 @@ h3 {
     content: ' - ';
 }
 
-/* 
- * Custom Hero Image
+/* Custom Hero Image
  * -----------------
  * The lead post on category pages has a different, bigger layout.
  * The placement of text and image are reversed. */
@@ -571,8 +611,7 @@ h3 {
     }
 }
 
-/*
- * Single Post Title and Meta
+/* Single Post Title and Meta
  * --------------------------
  * I rewrote and changed the style of the header. The stock layout
  * is a fucking mess of display:table and display:table-cell. I first
@@ -705,8 +744,7 @@ h3 {
     border: none;
 }
 
-/*
- * Education Landing Page
+/* Education Landing Page
  * ----------------------
  * The education landing page is a series of five coloured
  * boxes that link into the relevant sections. */
@@ -808,62 +846,62 @@ h3 {
     The menu takes the form of a horizontal ul.
     Just drop in links as so:
 
-    <ul class="tuairisc-share">
+    <ul class="mshare">
         <li><a class="email" href="#"></a></li>
         ...
         <li><a class="youtube" href="#"></a></li>
     </ul>
  */
 
-ul.tuairisc-share,
-.tuairisc-share li,
-.tuairisc-share a {
+ul.mshare,
+.mshare li,
+.mshare a {
     line-height: initial;
     margin: 0;
     overflow: auto;
     padding: 0;
 }
 
-ul.tuairisc-share {
+ul.mshare {
     float: right;
 }
 
-ul.tuairisc-share:after {
+ul.mshare:after {
     clear: both;
     display: table;
 }
 
-.tuairisc-share li,
-.tuairisc-share a {
+.mshare li,
+.mshare a {
     height: 30px;
     width: 30px;
 }
 
-#header .tuairisc-share li,
-#header .tuairisc-share a {
+#header .mshare li,
+#header .mshare a {
     height: 33px; 
     width: 33px;
 }
 
-#header .tuairisc-share {
+#header .mshare {
     padding-top: 27px;
     margin-right: 5px;
     float: right;
 }
 
 @media screen and (max-width: 800px) {
-    #header .tuairisc-share {
+    #header .mshare {
         display: none;
     }
 }
 
-.tuairisc-share li {
+.mshare li {
     display: inline;
     list-style-type: none;
     margin-right: 2px;
 }
 
-.tuairisc-share a {
+.mshare a {
     background-size: 90% auto;
     background-repeat: no-repeat;
     background-position: center center;
@@ -871,62 +909,62 @@ ul.tuairisc-share:after {
     display: inline-block;
 }
 
-.tuairisc-share .email { 
+.mshare .email { 
     background-color: #f5756c;
     background-image: url('images/social/email.png'); 
 }
 
-.tuairisc-share .facebook { 
+.mshare .facebook { 
     background-color: #3B5998;
     background-image: url('images/social/facebook.png');
 }
 
-.tuairisc-share .flickr { 
+.mshare .flickr { 
     background-color: #ff0084;
     background-image: url('images/social/flickr.png');
 }
 
-.tuairisc-share .github { 
+.mshare .github { 
     background-color: #333;
     background-image: url('images/social/github.png');
 }
 
-.tuairisc-share .google { 
+.mshare .google { 
     background-color: #dd4b39;
     background-image: url('images/social/google.png');
 } 
 
-.tuairisc-share .instagram { 
+.mshare .instagram { 
     background-color: #3f729b;
     background-image: url('images/social/instagram.png');
 } 
 
-.tuairisc-share .linkedin { 
+.mshare .linkedin { 
     background-color: #0976b4;
     background-image: url('images/social/linkedin.png');
 } 
 
-.tuairisc-share .pinterest { 
+.mshare .pinterest { 
     background-color: #cc2127;
     background-image: url('images/social/pinterest.png');
 } 
 
-.tuairisc-share .rss { 
+.mshare .rss { 
     background-color: #ff6600;
     background-image: url('images/social/rss.png');
 } 
 
-.tuairisc-share .tumblr { 
+.mshare .tumblr { 
     background-color: #35465c;
     background-image: url('images/social/tumblr.png');
 } 
 
-.tuairisc-share .twitter { 
+.mshare .twitter { 
     background-color: #55acee;
     background-image: url('images/social/twitter.png');
 } 
 
-.tuairisc-share .youtube { 
+.mshare .youtube { 
     background-color: #b31217;
     background-image: url('images/social/youtube.png');
 } 

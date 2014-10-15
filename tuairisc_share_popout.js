@@ -7,7 +7,7 @@ var sizeArray = [
     'width=450,height=257',
 ];
 
-$('.post-meta .tuairisc-share a').click(function(e) {
+$('.post-meta .mshare a').click(function(e) {
     var hrefClass = $(this).attr('class');
 
     if (hrefClass == 'facebook' | hrefClass == 'twitter') {

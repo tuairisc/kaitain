@@ -26,7 +26,7 @@
         </div><!-- /#side_ad -->
     <?php } ?>
     
-    <!-- AdRotate sidebar banners.  -->
+    <?php // AdRotate groups 2, 4 and 5 ?>
     <?php echo adrotate_group(2); ?>    
     <?php echo adrotate_group(4); ?>    
     <?php echo adrotate_group(5); ?>    

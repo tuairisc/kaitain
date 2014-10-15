@@ -16,7 +16,7 @@
 <body <?php body_class() ?>>
     <div class="inner-wrap">
 
-    <!-- AdRotate header banner. Height of 125px -->
+    <?php // AdRotate group 1 ?>
     <?php echo adrotate_group(1); ?>
 
         <header id="header">
@@ -52,11 +52,11 @@
                 </div>
             <?php } ?>
 
-            <ul class="tuairisc-share">
+            <ul class="mshare">
                 <li><a class="rss" href="<?php bloginfo('rss2_url'); ?>" target="_blank" title="RSS 2.0 Feed"></a></li>
                 <li><a class="facebook" href="https://www.facebook.com/tuairisc.ie" target="_blank" title="Facebook"></a></li>
                 <li><a class="twitter" href="https://twitter.com/tuairiscnuacht" target="_blank" title="Twitter"></a></li>
-                <li><a class="youtube" href="https://www.youtube.com/channel/UCd__CRDmcu3VfhPBwA7geRg" target="_blank" title="YouTube"></a></li>
+                <li><a class="youtube" href="https://www.youtube.com/user/tuairiscnuacht" target="_blank" title="YouTube"></a></li>
             </ul>
 
             <div class="clear"></div>

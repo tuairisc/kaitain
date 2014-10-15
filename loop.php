@@ -3,7 +3,7 @@
 <?php $show_hero = true; ?>
 
 <?php while (have_posts()) : the_post();?>
-    <?php if ($show_hero) : ?>
+    <?php if ($show_hero == true) : ?>
         <?php include(locate_template('hero.php')); ?>
     <?php else : ?>
         <div id="post-<?php the_ID(); ?>" class="recent-post">

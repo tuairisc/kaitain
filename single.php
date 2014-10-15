@@ -28,15 +28,37 @@
                             <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
                         </div><!-- /.post-meta-text -->
 
-                        <ul class="tuairisc-share">
-                            <?php $site   = urlencode(get_bloginfo('name')); ?>
-                            <?php $url    = urlencode(get_the_permalink()); ?> 
-                            <?php $title  = urlencode(get_the_title()); ?>
-                            <?php $twuser = urlencode(' ó @tuairiscnuacht'); ?>
+                        <ul class="mshare">
+                            <?php $share = array(
+                                'blog'  => urlencode(get_bloginfo('name')),
+                                'url'   => urlencode(get_the_permalink()),
+                                'title' => rawurlencode(get_the_title()),
+                                'tuser' => urlencode('tuairiscnuacht')
+                            ); ?> 
 
-                            <li><a class="email" href="mailto:?subject=<?php echo $title; ?>&amp;body=<?php echo $url; ?>" rel="0" target="_blank"  title="Email '<?php the_title(); ?>'"></a></li>
-                            <li><a class="facebook" href="https://www.facebook.com/sharer.php?u=<?php echo $url ?>" target="_blank" rel="1" title="Share '<?php the_title(); ?>' on Facebook"></a></li>
-                            <li><a class="twitter" href="https://twitter.com/share?text=<?php echo $title . $twuser; ?>&url=<?php echo $url; ?>" rel="2" target="_blank" title="Tweet about '<?php the_title(); ?>"></a></li>
+                            <li><a 
+                                class="email" 
+                                href="mailto:?subject=<?php echo $share['title']; ?>&amp;body=<?php echo $share['url']; ?>" 
+                                rel="0" 
+                                target="_blank"  
+                                title="Email '<?php the_title(); ?>'"
+                            ></a></li>
+
+                            <li><a 
+                                class="facebook" 
+                                href="https://www.facebook.com/sharer.php?u=<?php echo $share['url'] ?>" 
+                                rel="1" 
+                                target="_blank" 
+                                title="Share '<?php the_title(); ?>' on Facebook"
+                                ></a></li>
+
+                            <li><a
+                                class="twitter"
+                                href="https://twitter.com/share?via=<?php echo $share['tuser']; ?>&text=<?php echo $share['title']; ?>&url=<?php echo $share['url']; ?>"
+                                rel="2"
+                                target="_blank"
+                                title="Tweet about '<?php the_title(); ?>"
+                            ></a></li>
                         </ul>
                     </div><!-- /.post-meta -->  
                 </div>

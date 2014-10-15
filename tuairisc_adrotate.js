@@ -60,8 +60,10 @@ function isResponsiveAdvert(url) {
 function isSmallScreen(url) {
     /* Responsive check based on whether a known mobile browser is given in the
      * user agent string. Testing. Expect it to break. */
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-    // if ($(window).height() > $(window).width())
+
+    var mobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+
+    if (mobileUA.test(navigator.userAgent) && !navigator.userAgent.match(/iPad/i))
         return true;
 
     return false;
