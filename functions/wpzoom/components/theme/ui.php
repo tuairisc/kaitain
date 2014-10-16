@@ -348,8 +348,6 @@ class ui {
             array( 'name' => "Droid Serif", 'variant' => ':r,b,i,bi'),
             array( 'name' => "Lora", 'variant' => ''),
             array( 'name' => "Avro", 'variant' => ':400,700,400italic,700italic'),
-            array( 'name' => "Bitter", 'variant' => ':400,700,400italic'),
-            array( 'name' => "Merriweather", 'variant' => ''),
             array( 'name' => "Kreon", 'variant' => ':r,b'),
             array( 'name' => "Vollkorn", 'variant' => ':400italic,700italic,400,700'),
             array( 'name' => "PT Serif", 'variant' => ':r,b,i,bi'),

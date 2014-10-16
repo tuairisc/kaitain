@@ -8,12 +8,12 @@ var sizeArray = [
 ];
 
 $('.post-meta .mshare a').click(function(e) {
-    var hrefClass = $(this).attr('class');
+    var rel = $(this).attr('rel');
 
-    if (hrefClass == 'facebook' | hrefClass == 'twitter') {
+    if (rel == 1 || rel == 2) {
         var href = $(this).attr('href');
         var name = 'target="_blank';
-        var size = sizeArray[$(this).attr('rel')];
+        var size = sizeArray[rel];
 
         window.open(href, name, size);
         e.preventDefault();

@@ -1,24 +1,21 @@
 <?php get_header(); ?>
 <?php $template = get_post_meta($post->ID, 'wpzoom_post_template', true); ?>
 
-<div id="main"<?php if ($template == 'full') {echo " class=\"full-width\"";} ?>>
-    
+<div id="main"<?php if ($template == 'full') : echo ' class="full-width"'; endif; ?>>
     <div id="content">
-
 
         <?php while (have_posts()) : the_post(); ?>
             <?php // Requested by Sean. Incrementing post counter. ?>
             <?php increment_view_counter(); ?>
 
-            <div class="post-wrapper">
-     
+            <div class="breadcrumb-banner"></div>
+
+            <article class="post-wrapper">
                  <div class="post-heading">
                     <div class="title">
                         <h1><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
                     </div>
-
                     <?php the_excerpt(); ?>
-
                     <div class="post-meta">
                         <?php if (has_local_avatar()) : ?>
                             <div class="avatar" style="background-image: url('<?php echo get_avatar_url(135); ?>');"></div>
@@ -30,43 +27,32 @@
                             <?php } ?>
                             <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
                         </div><!-- /.post-meta-text -->
-
                         <?php // Social sharing links. ?>
-                        <?php include_once 'mshare.php'; ?>
-
+                        <?php include 'mshare.php'; ?>
                     </div><!-- /.post-meta -->  
-                </div>
-                
+                </div> 
                 <div class="clear"></div>
-                    
                 <div id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
-                     
                     <div class="entry">
                         <?php the_content(); ?>
+                        <?php include 'mshare.php'; ?>
                         <div class="clear"></div>
-                        
                         <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'wpzoom' ) . '</span>', 'after' => '</div>' ) ); ?>
-                        <div class="clear"></div>
-                         
-                        <?php if ( option::get('post_tags') == 'on' ) { the_tags( '<div class="tag-list"><strong>' . __('Tags:', 'wpzoom') . '</strong> ', ', ', '</div>' ); } ?>
-                
+                        <div class="clear"></div>                     
+                        <?php if ( option::get('post_tags') == 'on' ) : ?>
+                            <?php the_tags( '<div class="tag-list"><strong>' . __('Tags:', 'wpzoom') . '</strong> ', ', ', '</div>' ); ?>
+                        <?php endif; ?>
                      </div><!-- / .entry -->
                     <div class="clear"></div>
-                 
                 </div><!-- #post-<?php the_ID(); ?> -->
-
-            </div>
- 
-
+            </article>
              <?php if (option::get('post_related') == 'on') {
                 get_template_part('related-posts');
              } ?>
-
-
          
-            <?php if (option::get('post_comments') == 'on') { 
-                comments_template();
-                } ?>
+            <?php if (option::get('post_comments') == 'on') : ?>
+                <?php comments_template(); ?>
+            <?php endif; ?>
             
         <?php endwhile; ?>
 

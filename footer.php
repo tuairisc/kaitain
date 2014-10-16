@@ -10,22 +10,21 @@
     <?php // Adrotate group 3 ?>
     <?php echo adrotate_group(3); ?>
 
-    <div id="footer"> 
+    <footer> 
         <div class="interior">
             <?php if (is_active_sidebar('footer_1') || is_active_sidebar('footer_2') || is_active_sidebar('footer_3') || is_active_sidebar('footer_4')) : ?>
                 <div class="widget-area">
-            <?php endif; ?> 
                     <div class="column"><?php dynamic_sidebar('Footer (column 1)'); ?></div>
                     <div class="column"><?php dynamic_sidebar('Footer (column 2)'); ?></div>
                     <div class="column"><?php dynamic_sidebar('Footer (column 3)'); ?></div>
                     <div class="column"><?php dynamic_sidebar('Footer (column 4)'); ?></div>
-                </div><!-- /.widget-area-->        
-
+                </div>        
+            <?php endif; ?>
             <div class="copyright">
                 <p><?php _e('', 'wpzoom'); ?> &copy; <?php echo date("Y",time()); ?> <?php _e('Tuairisc Bheo Teoranta', 'wpzoom'); ?>.</p>
-            </div><!-- /.copyright -->
-        </div><!-- /.interior -->
-    </div><!-- /#footer --> 
+            </div>
+        </div>
+    </footer>
 </div><!-- /.inner-wrap -->
 
 <?php if ($paged < 2 && is_home()) : ?>

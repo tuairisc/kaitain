@@ -254,7 +254,7 @@
     array("name"  => "Header Background Color",
            "id"   => "header_background",
            "type" => "color",
-           "selector" => "#header",
+           "selector" => "header",
            "attr" => "background-color"),
 
     array("name"  => "Menu Background Color",
@@ -288,7 +288,7 @@
     array("name"  => "Footer Background",
            "id"   => "footer_background",
            "type" => "color",
-           "selector" => "#footer",
+           "selector" => "footer",
            "attr" => "background-color"),
 
   

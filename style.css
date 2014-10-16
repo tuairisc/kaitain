@@ -110,7 +110,7 @@ img::-moz-selection { background: transparent; }
 img::selection      { background: transparent; }
 
 /* Navigation */
-div.navigation { text-align:center; margin: 0 0 10px; font-size: 12px; border-top: 1px solid #333; border-bottom: 1px solid #F1F1F1; display:block; margin:0 0 15px;  padding: 10px 0; font-family: 'Bitter', Georgia, serif; text-transform: uppercase; }
+div.navigation { text-align:center; margin: 0 0 10px; font-size: 12px; border-top: 1px solid #333; border-bottom: 1px solid #F1F1F1; display:block; margin:0 0 15px;  padding: 10px 0; font-family: 'Georgia', Georgia, serif; text-transform: uppercase; }
 div.navigation a { font-weight: normal; padding:0 10px;   }
 div.navigation span.current { padding: 0 10px; color:#333; font-weight:bold;  }
 div.navigation span.pages { margin-right: 10px; display: none; }
@@ -209,7 +209,7 @@ p { margin: 0 0 15px; padding: 0; }
 
 *********************************************************************************************/
 
-#header {
+header {
     background: #FF3818;
     color: #fff;
     padding: 15px 40px 0;
@@ -245,7 +245,7 @@ p { margin: 0 0 15px; padding: 0; }
 }
 
 /* Search Form */
-#header #searchform {
+header #searchform {
     float: right;
     margin:14px 0 15px;
     padding: 2px 0;
@@ -260,7 +260,7 @@ p { margin: 0 0 15px; padding: 0; }
     box-shadow: inset 0 1px 2px rgba(0,0,0,.15);
 }
 
-#header #s {
+header #s {
     outline: none;
     background: #fff;
     font-size: 14px;
@@ -280,7 +280,7 @@ p { margin: 0 0 15px; padding: 0; }
     padding: 0;
 }
 
-#header  #searchsubmit {
+header  #searchsubmit {
     float:left;
     margin-left: 8px;
     width:23px;
@@ -555,7 +555,7 @@ html[xmlns] .slides {display: block;}
 
 
 h3.title { 
-    font-family: 'Bitter', Georgia, serif; 
+    font-family: 'Georgia', Georgia, serif; 
     font-size: 12px;
     font-weight: bold;  
     text-transform: uppercase; 
@@ -597,7 +597,7 @@ h3.title {
 
 /* Tab essentials */
 .wztw-container  { float:left; margin-bottom:0px; overflow:hidden; width:100%;}
-.wztw-container .tabs { font-family: 'Bitter', Georgia, serif; font-size: 12px;font-weight: bold;  text-transform: uppercase; border-top: 1px solid #333; border-bottom: 1px solid #F1F1F1; display:block; list-style: none; margin:0;   width:100%;  }
+.wztw-container .tabs { font-family: 'Georgia', Georgia, serif; font-size: 12px;font-weight: bold;  text-transform: uppercase; border-top: 1px solid #333; border-bottom: 1px solid #F1F1F1; display:block; list-style: none; margin:0;   width:100%;  }
 .wztw-container .tabs h2 {
     float: left;
     padding: 10px 0;
@@ -971,7 +971,7 @@ img.wp-smiley { border: none; padding: 0; }
 /* Tabbed Widget */
 .tabberlive .tabbertabhide { display: none; }
 .tabberlive h3 { display: none; }
-ul.tabbernav {  font-family: 'Bitter', Georgia, serif; font-size: 12px;font-weight: bold;  text-transform: uppercase; border-bottom: 1px solid #000; display:block; list-style: none; margin:0; padding:10px 0;  }
+ul.tabbernav {  font-family: 'Georgia', Georgia, serif; font-size: 12px;font-weight: bold;  text-transform: uppercase; border-bottom: 1px solid #000; display:block; list-style: none; margin:0; padding:10px 0;  }
 ul.tabbernav li { background: #000; border-right: 1px solid #333; display: inline; font-size: 12px; margin: 0 0 -1px 0; overflow:hidden; padding:12px 10px; position:relative; }
 ul.tabbernav li a { text-decoration: none; color: #fff;  }
 ul.tabbernav li a:hover { color: #ff3818;  }
@@ -1081,7 +1081,7 @@ h3#reply-title { font-size: 20px;  margin: 18px 0; color:#373737;}
 
 *********************************************************************************************/
  
-#footer {
+footer {
     color: #999;
     margin-bottom: 40px;
     padding-top: 20px;
@@ -1091,26 +1091,26 @@ h3#reply-title { font-size: 20px;  margin: 18px 0; color:#373737;}
     height: 222px;
 }
 
-#footer a {
+footer a {
     color:#000000;
 }
 
-#footer a:hover {
+footer a:hover {
     color: #ff3818;
 }
 
-#footer div.column {
+footer div.column {
 /*    display: inline-block;
     vertical-align: top;
     margin-right: 25px;
     width: 250px;
 */}
 
-#footer div.last {
+footer div.last {
     margin-right: 0;
 }
 
-#footer .widget-area {
+footer .widget-area {
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0px;
@@ -1121,13 +1121,13 @@ h3#reply-title { font-size: 20px;  margin: 18px 0; color:#373737;}
     padding-left: 0;
 }
 
-#footer .column .widget {
+footer .column .widget {
     line-height:1.7;
     overflow:hidden;
     margin-bottom:0px;
 }
 
-#footer .widget .title {
+footer .widget .title {
     color:#ff3818;
     border:none;
     padding: 0;

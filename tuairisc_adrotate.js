@@ -8,9 +8,9 @@ var advert = '.tuairisc-advert';
 
 // Fallback media if an advert is missing an appropriate image.
 var fallback = {
-    image : 'TODO',
+    image : 'http://tuairisc.ie/wp-content/uploads/tuairisc_fallback_desktop_.gif',
     href  : 'http://tuairisc.ie/glac-forgai-linn',
-    title : 'TODO',
+    title : 'Tuairisc',
 }
 
 // Suffix denotes respective desktop and mobile versions.

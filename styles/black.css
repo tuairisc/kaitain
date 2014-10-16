@@ -11,7 +11,7 @@ a:hover { color:#FF3E06; text-decoration:none;}
 }
 
 
-#header {
+header {
      background: #000;
 }
 
@@ -26,7 +26,7 @@ a:hover { color:#FF3E06; text-decoration:none;}
      background: #222;
 }
 
-#header #searchform {
+header #searchform {
      border: 1px solid #D8D8D8;
     box-shadow: none;
 }
@@ -98,8 +98,8 @@ ul.tabbernav li.tabberactive { border-right: 1px solid #FF3E06; background: #FF3
 ul.tabbernav li.tabberactive a:hover{ color:#fff;}
  
 
-#footer a:hover { color: #FF3E06; }
-#footer .widget .title { color:#fff;}
+footer a:hover { color: #FF3E06; }
+footer .widget .title { color:#fff;}
  
 .category-widget.dark-skin h2.title {   color:#FF3E06; }
 .category-widget.dark-skin h2.title a { color:#FF3E06; } 

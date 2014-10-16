@@ -22,12 +22,12 @@
 
 .entry .wp-caption-text,
 .post-heading p,
-.category-banner a,
+.breadcrumb-banner a,
 .entry blockquote {    
     font-family: Georgia, Times, "Times New Roman", serif;
 }
 
-.category-banner span {    
+.breadcrumb-banner span {    
     font: 14px arial, "helvetica neue", helvetica, sans-serif;
 }
 
@@ -80,6 +80,11 @@ h3 {
     font-size: 16px;
 }
 
+#slider_nav .item:hover a, #slider_nav .item.current a {
+    color: #000;
+    font-weight: normal;
+}
+
 .related_posts .title {
     /* Overrides above h3 rule */
     color: #000;
@@ -111,35 +116,35 @@ h3 {
 
 /* Header Block
  * ------------ 
- * The #header block and its many children. */
+ * The header block and its many children. */
 
-#header {
+header {
     /* Override gradient on header. */ 
     background: #fff center top/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
 }
 
-#header #logo img {
+header #logo img {
     /* Site logo. */ 
     height: 45px;
     width: auto;
 }
 
-#header .search_form {
+header .search_form {
     /* This had godawful stock CSS. They floated the child inside the parent, 
      * instead of floating the parent. */
     float: right;
     padding-top: 10px;
 }
 
-#header #searchform {
+header #searchform {
     float: none;
 }
 
 /* Footer Block
  * ------------
- * The #footer block and its many children. */
+ * The footer block and its many children. */
 
-#footer {
+footer {
     background: #fff left bottom/auto 65px no-repeat url('images/rainbow_footer.svg');
     height: auto;
     padding: 0 4% 65px 4%;
@@ -147,18 +152,18 @@ h3 {
     margin-bottom: 0;
 }
 
-#footer .interior {
+footer .interior {
     border-top: 1px solid #f1f1f1;
     padding-top: 20px;
 }
 
-.copyright, #footer li, #footer p {
+.copyright, footer li, footer p {
     color: #000;
     font: 11px Arial, "Helvetica Neue", Helvetica, sans-serif;
     line-height: 20px;
 }
 
-#footer a {
+footer a {
     color: inherit;
 }
 
@@ -496,54 +501,58 @@ h3 {
  * 
  * See: gazeti/functions/user/functions.php */
 
-.category-banner {
+.breadcrumb-banner {
     margin-bottom: 20px;
     overflow: auto;
     padding: 5px 0;  
     width: 100%;    
 }
 
-.category-banner:after {
+.breadcrumb-banner:after {
     clear: both;
     display: table;
 }
 
-.category-banner a {
+.breadcrumb-banner a {
     color: #fff;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
 
-.category-banner a:last-child {
+.breadcrumb-banner a:last-child {
     font-size: 10px;
 }
 
-.category-banner a:first-child {
+.breadcrumb-banner a:first-child {
     margin-left: 15px;
     font-size: 18px;
 }
 
-.category-banner a:nth-child(2):before {
+.breadcrumb-banner a:nth-child(2):before {
     content: '» ';
     font-size: 22px;
 }
 
-.category-banner span {
+.breadcrumb-banner span {
     color: #fff;
     float: right;
     margin: 10px 15px 0 0;
     text-align: right;
 }
 
-.category-banner span::first-line {
+.breadcrumb-banner span::first-line {
     font-weight: bold;
+}
+
+.breadcrumb-post a {
+    color: #000;
 }
 
 /* Wider Banner for Greann Category (158) 
  * ------------------------------------
  * The Greann category (158) must be taller in order to separate content. */
 
-.greann-category-banner {
+.greann {
     background: 10px center/auto 60px no-repeat url('images/asnc_logo.svg');
     min-height: 60px;
     padding: 15px 0;
@@ -877,20 +886,20 @@ ul.mshare:after {
     width: 30px;
 }
 
-#header .mshare li,
-#header .mshare a {
+header .mshare li,
+header .mshare a {
     height: 33px; 
     width: 33px;
 }
 
-#header .mshare {
+header .mshare {
     padding-top: 27px;
     margin-right: 5px;
     float: right;
 }
 
 @media screen and (max-width: 800px) {
-    #header .mshare {
+    header .mshare {
         display: none;
     }
 }

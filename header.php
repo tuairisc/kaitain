@@ -8,7 +8,6 @@
     <title><?php wp_title( '|', true, 'right' ); ?></title>
 
     <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" media="screen" />
-    <link href='http://fonts.googleapis.com/css?family=Bitter:400,700,400italic|Merriweather:400,700|Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />    
     <?php wp_head(); ?>
     <?php if ( (is_home()) && option::get('featured_enable') == 'on' ) { ui::js("flexslider"); } ?>
@@ -19,8 +18,7 @@
     <?php // AdRotate group 1 ?>
     <?php echo adrotate_group(1); ?>
 
-        <header id="header">
-
+        <header>
             <div id="logo">
                 <?php if (!option::get('misc_logo_path')) { echo "<h1>"; } ?>
 
@@ -32,7 +30,6 @@
 
                 <?php if (!option::get('misc_logo_path')) { echo "</h1>"; } ?>
             </div><!-- / #logo -->
-
 
             <?php if (option::get('ad_head_select') == 'on') { ?>
                 <div class="adv">
@@ -89,15 +86,9 @@
                             echo '<p class="dropdown notice">Please set your Main navigation menu on the <strong><a href="'.get_admin_url().'nav-menus.php">Appearance > Menus</a></strong> page.</p>';
                         }
                     ?>
-
                 </div>
-
-
-
-
             <div class="clear"></div>
             </div><!-- /#menu -->
-
     </header>
 
     <div class="content-wrap">

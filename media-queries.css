@@ -28,7 +28,7 @@ custom.css and it will override the style in this file.
         padding: 3% 4% 0;
     }
 
-    #header {
+    header {
         padding: 15px 4% 0;
     }
 
@@ -150,8 +150,8 @@ custom.css and it will override the style in this file.
     .widget img,
     .side_ad img { max-width: 100%; height: auto; }
     
-    #footer { padding: 4%; }
-    #footer div.column { 
+    footer { padding: 4%; }
+    footer div.column { 
         width: 22%;
         margin-right: 3%; 
     }
@@ -173,7 +173,7 @@ custom.css and it will override the style in this file.
     #slider.full .flex-direction-nav { display: block; }
     #slider #slides .slide_content_video-enabled { display: none; }
  
-    #header { position: relative; }
+    header { position: relative; }
 
     .btn_menu { display: block; float: left; cursor: pointer; background:#C20A0A url('images/menu.png') 8px 9px no-repeat; padding:5px 5px 0; width:30px; height:30px; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; margin:4px; }
     .mobile-menu  { display: none; clear:both; }
@@ -224,7 +224,7 @@ custom.css and it will override the style in this file.
  
     #sidebar { width: 100%; float: left; } 
 
-    #footer div.column { 
+    footer div.column { 
 /*        width: 45%;
         margin-right: 3%; 
 */    }
@@ -235,7 +235,7 @@ custom.css and it will override the style in this file.
 @media screen and (max-width: 640px) {
 
     #logo { float:left; display: block; width: 100%; }
-    #header #searchform { display: none; }
+    header #searchform { display: none; }
 
     #slider,
     #slider.full { height: 270px; }
@@ -264,7 +264,7 @@ custom.css and it will override the style in this file.
         padding: 10px 0;    
     }
 
-    #footer div.column { 
+    footer div.column { 
         width: 100%;
         margin-right: 0; 
     }

@@ -3,16 +3,21 @@
 /* You can add custom functions below, in the empty area
 =========================================================== */
 
-function get_parent_id($cat_id) {
+function get_parent_id($cat_id = null) {
     /* Return the ID of the top parent of any category.
      *
      * get_parent_id returns the id of the parent category. */
+
+    if ($cat_id == '') {
+        $cat_id = get_query_var('cat');
+    }
+
     $parent = get_category_parents($cat_id, false, '/'); 
     $parent = preg_replace('/\/.*/', '', $parent); 
     return get_cat_id($parent); 
 }
 
-function get_cat_color($cat_id) {
+function has_unique_breadcrumb_style($cat_id = null) {
     /* Return a unique colour for each given parent category.
      * 
      * # Category Name   Hex Colour  Category ID
@@ -26,8 +31,51 @@ function get_cat_color($cat_id) {
      * 7 Greann          #e6192a     158
      * 8 Foghlaimeoirí   #d4bb85     187 
      *
-     * get_cat_color returns the hex color as a string.
-    */
+     * get_cat_color returns the hex color as a string. */
+
+    $has_style = false;
+
+    if (is_single()) {
+        return $has_style;
+    }
+
+    if ($cat_id == '') {
+        $cat_id = get_parent_id(get_query_var('cat'));
+    }
+
+    switch ($cat_id) {
+        case 158: 
+            $has_style = true; break;
+        default: 
+            break;
+    }
+
+    return $has_style;
+}
+
+function get_breadcrumb_style($cat_id = null) {
+    /* Return a unique colour for each given parent category.
+     * 
+     * # Category Name   Hex Colour  Category ID
+     * -----------------------------------------
+     * 1 Nuacht          #516671     191  
+     * 2 Tuairmíocht     #8eb2d3     154   
+     * 3 Spoirt          #c54b54     155
+     * 4 Cultúr          #96c381     156
+     * 5 Saol            #e04184     157
+     * 6 Pobal           #7d5e90     159
+     * 7 Greann          #e6192a     158
+     * 8 Foghlaimeoirí   #d4bb85     187 
+     *
+     * get_breadcrumb_style returns the hex color as a string. */
+
+    if (is_single()) {
+        return;
+    }
+
+    if ($cat_id == '') {
+        $cat_id = get_query_var('cat');
+    }
 
     $cat_id = get_parent_id($cat_id);
 
@@ -67,7 +115,28 @@ function get_cat_color($cat_id) {
             $color = $cat_colors[999]; break;
     }
 
-    return $color;
+    echo 'background-color: ' . $color . ';';
+}
+
+function get_breadcrumb_class($cat_id = null) {
+    $class = '';
+
+    if (is_single()) {
+        $class = 'breadcrumb-post';
+    } else {
+        if ($cat_id == '') {
+            $cat_id = get_parent_id(get_query_var('cat'));
+        }
+
+        switch ($cat_id) {
+            case 158:
+                $class = 'greann'; break;
+            default:
+                break;
+        }
+    }
+
+    return $class;
 }
 
 function hero_post_class() {
@@ -75,17 +144,34 @@ function hero_post_class() {
      * style is very different than other posts in the cateory loop. 
      *
      * hero_post_class returns the correct class as string. */
+
     return (has_post_thumbnail()) ? 'hero-post' : '';
 }
 
-function greann_banner() {
-    /* The Greann category is a parody/comedy strip. The banner for this 
-     * category is of a different style than other categories. 
-     * 
-     * greann_banner returns the class as a string. */
-    $greann_category = 158;
-    $greann_banner = 'greann-category-banner';
-    return (get_query_var('cat') == $greann_category) ? $greann_banner : '';
+function show_hero($current_post) {
+    /* The first page in the category loop has a unique and different style. 
+    The image is hero-sized and flipped in position with the text. This is to 
+    be shown on all categories except the job listings. 
+
+    show_hero returns true or false. */
+
+    $show = false;
+
+    $job_a = 182;
+    $job_b = 216;
+
+    if ($current_post == 0 && !is_paged()) {
+        $show = true;
+    }
+
+    $cat_id = get_query_var('cat');
+
+    if ($cat_id == $job_a || $cat_id == $job_b) {
+        // Temporary dirty hack requested by Ciaran.
+        $show = false;
+    }
+
+    return $show;
 }
 
 function get_thumbnail_url() {
