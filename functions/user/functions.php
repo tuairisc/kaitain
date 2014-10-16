@@ -337,6 +337,7 @@ function tweak_title($title, $sep) {
 }
 
 function get_view_count($post_id = null) {
+    /* Return the view count for the specified post. */
     if ($post_id == '') {
         return;
     }
@@ -353,11 +354,14 @@ function get_view_count($post_id = null) {
 }
 
 function increment_view_counter($post_id = null) {
+    /* This a crude incrementing view counter. I'll parse the values 
+     * every day or so for a few days to see if results are even moderately 
+     * accurate.*/
     if ($post_id == '') {
         $post_id = get_the_ID();
     }
 
-    if (is_single()) {
+    if (is_single() && !is_user_logged_in()) {
         $key = 'tuairisc_view_counter';
         $count = (int) get_post_meta($post_id, $key, true);
         $count++;
