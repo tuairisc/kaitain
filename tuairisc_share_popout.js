@@ -7,8 +7,8 @@ var sizeArray = [
     'width=450,height=257',
 ];
 
-$('.post-meta .mshare a').click(function(e) {
-    var rel = $(this).attr('rel');
+$('.post-wrapper .mshare a').click(function(e) {
+    var rel = parseInt($(this).attr('rel'));
 
     if (rel == 1 || rel == 2) {
         var href = $(this).attr('href');
