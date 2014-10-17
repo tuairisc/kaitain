@@ -42,41 +42,50 @@ class Wpzoom_Feature_Posts extends WP_Widget {
         
         $query_opts = apply_filters('wpzoom_query', array(
             'posts_per_page' => $show_count,
-            'post_type' => 'post'
+            'post_type' => 'post',
+            // Exclude categories 182 and 216.
+            'cat' => '-216,-182',
         ));
-        if ( $category ) $query_opts['cat'] = $category;
-        
-        query_posts($query_opts);            
-        if ( have_posts() ) : while ( have_posts() ) : the_post();
-            echo '<li>';
-                
-                if ( $show_thumb ) { 
 
-                    get_the_image( array( 'size' => 'recent-widget',  'width' => $instance['thumb_width'], 'height' => $instance['thumb_height'] )    );
-      
-                 }
+        if ($category) 
+            $query_opts['cat'] = $category;
+        
+        query_posts($query_opts);
+
+        if ( have_posts() ) : 
+            while (have_posts()) : the_post();
+                    echo '<li>';
                         
-                if ( $show_title ) echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a> <br />';
-                
-                if ( $show_date ) echo '<small>' . get_the_date() . '</small> <br />';
-                
-                if ( $show_excerpt ) {
-                    $the_excerpt = get_the_excerpt();
-                    
-                    // cut to character limit
-                    $the_excerpt = substr( $the_excerpt, 0, $excerpt_length );
-                    
-                    // cut to last space
-                    $the_excerpt = substr( $the_excerpt, 0, strrpos( $the_excerpt, ' '));
-                    
-                    echo '<span class="post-excerpt">' . $the_excerpt . '</span>';
-                }
-            echo '<div class="clear"></div></li>';
-            endwhile; else:
-            endif;
+                        if ($show_thumb) { 
+                            get_the_image( array( 'size' => 'recent-widget',  'width' => $instance['thumb_width'], 'height' => $instance['thumb_height'] )    );
+                         }
+                                
+                        if ($show_title) 
+                            echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a> <br />';
+                        
+                        if ($show_date)
+                             echo '<small>' . get_the_date() . '</small> <br />';
+                        
+                        if ( $show_excerpt ) {
+                            $the_excerpt = get_the_excerpt();
+                            
+                            // cut to character limit
+                            $the_excerpt = substr( $the_excerpt, 0, $excerpt_length );
+                            
+                            // cut to last space
+                            $the_excerpt = substr( $the_excerpt, 0, strrpos( $the_excerpt, ' '));
+                            
+                            echo '<span class="post-excerpt">' . $the_excerpt . '</span>';
+                        }
+
+                    echo '<div class="clear"></div></li>';
+            endwhile; 
+        else:
+
+        endif;
             
-            //Reset query_posts
-            wp_reset_query();            
+        //Reset query_posts
+        wp_reset_query();            
         echo '</ul><div class="clear"></div>';
 
         /* After widget (defined by themes). */

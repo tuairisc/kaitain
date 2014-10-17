@@ -191,14 +191,14 @@ function wpzoom_comment( $comment, $args, $depth ) {
             <?php printf( __( '%s <span class="says">says:</span>', 'wpzoom' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
             
             <div class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
-                <?php printf( __('%s at %s', 'wpzoom'), get_comment_date(), get_comment_time()); ?></a><?php edit_comment_link( __( '(Edit)', 'wpzoom' ), ' ' );
+                <?php printf( __('%s ag %s', 'wpzoom'), get_comment_date(), get_comment_time()); ?></a><?php edit_comment_link( __( '(Edit)', 'wpzoom' ), ' ' );
                 ?>
                 
             </div><!-- .comment-meta .commentmetadata -->
         
         </div><!-- .comment-author .vcard -->
         <?php if ( $comment->comment_approved == '0' ) : ?>
-            <em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'wpzoom' ); ?></em>
+            <em class="comment-awaiting-moderation"><?php _e( 'Tá do thrácht á mheas.', 'wpzoom' ); ?></em>
             <br />
         <?php endif; ?>
 
@@ -207,7 +207,14 @@ function wpzoom_comment( $comment, $args, $depth ) {
         <div class="comment-body"><?php comment_text(); ?></div>
 
         <div class="reply">
-            <?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+            <?php comment_reply_link(array_merge(
+                $args, 
+                array( 
+                    'depth' => $depth,
+                    'max_depth' => $args['max_depth'],
+                    'reply_text' => 'Freagair',
+                )
+             )); ?>
         </div><!-- .reply -->
     </div><!-- #comment-##  -->
 

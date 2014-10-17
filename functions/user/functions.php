@@ -8,9 +8,8 @@ function get_parent_id($cat_id = null) {
      *
      * get_parent_id returns the id of the parent category. */
 
-    if ($cat_id == '') {
+    if ($cat_id == '')
         $cat_id = get_query_var('cat');
-    }
 
     $parent = get_category_parents($cat_id, false, '/'); 
     $parent = preg_replace('/\/.*/', '', $parent); 
@@ -35,13 +34,11 @@ function has_unique_breadcrumb_style($cat_id = null) {
 
     $has_style = false;
 
-    if (is_single()) {
+    if (is_single())
         return $has_style;
-    }
 
-    if ($cat_id == '') {
+    if ($cat_id == '')
         $cat_id = get_parent_id(get_query_var('cat'));
-    }
 
     switch ($cat_id) {
         case 158: 
@@ -69,13 +66,11 @@ function get_breadcrumb_style($cat_id = null) {
      *
      * get_breadcrumb_style returns the hex color as a string. */
 
-    if (is_single()) {
+    if (is_single())
         return;
-    }
 
-    if ($cat_id == '') {
+    if ($cat_id == '')
         $cat_id = get_query_var('cat');
-    }
 
     $cat_id = get_parent_id($cat_id);
 
@@ -124,9 +119,8 @@ function get_breadcrumb_class($cat_id = null) {
     if (is_single()) {
         $class = 'breadcrumb-post';
     } else {
-        if ($cat_id == '') {
+        if ($cat_id == '')
             $cat_id = get_parent_id(get_query_var('cat'));
-        }
 
         switch ($cat_id) {
             case 158:
@@ -157,19 +151,11 @@ function show_hero($current_post) {
 
     $show = false;
 
-    $job_a = 182;
-    $job_b = 216;
-
-    if ($current_post == 0 && !is_paged()) {
+    if ($current_post == 0 && !is_paged())
         $show = true;
-    }
 
-    $cat_id = get_query_var('cat');
-
-    if ($cat_id == $job_a || $cat_id == $job_b) {
-        // Temporary dirty hack requested by Ciaran.
+    if (is_excluded_category())
         $show = false;
-    }
 
     return $show;
 }
@@ -177,6 +163,7 @@ function show_hero($current_post) {
 function get_thumbnail_url() {
     /* Code snippet from http://goo.gl/NhcEU6
      * get_thumbnail_url returns the anchor url for the requested thumbnail. */
+
     $post_id = get_the_ID();
     $thumb_id = get_post_thumbnail_id($post_id);
     $thumb_url = wp_get_attachment_image_src($thumb_id,'large', true);
@@ -185,21 +172,26 @@ function get_thumbnail_url() {
 
 function remove_read_more($excerpt) {
     /* Remove the read more link from page and post excerpts.
-     * 
+     *
      * remove_read_more returns the excerpt. */
+
     return preg_replace('/(<a class="more.*<\/a>)/', '', $excerpt);
 }
 
 function replace_breaks($excerpt) {
-    /* Replace <br /> tags in excerpts with <paragraphs. 
-     *
-     * except_replace_breaks returns the exerpt. */ 
+    /* Replace <br /> tags in excerpts with <p>. 
+     * Excerpt are used site-wide as a 'blurb' for posts.
+     * 
+     * replace_breaks returns the exerpt. */ 
+
     return str_replace('<br />', '</p><p>', $excerpt);
 }
 
 function get_avatar_url($size) {
     /* Return the hyperlink for the given avatar size without the <img /> code.
+     * 
      * get_avatar_url returns the URL string. */
+
     $user_id = get_the_author_meta('ID');
     $avatar_url = get_avatar($user_id, $size);
     return preg_replace('/(^.*src="|" w.*$)/', '', $avatar_url);
@@ -218,6 +210,7 @@ function has_local_avatar() {
      * site. 
      * 
      * has_local_avatar returns true if the avatar is hosted on the site. */
+
     $user_id = get_the_author_meta('ID');
     $home_url = site_url();
     $avatar_url = get_avatar_url($user_id, 200);
@@ -226,7 +219,9 @@ function has_local_avatar() {
 
 function day_to_irish($day) {
     /* See date to Irish below.
+     * 
      * day_to_irish returns the Irish translation of the day. */
+
     $irish_days = array(
         'Dé Luain', 'Dé Máirt', 'Dé Céadaoin', 'Déardaoin', 
         'Dé hAoine', 'Dé Sathairn', 'Dé Domhnaigh'
@@ -257,6 +252,7 @@ function month_to_irish($month) {
     /* See date to Irish below.
      * 
      * month_to_irish returns the Irish translation of the month. */
+
     $irish_months = array(
         'Eanáir', 'Feabhra', 'Márta', 'Aibreán', 
         'Bealtaine', 'Meitheamh', 'Iúil', 'Lúnasa', 
@@ -300,6 +296,7 @@ function date_to_irish($the_date) {
      * the server.
      * 
      * date_to_irish returns the translated date. */
+
     $day_regex = '/(,.*)/';
     $month_regex = '/(^.*, | [0-9].*$)/'; 
 
@@ -318,6 +315,7 @@ function education_category_id($id) {
      * know the actual category.
      * 
      * education_category_id returns proper id or a fallback id. */
+
     switch ($id) {
         case 1: 
             $id = 202; break;
@@ -341,6 +339,7 @@ function education_landing_shortcode($atts) {
      * These are big boxy clickable boxes complete with title and description. 
      * 
      * education_landing_shortcode returns the div as a string. */
+
     $a = shortcode_atts(array(
         'id' => 0,
     ), $atts);
@@ -364,6 +363,7 @@ function parse_columnist_role($author_id) {
      * of our local users. 
      *
      * parse_columnist_role returns true if the string parses to 'yes' */
+
     $meta_tag = get_the_author_meta('columnist', $author_id);
     $is_columnist = false;
 
@@ -371,9 +371,8 @@ function parse_columnist_role($author_id) {
         $meta_tag = strtolower($meta_tag);
         $meta_tag = strip_tags($meta_tag);
 
-        if ($meta_tag === 'yes') {
+        if ($meta_tag === 'yes')
             $is_columnist = true;
-        }
     } 
 
     return $is_columnist;
@@ -385,6 +384,7 @@ function author_is_columnist() {
      * 
      * parse_columnist_role parses the variable string.
      * author_is_columnist returns true or false. */
+
     $id = get_the_author_meta('ID');
     return parse_columnist_role($id);
 }
@@ -394,14 +394,14 @@ function is_columnist_article() {
      * indicate whether a post is part of an ongoing column. 
      *
      * is_columnist_article parses the value and returns true or false. */
+
     $col_article = get_post_meta(get_the_ID(), 'is_column', true);
     $is_column = false;
     $col_article = strtolower($col_article);
     $col_article = strip_tags($col_article);
 
-    if ($col_article === '1') {
+    if ($col_article === '1') 
         $is_column = true;
-    }
 
     return $is_column;
 }
@@ -412,6 +412,7 @@ function tweak_title($title, $sep) {
      *  site_title | section_title
      *
      * tweak_title returns the title. */
+
     $title = str_replace($sep, '', $title); 
 
     if (!is_home()) {
@@ -423,10 +424,15 @@ function tweak_title($title, $sep) {
 }
 
 function get_view_count($post_id = null) {
-    /* Return the view count for the specified post. */
-    if ($post_id == '') {
+    /* Return the view count for the specified post.
+     * Used for a report on posts. 
+     * This should be used for quick estimates only.
+     * You should /not/ consider this canonical. 
+     * 
+     * get_view_count returns the integer count. */
+
+    if ($post_id == '')
         return;
-    }
 
     $key = 'tuairisc_view_counter';
     $count = (int) get_post_meta($post_id, $key, true);
@@ -439,13 +445,45 @@ function get_view_count($post_id = null) {
     return $count;
 }
 
+function is_excluded_category() {
+    /* Global exclusion and different treatment of the job categories were 
+     * requested by Ciaran and Sean. The currently excluded categories are: 
+     * 
+     * # Category Name               Category ID
+     * -----------------------------------------
+     * 1 Imeachtaí                   182  
+     * 2 Fógraí Poiblí/Folúntais     216   
+     * 
+     * I can exclude categories from post display with WP_Query, but these
+     * exclusions are more nuanced, in that we want to both change how the 
+     * categories are styled in the loop or exclude it entirely.
+     *
+     * is_excluded_category returns true or false. */
+
+    $is_excluded = false; 
+    $excluded_categories = array(216, 182);
+
+    foreach(get_the_category() as $c) {
+        $cat_id = get_cat_id($c->cat_name);
+
+        if (in_array($cat_id, $excluded_categories)) {
+            $is_excluded = true;
+            break;
+        }
+    }
+
+    return $is_excluded;
+}
+
 function increment_view_counter($post_id = null) {
     /* This a crude incrementing view counter. I'll parse the values 
      * every day or so for a few days to see if results are even moderately 
-     * accurate.*/
-    if ($post_id == '') {
+     * accurate.
+     * 
+     * increment_view_counter does not return anything. */
+
+    if ($post_id == '')
         $post_id = get_the_ID();
-    }
 
     if (is_single() && !is_user_logged_in()) {
         $key = 'tuairisc_view_counter';
@@ -454,6 +492,23 @@ function increment_view_counter($post_id = null) {
         update_post_meta($post_id, $key, $count);
     }
 }
+
+function create_post_type() {
+    // Debug/test
+    register_post_type( 'tuairisc_job_listing',
+        array(
+            'labels' => array(
+            'name' => __( 'Job Listing' ),
+            'singular_name' => __( 'Job Listing' ),
+        ),
+            'public' => true,
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'foluntais'),
+        )
+    );
+}
+
+add_action( 'init', 'create_post_type' );
 
 // Rearrange title.
 add_filter('wp_title', 'tweak_title', 10, 2);
@@ -466,6 +521,7 @@ add_shortcode('landing', 'education_landing_shortcode');
 add_action('init', add_post_type_support('page', 'excerpt'));
 // Filter date to return as Gaeilge.
 add_filter('get_the_date', 'date_to_irish');
+add_filter('get_comment_date', 'date_to_irish');
 
 /*  Don't add any code below here or the sky will fall down
 =========================================================== */

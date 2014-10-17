@@ -16,7 +16,7 @@
 
 <?php if ( have_comments() ) : ?>
 
-    <h3><?php comments_number(__('Gan Tráchtanna','wpzoom'), __('Trácht Amháin','wpzoom'), __('% Nótaí Tráchta','wpzoom') );?></h3>
+    <h3><?php comments_number(__('Gan Tráchtanna','wpzoom'), __('Trácht Amháin','wpzoom'), __('% Nóta Tráchta','wpzoom') );?></h3>
  
     <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
         <div class="navigation">
@@ -32,7 +32,7 @@
              * define wpzoom_comment() and that will be used instead.
              * See wpzoom_comment() in functions/theme/functions.php for more.
              */
-            wp_list_comments( array( 'callback' => 'wpzoom_comment' ) );
+            wp_list_comments(array('callback' => 'wpzoom_comment' ) );
         ?>
     </ol>
 

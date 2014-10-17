@@ -8,9 +8,9 @@
             <?php // Requested by Sean. Incrementing post counter. ?>
             <?php increment_view_counter(); ?>
 
-            <div class="breadcrumb-banner"></div>
-
             <article class="post-wrapper">
+                <?php include 'breadcrumb-banner.php'; ?>
+
                  <div class="post-heading">
                     <div class="title">
                         <h1><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
@@ -23,7 +23,7 @@
                         <div class="post-meta-text">
                             <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') { ?>
                                 <?php if (option::get('post_author') == 'on') { ?><span class="meta-author"><?php the_author_posts_link(); ?></span><?php } ?>
-                                <?php if (option::get('post_date') == 'on') { ?><?php echo get_the_date() . ' at ' . get_the_time(); ?><?php } ?>
+                                <?php if (option::get('post_date') == 'on') { ?><?php echo get_the_date() . ' ag ' . get_the_time(); ?><?php } ?>
                             <?php } ?>
                             <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
                         </div><!-- /.post-meta-text -->

@@ -1,6 +1,6 @@
 <div id="recent-posts" class="clearfix">
 
-<?php while (have_posts()) : the_post();?>    
+<?php while (have_posts()) : the_post(); ?>    
     <article id="post-<?php the_ID(); ?>" class="recent-post">
     <?php if (show_hero($wp_query->current_post)) : ?>
 

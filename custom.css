@@ -51,6 +51,16 @@
  * General stylings for generic parts of the site, as directed by
  * Aidan, Ciaran or Sean. */
 
+#respond .form_fields input,
+#comment {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+#respond textarea {
+    width: 98%;
+}
+
 .recent-meta span,
 .widget .feature-posts-list small {
     /* Widgets are capitalized. This causes issues with some Irish 
@@ -242,7 +252,7 @@ footer a {
  * down if this link is ever removed. */
 
  .foras-attribution {
-    background: right top/contain no-repeat url('images/foras_na_gaeilge_logo.svg');
+    background: right top/contain no-repeat url('images/foras_na_gaeilge_logo.png');
     height: 60px;
     width: 100%;
  }
