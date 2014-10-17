@@ -252,7 +252,7 @@ footer a {
  * down if this link is ever removed. */
 
  .foras-attribution {
-    background: right top/contain no-repeat url('images/foras_na_gaeilge_logo.png');
+    background: right top/auto 100% no-repeat url('images/foras_na_gaeilge_logo.png');
     height: 60px;
     width: 100%;
  }
