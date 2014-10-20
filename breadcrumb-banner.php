@@ -9,9 +9,8 @@
 
     <?php else : ?>
 
-        <?php if (is_single()) : ?>
-            <!-- <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a> -->
-            <?php echo ' '; ?>
+        <?php if (is_single()) : ?>            
+            <?php // single post ?>
         <?php else : ?>
             <?php echo get_category_parents(get_query_var('cat'), true, '&nbsp;'); ?>
         <?php endif; ?> 

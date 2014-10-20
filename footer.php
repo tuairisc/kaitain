@@ -1,7 +1,7 @@
         <?php if (is_active_sidebar('footer-full')) : ?>
             <div class="full-widget-area clearfix">
                 <?php dynamic_sidebar('Footer (full-width)'); ?>
-            </div>  
+            </div>
             <div class="clear"></div>
         <?php endif; ?>
 
@@ -10,7 +10,7 @@
     <?php // Adrotate group 3 ?>
     <?php echo adrotate_group(3); ?>
 
-    <footer> 
+    <footer>
         <div class="interior">
             <?php if (is_active_sidebar('footer_1') || is_active_sidebar('footer_2') || is_active_sidebar('footer_3') || is_active_sidebar('footer_4')) : ?>
                 <div class="widget-area">
@@ -18,7 +18,7 @@
                     <div class="column"><?php dynamic_sidebar('Footer (column 2)'); ?></div>
                     <div class="column"><?php dynamic_sidebar('Footer (column 3)'); ?></div>
                     <div class="column"><?php dynamic_sidebar('Footer (column 4)'); ?></div>
-                </div>        
+                </div>
             <?php endif; ?>
             <div class="copyright">
                 <p><?php _e('', 'wpzoom'); ?> &copy; <?php echo date("Y",time()); ?> <?php _e('Tuairisc Bheo Teoranta', 'wpzoom'); ?>.</p>
@@ -96,10 +96,10 @@
     </script>
 <?php endif; ?>
 
-<?php wp_footer(); ?> 
+<?php wp_footer(); ?>
 
 <?php wp_reset_query(); ?>
- 
+
 <?php // JavaScript for size of AdRotate advertisements. ?>
 <script src="<?php echo get_template_directory_uri() . '/tuairisc_adrotate.js'; ?>"></script>
 <script src="<?php echo get_template_directory_uri() . '/tuairisc_share_popout.js'; ?>"></script>

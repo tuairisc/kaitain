@@ -381,55 +381,54 @@ footer a {
 }
 
 /*
-    AdRotate Groups
-    ---------------
-    AdRotate's groups are numeric classes from .g-1 to .g-∞
-    It's stock CSS is awful and loaded at run time via JS. This
-    section hopefully overrides all of those stock rules.
-
-    Group   Location
-    ------------------
-    .g-1    Header
-    .g-2    Sidebar #1
-    .g-3    Footer
-    .g-4    Sidebar #2
-    .g-5    Sidebar #3
-
-    If the AdRotate Pro plugin is ever updated then this CSS will break. 
-    AdRotate injects its own CSS upon page load. I have prevented this behaviour
-    with the following alteration of its files:
-
-    adrotate.php:
-    -------------
-    Commented line 65:
-        Before:
-            add_action('wp_head', 'adrotate_custom_css');
-        After:
-            // add_action('wp_head', 'adrotate_custom_css');
-
-    If this line is uncommented then AdRotate Pro will inject its own CSS on
-    load. This is a Bad Thing which will bork advert display.
-
-    ./library/jquery.adrotate.dyngroup.js:
-    --------------------------------------
-    Altered line 58:
-        Before:
-            $cont.find(".c-" + counter).fadeIn(300)
-        After:
-            $cont.find(".c-" + counter).toggle()
-
-    Altered line 61:
-        Before:
-            $cont.find(".c-" + index).fadeOut(300)
-        After:
-            $cont.find(".c-" + index).toggle()
-
-    This stock behaviour causes the next advert in rotation to appear before the
-    previous one disappears. It causes a brief "stack" of one advert atop the 
-    other. It would've made sense to do the second fade as a callback to the 
-    first, but what would I know, eh? 
-
-    Regardless-if AdRotate Pro is updated, these changes will be wiped out. */
+ * AdRotate Groups
+ * ---------------
+ * AdRotate's groups are numeric classes from .g-1 to .g-∞
+ * It's stock CSS is awful and loaded at run time via JS. This
+ * section hopefully overrides all of those stock rules.
+ * 
+ * Group   Location
+ * ------------------
+ * .g-1    Header
+ * .g-2    Sidebar #1
+ * .g-3    Footer
+ * .g-4    Sidebar #2
+ * .g-5    Sidebar #3
+ * 
+ * If the AdRotate Pro plugin is ever updated then this CSS will break. 
+ * AdRotate injects its own CSS upon page load. I have prevented this behaviour
+ * with the following alteration of its files:
+ * 
+ * adrotate.php:
+ * -------------
+ * Commented line 65:
+ *    Before:
+ *          add_action('wp_head', 'adrotate_custom_css');
+ *     After:
+ *          // add_action('wp_head', 'adrotate_custom_css');
+ *
+ * If this line is uncommented then AdRotate Pro will inject its own CSS on
+ * load. This is a Bad Thing which will bork advert display.
+ * 
+ *      ./library/jquery.adrotate.dyngroup.js:
+ *      --------------------------------------
+ *      Altered line 58:
+ *          Before:
+ *              $cont.find(".c-" + counter).fadeIn(300)
+ *          After:
+ *              $cont.find(".c-" + counter).toggle()
+ * 
+ *      Altered line 61:
+ *          Before:
+ *              $cont.find(".c-" + index).fadeOut(300)
+ *          After:
+ *              $cont.find(".c-" + index).toggle()
+ * 
+ * This stock behaviour causes the next advert in rotation to appear before the
+ * previous one disappears. It causes a brief "stack" of one advert atop the 
+ * other. It would've made sense to do the second fade as a callback to the 
+ * first, but what would I know, eh? 
+ * Regardless-if AdRotate Pro is updated, these changes will be wiped out. */
 
 /* General Advert Styles */
 
@@ -471,6 +470,8 @@ footer a {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
+    box-sizing: border-box;
+    /*border: 1px solid #ddd;*/
     margin: 0 auto;
 }
 

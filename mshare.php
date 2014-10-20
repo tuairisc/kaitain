@@ -27,6 +27,6 @@
         href="https://twitter.com/share?via=<?php echo $share['tuser']; ?>&text=<?php echo $share['title']; ?>&url=<?php echo $share['url']; ?>"
         rel="2"
         target="_blank"
-        title="Tweet about '<?php the_title(); ?>"
+        title="Tweet about '<?php the_title(); ?>'"
     ></a></li>
 </ul>

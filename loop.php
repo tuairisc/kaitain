@@ -37,7 +37,7 @@
                     <span><?php printf( __('%s', 'wpzoom'),  get_the_date()); ?></span>
                 <?php endif; ?>
                 <?php if (option::get('display_comments') == 'on') : ?>
-                    <br /><span><?php comments_popup_link( __('', 'wpzoom'), __('trácht amháin', 'wpzoom'), __('% nótaí tráchta', 'wpzoom'), '', __('tá fóram na dtráchtanna dúnta.', 'wpzoom')); ?></span>
+                    <br /><span><?php comments_popup_link( __('', 'wpzoom'), __('trácht amháin', 'wpzoom'), __('% nóta tráchta', 'wpzoom'), '', __('tá fóram na dtráchtanna dúnta.', 'wpzoom')); ?></span>
                 <?php endif; ?> 
                 <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
 

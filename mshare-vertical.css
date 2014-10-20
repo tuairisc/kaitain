@@ -1,0 +1,152 @@
+
+/*
+    Nav Menu Social Links
+    ----------------------
+    The stock widgets look like crap. These layout better,
+    don't hog the site or break layout when the page is 
+    resized. 
+
+    Triggered to hide at mobile sizes. The rationale is that
+    the links will open in a browser, but not the native 
+    applications. So there is fundamentally no reason to show them.
+
+    You can choose from:
+
+    Colour      Class       Service
+    -------------------------------
+    #f5756c     .email      Email
+    #3b5998     .facebook   Facebook     
+    #ff0084     .flickr     Flickr
+    #333        .github     GitHub
+    #dd4b39     .google     Google+
+    #3f729b     .instagram  Instagram
+    #0976b4     .linkedin   LinkedIn
+    #cc2127     .interest   Pinterest
+    #35465c     .tumblr     Tumblr
+    #55acee     .twitter    Twitter
+    #b31217     .youtube    YouTube
+
+    The menu takes the form of a horizontal ul.
+    Just drop in links as so:
+
+    <ul class="msv">
+        <li><a class="email" href="#"></a></li>
+        ...
+        <li><a class="youtube" href="#"></a></li>
+    </ul>
+ */
+
+.article-content {
+    overflow: auto;
+    width: 100%;
+}
+
+.article-content:after {
+    clear: both;
+    display: table;
+}
+
+.article-content .entry {
+    box-sizing: border-box;
+    float: right;
+    width: 95%;
+}
+
+ul.msv,
+.msv li,
+.msv a {
+    line-height: initial;
+    margin: 0;
+    overflow: auto;
+    padding: 0;
+}
+
+ul.msv {
+    float: left;
+    width: 5%;
+}
+
+ul.msv:after {
+    clear: both;
+    display: table;
+}
+
+.msv li,
+.msv a {
+    height: 30px;
+    width: 30px;
+}
+
+.msv li {
+    list-style-type: none;
+    margin: 3px;
+    overflow: hidden;
+}
+
+.msv a {
+    background-size: 90% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.msv .email { 
+    background-color: #f5756c;
+    background-image: url('images/social/email.png'); 
+}
+
+.msv .facebook { 
+    background-color: #3B5998;
+    background-image: url('images/social/facebook.png');
+}
+
+.msv .flickr { 
+    background-color: #ff0084;
+    background-image: url('images/social/flickr.png');
+}
+
+.msv .github { 
+    background-color: #333;
+    background-image: url('images/social/github.png');
+}
+
+.msv .google { 
+    background-color: #dd4b39;
+    background-image: url('images/social/google.png');
+} 
+
+.msv .instagram { 
+    background-color: #3f729b;
+    background-image: url('images/social/instagram.png');
+} 
+
+.msv .linkedin { 
+    background-color: #0976b4;
+    background-image: url('images/social/linkedin.png');
+} 
+
+.msv .pinterest { 
+    background-color: #cc2127;
+    background-image: url('images/social/pinterest.png');
+} 
+
+.msv .rss { 
+    background-color: #ff6600;
+    background-image: url('images/social/rss.png');
+} 
+
+.msv .tumblr { 
+    background-color: #35465c;
+    background-image: url('images/social/tumblr.png');
+} 
+
+.msv .twitter { 
+    background-color: #55acee;
+    background-image: url('images/social/twitter.png');
+} 
+
+.msv .youtube { 
+    background-color: #b31217;
+    background-image: url('images/social/youtube.png');
+} 

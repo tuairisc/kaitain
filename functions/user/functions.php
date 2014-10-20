@@ -485,7 +485,7 @@ function increment_view_counter($post_id = null) {
     if ($post_id == '')
         $post_id = get_the_ID();
 
-    if (is_single() && !is_user_logged_in()) {
+    if (is_foluntais() || is_single() && !is_user_logged_in()) {
         $key = 'tuairisc_view_counter';
         $count = (int) get_post_meta($post_id, $key, true);
         $count++;
@@ -493,22 +493,132 @@ function increment_view_counter($post_id = null) {
     }
 }
 
-function create_post_type() {
-    // Debug/test
-    register_post_type( 'tuairisc_job_listing',
-        array(
-            'labels' => array(
-            'name' => __( 'Job Listing' ),
-            'singular_name' => __( 'Job Listing' ),
-        ),
-            'public' => true,
-            'has_archive' => true,
-            'rewrite' => array('slug' => 'foluntais'),
-        )
+function list_post_types() {
+    /* This has been helpful in debugging-output a list of all custom post types
+     * to the JavaScript console.
+     * 
+     * list_post_type doesn't return anything. */
+    
+    $args = array('public' => true, '_builtin' => false);
+
+    $output = 'names'; // names or objects, note names is the default
+    $operator = 'and'; // 'and' or 'or'
+
+    $post_types = get_post_types( $args, $output, $operator); 
+
+    foreach ($post_types as $post_type) {
+        echo '<script>console.log("' . $post_type . '");</script>';
+    }
+}
+
+function is_foluntais($post_id = null) {
+    /* Test if the article in question is of the custom 'foluntais' type.
+     * 
+     * is_folunttais returns true or false. */
+    if ($post_id == '')
+        $post_id = get_the_ID();
+
+    $job = 'foluntais';
+    $is_job = false;
+
+    if (get_post_type() == 'foluntais')
+        $is_job = true;
+
+    return $is_job;
+}
+
+function foluntais_post_type() {
+    // Debug/test. Needs to be expanded upon.
+    $labels = array(
+        'name'               => _x('Jobs', 'post type general name'),
+        'singlular_name'     => _x('Job', 'post type individual name'),
+        'add_new'            => _x('Add New', 'job'),
+        'add_new_item'       => __('Add New Product'),
+        'edit_item'          => __('Edit Job'),
+        'new_item'           => __('New Job'),
+        'menu_name'          => __('Jobs'),
+        'all_items'          => __('All Jobs'),
+        'search_items'       => __('Search Jobs'),
+        'not_found'          => __('No jobs found'),
+        'not_found_in_trash' => __('No jobs found in the Trash'),
+        'parent_item_colon'  => '',
+    );
+
+    $args = array(
+        'description'   => 'Tuairisc.ie job listings',
+        'has_archive'   => true,
+        'labels'        => $labels,
+        'menu_position' => 4,
+        'public'        => true,
+        'supports'      => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
+        // Add custom job taxonomy here.
+        'taxonomies'    => array(''),
+    );
+
+    register_post_type('foluntais', $args);
+    flush_rewrite_rules();
+}
+
+function foluntais_messages($messages) {
+    global $post, $post_ID;
+    
+    $messages['foluntais'] = array(
+        0 => '', 
+        1 => sprintf( __('Job updated. <a href="%s">View job</a>'), esc_url( get_permalink($post_ID) ) ),
+        2 => __('Custom field updated.'),
+        3 => __('Custom field deleted.'),
+        4 => __('Job updated.'),
+        5 => isset($_GET['revision']) ? sprintf( __('Job restored to revision from %s'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+        6 => sprintf( __('Job published. <a href="%s">View job</a>'), esc_url( get_permalink($post_ID) ) ),
+        7 => __('Product saved.'),
+        8 => sprintf( __('Job submitted. <a target="_blank" href="%s">Preview job</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+        9 => sprintf( __('Job scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview job</a>'), date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
+        10 => sprintf( __('Job draft updated. <a target="_blank" href="%s">Preview job</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+    );
+
+    return $messages;
+}
+
+function foluntais_help($contextual_help, $screen_id, $screen) { 
+    if ( 'product' == $screen->id ) {
+        $help = 'TODO';
+    } elseif ('edit-foluntais' == $screen->id) {
+        $help = 'TODO';
+    }
+
+    return $contextual_help;
+}
+
+function foluntais_meta_box() {
+    add_meta_box( 
+        // Unique box name
+        'foluntais_box',
+        // Visible name of meta box
+        __('Job Information', 'myplugin_textdomain'),
+        // Function to display box contents
+        'foluntais_box_content',
+        // Post type this belongs to
+        'foluntais',
+        // Placement of the box
+        'side',
+        // Placement priority of the box if other boxes shuffle it aside.
+        'high'
     );
 }
 
-add_action( 'init', 'create_post_type' );
+function foluntais_box_content($post) {
+    wp_nonce_field(plugin_basename(__FILE__), 'product_price_box_content_nonce');
+    echo '<span>Location:</span><br />';
+    echo '<label for="foluntais_box"></label>';
+    echo '<input type="text" id="product_price" name="product_price" placeholder="Job location" />';
+    echo '<input type="button" id="product_price" name="product_price" Value="Add" />';
+}
+
+// Add custom post type for job listings.
+add_action('init', 'foluntais_post_type');
+add_filter('post_updated_messages', 'foluntais_messages');
+add_action('contextual_help', 'foluntais_help', 10, 3);
+add_action('add_meta_boxes', 'foluntais_meta_box');
 
 // Rearrange title.
 add_filter('wp_title', 'tweak_title', 10, 2);
