@@ -52,7 +52,7 @@ class Wpzoom_Feature_Posts extends WP_Widget {
         
         query_posts($query_opts);
 
-        if ( have_posts() ) : 
+        if (have_posts()) : 
             while (have_posts()) : the_post();
                     echo '<li>';
                         
