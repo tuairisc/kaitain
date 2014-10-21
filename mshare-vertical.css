@@ -131,6 +131,11 @@ ul.msv:after {
     background-image: url('images/social/pinterest.png');
 } 
 
+.msv .reddit {
+    background-color: #ff5700;
+    background-image: url('images/social/reddit.png');
+}
+
 .msv .rss { 
     background-color: #ff6600;
     background-image: url('images/social/rss.png');

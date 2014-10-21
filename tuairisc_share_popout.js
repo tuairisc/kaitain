@@ -7,7 +7,7 @@ var sizeArray = [
     'width=450,height=257',
 ];
 
-$('.post-wrapper .mshare a').click(function(e) {
+$('.post-wrapper .mshare a, .msv a').click(function(e) {
     var rel = parseInt($(this).attr('rel'));
 
     if (rel == 1 || rel == 2) {

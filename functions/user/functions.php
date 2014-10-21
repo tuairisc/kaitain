@@ -160,11 +160,13 @@ function show_hero($current_post) {
     return $show;
 }
 
-function get_thumbnail_url() {
+function get_thumbnail_url($post_id = null) {
     /* Code snippet from http://goo.gl/NhcEU6
      * get_thumbnail_url returns the anchor url for the requested thumbnail. */
 
-    $post_id = get_the_ID();
+    if ($post_id == '') 
+        $post_id = get_the_ID();
+
     $thumb_id = get_post_thumbnail_id($post_id);
     $thumb_url = wp_get_attachment_image_src($thumb_id,'large', true);
     return $thumb_url[0];
