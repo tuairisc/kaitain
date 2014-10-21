@@ -23,7 +23,7 @@ if ( function_exists( 'add_image_size' ) ) {
     add_image_size( 'related', 230, 150, true );
 
      /* Recent Posts Widget */
-    add_image_size( 'recent-widget', 75, 50, true ;)
+    add_image_size( 'recent-widget', 75, 50, true );
 
 }
 
