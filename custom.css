@@ -31,6 +31,22 @@
     font: 14px arial, "helvetica neue", helvetica, sans-serif;
 }
 
+/* Self-clearing floats 
+ * ---------------------
+ * WPZOOM's use of <div class="clear"></div> should be classed as a 
+ * crime against humanity. */
+
+.widget-area, .feature-posts-list, .feature-posts-list li,
+.breadcrumb-banner, .post-meta, ul.mshare {
+    overflow: auto;
+}
+
+.widget-area:after, .breadcrumb-banner:after, .post-meta:after,
+.feature-posts-list:after, .feature-posts-list li:after, ul.mshare:after {
+    clear: both;
+    display: table;
+}
+
 /* Top Navigation Menu
  * -------------------
  * A one-hundred line minified JS file does what I could accomplish with 
@@ -61,6 +77,11 @@
     width: 98%;
 }
 
+.feature-posts-list-text {
+    float: left;
+    width: 212px;
+}
+
 .recent-meta span,
 .widget .feature-posts-list small {
     /* Widgets are capitalized. This causes issues with some Irish 
@@ -88,6 +109,10 @@ h3 {
     /* Requested by Adian. */
     color: #999;
     font-size: 16px;
+}
+
+#slider_nav .item, #slider_nav .item.current a {
+    font-size: 17px;
 }
 
 #slider_nav .item:hover a, #slider_nav .item.current a {
@@ -196,13 +221,7 @@ footer a {
  * default styles. */
 
 .widget-area {
-    overflow: auto;
     width: 100%;
-}
-
-.widget-area:after {
-    clear: both;
-    display: table;
 }
 
 .widget-area .column {
@@ -514,14 +533,8 @@ footer a {
 
 .breadcrumb-banner {
     margin-bottom: 20px;
-    overflow: auto;
     padding: 5px 0;  
     width: 100%;    
-}
-
-.breadcrumb-banner:after {
-    clear: both;
-    display: table;
 }
 
 .breadcrumb-banner a {
@@ -684,14 +697,7 @@ footer a {
 
 .post-meta {
     border-width: 1px 0;
-    overflow: auto;
     padding: 9px 4%;
-}
-
-.post-meta:after {
-    /* Clear floats. */ 
-    clear: both;
-    display: table;
 }
 
 .post-meta > * {
@@ -884,11 +890,6 @@ ul.mshare,
 
 ul.mshare {
     float: right;
-}
-
-ul.mshare:after {
-    clear: both;
-    display: table;
 }
 
 .mshare li,

@@ -357,6 +357,34 @@ function education_landing_shortcode($atts) {
         category_description($cat_id) . '</a></p></div>';
 }
 
+function education_banner_shortcode($atts, $content = null) {
+    /* These are shortcodes to use on the education page to deliniate sections and 
+     * subsections of the page. 
+     * 
+     * education_banneoning. */
+
+    $head = 'edu-heading';
+    $sub  = 'edu-subheading';
+
+    $a = shortcode_atts(array(
+        'type' => 'main',
+    ), $atts);
+
+    if ($content == '') {
+        $content = 'Did you forget to include text?';
+    }
+
+    if ($a['type'] == 'main') {
+        $open = '<h2 class="' . $head . '">';
+        $close = '</h2>';
+    } else {
+        $open = '<h3 class="' . $sub . '">';
+        $close = '</h3>';
+    }
+
+    return $open . $content . $close;
+}
+
 function parse_columnist_role($author_id) {
     /* See author_is_columnist, below.
      * 
@@ -502,15 +530,12 @@ function list_post_types() {
      * list_post_type doesn't return anything. */
     
     $args = array('public' => true, '_builtin' => false);
+    $output = 'names';
+    $operator = 'and';
+    $post_types = get_post_types($args, $output, $operator); 
 
-    $output = 'names'; // names or objects, note names is the default
-    $operator = 'and'; // 'and' or 'or'
-
-    $post_types = get_post_types( $args, $output, $operator); 
-
-    foreach ($post_types as $post_type) {
+    foreach ($post_types as $post_type)
         echo '<script>console.log("' . $post_type . '");</script>';
-    }
 }
 
 function is_foluntais($post_id = null) {
@@ -629,6 +654,8 @@ add_filter('the_excerpt', 'remove_read_more');
 add_filter('the_excerpt', 'replace_breaks');
 // Add shortcode for landing.
 add_shortcode('landing', 'education_landing_shortcode');
+// Add shortcode for education banners.
+add_shortcode('banner', 'education_banner_shortcode');
 // Page excerpts for SEO and the education landing page. 
 add_action('init', add_post_type_support('page', 'excerpt'));
 // Filter date to return as Gaeilge.

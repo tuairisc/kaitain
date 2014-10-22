@@ -4,8 +4,7 @@
 /* WPZOOM: Recent Posts           */
 /*------------------------------------------*/
  
-class Wpzoom_Feature_Posts extends WP_Widget {
-    
+class Wpzoom_Feature_Posts extends WP_Widget { 
     function Wpzoom_Feature_Posts() {
         /* Widget settings. */
         $widget_ops = array( 'classname' => 'feature-posts', 'description' => 'A list of posts, optionally filtered by category.' );
@@ -17,8 +16,7 @@ class Wpzoom_Feature_Posts extends WP_Widget {
         $this->WP_Widget( 'wpzoom-feature-posts', 'WPZOOM: Recent Posts', $widget_ops, $control_ops );
     }
     
-    function widget( $args, $instance ) {
-        
+    function widget( $args, $instance ) { 
         extract( $args );
 
         /* User-selected settings. */
@@ -35,63 +33,66 @@ class Wpzoom_Feature_Posts extends WP_Widget {
         echo $before_widget;
         
         /* Title of widget (before and after defined by themes). */
-        if ( $title )
+        if ($title)
             echo $before_title . $title . $after_title;
-        
-        echo '<ul class="feature-posts-list">';
-        
-        $query_opts = apply_filters('wpzoom_query', array(
-            'posts_per_page' => $show_count,
-            'post_type' => 'post',
-            // Exclude categories 182 and 216.
-            'cat' => '-216,-182',
-        ));
+        ?>
 
-        if ($category) 
-            $query_opts['cat'] = $category;
-        
-        query_posts($query_opts);
+        <ul class="feature-posts-list"> <?php 
+            $query_opts = apply_filters('wpzoom_query', array(
+                'posts_per_page' => $show_count,
+                'post_type' => 'post',
+                // Exclude categories 182 and 216.
+                'cat' => '-216,-182',
+            ));
 
-        if (have_posts()) : 
-            while (have_posts()) : the_post();
-                    echo '<li>';
-                        
-                        if ($show_thumb) { 
-                            get_the_image( array( 'size' => 'recent-widget',  'width' => $instance['thumb_width'], 'height' => $instance['thumb_height'] )    );
-                         }
-                                
-                        if ($show_title) 
-                            echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a> <br />';
-                        
-                        if ($show_date)
-                             echo '<small>' . get_the_date() . '</small> <br />';
-                        
-                        if ( $show_excerpt ) {
-                            $the_excerpt = get_the_excerpt();
-                            
-                            // cut to character limit
-                            $the_excerpt = substr( $the_excerpt, 0, $excerpt_length );
-                            
-                            // cut to last space
-                            $the_excerpt = substr( $the_excerpt, 0, strrpos( $the_excerpt, ' '));
-                            
-                            echo '<span class="post-excerpt">' . $the_excerpt . '</span>';
-                        }
-
-                    echo '<div class="clear"></div></li>';
-            endwhile; 
-        else:
-
-        endif;
+            if ($category) 
+                $query_opts['cat'] = $category;
             
-        //Reset query_posts
-        wp_reset_query();            
-        echo '</ul><div class="clear"></div>';
+            query_posts($query_opts);
 
-        /* After widget (defined by themes). */
+            if (have_posts()) { 
+                while (have_posts()) { 
+                    the_post(); ?>
+
+                    <li>
+                        <?php
+                            if ($show_thumb)
+                                get_the_image(array(
+                                    'size' => 'recent-widget', 
+                                    'width' => $instance['thumb_width'],
+                                    'height' => $instance['thumb_height']
+                                ));
+                        ?>        
+                        <div class="twerk">
+                        <?php
+                            if ($show_title) 
+                                echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a> <br />';
+                            
+                            if ($show_date)
+                                 echo '<small>' . get_the_date() . '</small> <br />';
+                            
+                            if ( $show_excerpt ) {
+                                $the_excerpt = get_the_excerpt();
+                                // cut to character limit
+                                $the_excerpt = substr($the_excerpt, 0, $excerpt_length);
+                                // cut to last space
+                                $the_excerpt = substr($the_excerpt, 0, strrpos($the_excerpt, ' '));
+                                echo '<span class="post-excerpt">' . $the_excerpt . '</span>';
+                            }
+                        ?>
+                        </div>
+                    </li>
+                <?php } 
+            }
+                
+            //Reset query_posts
+            wp_reset_query(); ?>
+        </ul>
+        <div class="clear"></div>
+
+        <?php /* After widget (defined by themes). */
         echo $after_widget;
-    }
-    
+    } 
     
     function update( $new_instance, $old_instance ) {
         $instance = $old_instance;
@@ -111,8 +112,7 @@ class Wpzoom_Feature_Posts extends WP_Widget {
         return $instance;
     }
     
-    function form( $instance ) {
-
+    function form($instance) {
         /* Set up some default widget settings. */
         $defaults = array( 'title' => 'Recent Posts', 'category' => 0, 'show_count' => 5, 'show_date' => false, 'show_thumb' => false, 'show_excerpt' => false, 'hide_title' => false, 'thumb_width' => 75, 'thumb_height' => 50, 'excerpt_length' => 55 );
         $instance = wp_parse_args( (array) $instance, $defaults ); ?>
@@ -127,52 +127,42 @@ class Wpzoom_Feature_Posts extends WP_Widget {
             <select id="<?php echo $this->get_field_id( 'category' ); ?>" name="<?php echo $this->get_field_name( 'category' ); ?>">
                 <option value="0" <?php if ( !$instance['category'] ) echo 'selected="selected"'; ?>>All</option>
                 <?php
-                $categories = get_categories(array('type' => 'post'));
-                
-                foreach( $categories as $cat ) {
-                    echo '<option value="' . $cat->cat_ID . '"';
+                    $categories = get_categories(array('type' => 'post'));
                     
-                    if ( $cat->cat_ID == $instance['category'] ) echo  ' selected="selected"';
-                    
-                    echo '>' . $cat->cat_name . ' (' . $cat->category_count . ')';
-                    
-                    echo '</option>';
-                }
+                    foreach($categories as $cat) {
+                        echo '<option value="' . $cat->cat_ID . '"';
+                        
+                        if ($cat->cat_ID == $instance['category']) 
+                            echo ' selected="selected"';
+                        
+                        echo '>' . $cat->cat_name . ' (' . $cat->category_count . ')';
+                        echo '</option>';
+                    }
                 ?>
             </select>
         </p>
-        
         <p>
             <label for="<?php echo $this->get_field_id( 'show_count' ); ?>">Show:</label>
             <input id="<?php echo $this->get_field_id( 'show_count' ); ?>" name="<?php echo $this->get_field_name( 'show_count' ); ?>" value="<?php echo $instance['show_count']; ?>" type="text" size="2" /> posts
         </p>
-        
         <p>
             <input class="checkbox" type="checkbox" <?php checked( $instance['hide_title'], 'on' ); ?> id="<?php echo $this->get_field_id( 'hide_title' ); ?>" name="<?php echo $this->get_field_name( 'hide_title' ); ?>" />
             <label for="<?php echo $this->get_field_id( 'hide_title' ); ?>">Hide post title</label>
         </p>
-        
         <p>
             <input class="checkbox" type="checkbox" <?php checked( $instance['show_date'], 'on' ); ?> id="<?php echo $this->get_field_id( 'show_date' ); ?>" name="<?php echo $this->get_field_name( 'show_date' ); ?>" />
             <label for="<?php echo $this->get_field_id( 'show_date' ); ?>">Display post date</label>
         </p>
-        
         <p>
             <input class="checkbox" type="checkbox" <?php checked( $instance['show_thumb'], 'on' ); ?> id="<?php echo $this->get_field_id( 'show_thumb' ); ?>" name="<?php echo $this->get_field_name( 'show_thumb' ); ?>" />
             <label for="<?php echo $this->get_field_id( 'show_thumb' ); ?>">Display post thumbnail</label>
         </p>
-        
-        <?php
-        // only allow thumbnail dimensions if GD library supported
-        if ( function_exists('imagecreatetruecolor') ) {
-        ?>
-        <p>
-           <label for="<?php echo $this->get_field_id( 'thumb_width' ); ?>">Thumbnail size</label> <input type="text" id="<?php echo $this->get_field_id( 'thumb_width' ); ?>" name="<?php echo $this->get_field_name( 'thumb_width' ); ?>" value="<?php echo $instance['thumb_width']; ?>" size="3" /> x <input type="text" id="<?php echo $this->get_field_id( 'thumb_height' ); ?>" name="<?php echo $this->get_field_name( 'thumb_height' ); ?>" value="<?php echo $instance['thumb_height']; ?>" size="3" />
-        </p>
-        <?php
-        }
-        ?>
-        
+        <?php if (function_exists('imagecreatetruecolor')) : ?>
+            <?php // only allow thumbnail dimensions if GD library supported ?>
+            <p>
+               <label for="<?php echo $this->get_field_id( 'thumb_width' ); ?>">Thumbnail size</label><input type="text" id="<?php echo $this->get_field_id( 'thumb_width' ); ?>" name="<?php echo $this->get_field_name( 'thumb_width' ); ?>" value="<?php echo $instance['thumb_width']; ?>" size="3" /> x <input type="text" id="<?php echo $this->get_field_id( 'thumb_height' ); ?>" name="<?php echo $this->get_field_name( 'thumb_height' ); ?>" value="<?php echo $instance['thumb_height']; ?>" size="3" />
+            </p>
+        <?php endif; ?>
         <p>
             <input class="checkbox" type="checkbox" <?php checked( $instance['show_excerpt'], 'on' ); ?> id="<?php echo $this->get_field_id( 'show_excerpt' ); ?>" name="<?php echo $this->get_field_name( 'show_excerpt' ); ?>" />
             <label for="<?php echo $this->get_field_id( 'show_excerpt' ); ?>">Display post excerpt</label>
@@ -182,7 +172,6 @@ class Wpzoom_Feature_Posts extends WP_Widget {
             <label for="<?php echo $this->get_field_id( 'excerpt_length' ); ?>">Excerpt character limit:</label>
             <input id="<?php echo $this->get_field_id( 'excerpt_length' ); ?>" name="<?php echo $this->get_field_name( 'excerpt_length' ); ?>" value="<?php echo $instance['excerpt_length']; ?>" type="text" size="4" />
         </p>
-        
         <?php
     }
 }
@@ -190,4 +179,5 @@ class Wpzoom_Feature_Posts extends WP_Widget {
 function wpzoom_register_fp_widget() {
     register_widget('Wpzoom_Feature_Posts');
 }
-add_action('widgets_init', 'wpzoom_register_fp_widget');
+
+add_action('widgets_init', 'wpzoom_register_fp_widget'); ?>

@@ -4,10 +4,8 @@
  */
 add_action('widgets_init', create_function('', 'return register_widget("Tabbed_Widget");'));
 
-class Tabbed_Widget extends WP_Widget
-{
-    function Tabbed_Widget()
-    {
+class Tabbed_Widget extends WP_Widget {
+    function Tabbed_Widget() {
         $widgetOps = array(
             "classname"   => "wpzoom_tabbed",
             "description" => "An advanced widget that displays a featured block with posts in different styles.",
@@ -22,67 +20,75 @@ class Tabbed_Widget extends WP_Widget
         $this->WP_Widget("wpzoom-tabbed-widget", "WPZOOM: Tabbed Categories", $widgetOps, $controlOps);
     }
 
-    function widget($args, $instance)
-    {
+    function widget($args, $instance) {
         extract($args);
         //print_r($instance);
         $title = apply_filters("widget_title", $instance["title"]);
         $category = $instance['category'];
         $count = $instance["count"];
  
-        if ($category) {
+        if ($category)
             $category_link = get_category_link($category);
-        }
  
         $rnd = rand();
         ?>
 
         <div class="wztw-container">
- 
             <ul class="tabs clearfix">
-
-                <?php if ( $title ) { echo '<h2>';
-                   if ($category) {
+                <?php if ($title) { 
+                    echo '<h2>';
+                    
+                    if ($category) 
                         echo '<a href="'.$category_link.'">';
-                   }
-                   echo $title;
-                   if ($category_link) {
+
+                    echo $title;
+
+                    if ($category_link)
                         echo '</a>';
-                   }
-                   echo '</h2>'; } ?>
+
+                    echo '</h2>'; 
+                } ?>
 
                 <?php for ($i = 1; $i <= $instance["count"]; $i++) { ?>
                 <li><a href="#tab<?php echo $rnd . $i; ?>"><?php echo stripslashes($instance["tab" . $i . "-title"]); ?></a></li>
                 <?php } ?>
             </ul>
             
-            <?php for ($i = 1; $i <= $instance["count"]; $i++) {
-                if ($instance["tab" . $i . "-type"] == "tag") {
-                    $postsq = $instance["tab" . $i . "-slugs"];
-                } else {
-                    $postsq = implode(",", $instance["tab" . $i . "-category"]);
-                }
-                $posts = $instance["tab" . $i . "-posts"];
-                $type = $instance["tab" . $i . "-type"];
-                $sq = new WP_Query( array( $type => $postsq, 'showposts' => $posts, 'orderby' => 'date', 'order' => 'DESC' ) );
-                $x = 0;
-                ?>
+            <?php 
+                for ($i = 1; $i <= $instance["count"]; $i++) {
+                    if ($instance["tab" . $i . "-type"] == "tag")
+                        $postsq = $instance["tab" . $i . "-slugs"];
+                    else
+                        $postsq = implode(",", $instance["tab" . $i . "-category"]);
+
+                    $posts = $instance["tab" . $i . "-posts"];
+                    $type = $instance["tab" . $i . "-type"];
+                    $sq = new WP_Query(array(
+                        $type => $postsq,
+                        'showposts' => $posts,
+                        'orderby' => 'date',
+                        'order' => 'DESC' 
+                    ));
+
+                    $x = 0;
+            ?>
                 
             <div id="tab<?php echo $rnd . $i; ?>" class="wztw-content">
                 <div class="column_1 col_3">
-                    <?php if ( $sq->have_posts() ) : while( $sq->have_posts() ) : $sq->the_post();  
-                    $x++;
-                    global $post;
+                    <?php if ($sq->have_posts()) : ?>
+                        <?php while($sq->have_posts()) : 
+                            $sq->the_post();  
+                            $x++;
+                            global $post;
                     
-                    if ($x == 1) { ?>
-                    
+                    if ($x == 1) : ?> 
                         <?php if (is_columnist_article() && has_local_avatar()) : ?>
                             <a href="javascript:void(0)"><img class="featured-tab" src="<?php echo get_avatar_url(135); ?>" /></a>
                         <?php else : ?>
                             <?php get_the_image( array( 'size' => 'featured-tab', 'width' => 135, 'height' => 135 ) ); ?>
                         <?php endif; ?>
                           
-                          <div class="main_content">
+                        <div class="main_content">
                             <h2>
                                 <a href="<?php the_permalink() ?>" title="<?php the_title(); ?>">
                                     <!-- Begin optional portion. -->
@@ -93,27 +99,31 @@ class Tabbed_Widget extends WP_Widget
                                     <?php the_title(); ?>
                                 </a>
                             </h2>                        
-                            <?php the_excerpt(); ?>                          
-                        </div>
-                        
+                            <?php the_excerpt(); ?>            
+
+                            <?php // category link here 
+                                $url = get_category_link($postsq);
+                                $name = get_cat_name($postsq);
+                                $text = 'Read more in ' . $name;
+                                $anchor = '<a title="' . $text . '" href="' . $url . '">' . $text . '</a>'; 
+                            ?>
+
+                            <script>console.log('<?php echo $anchor; ?>');</script>
+
+                        </div>                    
                 </div> <!-- /.1col -->
  
                 <div class="column_2 col_3">
-           
                     <ul class="posts_med">
-
-                         <?php } else {  ?>
-                     
+                         <?php else : ?>
                             <li>                         
                                 <h3><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>     
                             </li>
-                         
-                         <?php } ?>    
+                    <?php endif; ?>    
                         <?php endwhile; //  ?>
-                        <?php endif; ?>
+                    <?php endif; ?>
                     </ul>  
-
-                      
+ 
                 </div> <!-- /.2col -->
               
                 <?php wp_reset_query(); ?>
