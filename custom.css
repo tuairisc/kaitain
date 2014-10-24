@@ -77,8 +77,8 @@
     width: 98%;
 }
 
-.feature-posts-list-text {
-    float: left;
+.feature-post-text {
+    float: right;
     width: 212px;
 }
 
@@ -253,7 +253,8 @@ footer a {
     margin-right: 0;
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) {     
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait), 
+screen and (min-device-width:320px) and (max-device-width: 480px) and (orientation: landscape) {     
     .widget-area .column {
         float: none;
         margin-bottom: 0;
@@ -420,28 +421,28 @@ footer a {
  * 
  * adrotate.php:
  * -------------
- * Commented line 65:
- *    Before:
- *          add_action('wp_head', 'adrotate_custom_css');
+ * Commented line 68:
+ *     Before:
+ *         add_action('wp_head', 'adrotate_custom_css');
  *     After:
- *          // add_action('wp_head', 'adrotate_custom_css');
+ *         // add_action('wp_head', 'adrotate_custom_css');
  *
  * If this line is uncommented then AdRotate Pro will inject its own CSS on
  * load. This is a Bad Thing which will bork advert display.
  * 
- *      ./library/jquery.adrotate.dyngroup.js:
- *      --------------------------------------
- *      Altered line 58:
- *          Before:
- *              $cont.find(".c-" + counter).fadeIn(300)
- *          After:
- *              $cont.find(".c-" + counter).toggle()
+ * ./library/jquery.adrotate.dyngroup.js:
+ * --------------------------------------
+ * Altered line 58:
+ *      Before:
+ *          $cont.find(".c-" + counter).fadeIn(300)
+ *      After:
+ *          $cont.find(".c-" + counter).show()
  * 
- *      Altered line 61:
- *          Before:
- *              $cont.find(".c-" + index).fadeOut(300)
- *          After:
- *              $cont.find(".c-" + index).toggle()
+ * Altered line 61:
+ *      Before:
+ *          $cont.find(".c-" + index).fadeOut(300)
+ *      After:
+ *          $cont.find(".c-" + index).hide()
  * 
  * This stock behaviour causes the next advert in rotation to appear before the
  * previous one disappears. It causes a brief "stack" of one advert atop the 
@@ -969,6 +970,11 @@ header .mshare {
     background-color: #cc2127;
     background-image: url('images/social/pinterest.png');
 } 
+
+.mshare .reddit {
+    background-color: #ff5700;
+    background-image: url('images/social/reddit.png');
+}
 
 .mshare .rss { 
     background-color: #ff6600;

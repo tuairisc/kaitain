@@ -20,12 +20,12 @@ class Wpzoom_Feature_Posts extends WP_Widget {
         extract( $args );
 
         /* User-selected settings. */
-        $title             = apply_filters('widget_title', $instance['title'] );
-        $category         = $instance['category'];
+        $title          = apply_filters('widget_title', $instance['title'] );
+        $category       = $instance['category'];
         $show_count     = $instance['show_count'];
-        $show_date         = $instance['show_date'] ? true : false;
+        $show_date      = $instance['show_date'] ? true : false;
         $show_thumb     = $instance['show_thumb'] ? true : false;
-        $show_excerpt     = $instance['show_excerpt'] ? true : false;
+        $show_excerpt   = $instance['show_excerpt'] ? true : false;
         $excerpt_length = $instance['excerpt_length'];
         $show_title     = $instance['hide_title'] ? false : true;
 
@@ -63,7 +63,7 @@ class Wpzoom_Feature_Posts extends WP_Widget {
                                     'height' => $instance['thumb_height']
                                 ));
                         ?>        
-                        <div class="twerk">
+                        <div class="feature-post-text">
                         <?php
                             if ($show_title) 
                                 echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a> <br />';
