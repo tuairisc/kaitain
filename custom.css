@@ -27,6 +27,7 @@
     font-family: Georgia, Times, "Times New Roman", serif;
 }
 
+.modal-box a,
 .breadcrumb-banner span {    
     font: 14px arial, "helvetica neue", helvetica, sans-serif;
 }
@@ -361,7 +362,7 @@ screen and (min-device-width:320px) and (max-device-width: 480px) and (orientati
  * other segments on the site. */
 
 .modal-box {
-    background-color: #2769A3;
+    background: #d1d2d4 center center/auto 70% no-repeat border-box url('images/education_soundwave.svg');
     float: left;
     margin-bottom: 4px;
     width: 33%;
@@ -376,7 +377,7 @@ screen and (min-device-width:320px) and (max-device-width: 480px) and (orientati
 }
 
 .modal-box a {
-    color: #fff;
+    color: #000;
     display: block;
     font-size: 175%;
     font-weight: bold;
