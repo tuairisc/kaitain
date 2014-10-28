@@ -38,3 +38,4 @@ require_once THEME_INC . "/widgets/carousel.php";
 
 /** User functions */
 require_once USER_INC . "/functions.php";
+?>

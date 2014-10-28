@@ -27,7 +27,9 @@
     <?php endif; ?> 
 
             <h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permalink to %s', 'wpzoom'); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
-            <h3><?php echo get_the_author(); ?></h3>
+            <?php if (!default_author()) : ?>
+                <h3><?php echo get_the_author(); ?></h3>
+            <?php endif; ?>
             <div class="recent-meta">
 
                 <?php if (option::get('display_category') == 'on') : ?>

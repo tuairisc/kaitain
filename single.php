@@ -19,7 +19,7 @@
                         <?php endif; ?>
                         <div class="post-meta-text">
                             <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') { ?>
-                                <?php if (option::get('post_author') == 'on') { ?><span class="meta-author"><?php the_author_posts_link(); ?></span><?php } ?>
+                                <?php if (option::get('post_author') == 'on' && !default_author()) { ?><span class="meta-author"><?php the_author_posts_link(); ?></span><?php } ?>
                                 <?php if (option::get('post_date') == 'on') { ?><?php echo get_the_date() . ' ag ' . get_the_time(); ?><?php } ?>
                             <?php } ?>
                             <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
@@ -62,4 +62,4 @@
     <?php endif; ?>
  
 </div><!-- /#main -->
-<?php get_footer(); ?> 
+<?php get_footer(); ?>

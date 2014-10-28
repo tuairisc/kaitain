@@ -104,11 +104,10 @@ class Tabbed_Widget extends WP_Widget {
                             <?php // category link here 
                                 $url = get_category_link($postsq);
                                 $name = get_cat_name($postsq);
-                                $text = 'Read more in ' . $name;
-                                $anchor = '<a title="' . $text . '" href="' . $url . '">' . $text . '</a>'; 
+                                $text = 'Leigh tuilleadh i ' . $name;
+                                $anchor = '<h6><a title="' . $text . '" href="' . $url . '">' . $text . '</a></h6>'; 
+                                echo $anchor;
                             ?>
-
-                            <script>console.log('<?php echo $anchor; ?>');</script>
 
                         </div>                    
                 </div> <!-- /.1col -->

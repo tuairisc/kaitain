@@ -48,6 +48,14 @@
     display: table;
 }
 
+/* Tables
+ * -------------------
+ * Needed for tables to display correctly. */
+
+ table.tg {
+    margin-bottom: 14px;
+    width: 100%;
+ }
 /* Top Navigation Menu
  * -------------------
  * A one-hundred line minified JS file does what I could accomplish with 
@@ -68,6 +76,11 @@
  * General stylings for generic parts of the site, as directed by
  * Aidan, Ciaran or Sean. */
 
+#bwg_container1_0 {
+    /* The gallery insert doesn't have a bottom margin. */
+    margin-bottom: 14px;
+}
+
 #respond .form_fields input,
 #comment {
     box-sizing: border-box;
@@ -81,6 +94,12 @@
 .feature-post-text {
     float: right;
     width: 212px;
+}
+
+.post-meta,
+span.date,
+.comment-meta {
+    text-transform: none;
 }
 
 .recent-meta span,
@@ -342,15 +361,15 @@ screen and (min-device-width:320px) and (max-device-width: 480px) and (orientati
 .edu-subheading {
     background: #c44b54;
     color: #fff;
+    /* Important, or WPZOOM will override it. */
+    margin: 20px 0 10px 0 !important;
 }
 
 .edu-heading {
-    margin: 20px 0 !important;    
     padding: 10px;
 }
 
 .edu-subheading {
-    margin: 10px 0;
     padding: 5px 30px;
 }
 
@@ -732,7 +751,6 @@ screen and (min-device-width:320px) and (max-device-width: 480px) and (orientati
 
 .meta-author a {  
     color: #000;
-    text-transform: uppercase;
 }
 
 .meta-author a:hover {
@@ -995,4 +1013,4 @@ header .mshare {
 .mshare .youtube { 
     background-color: #b31217;
     background-image: url('images/social/youtube.png');
-} 
+}

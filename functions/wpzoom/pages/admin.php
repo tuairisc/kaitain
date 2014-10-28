@@ -26,7 +26,6 @@
             <h3><?php echo WPZOOM::$themeName . ' <span>' . WPZOOM::$themeVersion; ?></span></h3>
         </div>
      </div><!-- /#zoomHead -->
-
      <div class="head_meta">
         <div id="zoomFramework">
             <h5>Framework version <?php echo WPZOOM::$wpzoomVersion ?></h5>
