@@ -58,7 +58,7 @@
     <?php if ($template != 'full') : ?> 
         <?php get_sidebar(); ?>
     <?php else : ?>
-        <?php echo "<div class=\"clear\"></div>"; ?>
+        <div class="clear"></div>
     <?php endif; ?>
  
 </div><!-- /#main -->

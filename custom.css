@@ -13,7 +13,16 @@
 
 /*
  Useful generic smartphone media query: 
-    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) 
+
+@media only screen 
+    and (min-device-width: 320px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait),
+only screen
+    and (min-device-width: 320px) 
+    and (max-device-width: 736px) 
+    and (orientation: landscape) {
+
 */
     
 /* Font Selectors
@@ -27,10 +36,28 @@
     font-family: Georgia, Times, "Times New Roman", serif;
 }
 
+a.download-link,
 .modal-box a,
 .breadcrumb-banner span {    
     font: 14px arial, "helvetica neue", helvetica, sans-serif;
 }
+
+/* Oireachtas na Samhna 2014 banner 
+ * --------------------------------
+ * Temporary banner for the Oireachtas na Samhna 2014 festival. */
+
+ .oas-banner {
+    background: #95c27c left center/contain no-repeat border-box url('images/oas_banner.svg');
+    height: 45px;
+    margin-bottom: 14px;
+    width: 100%;
+ }
+
+ .oas-banner a {
+    display: block;
+    height: 100%;
+    width: 100%;
+ }
 
 /* Self-clearing floats 
  * ---------------------
@@ -42,9 +69,10 @@
     overflow: auto;
 }
 
-.widget-area:after, .breadcrumb-banner:after, .post-meta:after,
+#recent-foluntais, .widget-area:after, .breadcrumb-banner:after, .post-meta:after,
 .feature-posts-list:after, .feature-posts-list li:after, ul.mshare:after {
     clear: both;
+    content: '';
     display: table;
 }
 
@@ -93,7 +121,6 @@
 
 .feature-post-text {
     float: right;
-    width: 212px;
 }
 
 .post-meta,
@@ -273,35 +300,22 @@ footer a {
     margin-right: 0;
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait), 
-screen and (min-device-width:320px) and (max-device-width: 480px) and (orientation: landscape) {     
-    .widget-area .column {
-        float: none;
-        margin-bottom: 0;
-        width: 100%;
-    }
-
-    .widget-area .column:last-child {
-        margin-bottom: 20px;
-    }
-}
-
 /* Foras na Gaeilge Attribution Link
  * ---------------------------------
  * Foras na Gaeilge are a major sponsor of Tuairisc Nuacht. The sky /will/ fall
  * down if this link is ever removed. */
 
- .foras-attribution {
-    background: right top/auto 100% no-repeat url('images/foras_na_gaeilge_logo.png');
-    height: 60px;
-    width: 100%;
- }
+.foras-attribution {
+   background: right top/auto 100% no-repeat url('images/foras_na_gaeilge_logo.png');
+   height: 60px;
+   width: 100%;
+}
 
- .foras-attribution a {
-     display: block;
-     height: 100%;
-     width: 100%;
- }
+.foras-attribution a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
 
 @media screen and (max-width: 770px) {
     .foras-attribution {
@@ -535,15 +549,6 @@ screen and (min-device-width:320px) and (max-device-width: 480px) and (orientati
     }
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) { 
-    /* Generic smartphone mobile query. */
-    .g-2, .g-4, .g-5 {
-        float: none;
-        margin-right: 0;
-        width: 99%;
-    }
-}
-
 /* Category Header Banners
  * ------------------------
  * Each category has a custom header bannner.
@@ -594,13 +599,29 @@ screen and (min-device-width:320px) and (max-device-width: 480px) and (orientati
 }
 
 /* Wider Banner for Greann Category (158) 
- * ------------------------------------
+ * --------------------------------------
  * The Greann category (158) must be taller in order to separate content. */
 
 .greann {
     background: 10px center/auto 60px no-repeat url('images/asnc_logo.svg');
     min-height: 60px;
     padding: 15px 0;
+}
+
+/* Download Link
+ * ---------------
+ * Education section posts have a download button for PDF files. 
+*/
+
+a.download-link {
+    background: #d2d3d5 90% center/auto 70% no-repeat url('images/download_arrow.svg');
+    display: inline-block;
+    padding: 12px 50px 12px 12px;
+    text-decoration: none;
+}
+
+a.download-link:hover {
+    color: inherit;
 }
 
 /*
@@ -687,7 +708,7 @@ screen and (min-device-width:320px) and (max-device-width: 480px) and (orientati
     width: 100%;
 }
 
-.single .entry,
+.entry,
 .post-meta,
 .post-author-avatar,
 .post-meta-text,
@@ -699,16 +720,16 @@ screen and (min-device-width:320px) and (max-device-width: 480px) and (orientati
     box-sizing: border-box;
 }
 
-.single .entry,
+.entry,
 .post-meta,
 .post-heading .title {
-    padding: 0 4%;    
+    padding: 9px 4%;    
 }
 
 .post-wrapper {
     /* Containing post wrapper
      * Even out the padding. */
-    padding: 10px 0;
+    padding: 9px 0;
 }
 
 .post-meta {
@@ -1013,4 +1034,61 @@ header .mshare {
 .mshare .youtube { 
     background-color: #b31217;
     background-image: url('images/social/youtube.png');
+}
+
+/*
+ * Mobile Responsiveness
+ * ---------------------
+ * Generic media query for equally-generic smartphones. Targets a range of 
+ * screen sizes from the iPhone 4 through to the iPhone 6 and similarly-larger
+ * devices.
+*/
+
+@media only screen 
+    and (min-device-width: 320px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait),
+only screen
+    and (min-device-width: 320px) 
+    and (max-device-width: 736px) 
+    and (orientation: landscape) {
+
+    .widget-area .column {
+        float: none;
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .widget-area .column:last-child {
+        margin-bottom: 20px;
+    }
+
+    .g-2, .g-4, .g-5 {
+        float: none;
+        margin-right: 0;
+        width: 99%;
+    }
+}
+
+#recent-listings {
+    width: 100%;
+}
+
+.foluntais-recent-left {
+    float: left;
+    width: 20%;
+}
+
+.foluntais-recent-left .post-thumb img {
+    height: auto;
+    max-width: 100%;
+}
+
+.foluntais-recent-right {
+    float: right;
+    width: 77%;
+}
+
+.recent-foluntais {
+
 }

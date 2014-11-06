@@ -1,6 +1,6 @@
-<div class="navigation">
-    <?php
-        global $wp_query;
+<?php if (is_paged()) : ?>
+    <div class="navigation">
+        <?php global $wp_query;
 
         $big = 999999999; // need an unlikely integer
 
@@ -9,8 +9,8 @@
             'format' => '?paged=%#%',
             'current' => max( 1, get_query_var('paged') ),
             'total' => $wp_query->max_num_pages,
-            'prev_text'    => __('⇦', 'wpzoom'),
-            'next_text'    => __('⇨', 'wpzoom')
-        ) );
-    ?>
-</div>
+            'prev_text'    => __('&#8678;', 'wpzoom'),
+            'next_text'    => __('&#8680;', 'wpzoom')
+        )); ?>
+    </div>
+<?php endif; ?>

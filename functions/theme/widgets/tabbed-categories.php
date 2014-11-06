@@ -104,7 +104,8 @@ class Tabbed_Widget extends WP_Widget {
                             <?php // category link here 
                                 $url = get_category_link($postsq);
                                 $name = get_cat_name($postsq);
-                                $text = 'Leigh tuilleadh i ' . $name;
+                                // $text = 'Leígh tuilleadh i ' . $name;
+                                $text = 'Léigh tuilleadh sa rannóg seo';
                                 $anchor = '<h6><a title="' . $text . '" href="' . $url . '">' . $text . '</a></h6>'; 
                                 echo $anchor;
                             ?>

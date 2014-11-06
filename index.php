@@ -6,7 +6,6 @@
     <?php endif; ?>
 
     <div id="content">
-
         <?php if (is_home() && $paged < 2 && option::get('featured_enable') == 'on' && option::get('featured_full') == 'off' ) : ?> 
             <?php get_template_part('wpzoom-slider'); ?>
         <?php endif;?>

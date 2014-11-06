@@ -16,11 +16,14 @@ Template Name: Most Read Posts
             $key = 'tuairisc_view_counter';
 
             $args = array(
+                // Gallery category. The crappy gallery plugin reloads the article every time you view a different image.
+                // The end result is that gallery posts have a vastly inflated count.
+                'cat'            => -184,
                 'post_type'      => 'post',
                 'meta_key'       => $key, 
-                'orderby'        => 'meta_value_num',
                 'posts_per_page' => 50,
-                'order'          => 'DESC' 
+                'orderby'        => 'meta_value_num',
+                'order'          => 'DESC',
             );
 
             $query = new WP_Query($args); 

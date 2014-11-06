@@ -622,11 +622,10 @@ function foluntais_messages($messages) {
 }
 
 function foluntais_help($contextual_help, $screen_id, $screen) { 
-    if ( 'product' == $screen->id ) {
+    if ('product' == $screen->id)
         $help = 'TODO';
-    } elseif ('edit-foluntais' == $screen->id) {
+    elseif ('edit-foluntais' == $screen->id)
         $help = 'TODO';
-    }
 
     return $contextual_help;
 }

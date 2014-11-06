@@ -7,7 +7,7 @@
 <div id="main" role="main">
     <div id="content">
 
-        <?php if (!is_category()) : ?>
+        <?php if (!is_category() && !is_foluntais()) : ?>
             <h3 class="title">
                 <?php if(is_tag()) : ?>
                     <?php // Tag archive. ?>
@@ -35,7 +35,7 @@
             <?php include 'breadcrumb-banner.php'; ?>
         <?php endif; ?>
            
-        <?php get_template_part('loop'); ?> 
+            <?php get_template_part('loop'); ?> 
     </div> <!-- /#content -->
     <?php get_sidebar(); ?> 
 </div> <!-- /#main -->
