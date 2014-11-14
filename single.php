@@ -6,6 +6,8 @@
         <?php while (have_posts()) : the_post(); ?>
             <?php // Requested by Sean. Incrementing post counter. ?>
             <?php increment_view_counter(); ?>
+            
+            <?php get_template_part('banner'); ?>
 
             <article class="post-wrapper">
                 <div class="post-heading">

@@ -603,6 +603,10 @@ footer a {
     color: #000;
 }
 
+.banner-post {
+    margin-bottom: 13px;
+}
+
 /* Wider Banner for Greann Category (158) 
  * --------------------------------------
  * The Greann category (158) must be taller in order to separate content. */
@@ -734,7 +738,8 @@ a.download-link:hover {
 .post-wrapper {
     /* Containing post wrapper
      * Even out the padding. */
-    padding: 9px 0;
+    border: 0;
+    padding: 0;
 }
 
 .post-meta {
