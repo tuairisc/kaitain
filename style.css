@@ -24,7 +24,7 @@ custom.css and it will override the style in this file.
 
 1. Toolbox CSS  -----------------------  All Theme Files
 2. Global Styles  ---------------------  All Theme Files
-3. Header  ----------------------------  header.php
+3. Header  ----------------------------  #header.php
 4. Homepage  --------------------------  index.php
 5. Archive Posts ----------------------  loop.php
 6. Single Post ------------------------  single.php
@@ -42,7 +42,7 @@ custom.css and it will override the style in this file.
 *********************************************************************************************/
 
 /* Reset & General Styling */
-article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
+article, aside, details, figcaption, figure, footer, #header, hgroup, nav, section { display: block; }
 html { font-size: 100%; overflow-y: scroll; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 abbr[title] { border-bottom: 1px dotted; }
 b, strong { font-weight: bold; }
@@ -205,11 +205,11 @@ p { margin: 0 0 15px; padding: 0; }
 
 /*********************************************************************************************
 
-3. Header  -------------------------  header.php
+3. Header  -------------------------  #header.php
 
 *********************************************************************************************/
 
-header {
+#header {
     background: #FF3818;
     color: #fff;
     padding: 15px 40px 0;
@@ -245,7 +245,7 @@ header {
 }
 
 /* Search Form */
-header #searchform {
+#header #searchform {
     float: right;
     margin:14px 0 15px;
     padding: 2px 0;
@@ -260,7 +260,7 @@ header #searchform {
     box-shadow: inset 0 1px 2px rgba(0,0,0,.15);
 }
 
-header #s {
+#header #s {
     outline: none;
     background: #fff;
     font-size: 14px;
@@ -280,7 +280,7 @@ header #s {
     padding: 0;
 }
 
-header  #searchsubmit {
+#header  #searchsubmit {
     float:left;
     margin-left: 8px;
     width:23px;

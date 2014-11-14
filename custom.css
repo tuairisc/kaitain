@@ -31,6 +31,8 @@ only screen
 
 .entry .wp-caption-text,
 .post-heading p,
+#foluntais-listings p,
+#foluntais-listings h3,
 .breadcrumb-banner a,
 .entry blockquote {    
     font-family: Georgia, Times, "Times New Roman", serif;
@@ -38,6 +40,7 @@ only screen
 
 a.download-link,
 .modal-box a,
+#foluntais-listings span,
 .breadcrumb-banner span {    
     font: 14px arial, "helvetica neue", helvetica, sans-serif;
 }
@@ -69,7 +72,7 @@ a.download-link,
     overflow: auto;
 }
 
-#recent-foluntais, .widget-area:after, .breadcrumb-banner:after, .post-meta:after,
+#foluntais-listings article:after, .widget-area:after, .breadcrumb-banner:after, .post-meta:after,
 .feature-posts-list:after, .feature-posts-list li:after, ul.mshare:after {
     clear: both;
     content: '';
@@ -84,13 +87,14 @@ a.download-link,
     margin-bottom: 14px;
     width: 100%;
  }
+ 
 /* Top Navigation Menu
  * -------------------
  * A one-hundred line minified JS file does what I could accomplish with 
  * one line of JS, ironically reversing the norm. */
 
 .dropdown > li:last-child:after {
-    /* Each header menu item has a | after it. This removes the | from the
+    /* Each #header menu item has a | after it. This removes the | from the
     last item. */
     content: '';
 } 
@@ -173,7 +177,7 @@ h3 {
 }
 
 .content-wrap {
-    /* Make header strip regardless of whether header advert group is blocked. */
+    /* Make #header strip regardless of whether #header advert group is blocked. */
     background: center bottom/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
 }
 
@@ -198,27 +202,28 @@ h3 {
 
 /* Header Block
  * ------------ 
- * The header block and its many children. */
+ * The #header block and its many children. */
 
-header {
-    /* Override gradient on header. */ 
+#header {
+    /* Override gradient on #header. */ 
     background: #fff center top/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
 }
 
-header #logo img {
+#header #logo img {
     /* Site logo. */ 
     height: 45px;
     width: auto;
 }
 
-header .search_form {
+#header .search_form {
     /* This had godawful stock CSS. They floated the child inside the parent, 
      * instead of floating the parent. */
     float: right;
     padding-top: 10px;
 }
 
-header #searchform {
+#header #searchform {
+    border-radius: 0;
     float: none;
 }
 
@@ -551,7 +556,7 @@ footer a {
 
 /* Category Header Banners
  * ------------------------
- * Each category has a custom header bannner.
+ * Each category has a custom #header bannner.
  * Children have the same colour as the parent.
  * Colours are set via PHP. 
  * 
@@ -688,7 +693,7 @@ a.download-link:hover {
 
 /* Single Post Title and Meta
  * --------------------------
- * I rewrote and changed the style of the header. The stock layout
+ * I rewrote and changed the style of the #header. The stock layout
  * is a fucking mess of display:table and display:table-cell. I first
  * reset from this and from there build up layout using the same 
  * containers. */
@@ -720,7 +725,7 @@ a.download-link:hover {
     box-sizing: border-box;
 }
 
-.entry,
+.post .entry,
 .post-meta,
 .post-heading .title {
     padding: 9px 4%;    
@@ -755,7 +760,7 @@ a.download-link:hover {
 }
 
 .post-meta > .avatar {
-    /* Single post header avatar. */
+    /* Single post #header avatar. */
     height: 67px;
     margin-right: 10px;
     width: 67px;
@@ -939,20 +944,20 @@ ul.mshare {
     width: 30px;
 }
 
-header .mshare li,
-header .mshare a {
+#header .mshare li,
+#header .mshare a {
     height: 33px; 
     width: 33px;
 }
 
-header .mshare {
+#header .mshare {
     padding-top: 27px;
     margin-right: 5px;
     float: right;
 }
 
 @media screen and (max-width: 800px) {
-    header .mshare {
+    #header .mshare {
         display: none;
     }
 }
@@ -1037,6 +1042,76 @@ header .mshare {
 }
 
 /*
+ * Foluntais
+ * ---------
+ * Job and event listings archive page.
+*/
+
+#foluntais-listings {
+    width: 100%;
+}
+
+#foluntais-listings article {
+    border-bottom: 1px solid #f0f0f0;
+    border-top: 1px solid #f0f0f0;
+    padding: 15px 0;
+}
+
+#foluntais-listings p {
+    font-size: 17px;
+    line-height: 18px;
+}
+
+#foluntais-listings p, #foluntais-listings .recent-meta {
+    margin-bottom: 7px;
+}
+
+#foluntais-listings .left {
+    float: left;
+    width: 25%;
+}
+
+
+#foluntais-listings .right {
+    float: right;
+    width: 73%;
+}
+
+#foluntais-listings .post-thumb img {
+    height: auto;
+    max-width: 100%;
+}
+
+#foluntais-listings .left span, #foluntais-listings .read-more {
+    padding: 3px 15px 3px 5px;
+}
+
+#foluntais-listings .left span {
+    background: #000;
+    display: block;
+    color: #fff;
+    margin-bottom: 13px;
+}
+
+#foluntais-listings .read-more, #foluntais-listings .left span {
+    text-transform: uppercase;
+}
+
+#foluntais-listings .read-more {
+    background-color: #d2d3d5;
+    letter-spacing: 0;
+    text-decoration: none;
+}
+
+#foluntais-listings .meta {
+
+}
+
+#foluntais-listings .entry {
+    padding: 0;
+}
+
+/*
  * Mobile Responsiveness
  * ---------------------
  * Generic media query for equally-generic smartphones. Targets a range of 
@@ -1070,25 +1145,36 @@ only screen
     }
 }
 
-#recent-listings {
-    width: 100%;
-}
+/*
+ * Mobile Responsiveness
+ * ---------------------
+ * Generic media query for equally-generic smartphones. Targets a range of 
+ * screen sizes from the iPhone 4 through to the iPhone 6 and similarly-larger
+ * devices.
+*/
 
-.foluntais-recent-left {
-    float: left;
-    width: 20%;
-}
+@media only screen 
+    and (min-device-width: 320px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait),
+only screen
+    and (min-device-width: 320px) 
+    and (max-device-width: 736px) 
+    and (orientation: landscape) {
 
-.foluntais-recent-left .post-thumb img {
-    height: auto;
-    max-width: 100%;
-}
+    .widget-area .column {
+        float: none;
+        margin-bottom: 0;
+        width: 100%;
+    }
 
-.foluntais-recent-right {
-    float: right;
-    width: 77%;
-}
+    .widget-area .column:last-child {
+        margin-bottom: 20px;
+    }
 
-.recent-foluntais {
-
+    .g-2, .g-4, .g-5 {
+        float: none;
+        margin-right: 0;
+        width: 99%;
+    }
 }

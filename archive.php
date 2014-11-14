@@ -31,11 +31,14 @@
             </h3>
         <?php endif; ?>
 
-        <?php if (is_category()) : ?> 
-            <?php include 'breadcrumb-banner.php'; ?>
-        <?php endif; ?>
+        <?php if (is_category())
+            include 'breadcrumb-banner.php'; ?>
            
-            <?php get_template_part('loop'); ?> 
+        <?php if (is_foluntais())
+            get_template_part('loop','foluntais');
+        else 
+            get_template_part('loop'); ?> 
+
     </div> <!-- /#content -->
     <?php get_sidebar(); ?> 
 </div> <!-- /#main -->
