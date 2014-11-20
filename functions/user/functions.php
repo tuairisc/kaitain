@@ -3,6 +3,10 @@
 /* You can add custom functions below, in the empty area
 =========================================================== */
 
+/* Script Loading
+ * ---------------
+ * Load /all/ the things! */
+
 function tuairisc_scripts() {
     /* This handles loading for all of the custom scripts used in the theme. 
      * 
@@ -24,6 +28,10 @@ function tuairisc_styles() {
     // TODO/testing. Vertical sharing links.
     wp_enqueue_style('tuairisc-vertical-sharing', get_stylesheet_directory_uri() . '/mshare-vertical.css');
 }
+
+/* Breadcrumb Banners
+ * ------------------
+ * These were a requested feature on the site. */
 
 function get_parent_id($cat_id = null) {
     /* Return the ID of the top parent of any category.
@@ -651,17 +659,17 @@ function register_foluntais_taxonomies() {
      * -------------- */
 
     $cat_labels = array(
-        'name'              => _x('Job Types', 'taxonomy general name'),
-        'singular_name'     => _x('Job Type', 'taxonomy singular name'),
-        'search_items'      => __('Search Job Types'),
-        'all_items'         => __('All Job Types'),
-        'parent_item'       => __('Parent Job Type'),
-        'parent_item_colon' => __('Parent Job Type:'),
-        'edit_item'         => __('Edit Job Type'),
-        'update_item'       => __('Update Job Type'),
-        'add_new_item'      => __('Add New Job Type'),
-        'new_item_name'     => __('New Job Type Name'),
-        'menu_name'         => __('Job Types'),
+        'name'              => _x('Job Categories', 'taxonomy general name'),
+        'singular_name'     => _x('Job Category', 'taxonomy singular name'),
+        'search_items'      => __('Search Job Categories'),
+        'all_items'         => __('All Job Categories'),
+        'parent_item'       => __('Parent Cateory'),
+        'parent_item_colon' => __('Parent Category:'),
+        'edit_item'         => __('Edit Category'),
+        'update_item'       => __('Update Category'),
+        'add_new_item'      => __('Add Category'),
+        'new_item_name'     => __('New Category Name'),
+        'menu_name'         => __('Job Categories'),
     );
 
     $cat_args = array(
@@ -678,13 +686,13 @@ function register_foluntais_taxonomies() {
 
     $tag_labels = array(
         'name'              => _x('Job Tags', 'taxonomy general name'),
-        'singular_name'     => _x('Job Tags', 'taxonomy singular name'),
-        'search_items'      => __('Search Job Tags'),
-        'all_items'         => __('All Job Tags'),
-        'edit_item'         => __('Edit Job Tags'),
-        'update_item'       => __('Update Job Tag'),
-        'add_new_item'      => __('Add New Job Tag'),
-        'new_item_name'     => __('New Job Tag'),
+        'singular_name'     => _x('Job Tag', 'taxonomy singular name'),
+        'search_items'      => __('Search Tags'),
+        'all_items'         => __('All Tags'),
+        'edit_item'         => __('Edit Tags'),
+        'update_item'       => __('Update Tag'),
+        'add_new_item'      => __('Add New Tag'),
+        'new_item_name'     => __('New Tag'),
         'menu_name'         => __('Job Tags'),
     );
 
@@ -749,39 +757,37 @@ function foluntais_help($contextual_help, $screen_id, $screen) {
 
 // START TODO/FIXME
 
-function foluntais_box_content($post) {
-    wp_nonce_field(plugin_basename(__FILE__), 'product_price_box_content_nonce'); 
+function foluntais_meta_box_content($post) {
+    wp_nonce_field(plugin_basename(__FILE__), 'foluntais_meta_box_nonce'); 
 
     ?>
         <span>Location:</span><br />
         <label for="foluntais_box"></label>
-        <input class="newtag" type="text" id="product_price" name="product_price" placeholder="Job location" />
-        <input class="button" type="button" id="product_price" name="product_price" Value="Add" />
-        <span>Location:</span><br />
-        <label for="foluntais_box"></label>
-        <input class="newtag" type="text" id="product_price" name="product_price" placeholder="Job location" />
-        <input class="button" type="button" id="product_price" name="product_price" Value="Add" />
+        <input class="newtag" type="text" name="foluntais_input" placeholder="Job location" />
+        <input class="button" type="button" name="foluntais_button" Value="Add" />
     <?php
 }
 
 function foluntais_meta_box() {
     add_meta_box( 
-        // Unique box name
-        'foluntais_box',
-        // Visible name of meta box
-        __('Job Information', 'myplugin_textdomain'),
-        // Function to display box contents
-        'foluntais_box_content',
+        // Unique box name/ID
+        'tuairisc_foluntais_meta',
+        // Title of the text box
+        __('Job Information','wpzoom'),
+        // Callback function to display box contents
+        'foluntais_meta_box_content',
         // Post type this belongs to
         'foluntais',
-        // Placement of the box
+        // Context/placement of the box on the admin page
         'side',
-        // Placement priority of the box if other boxes shuffle it aside.
-        'high'
+        // Placement priority of the box if other boxes shuffle it aside
+        'high',
+        // Callback array
+        null
     );
 }
 
-add_action('add_meta_boxes', 'foluntais_meta_box');
+add_action('add_meta_boxes', 'foluntais_meta_box', 10, 0);
 
 // END TODO/FIXME
 
