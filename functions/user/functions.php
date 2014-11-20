@@ -6,7 +6,7 @@
 function tuairisc_scripts() {
     /* This handles loading for all of the custom scripts used in the theme. 
      * 
-     * Doesn't return anything, and is loadeded at the bottom. */
+     * tuairisc_scripts doesn't return anything, and is loaded at the bottom. */
 
     // Some styling isn't handled correctly by CSS.
     wp_enqueue_script('tuairisc-styling', get_stylesheet_directory_uri() . '/tuairisc_styling.js', array('jquery'), '1.0', true);
@@ -14,6 +14,15 @@ function tuairisc_scripts() {
     wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/tuairisc_adrotate.js', array('jquery'), '1.0', true);
     // Sharing links popout. 
     wp_enqueue_script('tuairisc-share-popout', get_stylesheet_directory_uri() . '/tuairisc_share_popout.js', array('jquery'), '1.0', true);
+}
+
+function tuairisc_styles() {
+    /* This handles loading for all of the custom stylesheets used in the theme. 
+     * 
+     * tuairisc_styles doesn't return anything, and is loaded at the bottom. */
+
+    // TODO/testing. Vertical sharing links.
+    wp_enqueue_style('tuairisc-vertical-sharing', get_stylesheet_directory_uri() . '/mshare-vertical.css');
 }
 
 function get_parent_id($cat_id = null) {
@@ -783,6 +792,7 @@ add_filter('post_updated_messages', 'foluntais_messages');
 add_action('contextual_help', 'foluntais_help', 10, 3);
 // Load JavaScript scripts. 
 add_action('wp_enqueue_scripts', 'tuairisc_scripts');
+add_action('wp_enqueue_scripts', 'tuairisc_styles');
 // Rearrange title.
 add_filter('wp_title', 'tweak_title', 10, 2);
 // Remove read more links from excerpts.
