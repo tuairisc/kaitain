@@ -17,11 +17,11 @@ var sizeArray = [
     'width=470,height=470',
 ];
 
-$('.post-wrapper .mshare a, .msv a').click(function(e) {
-    var rel = parseInt($(this).attr('rel'));
+jQuery('.post-wrapper .mshare a, .msv a').click(function(e) {
+    var rel = parseInt(jQuery(this).attr('rel'));
 
     if (sizeArray[rel] != '') {
-        var href = $(this).attr('href');
+        var href = jQuery(this).attr('href');
         var name = 'target="_blank';
         var size = sizeArray[rel];
 

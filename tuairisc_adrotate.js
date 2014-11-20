@@ -91,7 +91,7 @@ function setSuffix(url) {
 
 function getBackgroundImg(obj) {
     // Return background-image from advert as parsed URL.
-    return stripUrl($(obj).css('background-image'));
+    return stripUrl(jQuery(obj).css('background-image'));
 }
 
 function checkImageExists(url, successCallback, failCallback) {
@@ -106,7 +106,7 @@ function checkImageExists(url, successCallback, failCallback) {
         console.log('Error: ' + url + ' not found');
     }
 
-    $.ajax({
+    jQuery.ajax({
         url : url,
         type: 'HEAD',
         dataType: 'image',
@@ -128,16 +128,16 @@ function setBannerImage(obj, img) {
     var temp = new Image();
     temp.src = img;
 
-    $(temp).load(function() {
+    jQuery(temp).load(function() {
         var w = temp.width;
         var h = temp.height;
 
         // Shrink to parent.
-        if (w >= $(obj).closest('.g').width()) {
-            w = $(obj).closest('.g').width();
+        if (w >= jQuery(obj).closest('.g').width()) {
+            w = jQuery(obj).closest('.g').width();
         }
 
-        $(obj).css({
+        jQuery(obj).css({
             'width'  : w + 'px',
             'height' : h + 'px',
             'background-image' : addUrl(img)
@@ -150,8 +150,8 @@ function resizeBannerAdvert(obj) {
      * Parse the background image to a URL, check if it exists and set it if so.
      * If no image can be found, then the advert is broken and placeholder text 
      * is inserted into the advert instead. */
-    $(obj).find(advert).each(function() {
-        var curAdvert = $(this);
+    jQuery(obj).find(advert).each(function() {
+        var curAdvert = jQuery(this);
         var img = getBackgroundImg(this);
         img = setSuffix(img);
 
@@ -160,7 +160,7 @@ function resizeBannerAdvert(obj) {
             setBannerImage(curAdvert, img);
         }, function() {
             // Set banner to fallback size if image is missing.
-            $(curAdvert).children('a').attr({
+            jQuery(curAdvert).children('a').attr({
                 'href'  : fallback.href,
                 'title' : fallback.title,
             });
@@ -174,32 +174,32 @@ function resizeSidebarAdvert(obj) {
     /* Elements with display: none set report a width of 0. 
      * Capture width of first sidebar advert container and set all widths to 
      * that. */
-    var w = $(obj).width();
+    var w = jQuery(obj).width();
 
-    $(obj).find(advert).each(function() {
-        $(this).css({
+    jQuery(obj).find(advert).each(function() {
+        jQuery(this).css({
             'width'  : w + 'px',
             'height' : w + 'px'
         });
     });
 }
 
-$(function() { 
-    $.each(bannerGroups,function(i,v) {
+jQuery(function() { 
+    jQuery.each(bannerGroups,function(i,v) {
         resizeBannerAdvert(v);
     });
 
-    $.each(sidebarGroups,function(i,v) {
+    jQuery.each(sidebarGroups,function(i,v) {
         resizeSidebarAdvert(v);
     });
 });
 
-$(window).resize(function() {
-    $.each(bannerGroups,function(i,v) {
+jQuery(window).resize(function() {
+    jQuery.each(bannerGroups,function(i,v) {
         resizeBannerAdvert(v);
     });
 
-    $.each(sidebarGroups, function(i,v) {
+    jQuery.each(sidebarGroups, function(i,v) {
         resizeSidebarAdvert(v);
     });
 });

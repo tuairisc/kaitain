@@ -99,11 +99,5 @@
 <?php wp_footer(); ?>
 
 <?php wp_reset_query(); ?>
-
-<?php // JavaScript for size of AdRotate advertisements. ?>
-<script src="<?php echo get_template_directory_uri() . '/tuairisc_adrotate.js'; ?>"></script>
-<script src="<?php echo get_template_directory_uri() . '/tuairisc_share_popout.js'; ?>"></script>
-<script src="<?php echo get_template_directory_uri() . '/tuairisc_styling.js'; ?>"></script>
-
 </body>
 </html>

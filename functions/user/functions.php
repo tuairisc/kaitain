@@ -3,6 +3,19 @@
 /* You can add custom functions below, in the empty area
 =========================================================== */
 
+function tuairisc_scripts() {
+    /* This handles loading for all of the custom scripts used in the theme. 
+     * 
+     * Doesn't return anything, and is loadeded at the bottom. */
+
+    // Some styling isn't handled correctly by CSS.
+    wp_enqueue_script('tuairisc-styling', get_stylesheet_directory_uri() . '/tuairisc_styling.js', array('jquery'), '1.0', true);
+    // Styling and loading for jQuery scripts.
+    wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/tuairisc_adrotate.js', array('jquery'), '1.0', true);
+    // Sharing links popout. 
+    wp_enqueue_script('tuairisc-share-popout', get_stylesheet_directory_uri() . '/tuairisc_share_popout.js', array('jquery'), '1.0', true);
+}
+
 function get_parent_id($cat_id = null) {
     /* Return the ID of the top parent of any category.
      *
@@ -595,7 +608,7 @@ function register_foluntais() {
         'name'               => _x('Jobs', 'post type general name'),
         'singlular_name'     => _x('Job', 'post type individual name'),
         'add_new'            => _x('Add New', 'job'),
-        'add_new_item'       => __('Add New Product'),
+        'add_new_item'       => __('Add New Job'),
         'edit_item'          => __('Edit Job'),
         'new_item'           => __('New Job'),
         'menu_name'          => __('Jobs'),
@@ -675,8 +688,8 @@ function register_foluntais_taxonomies() {
         'rewrite'           => array('slug' => 'job-tags'),
     );
 
-    register_taxonomy('job_types', array('foluntais'), $cat_labels);
-    register_taxonomy('job_tags', array('foluntais'), $tag_labels);
+    register_taxonomy('job_types', array('foluntais'), $cat_args);
+    register_taxonomy('job_tags', array('foluntais'), $tag_args);
 }
 
 function is_foluntais() {
@@ -728,11 +741,18 @@ function foluntais_help($contextual_help, $screen_id, $screen) {
 // START TODO/FIXME
 
 function foluntais_box_content($post) {
-    wp_nonce_field(plugin_basename(__FILE__), 'product_price_box_content_nonce');
-    echo '<span>Location:</span><br />';
-    echo '<label for="foluntais_box"></label>';
-    echo '<input type="text" id="product_price" name="product_price" placeholder="Job location" />';
-    echo '<input type="button" id="product_price" name="product_price" Value="Add" />';
+    wp_nonce_field(plugin_basename(__FILE__), 'product_price_box_content_nonce'); 
+
+    ?>
+        <span>Location:</span><br />
+        <label for="foluntais_box"></label>
+        <input class="newtag" type="text" id="product_price" name="product_price" placeholder="Job location" />
+        <input class="button" type="button" id="product_price" name="product_price" Value="Add" />
+        <span>Location:</span><br />
+        <label for="foluntais_box"></label>
+        <input class="newtag" type="text" id="product_price" name="product_price" placeholder="Job location" />
+        <input class="button" type="button" id="product_price" name="product_price" Value="Add" />
+    <?php
 }
 
 function foluntais_meta_box() {
@@ -752,7 +772,7 @@ function foluntais_meta_box() {
     );
 }
 
-// add_action('add_meta_boxes', 'foluntais_meta_box');
+add_action('add_meta_boxes', 'foluntais_meta_box');
 
 // END TODO/FIXME
 
@@ -761,6 +781,8 @@ add_action('init', 'register_foluntais');
 add_action('init', 'register_foluntais_taxonomies', 0);
 add_filter('post_updated_messages', 'foluntais_messages');
 add_action('contextual_help', 'foluntais_help', 10, 3);
+// Load JavaScript scripts. 
+add_action('wp_enqueue_scripts', 'tuairisc_scripts');
 // Rearrange title.
 add_filter('wp_title', 'tweak_title', 10, 2);
 // Remove read more links from excerpts.
