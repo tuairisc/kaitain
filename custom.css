@@ -736,9 +736,10 @@ a.download-link:hover {
 }
 
 .post-wrapper {
+    border: 0;
+
     /* Containing post wrapper
      * Even out the padding. */
-    border: 0;
     padding: 0;
 }
 
@@ -817,8 +818,8 @@ a.download-link:hover {
 }
 
 .single .entry {
-    /* Remove border from top of post conent. */ 
-    border: none;
+    /* Remove border from top of post content. */ 
+    border: 0;
 }
 
 /* Education Landing Page
