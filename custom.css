@@ -1149,6 +1149,48 @@ only screen
         margin-right: 0;
         width: 99%;
     }
+
+    #foluntais-listings .left, #foluntais-listings .right {
+        float: none;
+        width: 100%;
+    }
+
+    #foluntais-listings .post-thumb {
+        display: none;
+    }
+
+    #foluntais-listings .left span {
+        margin-bottom: 7px;
+    }
+
+    #header {
+        padding: 4%;
+    }
+
+    #header #searchform {
+        margin-bottom: 28px;
+    }
+
+    #menu {
+        margin-top: 0;
+    }
+
+    .mshare {
+        display: none;
+    }
+
+    .widget-area {
+        margin-bottom: 13px;
+    }
+
+    #footer {
+        background-image: none;
+        padding-bottom: 28px;
+    }
+
+    .foras-attribution {
+        margin-top: 13px;
+    }
 }
 
 /*
