@@ -45,14 +45,6 @@
                     <div class="clear"></div>
                 </div><!-- #post-<?php the_ID(); ?> -->
             </article>
-
-            <?php if (option::get('post_related') == 'on') : ?>
-                <?php get_template_part('related-posts'); ?>
-            <?php endif; ?>
-
-            <?php if (option::get('post_comments') == 'on') : ?>
-                <?php comments_template(); ?>
-            <?php endif; ?>
             
         <?php endwhile; ?>
     </div><!-- /#content -->

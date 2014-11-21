@@ -55,9 +55,8 @@ function get_breadcrumb() {
         echo get_category_parents($id[0]->cat_ID, true, '&nbsp;');
     } else if (is_category() && is_greann()) {
         echo '<span>' . category_description() . '</span>';
-    } else if (is_single_job()) {
-        // TODO
-        echo '<a href="javascript:void(0">FIXME</a>'; 
+    } else if (is_singular('foluntais')) {
+        get_job_category_link($post_id, true, '&nbsp;');
     }
 }
 
@@ -89,7 +88,7 @@ function breadcrumbs_get_id() {
      * get_id figures out which is which and returns the appropriate ID. Dirty shorthand
      * until I have a better solution. */
 
-    if (is_single() && has_category() && !is_single_job()) {
+    if (is_single() && has_category() && !is_singular('foluntais')) {
         $id = get_the_category();
         $id = $id[0]->cat_ID;
 
@@ -101,7 +100,7 @@ function breadcrumbs_get_id() {
 
     } else if (is_category()) {
         $id = get_parent_id(get_query_var('cat'));
-    } else if (is_single_job()) {
+    } else if (is_singular('foluntais')) {
         $id = 799;
     } else {
         return;
@@ -464,8 +463,9 @@ function parse_columnist_role($author_id) {
         $meta_tag = strtolower($meta_tag);
         $meta_tag = strip_tags($meta_tag);
 
-        if ($meta_tag === 'yes')
+        if ($meta_tag === 'yes') {
             return true;
+        }
     } 
 
     return false;
@@ -492,10 +492,11 @@ function is_columnist_article() {
     $col_article = strtolower($col_article);
     $col_article = strip_tags($col_article);
 
-    if ($col_article === '1') 
+    if ($col_article === '1') {
         return true;
+    }
 
-    return false;;
+    return false;
 }
 
 function tweak_title($title, $sep) {
@@ -523,8 +524,9 @@ function get_view_count($post_id = null) {
      * 
      * get_view_count returns the integer count. */
 
-    if ($post_id == '')
+    if ($post_id == '') {
         return;
+    }
 
     $key = 'tuairisc_view_counter';
     $count = (int) get_post_meta($post_id, $key, true);
@@ -557,8 +559,9 @@ function is_excluded_category() {
     foreach(get_the_category() as $c) {
         $cat_id = get_cat_id($c->cat_name);
 
-        if (in_array($cat_id, $excluded_categories))
+        if (in_array($cat_id, $excluded_categories)) {
             return true;
+        }
     }
 
     return false;
@@ -574,7 +577,7 @@ function increment_view_counter($post_id = null) {
     if ($post_id == '')
         $post_id = get_the_ID();
 
-    if (is_single_job() || is_single() && !is_user_logged_in()) {
+    if (is_singular('foluntais') || is_single() && !is_user_logged_in()) {
         $key = 'tuairisc_view_counter';
         $count = (int) get_post_meta($post_id, $key, true);
         $count++;
@@ -593,8 +596,9 @@ function list_post_types() {
     $operator = 'and';
     $post_types = get_post_types($args, $output, $operator); 
 
-    foreach ($post_types as $post_type)
+    foreach ($post_types as $post_type) {
         echo '<script>console.log("' . $post_type . '");</script>';
+    }
 }
 
 /*
@@ -696,16 +700,6 @@ function register_job_taxonomies() {
     register_taxonomy('job_tags', array('foluntais'), $tag_args);
 }
 
-function is_single_job() {
-    /* Test if the article in question is of the custom 'foluntais' type.
-     * is_folunttais returns true or false. */
-
-    if (get_post_type() == 'foluntais')
-        return true;
-
-    return false;
-}
-
 function job_messages($messages) {
     /* Error and help messages related to foluntais post types. */
 
@@ -728,86 +722,117 @@ function job_messages($messages) {
     return $messages;
 }
 
-function job_help($contextual_help, $screen_id, $screen) { 
-    /* Foluntais help message. */
+function has_job_category($post_id = null) {
+    if ('' == $post_id) {
+        $post_id = get_the_ID();
+    }
 
-    if ('product' == $screen->id)
-        $help = 'TODO';
-    elseif ('edit-job' == $screen->id)
-        $help = 'TODO';
+    $t = get_terms('job_categories');
 
-    return $contextual_help;
+    foreach ($t as $a)
+        array_push($terms, $a->term_id);
+
+    return (has_term($terms, 'job_categories', $post_id)) ? true : false;
 }
 
-function job_category_id($id) {
-    // Return the ID for the given job post type.
-    return;
-    $id = wp_get_post_terms($id, 'job_types', array('fields' => 'ids'));
-    return $id[0];
+function job_category_id($post_id) {
+    // Return the ID for the first category of the given type. 
+
+    if ('' == $post_id) {
+        $post_id = get_the_ID();
+    }
+
+    if (!has_job_category($post_id)) {
+        return;
+    }
+
+    $cat_id = wp_get_post_terms($post_id, 'job_categories', array('fields' => 'ids'));
+    return $cat_id[0];
 }
 
-function job_category_name($id) {
+function job_category_name($post_id) {
     // Return the name for the given job post type.
-    return;
-    $term = get_term(job_category_id($id), 'job_types');
+
+    if ('' == $post_id) {
+        $post_id = get_the_ID();
+    }
+
+    if (!has_job_category($post_id)) {
+        return;
+    }
+
+    $term = get_term(job_category_id($post_id), 'job_categories');
     return $term->name;
 }
 
 function job_category_link($id) {
     // Return the link to the given job post type.
-    return;
-    $term = get_term(job_category_id($id), 'job_types');    
+    $term = get_term(job_category_id($id), 'job_categories');    
     return get_term_link($term);
 }
  
-function get_job_category_link($id = null, $add_parent = false, $separator = '/') {
+function get_job_category_link($post_id = null, $add_parent = false, $separator = '/') {
     /* This mirrors the function of get_category_parents(), except for job
      * postings. */
 
-    if ($id == '')
+    if ('' == $post_id) {
+        $post_id == get_the_ID();
+    }
+
+    if (!has_job_category($post_id)) {
         return;
+    }
 
     // Totally ghetto, but I'm drunk.
-    $term_name = job_category_name($id);
-    $term_link = job_category_link($id);
+    $term_name = job_category_name($post_id);
+    $term_link = job_category_link($post_id);
 
     $anchor = '<a href="' . $term_link . '">'. $term_name . '</a>';
 
     if ($add_parent == true) {
-        $parent_link = get_post_type_archive_link('job'); 
+        $parent_link = get_post_type_archive_link('foluntais'); 
         $parent_name = get_post_type($id);
         $parent_anchor = '<a href="' . $parent_link . '">' . $parent_name . '</a>' . $separator;
-        return $parent_anchor . $anchor;
+        $anchor = $parent_anchor . $anchor;
     }
 
-    return $anchor;
+    echo $anchor;
 }
 
 function job_category_color($post_id = null) {
-    if ($post_id == '')
+    if ('' == $post_id) {
         $post_id = get_the_ID();
+    }
 
-    $id = job_category_id($post_id);
+    if (!has_job_category($post_id)) {
+        echo 'display: none;';
+        return;
+    }
+
+    $cat_id = job_category_id($post_id);
 
     $category_colors = array(
         // Place holder.
-        223 => '#90b5d2',
-        226 => '#9ac485',
+        227 => '#90b5d2',
+        228 => '#9ac485',
         // Fallback
-        999 => '#000'
+        999 => '#424045'
     );
 
-    if (array_key_exists($id, $category_colors))
-        return $category_colors[$id];
-    else 
-        return $category_colors[999];
+    $bg_open = 'background-color:';
+    $bg_close = ';';
+
+    if (array_key_exists($cat_id, $category_colors)) {
+        echo $bg_open . $category_colors[$cat_id] . $bg_close;
+    } else {
+        echo $bg_open . $category_colors[999] . $bg_close;
+    }
 }
 
 // Add custom post type for job listings.
 add_action('init', 'register_job_type');
 add_action('init', 'register_job_taxonomies', 0);
 add_filter('post_updated_messages', 'job_messages');
-add_action('contextual_help', 'job_help', 10, 3);
 // Load JavaScript scripts. 
 add_action('wp_enqueue_scripts', 'tuairisc_scripts');
 add_action('wp_enqueue_scripts', 'tuairisc_styles');
