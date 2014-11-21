@@ -207,6 +207,7 @@ h3 {
 #header {
     /* Override gradient on #header. */ 
     background: #fff center top/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
+    padding: 0 4%;
 }
 
 #header #logo img {
@@ -220,11 +221,19 @@ h3 {
      * instead of floating the parent. */
     float: right;
     padding-top: 10px;
+    width: 278px;
 }
 
 #header #searchform {
     border-radius: 0;
     float: none;
+    width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+    #header .search_form {
+        float: left;
+    }    
 }
 
 /* Footer Block
