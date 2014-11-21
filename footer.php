@@ -10,7 +10,7 @@
     <?php // Adrotate group 3 ?>
     <?php echo adrotate_group(3); ?>
 
-    <footer>
+    <div id="footer">
         <div class="interior">
             <?php if (is_active_sidebar('footer_1') || is_active_sidebar('footer_2') || is_active_sidebar('footer_3') || is_active_sidebar('footer_4')) : ?>
                 <div class="widget-area">
@@ -24,7 +24,7 @@
                 <p><?php _e('', 'wpzoom'); ?> &copy; <?php echo date("Y",time()); ?> <?php _e('Tuairisc Bheo Teoranta', 'wpzoom'); ?>.</p>
             </div>
         </div>
-    </footer>
+    </div>
 </div><!-- /.inner-wrap -->
 
 <?php if ($paged < 2 && is_home()) : ?>
