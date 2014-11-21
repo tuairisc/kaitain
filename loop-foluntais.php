@@ -3,7 +3,7 @@
         <article id="post-<?php the_ID(); ?>" class="recent-foluntais">
 
             <div class="left">
-                <span style="background-color: <?php echo foluntais_category_color(); ?>"><?php echo foluntais_category_name(); ?></span>
+                <span style="background-color: <?php echo job_category_color(); ?>"><?php echo job_category_name(); ?></span>
                 <?php if (option::get('index_thumb') == 'on') : ?> 
                     <?php get_the_image( array( 'size' => 'loop', 'width' => option::get('thumb_width'), 'height' => option::get('thumb_height'), 'before' => '<div class="post-thumb">', 'after' => '</div>' ) ); ?>
                 <?php endif; ?>
