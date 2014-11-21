@@ -68,10 +68,15 @@ function unique_breadcrumb($cat_id = null) {
     if (is_category()) {
         if ($cat_id == '')
             $cat_id = get_parent_id(get_query_var('cat'));
-
-        if ($cat_id == 158)
-            return true;
+    } else if (is_single()) {
+        if ($cat_id == '') {
+            $cat_id = get_the_category();
+            $cat_id = $cat_id[0]->cat_ID;
+        }
     }
+
+    if ($cat_id == 158)
+        return true;
 
     return false;
 }
@@ -87,7 +92,14 @@ function get_id($id = null) {
      * until I have a better solution. */
 
     if (is_single()) {
-        $id = 899;
+        $cat_id = get_the_category();
+        $cat_id = $cat_id[0]->cat_ID;
+
+        if ($cat_id == 158) 
+            $id = 158;
+        else 
+            $id = 899;
+
     } else if (is_category()) {
         if ($id == '')
             $id = get_query_var('cat');
@@ -829,7 +841,7 @@ function foluntais_meta_box() {
     );
 }
 
-add_action('add_meta_boxes', 'foluntais_meta_box', 10, 0);
+// add_action('add_meta_boxes', 'foluntais_meta_box', 10, 0);
 
 // END TODO/FIXME
 
