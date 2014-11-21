@@ -1073,8 +1073,8 @@ ul.mshare {
 }
 
 #foluntais-listings p {
-    font-size: 17px;
-    line-height: 18px;
+    font-size: 16px;
+    line-height: 17px;
 }
 
 #foluntais-listings p, #foluntais-listings .recent-meta {
@@ -1083,13 +1083,16 @@ ul.mshare {
 
 #foluntais-listings .left {
     float: left;
-    width: 25%;
+    width: 15%;
 }
 
+#foluntais-listings .left span {
+    font-size: 12px;
+}
 
 #foluntais-listings .right {
     float: right;
-    width: 73%;
+    width: 83%;
 }
 
 #foluntais-listings .post-thumb img {
@@ -1098,7 +1101,7 @@ ul.mshare {
 }
 
 #foluntais-listings .left span, #foluntais-listings .read-more {
-    padding: 3px 15px 3px 5px;
+    padding: 3px 5px 3px 5px;
 }
 
 #foluntais-listings .left span {
