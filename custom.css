@@ -1203,6 +1203,10 @@ only screen
         display: none;
     }
 
+    article p, article blockquote, article li, article img {
+        margin-bottom: 7px;
+    }
+
     #comments {
         margin-bottom: 13px;
         overflow: auto;
