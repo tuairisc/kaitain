@@ -7,7 +7,7 @@
 <div id="main" role="main">
     <div id="content">
 
-        <?php if (!is_category() && !is_foluntais()) : ?>
+        <?php if (!is_category()) : ?>
             <h3 class="title">
                 <?php if(is_tag()) : ?>
                     <?php // Tag archive. ?>

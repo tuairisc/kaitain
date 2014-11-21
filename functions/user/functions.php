@@ -3,6 +3,13 @@
 /* You can add custom functions below, in the empty area
 =========================================================== */
 
+function js_log($str) {
+    if (!is_string($str))
+        $str = 'not a string';
+
+    echo '<script>console.log("' . $str .'");</script>';
+}
+
 /* Script Loading
  * ---------------
  * Load /all/ the things! */
@@ -26,7 +33,7 @@ function tuairisc_styles() {
      * tuairisc_styles doesn't return anything, and is loaded at the bottom. */
 
     // TODO/testing. Vertical sharing links.
-    wp_enqueue_style('tuairisc-vertical-sharing', get_stylesheet_directory_uri() . '/mshare-vertical.css');
+    // wp_enqueue_style('tuairisc-vertical-sharing', get_stylesheet_directory_uri() . '/mshare-vertical.css');
 }
 
 /* Breadcrumb Banners
@@ -50,47 +57,36 @@ function get_breadcrumb($id = null) {
     if ($id == '' && !is_foluntais()) {
         $id = get_the_category();
         $id = $id[0]->cat_ID;
-    }
+        return get_category_parents($id, true, '&nbsp;');
+    } else if (is_foluntais()) {
+        // Working on this. Shit be broke, yo.
 
-    return get_category_parents($id, true, '&nbsp;');
+        $id = get_ID();
+        js_log((string)$id);
+        $terms = get_terms('job-types');
+
+        js_log('arghhhhh');
+
+        foreach ($terms as $term) 
+            js_log($term);
+
+        return '<a href="javascript:void(0)">asdadad</a>';
+    }
 }
 
 function unique_breadcrumb($cat_id = null) {
-    return false;
-    /* Return a unique colour for each given parent category.
-     * 
-     * # Category Name   Hex Colour  Category ID
-     * -----------------------------------------
-     * 1 Nuacht          #516671     191  
-     * 2 Tuairmíocht     #8eb2d3     154   
-     * 3 Spoirt          #c54b54     155
-     * 4 Cultúr          #96c381     156
-     * 5 Saol            #e04184     157
-     * 6 Pobal           #7d5e90     159
-     * 7 Greann          #e6192a     158
-     * 8 Foghlaimeoirí   #d4bb85     187 
-     *
-     * get_cat_color returns the hex color as a string. */
+    if (is_category()) {
+        if ($cat_id == '')
+            $cat_id = get_parent_id(get_query_var('cat'));
 
-    $has_style = false;
-
-    if (is_single())
-        return $has_style;
-
-    if ($cat_id == '')
-        $cat_id = get_parent_id(get_query_var('cat'));
-
-    switch ($cat_id) {
-        case 158: 
-            $has_style = true; break;
-        default: 
-            break;
+        if ($cat_id == 158)
+            return true;
     }
 
-    return $has_style;
+    return false;
 }
 
-function get_id() {
+function get_id($id = null) {
     /* Three objects have banners:
      *
      * 1. Single posts
@@ -100,18 +96,16 @@ function get_id() {
      * get_id figures out which is which and returns the appropriate ID. Dirty shorthand
      * until I have a better solution. */
 
-    $id = '';
-
-    if (is_single())
-        // $id = get_the_ID();
+    if (is_single()) {
         $id = 899;
-    else if (is_category())
-        $id = get_query_var('cat');
-    else if (is_foluntais())
-        // Placeholder.
+    } else if (is_category()) {
+        if ($id == '')
+            $id = get_query_var('cat');
+    } else if (is_foluntais()) {
         $id = 799;
-    else 
+    } else {
         return;
+    }
 
     return $id;
 }
@@ -143,7 +137,7 @@ function banner_color($id = null) {
         187 => '#424045',
         191 => '#516671',
         // Foluntais
-        799 => '#000',
+        799 => '#424045',
         // Single posts
         899 => '#000',
         // Fallback
@@ -190,6 +184,11 @@ function banner_class($id = null) {
     echo $class;
 }
 
+/* 'Hero'-style Posts 
+ * ------------------
+ * The first post on the each page of the category display has a different, custom
+ * style. */
+
 function hero_post_class() {
     /* If the lead post has thumbnail images, mark it as a 'hero' post, whose 
      * style is very different than other posts in the cateory loop. 
@@ -206,15 +205,13 @@ function show_hero($current_post) {
 
     show_hero returns true or false. */
 
-    $show = false;
-
     if ($current_post == 0 && !is_paged())
-        $show = true;
+        return true;
 
     if (is_excluded_category())
-        $show = false;
+        return false;
 
-    return $show;
+    return false;
 }
 
 function get_thumbnail_url($post_id = null) {
@@ -314,12 +311,11 @@ function default_author() {
      * default_author returns true if the author was the default account. */
 
     $default_author = 37;
-    $is_default = false; 
     
     if (get_the_author_meta('ID') == $default_author)
-        $is_default = true;
+        return true;
 
-    return $is_default;
+    return false;
 }
 
 function month_to_irish($month) {
@@ -467,17 +463,16 @@ function parse_columnist_role($author_id) {
      * parse_columnist_role returns true if the string parses to 'yes' */
 
     $meta_tag = get_the_author_meta('columnist', $author_id);
-    $is_columnist = false;
 
     if (!empty($meta_tag)) {
         $meta_tag = strtolower($meta_tag);
         $meta_tag = strip_tags($meta_tag);
 
         if ($meta_tag === 'yes')
-            $is_columnist = true;
+            return true;
     } 
 
-    return $is_columnist;
+    return false;
 }
 
 function author_is_columnist() {
@@ -498,14 +493,13 @@ function is_columnist_article() {
      * is_columnist_article parses the value and returns true or false. */
 
     $col_article = get_post_meta(get_the_ID(), 'is_column', true);
-    $is_column = false;
     $col_article = strtolower($col_article);
     $col_article = strip_tags($col_article);
 
     if ($col_article === '1') 
-        $is_column = true;
+        return true;
 
-    return $is_column;
+    return false;;
 }
 
 function tweak_title($title, $sep) {
@@ -562,19 +556,16 @@ function is_excluded_category() {
      *
      * is_excluded_category returns true or false. */
 
-    $is_excluded = false; 
     $excluded_categories = array(216, 182);
 
     foreach(get_the_category() as $c) {
         $cat_id = get_cat_id($c->cat_name);
 
-        if (in_array($cat_id, $excluded_categories)) {
-            $is_excluded = true;
-            break;
-        }
+        if (in_array($cat_id, $excluded_categories))
+            return true;
     }
 
-    return $is_excluded;
+    return false;
 }
 
 function increment_view_counter($post_id = null) {
@@ -607,7 +598,7 @@ function list_post_types() {
     $post_types = get_post_types($args, $output, $operator); 
 
     foreach ($post_types as $post_type)
-        echo '<script>console.log("' . $post_type . '");</script>';
+        js_log($post_type);
 }
 
 /*
@@ -714,12 +705,11 @@ function is_foluntais() {
      * is_folunttais returns true or false. */
 
     $job = 'foluntais';
-    $is_job = false;
 
     if (get_post_type() == $job)
-        $is_job = true;
+        return true;
 
-    return $is_job;
+    return false;
 }
 
 function foluntais_messages($messages) {
