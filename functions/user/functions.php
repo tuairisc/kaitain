@@ -3,13 +3,6 @@
 /* You can add custom functions below, in the empty area
 =========================================================== */
 
-function js_log($str) {
-    if (!is_string($str))
-        $str = 'not a string';
-
-    echo '<script>console.log("' . $str .'");</script>';
-}
-
 /* Script Loading
  * ---------------
  * Load /all/ the things! */
@@ -53,28 +46,25 @@ function get_parent_id($cat_id = null) {
     return get_cat_id($parent); 
 }
 
-function get_breadcrumb($id = null) {
-    if ($id == '' && !is_foluntais()) {
+function get_breadcrumb() {
+    /* This returns the appropriate set of breadcrumb links for the given category/single post.
+     * Not much exciting here. */
+
+    if (!is_foluntais()) {
         $id = get_the_category();
-        $id = $id[0]->cat_ID;
-        return get_category_parents($id, true, '&nbsp;');
-    } else if (is_foluntais()) {
-        // Working on this. Shit be broke, yo.
-
-        $id = get_ID();
-        js_log((string)$id);
-        $terms = get_terms('job-types');
-
-        js_log('arghhhhh');
-
-        foreach ($terms as $term) 
-            js_log($term);
-
-        return '<a href="javascript:void(0)">asdadad</a>';
+        return get_category_parents($id[0]->cat_ID, true, '&nbsp;');
+    } else {
+        // Get ID of the custom post's taxonomies.
+        return get_foluntais_category_link(get_the_ID(), '&nbsp;');
     }
 }
 
 function unique_breadcrumb($cat_id = null) {
+    /* The Greann category has a unique breadcrumb style, to differentiate it with 
+     * other, more serious, segments of the website. 
+     * 
+     * unique_breacrumb return true if the cat_id == 158. */
+
     if (is_category()) {
         if ($cat_id == '')
             $cat_id = get_parent_id(get_query_var('cat'));
@@ -598,7 +588,7 @@ function list_post_types() {
     $post_types = get_post_types($args, $output, $operator); 
 
     foreach ($post_types as $post_type)
-        js_log($post_type);
+        echo '<script>console.log("' . $post_type . '");</script>';
 }
 
 /*
@@ -743,6 +733,68 @@ function foluntais_help($contextual_help, $screen_id, $screen) {
         $help = 'TODO';
 
     return $contextual_help;
+}
+
+function foluntais_category_id($post_id = null) {
+    // Return the ID for the given foluntais post type.
+    if ($post_id == '') 
+        $post_id = get_the_ID();
+
+    $id = wp_get_post_terms($post_id, 'job_types', array('fields' => 'ids'));
+    return $id[0];
+}
+
+function foluntais_category_name($post_id = null) {
+    // Return the name for the given foluntais post type.
+    if ($post_id == '')
+        $post_id = get_the_ID();
+
+    $term = get_term(foluntais_category_id($post_id), 'job_types');
+    return $term->name;
+}
+
+function foluntais_category_link($post_id = null) {
+    // Return the link to the given foluntais post type.
+    if ($post_id == '')
+        $post_id = get_the_ID();
+
+    $term = get_term(foluntais_category_id($post_id), 'job_types');    
+    return get_term_link($term);
+}
+ 
+function get_foluntais_category_link($post_id = null, $separator = '/') {
+    /* This mirrors the function of get_category_parents(), except for foluntais
+     * postings. */
+
+    if ($post_id == '')
+        return;
+
+    // Totally ghetto, but I'm drunk.
+    $term_name = foluntais_category_name($post_id);
+    $term_link = foluntais_category_link($post_id);
+    $parent_link = get_post_type_archive_link('foluntais'); 
+    $parent_name = get_post_type($post_id);
+    return '<a href="' . $parent_link . '">' . $parent_name . '</a>' . $separator . '<a href="' . $term_link . '">'. $term_name . '</a>';
+}
+
+function foluntais_category_color($post_id = null) {
+    if ($post_id == '')
+        $post_id = get_the_ID();
+
+    $id = foluntais_category_id($post_id);
+
+    $category_colors = array(
+        // Place holder.
+        223 => '#90b5d2',
+        226 => '#9ac485',
+        // Fallback
+        999 => '#000'
+    );
+
+    if (array_key_exists($id, $category_colors))
+        return $category_colors[$id];
+    else 
+        return $category_colors[999];
 }
 
 // START TODO/FIXME

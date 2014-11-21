@@ -2,18 +2,12 @@
         <?php if (is_category()) : ?>
 
             <?php if (unique_breadcrumb()) : ?>
-                <?php echo '<script>console.log("special category");</script>'; ?>
+                <span><?php echo category_description(); ?></span>
             <?php else : ?>
                 <?php echo get_breadcrumb(); ?>
             <?php endif; ?>
 
-        <?php elseif (is_foluntais()) : ?>
-
+        <?php elseif (is_foluntais() || is_single()) : ?>
             <?php echo get_breadcrumb(); ?>
-
-        <?php elseif (is_single()) : ?>
-
-            <?php echo get_breadcrumb(); ?>
-
         <?php endif; ?>
 </div>
