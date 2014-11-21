@@ -55,7 +55,11 @@ function get_breadcrumb() {
         return get_category_parents($id[0]->cat_ID, true, '&nbsp;');
     } else {
         // Get ID of the custom post's taxonomies.
-        return get_foluntais_category_link(get_the_ID(), '&nbsp;');
+        if (is_tax('job_types')) {
+            return get_foluntais_category_link(get_the_ID(), false, '&nbsp;');
+        } else {
+            return get_foluntais_category_link(get_the_ID(), true, '&nbsp;');
+        }
     }
 }
 
@@ -91,7 +95,7 @@ function get_id($id = null) {
      * get_id figures out which is which and returns the appropriate ID. Dirty shorthand
      * until I have a better solution. */
 
-    if (is_single()) {
+    if (is_single() && !is_foluntais()) {
         $cat_id = get_the_category();
         $cat_id = $cat_id[0]->cat_ID;
 
@@ -774,7 +778,7 @@ function foluntais_category_link($post_id = null) {
     return get_term_link($term);
 }
  
-function get_foluntais_category_link($post_id = null, $separator = '/') {
+function get_foluntais_category_link($post_id = null, $add_parent = false, $separator = '/') {
     /* This mirrors the function of get_category_parents(), except for foluntais
      * postings. */
 
@@ -786,7 +790,15 @@ function get_foluntais_category_link($post_id = null, $separator = '/') {
     $term_link = foluntais_category_link($post_id);
     $parent_link = get_post_type_archive_link('foluntais'); 
     $parent_name = get_post_type($post_id);
-    return '<a href="' . $parent_link . '">' . $parent_name . '</a>' . $separator . '<a href="' . $term_link . '">'. $term_name . '</a>';
+
+    $anchor = '<a href="' . $term_link . '">'. $term_name . '</a>';
+
+    if ($add_parent == true) {
+        $parent_anchor = '<a href="' . $parent_link . '">' . $parent_name . '</a>' . $separator;
+        $anchor = $parent_anchor . $anchor;
+    }
+
+    return $anchor;
 }
 
 function foluntais_category_color($post_id = null) {
