@@ -56,8 +56,9 @@ function addUrl(url) {
 function isResponsiveAdvert(url) {
     // If the URL contains '_mobile_' or '_desktop_' it is assumed to be 
     // part of a responsive advert.
-    if (url.indexOf(suffix.desktop) > -1 || url.indexOf(suffix.mobile) > -1)
+    if (url.indexOf(suffix.desktop) > -1 || url.indexOf(suffix.mobile) > -1) {
         return true;
+    }
 
     return false;
 }
@@ -68,8 +69,9 @@ function isSmallScreen(url) {
 
     var mobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
 
-    if (mobileUA.test(navigator.userAgent) && !navigator.userAgent.match(/iPad/i))
+    if (mobileUA.test(navigator.userAgent) && !navigator.userAgent.match(/iPad/i)) {
         return true;
+    }
 
     return false;
 }
