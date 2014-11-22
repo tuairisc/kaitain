@@ -67,7 +67,7 @@ function tuairisc_styles() {
 function get_parent_id($cat_id = null) {
     /* Return the ID of the top parent of any category. */
 
-    if ($cat_id == '') {
+    if ('' = $cat_id) {
         $cat_id = get_query_var('cat');
     }
 
@@ -201,7 +201,7 @@ function get_thumbnail_url($post_id = null) {
     /* Code snippet from http://goo.gl/NhcEU6
      * get_thumbnail_url returns the anchor url for the requested thumbnail. */
 
-    if ($post_id == '') {
+    if ('' == $post_id) {
         $post_id = get_the_ID();
     }
 
@@ -465,14 +465,14 @@ function get_view_count($post_id = null) {
      * This should be used for quick estimates only. You should /not/ consider 
      * this a canonical and absolute count of views on a post. */
 
-    if ($post_id == '') {
+    if ('' == $post_id) {
         return;
     }
 
     $key = 'tuairisc_view_counter';
     $count = (int) get_post_meta($post_id, $key, true);
 
-    if ($count == '') {
+    if ('' == $count) {
         update_post_meta($post_id, $key, 0);
         return 0;
     }
