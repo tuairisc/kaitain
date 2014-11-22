@@ -18,9 +18,9 @@ var sizeArray = [
 ];
 
 jQuery('.post-wrapper .mshare a, .msv a').click(function(e) {
-    var rel = parseInt(jQuery(this).attr('rel'));
+    var rel = parseInt(jQuery(this).data('rel'));
 
-    if (sizeArray[rel] != '') {
+    if (sizeArray[rel] != '' && rel > 0) {
         var href = jQuery(this).attr('href');
         var name = 'target="_blank';
         var size = sizeArray[rel];

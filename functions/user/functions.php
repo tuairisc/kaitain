@@ -67,7 +67,7 @@ function tuairisc_styles() {
 function get_parent_id($cat_id = null) {
     /* Return the ID of the top parent of any category. */
 
-    if ('' = $cat_id) {
+    if ('' == $cat_id) {
         $cat_id = get_query_var('cat');
     }
 

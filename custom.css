@@ -985,6 +985,11 @@ ul.mshare {
     display: inline-block;
 }
 
+.mshare .comments { 
+    background-color: #30b351;
+    background-image: url('images/social/comments.png'); 
+}
+
 .mshare .email { 
     background-color: #f5756c;
     background-image: url('images/social/email.png'); 
