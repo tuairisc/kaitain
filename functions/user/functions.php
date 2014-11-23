@@ -16,7 +16,7 @@
  * 8 Foghlaimeoirí   #d4bb85     187 
  */
 
-$banner_colors = [
+$banner_colors = array(
     // Categories
     154 => '#8eb2d3',
     155 => '#c54b54',
@@ -27,15 +27,15 @@ $banner_colors = [
     187 => '#424045',
     191 => '#516671',
     // Custom foluntais
-    227 => '#90b5d2',
-    228 => '#9ac485',
+    224 => '#9ac485',
+    225 => '#90b5d2',
     // Foluntais fallback
     799 => '#424045',
     // Single posts
     899 => '#000',
     // Fallback
     999 => '#c7c009',
-];
+);
 
 /* Script Loading
  * ---------------
@@ -85,13 +85,15 @@ function get_breadcrumb() {
      * 2. The Greann category archive pages uses the category's description. 
      * 3. Foluntais posts use get_job_category_link. */
 
-    if (is_category() && !is_greann() || is_single() && has_category()) {
+    if (is_category() && !is_greann() || is_singular('post') && has_category()) {
         $id = get_the_category();
         echo get_category_parents($id[0]->cat_ID, true, '&nbsp;');
     } else if (is_category() && is_greann()) {
         echo '<span>' . category_description() . '</span>';
     } else if (is_singular('foluntais')) {
         get_job_category_link($post_id, true, '&nbsp;');
+    } else if (is_foluntais()) {
+        get_job_category_link($post_id, false, '&nbsp;');
     }
 }
 
@@ -119,7 +121,7 @@ function breadcrumbs_get_id() {
      * get_id figures out which is which and returns the appropriate ID. Dirty 
      * shorthand until I have a better solution. */
 
-    if (is_single() && has_category() && !is_singular('foluntais')) {
+    if (is_singular('post') && has_category()) {
         $id = get_the_category();
         $id = $id[0]->cat_ID;
 
@@ -130,7 +132,7 @@ function breadcrumbs_get_id() {
         }
     } else if (is_category()) {
         $id = get_parent_id(get_query_var('cat'));
-    } else if (is_singular('foluntais')) {
+    } else if (is_foluntais()) {
         $id = 799;
     } else {
         return;
@@ -515,7 +517,7 @@ function increment_view_counter($post_id = null) {
         $post_id = get_the_ID();
     }
 
-    if (is_singular('foluntais') || is_single() && !is_user_logged_in()) {
+    if (is_singular('foluntais') || is_singular('post') && !is_user_logged_in()) {
         $key = 'tuairisc_view_counter';
         $count = (int) get_post_meta($post_id, $key, true);
         $count++;
@@ -575,6 +577,7 @@ function register_job_type() {
 
     register_post_type('foluntais', $args);
     flush_rewrite_rules();
+    remove_post_type_support('foluntais','comments');
 }
 
 function register_job_taxonomies() {
@@ -658,6 +661,18 @@ function job_messages($messages) {
     return $messages;
 }
 
+function is_foluntais($post_id = null) {
+    /* Is the post type explicitly of the foluntais type? */
+
+    $type = 'foluntais';
+
+    if ('' == $post_id) {
+        $post_id == get_the_ID();
+    }
+
+    return (get_post_type($post_id) == $type) ? true : false;
+}
+
 function has_job_category($term = null, $post_id = null) {
     /* Test whether a post has any given term out of a given taxonomy. This
      * function parallels has_category() for the job_categories taxonomy. */
@@ -697,7 +712,7 @@ function job_category_id($post_id) {
     return $cat_id[0];
 }
 
-function job_category_name($post_id) {
+function job_category_name($post_id = null) {
     /* Shorthand function to return only the name of a given term in the custom
      * taxonomy for job categories. */
 
@@ -713,13 +728,18 @@ function job_category_name($post_id) {
     return $term->name;
 }
 
-function job_category_link($id) {
-    // Return the link to the given job post type.
-    $term = get_term(job_category_id($id), 'job_categories');    
+function job_category_link($post_id) {
+    /* Return the link to the given job post type. */
+
+    if ('' == $post_id) {
+        $post_id = get_the_ID();
+    }
+
+    $term = get_term(job_category_id($post_id), 'job_categories');    
     return get_term_link($term);
 }
  
-function get_job_category_link($post_id = null, $use_parent = false, $sep = '/') {
+function get_job_category_link($post_id = null, $use_child = false, $sep = '/') {
     /* This functions mirrors the function of get_category_parents(), for job
      * postings. This function needs to be refactored. */
 
@@ -731,16 +751,14 @@ function get_job_category_link($post_id = null, $use_parent = false, $sep = '/')
         return;
     }
 
-    // Totally ghetto, but I'm drunk.
-    $term_name = job_category_name($post_id);
-    $term_link = job_category_link($post_id);
-    $anchor = '<a href="' . $term_link . '">'. $term_name . '</a>';
+    $parent_link   = get_post_type_archive_link('foluntais'); 
+    $parent_name   = get_post_type($id);
+    $anchor = '<a href="' . $parent_link . '">' . $parent_name . '</a>' . $sep;
 
-    if (true == $use_parent) {
-        $parent_link = get_post_type_archive_link('foluntais'); 
-        $parent_name = get_post_type($id);
-        $parent_anchor = '<a href="' . $parent_link . '">' . $parent_name . '</a>' . $sep;
-        $anchor = $parent_anchor . $anchor;
+    if (true == $use_child) {
+        $child_name = job_category_name($post_id);
+        $child_link = job_category_link($post_id);
+        $anchor .= '<a href="' . $child_link . '">'. $child_name . '</a>';
     }
 
     echo $anchor;
