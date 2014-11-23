@@ -241,7 +241,7 @@ h3 {
  * The #footer block and its many children. */
 
 #footer {
-    background: #fff left bottom/auto 65px no-repeat url('images/rainbow_#footer.svg');
+    background: #fff left bottom/auto 65px no-repeat url('images/rainbow_footer.svg');
     height: auto;
     padding: 0 4% 65px 4%;
     /* The site is unbalanced. */
