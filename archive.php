@@ -6,7 +6,7 @@
 
 <div id="main" role="main">
     <div id="content">
-        <?php if (!is_category() && !is_singular('foluntais')) : ?>
+        <?php if (!is_category() && !is_foluntais()) : ?>
             <h3 class="title">
                 <?php if(is_tag()) : ?>
                     <?php // Tag archive. ?>
@@ -32,7 +32,7 @@
 
         <?php get_template_part('banner'); ?>
            
-        <?php if (get_post_type() == 'foluntais') {
+        <?php if (is_foluntais()) {
             get_template_part('loop','foluntais');
         } else {
             get_template_part('loop'); 
