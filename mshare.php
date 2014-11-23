@@ -41,7 +41,7 @@
         target="_blank"
         title="Upvote '<?php the_title(); ?>' on Reddit"></a>
     </li>
-    <?php if (is_single() && option::get('post_comments') == 'on') : ?>
+    <?php if (is_singular('post') && comments_open()) : ?>
         <li>
             <a class="comments"
             href="#comments" 
