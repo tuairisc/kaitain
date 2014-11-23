@@ -27,7 +27,7 @@
                             <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
                         </div><!-- /.post-meta-text -->
                         <?php // Social sharing links. ?>
-                        <?php include 'mshare.php'; ?>
+                        <?php get_template_part('mshare'); ?>
                     </div><!-- /.post-meta -->  
                 </div> 
                 <div class="clear"></div>
@@ -50,7 +50,7 @@
                 <?php get_template_part('related-posts'); ?>
             <?php endif; ?>
 
-            <?php if (option::get('post_comments') == 'on') : ?>
+            <?php if (comments_open()) : ?>
                 <?php comments_template(); ?>
             <?php endif; ?>
             
