@@ -56,11 +56,7 @@ function addUrl(url) {
 function isResponsiveAdvert(url) {
     // If the URL contains '_mobile_' or '_desktop_' it is assumed to be 
     // part of a responsive advert.
-    if (url.indexOf(suffix.desktop) > -1 || url.indexOf(suffix.mobile) > -1) {
-        return true;
-    }
-
-    return false;
+    return (url.indexOf(suffix.desktop) > -1 || url.indexOf(suffix.mobile) > -1) ? true : false;
 }
 
 function isSmallScreen(url) {
@@ -68,12 +64,7 @@ function isSmallScreen(url) {
      * user agent string. Testing. Expect it to break. */
 
     var mobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-
-    if (mobileUA.test(navigator.userAgent) && !navigator.userAgent.match(/iPad/i)) {
-        return true;
-    }
-
-    return false;
+    return (mobileUA.test(navigator.userAgent) && !navigator.userAgent.match(/iPad/i)) ? true : false;
 }
 
 function suffixToMobile(url) {
