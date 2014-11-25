@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 <?php $template = get_post_meta($post->ID, 'wpzoom_post_template', true); ?>
 
-<div id="main"<?php if ($template == 'full') : echo ' class="full-width"'; endif; ?>>
+<div id="main"<?php if ($template == 'full') echo ' class="full-width"'; ?>>
     <div id="content">
         <?php while (have_posts()) : the_post(); ?>
             <?php // Requested by Sean. Incrementing post counter. ?>
