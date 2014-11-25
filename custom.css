@@ -45,23 +45,6 @@ a.download-link,
     font: 14px arial, "helvetica neue", helvetica, sans-serif;
 }
 
-/* Oireachtas na Samhna 2014 banner 
- * --------------------------------
- * Temporary banner for the Oireachtas na Samhna 2014 festival. */
-
- .oas-banner {
-    background: #95c27c left center/contain no-repeat border-box url('images/oas_banner.svg');
-    height: 45px;
-    margin-bottom: 14px;
-    width: 100%;
- }
-
- .oas-banner a {
-    display: block;
-    height: 100%;
-    width: 100%;
- }
-
 /* Self-clearing floats 
  * ---------------------
  * WPZOOM's use of <div class="clear"></div> should be classed as a 
