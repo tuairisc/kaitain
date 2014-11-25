@@ -40,6 +40,12 @@ class Wpzoom_Popular_News extends WP_Widget {
         $sql = "SELECT ID, post_title, comment_count, post_date FROM $wpdb->posts WHERE post_status = 'publish' AND post_type = 'post' ";
         // What's the chosen timeline?
         switch ($timeline) {
+            case "thisday":
+                $sql .= "AND DAY(post_date) = DAY(NOW()) AND YEAR(post_date) = YEAR(NOW()) ";
+                break;
+            case "thisweek":
+                $sql .= "AND WEEK(post_date) = WEEK(NOW()) AND YEAR(post_date) = YEAR(NOW()) ";
+                break;
             case "thismonth":
                 $sql .= "AND MONTH(post_date) = MONTH(NOW()) AND YEAR(post_date) = YEAR(NOW()) ";
                 break;
@@ -70,23 +76,14 @@ class Wpzoom_Popular_News extends WP_Widget {
         if($res) {
             $mcpcounter = 1;
             foreach ($res as $r) {
-
                 $cats = get_the_category($r->ID);
-
                 $wrappeddate = $r->post_date;
                 $wrappeddate = str_replace(" ","-",$wrappeddate);
                 $wrappeddate = str_replace(":","-",$wrappeddate);
                 $datearray = explode("-", $wrappeddate);
-
                 $wrappeddate = date("F j, Y", mktime($datearray[3], $datearray[4], $datearray[5], $datearray[1], $datearray[2], $datearray[0]));
-
-
-                echo "<li><a href='".get_permalink($r->ID)."' rel='bookmark'>".htmlspecialchars($r->post_title, ENT_QUOTES)."</a> <span class='comments' href='".get_permalink($r->ID)."'>".htmlspecialchars($r->comment_count, ENT_QUOTES)." ".__('comments','wpzoom')."</span>";
-
-
-                 echo"</li>\n";
-
-
+                echo "<li><a href='".get_permalink($r->ID)."' rel='bookmark'>".htmlspecialchars($r->post_title, ENT_QUOTES)."</a><br /><span class='comments' href='".get_permalink($r->ID)."'>".htmlspecialchars($r->comment_count, ENT_QUOTES)." ".__('comments','wpzoom')."</span>";
+                echo"</li>\n";
                 $mcpcounter++;
             }
         } else {
@@ -94,7 +91,6 @@ class Wpzoom_Popular_News extends WP_Widget {
         }
 
         echo "</ul>\n";
-
         /* After widget (defined by themes). */
         echo $after_widget;
     }
@@ -112,7 +108,7 @@ class Wpzoom_Popular_News extends WP_Widget {
 
      function form( $instance ) {
         /* Set up some default widget settings. */
-        $defaults = array( 'title' => 'Popular', 'maxposts' => 10, 'sincewhen' => 'forever' );
+        $defaults = array('title' => 'Popular', 'maxposts' => 10, 'sincewhen' => 'forever');
         $instance = wp_parse_args( (array) $instance, $defaults ); ?>
         
         <p>
@@ -126,17 +122,17 @@ class Wpzoom_Popular_News extends WP_Widget {
                 <option value="forever"<?php echo $instance['sincewhen'] != 'thismonth' && $instance['sincewhen'] != 'thisyear' ? 'selected="selected"' : ''; ?>><?php _e('Forever', 'wpzoom'); ?></option>
                 <option value="thisyear"<?php echo $instance['sincewhen'] == 'thisyear' ? 'selected="selected"' : ''; ?>><?php _e('This Year', 'wpzoom'); ?></option>
                 <option value="thismonth"<?php echo $instance['sincewhen'] == 'thismonth' ? 'selected="selected"' : ''; ?>><?php _e('This Month', 'wpzoom'); ?></option>
+                <option value="thisweek"<?php echo $instance['sincewhen'] == 'thisweek' ? 'selected="selected"' : ''; ?>><?php _e('This Week', 'wpzoom'); ?></option>
+                <option value="thisday"<?php echo $instance['sincewhen'] != 'thisday' && $instance['sincewhen'] != 'thisday' ? 'selected="selected"' : ''; ?>><?php _e('Today', 'wpzoom'); ?></option>
             </select>
         </p>
 
         <p>
             <label for="<?php echo $this->get_field_id( 'maxposts' ); ?>"><?php _e('Posts To Display:', 'wpzoom'); ?></label>
             <select id="<?php echo $this->get_field_id( 'maxposts' ); ?>" name="<?php echo $this->get_field_name( 'maxposts' ); ?>">
-                <?php
-                for ( $i = 1; $i < 11; $i++ ) {
+                <?php for ( $i = 1; $i < 11; $i++ ) {
                     echo '<option' . ( $i == $instance['maxposts'] ? ' selected="selected"' : '' ) . '>' . $i . '</option>';
-                }
-                ?>
+                } ?>
             </select>
         </p>
 
