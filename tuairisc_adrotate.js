@@ -13,8 +13,8 @@ var fallback = {
     // href  : 'http://tuairisc.ie/glac-fograi-linn/',
     // title : 'Tuairisc',
     // SANDBOX
-    image : 'http://tuairisc.bhalash.com/wp-content/uploads/tuairisc_fallback_desktop_.gif',
-    href  : 'http://tuairisc.bhalash.com/glac-fograi-linn/',
+    image : 'http://catnip.bhalash.com/wp-content/uploads/tuairisc_fallback_desktop_.gif',
+    href  : 'http://catnip.bhalash.com/glac-fograi-linn/',
     title : 'Tuairisc',
 }
 
