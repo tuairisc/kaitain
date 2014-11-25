@@ -1136,6 +1136,12 @@ ul.mshare {
  * devices.
 */
 
+@media only screen and (max-width: 910px) {
+    article .mshare {
+        float: left;
+    }
+}
+
 @media only screen 
     and (min-device-width: 320px) 
     and (max-device-width: 736px) 
@@ -1182,7 +1188,6 @@ only screen
         margin: 0;
     }
 
-
     .widget-area,
     #header #searchform,
     #header .mshare {
@@ -1196,10 +1201,6 @@ only screen
     #header .mshare {
         float: left;
         padding: 0;
-    }
-
-    article .mshare {
-        display: none;
     }
 
     #footer {
