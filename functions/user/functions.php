@@ -280,12 +280,16 @@ function day_to_irish($day) {
     return $day;
 }
 
-function default_author() {
+function default_author($author_id = null) {
     /* The UID for the admin account is 37. If the article's author is the
      * 'site', then neither Ciaran nor Sean want the author's name to appear. */
 
-    $default_author = 37;    
-    return (get_the_author_meta('ID') == $default_author) ? true : false;
+    if ('' == $author_id) {
+        $author_id = get_the_author_meta('ID');
+    }
+
+    $default_author = 37;
+    return ($author_id == $default_author) ? true : false;
 }
 
 function month_to_irish($month) {
