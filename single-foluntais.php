@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 <?php $template = get_post_meta($post->ID, 'wpzoom_post_template', true); ?>
 
-<div id="main"<?php if ($template == 'full') : echo ' class="full-width"'; endif; ?>>
+<div id="main"<?php if ($template == 'full') echo ' class="full-width"'; ?>>
     <div id="content">
         <?php while (have_posts()) : the_post(); ?>
             <?php // Requested by Sean. Incrementing post counter. ?>
@@ -20,10 +20,7 @@
                             <div class="avatar" style="background-image: url('<?php echo get_avatar_url(135); ?>');"></div>
                         <?php endif; ?>
                         <div class="post-meta-text">
-                            <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') { ?>
-                                <?php if (option::get('post_author') == 'on' && !default_author()) { ?><span class="meta-author"><?php the_author_posts_link(); ?></span><?php } ?>
-                                <?php if (option::get('post_date') == 'on') { ?><?php echo get_the_date() . ' ag ' . get_the_time(); ?><?php } ?>
-                            <?php } ?>
+                            <?php echo get_the_date() . ' ag ' . get_the_time(); ?>
                             <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
                         </div><!-- /.post-meta-text -->
                         <?php // Social sharing links. ?>
