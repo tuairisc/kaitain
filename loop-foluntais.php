@@ -12,17 +12,31 @@
             <div class="right">
                 <div class="content">    
                     <h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e('Permalink to %s','wpzoom'); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
-                    <?php if (!default_author()) : ?>
-                        <h3><?php echo get_the_author(); ?></h3>
-                    <?php endif; ?>
+
+                    <h3>
+                        <?php 
+
+                        $fol_emp = get_post_meta($post->ID, 'foluntais_employer', true); 
+                        $fol_loc = get_post_meta($post->ID, 'foluntais_location', true); 
+
+                        if ('' != $fol_emp) {
+                            echo $fol_emp;
+                        }
+
+                        if ('' != $fol_emp && '' != $fol_loc) {
+                            echo '<br />';
+                        }
+
+                        if ('' != $fol_loc) {
+                            echo $fol_loc;
+                        }
+
+                        ?>
+                    </h3>
 
                     <div class="recent-meta">
                         <?php if (option::get('display_category') == 'on') : ?>
                             <span><?php the_category(', '); ?></span>
-                        <?php endif; ?>
-
-                        <?php if (option::get('display_date') == 'on') : ?>
-                            <span><?php printf( __('%s', 'wpzoom'),  get_the_date()); ?></span>
                         <?php endif; ?>
 
                         <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
