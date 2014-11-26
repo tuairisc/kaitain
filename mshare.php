@@ -5,6 +5,7 @@
         'blog'  => urlencode(get_bloginfo('name')),
         'url'   => urlencode(get_the_permalink()),
         'title' => urlencode($post->post_title),
+        'tuser' => 'tuairiscnuacht',
     ); ?> 
 
     <li>
