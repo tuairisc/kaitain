@@ -66,11 +66,29 @@ a.download-link,
  * -------------------
  * Needed for tables to display correctly. */
 
- table.tg {
+table.tg {
     margin-bottom: 14px;
     width: 100%;
- }
- 
+}
+
+table.tg a {
+    text-decoration: none;
+}
+
+/* Author Report 
+ * ------------- */
+
+#author-report h2 {
+    color: #fff;
+    background: #000;
+    padding: 7px;
+}
+
+#author-report h2 a {
+    color: inherit;
+    text-decoration: none;
+}
+
 /* Top Navigation Menu
  * -------------------
  * A one-hundred line minified JS file does what I could accomplish with 
@@ -114,6 +132,10 @@ a.download-link,
 span.date,
 .comment-meta {
     text-transform: none;
+}
+
+#report {
+    margin-bottom: 13px;
 }
 
 .recent-meta span,
