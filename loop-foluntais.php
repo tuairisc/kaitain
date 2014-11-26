@@ -39,6 +39,10 @@
                             <span><?php the_category(', '); ?></span>
                         <?php endif; ?>
 
+                        <?php if (option::get('display_date') == 'on') : ?>
+                            <span><?php printf( __('%s', 'wpzoom'),  get_the_date()); ?></span>
+                        <?php endif; ?>
+
                         <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
                     </div>
 
