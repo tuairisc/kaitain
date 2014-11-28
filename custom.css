@@ -842,24 +842,20 @@ a.download-link:hover {
  * boxes that link into the relevant sections. */
 
 .education-box {
+    background-position: 3% center;
+    background-size: auto 60px;
+    background-repeat: no-repeat;
     color: #fff;
     margin-bottom: -10px;
+    min-height: 120px;
 }
 
 .education-box a {
     box-sizing: border-box;
     display: block;
     height: 100%;
-    padding: 15px 20% 15px 4%;
+    padding: 30px 15px 15px 17%;
     width: 100%;
-}
-
-.education-box:hover {
-    background-image: url('images/placeholder_arrow.svg');
-    background-origin: bounding-box;
-    background-position: 97% center;
-    background-repeat: no-repeat;
-    background-size: auto 60px;
 }
 
 @media screen and (max-width: 770px) {
@@ -901,12 +897,42 @@ a.download-link:hover {
     text-transform: uppercase;
 }
 
-.education-0 { background-color: #424045; }
-.education-1 { background-color: #c44b54; }
-.education-2 { background-color: #7c5c91; }
-.education-3 { background-color: #c9ab5f; }
-.education-4 { background-color: #89b0d4; }
-.education-5 { background-color: #e34284; }
+.education-0 { 
+    /* Description of the education section. */
+    background-color: #424045;
+}
+
+.education-1 { 
+    /* Sraith Pictiúr / Picture Exercises */
+    background-color: #c44b54;
+    background-image: url('images/education/picture.svg');
+}
+
+.education-2 { 
+    /* Léamhthuiscintí / Quiz */ 
+    background-color: #7c5c91;
+    background-image: url('images/education/book.svg');
+}
+
+.education-3 { 
+    /* Físeáin / Videos */ 
+    background-color: #c9ab5f;
+    background-image: url('images/education/video.svg');
+}
+
+.education-4 { 
+    /* Úrscéal d’fhoghlaimeoirí / Short Stories */
+    background-color: #89b0d4;
+    background-image: url('images/education/reading.svg');
+}
+
+.education-5 { 
+    /* Crossfhocal / Crossword */
+    background-color: #e34284;
+    background-image: url('images/education/crossword.svg');
+}
+
+
 
 /*
     Nav Menu Social Links
