@@ -35,7 +35,7 @@ Template Name: Monthly Author Report Form
                     * page-authorreport.php takes its input from page-authorform.php
                     * 
                     */ ?>
-                    <form method="post" action="<?php echo site_url() . '/author-monthly-report-output/'; ?>" novalidate>
+                    <form method="post" action="<?php echo site_url() . '/author-report/'; ?>" novalidate>
                         <p class="error"></p>
                         <p>
                             <?php // Form uses HTML5 input attributes, but I sanitize it with JS. ?>
