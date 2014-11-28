@@ -842,7 +842,7 @@ a.download-link:hover {
  * boxes that link into the relevant sections. */
 
 .education-box {
-    background-position: 3% center;
+    background-position: 3% 35%;
     background-size: auto 60px;
     background-repeat: no-repeat;
     color: #fff;
