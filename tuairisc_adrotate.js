@@ -157,7 +157,7 @@ function resizeBannerAdvert(obj) {
                 'href'  : fallback.href,
                 'title' : fallback.title,
             });
-
+            
             setBannerImage(curAdvert);
         });
     });
