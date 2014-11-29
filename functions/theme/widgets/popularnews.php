@@ -1,7 +1,7 @@
 <?php
 
 /*------------------------------------------*/
-/* WPZOOM: Popular News                                         */
+/* WPZOOM: Popular News */
 /*------------------------------------------*/
 
 class Wpzoom_Popular_News extends WP_Widget {
