@@ -27,10 +27,12 @@ $dates = array();
 $all_author_info = array(
     array(
         0 => 'Author Name',
-        1 => 'Post Date',
-        2 => 'Post Time',
-        3 => 'View Count',
-        4 => 'Word Count'
+        1 => 'Post Title',
+        2 => 'Post Category',
+        3 => 'Post Date',
+        4 => 'Post Time',
+        5 => 'View Count',
+        6 => 'Word Count'
     )
 );
 
@@ -73,13 +75,17 @@ foreach ($author_list as $author) {
     if ($author_query->have_posts()) {
         while ($author_query->have_posts()) {
             $author_query->the_post();
+            $category = get_the_category();
+            $category = $category[0]->cat_name;
 
             array_push($all_author_info, array(
-                'author_name' => $author->display_name,
-                'post_date'   => get_the_time('Y-m-d'),
-                'post_time'   => get_the_time('H:i:s'),
-                'view_count'  => get_view_count(get_the_ID()),
-                'word_count'  => str_word_count(strip_tags(get_the_content()), 0)
+                'author_name'   => $author->display_name,
+                'post_title'    => $post->post_title,
+                'post_category' => $category,
+                'post_date'     => get_the_time('Y-m-d'),
+                'post_time'     => get_the_time('H:i:s'),
+                'view_count'    => get_view_count(get_the_ID()),
+                'word_count'    => str_word_count(strip_tags(get_the_content()), 0)
             ));
         }
     }
