@@ -40,29 +40,27 @@ Template Name: Monthly Author Report Form
                         <p>
                             <?php // Form uses HTML5 input attributes, but I sanitize it with JS. ?>
                             <strong>Start date:</strong><br />
-                            <input type="text" id="start-day"   name="start_day"   pattern="^([1-3]{1})([0-9]{0,1})$" placeholder="dd"   size="2" width="2" required>
+                            <input type="text" id="start-day"   name="start_day"   pattern="^([1-9]|[12]\d|3[01])$"   placeholder="dd"   size="2" width="2" required>
                             <input type="text" id="start-month" name="start_month" pattern="^([1-9]{1})([0-2]{0,1})$" placeholder="mm"   size="2" width="2" required>
                             <input type="text" id="start-year"  name="start_year"  pattern="^(19|20)[0-9]{2}$"        placeholder="yyyy" size="4" width="4" required>
                         </p>
                         <p>
                             <strong>End date:</strong><br />
-                            <input type="text" id="end-day"   name="end_day"   pattern="^([1-3]{1})([0-9]{0,1})$" placeholder="dd"   size="2" width="2" required>
+                            <input type="text" id="end-day"   name="end_day"   pattern="^([1-9]|[12]\d|3[01])$"   placeholder="dd"   size="2" width="2" required>
                             <input type="text" id="end-month" name="end_month" pattern="^([1-9]{1})([0-2]{0,1})$" placeholder="mm"   size="2" width="2" required>
                             <input type="text" id="end-year"  name="end_year"  pattern="^(19|20)[0-9]{2}$"        placeholder="yyyy" size="4" width="4" required>
                         </p>
                         <input type="submit">
                     </form>
                     <script>
+                        /* Form Elements 
+                         * ------------- */
+
                         var form = {
                             id : '#author-report form',
                             error : '#author-report .error',
                             input : '#author-report input:text',
                         };
-
-                        // Is the form validated?
-                        var formValidated = false;
-
-                        // Functions
 
                         Array.prototype.allTrue = function() {
                             // Have all elements in the array successfully validated?
@@ -74,6 +72,9 @@ Template Name: Monthly Author Report Form
 
                             return true;
                         }
+
+                        /* Functions 
+                         * --------- */
 
                         function writeError(msg) {
                             // Write message to the error box.
@@ -99,13 +100,19 @@ Template Name: Monthly Author Report Form
                             return true;
                         }
 
-                        function toUnixTime(year, month, day, time) {
+                        function toUnixTime(year, month, day) {
                             // Convert a given string to a date.
-                            var string = year + '-' + month + '-' + day + ' ' + time;
-                            return new Date(string).getTime() / 1000;
+                            month = (month < 10) ? '0' + month : month;
+                            day = (day < 10) ? '0' + day : day;
+
+                            var string = year + '-' + month + '-' + day + 'T00:00:00Z';
+                            var date = new Date(string).getTime() / 1000;
+
+                            return date;
                         }
 
-                        // Validation
+                        /* Validation
+                         * ---------- */
 
                         jQuery(form.id).submit(function(click) {
                             // Results of input validation.
@@ -123,25 +130,24 @@ Template Name: Monthly Author Report Form
                                 var startDate = toUnixTime(
                                     jQuery('#start-year').val(),
                                     jQuery('#start-month').val(),
-                                    jQuery('#start-day').val(),
-                                    '00:00:00'
+                                    jQuery('#start-day').val()
                                 );
 
                                 var endDate = toUnixTime(
                                     jQuery('#end-year').val(),
                                     jQuery('#end-month').val(),
-                                    jQuery('#end-day').val(),
-                                    '23:59:59'
+                                    jQuery('#end-day').val()
                                 );
 
-                                if (endDate > startDate) {
-                                    formValidated = true;
+                                if (endDate - startDate >= 0) {
+                                    return true;
                                 } else {
                                     writeError('Error: end date may not be earlier than start date');
-                                }
+                                    return false;
+                                } 
+                            } else {
+                                return false;
                             }
-
-                            return formValidated;
                         });
                     </script>
                 </div><!-- / .entry -->
