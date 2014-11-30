@@ -40,15 +40,15 @@ Template Name: Monthly Author Report Form
                         <p>
                             <?php // Form uses HTML5 input attributes, but I sanitize it with JS. ?>
                             <strong>Start date:</strong><br />
-                            <input type="text" id="start-day"   name="start_day"   pattern="^([1-9]|[12]\d|3[01])$"   placeholder="dd"   size="2" width="2" required>
-                            <input type="text" id="start-month" name="start_month" pattern="^([1-9]{1})([0-2]{0,1})$" placeholder="mm"   size="2" width="2" required>
-                            <input type="text" id="start-year"  name="start_year"  pattern="^(19|20)[0-9]{2}$"        placeholder="yyyy" size="4" width="4" required>
+                            <input type="text" id="start-day" name="start_day" pattern="^([1-9]|[12]\d|3[01])$" placeholder="dd" size="2" width="2" required>
+                            <input type="text" id="start-month" name="start_month" pattern="^([1-9]{1})([0-2]{0,1})$" placeholder="mm" size="2" width="2" required>
+                            <input type="text" id="start-year" name="start_year" pattern="^(19|20)[0-9]{2}$" placeholder="yyyy" size="4" width="4" required>
                         </p>
                         <p>
                             <strong>End date:</strong><br />
-                            <input type="text" id="end-day"   name="end_day"   pattern="^([1-9]|[12]\d|3[01])$"   placeholder="dd"   size="2" width="2" required>
-                            <input type="text" id="end-month" name="end_month" pattern="^([1-9]{1})([0-2]{0,1})$" placeholder="mm"   size="2" width="2" required>
-                            <input type="text" id="end-year"  name="end_year"  pattern="^(19|20)[0-9]{2}$"        placeholder="yyyy" size="4" width="4" required>
+                            <input type="text" id="end-day" name="end_day" pattern="^([1-9]|[12]\d|3[01])$" placeholder="dd" size="2" width="2" required>
+                            <input type="text" id="end-month" name="end_month" pattern="^([1-9]{1})([0-2]{0,1})$" placeholder="mm" size="2" width="2" required>
+                            <input type="text" id="end-year" name="end_year" pattern="^(19|20)[0-9]{2}$" placeholder="yyyy" size="4" width="4" required>
                         </p>
                         <input type="submit">
                     </form>
@@ -84,9 +84,9 @@ Template Name: Monthly Author Report Form
                         function validateInput(obj) {
                             // Validate each field input in turn using it's pattern regex.
                             var input = {
-                                val   : jQuery(obj).val(),
+                                val : jQuery(obj).val(),
                                 regex : jQuery(obj).attr('pattern'),
-                                name  : jQuery(obj).attr('name'),
+                                name : jQuery(obj).attr('name'),
                                 phold : jQuery(obj).attr('placeholder')
                             };
 

@@ -44,26 +44,26 @@ foreach ($_POST as $key => $field) {
 $author_list = get_users(array(
     'blog_id' => $GLOBALS['blog_id'],
     'orderby' => 'display_name',
-    'order'   => 'ASC',
+    'order' => 'ASC',
 ));
 
 foreach ($author_list as $author) {
     $id = $author->ID;
 
     $author_query = new WP_Query(array(
-        'author'         => $id,
+        'author' => $id,
         'posts_per_page' => -1,
-        'order'   => 'ASC',
-        'date_query'     => array(
-            'after'  => array(
-                'year'  => $dates['start_year'],
+        'order' => 'ASC',
+        'date_query' => array(
+            'after' => array(
+                'year' => $dates['start_year'],
                 'month' => $dates['start_month'],
-                'day'   => $dates['start_day'],
+                'day' => $dates['start_day'],
             ),
             'before' => array(
-                'year'  => $dates['end_year'],
+                'year' => $dates['end_year'],
                 'month' => $dates['end_month'],
-                'day'   => $dates['end_day'],                                    
+                'day '=> $dates['end_day'],                                    
             ),
             'inclusive' => true,
         ),
@@ -79,13 +79,13 @@ foreach ($author_list as $author) {
             $category = $category[0]->cat_name;
 
             array_push($all_author_info, array(
-                'author_name'   => $author->display_name,
-                'post_title'    => $post->post_title,
+                'author_name' => $author->display_name,
+                'post_title' => $post->post_title,
                 'post_category' => $category,
-                'post_date'     => get_the_time('Y-m-d'),
-                'post_time'     => get_the_time('H:i:s'),
-                'view_count'    => get_view_count(get_the_ID()),
-                'word_count'    => str_word_count(strip_tags(get_the_content()), 0)
+                'post_date' => get_the_time('Y-m-d'),
+                'post_time' => get_the_time('H:i:s'),
+                'view_count' => get_view_count(get_the_ID()),
+                'word_count' => str_word_count(strip_tags(get_the_content()), 0)
             ));
         }
     }
