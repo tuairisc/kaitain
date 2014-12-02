@@ -2,7 +2,7 @@
 // Blame mark@bhalash.com for this.
 
 // Gazeti changes layout at 770px window width.
-var responsiveBreak = 770;
+var responsiveBreak = 768;
 // The class of the actual advert within each group.
 var advert = '.tuairisc-advert';
 
