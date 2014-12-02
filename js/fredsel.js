@@ -1,15 +1,2692 @@
-/*    
- *    jQuery carouFredSel 5.5.5
- *    Demo's and documentation:
- *    caroufredsel.frebsite.nl
- *    
- *    Copyright (c) 2012 Fred Heusschen
- *    www.frebsite.nl
+/*  
+ *  jQuery carouFredSel 5.5.5
+ *  Demo's and documentation:
+ *  caroufredsel.frebsite.nl
+ *  
+ *  Copyright (c) 2012 Fred Heusschen
+ *  www.frebsite.nl
  *
- *    Dual licensed under the MIT and GPL licenses.
- *    http://en.wikipedia.org/wiki/MIT_License
- *    http://en.wikipedia.org/wiki/GNU_General_Public_License
+ *  Dual licensed under the MIT and GPL licenses.
+ *  http://en.wikipedia.org/wiki/MIT_License
+ *  http://en.wikipedia.org/wiki/GNU_General_Public_License
  */
 
 
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('(I($){8($.1P.1J)J;$.1P.1J=I(y,z){8(1h.W==0){1c(M,\'5q 4p 6t 1m "\'+1h.3U+\'".\');J 1h}8(1h.W>1){J 1h.1Q(I(){$(1h).1J(y,z)})}F A=1h,$19=1h[0];8(A.1q(\'4q\')){F B=A.1A(\'5r\');A.X(\'5s\',M)}Q{F B=O}A.3V=I(o,b,c){o=3W($19,o);8(o.1c){H.1c=o.1c;1c(H,\'6u "1c" 6v 6w 6x 6y 3u 5t 6z 4r-1j.\')}F e=[\'G\',\'1n\',\'T\',\'17\',\'1a\',\'1b\'];1m(F a=0,l=e.W;a<l;a++){o[e[a]]=3W($19,o[e[a]])}8(K o.1n==\'14\'){8(o.1n<=50)o.1n={\'G\':o.1n};Q o.1n={\'1k\':o.1n}}Q{8(K o.1n==\'1l\')o.1n={\'1G\':o.1n}}8(K o.G==\'14\')o.G={\'P\':o.G};Q 8(o.G==\'1e\')o.G={\'P\':o.G,\'S\':o.G,\'1s\':o.G};8(K o.G!=\'1j\')o.G={};8(b)2u=$.25(M,{},$.1P.1J.4s,o);7=$.25(M,{},$.1P.1J.4s,o);8(K 7.G.12!=\'1j\')7.G.12={};8(7.G.2I==0&&K c==\'14\'){7.G.2I=c}C.4t=(7.2J);C.2k=(7.2k==\'4u\'||7.2k==\'1t\')?\'1a\':\'17\';F f=[[\'S\',\'34\',\'26\',\'1s\',\'5u\',\'2K\',\'1t\',\'2L\',\'1E\',0,1,2,3],[\'1s\',\'5u\',\'2K\',\'S\',\'34\',\'26\',\'2L\',\'1t\',\'3X\',3,2,1,0]];F g=f[0].W,5v=(7.2k==\'2M\'||7.2k==\'1t\')?0:1;7.d={};1m(F d=0;d<g;d++){7.d[f[0][d]]=f[5v][d]}F h=A.Z();1x(K 7.G.P){V\'1j\':7.G.12.2N=7.G.P.2N;7.G.12.27=7.G.P.27;7.G.P=O;18;V\'1l\':8(7.G.P==\'1e\'){7.G.12.1e=M}Q{7.G.12.2l=7.G.P}7.G.P=O;18;V\'I\':7.G.12.2l=7.G.P;7.G.P=O;18}8(K 7.G.1v==\'1y\'){7.G.1v=(h.1v(\':2O\').W>0)?\':P\':\'*\'}8(7[7.d[\'S\']]==\'T\'){7[7.d[\'S\']]=3v(h,7,\'26\')}8(3Y(7[7.d[\'S\']])&&!7.2J){7[7.d[\'S\']]=3Z(35($1B.36(),7,\'34\'),7[7.d[\'S\']]);C.4t=M}8(7[7.d[\'1s\']]==\'T\'){7[7.d[\'1s\']]=3v(h,7,\'2K\')}8(!7.G[7.d[\'S\']]){8(7.2J){1c(M,\'5w a \'+7.d[\'S\']+\' 1m 5t G!\');7.G[7.d[\'S\']]=3v(h,7,\'26\')}Q{7.G[7.d[\'S\']]=(4v(h,7,\'26\'))?\'1e\':h[7.d[\'26\']](M)}}8(!7.G[7.d[\'1s\']]){7.G[7.d[\'1s\']]=(4v(h,7,\'2K\'))?\'1e\':h[7.d[\'2K\']](M)}8(!7[7.d[\'1s\']]){7[7.d[\'1s\']]=7.G[7.d[\'1s\']]}8(!7.G.P&&!7.2J){8(7.G[7.d[\'S\']]==\'1e\'){7.G.12.1e=M}8(!7.G.12.1e){8(K 7[7.d[\'S\']]==\'14\'){7.G.P=1K.3w(7[7.d[\'S\']]/7.G[7.d[\'S\']])}Q{F i=35($1B.36(),7,\'34\');7.G.P=1K.3w(i/7.G[7.d[\'S\']]);7[7.d[\'S\']]=7.G.P*7.G[7.d[\'S\']];8(!7.G.12.2l)7.1C=O}8(7.G.P==\'6A\'||7.G.P<1){1c(M,\'28 a 4w 14 3x P G: 5w 3u "1e".\');7.G.12.1e=M}}}8(!7[7.d[\'S\']]){7[7.d[\'S\']]=\'1e\';8(!7.2J&&7.G.1v==\'*\'&&!7.G.12.1e&&7.G[7.d[\'S\']]!=\'1e\'){7[7.d[\'S\']]=7.G.P*7.G[7.d[\'S\']];7.1C=O}}8(7.G.12.1e){7.3y=(7[7.d[\'S\']]==\'1e\')?35($1B.36(),7,\'34\'):7[7.d[\'S\']];8(7.1C===O){7[7.d[\'S\']]=\'1e\'}7.G.P=2P(h,7,0)}Q 8(7.G.1v!=\'*\'){7.G.12.41=7.G.P;7.G.P=3z(h,7,0)}8(K 7.1C==\'1y\'){7.1C=(7[7.d[\'S\']]==\'1e\')?O:\'4x\'}7.G.P=2Q(7.G.P,7,7.G.12.2l,$19);7.G.12.2m=7.G.P;7.1u=O;8(7.2J){8(!7.G.12.2N)7.G.12.2N=7.G.P;8(!7.G.12.27)7.G.12.27=7.G.P;7.1C=O;7.1i=[0,0,0,0];F j=$1B.1W(\':P\');8(j)$1B.3a();F k=3Z(35($1B.36(),7,\'34\'),7[7.d[\'S\']]);8(K 7[7.d[\'S\']]==\'14\'&&k<7[7.d[\'S\']]){k=7[7.d[\'S\']]}8(j)$1B.3b();F m=4y(1K.2v(k/7.G[7.d[\'S\']]),7.G.12);8(m>h.W){m=h.W}F n=1K.3w(k/m),4z=7[7.d[\'1s\']],5x=3Y(4z);h.1Q(I(){F a=$(1h),4A=n-5y(a,7,\'6B\');a[7.d[\'S\']](4A);8(5x){a[7.d[\'1s\']](3Z(4A,4z))}});7.G.P=m;7.G[7.d[\'S\']]=n;7[7.d[\'S\']]=m*n}Q{7.1i=5z(7.1i);8(7.1C==\'2L\')7.1C=\'1t\';8(7.1C==\'4B\')7.1C=\'2M\';1x(7.1C){V\'4x\':V\'1t\':V\'2M\':8(7[7.d[\'S\']]!=\'1e\'){F p=42(3c(h,7),7);7.1u=M;7.1i[7.d[1]]=p[1];7.1i[7.d[3]]=p[0]}18;2w:7.1C=O;7.1u=(7.1i[0]==0&&7.1i[1]==0&&7.1i[2]==0&&7.1i[3]==0)?O:M;18}}8(K 7.2n==\'1r\'&&7.2n)7.2n=\'6C\'+A.6D(\'6E\');8(K 7.G.3d!=\'14\')7.G.3d=7.G.P;8(K 7.1n.1k!=\'14\')7.1n.1k=5A;8(K 7.1n.G==\'1y\')7.1n.G=(7.G.12.1e||7.G.1v!=\'*\')?\'P\':7.G.P;7.T=3A($19,7.T,\'T\');7.17=3A($19,7.17);7.1a=3A($19,7.1a);7.1b=3A($19,7.1b,\'1b\');7.T=$.25(M,{},7.1n,7.T);7.17=$.25(M,{},7.1n,7.17);7.1a=$.25(M,{},7.1n,7.1a);7.1b=$.25(M,{},7.1n,7.1b);8(K 7.1b.43!=\'1r\')7.1b.43=O;8(K 7.1b.3e!=\'I\'&&7.1b.3e!==O)7.1b.3e=$.1P.1J.5B;8(K 7.T.1H!=\'1r\')7.T.1H=M;8(K 7.T.4C!=\'14\')7.T.4C=0;8(K 7.T.44==\'1y\')7.T.44=M;8(K 7.T.4D!=\'1r\')7.T.4D=M;8(K 7.T.3f!=\'14\')7.T.3f=(7.T.1k<10)?6F:7.T.1k*5;8(7.29){7.29=4E(7.29)}8(H.1c){1c(H,\'3g S: \'+7.S);1c(H,\'3g 1s: \'+7.1s);8(7.3y)1c(H,\'6G \'+7.d[\'S\']+\': \'+7.3y);1c(H,\'5C 6H: \'+7.G.S);1c(H,\'5C 6I: \'+7.G.1s);1c(H,\'45 3x G P: \'+7.G.P);8(7.T.1H)1c(H,\'45 3x G 4F 6J: \'+7.T.G);8(7.17.Y)1c(H,\'45 3x G 4F 4G: \'+7.17.G);8(7.1a.Y)1c(H,\'45 3x G 4F 5D: \'+7.1a.G)}};A.5E=I(){A.1q(\'4q\',M);F a={\'4H\':A.16(\'4H\'),\'4I\':A.16(\'4I\'),\'3B\':A.16(\'3B\'),\'2L\':A.16(\'2L\'),\'2M\':A.16(\'2M\'),\'4B\':A.16(\'4B\'),\'1t\':A.16(\'1t\'),\'S\':A.16(\'S\'),\'1s\':A.16(\'1s\'),\'4J\':A.16(\'4J\'),\'1E\':A.16(\'1E\'),\'3X\':A.16(\'3X\'),\'4K\':A.16(\'4K\')};1x(a.3B){V\'4L\':F b=\'4L\';18;V\'5F\':F b=\'5F\';18;2w:F b=\'6K\'}$1B.16(a).16({\'6L\':\'2O\',\'3B\':b});A.1q(\'5G\',a).16({\'4H\':\'1t\',\'4I\':\'46\',\'3B\':\'4L\',\'2L\':0,\'1t\':0,\'4J\':0,\'1E\':0,\'3X\':0,\'4K\':0});8(7.1u){A.Z().1Q(I(){F m=2o($(1h).16(7.d[\'1E\']));8(2p(m))m=0;$(1h).1q(\'1S\',m)})}};A.5H=I(){A.4M();A.13(L(\'4N\',H),I(e,a){e.1f();8(!C.1Z){8(7.T.Y){7.T.Y.2R(2q(\'47\',H))}}C.1Z=M;8(7.T.1H){7.T.1H=O;A.X(L(\'2S\',H),a)}J M});A.13(L(\'4O\',H),I(e){e.1f();8(C.1T){3C(R)}J M});A.13(L(\'2S\',H),I(e,a,b){e.1f();1F=3h(1F);8(a&&C.1T){R.1Z=M;F c=2x()-R.2T;R.1k-=c;8(R.1o)R.1o.1k-=c;8(R.1R)R.1R.1k-=c;3C(R,O)}8(!C.1X&&!C.1T){8(b)1F.3D+=2x()-1F.2T}8(!C.1X){8(7.T.Y){7.T.Y.2R(2q(\'5I\',H))}}C.1X=M;8(7.T.5J){F d=7.T.3f-1F.3D,3E=3F-1K.2v(d*3F/7.T.3f);7.T.5J.1z($19,3E,d)}J M});A.13(L(\'1H\',H),I(e,b,c,d){e.1f();1F=3h(1F);F v=[b,c,d],t=[\'1l\',\'14\',\'1r\'],a=2U(v,t);F b=a[0],c=a[1],d=a[2];8(b!=\'17\'&&b!=\'1a\')b=C.2k;8(K c!=\'14\')c=0;8(K d!=\'1r\')d=O;8(d){C.1Z=O;7.T.1H=M}8(!7.T.1H){e.20();J 1c(H,\'3g 47: 28 2V.\')}8(C.1X){8(7.T.Y){7.T.Y.2y(2q(\'47\',H));7.T.Y.2y(2q(\'5I\',H))}}C.1X=O;1F.2T=2x();F f=7.T.3f+c;3G=f-1F.3D;3E=3F-1K.2v(3G*3F/f);1F.T=6M(I(){8(7.T.5K){7.T.5K.1z($19,3E,3G)}8(C.1T){A.X(L(\'1H\',H),b)}Q{A.X(L(b,H),7.T)}},3G);8(7.T.5L){7.T.5L.1z($19,3E,3G)}J M});A.13(L(\'2W\',H),I(e){e.1f();8(R.1Z){R.1Z=O;C.1X=O;C.1T=M;R.2T=2x();2a(R)}Q{A.X(L(\'1H\',H))}J M});A.13(L(\'17\',H)+\' \'+L(\'1a\',H),I(e,b,f,g){e.1f();8(C.1Z||A.1W(\':2O\')){e.20();J 1c(H,\'3g 47 6N 2O: 28 2V.\')}8(7.G.3d>=N.U){e.20();J 1c(H,\'28 5M G (\'+N.U+\', \'+7.G.3d+\' 5N): 28 2V.\')}F v=[b,f,g],t=[\'1j\',\'14/1l\',\'I\'],a=2U(v,t);F b=a[0],f=a[1],g=a[2];F h=e.4P.1d(H.3i.3H.W);8(K b!=\'1j\'||b==2b)b=7[h];8(K g==\'I\')b.21=g;8(K f!=\'14\'){8(7.G.1v!=\'*\'){f=\'P\'}Q{F i=[f,b.G,7[h].G];1m(F a=0,l=i.W;a<l;a++){8(K i[a]==\'14\'||i[a]==\'5O\'||i[a]==\'P\'){f=i[a];18}}}1x(f){V\'5O\':e.20();J A.1A(h+\'6O\',[b,g]);18;V\'P\':8(!7.G.12.1e&&7.G.1v==\'*\'){f=7.G.P}18}}8(R.1Z){A.X(L(\'2W\',H));A.X(L(\'3j\',H),[h,[b,f,g]]);e.20();J 1c(H,\'3g 6P 2V.\')}8(b.1k>0){8(C.1T){8(b.3j)A.X(L(\'3j\',H),[h,[b,f,g]]);e.20();J 1c(H,\'3g 6Q 2V.\')}}8(b.4Q&&!b.4Q.1z($19)){e.20();J 1c(H,\'6R "4Q" 6S O.\')}1F.3D=0;A.X(\'5P\'+h,[b,f]);8(7.29){F s=7.29,c=[b,f];1m(F j=0,l=s.W;j<l;j++){F d=h;8(!s[j][1])c[0]=s[j][0].1A(\'5Q\',h);8(!s[j][2])d=(d==\'17\')?\'1a\':\'17\';c[1]=f+s[j][3];s[j][0].X(\'5P\'+d,c)}}J M});A.13(L(\'6T\',H,O),I(e,f,g){e.1f();F h=A.Z();8(!7.1L){8(N.11==0){8(7.3k){A.X(L(\'1a\',H),N.U-1)}J e.20()}}8(7.1u)1M(h,7);8(K g!=\'14\'){8(7.G.12.1e){g=48(h,7,N.U-1)}Q 8(7.G.1v!=\'*\'){F i=(K f.G==\'14\')?f.G:4R(A,7);g=5R(h,7,N.U-1,i)}Q{g=7.G.P}g=4a(g,7,f.G,$19)}8(!7.1L){8(N.U-g<N.11){g=N.U-N.11}}7.G.12.2m=7.G.P;8(7.G.12.1e){F j=2P(h,7,N.U-g);8(7.G.P+g<=j&&g<N.U){g++;j=2P(h,7,N.U-g)}7.G.P=2Q(j,7,7.G.12.2l,$19)}Q 8(7.G.1v!=\'*\'){F j=3z(h,7,N.U-g);7.G.P=2Q(j,7,7.G.12.2l,$19)}8(7.1u)1M(h,7,M);8(g==0){e.20();J 1c(H,\'0 G 3u 1n: 28 2V.\')}1c(H,\'5S \'+g+\' G 4G.\');N.11+=g;22(N.11>=N.U){N.11-=N.U}8(!7.1L){8(N.11==0&&f.4b)f.4b.1z($19);8(!7.3k)2X(7,N.11,H)}A.Z().1d(N.U-g,N.U).6U(A);8(N.U<7.G.P+g){A.Z().1d(0,(7.G.P+g)-N.U).4c(M).3I(A)}F h=A.Z(),2r=5T(h,7,g),1U=5U(h,7),2c=h.1N(g-1),2d=2r.2Y(),2z=1U.2Y();8(7.1u)1M(h,7);8(7.1C){F p=42(1U,7),k=p[0],2s=p[1]}Q{F k=0,2s=0}F l=(k<0)?7.1i[7.d[3]]:0;8(f.1I==\'5V\'&&7.G.P<g){F m=h.1d(7.G.12.2m,g),4d=7.G[7.d[\'S\']];m.1Q(I(){F a=$(1h);a.1q(\'4e\',a.1W(\':2O\')).3a()});7.G[7.d[\'S\']]=\'1e\'}Q{F m=O}F n=3l(h.1d(0,g),7,\'S\'),2e=4f(2A(1U,7,M),7,!7.1u);8(m)7.G[7.d[\'S\']]=4d;8(7.1u){1M(h,7,M);8(2s>=0){1M(2d,7,7.1i[7.d[1]])}1M(2c,7,7.1i[7.d[3]])}8(7.1C){7.1i[7.d[1]]=2s;7.1i[7.d[3]]=k}F o={},1w=f.1k;8(f.1I==\'46\')1w=0;Q 8(1w==\'T\')1w=7.1n.1k/7.1n.G*g;Q 8(1w<=0)1w=0;Q 8(1w<10)1w=n/1w;R=23(1w,f.1G);8(7[7.d[\'S\']]==\'1e\'||7[7.d[\'1s\']]==\'1e\'){R.1g.1p([$1B,2e])}8(7.1u){F q=7.1i[7.d[3]];8(2z.4S(2c).W){F r={};r[7.d[\'1E\']]=2c.1q(\'1S\');8(k<0)2c.16(r);Q R.1g.1p([2c,r])}8(2z.4S(2d).W){F s={};s[7.d[\'1E\']]=2d.1q(\'1S\');R.1g.1p([2d,s])}8(2s>=0){F t={};t[7.d[\'1E\']]=2z.1q(\'1S\')+7.1i[7.d[1]];R.1g.1p([2z,t])}}Q{F q=0}o[7.d[\'1t\']]=q;F u=[2r,1U,2e,1w];8(f.2f)f.2f.3J($19,u);1Y.2f=3K(1Y.2f,$19,u);1x(f.1I){V\'2B\':V\'2g\':V\'2C\':V\'2h\':R.1o=23(R.1k,R.1G);R.1R=23(R.1k,R.1G);R.1k=0;18}1x(f.1I){V\'2g\':V\'2C\':V\'2h\':F v=A.4c().3I($1B);18}1x(f.1I){V\'2h\':v.Z().1d(0,g).1O();V\'2g\':V\'2C\':v.Z().1d(7.G.P).1O();18}1x(f.1I){V\'2B\':R.1o.1g.1p([A,{\'2i\':0}]);18;V\'2g\':v.16({\'2i\':0});R.1o.1g.1p([A,{\'S\':\'+=0\'},I(){v.1O()}]);R.1R.1g.1p([v,{\'2i\':1}]);18;V\'2C\':R=4T(R,A,v,7,M);18;V\'2h\':R=4U(R,A,v,7,M,g);18}F w=I(){F b=7.G.P+g-N.U;8(b>0){A.Z().1d(N.U).1O();2r=$(A.Z().1d(N.U-(7.G.P-b)).4g().5W(A.Z().1d(0,b).4g()))}8(m){m.1Q(I(){F a=$(1h);8(!a.1q(\'4e\'))a.3b()})}8(7.1u){F c=A.Z().1N(7.G.P+g-1);c.16(7.d[\'1E\'],c.1q(\'1S\'))}R.1g=[];8(R.1o)R.1o=23(R.4V,R.1G);F d=I(){1x(f.1I){V\'2B\':V\'2g\':A.16(\'1v\',\'\');18}R.1R=23(0,2b);C.1T=O;F a=[2r,1U,2e];8(f.21)f.21.3J($19,a);1Y.21=3K(1Y.21,$19,a);8(1V.W){A.X(L(1V[0][0],H),1V[0][1]);1V.5X()}8(!C.1X)A.X(L(\'1H\',H))};1x(f.1I){V\'2B\':R.1o.1g.1p([A,{\'2i\':1},d]);2a(R.1o);18;V\'2h\':R.1o.1g.1p([A,{\'S\':\'+=0\'},d]);2a(R.1o);18;2w:d();18}};R.1g.1p([A,o,w]);C.1T=M;A.16(7.d[\'1t\'],-(n-l));1F=3h(1F);2a(R);4W(7.2n,A.1A(L(\'3L\',H)));A.X(L(\'2D\',H),[O,2e]);J M});A.13(L(\'6V\',H,O),I(e,f,g){e.1f();F h=A.Z();8(!7.1L){8(N.11==7.G.P){8(7.3k){A.X(L(\'17\',H),N.U-1)}J e.20()}}8(7.1u)1M(h,7);8(K g!=\'14\'){8(7.G.1v!=\'*\'){F i=(K f.G==\'14\')?f.G:4R(A,7);g=5Y(h,7,0,i)}Q{g=7.G.P}g=4a(g,7,f.G,$19)}F j=(N.11==0)?N.U:N.11;8(!7.1L){8(7.G.12.1e){F k=2P(h,7,g),i=48(h,7,j-1)}Q{F k=7.G.P,i=7.G.P}8(g+k>j){g=j-i}}7.G.12.2m=7.G.P;8(7.G.12.1e){F k=4X(h,7,g,j);22(7.G.P-g>=k&&g<N.U){g++;k=4X(h,7,g,j)}7.G.P=2Q(k,7,7.G.12.2l,$19)}Q 8(7.G.1v!=\'*\'){F k=3z(h,7,g);7.G.P=2Q(k,7,7.G.12.2l,$19)}8(7.1u)1M(h,7,M);8(g==0){e.20();J 1c(H,\'0 G 3u 1n: 28 2V.\')}1c(H,\'5S \'+g+\' G 5D.\');N.11-=g;22(N.11<0){N.11+=N.U}8(!7.1L){8(N.11==7.G.P&&f.4b)f.4b.1z($19);8(!7.3k)2X(7,N.11,H)}8(N.U<7.G.P+g){A.Z().1d(0,(7.G.P+g)-N.U).4c(M).3I(A)}F h=A.Z(),2r=4Y(h,7),1U=4Z(h,7,g),2c=h.1N(g-1),2d=2r.2Y(),2z=1U.2Y();8(7.1u)1M(h,7);8(7.1C){F p=42(1U,7),l=p[0],2s=p[1]}Q{F l=0,2s=0}8(f.1I==\'5V\'&&7.G.12.2m<g){F m=h.1d(7.G.12.2m,g),4d=7.G[7.d[\'S\']];m.1Q(I(){F a=$(1h);a.1q(\'4e\',a.1W(\':2O\')).3a()});7.G[7.d[\'S\']]=\'1e\'}Q{F m=O}F n=3l(h.1d(0,g),7,\'S\'),2e=4f(2A(1U,7,M),7,!7.1u);8(m)7.G[7.d[\'S\']]=4d;8(7.1C){8(7.1i[7.d[1]]<0){7.1i[7.d[1]]=0}}8(7.1u){1M(h,7,M);1M(2d,7,7.1i[7.d[1]])}8(7.1C){7.1i[7.d[1]]=2s;7.1i[7.d[3]]=l}F o={},1w=f.1k;8(f.1I==\'46\')1w=0;Q 8(1w==\'T\')1w=7.1n.1k/7.1n.G*g;Q 8(1w<=0)1w=0;Q 8(1w<10)1w=n/1w;R=23(1w,f.1G);8(7[7.d[\'S\']]==\'1e\'||7[7.d[\'1s\']]==\'1e\'){R.1g.1p([$1B,2e])}8(7.1u){F q=2z.1q(\'1S\');8(2s>=0){q+=7.1i[7.d[1]]}2z.16(7.d[\'1E\'],q);8(2c.4S(2d).W){F r={};r[7.d[\'1E\']]=2d.1q(\'1S\');R.1g.1p([2d,r])}F s=2c.1q(\'1S\');8(l>=0){s+=7.1i[7.d[3]]}F t={};t[7.d[\'1E\']]=s;R.1g.1p([2c,t])}o[7.d[\'1t\']]=-n;8(l<0){o[7.d[\'1t\']]+=l}F u=[2r,1U,2e,1w];8(f.2f)f.2f.3J($19,u);1Y.2f=3K(1Y.2f,$19,u);1x(f.1I){V\'2B\':V\'2g\':V\'2C\':V\'2h\':R.1o=23(R.1k,R.1G);R.1R=23(R.1k,R.1G);R.1k=0;18}1x(f.1I){V\'2g\':V\'2C\':V\'2h\':F v=A.4c().3I($1B);18}1x(f.1I){V\'2h\':v.Z().1d(7.G.12.2m).1O();18;V\'2g\':V\'2C\':v.Z().1d(0,g).1O();v.Z().1d(7.G.P).1O();18}1x(f.1I){V\'2B\':R.1o.1g.1p([A,{\'2i\':0}]);18;V\'2g\':v.16({\'2i\':0});R.1o.1g.1p([A,{\'S\':\'+=0\'},I(){v.1O()}]);R.1R.1g.1p([v,{\'2i\':1}]);18;V\'2C\':R=4T(R,A,v,7,O);18;V\'2h\':R=4U(R,A,v,7,O,g);18}F w=I(){F b=7.G.P+g-N.U,5Z=(7.1u)?7.1i[7.d[3]]:0;A.16(7.d[\'1t\'],5Z);8(b>0){A.Z().1d(N.U).1O()}F c=A.Z().1d(0,g).3I(A).2Y();8(b>0){1U=3c(h,7)}8(m){m.1Q(I(){F a=$(1h);8(!a.1q(\'4e\'))a.3b()})}8(7.1u){8(N.U<7.G.P+g){F d=A.Z().1N(7.G.P-1);d.16(7.d[\'1E\'],d.1q(\'1S\')+7.1i[7.d[3]])}c.16(7.d[\'1E\'],c.1q(\'1S\'))}R.1g=[];8(R.1o)R.1o=23(R.4V,R.1G);F e=I(){1x(f.1I){V\'2B\':V\'2g\':A.16(\'1v\',\'\');18}R.1R=23(0,2b);C.1T=O;F a=[2r,1U,2e];8(f.21)f.21.3J($19,a);1Y.21=3K(1Y.21,$19,a);8(1V.W){A.X(L(1V[0][0],H),1V[0][1]);1V.5X()}8(!C.1X)A.X(L(\'1H\',H))};1x(f.1I){V\'2B\':R.1o.1g.1p([A,{\'2i\':1},e]);2a(R.1o);18;V\'2h\':R.1o.1g.1p([A,{\'S\':\'+=0\'},e]);2a(R.1o);18;2w:e();18}};R.1g.1p([A,o,w]);C.1T=M;1F=3h(1F);2a(R);4W(7.2n,A.1A(L(\'3L\',H)));A.X(L(\'2D\',H),[O,2e]);J M});A.13(L(\'2Z\',H),I(e,b,c,d,f,g,h){e.1f();F v=[b,c,d,f,g,h],t=[\'1l/14/1j\',\'14\',\'1r\',\'1j\',\'1l\',\'I\'],a=2U(v,t);F f=a[3],g=a[4],h=a[5];b=3m(a[0],a[1],a[2],N,A);8(b==0)J;8(K f!=\'1j\')f=O;8(C.1T){8(K f!=\'1j\'||f.1k>0)J O}8(g!=\'17\'&&g!=\'1a\'){8(7.1L){8(b<=N.U/2)g=\'1a\';Q g=\'17\'}Q{8(N.11==0||N.11>b)g=\'1a\';Q g=\'17\'}}8(g==\'17\')b=N.U-b;A.X(L(g,H),[f,b,h]);J M});A.13(L(\'6W\',H),I(e,a,b){e.1f();F c=A.1A(L(\'3M\',H));J A.1A(L(\'51\',H),[c-1,a,\'17\',b])});A.13(L(\'6X\',H),I(e,a,b){e.1f();F c=A.1A(L(\'3M\',H));J A.1A(L(\'51\',H),[c+1,a,\'1a\',b])});A.13(L(\'51\',H),I(e,a,b,c,d){e.1f();8(K a!=\'14\')a=A.1A(L(\'3M\',H));F f=7.1b.G||7.G.P,27=1K.2v(N.U/f)-1;8(a<0)a=27;8(a>27)a=0;J A.1A(L(\'2Z\',H),[a*f,0,M,b,c,d])});A.13(L(\'60\',H),I(e,s){e.1f();8(s)s=3m(s,0,M,N,A);Q s=0;s+=N.11;8(s!=0){22(s>N.U)s-=N.U;A.6Y(A.Z().1d(s,N.U))}J M});A.13(L(\'29\',H),I(e,s){e.1f();8(s)s=4E(s);Q 8(7.29)s=7.29;Q J 1c(H,\'5q 6Z 3u 29.\');F n=A.1A(L(\'3L\',H)),x=M;1m(F j=0,l=s.W;j<l;j++){8(!s[j][0].1A(L(\'2Z\',H),[n,s[j][3],M])){x=O}}J x});A.13(L(\'3j\',H),I(e,a,b){e.1f();8(K a==\'I\'){a.1z($19,1V)}Q 8(31(a)){1V=a}Q 8(K a!=\'1y\'){1V.1p([a,b])}J 1V});A.13(L(\'70\',H),I(e,b,c,d,f){e.1f();F v=[b,c,d,f],t=[\'1l/1j\',\'1l/14/1j\',\'1r\',\'14\'],a=2U(v,t);F b=a[0],c=a[1],d=a[2],f=a[3];8(K b==\'1j\'&&K b.3n==\'1y\')b=$(b);8(K b==\'1l\')b=$(b);8(K b!=\'1j\'||K b.3n==\'1y\'||b.W==0)J 1c(H,\'28 a 4w 1j.\');8(K c==\'1y\')c=\'4h\';8(7.1u){b.1Q(I(){F m=2o($(1h).16(7.d[\'1E\']));8(2p(m))m=0;$(1h).1q(\'1S\',m)})}F g=c,3N=\'3N\';8(c==\'4h\'){8(d){8(N.11==0){c=N.U-1;3N=\'61\'}Q{c=N.11;N.11+=b.W}8(c<0)c=0}Q{c=N.U-1;3N=\'61\'}}Q{c=3m(c,f,d,N,A)}8(g!=\'4h\'&&!d){8(c<N.11)N.11+=b.W}8(N.11>=N.U)N.11-=N.U;F h=A.Z().1N(c);8(h.W){h[3N](b)}Q{A.62(b)}N.U=A.Z().W;F i=A.1A(\'52\');3O(7,N.U,H);2X(7,N.11,H);A.X(L(\'53\',H));A.X(L(\'2D\',H),[M,i]);J M});A.13(L(\'71\',H),I(e,b,c,d){e.1f();F v=[b,c,d],t=[\'1l/14/1j\',\'1r\',\'14\'],a=2U(v,t);F b=a[0],c=a[1],d=a[2];8(K b==\'1y\'||b==\'4h\'){A.Z().2Y().1O()}Q{b=3m(b,d,c,N,A);F f=A.Z().1N(b);8(f.W){8(b<N.11)N.11-=f.W;f.1O()}}N.U=A.Z().W;F g=A.1A(\'52\');3O(7,N.U,H);2X(7,N.11,H);A.X(L(\'2D\',H),[M,g]);J M});A.13(L(\'2f\',H)+\' \'+L(\'21\',H),I(e,a){e.1f();F b=e.4P.1d(H.3i.3H.W);8(31(a))1Y[b]=a;8(K a==\'I\')1Y[b].1p(a);J 1Y[b]});A.13(L(\'5r\',H,O),I(e,a){e.1f();J A.1A(L(\'3L\',H),a)});A.13(L(\'3L\',H),I(e,a){e.1f();8(N.11==0)F b=0;Q F b=N.U-N.11;8(K a==\'I\')a.1z($19,b);J b});A.13(L(\'3M\',H),I(e,a){e.1f();F b=7.1b.G||7.G.P;F c=1K.2v(N.U/b-1);8(N.11==0)F d=0;Q 8(N.11<N.U%b)F d=0;Q 8(N.11==b&&!7.1L)F d=c;Q F d=1K.72((N.U-N.11)/b);8(d<0)d=0;8(d>c)d=c;8(K a==\'I\')a.1z($19,d);J d});A.13(L(\'73\',H),I(e,a){e.1f();$i=3c(A.Z(),7);8(K a==\'I\')a.1z($19,$i);J $i});A.13(L(\'1d\',H),I(e,f,l,b){e.1f();F v=[f,l,b],t=[\'14\',\'14\',\'I\'],a=2U(v,t);f=(K a[0]==\'14\')?a[0]:0,l=(K a[1]==\'14\')?a[1]:N.U,b=a[2];f+=N.11;l+=N.11;22(f>N.U){f-=N.U}22(l>N.U){l-=N.U}22(f<0){f+=N.U}22(l<0){l+=N.U}F c=A.Z();8(l>f){F d=c.1d(f,l)}Q{F d=$(c.1d(f,N.U).4g().5W(c.1d(0,l).4g()))}8(K b==\'I\')b.1z($19,d);J d});A.13(L(\'1X\',H)+\' \'+L(\'1Z\',H)+\' \'+L(\'1T\',H),I(e,a){e.1f();F b=e.4P.1d(H.3i.3H.W);8(K a==\'I\')a.1z($19,C[b]);J C[b]});A.13(L(\'5Q\',H,O),I(e,a,b,c){e.1f();J A.1A(L(\'4r\',H),[a,b,c])});A.13(L(\'4r\',H),I(e,a,b,c){e.1f();F d=O;8(K a==\'I\'){a.1z($19,7)}Q 8(K a==\'1j\'){2u=$.25(M,{},2u,a);8(b!==O)d=M;Q 7=$.25(M,{},7,a)}Q 8(K a!=\'1y\'){8(K b==\'I\'){F f=4i(\'7.\'+a);8(K f==\'1y\')f=\'\';b.1z($19,f)}Q 8(K b!=\'1y\'){8(K c!==\'1r\')c=M;4i(\'2u.\'+a+\' = b\');8(c!==O)d=M;Q 4i(\'7.\'+a+\' = b\')}Q{J 4i(\'7.\'+a)}}8(d){1M(A.Z(),7);A.3V(2u);A.54();F g=3P(A,7,O);A.X(L(\'2D\',H),[M,g])}J 7});A.13(L(\'53\',H),I(e,a,b){e.1f();8(K a==\'1y\'||a.W==0)a=$(\'74\');Q 8(K a==\'1l\')a=$(a);8(K a!=\'1j\')J 1c(H,\'28 a 4w 1j.\');8(K b!=\'1l\'||b.W==0)b=\'a.63\';a.75(b).1Q(I(){F h=1h.64||\'\';8(h.W>0&&A.Z().65($(h))!=-1){$(1h).24(\'55\').55(I(e){e.2j();A.X(L(\'2Z\',H),h)})}});J M});A.13(L(\'2D\',H),I(e,b,c){e.1f();8(!7.1b.1D)J;8(b){F d=7.1b.G||7.G.P,l=1K.2v(N.U/d);8(7.1b.3e){7.1b.1D.Z().1O();7.1b.1D.1Q(I(){1m(F a=0;a<l;a++){F i=A.Z().1N(3m(a*d,0,M,N,A));$(1h).62(7.1b.3e(a+1,i))}})}7.1b.1D.1Q(I(){$(1h).Z().24(7.1b.3o).1Q(I(a){$(1h).13(7.1b.3o,I(e){e.2j();A.X(L(\'2Z\',H),[a*d,0,M,7.1b])})})})}7.1b.1D.1Q(I(){$(1h).Z().2y(2q(\'66\',H)).1N(A.1A(L(\'3M\',H))).2R(2q(\'66\',H))});J M});A.13(L(\'52\',H),I(e){F a=A.Z(),3Q=7.G.P;8(7.G.12.1e)3Q=2P(a,7,0);Q 8(7.G.1v!=\'*\')3Q=3z(a,7,0);8(!7.1L&&N.11!=0&&3Q>N.11){8(7.G.12.1e){F b=48(a,7,N.11)-N.11}Q 8(7.G.1v!=\'*\'){F b=68(a,7,N.11)-N.11}Q{b=7.G.P-N.11}1c(H,\'76 77-1L: 78 \'+b+\' G 4G.\');A.X(\'17\',b)}7.G.P=2Q(3Q,7,7.G.12.2l,$19);J 3P(A,7)});A.13(L(\'5s\',H,O),I(e,a){e.1f();A.X(L(\'69\',H),a);J M});A.13(L(\'69\',H),I(e,a){e.1f();1F=3h(1F);A.1q(\'4q\',O);A.X(L(\'4O\',H));8(a){A.X(L(\'60\',H))}8(7.1u){1M(A.Z(),7)}A.16(A.1q(\'5G\'));A.4M();A.56();$1B.79(A);J M})};A.4M=I(){A.24(L(\'\',H));A.24(L(\'\',H,O))};A.54=I(){A.56();3O(7,N.U,H);2X(7,N.11,H);8(7.T.2t){F c=3p(7.T.2t);$1B.13(L(\'4j\',H,O),I(){A.X(L(\'2S\',H),c)}).13(L(\'4k\',H,O),I(){A.X(L(\'2W\',H))})}8(7.T.Y){7.T.Y.13(L(7.T.3o,H,O),I(e){e.2j();F a=O,c=2b;8(C.1X){a=\'1H\'}Q 8(7.T.44){a=\'2S\';c=3p(7.T.44)}8(a){A.X(L(a,H),c)}})}8(7.17.Y){7.17.Y.13(L(7.17.3o,H,O),I(e){e.2j();A.X(L(\'17\',H))});8(7.17.2t){F c=3p(7.17.2t);7.17.Y.13(L(\'4j\',H,O),I(){A.X(L(\'2S\',H),c)}).13(L(\'4k\',H,O),I(){A.X(L(\'2W\',H))})}}8(7.1a.Y){7.1a.Y.13(L(7.1a.3o,H,O),I(e){e.2j();A.X(L(\'1a\',H))});8(7.1a.2t){F c=3p(7.1a.2t);7.1a.Y.13(L(\'4j\',H,O),I(){A.X(L(\'2S\',H),c)}).13(L(\'4k\',H,O),I(){A.X(L(\'2W\',H))})}}8($.1P.2E){8(7.17.2E){8(!C.57){C.57=M;$1B.2E(I(e,a){8(a>0){e.2j();F b=59(7.17.2E);A.X(L(\'17\',H),b)}})}}8(7.1a.2E){8(!C.5a){C.5a=M;$1B.2E(I(e,a){8(a<0){e.2j();F b=59(7.1a.2E);A.X(L(\'1a\',H),b)}})}}}8($.1P.3R){F d=(7.17.5b)?I(){A.X(L(\'17\',H))}:2b,3S=(7.1a.5b)?I(){A.X(L(\'1a\',H))}:2b;8(3S||3S){8(!C.3R){C.3R=M;F f={\'7a\':30,\'7b\':30,\'7c\':M};1x(7.2k){V\'4u\':V\'6a\':f.7d=d;f.7e=3S;18;2w:f.7f=3S;f.7g=d}$1B.3R(f)}}}8(7.1b.1D){8(7.1b.2t){F c=3p(7.1b.2t);7.1b.1D.13(L(\'4j\',H,O),I(){A.X(L(\'2S\',H),c)}).13(L(\'4k\',H,O),I(){A.X(L(\'2W\',H))})}}8(7.17.2F||7.1a.2F){$(3T).13(L(\'6b\',H,O,M,M),I(e){F k=e.6c;8(k==7.1a.2F){e.2j();A.X(L(\'1a\',H))}8(k==7.17.2F){e.2j();A.X(L(\'17\',H))}})}8(7.1b.43){$(3T).13(L(\'6b\',H,O,M,M),I(e){F k=e.6c;8(k>=49&&k<58){k=(k-49)*7.G.P;8(k<=N.U){e.2j();A.X(L(\'2Z\',H),[k,0,M,7.1b])}}})}8(7.T.1H){A.X(L(\'1H\',H),7.T.4C)}8(C.4t){$(3q).13(L(\'7h\',H,O,M,M),I(e){A.X(L(\'4O\',H));8(7.T.4D&&!C.1X){A.X(L(\'1H\',H))}1M(A.Z(),7);A.3V(2u);F a=3P(A,7,O);A.X(L(\'2D\',H),[M,a])})}};A.56=I(){F a=L(\'\',H),3r=L(\'\',H,O);5c=L(\'\',H,O,M,M);$(3T).24(5c);$(3q).24(5c);$1B.24(3r);8(7.T.Y)7.T.Y.24(3r);8(7.17.Y)7.17.Y.24(3r);8(7.1a.Y)7.1a.Y.24(3r);8(7.1b.1D){7.1b.1D.24(3r);8(7.1b.3e){7.1b.1D.Z().1O()}}3O(7,\'3a\',H);2X(7,\'2y\',H)};F C={\'2k\':\'1a\',\'1X\':M,\'1T\':O,\'1Z\':O,\'5a\':O,\'57\':O,\'3R\':O},N={\'U\':A.Z().W,\'11\':0},1F={\'7i\':2b,\'T\':2b,\'3j\':2b,\'2T\':2x(),\'3D\':0},R={\'1Z\':O,\'1k\':0,\'2T\':0,\'1G\':\'\',\'1g\':[]},1Y={\'2f\':[],\'21\':[]},1V=[],H=$.25(M,{},$.1P.1J.6d,z),7={},2u=y,$1B=A.7j(\'<\'+H.5d.4p+\' 7k="\'+H.5d.6e+\'" />\').36();H.3U=A.3U;H.4l=$.1P.1J.4l++;A.3V(2u,M,B);A.5E();A.5H();A.54();8(31(7.G.2I)){F D=7.G.2I}Q{F D=[];8(7.G.2I!=0){D.1p(7.G.2I)}}8(7.2n){D.7l(6f(7.2n))}8(D.W>0){1m(F a=0,l=D.W;a<l;a++){F s=D[a];8(s==0){5e}8(s===M){s=3q.7m.64;8(s.W<1){5e}}Q 8(s===\'6g\'){s=1K.3w(1K.6g()*N.U)}8(A.1A(L(\'2Z\',H),[s,0,M,{1I:\'46\'}])){18}}}F E=3P(A,7,O),6h=3c(A.Z(),7);8(7.6i){7.6i.1z($19,6h,E)}A.X(L(\'2D\',H),[M,E]);A.X(L(\'53\',H));J A};$.1P.1J.4l=1;$.1P.1J.4s={\'29\':O,\'3k\':M,\'1L\':M,\'2J\':O,\'2k\':\'1t\',\'G\':{\'2I\':0},\'1n\':{\'1G\':\'7n\',\'1k\':5A,\'2t\':O,\'2E\':O,\'5b\':O,\'3o\':\'55\',\'3j\':O}};$.1P.1J.6d={\'1c\':O,\'3i\':{\'3H\':\'\',\'6j\':\'7o\'},\'5d\':{\'4p\':\'7p\',\'6e\':\'7q\'},\'5f\':{}};$.1P.1J.5B=I(a,b){J\'<a 7r="#"><6k>\'+a+\'</6k></a>\'};I 23(d,e){J{1g:[],1k:d,4V:d,1G:e,2T:2x()}}I 2a(s){8(K s.1o==\'1j\'){2a(s.1o)}1m(F a=0,l=s.1g.W;a<l;a++){F b=s.1g[a];8(!b)5e;8(b[3])b[0].4N();b[0].6l(b[1],{6m:b[2],1k:s.1k,1G:s.1G})}8(K s.1R==\'1j\'){2a(s.1R)}}I 3C(s,c){8(K c!=\'1r\')c=M;8(K s.1o==\'1j\'){3C(s.1o,c)}1m(F a=0,l=s.1g.W;a<l;a++){F b=s.1g[a];b[0].4N(M);8(c){b[0].16(b[1]);8(K b[2]==\'I\')b[2]()}}8(K s.1R==\'1j\'){3C(s.1R,c)}}I 3h(t){8(t.T)7s(t.T);J t}I 3K(b,t,c){8(b.W){1m(F a=0,l=b.W;a<l;a++){b[a].3J(t,c)}}J[]}I 7t(a,c,x,d,f){F o={\'1k\':d,\'1G\':a.1G};8(K f==\'I\')o.6m=f;c.6l({2i:x},o)}I 4T(a,b,c,o,d){F e=2A(4Y(b.Z(),o),o,M)[0],5g=2A(c.Z(),o,M)[0],4m=(d)?-5g:e,2G={},3s={};2G[o.d[\'S\']]=5g;2G[o.d[\'1t\']]=4m;3s[o.d[\'1t\']]=0;a.1o.1g.1p([b,{\'2i\':1}]);a.1R.1g.1p([c,3s,I(){$(1h).1O()}]);c.16(2G);J a}I 4U(a,b,c,o,d,n){F e=2A(4Z(b.Z(),o,n),o,M)[0],5h=2A(c.Z(),o,M)[0],4m=(d)?-5h:e,2G={},3s={};2G[o.d[\'S\']]=5h;2G[o.d[\'1t\']]=0;3s[o.d[\'1t\']]=4m;a.1R.1g.1p([c,3s,I(){$(1h).1O()}]);c.16(2G);J a}I 3O(o,t,c){8(t==\'3b\'||t==\'3a\'){F f=t}Q 8(o.G.3d>=t){1c(c,\'28 5M G: 7u 7v (\'+t+\' G, \'+o.G.3d+\' 5N).\');F f=\'3a\'}Q{F f=\'3b\'}F s=(f==\'3b\')?\'2y\':\'2R\',h=2q(\'2O\',c);8(o.T.Y)o.T.Y[f]()[s](h);8(o.17.Y)o.17.Y[f]()[s](h);8(o.1a.Y)o.1a.Y[f]()[s](h);8(o.1b.1D)o.1b.1D[f]()[s](h)}I 2X(o,f,c){8(o.1L||o.3k)J;F a=(f==\'2y\'||f==\'2R\')?f:O,4n=2q(\'7w\',c);8(o.T.Y&&a){o.T.Y[a](4n)}8(o.17.Y){F b=a||(f==0)?\'2R\':\'2y\';o.17.Y[b](4n)}8(o.1a.Y){F b=a||(f==o.G.P)?\'2R\':\'2y\';o.1a.Y[b](4n)}}I 3W(a,b){8(K b==\'I\')b=b.1z(a);8(K b==\'1y\')b={};J b}I 3A(a,b,c){8(K c!=\'1l\')c=\'\';b=3W(a,b);8(K b==\'1l\'){F d=5i(b);8(d==-1)b=$(b);Q b=d}8(c==\'1b\'){8(K b==\'1r\')b={\'43\':b};8(K b.3n!=\'1y\')b={\'1D\':b};8(K b.1D==\'I\')b.1D=b.1D.1z(a);8(K b.1D==\'1l\')b.1D=$(b.1D);8(K b.G!=\'14\')b.G=O}Q 8(c==\'T\'){8(K b.3n!=\'1y\')b={\'Y\':b};8(K b==\'1r\')b={\'1H\':b};8(K b==\'14\')b={\'3f\':b};8(K b.Y==\'I\')b.Y=b.Y.1z(a);8(K b.Y==\'1l\')b.Y=$(b.Y)}Q{8(K b.3n!=\'1y\')b={\'Y\':b};8(K b==\'14\')b={\'2F\':b};8(K b.Y==\'I\')b.Y=b.Y.1z(a);8(K b.Y==\'1l\')b.Y=$(b.Y);8(K b.2F==\'1l\')b.2F=5i(b.2F)}J b}I 3m(a,b,c,d,e){8(K a==\'1l\'){8(2p(a))a=$(a);Q a=2o(a)}8(K a==\'1j\'){8(K a.3n==\'1y\')a=$(a);a=e.Z().65(a);8(a==-1)a=0;8(K c!=\'1r\')c=O}Q{8(K c!=\'1r\')c=M}8(2p(a))a=0;Q a=2o(a);8(2p(b))b=0;Q b=2o(b);8(c){a+=d.11}a+=b;8(d.U>0){22(a>=d.U){a-=d.U}22(a<0){a+=d.U}}J a}I 48(i,o,s){F t=0,x=0;1m(F a=s;a>=0;a--){F j=i.1N(a);t+=(j.1W(\':P\'))?j[o.d[\'26\']](M):0;8(t>o.3y)J x;8(a==0)a=i.W;x++}}I 68(i,o,s){J 5j(i,o.G.1v,o.G.12.41,s)}I 5R(i,o,s,m){J 5j(i,o.G.1v,m,s)}I 5j(i,f,m,s){F t=0,x=0;1m(F a=s,l=i.W-1;a>=0;a--){x++;8(x==l)J x;F j=i.1N(a);8(j.1W(f)){t++;8(t==m)J x}8(a==0)a=i.W}}I 4R(a,o){J o.G.12.41||a.Z().1d(0,o.G.P).1v(o.G.1v).W}I 2P(i,o,s){F t=0,x=0;1m(F a=s,l=i.W-1;a<=l;a++){F j=i.1N(a);t+=(j.1W(\':P\'))?j[o.d[\'26\']](M):0;8(t>o.3y)J x;x++;8(x==l)J x;8(a==l)a=-1}}I 4X(i,o,s,l){F v=2P(i,o,s);8(!o.1L){8(s+v>l)v=l-s}J v}I 3z(i,o,s){J 5k(i,o.G.1v,o.G.12.41,s,o.1L)}I 5Y(i,o,s,m){J 5k(i,o.G.1v,m+1,s,o.1L)-1}I 5k(i,f,m,s,c){F t=0,x=0;1m(F a=s,l=i.W-1;a<=l;a++){x++;8(x==l)J x;F j=i.1N(a);8(j.1W(f)){t++;8(t==m)J x}8(a==l)a=-1}}I 3c(i,o){J i.1d(0,o.G.P)}I 5T(i,o,n){J i.1d(n,o.G.12.2m+n)}I 5U(i,o){J i.1d(0,o.G.P)}I 4Y(i,o){J i.1d(0,o.G.12.2m)}I 4Z(i,o,n){J i.1d(n,o.G.P+n)}I 1M(i,o,m){F x=(K m==\'1r\')?m:O;8(K m!=\'14\')m=0;i.1Q(I(){F j=$(1h);F t=2o(j.16(o.d[\'1E\']));8(2p(t))t=0;j.1q(\'6n\',t);j.16(o.d[\'1E\'],((x)?j.1q(\'6n\'):m+j.1q(\'1S\')))})}I 3P(a,o,p){F b=a.36(),$i=a.Z(),$v=3c($i,o),4o=4f(2A($v,o,M),o,p);b.16(4o);8(o.1u){F p=o.1i,r=p[o.d[1]];8(o.1C){8(r<0)r=0}F c=$v.2Y();c.16(o.d[\'1E\'],c.1q(\'1S\')+r);a.16(o.d[\'2L\'],p[o.d[0]]);a.16(o.d[\'1t\'],p[o.d[3]])}a.16(o.d[\'S\'],4o[o.d[\'S\']]+(3l($i,o,\'S\')*2));a.16(o.d[\'1s\'],5l($i,o,\'1s\'));J 4o}I 2A(i,o,a){F b=3l(i,o,\'S\',a),6o=5l(i,o,\'1s\',a);J[b,6o]}I 5l(i,o,a,b){8(K b!=\'1r\')b=O;8(K o[o.d[a]]==\'14\'&&b)J o[o.d[a]];8(K o.G[o.d[a]]==\'14\')J o.G[o.d[a]];F c=(a.5m().32(\'S\')>-1)?\'26\':\'2K\';J 3v(i,o,c)}I 3v(i,o,b){F s=0;1m(F a=0,l=i.W;a<l;a++){F j=i.1N(a);F m=(j.1W(\':P\'))?j[o.d[b]](M):0;8(s<m)s=m}J s}I 35(b,o,c){8(!b.1W(\':P\'))J 0;F d=b[o.d[c]](),5n=(o.d[c].5m().32(\'S\')>-1)?[\'7x\',\'7y\']:[\'7z\',\'7A\'];1m(F a=0,l=5n.W;a<l;a++){F m=2o(b.16(5n[a]));d-=(2p(m))?0:m}J d}I 3l(i,o,b,c){8(K c!=\'1r\')c=O;8(K o[o.d[b]]==\'14\'&&c)J o[o.d[b]];8(K o.G[o.d[b]]==\'14\')J o.G[o.d[b]]*i.W;F d=(b.5m().32(\'S\')>-1)?\'26\':\'2K\',s=0;1m(F a=0,l=i.W;a<l;a++){F j=i.1N(a);s+=(j.1W(\':P\'))?j[o.d[d]](M):0}J s}I 4v(i,o,b){F s=O,v=O;1m(F a=0,l=i.W;a<l;a++){F j=i.1N(a);F c=(j.1W(\':P\'))?j[o.d[b]](M):0;8(s===O)s=c;Q 8(s!=c)v=M;8(s==0)v=M}J v}I 5y(i,o,d){J i[o.d[\'7B\'+d]](M)-35(i,o,\'7C\'+d)}I 3Y(x){J(K x==\'1l\'&&x.1d(-1)==\'%\')}I 3Z(s,o){8(3Y(o)){o=o.1d(0,-1);8(2p(o))J s;s*=o/3F}J s}I L(n,c,a,b,d){8(K a!=\'1r\')a=M;8(K b!=\'1r\')b=M;8(K d!=\'1r\')d=O;8(a)n=c.3i.3H+n;8(b)n=n+\'.\'+c.3i.6j;8(b&&d)n+=c.4l;J n}I 2q(n,c){J(K c.5f[n]==\'1l\')?c.5f[n]:n}I 4f(a,o,p){8(K p!=\'1r\')p=M;F b=(o.1u&&p)?o.1i:[0,0,0,0];F c={};c[o.d[\'S\']]=a[0]+b[1]+b[3];c[o.d[\'1s\']]=a[1]+b[0]+b[2];J c}I 2U(c,d){F e=[];1m(F a=0,6p=c.W;a<6p;a++){1m(F b=0,6q=d.W;b<6q;b++){8(d[b].32(K c[a])>-1&&K e[b]==\'1y\'){e[b]=c[a];18}}}J e}I 5z(p){8(K p==\'1y\')J[0,0,0,0];8(K p==\'14\')J[p,p,p,p];Q 8(K p==\'1l\')p=p.3t(\'7D\').6r(\'\').3t(\'7E\').6r(\'\').3t(\' \');8(!31(p)){J[0,0,0,0]}1m(F i=0;i<4;i++){p[i]=2o(p[i])}1x(p.W){V 0:J[0,0,0,0];V 1:J[p[0],p[0],p[0],p[0]];V 2:J[p[0],p[1],p[0],p[1]];V 3:J[p[0],p[1],p[2],p[1]];2w:J[p[0],p[1],p[2],p[3]]}}I 42(a,o){F x=(K o[o.d[\'S\']]==\'14\')?1K.2v(o[o.d[\'S\']]-3l(a,o,\'S\')):0;1x(o.1C){V\'1t\':J[0,x];V\'2M\':J[x,0];V\'4x\':2w:J[1K.2v(x/2),1K.3w(x/2)]}}I 4a(x,o,a,b){F v=x;8(K a==\'I\'){v=a.1z(b,v)}Q 8(K a==\'1l\'){F p=a.3t(\'+\'),m=a.3t(\'-\');8(m.W>p.W){F c=M,5o=m[0],2H=m[1]}Q{F c=O,5o=p[0],2H=p[1]}1x(5o){V\'7F\':v=(x%2==1)?x-1:x;18;V\'7G\':v=(x%2==0)?x-1:x;18;2w:v=x;18}2H=2o(2H);8(!2p(2H)){8(c)2H=-2H;v+=2H}}8(K v!=\'14\')v=1;8(v<1)v=1;J v}I 2Q(x,o,a,b){J 4y(4a(x,o,a,b),o.G.12)}I 4y(v,i){8(K i.2N==\'14\'&&v<i.2N)v=i.2N;8(K i.27==\'14\'&&v>i.27)v=i.27;8(v<1)v=1;J v}I 4E(s){8(!31(s))s=[[s]];8(!31(s[0]))s=[s];1m(F j=0,l=s.W;j<l;j++){8(K s[j][0]==\'1l\')s[j][0]=$(s[j][0]);8(K s[j][1]!=\'1r\')s[j][1]=M;8(K s[j][2]!=\'1r\')s[j][2]=M;8(K s[j][3]!=\'14\')s[j][3]=0}J s}I 5i(k){8(k==\'2M\')J 39;8(k==\'1t\')J 37;8(k==\'4u\')J 38;8(k==\'6a\')J 40;J-1}I 4W(n,v){8(n)3T.2n=n+\'=\'+v+\'; 7H=/\'}I 6f(n){n+=\'=\';F b=3T.2n.3t(\';\');1m(F a=0,l=b.W;a<l;a++){F c=b[a];22(c.7I(0)==\' \'){c=c.1d(1)}8(c.32(n)==0){J c.1d(n.W)}}J 0}I 3p(p){8(p&&K p==\'1l\'){F i=(p.32(\'7J\')>-1)?M:O,r=(p.32(\'2W\')>-1)?M:O}Q{F i=r=O}J[i,r]}I 59(a){J(K a==\'14\')?a:2b}I 31(a){J K(a)==\'1j\'&&(a 7K 7L)}I 2x(){J 7M 7N().2x()}I 1c(d,m){8(K d==\'1j\'){F s=\' (\'+d.3U+\')\';d=d.1c}Q{F s=\'\'}8(!d)J O;8(K m==\'1l\')m=\'1J\'+s+\': \'+m;Q m=[\'1J\'+s+\':\',m];8(3q.5p&&3q.5p.6s)3q.5p.6s(m);J O}$.1P.63=I(o,c){J 1h.1J(o,c)};$.25($.1G,{\'7O\':I(t){F a=t*t;J t*(-a*t+4*a-6*t+4)},\'7P\':I(t){J t*(4*t*t-9*t+6)},\'7Q\':I(t){F a=t*t;J t*(33*a*a-7R*a*t+7S*a-67*t+15)}})})(7T);',62,490,'|||||||opts|if|||||||||||||||||||||||||||||||||var|items|conf|function|return|typeof|cf_e|true|itms|false|visible|else|scrl|width|auto|total|case|length|trigger|button|children||first|visibleConf|bind|number||css|prev|break|tt0|next|pagination|debug|slice|variable|stopPropagation|anims|this|padding|object|duration|string|for|scroll|pre|push|data|boolean|height|left|usePadding|filter|a_dur|switch|undefined|call|triggerHandler|wrp|align|container|marginRight|tmrs|easing|play|fx|carouFredSel|Math|circular|sz_resetMargin|eq|remove|fn|each|post|cfs_origCssMargin|isScrolling|c_new|queu|is|isPaused|clbk|isStopped|stopImmediatePropagation|onAfter|while|sc_setScroll|unbind|extend|outerWidth|max|Not|synchronise|sc_startScroll|null|l_cur|l_old|w_siz|onBefore|crossfade|uncover|opacity|preventDefault|direction|adjust|old|cookie|parseInt|isNaN|cf_c|c_old|pR|pauseOnHover|opts_orig|ceil|default|getTime|removeClass|l_new|ms_getSizes|fade|cover|updatePageStatus|mousewheel|key|css_o|adj|start|responsive|outerHeight|top|right|min|hidden|gn_getVisibleItemsNext|cf_getItemsAdjust|addClass|pause|startTime|cf_sortParams|scrolling|resume|nv_enableNavi|last|slideTo||is_array|indexOf||innerWidth|ms_getTrueInnerSize|parent||||hide|show|gi_getCurrentItems|minimum|anchorBuilder|pauseDuration|Carousel|sc_clearTimers|events|queue|infinite|ms_getTotalSize|gn_getItemIndex|jquery|event|bt_pauseOnHoverConfig|window|ns2|ani_o|split|to|ms_getTrueLargestSize|floor|of|maxDimention|gn_getVisibleItemsNextFilter|go_getNaviObject|position|sc_stopScroll|timePassed|perc|100|dur2|prefix|appendTo|apply|sc_callCallbacks|currentPosition|currentPage|before|nv_showNavi|sz_setSizes|vI|touchwipe|wN|document|selector|_cfs_init|go_getObject|marginBottom|ms_isPercentage|ms_getPercentage||org|cf_getAlignPadding|keys|pauseOnEvent|Number|none|stopped|gn_getVisibleItemsPrev||cf_getAdjust|onEnd|clone|orgW|isHidden|cf_mapWrapperSizes|get|end|eval|mouseenter|mouseleave|serialNumber|cur_l|di|sz|element|cfs_isCarousel|configuration|defaults|upDateOnWindowResize|up|ms_hasVariableSizes|valid|center|cf_getItemAdjustMinMax|seco|nw|bottom|delay|pauseOnResize|cf_getSynchArr|scrolled|backward|textAlign|float|marginTop|marginLeft|absolute|_cfs_unbind_events|stop|finish|type|conditions|gn_getVisibleOrg|not|fx_cover|fx_uncover|orgDuration|cf_setCookie|gn_getVisibleItemsNextTestCircular|gi_getOldItemsNext|gi_getNewItemsNext||slideToPage|updateSizes|linkAnchors|_cfs_bind_buttons|click|_cfs_unbind_buttons|mousewheelPrev||bt_mousesheelNumber|mousewheelNext|wipe|ns3|wrapper|continue|classnames|new_w|old_w|cf_getKeyCode|gn_getItemsPrevFilter|gn_getItemsNextFilter|ms_getLargestSize|toLowerCase|arr|sta|console|No|_cfs_currentPosition|_cfs_destroy|the|innerHeight|dx|Set|secp|ms_getPaddingBorderMargin|cf_getPadding|500|pageAnchorBuilder|Item|forward|_cfs_build|fixed|cfs_origCss|_cfs_bind_events|paused|onPausePause|onPauseEnd|onPauseStart|enough|needed|page|_cfs_slide_|_cfs_configuration|gn_getScrollItemsPrevFilter|Scrolling|gi_getOldItemsPrev|gi_getNewItemsPrev|directscroll|concat|shift|gn_getScrollItemsNextFilter|new_m|jumpToStart|after|append|caroufredsel|hash|index|selected||gn_getVisibleItemsPrevFilter|destroy|down|keyup|keyCode|configs|classname|cf_readCookie|random|itm|onCreate|namespace|span|animate|complete|cfs_tempCssMargin|s2|l1|l2|join|log|found|The|option|should|be|moved|second|Infinity|Width|caroufredsel_cookie_|attr|id|2500|Available|widths|heights|automatically|relative|overflow|setTimeout|or|Page|resumed|currently|Callback|returned|_cfs_slide_prev|prependTo|_cfs_slide_next|prevPage|nextPage|prepend|carousel|insertItem|removeItem|round|currentVisible|body|find|Preventing|non|sliding|replaceWith|min_move_x|min_move_y|preventDefaultEvents|wipeUp|wipeDown|wipeLeft|wipeRight|resize|timer|wrap|class|unshift|location|swing|cfs|div|caroufredsel_wrapper|href|clearTimeout|fx_fade|hiding|navigation|disabled|paddingLeft|paddingRight|paddingTop|paddingBottom|outer|inner|px|em|even|odd|path|charAt|immediate|instanceof|Array|new|Date|quadratic|cubic|elastic|106|126|jQuery'.split('|'),0,{}))
+(function($) {
+
+
+
+    //  LOCAL
+
+    if ($.fn.carouFredSel) return;
+
+    $.fn.carouFredSel = function(options, configs) {
+        if (this.length == 0) {
+            debug(true, 'No element found for "'+this.selector+'".');
+            return this;
+        }
+        if (this.length > 1) {
+            return this.each(function() {
+                $(this).carouFredSel(options, configs);
+            });
+        }
+
+        var $cfs = this,
+            $tt0 = this[0];
+
+        if ($cfs.data('cfs_isCarousel')) {
+            var starting_position = $cfs.triggerHandler('_cfs_currentPosition');
+            $cfs.trigger('_cfs_destroy', true);
+        } else {
+            var starting_position = false;
+        }
+
+        $cfs._cfs_init = function(o, setOrig, start) {
+            o = go_getObject($tt0, o);
+
+
+            //  DEPRECATED
+            if (o.debug) {
+                conf.debug = o.debug;
+                debug(conf, 'The "debug" option should be moved to the second configuration-object.');
+            }
+            //  /DEPRECATED
+
+
+            var obs = ['items', 'scroll', 'auto', 'prev', 'next', 'pagination'];
+            for (var a = 0, l = obs.length; a < l; a++) {
+                o[obs[a]] = go_getObject($tt0, o[obs[a]]);
+            }
+
+            if (typeof o.scroll == 'number') {
+                if (o.scroll <= 50)                 o.scroll    = { 'items'     : o.scroll  };
+                else                                o.scroll    = { 'duration'  : o.scroll  };
+            } else {
+                if (typeof o.scroll == 'string')    o.scroll    = { 'easing'    : o.scroll  };
+            }
+
+                 if (typeof o.items == 'number')    o.items     = { 'visible'   : o.items   };
+            else if (       o.items == 'variable')  o.items     = { 'visible'   : o.items,
+                                                                    'width'     : o.items, 
+                                                                    'height'    : o.items   };
+
+            if (typeof o.items != 'object') o.items = {};
+            if (setOrig) opts_orig = $.extend(true, {}, $.fn.carouFredSel.defaults, o);
+
+            opts = $.extend(true, {}, $.fn.carouFredSel.defaults, o);
+
+            if (typeof opts.items.visibleConf != 'object') opts.items.visibleConf = {};
+
+            if (opts.items.start == 0 && typeof start == 'number') {
+                opts.items.start = start;
+            }
+
+            crsl.upDateOnWindowResize = (opts.responsive);
+            crsl.direction = (opts.direction == 'up' || opts.direction == 'left') ? 'next' : 'prev';
+
+            var dims = [
+                ['width'    , 'innerWidth'  , 'outerWidth'  , 'height'  , 'innerHeight' , 'outerHeight' , 'left', 'top' , 'marginRight' , 0, 1, 2, 3],
+                ['height'   , 'innerHeight' , 'outerHeight' , 'width'   , 'innerWidth'  , 'outerWidth'  , 'top' , 'left', 'marginBottom', 3, 2, 1, 0]
+            ];
+
+            var dn = dims[0].length,
+                dx = (opts.direction == 'right' || opts.direction == 'left') ? 0 : 1;
+
+            opts.d = {};
+            for (var d = 0; d < dn; d++) {
+                opts.d[dims[0][d]] = dims[dx][d];
+            }
+
+            var all_itm = $cfs.children();
+
+
+            //  check visible items
+            switch (typeof opts.items.visible) {
+
+                //  min and max visible items
+                case 'object':
+                    opts.items.visibleConf.min = opts.items.visible.min;
+                    opts.items.visibleConf.max = opts.items.visible.max;
+                    opts.items.visible = false;
+                    break;
+                
+                case 'string':
+                    //  variable visible items
+                    if (opts.items.visible == 'variable') {
+                        opts.items.visibleConf.variable = true;
+
+                    //  adjust string visible items
+                    } else {
+                        opts.items.visibleConf.adjust = opts.items.visible;
+                    }
+                    opts.items.visible = false;
+                    break;
+
+                // function visible items
+                case 'function':
+                    opts.items.visibleConf.adjust = opts.items.visible;
+                    opts.items.visible = false;
+                    break;
+            }
+
+            //  set items filter
+            if (typeof opts.items.filter == 'undefined') {
+                opts.items.filter = (all_itm.filter(':hidden').length > 0) ? ':visible' : '*';
+            }
+
+            //  primary size set to auto -> measure largest size and set it
+            if (opts[opts.d['width']] == 'auto') {
+                opts[opts.d['width']] = ms_getTrueLargestSize(all_itm, opts, 'outerWidth');
+            }
+            //  primary size percentage
+            if (ms_isPercentage(opts[opts.d['width']]) && !opts.responsive) {
+                opts[opts.d['width']] = ms_getPercentage(ms_getTrueInnerSize($wrp.parent(), opts, 'innerWidth'), opts[opts.d['width']]);
+                crsl.upDateOnWindowResize = true;
+            }
+
+            //  secondary size set to auto -> measure largest size and set it
+            if (opts[opts.d['height']] == 'auto') {
+                opts[opts.d['height']] = ms_getTrueLargestSize(all_itm, opts, 'outerHeight');
+            }
+
+            //  primary item-size not set
+            if (!opts.items[opts.d['width']]) {
+//  responsive carousel -> set to largest
+if (opts.responsive) {
+    debug(true, 'Set a '+opts.d['width']+' for the items!');
+    opts.items[opts.d['width']] = ms_getTrueLargestSize(all_itm, opts, 'outerWidth');
+                //   non-responsive -> measure it or set to "variable"
+} else {
+                opts.items[opts.d['width']] = (ms_hasVariableSizes(all_itm, opts, 'outerWidth')) 
+                    ? 'variable' 
+                    : all_itm[opts.d['outerWidth']](true);
+}
+            }
+
+            //  secondary item-size not set -> measure it or set to "variable"
+            if (!opts.items[opts.d['height']]) {
+                opts.items[opts.d['height']] = (ms_hasVariableSizes(all_itm, opts, 'outerHeight')) 
+                    ? 'variable' 
+                    : all_itm[opts.d['outerHeight']](true);
+            }
+
+            //  secondary size not set -> set to secondary item-size
+            if (!opts[opts.d['height']]) {
+                opts[opts.d['height']] = opts.items[opts.d['height']];
+            }
+
+            //  visible-items not set
+            if (!opts.items.visible && !opts.responsive) {
+                //  primary item-size variable -> set visible items variable
+                if (opts.items[opts.d['width']] == 'variable') {
+                    opts.items.visibleConf.variable = true;
+                }
+                if (!opts.items.visibleConf.variable) {
+                    //  primary size is number -> calculate visible-items
+                    if (typeof opts[opts.d['width']] == 'number') {
+                        opts.items.visible = Math.floor(opts[opts.d['width']] / opts.items[opts.d['width']]);
+                    } else {
+                        //  measure and calculate primary size and visible-items
+                        var maxS = ms_getTrueInnerSize($wrp.parent(), opts, 'innerWidth');
+                        opts.items.visible = Math.floor(maxS / opts.items[opts.d['width']]);
+                        opts[opts.d['width']] = opts.items.visible * opts.items[opts.d['width']];
+                        if (!opts.items.visibleConf.adjust) opts.align = false;
+                    }
+                    if (opts.items.visible == 'Infinity' || opts.items.visible < 1) {
+                        debug(true, 'Not a valid number of visible items: Set to "variable".');
+                        opts.items.visibleConf.variable = true;
+                    }
+                }
+            }
+
+            //  primary size not set -> calculate it or set to "variable"
+            if (!opts[opts.d['width']]) {
+                opts[opts.d['width']] = 'variable';
+                if (!opts.responsive && opts.items.filter == '*' && !opts.items.visibleConf.variable && opts.items[opts.d['width']] != 'variable') {
+                    opts[opts.d['width']] = opts.items.visible * opts.items[opts.d['width']];
+                    opts.align = false;
+                }
+            }
+
+            //  variable primary item-sizes with variabe visible-items
+            if (opts.items.visibleConf.variable) {
+                opts.maxDimention = (opts[opts.d['width']] == 'variable')
+                    ? ms_getTrueInnerSize($wrp.parent(), opts, 'innerWidth')
+                    : opts[opts.d['width']];
+                if (opts.align === false) {
+                    opts[opts.d['width']] = 'variable';
+                }
+                opts.items.visible = gn_getVisibleItemsNext(all_itm, opts, 0);
+
+            //  set visible items by filter
+            } else if (opts.items.filter != '*') {
+                opts.items.visibleConf.org = opts.items.visible;
+                opts.items.visible = gn_getVisibleItemsNextFilter(all_itm, opts, 0);
+            }
+
+            //  align not set -> set to center if primary size is number
+            if (typeof opts.align == 'undefined') {
+                opts.align = (opts[opts.d['width']] == 'variable')
+                    ? false
+                    : 'center';
+            }
+
+            opts.items.visible = cf_getItemsAdjust(opts.items.visible, opts, opts.items.visibleConf.adjust, $tt0);
+            opts.items.visibleConf.old = opts.items.visible;
+            opts.usePadding = false;
+
+
+if (opts.responsive) {
+
+    if (!opts.items.visibleConf.min) opts.items.visibleConf.min = opts.items.visible;
+    if (!opts.items.visibleConf.max) opts.items.visibleConf.max = opts.items.visible;
+
+    opts.align = false;
+    opts.padding = [0, 0, 0, 0];
+
+    var isVisible = $wrp.is(':visible');
+    if (isVisible) $wrp.hide();
+    var fullS = ms_getPercentage(ms_getTrueInnerSize($wrp.parent(), opts, 'innerWidth'), opts[opts.d['width']]);
+
+    if (typeof opts[opts.d['width']] == 'number' && fullS < opts[opts.d['width']]) {
+        fullS = opts[opts.d['width']];
+    }
+    if (isVisible) $wrp.show();
+
+    var visb = cf_getItemAdjustMinMax(Math.ceil(fullS / opts.items[opts.d['width']]), opts.items.visibleConf);
+    if (visb > all_itm.length) {
+        visb = all_itm.length;
+    }
+
+    var newS = Math.floor(fullS/visb),
+        seco = opts[opts.d['height']],
+        secp = ms_isPercentage(seco);
+
+    all_itm.each(function() {
+        var $t = $(this),
+            nw = newS - ms_getPaddingBorderMargin($t, opts, 'Width');
+
+        $t[opts.d['width']](nw);
+        if (secp) {
+            $t[opts.d['height']](ms_getPercentage(nw, seco));
+        }
+    });
+
+    opts.items.visible = visb;
+    opts.items[opts.d['width']] = newS;
+    opts[opts.d['width']] = visb * newS;
+    
+} else {
+
+            opts.padding = cf_getPadding(opts.padding);
+
+            if (opts.align == 'top')        opts.align = 'left';
+            if (opts.align == 'bottom')     opts.align = 'right';
+
+
+            switch (opts.align) {
+                //  align: center, left or right
+                case 'center':
+                case 'left':
+                case 'right':
+                    if (opts[opts.d['width']] != 'variable') {
+                        var p = cf_getAlignPadding(gi_getCurrentItems(all_itm, opts), opts);
+                        opts.usePadding = true;
+                        opts.padding[opts.d[1]] = p[1];
+                        opts.padding[opts.d[3]] = p[0];
+                    }
+                    break;
+
+                //  padding
+                default:
+                    opts.align = false;
+                    opts.usePadding = (
+                        opts.padding[0] == 0 && 
+                        opts.padding[1] == 0 && 
+                        opts.padding[2] == 0 && 
+                        opts.padding[3] == 0
+                    ) ? false : true;
+                    break;
+            }
+}
+
+            if (typeof opts.cookie == 'boolean' && opts.cookie)         opts.cookie                     = 'caroufredsel_cookie_'+$cfs.attr('id');
+            if (typeof opts.items.minimum               != 'number')    opts.items.minimum              = opts.items.visible;
+            if (typeof opts.scroll.duration             != 'number')    opts.scroll.duration            = 500;
+            if (typeof opts.scroll.items                == 'undefined') opts.scroll.items               = (opts.items.visibleConf.variable || opts.items.filter != '*') ? 'visible' : opts.items.visible;
+
+            opts.auto       = go_getNaviObject($tt0, opts.auto, 'auto');
+            opts.prev       = go_getNaviObject($tt0, opts.prev);
+            opts.next       = go_getNaviObject($tt0, opts.next);
+            opts.pagination = go_getNaviObject($tt0, opts.pagination, 'pagination');
+
+            opts.auto       = $.extend(true, {}, opts.scroll, opts.auto);
+            opts.prev       = $.extend(true, {}, opts.scroll, opts.prev);
+            opts.next       = $.extend(true, {}, opts.scroll, opts.next);
+            opts.pagination = $.extend(true, {}, opts.scroll, opts.pagination);
+
+            if (typeof opts.pagination.keys             != 'boolean')   opts.pagination.keys            = false;
+            if (typeof opts.pagination.anchorBuilder    != 'function'
+                    && opts.pagination.anchorBuilder    !== false)      opts.pagination.anchorBuilder   = $.fn.carouFredSel.pageAnchorBuilder;
+            if (typeof opts.auto.play                   != 'boolean')   opts.auto.play                  = true;
+            if (typeof opts.auto.delay                  != 'number')    opts.auto.delay                 = 0;
+            if (typeof opts.auto.pauseOnEvent           == 'undefined') opts.auto.pauseOnEvent          = true;
+            if (typeof opts.auto.pauseOnResize          != 'boolean')   opts.auto.pauseOnResize         = true;
+            if (typeof opts.auto.pauseDuration          != 'number')    opts.auto.pauseDuration         = (opts.auto.duration < 10) ? 2500 : opts.auto.duration * 5;
+
+            if (opts.synchronise) {
+                opts.synchronise = cf_getSynchArr(opts.synchronise);
+            }
+            if (conf.debug) {
+                debug(conf, 'Carousel width: '+opts.width);
+                debug(conf, 'Carousel height: '+opts.height);
+                if (opts.maxDimention)  debug(conf, 'Available '+opts.d['width']+': '+opts.maxDimention);
+                debug(conf, 'Item widths: '+opts.items.width);
+                debug(conf, 'Item heights: '+opts.items.height);
+                debug(conf, 'Number of items visible: '+opts.items.visible);
+                if (opts.auto.play)     debug(conf, 'Number of items scrolled automatically: '+opts.auto.items);
+                if (opts.prev.button)   debug(conf, 'Number of items scrolled backward: '+opts.prev.items);
+                if (opts.next.button)   debug(conf, 'Number of items scrolled forward: '+opts.next.items);
+            }
+        };  //  /init
+
+        $cfs._cfs_build = function() {
+            $cfs.data('cfs_isCarousel', true);
+
+            var orgCSS = {
+                'textAlign'     : $cfs.css('textAlign'),
+                'float'         : $cfs.css('float'),
+                'position'      : $cfs.css('position'),
+                'top'           : $cfs.css('top'),
+                'right'         : $cfs.css('right'),
+                'bottom'        : $cfs.css('bottom'),
+                'left'          : $cfs.css('left'),
+                'width'         : $cfs.css('width'),
+                'height'        : $cfs.css('height'),
+                'marginTop'     : $cfs.css('marginTop'),
+                'marginRight'   : $cfs.css('marginRight'),
+                'marginBottom'  : $cfs.css('marginBottom'),
+                'marginLeft'    : $cfs.css('marginLeft')
+            };
+
+            switch (orgCSS.position) {
+                case 'absolute':
+                    var newPosition = 'absolute';
+                    break;
+                case 'fixed':
+                    var newPosition = 'fixed';
+                    break;
+                default:
+                    var newPosition = 'relative';
+            } 
+
+            $wrp.css(orgCSS).css({
+                'overflow'      : 'hidden',
+                'position'      : newPosition
+            });
+
+            $cfs.data('cfs_origCss', orgCSS).css({
+                'textAlign'     : 'left',
+                'float'         : 'none',
+                'position'      : 'absolute',
+                'top'           : 0,
+                'left'          : 0,
+                'marginTop'     : 0,
+                'marginRight'   : 0,
+                'marginBottom'  : 0,
+                'marginLeft'    : 0
+            });
+
+            if (opts.usePadding) {
+                $cfs.children().each(function() {
+                    var m = parseInt($(this).css(opts.d['marginRight']));
+                    if (isNaN(m)) m = 0;
+                    $(this).data('cfs_origCssMargin', m);
+                });
+            }
+
+        };  //  /build
+
+        $cfs._cfs_bind_events = function() {
+            $cfs._cfs_unbind_events();
+
+            //  stop event
+            $cfs.bind(cf_e('stop', conf), function(e, imm) {
+                e.stopPropagation();
+
+                //  button
+                if (!crsl.isStopped) {
+                    if (opts.auto.button) {
+                        opts.auto.button.addClass(cf_c('stopped', conf));
+                    }
+                }
+
+                //  set stopped
+                crsl.isStopped = true;
+
+                if (opts.auto.play) {
+                    opts.auto.play = false;
+                    $cfs.trigger(cf_e('pause', conf), imm);
+                }
+                return true;
+            });
+
+            //  finish event
+            $cfs.bind(cf_e('finish', conf), function(e) {
+                e.stopPropagation();
+                if (crsl.isScrolling) {
+                    sc_stopScroll(scrl);
+                }
+                return true;
+            });
+
+            //  pause event
+            $cfs.bind(cf_e('pause', conf), function(e, imm, res) {
+                e.stopPropagation();
+                tmrs = sc_clearTimers(tmrs);
+
+                //  immediately pause
+                if (imm && crsl.isScrolling) {
+                    scrl.isStopped = true;
+                    var nst = getTime() - scrl.startTime;
+                    scrl.duration -= nst;
+                    if (scrl.pre) scrl.pre.duration -= nst;
+                    if (scrl.post) scrl.post.duration -= nst;
+                    sc_stopScroll(scrl, false);
+                }
+
+                //  update remaining pause-time
+                if (!crsl.isPaused && !crsl.isScrolling) {
+                    if (res) tmrs.timePassed += getTime() - tmrs.startTime;
+                }
+                
+                //  button
+                if (!crsl.isPaused) {
+                    if (opts.auto.button) {
+                        opts.auto.button.addClass(cf_c('paused', conf));
+                    }
+                }
+
+                //  set paused
+                crsl.isPaused = true;
+
+                //  pause pause callback
+                if (opts.auto.onPausePause) {
+                    var dur1 = opts.auto.pauseDuration - tmrs.timePassed,
+                        perc = 100 - Math.ceil( dur1 * 100 / opts.auto.pauseDuration );
+                    opts.auto.onPausePause.call($tt0, perc, dur1);
+                }
+                return true;
+            });
+
+            //  play event
+            $cfs.bind(cf_e('play', conf), function(e, dir, del, res) {
+                e.stopPropagation();
+                tmrs = sc_clearTimers(tmrs);
+
+                //  sort params
+                var v = [dir, del, res],
+                    t = ['string', 'number', 'boolean'],
+                    a = cf_sortParams(v, t);
+
+                var dir = a[0],
+                    del = a[1],
+                    res = a[2];
+
+                if (dir != 'prev' && dir != 'next') dir = crsl.direction;
+                if (typeof del != 'number')         del = 0;
+                if (typeof res != 'boolean')        res = false;
+
+                //  stopped?
+                if (res) {
+                    crsl.isStopped = false;
+                    opts.auto.play = true;
+                }
+                if (!opts.auto.play) {
+                    e.stopImmediatePropagation();
+                    return debug(conf, 'Carousel stopped: Not scrolling.');
+                }
+
+                //  button
+                if (crsl.isPaused) {
+                    if (opts.auto.button) {
+                        opts.auto.button.removeClass(cf_c('stopped', conf));
+                        opts.auto.button.removeClass(cf_c('paused', conf));
+                    }
+                }
+
+                //  set playing
+                crsl.isPaused = false;
+                tmrs.startTime = getTime();
+
+                //  timeout the scrolling
+                var dur1 = opts.auto.pauseDuration + del;
+                    dur2 = dur1 - tmrs.timePassed;
+                    perc = 100 - Math.ceil(dur2 * 100 / dur1);
+
+                tmrs.auto = setTimeout(function() {
+                    if (opts.auto.onPauseEnd) {
+                        opts.auto.onPauseEnd.call($tt0, perc, dur2);
+                    }
+                    if (crsl.isScrolling) {
+                        $cfs.trigger(cf_e('play', conf), dir);
+                    } else {
+                        $cfs.trigger(cf_e(dir, conf), opts.auto);
+                    }
+                }, dur2);
+
+                //  pause start callback
+                if (opts.auto.onPauseStart) {
+                    opts.auto.onPauseStart.call($tt0, perc, dur2);
+                }
+
+                return true;
+            });
+
+            //  resume event
+            $cfs.bind(cf_e('resume', conf), function(e) {
+                e.stopPropagation();
+                if (scrl.isStopped) {
+                    scrl.isStopped = false;
+                    crsl.isPaused = false;
+                    crsl.isScrolling = true;
+                    scrl.startTime = getTime();
+                    sc_startScroll(scrl);
+                } else {
+                    $cfs.trigger(cf_e('play', conf));
+                }
+                return true;
+            });
+
+            //  prev + next events
+            $cfs.bind(cf_e('prev', conf)+' '+cf_e('next', conf), function(e, obj, num, clb) {
+                e.stopPropagation();
+
+                //  stopped or hidden carousel, don't scroll, don't queue
+                if (crsl.isStopped || $cfs.is(':hidden')) {
+                    e.stopImmediatePropagation();
+                    return debug(conf, 'Carousel stopped or hidden: Not scrolling.');
+                }
+
+                //  not enough items
+                if (opts.items.minimum >= itms.total) {
+                    e.stopImmediatePropagation();
+                    return debug(conf, 'Not enough items ('+itms.total+', '+opts.items.minimum+' needed): Not scrolling.');
+                }
+
+                //  get config
+                var v = [obj, num, clb],
+                    t = ['object', 'number/string', 'function'],
+                    a = cf_sortParams(v, t);
+
+                var obj = a[0],
+                    num = a[1],
+                    clb = a[2];
+
+                var eType = e.type.slice(conf.events.prefix.length);
+
+                if (typeof obj != 'object' || obj == null)  obj = opts[eType];
+                if (typeof clb == 'function')               obj.onAfter = clb;
+
+                if (typeof num != 'number') {
+                    if (opts.items.filter != '*') {
+                        num = 'visible';
+                    } else {
+                        var arr = [num, obj.items, opts[eType].items];
+                        for (var a = 0, l = arr.length; a < l; a++) {
+                            if (typeof arr[a] == 'number' || arr[a] == 'page' || arr[a] == 'visible') {
+                                num = arr[a];
+                                break;
+                            }
+                        }
+                    }
+                    switch(num) {
+                        case 'page':
+                            e.stopImmediatePropagation();
+                            return $cfs.triggerHandler(eType+'Page', [obj, clb]);
+                            break;
+
+                        case 'visible':
+                            if (!opts.items.visibleConf.variable && opts.items.filter == '*') {
+                                num = opts.items.visible;
+                            }
+                            break;
+                    }
+                }
+
+                //  resume animation, add current to queue
+                if (scrl.isStopped) {
+                    $cfs.trigger(cf_e('resume', conf));
+                    $cfs.trigger(cf_e('queue', conf), [eType, [obj, num, clb]]);
+                    e.stopImmediatePropagation();
+                    return debug(conf, 'Carousel resumed scrolling.');
+                }
+
+                //  queue if scrolling
+                if (obj.duration > 0) {
+                    if (crsl.isScrolling) {
+                        if (obj.queue) $cfs.trigger(cf_e('queue', conf), [eType, [obj, num, clb]]);
+                        e.stopImmediatePropagation();
+                        return debug(conf, 'Carousel currently scrolling.');
+                    }
+                }
+
+                //  test conditions callback
+                if (obj.conditions && !obj.conditions.call($tt0)) {
+                    e.stopImmediatePropagation();
+                    return debug(conf, 'Callback "conditions" returned false.');
+                }
+
+                tmrs.timePassed = 0;
+                $cfs.trigger('_cfs_slide_'+eType, [obj, num]);
+
+                //  synchronise
+                if (opts.synchronise) {
+                    var s = opts.synchronise,
+                        c = [obj, num];
+                    for (var j = 0, l = s.length; j < l; j++) {
+                        var d = eType;
+                        if (!s[j][1]) c[0] = s[j][0].triggerHandler('_cfs_configuration', eType);
+                        if (!s[j][2]) d = (d == 'prev') ? 'next' : 'prev';
+                        c[1] = num + s[j][3];
+                        s[j][0].trigger('_cfs_slide_'+d, c);
+                    }
+                }
+                return true;
+            });
+
+            //  prev event, accessible from outside
+            $cfs.bind(cf_e('_cfs_slide_prev', conf, false), function(e, sO, nI) {
+                e.stopPropagation();
+                var a_itm = $cfs.children();
+
+                //  non-circular at start, scroll to end
+                if (!opts.circular) {
+                    if (itms.first == 0) {
+                        if (opts.infinite) {
+                            $cfs.trigger(cf_e('next', conf), itms.total-1);
+                        }
+                        return e.stopImmediatePropagation();
+                    }
+                }
+
+                if (opts.usePadding) sz_resetMargin(a_itm, opts);
+
+                //  find number of items to scroll
+                if (typeof nI != 'number') {
+                    if (opts.items.visibleConf.variable) {
+                        nI = gn_getVisibleItemsPrev(a_itm, opts, itms.total-1);
+                    } else if (opts.items.filter != '*') {
+                        var xI = (typeof sO.items == 'number') ? sO.items : gn_getVisibleOrg($cfs, opts);
+                        nI = gn_getScrollItemsPrevFilter(a_itm, opts, itms.total-1, xI);
+                    } else {
+                        nI = opts.items.visible;
+                    }
+                    nI = cf_getAdjust(nI, opts, sO.items, $tt0);
+                }
+
+                //  prevent non-circular from scrolling to far
+                if (!opts.circular) {
+                    if (itms.total - nI < itms.first) {
+                        nI = itms.total - itms.first;
+                    }
+                }
+
+                //  set new number of visible items
+                opts.items.visibleConf.old = opts.items.visible;
+                if (opts.items.visibleConf.variable) {
+                    var vI = gn_getVisibleItemsNext(a_itm, opts, itms.total-nI);
+                    if (opts.items.visible+nI <= vI && nI < itms.total) {
+                        nI++;
+                        vI = gn_getVisibleItemsNext(a_itm, opts, itms.total-nI);
+                    }
+                    opts.items.visible = cf_getItemsAdjust(vI, opts, opts.items.visibleConf.adjust, $tt0);
+                } else if (opts.items.filter != '*') {
+                    var vI = gn_getVisibleItemsNextFilter(a_itm, opts, itms.total-nI);
+                    opts.items.visible = cf_getItemsAdjust(vI, opts, opts.items.visibleConf.adjust, $tt0);
+                }
+
+                if (opts.usePadding) sz_resetMargin(a_itm, opts, true);
+
+                //  scroll 0, don't scroll
+                if (nI == 0) {
+                    e.stopImmediatePropagation();
+                    return debug(conf, '0 items to scroll: Not scrolling.');
+                }
+                debug(conf, 'Scrolling '+nI+' items backward.');
+
+                //  save new config
+                itms.first += nI;
+                while (itms.first >= itms.total) {
+                    itms.first -= itms.total;
+                }
+
+                //  non-circular callback
+                if (!opts.circular) {
+                    if (itms.first == 0 && sO.onEnd) sO.onEnd.call($tt0);
+                    if (!opts.infinite) nv_enableNavi(opts, itms.first, conf);
+                }
+
+                //  rearrange items
+                $cfs.children().slice(itms.total-nI, itms.total).prependTo($cfs);
+                if (itms.total < opts.items.visible + nI) {
+                    $cfs.children().slice(0, (opts.items.visible+nI)-itms.total).clone(true).appendTo($cfs);
+                }
+
+                //  the needed items
+                var a_itm = $cfs.children(),
+                    c_old = gi_getOldItemsPrev(a_itm, opts, nI),
+                    c_new = gi_getNewItemsPrev(a_itm, opts),
+                    l_cur = a_itm.eq(nI-1),
+                    l_old = c_old.last(),
+                    l_new = c_new.last();
+
+                if (opts.usePadding) sz_resetMargin(a_itm, opts);
+                if (opts.align) {
+                    var p = cf_getAlignPadding(c_new, opts),
+                        pL = p[0],
+                        pR = p[1];
+                } else {
+                    var pL = 0,
+                        pR = 0;
+                }
+                var oL = (pL < 0) ? opts.padding[opts.d[3]] : 0;
+
+                //  hide items for fx directscroll
+                if (sO.fx == 'directscroll' && opts.items.visible < nI) {
+                    var hiddenitems = a_itm.slice(opts.items.visibleConf.old, nI),
+                        orgW = opts.items[opts.d['width']];
+                    hiddenitems.each(function() {
+                        var hi = $(this);
+                        hi.data('isHidden', hi.is(':hidden')).hide();
+                    });
+                    opts.items[opts.d['width']] = 'variable';
+                } else {
+                    var hiddenitems = false;
+                }
+
+                //  save new sizes
+                var i_siz = ms_getTotalSize(a_itm.slice(0, nI), opts, 'width'),
+                    w_siz = cf_mapWrapperSizes(ms_getSizes(c_new, opts, true), opts, !opts.usePadding);
+
+                if (hiddenitems) opts.items[opts.d['width']] = orgW;
+
+                if (opts.usePadding) {
+                    sz_resetMargin(a_itm, opts, true);
+                    if (pR >= 0) {
+                        sz_resetMargin(l_old, opts, opts.padding[opts.d[1]]);
+                    }
+                    sz_resetMargin(l_cur, opts, opts.padding[opts.d[3]]);
+                }
+                if (opts.align) {
+                    opts.padding[opts.d[1]] = pR;
+                    opts.padding[opts.d[3]] = pL;
+                }
+
+                //  animation configuration
+                var a_cfs = {},
+                    a_dur = sO.duration;
+
+                     if (sO.fx == 'none')   a_dur = 0;
+                else if (a_dur == 'auto')   a_dur = opts.scroll.duration / opts.scroll.items * nI;
+                else if (a_dur <= 0)        a_dur = 0;
+                else if (a_dur < 10)        a_dur = i_siz / a_dur;
+
+                scrl = sc_setScroll(a_dur, sO.easing);
+
+                //  animate wrapper
+                if (opts[opts.d['width']] == 'variable' || opts[opts.d['height']] == 'variable') {
+                    scrl.anims.push([$wrp, w_siz]);
+                }
+
+                //  animate items
+                if (opts.usePadding) {
+                    var new_m = opts.padding[opts.d[3]];
+
+                    if (l_new.not(l_cur).length) {
+                        var a_cur = {};
+                            a_cur[opts.d['marginRight']] = l_cur.data('cfs_origCssMargin');
+
+                        if (pL < 0) l_cur.css(a_cur);
+                        else        scrl.anims.push([l_cur, a_cur]);
+                    }
+
+                    if (l_new.not(l_old).length) {
+                        var a_old = {};
+                            a_old[opts.d['marginRight']] = l_old.data('cfs_origCssMargin');
+                        scrl.anims.push([l_old, a_old]);
+                    }
+
+                    if (pR >= 0) {
+                        var a_new = {};
+                            a_new[opts.d['marginRight']] = l_new.data('cfs_origCssMargin') + opts.padding[opts.d[1]];
+                        scrl.anims.push([l_new, a_new]);
+                    }
+                } else {
+                    var new_m = 0;
+                }
+
+                //  animate carousel
+                a_cfs[opts.d['left']] = new_m;
+
+                //  onBefore callback
+                var args = [c_old, c_new, w_siz, a_dur];
+                if (sO.onBefore) sO.onBefore.apply($tt0, args);
+                clbk.onBefore = sc_callCallbacks(clbk.onBefore, $tt0, args);
+
+
+
+                //  ALTERNATIVE EFFECTS
+
+                //  extra animation arrays
+                switch(sO.fx) {
+                    case 'fade':
+                    case 'crossfade':
+                    case 'cover':
+                    case 'uncover':
+                        scrl.pre = sc_setScroll(scrl.duration, scrl.easing);
+                        scrl.post = sc_setScroll(scrl.duration, scrl.easing);
+                        scrl.duration = 0;
+                        break;
+                }
+
+                //  create copy
+                switch(sO.fx) {
+                    case 'crossfade':
+                    case 'cover':
+                    case 'uncover':
+                        var $cf2 = $cfs.clone().appendTo($wrp);
+                        break;
+                }
+                switch(sO.fx) {
+                    case 'uncover':
+                        $cf2.children().slice(0, nI).remove();
+                    case 'crossfade':
+                    case 'cover':
+                        $cf2.children().slice(opts.items.visible).remove();
+                        break;
+                }
+
+                //  animations
+                switch(sO.fx) {
+                    case 'fade':
+                        scrl.pre.anims.push([$cfs, { 'opacity': 0 }]);
+                        break;
+                    case 'crossfade':
+                        $cf2.css({ 'opacity': 0 });
+                        scrl.pre.anims.push([$cfs, { 'width': '+=0' }, function() { $cf2.remove(); }]);
+                        scrl.post.anims.push([$cf2, { 'opacity': 1 }]);
+                        break;
+                    case 'cover':
+                        scrl = fx_cover(scrl, $cfs, $cf2, opts, true);
+                        break;
+                    case 'uncover':
+                        scrl = fx_uncover(scrl, $cfs, $cf2, opts, true, nI);
+                        break;
+                }
+
+                //  /ALTERNATIVE EFFECTS
+
+
+                //  complete callback
+                var a_complete = function() {
+
+                    var overFill = opts.items.visible+nI-itms.total;
+                    if (overFill > 0) {
+                        $cfs.children().slice(itms.total).remove();
+                        c_old = $( $cfs.children().slice(itms.total-(opts.items.visible-overFill)).get().concat( $cfs.children().slice(0, overFill).get() ) );
+                    }
+                    if (hiddenitems) {
+                        hiddenitems.each(function() {
+                            var hi = $(this);
+                            if (!hi.data('isHidden')) hi.show();
+                        }); 
+                    }
+                    if (opts.usePadding) {
+                        var l_itm = $cfs.children().eq(opts.items.visible+nI-1);
+                        l_itm.css(opts.d['marginRight'], l_itm.data('cfs_origCssMargin'));
+                    }
+
+                    scrl.anims = [];
+                    if (scrl.pre) scrl.pre = sc_setScroll(scrl.orgDuration, scrl.easing);
+
+                    var fn = function() {
+                        switch(sO.fx) {
+                            case 'fade':
+                            case 'crossfade':
+                                $cfs.css('filter', '');
+                                break;
+                        }
+
+                        scrl.post = sc_setScroll(0, null);
+                        crsl.isScrolling = false;
+
+                        var args = [c_old, c_new, w_siz];
+                        if (sO.onAfter) sO.onAfter.apply($tt0, args);
+                        clbk.onAfter = sc_callCallbacks(clbk.onAfter, $tt0, args);
+
+                        if (queu.length) {
+                            $cfs.trigger(cf_e(queu[0][0], conf), queu[0][1]);
+                            queu.shift();
+                        }
+                        if (!crsl.isPaused) $cfs.trigger(cf_e('play', conf));
+                    };
+                    switch(sO.fx) {
+                        case 'fade':
+                            scrl.pre.anims.push([$cfs, { 'opacity': 1 }, fn]);
+                            sc_startScroll(scrl.pre);
+                            break;
+                        case 'uncover':
+                            scrl.pre.anims.push([$cfs, { 'width': '+=0' }, fn]);
+                            sc_startScroll(scrl.pre);
+                            break;
+                        default:
+                            fn();
+                            break;
+                    }
+                };
+
+                scrl.anims.push([$cfs, a_cfs, a_complete]);
+                crsl.isScrolling = true;
+                $cfs.css(opts.d['left'], -(i_siz-oL));
+                tmrs = sc_clearTimers(tmrs);
+                sc_startScroll(scrl);
+                cf_setCookie(opts.cookie, $cfs.triggerHandler(cf_e('currentPosition', conf)));
+
+                $cfs.trigger(cf_e('updatePageStatus', conf), [false, w_siz]);
+
+                return true;
+            });
+
+            //  next event, accessible from outside
+            $cfs.bind(cf_e('_cfs_slide_next', conf, false), function(e, sO, nI) {
+                e.stopPropagation();
+                var a_itm = $cfs.children();
+
+                //  non-circular at end, scroll to start
+                if (!opts.circular) {
+                    if (itms.first == opts.items.visible) {
+                        if (opts.infinite) {
+                            $cfs.trigger(cf_e('prev', conf), itms.total-1);
+                        }
+                        return e.stopImmediatePropagation();
+                    }
+                }
+
+                if (opts.usePadding) sz_resetMargin(a_itm, opts);
+
+                //  find number of items to scroll
+                if (typeof nI != 'number') {
+                    if (opts.items.filter != '*') {
+                        var xI = (typeof sO.items == 'number') ? sO.items : gn_getVisibleOrg($cfs, opts);
+                        nI = gn_getScrollItemsNextFilter(a_itm, opts, 0, xI);
+                    } else {
+                        nI = opts.items.visible;
+                    }
+                    nI = cf_getAdjust(nI, opts, sO.items, $tt0);
+                }
+
+                var lastItemNr = (itms.first == 0) ? itms.total : itms.first;
+
+                //  prevent non-circular from scrolling to far
+                if (!opts.circular) {
+                    if (opts.items.visibleConf.variable) {
+                        var vI = gn_getVisibleItemsNext(a_itm, opts, nI),
+                            xI = gn_getVisibleItemsPrev(a_itm, opts, lastItemNr-1);
+                    } else {
+                        var vI = opts.items.visible,
+                            xI = opts.items.visible;
+                    }
+
+                    if (nI + vI > lastItemNr) {
+                        nI = lastItemNr - xI;
+                    }
+                }
+
+                //  set new number of visible items
+                opts.items.visibleConf.old = opts.items.visible;
+                if (opts.items.visibleConf.variable) {
+                    var vI = gn_getVisibleItemsNextTestCircular(a_itm, opts, nI, lastItemNr);
+                    while (opts.items.visible-nI >= vI && nI < itms.total) {
+                        nI++;
+                        vI = gn_getVisibleItemsNextTestCircular(a_itm, opts, nI, lastItemNr);
+                    }
+                    opts.items.visible = cf_getItemsAdjust(vI, opts, opts.items.visibleConf.adjust, $tt0);
+                } else if (opts.items.filter != '*') {
+                    var vI = gn_getVisibleItemsNextFilter(a_itm, opts, nI);
+                    opts.items.visible = cf_getItemsAdjust(vI, opts, opts.items.visibleConf.adjust, $tt0);
+                }
+
+                if (opts.usePadding) sz_resetMargin(a_itm, opts, true);
+
+                //  scroll 0, don't scroll
+                if (nI == 0) {
+                    e.stopImmediatePropagation();
+                    return debug(conf, '0 items to scroll: Not scrolling.');
+                }
+                debug(conf, 'Scrolling '+nI+' items forward.');
+
+                //  save new config
+                itms.first -= nI;
+                while (itms.first < 0) {
+                    itms.first += itms.total;
+                }
+
+                //  non-circular callback
+                if (!opts.circular) {
+                    if (itms.first == opts.items.visible && sO.onEnd) sO.onEnd.call($tt0);
+                    if (!opts.infinite) nv_enableNavi(opts, itms.first, conf);
+                }
+
+                //  rearrange items
+                if (itms.total < opts.items.visible+nI) {
+                    $cfs.children().slice(0, (opts.items.visible+nI)-itms.total).clone(true).appendTo($cfs);
+                }
+
+                //  the needed items
+                var a_itm = $cfs.children(),
+                    c_old = gi_getOldItemsNext(a_itm, opts),
+                    c_new = gi_getNewItemsNext(a_itm, opts, nI),
+                    l_cur = a_itm.eq(nI-1),
+                    l_old = c_old.last(),
+                    l_new = c_new.last();
+
+                if (opts.usePadding) sz_resetMargin(a_itm, opts);
+                if (opts.align) {
+                    var p = cf_getAlignPadding(c_new, opts),
+                        pL = p[0],
+                        pR = p[1];
+                } else {
+                    var pL = 0,
+                        pR = 0;
+                }
+
+                //  hide items for fx directscroll
+                if (sO.fx == 'directscroll' && opts.items.visibleConf.old < nI) {
+                    var hiddenitems = a_itm.slice(opts.items.visibleConf.old, nI),
+                        orgW = opts.items[opts.d['width']];
+                    hiddenitems.each(function() {
+                        var hi = $(this);
+                        hi.data('isHidden', hi.is(':hidden')).hide();
+                    });
+                    opts.items[opts.d['width']] = 'variable';
+                } else {
+                    var hiddenitems = false;
+                }
+
+                //  save new sizes
+                var i_siz = ms_getTotalSize(a_itm.slice(0, nI), opts, 'width'),
+                    w_siz = cf_mapWrapperSizes(ms_getSizes(c_new, opts, true), opts, !opts.usePadding);
+
+                if (hiddenitems) opts.items[opts.d['width']] = orgW;
+
+                if (opts.align) {
+                    if (opts.padding[opts.d[1]] < 0) {
+                        opts.padding[opts.d[1]] = 0;
+                    }
+                }
+                if (opts.usePadding) {
+                    sz_resetMargin(a_itm, opts, true);
+                    sz_resetMargin(l_old, opts, opts.padding[opts.d[1]]);
+                }
+                if (opts.align) {
+                    opts.padding[opts.d[1]] = pR;
+                    opts.padding[opts.d[3]] = pL;
+                }
+
+                //  animation configuration
+                var a_cfs = {},
+                    a_dur = sO.duration;
+
+                     if (sO.fx == 'none')   a_dur = 0;
+                else if (a_dur == 'auto')   a_dur = opts.scroll.duration / opts.scroll.items * nI;
+                else if (a_dur <= 0)        a_dur = 0;
+                else if (a_dur < 10)        a_dur = i_siz / a_dur;
+
+                scrl = sc_setScroll(a_dur, sO.easing);
+
+                //  animate wrapper
+                if (opts[opts.d['width']] == 'variable' || opts[opts.d['height']] == 'variable') {
+                    scrl.anims.push([$wrp, w_siz]);
+                }
+
+                //  animate items
+                if (opts.usePadding) {
+                    var l_new_m = l_new.data('cfs_origCssMargin');
+                    if (pR >= 0) {
+                        l_new_m += opts.padding[opts.d[1]];
+                    }
+                    l_new.css(opts.d['marginRight'], l_new_m);
+
+                    if (l_cur.not(l_old).length) {
+                        var a_old = {};
+                            a_old[opts.d['marginRight']] = l_old.data('cfs_origCssMargin');
+                        scrl.anims.push([l_old, a_old]);
+                    }
+
+                    var c_new_m = l_cur.data('cfs_origCssMargin');
+                    if (pL >= 0) {
+                        c_new_m += opts.padding[opts.d[3]];
+                    }
+                    var a_cur = {};
+                        a_cur[opts.d['marginRight']] = c_new_m;
+                    scrl.anims.push([l_cur, a_cur]);
+
+                }
+
+                //  animate carousel
+                a_cfs[opts.d['left']] = -i_siz;
+                if (pL < 0) {
+                    a_cfs[opts.d['left']] += pL;
+                }
+
+                //  onBefore callback
+                var args = [c_old, c_new, w_siz, a_dur];
+                if (sO.onBefore) sO.onBefore.apply($tt0, args);
+                clbk.onBefore = sc_callCallbacks(clbk.onBefore, $tt0, args);
+
+
+
+                //  ALTERNATIVE EFFECTS
+
+                //  extra animation arrays
+                switch(sO.fx) {
+                    case 'fade':
+                    case 'crossfade':
+                    case 'cover':
+                    case 'uncover':
+                        scrl.pre = sc_setScroll(scrl.duration, scrl.easing);
+                        scrl.post = sc_setScroll(scrl.duration, scrl.easing);
+                        scrl.duration = 0;
+                        break;
+                }
+
+                //  create copy
+                switch(sO.fx) {
+                    case 'crossfade':
+                    case 'cover':
+                    case 'uncover':
+                        var $cf2 = $cfs.clone().appendTo($wrp);
+                        break;
+                }
+                switch(sO.fx) {
+                    case 'uncover':
+                        $cf2.children().slice(opts.items.visibleConf.old).remove();
+                        break;
+                    case 'crossfade':
+                    case 'cover':
+                        $cf2.children().slice(0, nI).remove();
+                        $cf2.children().slice(opts.items.visible).remove();
+                        break;
+                }
+
+                //  animations
+                switch(sO.fx) {
+                    case 'fade':
+                        scrl.pre.anims.push([$cfs, { 'opacity': 0 }]);
+                        break;
+                    case 'crossfade':
+                        $cf2.css({ 'opacity': 0 });
+                        scrl.pre.anims.push([$cfs, { 'width': '+=0' }, function() { $cf2.remove(); }]);
+                        scrl.post.anims.push([$cf2, { 'opacity': 1 }]);
+                        break;
+                    case 'cover':
+                        scrl = fx_cover(scrl, $cfs, $cf2, opts, false);
+                        break;
+                    case 'uncover':
+                        scrl = fx_uncover(scrl, $cfs, $cf2, opts, false, nI);
+                        break;
+                }
+
+                //  /ALTERNATIVE EFFECTS
+
+
+                //  complete callback
+                var a_complete = function() {
+
+                    var overFill = opts.items.visible+nI-itms.total,
+                        new_m = (opts.usePadding) ? opts.padding[opts.d[3]] : 0;
+                    $cfs.css(opts.d['left'], new_m);
+                    if (overFill > 0) {
+                        $cfs.children().slice(itms.total).remove();
+                    }
+                    var l_itm = $cfs.children().slice(0, nI).appendTo($cfs).last();
+                    if (overFill > 0) {
+                        c_new = gi_getCurrentItems(a_itm, opts);
+                    }
+                    if (hiddenitems) {
+                        hiddenitems.each(function() {
+                            var hi = $(this);
+                            if (!hi.data('isHidden')) hi.show();
+                        });
+                    }
+                    if (opts.usePadding) {
+                        if (itms.total < opts.items.visible+nI) {
+                            var l_cur = $cfs.children().eq(opts.items.visible-1);
+                            l_cur.css(opts.d['marginRight'], l_cur.data('cfs_origCssMargin') + opts.padding[opts.d[3]]);
+                        }
+                        l_itm.css(opts.d['marginRight'], l_itm.data('cfs_origCssMargin'));
+                    }
+
+                    scrl.anims = [];
+                    if (scrl.pre) scrl.pre = sc_setScroll(scrl.orgDuration, scrl.easing);
+
+                    var fn = function() {
+                        switch(sO.fx) {
+                            case 'fade':
+                            case 'crossfade':
+                                $cfs.css('filter', '');
+                                break;
+                        }
+
+                        scrl.post = sc_setScroll(0, null);
+                        crsl.isScrolling = false;
+
+                        var args = [c_old, c_new, w_siz];
+                        if (sO.onAfter) sO.onAfter.apply($tt0, args);
+                        clbk.onAfter = sc_callCallbacks(clbk.onAfter, $tt0, args);
+
+                        if (queu.length) {
+                            $cfs.trigger(cf_e(queu[0][0], conf), queu[0][1]);
+                            queu.shift();
+                        }
+                        if (!crsl.isPaused) $cfs.trigger(cf_e('play', conf));
+                    };
+                    switch(sO.fx) {
+                        case 'fade':
+                            scrl.pre.anims.push([$cfs, { 'opacity': 1 }, fn]);
+                            sc_startScroll(scrl.pre);
+                            break;
+                        case 'uncover':
+                            scrl.pre.anims.push([$cfs, { 'width': '+=0' }, fn]);
+                            sc_startScroll(scrl.pre);
+                            break;
+                        default:
+                            fn();
+                            break;
+                    }
+                };
+
+                scrl.anims.push([$cfs, a_cfs, a_complete]);
+                crsl.isScrolling = true;
+                tmrs = sc_clearTimers(tmrs);
+                sc_startScroll(scrl);
+                cf_setCookie(opts.cookie, $cfs.triggerHandler(cf_e('currentPosition', conf)));
+
+                $cfs.trigger(cf_e('updatePageStatus', conf), [false, w_siz]);
+
+                return true;
+            });
+
+            //  slideTo event
+            $cfs.bind(cf_e('slideTo', conf), function(e, num, dev, org, obj, dir, clb) {
+                e.stopPropagation();
+
+                var v = [num, dev, org, obj, dir, clb],
+                    t = ['string/number/object', 'number', 'boolean', 'object', 'string', 'function'],
+                    a = cf_sortParams(v, t);
+                
+                var obj = a[3],
+                    dir = a[4],
+                    clb = a[5];
+
+                num = gn_getItemIndex(a[0], a[1], a[2], itms, $cfs);
+
+                if (num == 0) return;
+                if (typeof obj != 'object') obj = false;
+
+                if (crsl.isScrolling) {
+                    if (typeof obj != 'object' || obj.duration > 0) return false;
+                }
+
+                if (dir != 'prev' && dir != 'next') {
+                    if (opts.circular) {
+                        if (num <= itms.total / 2)  dir = 'next';
+                        else                        dir = 'prev';
+                    } else {
+                        if (itms.first == 0 ||
+                            itms.first > num)       dir = 'next';
+                        else                        dir = 'prev';
+                    }
+                }
+
+                if (dir == 'prev') num = itms.total-num;
+                $cfs.trigger(cf_e(dir, conf), [obj, num, clb]);
+
+                return true;
+            });
+
+            //  prevPage event
+            $cfs.bind(cf_e('prevPage', conf), function(e, obj, clb) {
+                e.stopPropagation();
+                var cur = $cfs.triggerHandler(cf_e('currentPage', conf));
+                return $cfs.triggerHandler(cf_e('slideToPage', conf), [cur-1, obj, 'prev', clb]);
+            });
+
+            //  nextPage event
+            $cfs.bind(cf_e('nextPage', conf), function(e, obj, clb) {
+                e.stopPropagation();
+                var cur = $cfs.triggerHandler(cf_e('currentPage', conf));
+                return $cfs.triggerHandler(cf_e('slideToPage', conf), [cur+1, obj, 'next', clb]);
+            });
+
+            //  slideToPage event
+            $cfs.bind(cf_e('slideToPage', conf), function(e, pag, obj, dir, clb) {
+                e.stopPropagation();
+                if (typeof pag != 'number') pag = $cfs.triggerHandler(cf_e('currentPage', conf));
+                var ipp = opts.pagination.items || opts.items.visible,
+                    max = Math.ceil(itms.total / ipp)-1;
+                if (pag < 0)    pag = max;
+                if (pag > max)  pag = 0;
+                return $cfs.triggerHandler(cf_e('slideTo', conf), [pag*ipp, 0, true, obj, dir, clb]);
+            });
+
+            //  jumpToStart event
+            $cfs.bind(cf_e('jumpToStart', conf), function(e, s) {
+                e.stopPropagation();
+                if (s)  s = gn_getItemIndex(s, 0, true, itms, $cfs);
+                else    s = 0;
+
+                s += itms.first;
+                if (s != 0) {
+                    while (s > itms.total) s -= itms.total;
+                    $cfs.prepend($cfs.children().slice(s, itms.total));
+                }
+                return true;
+            });
+
+            //  synchronise event
+            $cfs.bind(cf_e('synchronise', conf), function(e, s) {
+                e.stopPropagation();
+                     if (s)                 s = cf_getSynchArr(s);
+                else if (opts.synchronise)  s = opts.synchronise;
+                else return debug(conf, 'No carousel to synchronise.');
+
+                var n = $cfs.triggerHandler(cf_e('currentPosition', conf)),
+                    x = true;
+                for (var j = 0, l = s.length; j < l; j++) {
+                    if (!s[j][0].triggerHandler(cf_e('slideTo', conf), [n, s[j][3], true])) {
+                        x = false;
+                    }
+                }
+                return x;
+            });
+
+            //  queue event
+            $cfs.bind(cf_e('queue', conf), function(e, dir, opt) {
+                e.stopPropagation();
+                if (typeof dir == 'function') {
+                    dir.call($tt0, queu);
+                } else if (is_array(dir)) {
+                    queu = dir;
+                } else if (typeof dir != 'undefined') {
+                    queu.push([dir, opt]);
+                }
+                return queu;
+            });
+
+            //  insertItem event
+            $cfs.bind(cf_e('insertItem', conf), function(e, itm, num, org, dev) {
+                e.stopPropagation();
+
+                var v = [itm, num, org, dev],
+                    t = ['string/object', 'string/number/object', 'boolean', 'number'],
+                    a = cf_sortParams(v, t);
+                
+                var itm = a[0],
+                    num = a[1],
+                    org = a[2],
+                    dev = a[3];
+
+                if (typeof itm == 'object' && 
+                    typeof itm.jquery == 'undefined')   itm = $(itm);
+                if (typeof itm == 'string')             itm = $(itm);
+                if (typeof itm != 'object' ||
+                    typeof itm.jquery == 'undefined' || 
+                    itm.length == 0) return debug(conf, 'Not a valid object.');
+
+                if (typeof num == 'undefined') num = 'end';
+
+                if (opts.usePadding) {
+                    itm.each(function() {
+                        var m = parseInt($(this).css(opts.d['marginRight']));
+                        if (isNaN(m)) m = 0;
+                        $(this).data('cfs_origCssMargin', m);
+                    });
+                }
+
+                var orgNum = num,
+                    before = 'before';
+
+                if (num == 'end') {
+                    if (org) {
+                        if (itms.first == 0) {
+                            num = itms.total-1;
+                            before = 'after';
+                        } else {
+                            num = itms.first;
+                            itms.first += itm.length
+                        }
+                        if (num < 0) num = 0;
+                    } else {
+                        num = itms.total-1;
+                        before = 'after';
+                    }
+                } else {
+                    num = gn_getItemIndex(num, dev, org, itms, $cfs);
+                }
+                if (orgNum != 'end' && !org) {
+                    if (num < itms.first) itms.first += itm.length;
+                }
+                if (itms.first >= itms.total) itms.first -= itms.total;
+
+                var $cit = $cfs.children().eq(num);
+                if ($cit.length) {
+                    $cit[before](itm);
+                } else {
+                    $cfs.append(itm);
+                }
+
+                itms.total = $cfs.children().length;
+
+                var sz = $cfs.triggerHandler('updateSizes');
+                nv_showNavi(opts, itms.total, conf);
+                nv_enableNavi(opts, itms.first, conf);
+                $cfs.trigger(cf_e('linkAnchors', conf));
+                $cfs.trigger(cf_e('updatePageStatus', conf), [true, sz]);
+
+                return true;
+            });
+
+            //  removeItem event
+            $cfs.bind(cf_e('removeItem', conf), function(e, num, org, dev) {
+                e.stopPropagation();
+                
+                var v = [num, org, dev],
+                    t = ['string/number/object', 'boolean', 'number'],
+                    a = cf_sortParams(v, t);
+                
+                var num = a[0],
+                    org = a[1],
+                    dev = a[2];
+
+                if (typeof num == 'undefined' || num == 'end') {
+                    $cfs.children().last().remove();
+                } else {
+                    num = gn_getItemIndex(num, dev, org, itms, $cfs);
+                    var $cit = $cfs.children().eq(num);
+                    if ($cit.length){
+                        if (num < itms.first) itms.first -= $cit.length;
+                        $cit.remove();
+                    }
+                }
+                itms.total = $cfs.children().length;
+
+                var sz = $cfs.triggerHandler('updateSizes');
+                nv_showNavi(opts, itms.total, conf);
+                nv_enableNavi(opts, itms.first, conf);
+                $cfs.trigger(cf_e('updatePageStatus', conf), [true, sz]);
+
+                return true;
+            });
+
+            //  onBefore and onAfter event
+            $cfs.bind(cf_e('onBefore', conf)+' '+cf_e('onAfter', conf), function(e, fn) {
+                e.stopPropagation();
+                var eType = e.type.slice(conf.events.prefix.length);
+                if (is_array(fn))               clbk[eType] = fn;
+                if (typeof fn == 'function')    clbk[eType].push(fn);
+                return clbk[eType];
+            });
+
+            //  currentPosition event, accessible from outside
+            $cfs.bind(cf_e('_cfs_currentPosition', conf, false), function(e, fn) {
+                e.stopPropagation();
+                return $cfs.triggerHandler(cf_e('currentPosition', conf), fn);
+            });
+            $cfs.bind(cf_e('currentPosition', conf), function(e, fn) {
+                e.stopPropagation();
+                if (itms.first == 0) var val = 0;
+                else var val = itms.total - itms.first;
+                if (typeof fn == 'function') fn.call($tt0, val);
+                return val;
+            });
+
+            //  currentPage event
+            $cfs.bind(cf_e('currentPage', conf), function(e, fn) {
+                e.stopPropagation();
+                var ipp = opts.pagination.items || opts.items.visible;
+                var max = Math.ceil(itms.total/ipp-1);
+                if (itms.first == 0)                            var nr = 0;
+                else if (itms.first < itms.total % ipp)         var nr = 0;
+                else if (itms.first == ipp && !opts.circular)   var nr = max;
+                else                                            var nr = Math.round((itms.total-itms.first)/ipp);
+                if (nr < 0) nr = 0;
+                if (nr > max) nr = max;
+                if (typeof fn == 'function') fn.call($tt0, nr);
+                return nr;
+            });
+
+            //  currentVisible event
+            $cfs.bind(cf_e('currentVisible', conf), function(e, fn) {
+                e.stopPropagation();
+                $i = gi_getCurrentItems($cfs.children(), opts);
+                if (typeof fn == 'function') fn.call($tt0, $i);
+                return $i;
+            });
+            
+            //  slice event
+            $cfs.bind(cf_e('slice', conf), function(e, f, l, fn) {
+                e.stopPropagation();
+
+                var v = [f, l, fn],
+                    t = ['number', 'number', 'function'],
+                    a = cf_sortParams(v, t);
+
+                f = (typeof a[0] == 'number') ? a[0] : 0,
+                l = (typeof a[1] == 'number') ? a[1] : itms.total,
+                fn = a[2];
+                
+                f += itms.first;
+                l += itms.first;
+
+                while (f > itms.total) { f -= itms.total }
+                while (l > itms.total) { l -= itms.total }
+                while (f < 0) { f += itms.total }
+                while (l < 0) { l += itms.total }
+
+                var $iA = $cfs.children();
+
+                if (l > f) {
+                    var $i = $iA.slice(f, l);   
+                } else {
+                    var $i = $( $iA.slice(f, itms.total).get().concat( $iA.slice(0, l).get() ) );
+                }
+
+                if (typeof fn == 'function') fn.call($tt0, $i);
+                return $i;
+            });
+
+            //  isPaused, isStopped and isScrolling events
+            $cfs.bind(cf_e('isPaused', conf)+' '+cf_e('isStopped', conf)+' '+cf_e('isScrolling', conf), function(e, fn) {
+                e.stopPropagation();
+                var eType = e.type.slice(conf.events.prefix.length);
+                if (typeof fn == 'function') fn.call($tt0, crsl[eType]);
+                return crsl[eType];
+            });
+
+            //  configuration event, accessible from outside
+            $cfs.bind(cf_e('_cfs_configuration', conf, false), function(e, a, b, c) {
+                e.stopPropagation();
+                return $cfs.triggerHandler(cf_e('configuration', conf), [a, b, c]);
+            });
+            $cfs.bind(cf_e('configuration', conf), function(e, a, b, c) {
+                e.stopPropagation();
+                var reInit = false;
+
+                //  return entire configuration-object
+                if (typeof a == 'function') {
+                    a.call($tt0, opts);
+
+                //  set multiple options via object
+                } else if (typeof a == 'object') {
+                    opts_orig = $.extend(true, {}, opts_orig, a);
+                    if (b !== false) reInit = true;
+                    else opts = $.extend(true, {}, opts, a);
+
+                } else if (typeof a != 'undefined') {
+
+                    //  callback function for specific option
+                    if (typeof b == 'function') {
+                        var val = eval('opts.'+a);
+                        if (typeof val == 'undefined') val = '';
+                        b.call($tt0, val);
+
+                    //  set individual option
+                    } else if (typeof b != 'undefined') {
+                        if (typeof c !== 'boolean') c = true;
+                        eval('opts_orig.'+a+' = b');
+                        if (c !== false) reInit = true;
+                        else eval('opts.'+a+' = b');
+
+                    //  return value for specific option
+                    } else {
+                        return eval('opts.'+a);
+                    }
+                }
+                if (reInit) {
+                    sz_resetMargin($cfs.children(), opts);
+                    $cfs._cfs_init(opts_orig);
+                    $cfs._cfs_bind_buttons();
+                    var siz = sz_setSizes($cfs, opts, false);
+                    $cfs.trigger(cf_e('updatePageStatus', conf), [true, siz]);
+                }
+                return opts;
+            });
+
+            //  linkAnchors event
+            $cfs.bind(cf_e('linkAnchors', conf), function(e, $con, sel) {
+                e.stopPropagation();
+                if (typeof $con == 'undefined' || $con.length == 0) $con = $('body');
+                else if (typeof $con == 'string') $con = $($con);
+                if (typeof $con != 'object') return debug(conf, 'Not a valid object.');
+                if (typeof sel != 'string' || sel.length == 0) sel = 'a.caroufredsel';
+                $con.find(sel).each(function() {
+                    var h = this.hash || '';
+                    if (h.length > 0 && $cfs.children().index($(h)) != -1) {
+                        $(this).unbind('click').click(function(e) {
+                            e.preventDefault();
+                            $cfs.trigger(cf_e('slideTo', conf), h);
+                        });
+                    }
+                });
+                return true;
+            });
+
+            //  updatePageStatus event
+            $cfs.bind(cf_e('updatePageStatus', conf), function(e, build, sizes) {
+                e.stopPropagation();
+                if (!opts.pagination.container) return;
+                
+                if (build) {
+                    var ipp = opts.pagination.items || opts.items.visible,
+                        l = Math.ceil(itms.total/ipp);
+
+                    if (opts.pagination.anchorBuilder) {
+                        opts.pagination.container.children().remove();
+                        opts.pagination.container.each(function() {
+                            for (var a = 0; a < l; a++) {
+                                var i = $cfs.children().eq( gn_getItemIndex(a*ipp, 0, true, itms, $cfs) );
+                                $(this).append(opts.pagination.anchorBuilder(a+1, i));
+                            }
+                        });
+                    }
+                    opts.pagination.container.each(function() {
+                        $(this).children().unbind(opts.pagination.event).each(function(a) {
+                            $(this).bind(opts.pagination.event, function(e) {
+                                e.preventDefault();
+                                $cfs.trigger(cf_e('slideTo', conf), [a*ipp, 0, true, opts.pagination]);
+                            });
+                        });
+                    });
+                }
+                opts.pagination.container.each(function() {
+                    $(this).children().removeClass(cf_c('selected', conf)).eq($cfs.triggerHandler(cf_e('currentPage', conf))).addClass(cf_c('selected', conf));
+                });
+                return true;
+            });
+
+            //  updateSizes event
+            $cfs.bind(cf_e('updateSizes', conf), function(e) {
+                var a_itm = $cfs.children(),
+                    vI = opts.items.visible;
+
+                     if (opts.items.visibleConf.variable)   vI = gn_getVisibleItemsNext(a_itm, opts, 0);
+                else if (opts.items.filter != '*')          vI = gn_getVisibleItemsNextFilter(a_itm, opts, 0);
+
+                if (!opts.circular && itms.first != 0 && vI > itms.first) {
+                    if (opts.items.visibleConf.variable) {
+                        var nI = gn_getVisibleItemsPrev(a_itm, opts, itms.first) - itms.first;
+                    } else if (opts.items.filter != '*') {
+                        var nI = gn_getVisibleItemsPrevFilter(a_itm, opts, itms.first) - itms.first;
+                    } else {
+                        nI = opts.items.visible - itms.first;
+                    }
+                    debug(conf, 'Preventing non-circular: sliding '+nI+' items backward.');
+                    $cfs.trigger('prev', nI);
+                }
+                opts.items.visible = cf_getItemsAdjust(vI, opts, opts.items.visibleConf.adjust, $tt0);
+                return sz_setSizes($cfs, opts);
+            });
+
+            //  destroy event, accessible from outside
+            $cfs.bind(cf_e('_cfs_destroy', conf, false), function(e, orgOrder) {
+                e.stopPropagation();
+                $cfs.trigger(cf_e('destroy', conf), orgOrder);
+                return true;
+            });
+            $cfs.bind(cf_e('destroy', conf), function(e, orgOrder) {
+                e.stopPropagation();
+                tmrs = sc_clearTimers(tmrs);
+
+                $cfs.data('cfs_isCarousel', false);
+                $cfs.trigger(cf_e('finish', conf));
+                if (orgOrder) {
+                    $cfs.trigger(cf_e('jumpToStart', conf));
+                }
+                if (opts.usePadding) {
+                    sz_resetMargin($cfs.children(), opts);
+                }
+
+                $cfs.css($cfs.data('cfs_origCss'));
+                $cfs._cfs_unbind_events();
+                $cfs._cfs_unbind_buttons();
+                $wrp.replaceWith($cfs);
+
+                return true;
+            });
+        };  //  /bind_events
+
+        $cfs._cfs_unbind_events = function() {
+            $cfs.unbind(cf_e('', conf));
+            $cfs.unbind(cf_e('', conf, false));
+        };  //  /unbind_events
+
+        $cfs._cfs_bind_buttons = function() {
+            $cfs._cfs_unbind_buttons();
+            nv_showNavi(opts, itms.total, conf);
+            nv_enableNavi(opts, itms.first, conf);
+
+            if (opts.auto.pauseOnHover) {
+                var pC = bt_pauseOnHoverConfig(opts.auto.pauseOnHover);
+                $wrp.bind(cf_e('mouseenter', conf, false), function() { $cfs.trigger(cf_e('pause', conf), pC);  })
+                    .bind(cf_e('mouseleave', conf, false), function() { $cfs.trigger(cf_e('resume', conf));     });
+            }
+
+            if (opts.auto.button) {
+                opts.auto.button.bind(cf_e(opts.auto.event, conf, false), function(e) {
+                    e.preventDefault();
+                    var ev = false,
+                        pC = null;
+
+                    if (crsl.isPaused) {
+                        ev = 'play';
+                    } else if (opts.auto.pauseOnEvent) {
+                        ev = 'pause';
+                        pC = bt_pauseOnHoverConfig(opts.auto.pauseOnEvent);
+                    }
+                    if (ev) {
+                        $cfs.trigger(cf_e(ev, conf), pC);
+                    }
+                });
+            }
+            if (opts.prev.button) {
+                opts.prev.button.bind(cf_e(opts.prev.event, conf, false), function(e) {
+                    e.preventDefault();
+                    $cfs.trigger(cf_e('prev', conf));
+                });
+                if (opts.prev.pauseOnHover) {
+                    var pC = bt_pauseOnHoverConfig(opts.prev.pauseOnHover);
+                    opts.prev.button.bind(cf_e('mouseenter', conf, false), function() { $cfs.trigger(cf_e('pause', conf), pC);  })
+                                    .bind(cf_e('mouseleave', conf, false), function() { $cfs.trigger(cf_e('resume', conf));     });
+                }
+            }
+
+            if (opts.next.button) {
+                opts.next.button.bind(cf_e(opts.next.event, conf, false), function(e) {
+                    e.preventDefault();
+                    $cfs.trigger(cf_e('next', conf));
+                });
+                if (opts.next.pauseOnHover) {
+                    var pC = bt_pauseOnHoverConfig(opts.next.pauseOnHover);
+                    opts.next.button.bind(cf_e('mouseenter', conf, false), function() { $cfs.trigger(cf_e('pause', conf), pC);  })
+                                    .bind(cf_e('mouseleave', conf, false), function() { $cfs.trigger(cf_e('resume', conf));     });
+                }
+            }
+            if ($.fn.mousewheel) {
+                if (opts.prev.mousewheel) {
+                    if (!crsl.mousewheelPrev) {
+                        crsl.mousewheelPrev = true;
+                        $wrp.mousewheel(function(e, delta) { 
+                            if (delta > 0) {
+                                e.preventDefault();
+                                var num = bt_mousesheelNumber(opts.prev.mousewheel);
+                                $cfs.trigger(cf_e('prev', conf), num);
+                            }
+                        });
+                    }
+                }
+                if (opts.next.mousewheel) {
+                    if (!crsl.mousewheelNext) {
+                        crsl.mousewheelNext = true;
+                        $wrp.mousewheel(function(e, delta) { 
+                            if (delta < 0) {
+                                e.preventDefault();
+                                var num = bt_mousesheelNumber(opts.next.mousewheel);
+                                $cfs.trigger(cf_e('next', conf), num);
+                            }
+                        });
+                    }
+                }
+            }
+            if ($.fn.touchwipe) {
+                var wP = (opts.prev.wipe) ? function() { $cfs.trigger(cf_e('prev', conf)) } : null,
+                    wN = (opts.next.wipe) ? function() { $cfs.trigger(cf_e('next', conf)) } : null;
+
+                if (wN || wN) {
+                    if (!crsl.touchwipe) {
+                        crsl.touchwipe = true;
+                        var twOps = {
+                            'min_move_x': 30,
+                            'min_move_y': 30,
+                            'preventDefaultEvents': true
+                        };
+                        switch (opts.direction) {
+                            case 'up':
+                            case 'down':
+                                twOps.wipeUp = wP;
+                                twOps.wipeDown = wN;
+                                break;
+                            default:
+                                twOps.wipeLeft = wN;
+                                twOps.wipeRight = wP;
+                        }
+                        $wrp.touchwipe(twOps);
+                    }
+                }
+            }
+            if (opts.pagination.container) {
+                if (opts.pagination.pauseOnHover) {
+                    var pC = bt_pauseOnHoverConfig(opts.pagination.pauseOnHover);
+                    opts.pagination.container.bind(cf_e('mouseenter', conf, false), function() { $cfs.trigger(cf_e('pause', conf), pC); })
+                                             .bind(cf_e('mouseleave', conf, false), function() { $cfs.trigger(cf_e('resume', conf));    });
+                }
+            }
+            if (opts.prev.key || opts.next.key) {
+                $(document).bind(cf_e('keyup', conf, false, true, true), function(e) {
+                    var k = e.keyCode;
+                    if (k == opts.next.key) {
+                        e.preventDefault();
+                        $cfs.trigger(cf_e('next', conf));
+                    }
+                    if (k == opts.prev.key) {
+                        e.preventDefault();
+                        $cfs.trigger(cf_e('prev', conf));
+                    }
+                });
+            }
+            if (opts.pagination.keys) {
+                $(document).bind(cf_e('keyup', conf, false, true, true), function(e) {
+                    var k = e.keyCode;
+                    if (k >= 49 && k < 58) {
+                        k = (k-49) * opts.items.visible;
+                        if (k <= itms.total) {
+                            e.preventDefault();
+                            $cfs.trigger(cf_e('slideTo', conf), [k, 0, true, opts.pagination]);
+                        }
+                    }
+                });
+            }
+            if (opts.auto.play) {
+                $cfs.trigger(cf_e('play', conf), opts.auto.delay);
+            }
+
+if (crsl.upDateOnWindowResize) {
+    $(window).bind(cf_e('resize', conf, false, true, true), function(e) {
+        $cfs.trigger(cf_e('finish', conf));
+        if (opts.auto.pauseOnResize && !crsl.isPaused) {
+            $cfs.trigger(cf_e('play', conf));
+        }
+        sz_resetMargin($cfs.children(), opts);
+        $cfs._cfs_init(opts_orig);
+        var siz = sz_setSizes($cfs, opts, false);
+        $cfs.trigger(cf_e('updatePageStatus', conf), [true, siz]);
+    });
+}
+
+        };  //  /bind_buttons
+
+        $cfs._cfs_unbind_buttons = function() {
+            var ns1 = cf_e('', conf),
+                ns2 = cf_e('', conf, false);
+                ns3 = cf_e('', conf, false, true, true);
+
+            $(document).unbind(ns3);
+            $(window).unbind(ns3);
+            $wrp.unbind(ns2);
+
+            if (opts.auto.button) opts.auto.button.unbind(ns2);
+            if (opts.prev.button) opts.prev.button.unbind(ns2);
+            if (opts.next.button) opts.next.button.unbind(ns2);
+            if (opts.pagination.container) {
+                opts.pagination.container.unbind(ns2);
+                if (opts.pagination.anchorBuilder) {
+                    opts.pagination.container.children().remove();
+                }
+            }
+
+            nv_showNavi(opts, 'hide', conf);
+            nv_enableNavi(opts, 'removeClass', conf);
+
+        };  //  /unbind_buttons
+
+
+
+        //  START
+
+        var crsl = {
+                'direction'     : 'next',
+                'isPaused'      : true,
+                'isScrolling'   : false,
+                'isStopped'     : false,
+
+                'mousewheelNext': false,
+                'mousewheelPrev': false,
+                'touchwipe'     : false
+            },
+            itms = {
+                'total'         : $cfs.children().length,
+                'first'         : 0
+            },
+            tmrs = {
+                'timer'         : null,
+                'auto'          : null,
+                'queue'         : null,
+                'startTime'     : getTime(),
+                'timePassed'    : 0
+            },
+            scrl = {
+                'isStopped'     : false,
+                'duration'      : 0,
+                'startTime'     : 0,
+                'easing'        : '',
+                'anims'         : []
+            },
+            clbk = {
+                'onBefore'      : [],
+                'onAfter'       : []
+            },
+            queu = [],
+            conf = $.extend(true, {}, $.fn.carouFredSel.configs, configs),
+            opts = {},
+            opts_orig = options,
+            $wrp = $cfs.wrap('<'+conf.wrapper.element+' class="'+conf.wrapper.classname+'" />').parent();
+
+        conf.selector       = $cfs.selector;
+        conf.serialNumber   = $.fn.carouFredSel.serialNumber++;
+
+        //  create carousel
+        $cfs._cfs_init(opts_orig, true, starting_position);
+        $cfs._cfs_build();
+        $cfs._cfs_bind_events();
+        $cfs._cfs_bind_buttons();
+
+        //  find item to start
+        if (is_array(opts.items.start)) {
+            var start_arr = opts.items.start;
+        } else {
+            var start_arr = [];
+            if (opts.items.start != 0) {
+                start_arr.push(opts.items.start);
+            }
+        }
+        if (opts.cookie) {
+            start_arr.unshift(cf_readCookie(opts.cookie));
+        }
+        if (start_arr.length > 0) {
+            for (var a = 0, l = start_arr.length; a < l; a++) {
+                var s = start_arr[a];
+                if (s == 0) {
+                    continue;
+                }
+                if (s === true) {
+                    s = window.location.hash;
+                    if (s.length < 1) {
+                        continue;
+                    }
+                } else if (s === 'random') {
+                    s = Math.floor(Math.random()*itms.total);
+                }
+                if ($cfs.triggerHandler(cf_e('slideTo', conf), [s, 0, true, { fx: 'none' }])) {
+                    break;
+                }
+            }
+        }
+        var siz = sz_setSizes($cfs, opts, false),
+            itm = gi_getCurrentItems($cfs.children(), opts);
+
+        if (opts.onCreate) {
+            opts.onCreate.call($tt0, itm, siz);
+        }
+
+        $cfs.trigger(cf_e('updatePageStatus', conf), [true, siz]);
+        $cfs.trigger(cf_e('linkAnchors', conf));
+
+        return $cfs;
+    };
+
+
+    //  GLOBAL PUBLIC
+
+    $.fn.carouFredSel.serialNumber = 1;
+    $.fn.carouFredSel.defaults = {
+        'synchronise'   : false,
+        'infinite'      : true,
+        'circular'      : true,
+        'responsive'    : false,
+        'direction'     : 'left',
+        'items'         : {
+            'start'         : 0
+        },
+        'scroll'        : {
+            'easing'        : 'swing',
+            'duration'      : 500,
+            'pauseOnHover'  : false,
+            'mousewheel'    : false,
+            'wipe'          : false,
+            'event'         : 'click',
+            'queue'         : false
+        }
+    };
+    $.fn.carouFredSel.configs = {
+        'debug'         : false,
+        'events'        : {
+            'prefix'        : '',
+            'namespace'     : 'cfs'
+        },
+        'wrapper'       : {
+            'element'       : 'div',
+            'classname'     : 'caroufredsel_wrapper'
+        },
+        'classnames'    : {}
+    };
+    $.fn.carouFredSel.pageAnchorBuilder = function(nr, itm) {
+        return '<a href="#"><span>'+nr+'</span></a>';
+    };
+
+
+    //  GLOBAL PRIVATE
+
+    //  scrolling functions
+    function sc_setScroll(d, e) {
+        return {
+            anims       : [],
+            duration    : d,
+            orgDuration : d,
+            easing      : e,
+            startTime   : getTime()
+        };
+    }
+    function sc_startScroll(s) {
+        if (typeof s.pre == 'object') {
+            sc_startScroll(s.pre);
+        }
+        for (var a = 0, l = s.anims.length; a < l; a++) {
+            var b = s.anims[a];
+            if (!b) continue;
+            if (b[3]) b[0].stop();
+            b[0].animate(b[1], {
+                complete: b[2],
+                duration: s.duration,
+                easing: s.easing
+            });
+        }
+        if (typeof s.post == 'object') {
+            sc_startScroll(s.post);
+        }
+    }
+    function sc_stopScroll(s, finish) {
+        if (typeof finish != 'boolean') finish = true;
+        if (typeof s.pre == 'object') {
+            sc_stopScroll(s.pre, finish);
+        }
+        for (var a = 0, l = s.anims.length; a < l; a++) {
+            var b = s.anims[a];
+            b[0].stop(true);
+            if (finish) {
+                b[0].css(b[1]);
+                if (typeof b[2] == 'function') b[2]();
+            }
+        }
+        if (typeof s.post == 'object') {
+            sc_stopScroll(s.post, finish);
+        }
+    }
+    function sc_clearTimers(t) {
+        if (t.auto) clearTimeout(t.auto);
+        return t;
+    }
+    function sc_callCallbacks(cbs, t, args) {
+        if (cbs.length) {
+            for (var a = 0, l = cbs.length; a < l; a++) {
+                cbs[a].apply(t, args);
+            }
+        }
+        return [];
+    }
+
+    //  fx functions
+    function fx_fade(sO, c, x, d, f) {
+        var o = {
+            'duration'  : d,
+            'easing'    : sO.easing
+        };
+        if (typeof f == 'function') o.complete = f;
+        c.animate({
+            opacity: x
+        }, o);
+    }
+    function fx_cover(sc, c1, c2, o, prev) {
+        var old_w = ms_getSizes(gi_getOldItemsNext(c1.children(), o), o, true)[0],
+            new_w = ms_getSizes(c2.children(), o, true)[0],
+            cur_l = (prev) ? -new_w : old_w,
+            css_o = {},
+            ani_o = {};
+
+        css_o[o.d['width']] = new_w;
+        css_o[o.d['left']] = cur_l;
+        ani_o[o.d['left']] = 0;
+        
+        sc.pre.anims.push([c1, { 'opacity': 1 }]);
+        sc.post.anims.push([c2, ani_o, function() { $(this).remove(); }]);
+        c2.css(css_o);
+        return sc;
+    }
+    function fx_uncover(sc, c1, c2, o, prev, n) {
+        var new_w = ms_getSizes(gi_getNewItemsNext(c1.children(), o, n), o, true)[0],
+            old_w = ms_getSizes(c2.children(), o, true)[0],
+            cur_l = (prev) ? -old_w : new_w,
+            css_o = {},
+            ani_o = {};
+
+        css_o[o.d['width']] = old_w;
+        css_o[o.d['left']] = 0;
+        ani_o[o.d['left']] = cur_l;
+        sc.post.anims.push([c2, ani_o, function() { $(this).remove(); }]);
+        c2.css(css_o);
+        return sc;
+    }
+
+    //  navigation functions
+    function nv_showNavi(o, t, c) {
+        if (t == 'show' || t == 'hide') {
+            var f = t;
+        } else if (o.items.minimum >= t) {
+            debug(c, 'Not enough items: hiding navigation ('+t+' items, '+o.items.minimum+' needed).');
+            var f = 'hide';
+        } else {
+            var f = 'show';
+        }
+        var s = (f == 'show') ? 'removeClass' : 'addClass',
+            h = cf_c('hidden', c);
+        if (o.auto.button) o.auto.button[f]()[s](h);
+        if (o.prev.button) o.prev.button[f]()[s](h);
+        if (o.next.button) o.next.button[f]()[s](h);
+        if (o.pagination.container) o.pagination.container[f]()[s](h);
+    }
+    function nv_enableNavi(o, f, c) {
+        if (o.circular || o.infinite) return;
+        var fx = (f == 'removeClass' || f == 'addClass') ? f : false,
+            di = cf_c('disabled', c);
+        if (o.auto.button && fx) {
+            o.auto.button[fx](di);
+        }
+        if (o.prev.button) {
+            var fn = fx || (f == 0) ? 'addClass' : 'removeClass';
+            o.prev.button[fn](di);
+        }
+        if (o.next.button) {
+            var fn = fx || (f == o.items.visible) ? 'addClass' : 'removeClass';
+            o.next.button[fn](di);
+        }
+    }
+
+    //  get object functions
+    function go_getObject($tt, obj) {
+        if (typeof obj == 'function')   obj = obj.call($tt);
+        if (typeof obj == 'undefined')  obj = {};
+        return obj;
+    }
+    function go_getNaviObject($tt, obj, type) {
+        if (typeof type != 'string') type = '';
+
+        obj = go_getObject($tt, obj);
+        if (typeof obj == 'string') {
+            var temp = cf_getKeyCode(obj);
+            if (temp == -1) obj = $(obj);
+            else            obj = temp;
+        }
+
+        //  pagination
+        if (type == 'pagination') {
+            if (typeof obj              == 'boolean')   obj = { 'keys': obj };
+            if (typeof obj.jquery       != 'undefined') obj = { 'container': obj };
+            if (typeof obj.container    == 'function')  obj.container = obj.container.call($tt);
+            if (typeof obj.container    == 'string')    obj.container = $(obj.container);
+            if (typeof obj.items        != 'number')    obj.items = false;
+
+        //  auto
+        } else if (type == 'auto') {
+            if (typeof obj.jquery   != 'undefined')     obj = { 'button': obj };
+            if (typeof obj == 'boolean')                obj = { 'play': obj };
+            if (typeof obj == 'number')                 obj = { 'pauseDuration': obj };
+            if (typeof obj.button       == 'function')  obj.button = obj.button.call($tt);
+            if (typeof obj.button       == 'string')    obj.button = $(obj.button);
+
+        //  prev + next
+        } else {
+            if (typeof obj.jquery       != 'undefined') obj = { 'button': obj };
+            if (typeof obj              == 'number')    obj = { 'key': obj };
+            if (typeof obj.button       == 'function')  obj.button = obj.button.call($tt);
+            if (typeof obj.button       == 'string')    obj.button = $(obj.button);
+            if (typeof obj.key          == 'string')    obj.key = cf_getKeyCode(obj.key);
+        }           
+
+        return obj;
+    }
+
+    //  get number functions
+    function gn_getItemIndex(num, dev, org, items, $cfs) {
+        if (typeof num == 'string') {
+            if (isNaN(num)) num = $(num);
+            else            num = parseInt(num);
+        }
+        if (typeof num == 'object') {
+            if (typeof num.jquery == 'undefined') num = $(num);
+            num = $cfs.children().index(num);
+            if (num == -1) num = 0;
+            if (typeof org != 'boolean') org = false;
+        } else {
+            if (typeof org != 'boolean') org = true;
+        }
+        if (isNaN(num)) num = 0;
+        else            num = parseInt(num);
+        if (isNaN(dev)) dev = 0;
+        else            dev = parseInt(dev);
+
+        if (org) {
+            num += items.first;
+        }
+        num += dev;
+        if (items.total > 0) {
+            while (num >= items.total)  {   num -= items.total; }
+            while (num < 0)             {   num += items.total; }
+        }
+        return num;
+    }
+
+    //  items prev
+    function gn_getVisibleItemsPrev(i, o, s) {
+        var t = 0,
+            x = 0;
+
+        for (var a = s; a >= 0; a--) {
+            var j = i.eq(a);
+            t += (j.is(':visible')) ? j[o.d['outerWidth']](true) : 0;
+            if (t > o.maxDimention) return x;
+            if (a == 0) a = i.length;
+            x++;
+        }
+    }
+    function gn_getVisibleItemsPrevFilter(i, o, s) {
+        return gn_getItemsPrevFilter(i, o.items.filter, o.items.visibleConf.org, s);
+    }
+    function gn_getScrollItemsPrevFilter(i, o, s, m) {
+        return gn_getItemsPrevFilter(i, o.items.filter, m, s);
+    }
+    function gn_getItemsPrevFilter(i, f, m, s) {
+        var t = 0,
+            x = 0;
+    
+        for (var a = s, l = i.length-1; a >= 0; a--) {
+            x++;
+            if (x == l) return x;
+    
+            var j = i.eq(a);
+            if (j.is(f)) {
+                t++;
+                if (t == m) return x;
+            }
+            if (a == 0) a = i.length;
+        }
+    }
+
+    function gn_getVisibleOrg($c, o) {
+        return o.items.visibleConf.org || $c.children().slice(0, o.items.visible).filter(o.items.filter).length;
+    }
+
+    //  items next
+    function gn_getVisibleItemsNext(i, o, s) {
+        var t = 0,
+            x = 0;
+
+        for (var a = s, l = i.length-1; a <= l; a++) {
+            var j = i.eq(a);
+
+            t += (j.is(':visible')) ? j[o.d['outerWidth']](true) : 0;
+            if (t > o.maxDimention) return x;
+
+            x++;
+            if (x == l) return x;
+            if (a == l) a = -1;
+        }
+    }
+    function gn_getVisibleItemsNextTestCircular(i, o, s, l) {
+        var v = gn_getVisibleItemsNext(i, o, s);
+        if (!o.circular) {
+            if (s + v > l) v = l - s;
+        }
+        return v;
+    }
+    function gn_getVisibleItemsNextFilter(i, o, s) {
+        return gn_getItemsNextFilter(i, o.items.filter, o.items.visibleConf.org, s, o.circular);
+    }
+    function gn_getScrollItemsNextFilter(i, o, s, m) {
+        return gn_getItemsNextFilter(i, o.items.filter, m+1, s, o.circular) - 1;
+    }
+    function gn_getItemsNextFilter(i, f, m, s, c) {
+        var t = 0,
+            x = 0;
+
+        for (var a = s, l = i.length-1; a <= l; a++) {
+            x++;
+            if (x == l) return x;
+
+            var j = i.eq(a);
+            if (j.is(f)) {
+                t++;
+                if (t == m) return x;
+            }
+            if (a == l) a = -1;
+        }
+    }
+
+    //  get items functions
+    function gi_getCurrentItems(i, o) {
+        return i.slice(0, o.items.visible);
+    }
+    function gi_getOldItemsPrev(i, o, n) {
+        return i.slice(n, o.items.visibleConf.old+n);
+    }
+    function gi_getNewItemsPrev(i, o) {
+        return i.slice(0, o.items.visible);
+    }
+    function gi_getOldItemsNext(i, o) {
+        return i.slice(0, o.items.visibleConf.old);
+    }
+    function gi_getNewItemsNext(i, o, n) {
+        return i.slice(n, o.items.visible+n);
+    }
+
+    //  sizes functions
+    function sz_resetMargin(i, o, m) {
+        var x = (typeof m == 'boolean') ? m : false;
+        if (typeof m != 'number') m = 0;
+        i.each(function() {
+            var j = $(this);
+            var t = parseInt(j.css(o.d['marginRight']));
+            if (isNaN(t)) t = 0;
+            j.data('cfs_tempCssMargin', t);
+            j.css(o.d['marginRight'], ((x) ? j.data('cfs_tempCssMargin') : m + j.data('cfs_origCssMargin')));
+        });
+    }
+    function sz_setSizes($c, o, p) {
+        var $w = $c.parent(),
+            $i = $c.children(),
+            $v = gi_getCurrentItems($i, o),
+            sz = cf_mapWrapperSizes(ms_getSizes($v, o, true), o, p);
+
+        $w.css(sz);
+
+        if (o.usePadding) {
+            var p = o.padding,
+                r = p[o.d[1]];
+            if (o.align) {
+                if (r < 0) r = 0;
+            }
+            var $l = $v.last();
+            $l.css(o.d['marginRight'], $l.data('cfs_origCssMargin') + r);
+            $c.css(o.d['top'], p[o.d[0]]);
+            $c.css(o.d['left'], p[o.d[3]]);
+        }
+
+        $c.css(o.d['width'], sz[o.d['width']]+(ms_getTotalSize($i, o, 'width')*2));
+        $c.css(o.d['height'], ms_getLargestSize($i, o, 'height'));
+        return sz;
+    }
+
+    //  measuring functions
+    function ms_getSizes(i, o, wrapper) {
+        var s1 = ms_getTotalSize(i, o, 'width', wrapper),
+            s2 = ms_getLargestSize(i, o, 'height', wrapper);
+        return [s1, s2];
+    }
+    function ms_getLargestSize(i, o, dim, wrapper) {
+        if (typeof wrapper != 'boolean') wrapper = false;
+        if (typeof o[o.d[dim]] == 'number' && wrapper) return o[o.d[dim]];
+        if (typeof o.items[o.d[dim]] == 'number') return o.items[o.d[dim]];
+        var di2 = (dim.toLowerCase().indexOf('width') > -1) ? 'outerWidth' : 'outerHeight';
+        return ms_getTrueLargestSize(i, o, di2);
+    }
+    function ms_getTrueLargestSize(i, o, dim) {
+        var s = 0;
+
+        for (var a = 0, l = i.length; a < l; a++) {
+            var j = i.eq(a);
+
+            var m = (j.is(':visible')) ? j[o.d[dim]](true) : 0;
+            if (s < m) s = m;
+        }
+        return s;
+    }
+    function ms_getTrueInnerSize($el, o, dim) {
+        if (!$el.is(':visible')) return 0;
+
+        var siz = $el[o.d[dim]](),
+            arr = (o.d[dim].toLowerCase().indexOf('width') > -1) ? ['paddingLeft', 'paddingRight'] : ['paddingTop', 'paddingBottom'];
+        
+        for (var a = 0, l = arr.length; a < l; a++) {
+            var m = parseInt($el.css(arr[a]));
+            siz -= (isNaN(m)) ? 0 : m;
+        }
+        return siz;
+    }
+    function ms_getTotalSize(i, o, dim, wrapper) {
+        if (typeof wrapper != 'boolean') wrapper = false;
+        if (typeof o[o.d[dim]] == 'number' && wrapper) return o[o.d[dim]];
+        if (typeof o.items[o.d[dim]] == 'number') return o.items[o.d[dim]] * i.length;
+        
+        var d = (dim.toLowerCase().indexOf('width') > -1) ? 'outerWidth' : 'outerHeight',
+            s = 0;
+        
+        for (var a = 0, l = i.length; a < l; a++) {
+            var j = i.eq(a);
+            s += (j.is(':visible')) ? j[o.d[d]](true) : 0;
+        }
+        return s;
+    }
+    function ms_hasVariableSizes(i, o, dim) {
+        var s = false,
+            v = false;
+        
+        for (var a = 0, l = i.length; a < l; a++) {
+            var j = i.eq(a);
+
+            var c = (j.is(':visible')) ? j[o.d[dim]](true) : 0;
+            if (s === false) s = c;
+            else if (s != c) v = true;
+            if (s == 0)      v = true;
+        }
+        return v;
+    }
+    function ms_getPaddingBorderMargin(i, o, d) {
+        return i[o.d['outer'+d]](true) - ms_getTrueInnerSize(i, o, 'inner'+d);
+    }
+    function ms_isPercentage(x) {
+        return (typeof x == 'string' && x.slice(-1) == '%');
+    }
+    function ms_getPercentage(s, o) {
+        if (ms_isPercentage(o)) {
+            o = o.slice(0, -1);
+            if (isNaN(o)) return s;
+            s *= o/100;
+        }
+        return s;
+    }
+
+    //  config functions
+    function cf_e(n, c, pf, ns, rd) {
+        if (typeof pf != 'boolean') pf = true;
+        if (typeof ns != 'boolean') ns = true;
+        if (typeof rd != 'boolean') rd = false;
+        
+        if (pf) n = c.events.prefix + n;
+        if (ns) n = n +'.'+ c.events.namespace;
+        if (ns && rd) n += c.serialNumber;
+
+        return n;
+    }
+    function cf_c(n, c) {
+        return (typeof c.classnames[n] == 'string') ? c.classnames[n] : n;
+    }
+    function cf_mapWrapperSizes(ws, o, p) {
+        if (typeof p != 'boolean') p = true;
+        var pad = (o.usePadding && p) ? o.padding : [0, 0, 0, 0];
+        var wra = {};
+            wra[o.d['width']] = ws[0] + pad[1] + pad[3];
+            wra[o.d['height']] = ws[1] + pad[0] + pad[2];
+
+        return wra;
+    }
+    function cf_sortParams(vals, typs) {
+        var arr = [];
+        for (var a = 0, l1 = vals.length; a < l1; a++) {
+            for (var b = 0, l2 = typs.length; b < l2; b++) {
+                if (typs[b].indexOf(typeof vals[a]) > -1 && typeof arr[b] == 'undefined') {
+                    arr[b] = vals[a];
+                    break;
+                }
+            }
+        }
+        return arr;
+    }
+    function cf_getPadding(p) {
+        if (typeof p == 'undefined') return [0, 0, 0, 0];
+        
+        if (typeof p == 'number') return [p, p, p, p];
+        else if (typeof p == 'string') p = p.split('px').join('').split('em').join('').split(' ');
+
+        if (!is_array(p)) {
+            return [0, 0, 0, 0];
+        }
+        for (var i = 0; i < 4; i++) {
+            p[i] = parseInt(p[i]);
+        }
+        switch (p.length) {
+            case 0: return [0, 0, 0, 0];
+            case 1: return [p[0], p[0], p[0], p[0]];
+            case 2: return [p[0], p[1], p[0], p[1]];
+            case 3: return [p[0], p[1], p[2], p[1]];
+            default: return [p[0], p[1], p[2], p[3]];
+        }
+    }
+    function cf_getAlignPadding(itm, o) {
+        var x = (typeof o[o.d['width']] == 'number') ? Math.ceil(o[o.d['width']] - ms_getTotalSize(itm, o, 'width')) : 0;
+        switch (o.align) {
+            case 'left': return [0, x];
+            case 'right': return [x, 0];
+            case 'center':
+            default:
+                return [Math.ceil(x/2), Math.floor(x/2)];
+        }
+    }
+    function cf_getAdjust(x, o, a, $t) {
+        var v = x;
+        if (typeof a == 'function') {
+            v = a.call($t, v);
+
+        } else if (typeof a == 'string') {
+            var p = a.split('+'),
+                m = a.split('-');
+            
+            if (m.length > p.length) {
+                var neg = true,
+                    sta = m[0],
+                    adj = m[1];
+            } else {
+                var neg = false,
+                    sta = p[0],
+                    adj = p[1];
+            }
+
+            switch(sta) {
+                case 'even':
+                    v = (x % 2 == 1) ? x-1 : x;
+                    break;
+                case 'odd':
+                    v = (x % 2 == 0) ? x-1 : x;
+                    break;
+                default:
+                    v = x;
+                    break;
+            }
+            adj = parseInt(adj);
+            if (!isNaN(adj)) {
+                if (neg) adj = -adj;
+                v += adj;
+            }
+        }
+        if (typeof v != 'number') v = 1;
+        if (v < 1) v = 1;
+        return v;
+    }
+    function cf_getItemsAdjust(x, o, a, $t) {
+        return cf_getItemAdjustMinMax(cf_getAdjust(x, o, a, $t), o.items.visibleConf);
+    }
+    function cf_getItemAdjustMinMax(v, i) {
+        if (typeof i.min == 'number' && v < i.min) v = i.min;
+        if (typeof i.max == 'number' && v > i.max) v = i.max;
+        if (v < 1) v = 1;
+        return v;
+    }
+    function cf_getSynchArr(s) {
+        if (!is_array(s))       s = [[s]];
+        if (!is_array(s[0]))    s = [s];
+        for (var j = 0, l = s.length; j < l; j++) {
+            if (typeof s[j][0] == 'string')     s[j][0] = $(s[j][0]);
+            if (typeof s[j][1] != 'boolean')    s[j][1] = true;
+            if (typeof s[j][2] != 'boolean')    s[j][2] = true;
+            if (typeof s[j][3] != 'number')     s[j][3] = 0;
+        }
+        return s;
+    }
+    function cf_getKeyCode(k) {
+        if (k == 'right')   return 39;
+        if (k == 'left')    return 37;
+        if (k == 'up')      return 38;
+        if (k == 'down')    return 40;
+        return -1;
+    }
+    function cf_setCookie(n, v) {
+        if (n) document.cookie = n+'='+v+'; path=/';
+    }
+    function cf_readCookie(n) {
+        n += '=';
+        var ca = document.cookie.split(';');
+        for (var a = 0, l = ca.length; a < l; a++) {
+            var c = ca[a];
+            while (c.charAt(0) == ' ') {
+                c = c.slice(1);
+            }
+            if (c.indexOf(n) == 0) {
+                return c.slice(n.length);
+            }
+        }
+        return 0;
+    }
+
+    //  buttons functions
+    function bt_pauseOnHoverConfig(p) {
+        if (p && typeof p == 'string') {
+            var i = (p.indexOf('immediate') > -1) ? true : false,
+                r = (p.indexOf('resume')    > -1) ? true : false;
+        } else {
+            var i = r = false;
+        }
+        return [i, r];
+    }
+    function bt_mousesheelNumber(mw) {
+        return (typeof mw == 'number') ? mw : null
+    }
+
+    //  helper functions
+    function is_array(a) {
+        return typeof(a) == 'object' && (a instanceof Array);
+    }
+
+    function getTime() {
+        return new Date().getTime();
+    }
+
+    function debug(d, m) {
+        if (typeof d == 'object') {
+            var s = ' ('+d.selector+')';
+            d = d.debug;
+        } else {
+            var s = '';
+        }
+        if (!d) return false;
+        
+        if (typeof m == 'string') m = 'carouFredSel'+s+': ' + m;
+        else m = ['carouFredSel'+s+':', m];
+
+        if (window.console && window.console.log) window.console.log(m);
+        return false;
+    }
+
+
+    //  CAROUFREDSEL ALL LOWERCASE
+
+    $.fn.caroufredsel = function(o, c) {
+        return this.carouFredSel(o, c);
+    };
+
+
+    //  EASING FUNCTIONS
+
+    $.extend($.easing, {
+        'quadratic' : function(t) {
+            var t2 = t * t;
+            return t * (-t2 * t + 4 * t2 - 6 * t + 4);
+        },
+        'cubic'     : function(t) {
+            return t * (4 * t * t - 9 * t + 6);
+        },
+        'elastic'   : function(t) {
+            var t2 = t * t;
+            return t * (33 * t2 * t2 - 106 * t2 * t + 126 * t2 - 67 * t + 15);
+        }
+    });
+
+
+})(jQuery);
