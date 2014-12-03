@@ -55,8 +55,9 @@ a.download-link,
     overflow: auto;
 }
 
-#foluntais-listings article:after, .widget-area:after, .breadcrumb-banner:after, .post-meta:after,
-.feature-posts-list:after, .feature-posts-list li:after, ul.mshare:after {
+#foluntais-listings article:after, .widget-area:after, .breadcrumb-banner:after,
+.post-meta:after, .feature-posts-list:after, .feature-posts-list li:after, 
+ul.mshare:after {
     clear: both;
     content: '';
     display: table;
@@ -73,21 +74,6 @@ table.tg {
 
 table.tg a {
     text-decoration: none;
-}
-Top
-/*  Navigation Menu
- * -------------------
- * A one-hundred line minified JS file does what I could accomplish with 
- * one line of JS, ironically reversing the norm. */
-
-.dropdown > li:last-child:after {
-    /* Each #header menu item has a | after it. This removes the | from the
-    last item. */
-    content: '';
-} 
-
-.sf-sub-indicator {
-    display: none;
 }
 
 /* General Site Stylings
@@ -221,12 +207,6 @@ h3 {
     width: 100%;
 }
 
-@media only screen and (max-width: 800px) {
-    #header .search_form {
-        float: left;
-    }    
-}
-
 /* Footer Block
  * ------------
  * The #footer block and its many children. */
@@ -294,7 +274,7 @@ h3 {
     float: right;
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 778px) {
     .widget-area .column:nth-child(4) {
         display: none;
     }
@@ -322,7 +302,7 @@ h3 {
     width: 100%;
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 768px) {
     .foras-attribution {
         background-position: left top;
     }
@@ -542,7 +522,7 @@ h3 {
 
 /* Advert Responsiveness */
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 768px) {
     /* Standard mobile view. For tablets or small desktop sizes. */
     .g-2, .g-4, .g-5 {
         float: left;
@@ -684,7 +664,7 @@ a.download-link:hover {
     font-size: center;
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 768px) {
     .hero-post, .hero-image {
         float: none;
         width: 100%;
@@ -844,7 +824,7 @@ a.download-link:hover {
     width: 100%;
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 768px) {
     .education-box {
         padding: 20px;
     }
@@ -917,8 +897,6 @@ a.download-link:hover {
     background-color: #e34284;
     background-image: url('images/education/crossword.svg');
 }
-
-
 
 /*
     Nav Menu Social Links
@@ -1073,6 +1051,55 @@ ul.mshare {
 }
 
 /*
+ * Site Menu
+ * ---------
+ * This section entirely deals with the responsive layout of the site's main 
+ * nav menu.
+*/
+
+.dropdown > li:last-child:after {
+    /* Each #header menu item has a | after it. This removes the | from the
+    last item. */
+    content: '' !important;
+} 
+
+.sf-sub-indicator {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    #menu {
+        border: 2px solid #fff;
+        left: 5px;
+        margin: 0;
+        padding: 4px;
+        position: fixed;
+        top: 5px;
+        /* Because #slider .flex-direction-nav a has a z-index of 100 */
+        z-index: 101;
+    }
+
+    .dropdown .sub-menu {
+        margin-left: 30px;
+    }
+
+    .mobile-menu {
+        margin: 0;
+    }
+
+    .btn_menu {         
+        background: #555 center center/auto 50% no-repeat url('images/menu.png');
+        border-radius: 0;
+        box-sizing: border-box;
+        padding: 5px;
+    }
+
+    #secondmenu {
+        display: none;
+    }
+}
+
+/*
  * Foluntais
  * ---------
  * Job and event listings archive page.
@@ -1155,8 +1182,18 @@ ul.mshare {
 */
 
 @media only screen and (max-width: 910px) {
-    article .mshare {
-        float: left;
+    #header .mshare {
+        padding-top: 0;
+    }
+
+    .post-meta > *, #logo, article .mshare, #header .mshare, 
+    #header .search_form {
+        /* Ciaran prefers to left-align where possible. */ 
+        float: none;
+    }
+
+    #header #searchform {
+        margin-top: 0;
     }
 }
 
@@ -1265,6 +1302,12 @@ only screen
     }
 }
 
+/*
+ * Printing 
+ * --------
+ * Gazeti's stock CSS looks awful when printed. I have made changes that I hope
+ * will improve a page's legibility when printed. */
+
 @media only print {
     body {
         margin: 0;
@@ -1274,12 +1317,14 @@ only screen
         padding: 8px;
     }
 
-    .entry .wp-caption-text, .post-heading p, .post .entry, .post-meta, .post-heading .title {
+    .entry .wp-caption-text, .post-heading p, .post .entry, .post-meta, 
+    .post-heading .title {
         padding-left: 0;
         padding-right: 0;
     }
 
-    #footer, .breadcrumb-banner, .reply, #reply-title, .related_posts, #sidebar, #header .mshare, .full-widget-area, .g, .comment-form, .search_form, #menu {
+    #footer, .breadcrumb-banner, .reply, #reply-title, .related_posts, #sidebar,
+    #header .mshare, .full-widget-area, .g, .comment-form, .search_form, #menu {
         display: none;
     }
 
@@ -1304,8 +1349,8 @@ only screen
 
     /* Start Vanilla CSS 1.0.2
      * ------------------------
-     * This is an anti-reset, of sorts: it returns the style to something close to the browser default. 
-     * In this case it is very useful for print media. 
+     * This is an anti-reset, of sorts: it returns the style to something close
+     * to the browser default. In this case it is very useful for print media. 
      * Visit: http://noscope.com/vanilla-css/ */
 
     body {
