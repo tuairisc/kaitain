@@ -847,7 +847,7 @@ jQuery(document).ready(function($) {
         var id = $(this).parent().attr("id");
 
         // open clicked panel
-        $(this).parent().find('ul').slideToggle('fast', function(){
+        $(this).parent().find('ul').toggle(function(){
             $(this).parent().toggleClass("a-open");
         });
     });
