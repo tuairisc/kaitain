@@ -1,14 +1,11 @@
 <?php get_header(); ?>
 <div id="main" role="main">
 
-    <?php if (is_home() && $paged < 2 && option::get('featured_enable') == 'on' && option::get('featured_full') == 'on' )  : ?>
-        <?php get_template_part('wpzoom-slider'); ?>
-    <?php endif; ?>
-
     <div id="content">
-        <?php if (is_home() && $paged < 2 && option::get('featured_enable') == 'on' && option::get('featured_full') == 'off' ) : ?> 
+        <?php if (is_home() && $paged < 2 && option::get('featured_enable') == 'on') : ?>
+            <?php // Replace this with tuairisc-featured ?>
             <?php get_template_part('wpzoom-slider'); ?>
-        <?php endif;?>
+        <?php endif; ?>
 
         <?php if(is_home() && $paged < 2) : ?>
             <div class="home_widgets">
