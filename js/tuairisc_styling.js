@@ -47,6 +47,12 @@ jQuery(function($) {
     resizeFeaturePost();
 
     $('#toggle-main').click(function() {
+        // By default #secondmenu would display on mobile devices until this 
+        // function was called to hide its parent. It looked unsightly and 
+        // reduced the ability of the user to immediately navigate the site. 
+        // I changed its CSS to hide it until the function is called. 
+        $('#secondmenu').show();
+
         $('.menu-wrap').toggle();
         $('.mobile-menu').toggleClass("active"); 
         return false;
@@ -56,10 +62,4 @@ jQuery(function($) {
         mobileAdjust();
         resizeFeaturePost();
     });
-
-    // By default #secondmenu would display on mobile devices until this 
-    // function was called to hide its parent. It looked unsightly and 
-    // reduced the ability of the user to immediately navigate the site. 
-    // I changed its CSS to hide it until the function is called. 
-    $('#secondmenu').show();
 });
