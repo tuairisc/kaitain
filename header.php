@@ -23,7 +23,7 @@
                         <?php if (!option::get('misc_logo_path')) : ?>
                             <?php bloginfo('name'); ?>
                         <?php else : ?>
-                            <img src="<?php echo ui::logo(); ?>" alt="<?php bloginfo('name'); ?>" />
+                            <img id="site-logo" src="<?php echo ui::logo(); ?>" alt="<?php bloginfo('name'); ?>" />
                         <?php endif; ?>
                     </a>
                 <?php if (!option::get('misc_logo_path')) echo "</h1>"; ?>
