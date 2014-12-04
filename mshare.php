@@ -1,6 +1,6 @@
 <?php global $post; ?>
 
-<ul class="mshare">
+<ul class="self-clear mshare">
     <?php $share = array(
         'blog'  => urlencode(get_bloginfo('name')),
         'url'   => urlencode(get_the_permalink()),
