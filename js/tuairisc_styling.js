@@ -1,6 +1,15 @@
 'use strict';
 
 var responsiveBreak = 768;
+var isMenuOpen = false;
+
+var menu = {
+    'container' : '#menu',
+    'toggle'    : '.menu-toggle',
+    'wrap'      : '.menu-wrap',
+    'mobile'    : '.mobile-menu',
+    'dropdown'  : '.dropdown'
+};
 
 jQuery(function($) {
     function resizeFeaturePost() {
@@ -11,55 +20,79 @@ jQuery(function($) {
         $(fpt).css('width', w);
     }
 
-    function mobileAdjust() {
-        var wrap = '.menu-wrap';
+    function menuStyleToggle() {
+        // Toggle the main navigation menu bewenen the mobile and desktop 
+        // states.
 
         if (typeof window.orientation === 'undefined') {
-            $(wrap).removeAttr('style');
+            $(menu.wrap).removeAttr('style');
         }
 
         if ($(window).width() <= responsiveBreak) {
-            $(wrap).addClass('mobile-menu');
+            $(menu.wrap).addClass('mobile-menu');
         }
     }
 
-    function scrollMenuToggle() {
-        // Hide the menu until the window has scrolled past the first advert. 
-        // TODO: This stands to be refined after a consultation with Ciaran.
-        var menu = '#menu';
+    function openMenu() {
+        if ($(window).width() < responsiveBreak) {
+            $(menu.wrap).show();
+            $(menu.mobile).addClass('active');
 
-        if ($(window).width() < responsiveBreak && $(window).scrollTop() < $('.g-1').outerHeight() + 20) {
-            $(menu).css({
-                'top': $('.g-1').scrollHeight + 50,
-                'display' : 'initial'
+            $(menu.toggle).css({
+                'background-color' : '#fff',
+                'background-image' : 'url("http://catnip.bhalash.com/wp-content/themes/gazeti/images/menu_button_grey.svg")',
             });
-        } else {
-            // $(menu).css('top', 20);
+
+            isMenuOpen = true;
         }
     }
 
-    $(window).scroll(function() {
-        // scrollMenuToggle();
-    });
+    function closeMenu() {
+        if ($(window).width() < responsiveBreak) {
+            $(menu.wrap).hide();
+            $(menu.mobile).removeClass('active'); 
 
-    // scrollMenuToggle();
-    mobileAdjust();
+            $(menu.toggle).css({
+                'background-color' : '#555',
+                'background-image' : 'url("http://catnip.bhalash.com/wp-content/themes/gazeti/images/menu_button_white.svg")',
+            });
+
+            isMenuOpen = false;
+        }
+    }
+
+    menuStyleToggle();
     resizeFeaturePost();
 
-    $('#toggle-main').click(function() {
-        // By default #secondmenu would display on mobile devices until this 
-        // function was called to hide its parent. It looked unsightly and 
-        // reduced the ability of the user to immediately navigate the site. 
-        // I changed its CSS to hide it until the function is called. 
-        $('#secondmenu').show();
+    /* Menu Opening and Closing
+     * ------------------------ */
 
-        $('.menu-wrap').toggle();
-        $('.mobile-menu').toggleClass("active"); 
-        return false;
+    $(window).click(function() {
+        closeMenu();
+    });
+
+    $(menu.container).click(function(e) {
+        e.stopPropagation();
+    });
+
+    /* Toggle the appearance of the menu at mobile sizes. */
+
+    $(menu.toggle).click(function() {
+        /* Dropdown is hidden on page load. */
+        $(menu.dropdown).show();
+
+        (isMenuOpen) ? closeMenu() : openMenu();
+    });
+
+    /* Close the menu on window scroll or resize. */
+
+    $(window).scroll(function() {
+        closeMenu();
     });
 
     $(window).resize(function() {
-        mobileAdjust();
+        closeMenu();
+        menuStyleToggle();
         resizeFeaturePost();
     });
 });

@@ -22,10 +22,10 @@
                         <div class="post-meta-text">
                             <?php echo get_the_date() . ' ag ' . get_the_time(); ?>
                             <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
-                        </div><!-- /.post-meta-text -->
+                        </div>
                         <?php // Social sharing links. ?>
                         <?php include 'mshare.php'; ?>
-                    </div><!-- /.post-meta -->  
+                    </div>
                 </div> 
                 <div class="clear"></div>
                 <div id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>

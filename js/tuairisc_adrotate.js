@@ -8,13 +8,8 @@ var advert = '.tuairisc-advert';
 
 // Fallback media if an advert is missing an appropriate image.
 var fallback = {
-    // LIVE
-    // image : 'http://tuairisc.ie/wp-content/uploads/tuairisc_fallback_desktop_.gif',
-    // href  : 'http://tuairisc.ie/glac-fograi-linn/',
-    // title : 'Tuairisc',
-    // SANDBOX
-    image : 'http://catnip.bhalash.com/wp-content/uploads/tuairisc_fallback_desktop_.gif',
-    href  : 'http://catnip.bhalash.com/glac-fograi-linn/',
+    image : 'http://tuairisc.ie/wp-content/uploads/tuairisc_fallback_desktop_.gif',
+    href  : 'http://tuairisc.ie/glac-fograi-linn/',
     title : 'Tuairisc',
 }
 

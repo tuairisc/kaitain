@@ -43,16 +43,9 @@
             </ul>
             <div class="clear"></div>
             <div id="menu">
-                <?php if (is_active_sidebar('header')) : ?>
-                    <div id="navsocial">
-                        <?php dynamic_sidebar('Header Social Icons'); ?>
-                    </div>
-                 <?php endif; ?>
-
-                <a class="menu-toggle" id="toggle-main" href="#"></a>
-
+                <a class="menu-toggle" id="toggle-main" href="javascript:void(0)"></a>
                 <div class="menu-wrap">
-                    <?php if (has_nav_menu( 'primary' )) {
+                    <?php if (has_nav_menu('primary')) {
                         wp_nav_menu(array(
                             'container' => 'menu',
                             'container_class' => '',

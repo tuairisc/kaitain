@@ -1151,14 +1151,31 @@ ul.mshare {
 
 @media only screen and (max-width: 768px) {
     #menu {
-        border: 2px solid #fff;
+        border: 1px solid rgba(255,255,255,0.5);
         left: 5px;
         margin: 0;
-        padding: 4px;
+        /*padding: 4px;*/
+        padding: 0;
         position: fixed;
         top: 5px;
         /* Because #slider .flex-direction-nav a has a z-index of 100 */
         z-index: 101;
+    }
+
+    #menu ul ul {
+        display: none;
+    }
+
+    #menu li a {
+        color: #fff;
+        padding: 10px 30px 10px 10px;
+    }
+
+    .dropdown li:active a,
+    .dropdown li:hover a {
+        background-color: #506572;
+        border-radius: 0;
+        /*background-color: #fff;*/
     }
 
     .dropdown .sub-menu {
@@ -1170,7 +1187,7 @@ ul.mshare {
     }
 
     .menu-toggle {         
-        background: #555 center center/auto 50% no-repeat url('images/menu.png');
+        background: #555 center center/auto 90% no-repeat url('images/menu_button_white.svg');
         border-radius: 0;
         box-sizing: border-box;
         padding: 5px;
