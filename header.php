@@ -27,18 +27,7 @@
                         <?php endif; ?>
                     </a>
                 <?php if (!option::get('misc_logo_path')) echo "</h1>"; ?>
-            </div><!-- / #logo -->
-
-            <?php if (option::get('ad_head_select') == 'on') : ?>
-                <div class="adv">
-                    <?php if (option::get('ad_head_code') <> "") : ?>
-                        <?php echo stripslashes(option::get('ad_head_code')); ?>
-                    <?php else : ?>
-                        <a href="<?php echo option::get('banner_top_url'); ?>"><img src="<?php echo option::get('banner_top'); ?>" alt="<?php echo option::get('banner_top_alt'); ?>" /></a>
-                    <?php endif; ?>
-                </div><!-- /.adv -->
-                <div class="clear"></div>
-            <?php endif; ?>
+            </div>
 
             <?php if (option::get('searchform_enable') == 'on') : ?>
                 <div class="search_form">
@@ -60,7 +49,7 @@
                     </div>
                  <?php endif; ?>
 
-                <a class="btn_menu" id="toggle-main" href="#"></a>
+                <a class="menu-toggle" id="toggle-main" href="#"></a>
 
                 <div class="menu-wrap">
                     <?php if (has_nav_menu( 'primary' )) {
@@ -77,6 +66,6 @@
                     } ?>
                 </div>
             <div class="clear"></div>
-            </div><!-- /#menu -->
+            </div>
         </div>
     <div class="content-wrap">

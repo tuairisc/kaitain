@@ -4,8 +4,8 @@ var responsiveBreak = 768;
 
 jQuery(function($) {
     function resizeFeaturePost() {
-        // CSS for this box is a Byzantine mess that I could quite simply not 
-        // untangle. The 'nuclear' option is this.
+        // CSS for this box was a Byzantine mess. I wasn't able to consistently
+        // set its style with CSS alone. 
         var fpt = '.feature-post-text';
         var w = $(fpt).parent().width() - $(fpt).parent().find('img').first().outerWidth() - 15;
         $(fpt).css('width', w);
@@ -14,11 +14,11 @@ jQuery(function($) {
     function mobileAdjust() {
         var wrap = '.menu-wrap';
 
-        if(typeof window.orientation === 'undefined') {
+        if (typeof window.orientation === 'undefined') {
             $(wrap).removeAttr('style');
-         }
+        }
 
-        if($(window).width() <= responsiveBreak) {
+        if ($(window).width() <= responsiveBreak) {
             $(wrap).addClass('mobile-menu');
         }
     }

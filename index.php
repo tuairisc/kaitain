@@ -3,8 +3,8 @@
 
     <div id="content">
         <?php if (is_home() && $paged < 2 && option::get('featured_enable') == 'on') : ?>
-            <?php // Replace this with tuairisc-featured ?>
-            <?php get_template_part('wpzoom-slider'); ?>
+            <?php // get_template_part('wpzoom-slider'); ?>
+            <?php get_template_part('tuairisc-featured'); ?>
         <?php endif; ?>
 
         <?php if(is_home() && $paged < 2) : ?>

@@ -13,7 +13,6 @@
                 <div class="post-content <?php echo hero_post_class(); ?>">  
 
             <?php else : ?>
-
                     <?php if (is_columnist_article() && has_local_avatar()) : ?>
                         <div class="post-thumb">
                             <div class="avatar" style="background-image: url('<?php echo get_avatar_url(200); ?>');"></div>
@@ -25,7 +24,6 @@
                     <?php endif; ?>
 
                     <div class="post-content">
-
                 <?php endif; ?> 
 
                 <h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( '%s', 'wpzoom'); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
@@ -37,7 +35,7 @@
                     <span><?php the_date(); ?></span>
                     <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
                 </div> 
-                 <div class="entry">                     
+                <div class="entry">                     
                     <?php the_excerpt(); ?>
                 </div>
             </div>

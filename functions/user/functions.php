@@ -188,7 +188,7 @@ function hero_post_class() {
     return (has_post_thumbnail()) ? 'hero-post' : '';
 }
 
-function get_thumbnail_url($post_id = null) {
+function get_thumbnail_url($post_id = null, $size = null) {
     /* Code snippet from http://goo.gl/NhcEU6
      * get_thumbnail_url returns the anchor url for the requested thumbnail. */
 
@@ -196,8 +196,12 @@ function get_thumbnail_url($post_id = null) {
         $post_id = get_the_ID();
     }
 
+    if ('' == $size) {
+        $size = 'large';
+    }
+
     $thumb_id = get_post_thumbnail_id($post_id);
-    $thumb_url = wp_get_attachment_image_src($thumb_id,'large', true);
+    $thumb_url = wp_get_attachment_image_src($thumb_id, $size, true);
     return $thumb_url[0];
 }
 
