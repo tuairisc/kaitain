@@ -17,7 +17,8 @@ var sizeArray = [
     'width=470,height=470',
 ];
 
-jQuery('.post-wrapper .mshare a, .msv a').click(function(e) {
+jQuery('.post-wrapper .mshare a, .msv a').click(function(click) {
+    // .mshare sharing links.
     var rel = parseInt(jQuery(this).data('rel'));
 
     if (sizeArray[rel] != '' && rel > 0) {
@@ -26,6 +27,14 @@ jQuery('.post-wrapper .mshare a, .msv a').click(function(e) {
         var size = sizeArray[rel];
 
         window.open(href, name, size);
-        e.preventDefault();
+        click.preventDefault();
     }
+});
+
+jQuery('.mailing-list-link a').click(function(click) {
+    // Signup for the Tuairisc mailing list.
+    var href = jQuery(this).attr('href');
+    var name = 'target="_blank';
+    window.open(href,name,'width=400,height=630');
+    click.preventDefault();
 });
