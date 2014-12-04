@@ -188,14 +188,6 @@ function hero_post_class() {
     return (has_post_thumbnail()) ? 'hero-post' : '';
 }
 
-function show_hero($current_post) {
-    /* The first page in the category loop has a unique and different style. 
-    The image is hero-sized and flipped in position with the text. This is to 
-    be shown on all categories except the job listings. */
-
-    return ($current_post == 0 && !is_paged()) ? true : false;
-}
-
 function get_thumbnail_url($post_id = null) {
     /* Code snippet from http://goo.gl/NhcEU6
      * get_thumbnail_url returns the anchor url for the requested thumbnail. */
