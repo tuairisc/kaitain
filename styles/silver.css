@@ -119,5 +119,5 @@ footer .widget .title { color:#95c37c;}
 .wztw-container .tabs li a { color: #506572;  }
 
 @media screen and (max-width: 768px) {
-    .btn_menu {   background:#555 url('../images/menu.png') 8px 9px no-repeat;   }
+    .menu-toggle {   background:#555 url('../images/menu.png') 8px 9px no-repeat;   }
 }

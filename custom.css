@@ -50,14 +50,27 @@ a.download-link,
  * WPZOOM's use of <div class="clear"></div> should be classed as a 
  * crime against humanity. */
 
+.self-clear {
+    overflow: auto;
+}
+
+.self-clear:after {
+    clear: both;
+    content: '';
+    display: table; 
+    width: 100%;
+}
+
+/* I need to replace the below... */
+
 .widget-area, .feature-posts-list, .feature-posts-list li,
-.breadcrumb-banner, .post-meta, ul.mshare, #slides li {
+.breadcrumb-banner, .post-meta, #slides li {
     overflow: auto;
 }
 
 #foluntais-listings article:after, .widget-area:after, .breadcrumb-banner:after,
 .post-meta:after, .feature-posts-list:after, .feature-posts-list li:after, 
-ul.mshare:after, #slides li:after {
+#slides li:after {
     clear: both;
     content: '';
     display: table;
@@ -1087,7 +1100,7 @@ ul.mshare {
         margin: 0;
     }
 
-    .btn_menu {         
+    .menu-toggle {         
         background: #555 center center/auto 50% no-repeat url('images/menu.png');
         border-radius: 0;
         box-sizing: border-box;

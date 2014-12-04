@@ -108,7 +108,7 @@ footer .widget .title { color:#fff;}
 
 
 @media screen and (max-width: 768px) {
-    .btn_menu {   background:#555 url('../images/menu.png') 8px 9px no-repeat !important;   }
+    .menu-toggle {   background:#555 url('../images/menu.png') 8px 9px no-repeat !important;   }
 
      .dropdown li ul li a {
     color:#fff !important;

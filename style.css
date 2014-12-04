@@ -310,7 +310,7 @@ ul.dropdown li li.sfHover li ul { top: -999em; }
 ul.dropdown li li li:hover ul,
 ul.dropdown li li li.sfHover ul { left: 200px; /* match ul width */ top: 0; }
 
-.btn_menu { display:none; }
+.menu-toggle { display:none; }
 
 .dropdown a {
     padding: 10px 10px;

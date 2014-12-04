@@ -175,7 +175,7 @@ custom.css and it will override the style in this file.
  
     header { position: relative; }
 
-    .btn_menu { display: block; float: left; cursor: pointer; background:#C20A0A url('images/menu.png') 8px 9px no-repeat; padding:5px 5px 0; width:30px; height:30px; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; margin:4px; }
+    .menu-toggle { display: block; float: left; cursor: pointer; background:#C20A0A url('images/menu.png') 8px 9px no-repeat; padding:5px 5px 0; width:30px; height:30px; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; margin:4px; }
     .mobile-menu  { display: none; clear:both; }
 
     .menu-wrap { margin:0 0 2% 2%; }
