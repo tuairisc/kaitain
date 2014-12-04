@@ -20,6 +20,11 @@ jQuery(function($) {
         $(fpt).css('width', w);
     }
 
+    function resizeNewsletterBox() {
+        var mll = '.mailing-list-link';
+        $(mll).css('height', $(mll).width());
+    }
+
     function menuStyleToggle() {
         // Toggle the main navigation menu bewenen the mobile and desktop 
         // states.
@@ -61,6 +66,7 @@ jQuery(function($) {
         }
     }
 
+    resizeNewsletterBox();
     menuStyleToggle();
     resizeFeaturePost();
 
@@ -92,6 +98,7 @@ jQuery(function($) {
 
     $(window).resize(function() {
         closeMenu();
+        resizeNewsletterBox();
         menuStyleToggle();
         resizeFeaturePost();
     });
