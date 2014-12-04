@@ -551,6 +551,23 @@ h3 {
     }
 }
 
+/* Mailing List Link
+ * ----------------- */
+
+.mailing-list-link {
+    -webkit-background-origin:border;
+    background: #e44284 center bottom/cover no-repeat url('images/mailing_list.svg');
+    max-height: 250px;
+    max-width: 300px;
+    width: 100%;
+}
+
+.mailing-list-link a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
 /* Category Header Banners
  * ------------------------
  * Each category has a custom #header bannner.
@@ -649,23 +666,24 @@ h3 {
     }
 
     .featured-row article {
-        width: 50%;
         padding: 0;
+        width: 48%;
+    }
+
+    .featured-row article:nth-child(1) h5,
+    .featured-row article:nth-child(2) h5 {
+        margin-bottom: 9px;
+        min-height: 50px;
     }
 
     .featured-row article:nth-child(1),
     .featured-row article:nth-child(3) {
-        padding-right: 10px;
+        float: left;
     }
 
     .featured-row article:nth-child(2),
     .featured-row article:nth-child(4) {
-        padding-left: 10px;
-    }
-
-    .featured-row article:nth-child(1),
-    .featured-row article:nth-child(2) {
-        margin-bottom: 9px;
+        float: right;
     }
 }
 
@@ -1145,6 +1163,11 @@ ul.mshare {
     content: '' !important;
 } 
 
+.menu-toggle {
+    height: 40px;
+    width: 40px;
+}
+
 .sf-sub-indicator {
     display: none;
 }
@@ -1398,6 +1421,11 @@ only screen
         float: none;
         margin-right: 0;
         width: 99%;
+    }
+
+    .featured-row article:nth-child(1) h5,
+    .featured-row article:nth-child(2) h5 {
+        min-height: 110px;
     }
 }
 
