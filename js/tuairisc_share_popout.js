@@ -31,7 +31,7 @@ jQuery('.post-wrapper .mshare a, .msv a').click(function(click) {
     }
 });
 
-jQuery('.mailing-list-link a').click(function(click) {
+jQuery('.newsletter a').click(function(click) {
     // Signup for the Tuairisc mailing list.
     var href = jQuery(this).attr('href');
     var name = 'target="_blank';

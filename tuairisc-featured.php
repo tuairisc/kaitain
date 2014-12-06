@@ -43,14 +43,22 @@ $query_featured = new WP_Query(array(
                 </div>
             </article>
             <div class="featured-row self-clear">
+                <div class="row self-clear">
         <?php else : ?>
+            <?php if ($query_featured->current_post == 3) : ?>
+                </div>
+                <div class="row self-clear">
+            <?php endif; ?>
+
             <article id="post-<?php the_ID(); ?>">
                 <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" style="background-image: url('<?php echo get_thumbnail_url(get_the_ID(), 'medium'); ?>');"></a>
                 <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
                     <h5><?php the_title(); ?></h5>
                 </a>
             </article>
+
         <?php endif; ?>
     <?php endwhile; ?>
+            </div>
         </div>
 <?php endif; ?>

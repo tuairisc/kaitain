@@ -554,18 +554,28 @@ h3 {
 /* Mailing List Link
  * ----------------- */
 
-.mailing-list-link {
-    -webkit-background-origin:border;
-    background: #e44284 center bottom/cover no-repeat url('images/mailing_list.svg');
-    max-height: 250px;
+.newsletter {
+    background-color: #e44284;
+    background-image:
+        url('images/rainbow_strip_alternate.svg'),
+        url('images/tuairisc_logo_alternate.svg');
+    background-position: center bottom, 90% 90%;
+    background-size: 100% 10px, 132px auto;
+    background-repeat: no-repeat;
     max-width: 300px;
+}
+
+.newsletter a {
+    box-sizing: border-box;
+    color: #fff;
+    display: block;
+    height: 100%;
+    padding: 20px 20px 60px 20px;
     width: 100%;
 }
 
-.mailing-list-link a {
-    display: block;
-    height: 100%;
-    width: 100%;
+.newsletter a > * {
+    color: inherit;
 }
 
 /* Category Header Banners
@@ -629,6 +639,19 @@ h3 {
     width: 100%;
 }
 
+.row {
+    float: left;
+    width: 50%;
+}
+
+.row:first-child article:first-child {
+    padding-left: 0;
+}
+
+.row:last-child article:last-child {
+    padding-right: 0;
+}
+
 .featured-row a:first-child {
     background-size: cover;
     background-position: center center;
@@ -643,20 +666,20 @@ h3 {
     box-sizing: border-box;
     float: left;
     padding: 0 10px;
-    width: 25%;
-}
-
-.featured-row article:first-child {
-    padding-left: 0;
-}
-
-.featured-row article:last-child {
-    padding-right: 0;
+    width: 50%;
 }
 
 @media only screen and (max-width: 950px) {
     .featured-main {
         padding-bottom: 0;
+    }
+
+    .row article:first-child {
+        padding-left: 0;
+    }
+
+    .row article:last-child {
+        padding-right: 0;
     }
 
     .featured-main .hero-image,
@@ -665,25 +688,13 @@ h3 {
         width: 100%;
     }
 
-    .featured-row article {
-        padding: 0;
-        width: 48%;
+    .featured-row .row {
+        float: none;
+        width: 100%;
     }
 
-    .featured-row article:nth-child(1) h5,
-    .featured-row article:nth-child(2) h5 {
-        margin-bottom: 9px;
-        min-height: 50px;
-    }
-
-    .featured-row article:nth-child(1),
-    .featured-row article:nth-child(3) {
-        float: left;
-    }
-
-    .featured-row article:nth-child(2),
-    .featured-row article:nth-child(4) {
-        float: right;
+    .featured-row .row:first-child {
+        margin-bottom: 14px;
     }
 }
 
@@ -1164,8 +1175,8 @@ ul.mshare {
 } 
 
 .menu-toggle {
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
 }
 
 .sf-sub-indicator {
@@ -1177,7 +1188,6 @@ ul.mshare {
         border: 1px solid rgba(255,255,255,0.5);
         left: 5px;
         margin: 0;
-        /*padding: 4px;*/
         padding: 0;
         position: fixed;
         top: 5px;
@@ -1421,11 +1431,6 @@ only screen
         float: none;
         margin-right: 0;
         width: 99%;
-    }
-
-    .featured-row article:nth-child(1) h5,
-    .featured-row article:nth-child(2) h5 {
-        min-height: 110px;
     }
 }
 
