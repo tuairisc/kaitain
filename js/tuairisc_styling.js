@@ -95,4 +95,10 @@ jQuery(function($) {
         menuStyleToggle();
         resizeFeaturePost();
     });
+
+    $('a').click(function() {
+        // Debug.
+        console.log('You disabled hyperlinks for debug purposes, doofus!');
+        return false;
+    });
 });
