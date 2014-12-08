@@ -31,7 +31,7 @@
     </li>
     <li>
         <a class="twitter"
-        href="//twitter.com/share?via=<?php echo $share['tuser']; ?>&text=<?php echo $share['title']; ?>&url=<?php echo $share['url']; ?>"
+        href="//twitter.com/share?via=<?php echo $share['tuser']; ?>&text=<?php echo $share['title']; ?>&url=<?php echo $share['url']; ?>&related=@<?php echo $share['tuser']; ?>"
         data-rel="3"
         target="_blank"
         title="Tweet about <?php the_title_attribute(); ?>"></a>
