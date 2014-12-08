@@ -596,8 +596,23 @@ h3.title {
 }
 
 /* Tab essentials */
-.wztw-container  { float:left; margin-bottom:0px; overflow:hidden; width:100%;}
-.wztw-container .tabs { font-family: 'Georgia', Georgia, serif; font-size: 12px;font-weight: bold;  text-transform: uppercase; border-top: 1px solid #333; border-bottom: 1px solid #F1F1F1; display:block; list-style: none; margin:0;   width:100%;  }
+.wztw-container  { 
+    float:left; 
+    margin-bottom: 0px; 
+    /*overflow:hidden; */
+    width:100%;
+}
+.wztw-container .tabs { 
+    font-family: 'Georgia', Georgia, serif; 
+    font-size: 12px;
+    font-weight: bold;  
+    text-transform: uppercase; 
+    border-top: 1px solid #333; 
+    border-bottom: 1px solid #F1F1F1; 
+    list-style: none; 
+    margin: 0;
+    /*width: 100%;*/
+}
 .wztw-container .tabs h2 {
     float: left;
     padding: 10px 0;
