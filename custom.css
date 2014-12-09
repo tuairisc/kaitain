@@ -83,7 +83,7 @@ a.download-link,
     TODO
 */
 
-.wztw-container ul {
+/*.wztw-container ul {
     -webkit-overflow-scrolling: touch;
     white-space: nowrap;
     overflow-x: auto;
@@ -93,7 +93,7 @@ a.download-link,
 .wztz-container li {
     display: inline-block;
 }
-
+*/
 /* Tables
  * -------------------
  * Needed for tables to display correctly. */

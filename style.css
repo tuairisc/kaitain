@@ -599,7 +599,7 @@ h3.title {
 .wztw-container  { 
     float:left; 
     margin-bottom: 0px; 
-    /*overflow:hidden; */
+    overflow:hidden; 
     width:100%;
 }
 .wztw-container .tabs { 
@@ -611,7 +611,7 @@ h3.title {
     border-bottom: 1px solid #F1F1F1; 
     list-style: none; 
     margin: 0;
-    /*width: 100%;*/
+    width: 100%;
 }
 .wztw-container .tabs h2 {
     float: left;
