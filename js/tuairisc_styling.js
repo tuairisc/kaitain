@@ -96,9 +96,9 @@ jQuery(function($) {
         resizeFeaturePost();
     });
 
-    $('a').click(function() {
-        // Debug.
-        console.log('You disabled hyperlinks for debug purposes, doofus!');
-        return false;
-    });
+    // $('a').click(function() {
+    //     // Debug.
+    //     console.warn('You disabled hyperlinks for debug purposes, doofus!');
+    //     return false;
+    // });
 });
