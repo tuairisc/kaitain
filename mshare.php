@@ -9,6 +9,12 @@
     ); ?> 
 
     <li>
+        <a class="print" 
+        href="javascript:window.print()" 
+        data-rel="-1" 
+        title="Print <?php the_title_attribute(); ?>"></a>
+    </li>
+    <li>
         <a class="email" 
         href="mailto:?subject=<?php echo $share['title']; ?>&amp;body=<?php echo $share['url']; ?>" 
         data-rel="0" 

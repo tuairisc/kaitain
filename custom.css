@@ -580,7 +580,7 @@ h3 {
     background-position: center bottom, 90% 90%;
     background-size: 100% 10px, 132px auto;
     background-repeat: no-repeat;
-    max-width: 300px;
+    max-width: 350px;
 }
 
 .newsletter a {
@@ -1154,6 +1154,11 @@ ul.mshare {
     background-image: url('images/social/pinterest.png');
 } 
 
+.mshare .print { 
+    background-color: #007aaf;
+    background-image: url('images/social/print.png');
+} 
+
 .mshare .reddit {
     background-color: #ff5700;
     background-image: url('images/social/reddit.png');
@@ -1331,7 +1336,7 @@ ul.mshare {
  * devices.
 */
 
-@media only screen and (max-width: 910px) {
+@media only screen and (max-width: 1000px) {
     #header .mshare {
         padding-top: 0;
     }
