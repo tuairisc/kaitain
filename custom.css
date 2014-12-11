@@ -1368,6 +1368,14 @@ ul.mshare {
     #header #searchform {
         margin-top: 0;
     }
+
+    .education-box {
+        min-height: 90px;
+    }
+
+    .education-box a {
+        padding: 15px;
+    }
 }
 
 @media only screen 
@@ -1378,6 +1386,22 @@ only screen
     and (min-device-width: 320px) 
     and (max-device-width: 736px) 
     and (orientation: landscape) {
+
+    .education-box {
+        background-position: 7px 7px;
+    }
+
+    .education-box span {
+        font-size: 125%;
+    }
+
+    .education-box p:nth-child(1) {
+        margin-bottom: 13px;
+    }
+
+    .greann {
+        background-size: auto 33px;
+    }
 
     .widget-area .column {
         float: none;
