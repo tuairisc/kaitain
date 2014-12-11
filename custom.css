@@ -755,26 +755,44 @@ a.download-link:hover {
     content: ' - ';
 }
 
-/* Custom Hero Image
- * -----------------
+/* Category Loop Posts
+ * --------------------
  * The lead post on category pages has a different, bigger layout.
  * The placement of text and image are reversed. */
+
+.post-image, .hero-image {
+    /* Background image is set via PHP. */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.post-image-fallback {
+    display: none;
+}
 
 .hero-image,
 .hero-image a {
     height: 333px;
 }
 
+.post-image, .post-image a {
+    width: 100px;
+    height: 150px;
+}
+
+.post-image {
+    float: left;
+    margin-right: 15px;
+    width: 200px;
+}
+
 .hero-image {
-    /* Background image is set via PHP. */
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
     float: right;
     width: 71%;
 }
 
-.hero-image a {
+.hero-image a, .post-image a {
     display: block;
     width: 100%;
 }
@@ -1365,6 +1383,16 @@ only screen
         float: none;
         margin-bottom: 0;
         width: 100%;
+    }
+
+    .post-image {
+        float: none;
+        margin: 0 0 15px 0;
+        width: 100%;
+    }
+
+    #recent-posts article {
+        padding: 0;
     }
 
     .widget-area .column:last-child {

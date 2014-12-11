@@ -13,18 +13,21 @@
                 <div class="post-content <?php echo hero_post_class(); ?>">  
 
             <?php else : ?>
+
                     <?php if (is_columnist_article() && has_local_avatar()) : ?>
-                        <div class="post-thumb">
-                            <div class="avatar" style="background-image: url('<?php echo get_avatar_url(200); ?>');"></div>
-                        </div>
+                        <div class="post-image" style="background-image: url('<?php echo get_avatar_url(200); ?>');">
+                    <?php elseif (option::get('index_thumb') == 'on') : ?>
+                        <div class="post-image" style="background-image: url('<?php echo get_thumbnail_url(); ?>'); ">
                     <?php else : ?>
-                        <?php if (option::get('index_thumb') == 'on') { 
-                            get_the_image( array( 'size' => 'loop', 'width' => option::get('thumb_width'), 'height' => option::get('thumb_height'), 'before' => '<div class="post-thumb">', 'after' => '</div>' ) );
-                        } ?>
+                        <div class="post-image-fallback">
                     <?php endif; ?>
 
+                            <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"></a>
+                        </div>
+
                     <div class="post-content">
-                <?php endif; ?> 
+
+            <?php endif; ?> 
 
                 <h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( '%s', 'wpzoom'); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
                 <?php if (!default_author()) : ?>
