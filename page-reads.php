@@ -13,17 +13,17 @@ Template Name: Most Read Posts
     <div id="content">
 
         <?php 
-            $key = 'tuairisc_view_counter';
+            $views_meta_key = 'tuairisc_view_counter';
 
             $viewed_query = new WP_Query(array(
                 // Gallery category. The crappy gallery plugin reloads the article every time you view a different image.
                 // The end result is that gallery posts have a vastly inflated count.
-                'cat'            => -184,
-                'post_type'      => 'post',
-                'meta_key'       => $key, 
+                'cat' => -184,
+                'post_type' => 'post',
+                'meta_key' => $views_meta_key, 
                 'posts_per_page' => 50,
-                'orderby'        => 'meta_value_num',
-                'order'          => 'DESC',
+                'orderby' => 'meta_value_num',
+                'order' => 'DESC',
             )); 
 
             $n = 1;
@@ -46,7 +46,7 @@ Template Name: Most Read Posts
                         <td><a href="<?php echo get_the_permalink(); ?>" title="<?php echo get_the_title(); ?>"><?php echo get_the_title(); ?></a></td>
                         <td><?php the_author_posts_link(); ?></td>     
                         <td><?php echo get_the_date(); ?></td>     
-                        <td><?php echo get_post_meta(get_the_ID(), $key, true); ?></td>
+                        <td><?php echo get_post_meta(get_the_ID(), $views_meta_key, true); ?></td>
                         <?php edit_post_link( __('Edit', 'wpzoom'), '<td>', '</td>'); ?>
                     </tr>
                 <?php endwhile; ?>
