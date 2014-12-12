@@ -15,7 +15,7 @@ Template Name: Most Read Posts
         <?php 
             $key = 'tuairisc_view_counter';
 
-            $args = array(
+            $viewed_query = new WP_Query(array(
                 // Gallery category. The crappy gallery plugin reloads the article every time you view a different image.
                 // The end result is that gallery posts have a vastly inflated count.
                 'cat'            => -184,
@@ -24,13 +24,12 @@ Template Name: Most Read Posts
                 'posts_per_page' => 50,
                 'orderby'        => 'meta_value_num',
                 'order'          => 'DESC',
-            );
+            )); 
 
-            $query = new WP_Query($args); 
             $n = 1;
         ?>
 
-        <?php if ($query->have_posts()) : ?>
+        <?php if ($viewed_query->have_posts()) : ?>
             <table class="tg">
                 <tr>
                     <th>#</th>
@@ -40,8 +39,8 @@ Template Name: Most Read Posts
                     <th>Views</th>
                     <th>Edit</th>
                 </tr>
-                <?php while ($query->have_posts()) : ?>
-                    <?php $query->the_post(); ?>
+                <?php while ($viewed_query->have_posts()) : ?>
+                    <?php $viewed_query->the_post(); ?>
                     <tr>
                         <td><?php echo $n++; ?></td>
                         <td><a href="<?php echo get_the_permalink(); ?>" title="<?php echo get_the_title(); ?>"><?php echo get_the_title(); ?></a></td>
