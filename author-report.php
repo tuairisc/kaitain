@@ -63,7 +63,7 @@ foreach ($author_list as $author) {
             'before' => array(
                 'year' => $dates['end_year'],
                 'month' => $dates['end_month'],
-                'day '=> $dates['end_day'],                                    
+                'day' => $dates['end_day'],                                    
             ),
             'inclusive' => true,
         ),
