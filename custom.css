@@ -789,7 +789,7 @@ a.download-link:hover {
 
 .hero-image {
     float: right;
-    width: 71%;
+    width: 65%;
 }
 
 .hero-image a, .post-image a {
@@ -799,7 +799,7 @@ a.download-link:hover {
 
 .hero-post {
     float: left;
-    width: 27%;
+    width: 33%;
 }
 
 .hero-post span:first-child {
