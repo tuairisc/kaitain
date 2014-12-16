@@ -35,6 +35,7 @@ require_once THEME_INC . "/widgets/featured-category.php";
 require_once THEME_INC . "/widgets/popularnews.php";
 require_once THEME_INC . "/widgets/tabbed-categories.php";
 require_once THEME_INC . "/widgets/carousel.php";
+require_once THEME_INC . "/widgets/mostviewed.php";
 
 /** User functions */
 require_once USER_INC . "/functions.php";
