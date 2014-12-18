@@ -1476,40 +1476,6 @@ only screen
 }
 
 /*
- * Mobile Responsiveness
- * ---------------------
- * Generic media query for equally-generic smartphones. Targets a range of 
- * screen sizes from the iPhone 4 through to the iPhone 6 and similarly-larger
- * devices.
-*/
-
-@media only screen 
-    and (min-device-width: 320px) 
-    and (max-device-width: 736px) 
-    and (orientation: portrait),
-only screen
-    and (min-device-width: 320px) 
-    and (max-device-width: 736px) 
-    and (orientation: landscape) {
-
-    .widget-area .column {
-        float: none;
-        margin-bottom: 0;
-        width: 100%;
-    }
-
-    .widget-area .column:last-child {
-        margin-bottom: 20px;
-    }
-
-    .g-2, .g-4, .g-5 {
-        float: none;
-        margin-right: 0;
-        width: 99%;
-    }
-}
-
-/*
  * Printing 
  * --------
  * Gazeti's stock CSS looks awful when printed. I have made changes that I hope
