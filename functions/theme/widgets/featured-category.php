@@ -84,6 +84,7 @@
 
                 <ul>
                     <?php if ($sq->have_posts()) : ?>
+                        <?php $x = 0; ?>
                         <?php while( $sq->have_posts() ) : ?> 
                             <?php $sq->the_post(); $x++; global $post; ?>
                             <li> 
