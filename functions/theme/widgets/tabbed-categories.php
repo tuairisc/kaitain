@@ -34,23 +34,23 @@ class Tabbed_Widget extends WP_Widget {
         ?>
 
         <div class="wztw-container">
+             <?php if ($title) {
+                echo '<h2>';
+                
+                if ($category) {
+                    echo '<a href="' . $category_link . '">';
+                }
+
+                echo $title;
+
+                if ($category_link) {
+                    echo '</a>';
+                }
+
+                echo '</h2>'; 
+            } ?>
+
             <ul class="tabs clearfix">
-                 <?php if ($title) {
-                    echo '<h2>';
-                    
-                    if ($category) {
-                        echo '<a href="'.$category_link.'">';
-                    }
-
-                    echo $title;
-
-                    if ($category_link) {
-                        echo '</a>';
-                    }
-
-                    echo '</h2>'; 
-                } ?>
-
                 <?php for ($i = 1; $i <= $instance["count"]; $i++) : ?>
                     <li>
                         <a href="#tab<?php echo $rnd . $i; ?>"><?php echo stripslashes($instance["tab" . $i . "-title"]); ?></a>
