@@ -196,6 +196,7 @@ h3 {
 .content-wrap {
     /* Make #header strip regardless of whether #header advert group is blocked. */
     background: center bottom/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
+    padding: 40px 4% 0 4%;
 }
 
 .inner-wrap {
@@ -296,6 +297,10 @@ h3 {
 
 #footer a {
     color: inherit;
+}
+
+.carousel-slider {
+    margin-bottom: 30px;
 }
 
 /* Copyright Block
@@ -893,6 +898,7 @@ a.download-link:hover {
 
 .post-wrapper {
     border: 0;
+    box-shadow: none;
 
     /* Containing post wrapper
      * Even out the padding. */
@@ -958,7 +964,7 @@ a.download-link:hover {
 .post-heading p {
     color: #87888a; 
     font-size: 16px;
-    line-height: 17px;
+    line-height: 23px;
     margin-bottom: 13px;
     padding: 0 4%;
 }
