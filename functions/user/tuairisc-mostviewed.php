@@ -14,7 +14,7 @@
     public function __construct() {
         parent::__construct(
             'tuairisc_popular',
-            'Popular Posts by View Count',
+            'Tuairisc Popular',
             array(
                 'description' => 'An ordered list of popular Tuairisc posts sorted by view count.',
             )
