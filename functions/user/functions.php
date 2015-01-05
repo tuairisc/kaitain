@@ -788,6 +788,11 @@ function job_category_color($post_id = null) {
     }
 }
 
+// Load custom Tuairisc widgets.
+$widget_path = get_template_directory() . '/functions/user/';
+require_once $widget_path . 'tuairisc-authors.php';
+require_once $widget_path . 'tuairisc-mostviewed.php';
+
 // Add custom post type for job listings.
 add_action('init', 'register_job_type');
 add_action('init', 'register_job_taxonomies', 0);
