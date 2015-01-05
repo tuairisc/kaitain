@@ -33,6 +33,7 @@ only screen
 .post-heading p,
 #foluntais-listings p,
 #foluntais-listings h3,
+.popular-text a,
 .breadcrumb-banner a,
 .entry blockquote {    
     font-family: Georgia, Times, "Times New Roman", serif;
@@ -40,9 +41,14 @@ only screen
 
 a.download-link,
 .modal-box a,
+.popular-text a,
 #foluntais-listings span,
 .breadcrumb-banner span {    
     font: 14px arial, "helvetica neue", helvetica, sans-serif;
+}
+
+.popular-text a:hover {
+    color: #95c37c;
 }
 
 /* Self-clearing floats 
@@ -198,7 +204,6 @@ h3 {
     background-color: #fff;
 }
 
-
 .slide_content_holder {
     /* Posts slider on front page. */
     bottom: 10px;
@@ -210,6 +215,31 @@ h3 {
      * The effect brings the author and title closer together.
      * The Earth will /literally/ fall into the sun if you change this. */
     margin-bottom: 0 !important;
+}
+
+/* Popular Posts Widget
+ * -------------------- */
+
+.tuairisc-popular-list li {
+    padding: 6px 0;
+}
+
+.popular-thumb {
+    background-size: cover;
+    float: left;
+    height: 50px;
+    width: 23%;
+}
+
+.popular-thumb a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.popular-text {
+    float: right;
+    width: 73%;
 }
 
 /* Header Block
