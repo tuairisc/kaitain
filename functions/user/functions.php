@@ -599,12 +599,9 @@ function facebook_meta() {
         $category = get_the_category($post->ID);
 
         $article_meta = array(
-            'article:author' => get_the_author_meta('display_name', $post->post_author),
             'article:section' => $category[0]->cat_name,
             'article:tag' => get_the_tags(),
-            'article:publisher' => 'https://www.facebook.com/tuairisc.ie',
-            'article:published' => get_the_time('c'),
-            'article:modified_time' => get_the_modified_time('c'),
+            'article:publisher' => '589352557826604',
         );
 
         $site_meta = array_merge($site_meta, $article_meta);
