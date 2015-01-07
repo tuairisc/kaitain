@@ -537,6 +537,85 @@ function list_post_types() {
 }
 
 /*
+ * Header Social Meta Information
+ * ------------------------------
+ * We tried a few different existing plugins for this, but:
+ * 
+ * 1. They were overly-complex for lay users to configure.
+ * 2. They worked in an inconsistent and buggy manner, at best.
+ * 3. They chosen one occasionally inserted annoying upsell banners on admin
+ *    pages.
+ */
+
+function social_meta() {
+    facebook_meta();
+    twitter_meta();
+}
+
+$fallback_desc = 'Cuireann Tuairisc.ie seirbhís nuachta Gaeilge '
+    . 'ar fáil do phobal uile na Gaeilge, in Éirinn agus thar lear. Té sé '
+    . 'mar aidhm againn oibriú i gcónaí ar leas an phobail trí nuacht, '
+    . 'eolas, anailís agus siamsaíocht ar ardchaighdeán a bhailiú, a '
+    . 'fhoilsiú agus a chur sa chúrsaíocht.';
+$fallback_image = 'http://tuairisc.ie/wp-content/uploads/2014/01/Tuairisc-2-beag.png';
+
+function twitter_meta() {
+    /* Social Meta Information for Twitter
+     * ------------------------------------
+     * This /should/ be all of the relevant information for Twitter. */
+    global $fallback_desc, $fallback_image, $post;
+
+    $site_meta = array(
+        'twitter:card' => 'summary',
+        'twitter:site' => '@tuairiscnuacht',
+        'twitter:title' => get_the_title(),
+        'twitter:description' => (is_single()) ? get_the_excerpt() : $fallback_desc,
+        'twitter:image:src' => (is_single()) ? get_thumbnail_url() : $fallback_image,
+        'twitter:url' => get_the_permalink(),
+    );
+
+    foreach ($site_meta as $key => $value) {
+        printf('<meta name="%s" content="%s">', $key, $value);
+    }
+}
+
+function facebook_meta() {
+    /* Social Meta Information for Facebook
+     * ------------------------------------
+     * This /should/ be all of the relevant information for Facebook. */
+    global $fallback_desc, $fallback_image, $post;
+
+    $site_meta = array(
+        'og:locale' => get_locale(),
+        'og:title' => get_the_title(),
+        'og:site_name' => get_bloginfo('name'),
+        'og:type' => (is_single()) ? 'article' : 'website',
+        'og:url' => get_permalink(),
+        'og:description' => (is_single()) ? get_the_excerpt() : $fallback_desc,
+        'og:image' => (is_single()) ? get_thumbnail_url() : $fallback_image,
+    );
+
+    if (is_single()) {
+        $category = get_the_category($post->ID);
+
+        $article_meta = array(
+            'article:author' => get_the_author_meta('display_name', $post->post_author),
+            'article:section' => $category[0]->cat_name,
+            'article:tag' => get_the_tags(),
+            'article:publisher' => 'https://www.facebook.com/tuairisc.ie',
+            'article:published' => get_the_time('c'),
+            'article:modified_time' => get_the_modified_time('c'),
+        );
+
+        $site_meta = array_merge($site_meta, $article_meta);
+    }
+
+    foreach ($site_meta as $key => $value) {
+        printf('<meta property="%s" content="%s">', $key, $value);
+    }
+}
+
+/*
  * Foluntais Custom Post Type
  * --------------------------
  * This custom post type is used to highlight and differentiate jobs across the 

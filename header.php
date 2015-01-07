@@ -7,6 +7,7 @@
     <title><?php wp_title('|', true, 'right'); ?></title>
     <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" media="screen" />
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />    
+    <?php social_meta(); ?>
     <?php wp_head(); ?>
     <?php if ((is_home()) && option::get('featured_enable') == 'on' ) { ui::js("flexslider"); } ?>
 </head>
