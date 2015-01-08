@@ -557,7 +557,7 @@ $fallback_desc = 'Cuireann Tuairisc.ie seirbhís nuachta Gaeilge '
     . 'mar aidhm againn oibriú i gcónaí ar leas an phobail trí nuacht, '
     . 'eolas, anailís agus siamsaíocht ar ardchaighdeán a bhailiú, a '
     . 'fhoilsiú agus a chur sa chúrsaíocht.';
-$fallback_image = 'http://tuairisc.ie/wp-content/uploads/2014/01/Tuairisc-2-beag.png';
+$fallback_image = get_template_directory_uri() . '/images/tuairisc_fallback.jpg';
 
 function twitter_meta() {
     /* Social Meta Information for Twitter
@@ -571,7 +571,7 @@ function twitter_meta() {
         'twitter:title' => get_the_title(),
         'twitter:description' => (is_single()) ? get_the_excerpt() : $fallback_desc,
         'twitter:image:src' => (is_single()) ? get_thumbnail_url() : $fallback_image,
-        'twitter:url' => get_the_permalink(),
+        'twitter:url' => get_site_url() . $_SERVER['REQUEST_URI'],
     );
 
     foreach ($site_meta as $key => $value) {
@@ -586,13 +586,15 @@ function facebook_meta() {
     global $fallback_desc, $fallback_image, $post;
 
     $site_meta = array(
-        'og:locale' => get_locale(),
         'og:title' => get_the_title(),
         'og:site_name' => get_bloginfo('name'),
-        'og:type' => (is_single()) ? 'article' : 'website',
-        'og:url' => get_permalink(),
+        'og:url' => get_site_url() . $_SERVER['REQUEST_URI'],
         'og:description' => (is_single()) ? get_the_excerpt() : $fallback_desc,
         'og:image' => (is_single()) ? get_thumbnail_url() : $fallback_image,
+        'og:image:width' => 300,
+        'og:image:height' => 300,
+        'og:type' => (is_single()) ? 'article' : 'website',
+        'og:locale' => get_locale(),
     );
 
     if (is_single()) {
@@ -601,7 +603,7 @@ function facebook_meta() {
         $article_meta = array(
             'article:section' => $category[0]->cat_name,
             'article:tag' => get_the_tags(),
-            'article:publisher' => '589352557826604',
+            'article:publisher' => 'https://www.facebook.com/tuairisc.ie',
         );
 
         $site_meta = array_merge($site_meta, $article_meta);
