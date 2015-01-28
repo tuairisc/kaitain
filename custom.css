@@ -81,24 +81,6 @@ a.download-link,
     display: table;
 }
 
-/* Tabbed Categories
- * ----------------- */
-
-/*
-    TODO
-*/
-
-/*.wztw-container ul {
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
-    overflow-x: auto;
-    width: auto;
-}
-
-.wztz-container li {
-    display: inline-block;
-}
-*/
 /* Tables
  * -------------------
  * Needed for tables to display correctly. */
@@ -138,6 +120,11 @@ table.tg a {
 
 .feature-post-text {
     float: right;
+}
+
+.entry .wp-caption img {
+    height: auto;
+    max-width: 100%;
 }
 
 .post-meta,
@@ -215,6 +202,48 @@ h3 {
      * The effect brings the author and title closer together.
      * The Earth will /literally/ fall into the sun if you change this. */
     margin-bottom: 0 !important;
+}
+
+/* Tuairisc Authors Widget
+ * ----------------------- */
+
+.widget_tuairisc_author_list {
+    width: 100% !important;
+}
+
+.tuairisc-author-list {
+    background: #e5e5e5;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+
+.tuairisc-author-list h2 {
+    margin-bottom: 5px;
+}
+
+.tuairisc-author {
+    float: left;
+    width: 23.5%;
+}
+
+.tuairisc-author:not(:last-child) {
+    margin-right: 2%;
+}
+
+.tuairisc-author .avatar {
+    background-color: #000;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 0;
+    padding-bottom: 100%;
+    width: 100%;
+}
+
+.tuairisc-author .avatar:not(:last-child) {
+    margin-right: 0.5%;
 }
 
 /* Popular Posts Widget
@@ -546,6 +575,12 @@ h3 {
     overflow: hidden;
 }
 
+.g img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
 .g-2, .g-4, .g-5 {
     width: 100%;
 }
@@ -686,25 +721,24 @@ h3 {
 /* Homepage Featured Post
  * ---------------------- */
 
-.featured-row {
-    margin-bottom: 25px;
+.tuairisc-featured-row, .tuairisc-featured-block {
+    overflow: auto;
     width: 100%;
 }
 
-.row {
+.tuairisc-featured-row:after, .tuairisc-featured-block:after {
+    clear: both;
+    content: '';
+    display: block;
+    width: 100%;
+}
+
+.tuairisc-featured-block, .tuairisc-featured-block article {
     float: left;
-    width: 50%;
+    width: 50%;   
 }
 
-.row:first-child article:first-child {
-    padding-left: 0;
-}
-
-.row:last-child article:last-child {
-    padding-right: 0;
-}
-
-.featured-row a:first-child {
+.tuairisc-featured-thumb {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -714,11 +748,26 @@ h3 {
     width: 100%;
 }
 
-.featured-row article {
+.tuairisc-featured-thumb a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.tuairisc-featured-block article {
     box-sizing: border-box;
-    float: left;
+    display: inline-block;
+    margin-bottom: 15px;
     padding: 0 10px;
     width: 50%;
+}
+
+.tuairisc-featured-block:first-child article:first-child {
+    padding-left: 0;
+}
+
+.tuairisc-featured-block:last-child article:last-child {
+    padding-right: 0;
 }
 
 @media only screen and (max-width: 950px) {
@@ -726,11 +775,11 @@ h3 {
         padding-bottom: 0;
     }
 
-    .row article:first-child {
+    .tuairisc-featured-block article:first-child {
         padding-left: 0;
     }
 
-    .row article:last-child {
+    .tuairisc-featured-block article:last-child {
         padding-right: 0;
     }
 
@@ -740,13 +789,9 @@ h3 {
         width: 100%;
     }
 
-    .featured-row .row {
+    .tuairisc-featured-row .tuairisc-featured-block {
         float: none;
         width: 100%;
-    }
-
-    .featured-row .row:first-child {
-        margin-bottom: 14px;
     }
 }
 
