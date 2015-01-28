@@ -1,7 +1,7 @@
 <?php
-$query_featured = new WP_Query(array(
+$query = new WP_Query(array(
     'post__not_in' => get_option('sticky_posts'),
-    'posts_per_page' => 5,
+    'posts_per_page' => 9,
     'paged' => 0,
     'meta_key' => 'wpzoom_is_featured',
     'meta_value' => 1
@@ -9,12 +9,14 @@ $query_featured = new WP_Query(array(
 ?>
 
 <?php // Stolen, adapted and simplified from loop.php ?>
-<?php if ($query_featured->have_posts()) :
-    while ($query_featured->have_posts()) :
-        $query_featured->the_post();
+<?php if ($query->have_posts()) : ?>
+    <div class="tuairisc-featured">
+
+    <?php while ($query->have_posts()) :
+        $query->the_post();
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; ?>  
 
-        <?php if ($query_featured->current_post == 0 && $paged == 1) : ?>
+        <?php if ($query->current_post == 0 && $paged == 1) : ?>
             <article class="featured-main self-clear recent-post" id="post-<?php the_ID(); ?>">
                 <?php if (has_post_thumbnail()) : ?>
                     <div class="hero-image" style="background-image: url('<?php echo get_thumbnail_url(); ?>'); ">
@@ -42,23 +44,35 @@ $query_featured = new WP_Query(array(
                     </div>
                 </div>
             </article>
-            <div class="featured-row self-clear">
-                <div class="row self-clear">
+
         <?php else : ?>
-            <?php if ($query_featured->current_post == 3) : ?>
-                </div>
-                <div class="row self-clear">
+
+            <?php if ($query->current_post % 4 == 1) : ?>
+                <div class="tuairisc-featured-row">
+            <?php endif; ?>
+
+            <?php if ($query->current_post % 2 == 1) : ?>
+                <div class="tuairisc-featured-block">
             <?php endif; ?>
 
             <article id="post-<?php the_ID(); ?>">
-                <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" style="background-image: url('<?php echo get_thumbnail_url(get_the_ID(), 'medium'); ?>');"></a>
+                <div class="tuairisc-featured-thumb" style="background-image: url('<?php echo get_thumbnail_url(get_the_ID(), 'medium'); ?>');">
+                    <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"> </a>
+                </div>
                 <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
                     <h5><?php the_title(); ?></h5>
                 </a>
             </article>
 
+            <?php if ($query->current_post % 2 == 0) : ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($query->current_post % 4 == 0) : ?>
+                </div>
+            <?php endif; ?>
+
         <?php endif; ?>
     <?php endwhile; ?>
-            </div>
-        </div>
+    </div>
 <?php endif; ?>
