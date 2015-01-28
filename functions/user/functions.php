@@ -45,7 +45,8 @@ function tuairisc_scripts() {
     /* This handles loading for all of the custom scripts used in the theme. */
 
     // Styling and loading for jQuery scripts.
-    wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_adrotate.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_better_adrotate.js', array('jquery'), '1.0', true);
+    // wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_adrotate.js', array('jquery'), '1.0', true);
     // Some styling isn't handled correctly by CSS.
     wp_enqueue_script('tuairisc-styling', get_stylesheet_directory_uri() . '/js/tuairisc_styling.js', array('jquery'), '1.0', true);
     // Sharing links popout. 
@@ -218,15 +219,22 @@ function replace_breaks($excerpt) {
     return str_replace('<br />', '</p><p>', $excerpt);
 }
 
-function get_avatar_url($size) {
+function get_avatar_url($user_id, $size) {
     /* Return the hyperlink for the given avatar, without the <img /> code. */
 
-    $user_id = get_the_author_meta('ID');
+    if ('' == $user_id) {
+        $user_id = get_the_author_meta('ID');
+    }
+
+    if ('' == $size) {
+        $size = 100;
+    }
+
     $avatar_url = get_avatar($user_id, $size);
-    return preg_replace('/(^.*src="|" w.*$)/', '', $avatar_url);
+    return preg_replace('/(^.*src="|".*$)/', '', $avatar_url);
 }
 
-function has_local_avatar() {
+function has_local_avatar($user_id) {
     /* This site uses 'WP USer Avatar' for avatar control.
      * It serves avatars in this priority:
      *  
@@ -238,10 +246,12 @@ function has_local_avatar() {
      * This function checks to see if the avatar is being served from the local 
      * site. */
 
-    $user_id = get_the_author_meta('ID');
-    $home_url = site_url();
+    if ('' == $user_id) {
+        $user_id = get_the_author_meta('ID');
+    }
+
     $avatar_url = get_avatar_url($user_id, 200);
-    return (strpos($avatar_url, $home_url) === false) ? false : true;
+    return (strpos($avatar_url, 'gravatar') !== false) ? false : true;
 }
 
 function day_to_irish($day) {
