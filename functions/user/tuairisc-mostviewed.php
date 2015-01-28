@@ -20,7 +20,6 @@
         extract($args);
 
         $title = apply_filters('widget_title', $instance['widget_title']);
-        $counter_meta_key = 'tuairisc_view_counter';
 
         // Get current date and subtract $instance['elapsed_days'] days from it. 
         $end_date = new DateTime();
@@ -30,9 +29,9 @@
         $popular_query = new WP_Query(array(
             'cat' => -184,
             'post_type' => 'post',
-            'meta_key' => $counter_meta_key, 
+            'meta_key' => 'tuairisc_view_counter', 
             'posts_per_page' => $instance['max_posts'],
-            'orderby' => $counter_meta_key,
+            'orderby' => 'meta_value_num',
             'order' => 'DESC',
             'date_query' => array(
                 'after' => array(
