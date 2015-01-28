@@ -24,7 +24,7 @@ custom.css and it will override the style in this file.
 
 1. Toolbox CSS  -----------------------  All Theme Files
 2. Global Styles  ---------------------  All Theme Files
-3. Header  ----------------------------  #header.php
+3. Header  ----------------------------  header.php
 4. Homepage  --------------------------  index.php
 5. Archive Posts ----------------------  loop.php
 6. Single Post ------------------------  single.php
@@ -558,7 +558,6 @@ h3.title {
     font-family: 'Georgia', Georgia, serif; 
     font-size: 12px;
     font-weight: bold;  
-    text-transform: uppercase; 
     border-top: 1px solid #333; 
     border-bottom: 1px solid #F1F1F1; 
     display:block; 
@@ -606,7 +605,6 @@ h3.title {
     font-family: 'Georgia', Georgia, serif; 
     font-size: 12px;
     font-weight: bold;  
-    text-transform: uppercase; 
     border-top: 1px solid #333; 
     border-bottom: 1px solid #F1F1F1; 
     list-style: none; 
@@ -866,7 +864,7 @@ h1.title  {
 
 /* Caption for images */
 .entry .wp-caption { max-width: 100% !important; text-align:center; }
-.entry .wp-caption img { background:none; margin:0; border:0 none; max-width:100%; width:auto; height:auto;}
+.entry .wp-caption img { background:none; margin:0; border:0 none; max-width:100%; height:auto; }
 .entry .wp-caption-text, .gallery-caption { color:#A7A3A3; font-size:11px; margin:0; padding:4px 0 0; text-align:center; }
 .entry .wp-caption.aligncenter { margin:0 auto 15px; }
 
@@ -915,7 +913,6 @@ img.wp-smiley { border: none; padding: 0; }
     font-family: Georgia, serif;
     font-size: 12px;
     font-weight: bold;
-    text-transform: uppercase;
     border-top: 1px solid #333;
     border-bottom: 1px solid #F1F1F1;
     display: block;
