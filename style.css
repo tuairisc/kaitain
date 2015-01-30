@@ -215,7 +215,7 @@ p { margin: 0 0 15px; padding: 0; }
     padding: 15px 40px 0;
 }
 
-#menu {
+/*#menu {
     margin-top: 20px;
     background: #DF250B;
     padding: 0 20px 0 0;
@@ -223,7 +223,7 @@ p { margin: 0 0 15px; padding: 0; }
     border-bottom: none;
 }
 
-#logo {
+*/#logo {
     float:left;
     font-family: 'Merriweather', Georgia, serif;
 }
