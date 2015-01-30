@@ -22,6 +22,10 @@ Template Name: Monthly Author Report
 */
 
 // Sanitize input into array of start and end dates.
+if (empty($_POST)) {
+    return;
+}
+
 $dates = array();
 
 $all_author_info = array(
