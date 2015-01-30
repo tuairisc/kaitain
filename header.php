@@ -43,23 +43,6 @@
                 <li><a class="youtube" href="https://www.youtube.com/user/tuairiscnuacht" target="_blank" title="YouTube"></a></li>
             </ul>
             <div class="clear"></div>
-            <div id="menu">
-                <a class="menu-toggle" id="toggle-main" href="javascript:void(0)"></a>
-                <div class="menu-wrap">
-                    <?php if (has_nav_menu('primary')) {
-                        wp_nav_menu(array(
-                            'container' => 'menu',
-                            'container_class' => '',
-                            'menu_class' => 'dropdown',
-                            'menu_id' => 'secondmenu',
-                            'sort_column' => 'menu_order',
-                            'theme_location' => 'primary'
-                        ));
-                    } else {
-                        echo '<p class="dropdown notice">Please set your Main navigation menu on the <strong><a href="'.get_admin_url().'nav-menus.php">Appearance > Menus</a></strong> page.</p>';
-                    } ?>
-                </div>
-            <div class="clear"></div>
-            </div>
+            <?php include('temp_menu.php'); ?>
         </div>
     <div class="content-wrap">
