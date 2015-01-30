@@ -45,8 +45,8 @@ function tuairisc_scripts() {
     /* This handles loading for all of the custom scripts used in the theme. */
 
     // Styling and loading for jQuery scripts.
-    wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_better_adrotate.js', array('jquery'), '1.0', true);
-    // wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_adrotate.js', array('jquery'), '1.0', true);
+    // wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_better_adrotate.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_adrotate.js', array('jquery'), '1.0', true);
     // Some styling isn't handled correctly by CSS.
     wp_enqueue_script('tuairisc-styling', get_stylesheet_directory_uri() . '/js/tuairisc_styling.js', array('jquery'), '1.0', true);
     // Sharing links popout. 
@@ -250,8 +250,7 @@ function has_local_avatar($user_id) {
         $user_id = get_the_author_meta('ID');
     }
 
-    $avatar_url = get_avatar_url($user_id, 200);
-    return (strpos($avatar_url, 'gravatar') !== false) ? false : true;
+    return (strpos(get_avatar_url($user_id), 'gravatar') == false) ? true : false;
 }
 
 function day_to_irish($day) {

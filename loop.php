@@ -15,7 +15,7 @@
             <?php else : ?>
 
                     <?php if (is_columnist_article() && has_local_avatar()) : ?>
-                        <div class="post-image" style="background-image: url('<?php echo get_avatar_url(200); ?>');">
+                        <div class="post-image" style="background-image: url('<?php echo get_avatar_url(get_the_author_meta('ID'), 200); ?>');">
                     <?php elseif (option::get('index_thumb') == 'on') : ?>
                         <div class="post-image" style="background-image: url('<?php echo get_thumbnail_url(); ?>'); ">
                     <?php else : ?>
