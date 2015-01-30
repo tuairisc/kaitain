@@ -1,12 +1,12 @@
-<?php class tuairisc_author_list extends WP_Widget {
-    /* tuairisc_author_list Widget
+<?php class tuairisc_authors extends WP_Widget {
+    /* tuairisc_authors Widget
      * -----------------------
      * This widget displays an ordered horizontal lists of selected Tuairisc 
      * authors and other contributors. 
      */ 
     public function __construct() {
         parent::__construct(
-            'tuairisc_author_list',
+            'tuairisc_authors',
             'Tuairisc Authors',
             array(
                 'description' => 'A horizontal ordered list of selected Tuairisc authors.',
@@ -30,11 +30,11 @@
 
         <div class="tuairisc-author-list self-clear">
             <?php printf('<h2>%s</h2>', apply_filters('widget_title', $instance['widget_title']));
-            
+
             foreach ($author_query as $author) {
                 printf('<div class="tuairisc-author">');
                 printf('<div class="avatar" style="background-image: url(%s);"></div>', get_avatar_url($author->ID));
-                printf('<h6>%s</h6>', $author->display_name);
+                printf('<h6><a href="%s">%s</a></h6>', get_author_posts_url($author->ID), $author->display_name);
                 printf('</div>');
             } ?>
         </div>
@@ -91,6 +91,6 @@
 }
 
 add_action('widgets_init',
-    create_function('', 'return register_widget("tuairisc_author_list");')
+    create_function('', 'return register_widget("tuairisc_authors");')
 );
 ?>
