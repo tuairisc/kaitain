@@ -1,0 +1,136 @@
+/*
+ * Mobile Responsiveness
+ * ---------------------
+ * Generic media query for equally-generic smartphones. Targets a range of 
+ * screen sizes from the iPhone 4 through to the iPhone 6 and similarly-larger
+ * devices.
+ */
+
+@media only screen and (max-width: 1000px) {
+    #header .mshare {
+        padding-top: 0;
+    }
+
+    .post-meta > *, #logo, article .mshare, #header .mshare, 
+    #header .search_form {
+        /* Ciaran prefers to left-align where possible. */ 
+        float: none;
+    }
+
+    #header #searchform {
+        margin-top: 0;
+    }
+
+    .education-box {
+        min-height: 90px;
+    }
+
+    .education-box a {
+        padding: 15px;
+    }
+}
+
+@media only screen 
+    and (min-device-width: 320px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait),
+only screen
+    and (min-device-width: 320px) 
+    and (max-device-width: 736px) 
+    and (orientation: landscape) {
+
+    .education-box {
+        background-position: 7px 7px;
+    }
+
+    .education-box span {
+        font-size: 125%;
+    }
+
+    .education-box p:nth-child(1) {
+        margin-bottom: 13px;
+    }
+
+    .greann {
+        background-size: auto 33px;
+    }
+
+    .widget-area .column {
+        float: none;
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .post-image {
+        float: none;
+        margin: 0 0 15px 0;
+        width: 100%;
+    }
+
+    #recent-posts article {
+        padding: 0;
+    }
+
+    .widget-area .column:last-child {
+        margin-bottom: 20px;
+    }
+
+    .g-2, .g-4, .g-5 {
+        float: none;
+        margin-right: 0;
+        width: 99%;
+    }
+
+    #foluntais-listings .left, #foluntais-listings .right {
+        float: none;
+        width: 100%;
+    }
+
+    #foluntais-listings .post-thumb {
+        display: none;
+    }
+
+    #foluntais-listings .left span {
+        margin-bottom: 7px;
+    }
+
+    #header {
+        padding: 4%;
+    }
+
+    #header #searchform {
+        margin: 0;
+    }
+
+    .widget-area,
+    #header #searchform,
+    #header .mshare {
+        margin-bottom: 13px;
+    }
+
+    #header .mshare {
+        float: left;
+        padding: 0;
+    }
+
+    #footer {
+        background-image: none;
+        padding-bottom: 28px;
+    }
+
+    .foras-attribution {
+        margin-top: 13px;
+    }
+
+    .wztw-container ul {
+        overflow-x: scroll !important;
+        overflow-y: hidden !important;
+        white-space: nowrap !important;
+    }
+
+    .wztw-container .tabs li {
+        display: inline-block;
+        float: none;
+        white-space: nowrap;
+    }
+}

@@ -1,0 +1,129 @@
+/*
+ * Education Post Section Headers
+ * ------------------------------
+ * This area will be fleshed out later. */
+
+.edu-heading,
+.edu-subheading {
+    background: #c44b54;
+    color: #fff;
+    /* Important, or WPZOOM will override it. */
+    margin: 20px 0 10px 0 !important;
+}
+
+.edu-heading {
+    padding: 10px;
+}
+
+.edu-subheading {
+    padding: 5px 30px;
+}
+
+/* 
+ * Education Landing Page
+ * ----------------------
+ * The education landing page is a series of five coloured
+ * boxes that link into the relevant sections. 
+ */
+
+.education-box {
+    background-position: 3% 35%;
+    background-size: auto 60px;
+    background-repeat: no-repeat;
+    color: #fff;
+    margin-bottom: -10px;
+    min-height: 120px;
+
+    a {
+        @extend %border-box;
+        @extend %block;
+        color: inherit;
+        padding: 30px 15px 15px 17%;
+        text-decoration: none;
+    }
+
+    h1, p {
+        font-family: $font_arial;
+    }
+
+    h1 {
+        margin-bottom: 22px;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 21px;
+        margin-bottom: 0;
+    }
+
+    span {
+        font-size: 175%;
+        text-transform: uppercase;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .education-box {
+        padding: 20px;
+
+        &:hover {
+            background-image: none;
+        }
+    }
+}
+
+.education-0 { 
+    /* Description of the education section. */
+    background-color: $education_0;
+
+    &:hover { 
+        background-image: none;
+    }
+}
+
+.education-1 { 
+    /* Sraith Pictiúr / Picture Exercises */
+    background-color: $education_1;
+    background-image: url('images/education/picture.svg');
+}
+
+.education-2 { 
+    /* Léamhthuiscintí / Quiz */ 
+    background-color: $education_2;
+    background-image: url('images/education/book.svg');
+}
+
+.education-3 { 
+    /* Físeáin / Videos */ 
+    background-color: $education_3;
+    background-image: url('images/education/video.svg');
+}
+
+.education-4 { 
+    /* Úrscéal d’fhoghlaimeoirí / Short Stories */
+    background-color: $education_4;
+    background-image: url('images/education/reading.svg');
+}
+
+.education-5 { 
+    /* Crossfhocal / Crossword */
+    background-color: $education_5;
+    background-image: url('images/education/crossword.svg');
+}
+
+/* 
+ * Download Link
+ * ---------------
+ * Education section posts have a download button for PDF files. 
+*/
+
+a.download-link {
+    background: $education_download 90% center/auto 70% no-repeat url('images/download_arrow.svg');
+    display: inline-block;
+    padding: 12px 50px 12px 12px;
+ 
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+}

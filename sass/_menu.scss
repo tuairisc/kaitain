@@ -1,0 +1,97 @@
+/*
+ * Site Menu
+ * ---------
+ * This section entirely deals with the responsive layout of the site's main 
+ * nav menu.
+ */
+
+ul#menu {
+    list-style-type: none;
+    margin-top: 20px;
+
+    a {
+        @extend %border-box;
+        color: #fff;
+        display: inline-block;
+        font: 16px $font_arial;
+        line-height: 24px;
+        padding: 10px;
+        white-space: nowrap;
+
+        &:hover {
+            color: inherit;
+        }
+    }
+
+    li {
+        display: inline-block;
+        position: relative;
+
+        &:not(:last-child):after {
+            content: '|';
+            color: $wpzoom_anchor;
+            display: inline-block;
+            font-size: 15px;
+        }
+
+        &:hover ul {
+            display: block;
+        }
+
+        li {
+            display: block;
+
+            &:not(:last-child):after {
+                display: none;
+            }
+
+            &:hover {
+                background-color: $nav_blue;
+            }
+
+            a {
+                padding: 7px 10px;
+                width: 100%;
+            }
+        }
+    }
+
+    ul {
+        background-color: #000;
+        display: none;
+        list-style-type: none;
+        position: absolute;
+        width: 200px;
+    }
+}
+
+@media only screen 
+    and (min-device-width: 320px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait),
+only screen
+    and (min-device-width: 320px) 
+    and (max-device-width: 736px) 
+    and (orientation: landscape) {
+    ul#menu {
+        left: 0;
+        margin: 0;
+        padding: 0;
+        overflow-x: scroll;
+        position: fixed;
+        right: 0;
+        top: 0;
+        white-space: nowrap;
+        z-index: 3;
+
+        li {
+            &:not(:last-child):after {
+                font-size: 25px;
+            }
+
+            &:hover ul {
+                display: none;
+            }
+        }
+    }
+}

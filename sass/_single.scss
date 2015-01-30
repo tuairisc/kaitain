@@ -1,0 +1,159 @@
+/* 
+ * Article Element Styles
+ * ----------------------
+ * Styles for articles and their child elements. WPZOOM is pretty disorganized 
+ * when it comes to posts. <article>, <div class="entry"> and <div class="post">
+ * are all used interchangably in different sections of the site. 
+ */
+
+.entry {
+    blockquote, blockquote p {
+        margin: 0 0 14px 0;
+    }
+
+    blockquote {
+        background-image: url('images/quotation_open.svg'), url('images/quotation_close.svg');
+        background-position: -4% 4%, 104% 88%;
+        background-origin: content-box;
+        background-repeat: no-repeat;
+        background-size: auto 25px;
+        border-color: #f1f1f1;
+        border-style: solid;
+        border-width: 1px 0 1px 0;
+        box-sizing: border-box;
+        font-size: 18px;
+        font-style: italic;
+        padding: 15px 30px;
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        cite {
+            color: #444;
+            display: block;
+            font-style: none;
+            font-weight: bold;
+            font-size: 80%;
+            width: 100%;
+        }
+    }
+}
+
+/* 
+ * Single Post Title and Meta
+ * --------------------------
+ * I rewrote and changed the style of the header. The stock layout is a mess of
+ * display:table and display:table-cell. I first reset from this and from there 
+ * build up layout using the same containers. 
+ */
+
+.post-heading, .post-meta, .post-meta span, .meta-author, .post-heading h1.title {    
+    /* Reset post titles. By default these display as table elements. */
+    display: block;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    text-align: left;
+    width: 100%;
+}
+
+.entry, .post-meta, .post-author-avatar, .post-meta-text, .post-heading .title {
+    /* Contain padding. All post title items requires padding, but horizontal
+     * space is limited. */
+    @extend %border-box;
+}
+
+.single .entry {
+    /* Remove border from top of post content. */ 
+    border: 0;
+}
+
+.post .entry, .post-meta, .post-heading .title {
+    padding: 9px 4%;    
+}
+
+.post-wrapper {
+    border: 0;
+    box-shadow: none;
+    /* Containing post wrapper
+     * Even out the padding. */
+    padding: 0;
+}
+
+.post-meta {
+    /* For legibility when its white-on-white. */
+    border: 1px solid #f1f1f1;
+    border-width: 1px 0;
+    padding: 9px 4%;
+
+    > * {
+        /* Please forive me for the wildcard selector. :/ */
+        float: left;
+    }
+}
+
+.avatar {
+    /* background-image is set in single.php */ 
+    @extend %cover-picture;
+}
+
+.post-meta > .avatar {
+    /* Single post #header avatar. */
+    height: 67px;
+    margin-right: 10px;
+    width: 67px;
+}
+
+.post-thumb > .avatar {
+    height: 150px;
+    width: 200px;
+}
+
+.post-meta-text {
+    text-transform: initial;
+}
+
+.meta-author a {  
+    color: #000;
+
+    &:hover {
+        color: $wpzoom_anchor;
+    }
+}
+
+%entry-text {
+    color: $charcoal_grey; 
+    font-size: 16px;
+    line-height: 23px;
+    margin-bottom: 13px;
+    padding: 0 4%;
+}
+
+.post-heading {
+    .more-link a {
+        /* Remove 'read more' link from excerpt/description. */
+        display: none;
+    }
+
+    .title {
+        margin-bottom: 10px;    
+    }
+
+    p {
+        @extend %entry-text;
+    }
+}
+
+.entry {
+    .wp-caption img {
+        margin-bottom: 10px;
+    }
+
+    .wp-caption-text {
+        @extend %entry-text;
+        font-size: 14px;
+        padding: 0;
+        text-align: left;
+    }
+}

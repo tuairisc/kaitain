@@ -1,0 +1,66 @@
+/* 
+ * Category Header Banners
+ * ------------------------
+ * Each category has a custom #header bannner.
+ * Children have the same colour as the parent.
+ * Colours are set via PHP. 
+ * 
+ * See: gazeti/functions/user/functions.php
+ */
+
+.breadcrumb-banner {
+    margin-bottom: 20px;
+    padding: 5px 0;  
+    width: 100%;    
+
+    a {
+        color: #fff;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+
+        &:last-child {
+            font-size: 10px;
+        }
+
+        &:first-child {
+            margin-left: 15px;
+            font-size: 18px;
+        }
+
+        &:nth-child(2):before {
+            content: '» ';
+            font-size: 22px;
+        }
+    }
+
+    span {
+        color: #fff;
+        float: right;
+        margin: 10px 15px 0 0;
+        text-align: right;
+
+        &::first-line {
+            font-weight: bold;
+        }
+    }
+}
+
+.breadcrumb-post a {
+    color: #000;
+}
+
+.banner-post {
+    margin-bottom: 13px;
+}
+
+/* 
+ * Wider Banner for Greann Category (158) 
+ * --------------------------------------
+ * The Greann category (158) must be taller in order to separate content. 
+ */
+
+.greann {
+    background: 10px center/auto 60px no-repeat url('images/asnc_logo.svg');
+    min-height: 60px;
+    padding: 15px 0;
+}

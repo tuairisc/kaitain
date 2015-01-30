@@ -1,0 +1,104 @@
+.three-columns .widget:nth-child(3n+2) .title {
+    /* WPZOOM gives the middle column a wider margin because no good reason 
+     * that I can fathom. */
+    margin: 0 0 5px 0;
+}
+
+.recent-meta span,
+.widget .feature-posts-list small {
+    /* Widgets are capitalized. This causes issues with some Irish 
+     * spellings. Removing capitalization affected legibility so I bumped
+     * font size. */
+    text-transform: none;
+}
+
+.column_1 a {
+    /* Yay for JS-loaded CSS!
+     * Removes bottom margin from homepage widget hyperlinks. 
+     * The effect brings the author and title closer together.
+     * The Earth will /literally/ fall into the sun if you change this. */
+    margin-bottom: 0 !important;
+}
+
+/* 
+ * Tuairisc Authors Widget
+ * ----------------------- 
+ */
+
+.widget_tuairisc_authors {
+    width: 100% !important;
+
+    .tuairisc-author-list {
+        background: #e5e5e5;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+        padding: 15px;
+
+        h2 {
+            margin-bottom: 5px;
+        }
+    }
+
+    .tuairisc-author {
+        float: left;
+        width: 23.5%;
+
+        &:not(:last-child) {
+            margin-right: 2%;
+        }
+
+        .avatar {
+            @extend %cover-picture;
+            background-color: #000;
+            display: inline-block;
+            height: 0;
+            padding-bottom: 100%;
+            width: 100%;
+
+            &:not(:last-child) {
+                margin-right: 0.5%;
+            }
+        }
+    }
+}
+
+/* 
+ * Popular Posts Widget
+ * -------------------- 
+ */
+
+.widget_tuairisc_popular {
+    li {
+        padding: 6px 0;
+    }
+
+    .popular-thumb {
+        background-size: cover;
+        float: left;
+        height: 50px;
+        width: 23%;
+
+        a {
+            @extend %block;
+        }
+    }
+
+    .popular-text {
+        float: right;
+        width: 73%;
+    }
+}
+
+/*
+ * Main Content Widget
+ * -------------------
+ * The author's name will appear above the widget. 
+ */
+
+.main_content span {
+    text-transform: uppercase;
+
+    &:after {
+        content: ' - ';
+    }
+}

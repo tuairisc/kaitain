@@ -1,0 +1,77 @@
+
+/* Homepage Featured Post
+ * ---------------------- */
+
+.tuairisc-featured-row, .tuairisc-featured-block {
+    overflow: auto;
+    width: 100%;
+}
+
+.tuairisc-featured-row:after, .tuairisc-featured-block:after {
+    clear: both;
+    content: '';
+    display: block;
+    width: 100%;
+}
+
+.tuairisc-featured-block, .tuairisc-featured-block article {
+    float: left;
+    width: 50%;   
+}
+
+.tuairisc-featured-thumb {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: block;
+    height: 125px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.tuairisc-featured-thumb a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.tuairisc-featured-block article {
+    box-sizing: border-box;
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 0 10px;
+    width: 50%;
+}
+
+.tuairisc-featured-block:first-child article:first-child {
+    padding-left: 0;
+}
+
+.tuairisc-featured-block:last-child article:last-child {
+    padding-right: 0;
+}
+
+@media only screen and (max-width: 950px) {
+    .featured-main {
+        padding-bottom: 0;
+    }
+
+    .tuairisc-featured-block article:first-child {
+        padding-left: 0;
+    }
+
+    .tuairisc-featured-block article:last-child {
+        padding-right: 0;
+    }
+
+    .featured-main .hero-image,
+    .featured-main .post-content {
+        float: none;
+        width: 100%;
+    }
+
+    .tuairisc-featured-row .tuairisc-featured-block {
+        float: none;
+        width: 100%;
+    }
+}

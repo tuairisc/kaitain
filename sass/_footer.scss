@@ -1,0 +1,108 @@
+/* 
+ * Footer Block
+ * ------------
+ * The #footer block and its many children.
+ */
+
+#footer {
+    background: #fff left bottom/auto 65px no-repeat url('images/rainbow_footer.svg');
+    height: auto;
+    padding: 0 4% 65px 4%;
+    /* The site is unbalanced. */
+    margin-bottom: 0;
+
+    a {
+        color: inherit;
+    }
+
+    .interior {
+        border-top: 1px solid #f1f1f1;
+        padding-top: 20px;
+    }
+}
+
+.copyright, #footer li, #footer p {
+    color: #000;
+    font: 11px $font_arial;
+    line-height: 20px;
+}
+
+.carousel-slider {
+    margin-bottom: 30px;
+}
+
+/* 
+ * Copyright Block
+ * ----------------
+ * Privacy policy, copyright and all that other good stuff.
+ */
+
+.copyright {
+    padding: 0;
+
+    p {
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+}
+
+/* 
+ * Footer Widgets and Columns 
+ * --------------------------
+ * Footer widgets are arranged into four columns. These rules override the fixed
+ * default styles.
+ */
+
+.widget-area {
+    width: 100%;
+
+    .column {
+        box-sizing: border-box;
+        display: block;
+        min-height: 1px;
+        margin: 0 0 20px 0;
+        width: 20%;
+
+        &:nth-child(1), &:nth-child(2) {
+            float: left;
+        }
+
+        &:nth-child(3), &:nth-child(4) {
+            float: right;
+        }
+
+        &:last-child {
+            border: 0;
+            margin-right: 0;
+        }
+    }
+}
+
+@media screen and (max-width: 778px) {
+    .widget-area .column:nth-child(4) {
+        display: none;
+    }
+ }
+
+/* 
+ * Foras na Gaeilge Attribution Link
+ * ---------------------------------
+ * Foras na Gaeilge are a major sponsor of Tuairisc Nuacht. The sky /will/ fall
+ * down if this link is ever removed.
+ */
+
+.foras-attribution {
+   background: right top/auto 100% no-repeat url('images/foras_na_gaeilge_logo.png');
+   height: 60px;
+   width: 100%;
+
+    a {
+        @extend %block;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .foras-attribution {
+        background-position: left top;
+    }
+}

@@ -1,0 +1,31 @@
+/* 
+ * Header Block
+ * ------------ 
+ * The #header block and its many children. 
+ */
+
+#header {
+    /* Override gradient on #header. */ 
+    background: #fff center top/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
+    padding: 0 4%;
+
+    #logo img {
+        /* Site logo. */ 
+        height: 45px;
+        width: auto;
+    }
+
+    .search_form {
+        /* This had godawful stock CSS. They floated the child inside the parent, 
+         * instead of floating the parent. */
+        float: right;
+        padding-top: 10px;
+        width: 278px;
+    }
+
+    #searchform {
+        border-radius: 0;
+        float: none;
+        width: 100%;
+    }
+}
