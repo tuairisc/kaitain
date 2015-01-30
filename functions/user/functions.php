@@ -51,6 +51,8 @@ function tuairisc_scripts() {
     wp_enqueue_script('tuairisc-styling', get_stylesheet_directory_uri() . '/js/tuairisc_styling.js', array('jquery'), '1.0', true);
     // Sharing links popout. 
     wp_enqueue_script('tuairisc-share-popout', get_stylesheet_directory_uri() . '/js/tuairisc_share_popout.js', array('jquery'), '1.0', true);
+    // Modernizr, for menu touch events.
+    wp_enqueue_script('tuairisc-modernizr', get_stylesheet_directory_uri() . '/js/tuairisc_modernizr_touch.js', array('jquery'), '1.0', true);
 }
 
 function tuairisc_styles() {
