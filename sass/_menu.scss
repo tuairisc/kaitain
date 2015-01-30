@@ -62,36 +62,6 @@ ul#menu {
         list-style-type: none;
         position: absolute;
         width: 200px;
-    }
-}
-
-@media only screen 
-    and (min-device-width: 320px) 
-    and (max-device-width: 736px) 
-    and (orientation: portrait),
-only screen
-    and (min-device-width: 320px) 
-    and (max-device-width: 736px) 
-    and (orientation: landscape) {
-    ul#menu {
-        left: 0;
-        margin: 0;
-        padding: 0;
-        overflow-x: scroll;
-        position: fixed;
-        right: 0;
-        top: 0;
-        white-space: nowrap;
-        z-index: 3;
-
-        li {
-            &:not(:last-child):after {
-                font-size: 25px;
-            }
-
-            &:hover ul {
-                display: none;
-            }
-        }
+        z-index: 6;
     }
 }

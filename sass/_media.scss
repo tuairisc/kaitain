@@ -39,12 +39,35 @@ only screen
     and (max-device-width: 736px) 
     and (orientation: landscape) {
 
-    .education-box {
-        background-position: 7px 7px;
+    ul#menu {
+        /* Nav collapses to a simple side-scrolling list on smartphones. */
+        left: 0;
+        margin: 0;
+        padding: 0;
+        overflow-x: scroll;
+        position: fixed;
+        right: 0;
+        top: 0;
+        white-space: nowrap;
+        z-index: 3;
+
+        li {
+            &:not(:last-child):after {
+                font-size: 25px;
+            }
+
+            &:hover ul {
+                display: none;
+            }
+        }
     }
 
-    .education-box span {
-        font-size: 125%;
+    .education-box {
+        background-position: 7px 7px;
+
+        span {
+            font-size: 125%;
+        }
     }
 
     .education-box p:nth-child(1) {
