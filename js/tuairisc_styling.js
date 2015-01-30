@@ -1,16 +1,6 @@
 'use strict';
 
-/*
- * Tuairisc Menu
- * -------------
- */
-
 jQuery(function($) {
-    /*
-     * Everything Else
-     * ---------------
-     */
-
     function resizeFeaturePost() {
         // CSS for this box was a Byzantine mess. I wasn't able to consistently
         // set its style with CSS alone. 
