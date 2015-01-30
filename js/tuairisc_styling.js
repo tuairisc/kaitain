@@ -6,12 +6,6 @@
  */
 
 jQuery(function($) {
-    var menu = {
-        ul: 'ul#menu',
-        toggle: function() {
-        },
-    };
-
     /*
      * Everything Else
      * ---------------
