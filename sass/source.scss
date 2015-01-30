@@ -134,6 +134,11 @@ h3 {
     font-size: 16px;
 }
 
+.caroufredsel_wrapper {
+    /* Carousel wrapper occasionally wigs out in a bad way. */
+    min-height: 200px;
+}
+
 .galleria-info-title {
     display: none;
 }
@@ -158,6 +163,11 @@ h3 {
     float: right;
 }
 
+.three-columns .widget:nth-child(3n+2) .title {
+    /* The middle widget column has extra padding that puts the text out of 
+     * line with the other widgets. */
+    padding: 10px 0;
+}
 
 .entry {
     .wp-caption img {
