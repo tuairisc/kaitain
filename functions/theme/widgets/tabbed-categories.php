@@ -87,7 +87,7 @@ class Tabbed_Widget extends WP_Widget {
                         
                                 if ($x == 1) : ?> 
                                     <?php if (is_columnist_article() && has_local_avatar()) : ?>
-                                        <a href="javascript:void(0)"><img class="featured-tab" src="<?php echo get_avatar_url(135); ?>" /></a>
+                                        <a href="javascript:void(0)"><img class="featured-tab" src="<?php echo get_avatar_url(get_the_author_meta('ID'), 135); ?>" /></a>
                                     <?php else : ?>
                                         <?php get_the_image(array(
                                             'size' => 'featured-tab',
