@@ -1,3 +1,44 @@
+/*
+ * Break Points
+ * ------------
+ */
+
+@mixin breakpoint($point, $size: '') {
+    $smart_min: 320px;
+    $smart_max: 736px;
+
+    @if $point == smartphone {
+         @media only screen and (min-device-width: $smart_min) and (max-device-width: $smart_max) and (orientation: portrait), 
+         only screen and (min-device-width: $smart_min) and (max-device-width: $smart_max) and (orientation: landscape) {
+            @content;  
+        }
+    }
+
+    @if $point == portrait {
+        @media only screen and (orientation: portrait) {
+            @content;
+        }
+    }
+
+    @if $point == landscape {
+        @media only screen and (orientation: landscape) {
+            @content;
+        }
+    }
+
+    @if $point == max {
+        @media only screen and (max-width: $size + px) {
+            @content;
+        }
+    }
+
+    @if $point == min {
+        @media only screen and (min-width: $size + px) {
+            @content;
+        }
+    }
+}
+
 @mixin transform_scale_y($amount) {
     // Vertically stretch text.
     -webkit-transform: scaleY($amount);

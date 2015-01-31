@@ -4,12 +4,23 @@
  * The #footer block and its many children.
  */
 
+%footer-text {
+    color: #000;
+    font: 11px $font_arial;
+    line-height: $bottom_default * 1.5;
+}
+
 #footer {
-    background: #fff left bottom/auto 65px no-repeat url('images/rainbow_footer.svg');
+    background: #fff left bottom/auto 65px no-repeat url('../images/rainbow_footer.svg');
     height: auto;
-    padding: 0 4% 65px 4%;
+    padding: 0 4% $bottom_default * 5 4%;
     /* The site is unbalanced. */
     margin-bottom: 0;
+
+    @include breakpoint(smartphone) {
+        background-image: none;
+        padding-bottom: $bottom_default * 2;
+    }
 
     a {
         color: inherit;
@@ -19,12 +30,6 @@
         border-top: 1px solid #f1f1f1;
         padding-top: 20px;
     }
-}
-
-.copyright, #footer li, #footer p {
-    color: #000;
-    font: 11px $font_arial;
-    line-height: 20px;
 }
 
 .carousel-slider {
@@ -56,33 +61,10 @@
 .widget-area {
     width: 100%;
 
-    .column {
-        box-sizing: border-box;
-        display: block;
-        min-height: 1px;
-        margin: 0 0 20px 0;
-        width: 20%;
-
-        &:nth-child(1), &:nth-child(2) {
-            float: left;
-        }
-
-        &:nth-child(3), &:nth-child(4) {
-            float: right;
-        }
-
-        &:last-child {
-            border: 0;
-            margin-right: 0;
-        }
+    @include breakpoint(smartphone) {
+        margin-bottom: $bottom_default;
     }
 }
-
-@media screen and (max-width: 778px) {
-    .widget-area .column:nth-child(4) {
-        display: none;
-    }
- }
 
 /* 
  * Foras na Gaeilge Attribution Link
@@ -92,17 +74,19 @@
  */
 
 .foras-attribution {
-   background: right top/auto 100% no-repeat url('images/foras_na_gaeilge_logo.png');
-   height: 60px;
-   width: 100%;
+    background: right top/auto 100% no-repeat url('../images/foras_na_gaeilge_logo.png');
+    height: 60px;
+    width: 100%;
+
+    @include breakpoint(max, 768) {
+        background-position: left top;
+    }
+
+    @include breakpoint(smartphone) {
+        margin-top: $bottom_default;
+    }
 
     a {
         @extend %block;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .foras-attribution {
-        background-position: left top;
     }
 }

@@ -13,11 +13,11 @@
     <div id="footer">
         <div class="interior">
             <?php if (is_active_sidebar('footer_1') || is_active_sidebar('footer_2') || is_active_sidebar('footer_3') || is_active_sidebar('footer_4')) : ?>
-                <div class="widget-area">
-                    <div class="column"><?php dynamic_sidebar('Footer (column 1)'); ?></div>
-                    <div class="column"><?php dynamic_sidebar('Footer (column 2)'); ?></div>
-                    <div class="column"><?php dynamic_sidebar('Footer (column 3)'); ?></div>
-                    <div class="column"><?php dynamic_sidebar('Footer (column 4)'); ?></div>
+                <div class="widget-area split">
+                    <div class="quarter"><?php dynamic_sidebar('Footer (column 1)'); ?></div>
+                    <div class="quarter"><?php dynamic_sidebar('Footer (column 2)'); ?></div>
+                    <div class="quarter"><?php dynamic_sidebar('Footer (column 3)'); ?></div>
+                    <div class="quarter"><?php dynamic_sidebar('Footer (column 4)'); ?></div>
                 </div>
             <?php endif; ?>
             <div class="copyright">

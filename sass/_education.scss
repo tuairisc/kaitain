@@ -1,3 +1,11 @@
+$education_0: #424045;
+$education_1: #c44b54;
+$education_2: #7c5c91;
+$education_3: #c9ab5f;
+$education_4: #89b0d4;
+$education_5: #e34284;
+$education_download: #d2d3d5;
+
 /*
  * Education Post Section Headers
  * ------------------------------
@@ -34,12 +42,24 @@
     margin-bottom: -10px;
     min-height: 120px;
 
+    @include breakpoint(max, 1000) {
+        min-height: 90px;
+    }
+
+    @include breakpoint(smartphone) {
+        background-position: 7px 7px;
+    }
+
     a {
         @extend %border-box;
         @extend %block;
         color: inherit;
         padding: 30px 15px 15px 17%;
         text-decoration: none;
+
+        @include breakpoint(max, 1000) {
+            padding: $bottom_default;
+        }
     }
 
     h1, p {
@@ -54,11 +74,21 @@
         font-size: 16px;
         line-height: 21px;
         margin-bottom: 0;
+
+        &:nth-child(1) {
+            @include breakpoint(smartphone) {
+                margin-bottom: $bottom_default;
+            }
+        }
     }
 
     span {
         font-size: 175%;
         text-transform: uppercase;
+
+        @include breakpoint(smartphone) {
+            font-size: 125%;
+        }
     }
 }
 
@@ -84,31 +114,31 @@
 .education-1 { 
     /* Sraith Pictiúr / Picture Exercises */
     background-color: $education_1;
-    background-image: url('images/education/picture.svg');
+    background-image: url('../images/education/picture.svg');
 }
 
 .education-2 { 
     /* Léamhthuiscintí / Quiz */ 
     background-color: $education_2;
-    background-image: url('images/education/book.svg');
+    background-image: url('../images/education/book.svg');
 }
 
 .education-3 { 
     /* Físeáin / Videos */ 
     background-color: $education_3;
-    background-image: url('images/education/video.svg');
+    background-image: url('../images/education/video.svg');
 }
 
 .education-4 { 
     /* Úrscéal d’fhoghlaimeoirí / Short Stories */
     background-color: $education_4;
-    background-image: url('images/education/reading.svg');
+    background-image: url('../images/education/reading.svg');
 }
 
 .education-5 { 
     /* Crossfhocal / Crossword */
     background-color: $education_5;
-    background-image: url('images/education/crossword.svg');
+    background-image: url('../images/education/crossword.svg');
 }
 
 /* 
@@ -118,7 +148,7 @@
 */
 
 a.download-link {
-    background: $education_download 90% center/auto 70% no-repeat url('images/download_arrow.svg');
+    background: $education_download 90% center/auto 70% no-repeat url('../images/download_arrow.svg');
     display: inline-block;
     padding: 12px 50px 12px 12px;
  

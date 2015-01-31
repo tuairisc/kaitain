@@ -1,27 +1,4 @@
 /*
- * Custom Stylesheet
- * -----------------
- * You can place your custom CSS statements in this file, after this message.
- * It is better to write everything custom here
- * because this file won't be replaced during updates.
- * 
- * Simply copy an existing style from style.css to this file, 
- * and modify it to your liking.
- */
-
-/*
- Useful generic smartphone media query: 
-
-@media only screen 
-    and (min-device-width: 320px) 
-    and (max-device-width: 736px) 
-    and (orientation: portrait),
-only screen
-    and (min-device-width: 320px) 
-    and (max-device-width: 736px) 
-    and (orientation: landscape) {
-
-/*
  * Fonts
  * -------
  */
@@ -34,25 +11,17 @@ $font_arial: arial, "helvetica neue", helvetica, sans-serif;
  * -------
  */
 
-$education_0: #424045;
-$education_1: #c44b54;
-$education_2: #7c5c91;
-$education_3: #c9ab5f;
-$education_4: #89b0d4;
-$education_5: #e34284;
-$education_download: #d2d3d5;
 $wpzoom_anchor: #95c37c;
-
 $charcoal_grey: #87888a;
-// Nav menu.
 $nav_blue: #506572;
 
 /*
- * Margins
- * -------
+ * Margins and Sizes
+ * -----------------
  */
 
-$bottom_default: 16px;
+$bottom_default: 13px;
+$button_size: $bottom_default * 2.5;
 
 /*
  * Partials and Mixins 
@@ -96,13 +65,6 @@ a.download-link, .modal-box a, #foluntais-listings span,
     @extend %clearfix;
 }
 
-/* I need to replace the below... */
-
-.widget-area, .feature-posts-list, .feature-posts-list li,
-.breadcrumb-banner, .post-meta, #slides li {
-    @extend %clearfix;
-}
-
 /* Tables
  * ------
  * Needed for tables to display correctly. */
@@ -117,8 +79,8 @@ table.tg {
 }
 
 /* 
- * General Site Stylings
- * ---------------------
+ * Header Stylings
+ * ---------------
  * General stylings for generic parts of the site, as directed by
  * Aidan, Ciaran or Sean.
  */
@@ -134,18 +96,38 @@ h3 {
     font-size: 16px;
 }
 
+/*
+ * Content Wrappers
+ * ----------------
+ */
+
+.content-wrap {
+    /* Make #header strip regardless of whether #header advert group is blocked. */
+    background: center bottom/auto 6px no-repeat border-box url('..//images/rainbow_strip.svg');
+    padding: $bottom_default * 1.5 4% 0 4%;
+
+    @include breakpoint(smartphone) {
+        padding-top: 0;
+    }
+}
+
+.inner-wrap {
+    /* Stock colour is grey. */
+    background-color: #fff;
+
+    @include breakpoint(smartphone) {
+        padding-top: 40px;
+    }
+}
+
+/*
+ * Miscellaneous Rules
+ * -------------------
+ */
+
 .caroufredsel_wrapper {
     /* Carousel wrapper occasionally wigs out in a bad way. */
     min-height: 200px;
-}
-
-.galleria-info-title {
-    display: none;
-}
-
-#bwg_container1_0 {
-    /* The gallery insert doesn't have a bottom margin. */
-    margin-bottom: 14px;
 }
 
 #respond {
@@ -159,33 +141,16 @@ h3 {
     }
 }
 
+#slides li {
+    @extend %clearfix;
+}
+
 .feature-post-text {
     float: right;
 }
 
-.three-columns .widget:nth-child(3n+2) .title {
-    /* The middle widget column has extra padding that puts the text out of 
-     * line with the other widgets. */
-    padding: 10px 0;
-}
-
-.entry {
-    .wp-caption img {
-        height: auto;
-        max-width: 100%;
-    }
-
-    blockquote cite:before {
-        content: ' -';
-    }
-}
-
-.post-meta, span.date, .comment-meta {
-    text-transform: none;
-}
-
 #report {
-    margin-bottom: 13px;
+    margin-bottom: $bottom_default;
 }
 
 .recent-meta span {    
@@ -203,22 +168,6 @@ h3 {
     }
 }
 
-.related_posts .title {
-    /* Overrides above h3 rule */
-    color: #000;
-}
-
-.content-wrap {
-    /* Make #header strip regardless of whether #header advert group is blocked. */
-    background: center bottom/auto 6px no-repeat border-box url('images/rainbow_strip.svg');
-    padding: 40px 4% 0 4%;
-}
-
-.inner-wrap {
-    /* Stock colour is grey. */
-    background-color: #fff;
-}
-
 .slide_content_holder {
     /* Posts slider on front page. */
     bottom: 10px;
@@ -229,25 +178,37 @@ h3 {
  * ------- 
  */
 
-@import 'adverts';
-@import 'archives';
-@import 'banners';
-@import 'education';
-@import 'footer';
+// Website header. 
 @import 'header';
-@import 'home';
-@import 'jobs';
+// Website nav menu.
 @import 'menu';
-@import 'plugins';
+// AdRotate adverts.
+@import 'adverts';
+// Intra-post category archives.
+@import 'archives';
+// Banenrs for single posts and archives. 
+@import 'banners';
+// Education category articles.
+@import 'education';
+// Website home page.
+@import 'home';
+// Tuairisc jobs section styles.
+@import 'jobs';
+// Social sharing links.
 @import 'sharing';
+// Single article.
 @import 'single';
+// Website footer. 
+@import 'footer';
+// Tweaks for plugins that Tuairisc use.
+@import 'plugins';
+// WPZOOM and Tuairisc widgets.
 @import 'widgets';
 
 /*
- * Media and Print Queries
+ * Print Queries
  * -----------------------
- * These should _always_ come after all other rules.
+ * This should _always_ come after all other rules.
  */
 
-@import 'media';
 @import 'print';

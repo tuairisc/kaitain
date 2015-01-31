@@ -4,6 +4,25 @@
  * Styles for articles and their child elements. WPZOOM is pretty disorganized 
  * when it comes to posts. <article>, <div class="entry"> and <div class="post">
  * are all used interchangably in different sections of the site. 
+ *
+ * TODO: This file is a mess and needs to be cleaned up.
+ */
+
+.related_posts .title {
+    color: #000;
+}
+
+%entry-text {
+    color: $charcoal_grey; 
+    font-size: 16px;
+    line-height: 23px;
+    margin-bottom: $bottom_default;
+    padding: 0 4%;
+}
+
+/*
+ * Article Wrapper
+ * ---------------
  */
 
 .entry {
@@ -12,7 +31,7 @@
     }
 
     blockquote {
-        background-image: url('images/quotation_open.svg'), url('images/quotation_close.svg');
+        background-image: url('../images/quotation_open.svg'), url('../images/quotation_close.svg');
         background-position: -4% 4%, 104% 88%;
         background-origin: content-box;
         background-repeat: no-repeat;
@@ -36,7 +55,16 @@
             font-weight: bold;
             font-size: 80%;
             width: 100%;
+
+            &:before {
+                content: ' -';
+            }
         }
+    }
+
+    .wp-caption img {
+        height: auto;
+        max-width: 100%;
     }
 }
 
@@ -73,6 +101,18 @@
     padding: 9px 4%;    
 }
 
+.post-meta, span.date, .comment-meta {
+    text-transform: none;
+}
+
+.post-image {
+    @include breakpoint(smartphone) {
+        float: none;
+        margin: 0 0 15px 0;
+        width: 100%;
+    }
+}
+
 .post-wrapper {
     border: 0;
     box-shadow: none;
@@ -82,6 +122,7 @@
 }
 
 .post-meta {
+    @extend %clearfix;
     /* For legibility when its white-on-white. */
     border: 1px solid #f1f1f1;
     border-width: 1px 0;
@@ -90,6 +131,16 @@
     > * {
         /* Please forive me for the wildcard selector. :/ */
         float: left;
+
+        @include breakpoint(max, 1000) {
+            float: none;
+        }
+    }
+}
+
+#recent-posts article {
+    @include breakpoint(smartphone) {
+        padding: 0;
     }
 }
 
@@ -120,14 +171,6 @@
     &:hover {
         color: $wpzoom_anchor;
     }
-}
-
-%entry-text {
-    color: $charcoal_grey; 
-    font-size: 16px;
-    line-height: 23px;
-    margin-bottom: 13px;
-    padding: 0 4%;
 }
 
 .post-heading {

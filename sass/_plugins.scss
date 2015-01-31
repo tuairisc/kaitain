@@ -24,7 +24,7 @@
 }
 
 .modal-box {
-    background: #d1d2d4 center center/auto 70% no-repeat border-box url('images/education_soundwave.svg');
+    background: #d1d2d4 center center/auto 70% no-repeat border-box url('../images/education_soundwave.svg');
     float: left;
     margin-bottom: 4px;
     width: 32.66%;
@@ -59,8 +59,8 @@
 .newsletter {
     background-color: #e44284;
     background-image:
-        url('images/rainbow_strip_alternate.svg'),
-        url('images/tuairisc_logo_alternate.svg');
+        url('../images/rainbow_strip_alternate.svg'),
+        url('../images/tuairisc_logo_alternate.svg');
     background-position: center bottom, 90% 90%;
     background-size: 100% 10px, 132px auto;
     background-repeat: no-repeat;

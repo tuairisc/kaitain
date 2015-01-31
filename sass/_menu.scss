@@ -5,9 +5,36 @@
  * nav menu.
  */
 
+nav {
+    padding: 0 4%;
+}
+
+#menu {
+    @include breakpoint(portrait) {
+        padding: 0;
+    }
+}
+
 ul#menu {
     list-style-type: none;
-    margin-top: 20px;
+
+    @include breakpoint(smartphone) {
+        /* Nav collapses to a simple side-scrolling list on smartphones. */
+        left: 0;
+        margin: 0;
+        padding: 0;
+        overflow-x: scroll;
+        padding: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        white-space: nowrap;
+        z-index: 3;
+    }
+
+    @include breakpoint(portrait) {
+        text-align: center;
+    }
 
     a {
         @extend %border-box;
@@ -18,8 +45,8 @@ ul#menu {
         padding: 10px;
         white-space: nowrap;
 
-        &:hover {
-            color: inherit;
+        @include breakpoint(portrait) {
+            font-size: 14px;
         }
     }
 
@@ -36,6 +63,10 @@ ul#menu {
 
         &:hover ul {
             display: block;
+
+            @include breakpoint(smartphone) {
+                display: none;
+            }
         }
 
         li {
@@ -43,6 +74,10 @@ ul#menu {
 
             &:not(:last-child):after {
                 display: none;
+
+                @include breakpoint(smartphone) {
+                    font-size: 25px;
+                }
             }
 
             &:hover {
@@ -63,5 +98,9 @@ ul#menu {
         position: absolute;
         width: 200px;
         z-index: 6;
+
+        @include breakpoint(portrait) {
+            text-align: left;
+        }
     }
 }

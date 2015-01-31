@@ -9,6 +9,7 @@
  */
 
 .breadcrumb-banner {
+    @extend %clearfix;
     margin-bottom: 20px;
     padding: 5px 0;  
     width: 100%;    
@@ -50,7 +51,7 @@
 }
 
 .banner-post {
-    margin-bottom: 13px;
+    margin-bottom: $bottom_default;
 }
 
 /* 
@@ -60,7 +61,11 @@
  */
 
 .greann {
-    background: 10px center/auto 60px no-repeat url('images/asnc_logo.svg');
+    background: 10px center/auto 60px no-repeat url('../images/asnc_logo.svg');
     min-height: 60px;
     padding: 15px 0;
+
+    @include breakpoint(smartphone) {
+        background-size: auto 33px;
+    }
 }

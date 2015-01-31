@@ -101,21 +101,6 @@
     @extend %clearfix;
 }
 
-%split {
-    @extend %border-box;
-    float: left;
-    height: 100%;
-    padding-right: $bottom_default;
-
-    &:last-child {
-        padding-right: 0;
-    }
-}
-
-.twothirds, .onethird, .quarter, .half, .onefifth {
-    @extend %split;
-}
-
 .twothirds {
     width: 66%;
 }
@@ -134,6 +119,24 @@
 
 .onefifth {
     width: 66%;
+}
+
+.twothirds, .onethird, .quarter, .half, .onefifth {
+    @extend %border-box;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+    padding-right: $bottom_default;
+
+    &:last-child {
+        padding-right: 0;
+    }
+
+    @include breakpoint(smartphone) {
+        float: none;
+        margin-bottom: $bottom_default;
+        width: 100%;
+    } 
 }
 
 /*

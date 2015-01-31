@@ -2,6 +2,7 @@
     /* WPZOOM gives the middle column a wider margin because no good reason 
      * that I can fathom. */
     margin: 0 0 5px 0;
+    padding: 10px 0;
 }
 
 .recent-meta span,
@@ -12,12 +13,37 @@
     text-transform: none;
 }
 
+.feature-posts-list, .feature-posts-list li {
+    @extend %clearfix;
+}
+
 .column_1 a {
     /* Yay for JS-loaded CSS!
      * Removes bottom margin from homepage widget hyperlinks. 
      * The effect brings the author and title closer together.
      * The Earth will /literally/ fall into the sun if you change this. */
     margin-bottom: 0 !important;
+}
+
+/*
+ * Tabbed Category Widgets
+ * -----------------------
+ */
+
+.wztw-container ul[role=tablist] {
+    @include breakpoint(smartphone) {
+        /* To stop wrapping on smartphones. */
+        overflow-x: scroll;
+        white-space: nowrap;
+    }
+}
+
+.wztw-container .tabs li {
+    @include breakpoint(smartphone) {
+        display: inline-block;
+        float: none;
+        white-space: nowrap;
+    }
 }
 
 /* 

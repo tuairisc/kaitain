@@ -30,29 +30,30 @@
                 <?php if (!option::get('misc_logo_path')) echo "</h1>"; ?>
             </div>
 
-            <?php if (option::get('searchform_enable') == 'on') : ?>
-                <div class="search_form">
-                    <?php get_search_form(); ?>
-                </div>
-            <?php endif; ?>
+            <div class="share-search">
+                <?php if (option::get('searchform_enable') == 'on') : ?>
+                    <div class="search_form">
+                        <?php get_search_form(); ?>
+                    </div>
+                <?php endif; ?>
 
-            <ul class="mshare">
-                <li><a class="rss" href="<?php bloginfo('rss2_url'); ?>" target="_blank" title="RSS 2.0 Feed"></a></li>
-                <li><a class="facebook" href="https://www.facebook.com/tuairisc.ie" target="_blank" title="Facebook"></a></li>
-                <li><a class="twitter" href="https://twitter.com/tuairiscnuacht" target="_blank" title="Twitter"></a></li>
-                <li><a class="youtube" href="https://www.youtube.com/user/tuairiscnuacht" target="_blank" title="YouTube"></a></li>
-            </ul>
-            <div class="clear"></div>
-            <nav>
-                <?php if (has_nav_menu('primary')) {
-                    wp_nav_menu(array(
-                        'menu_id' => 'menu',
-                        'sort_column' => 'menu_order',
-                        'theme_location' => 'primary'
-                    ));
-                } else {
-                    echo '<p class="dropdown notice">Please set your Main navigation menu on the <strong><a href="'.get_admin_url().'nav-menus.php">Appearance > Menus</a></strong> page.</p>';
-                } ?>
-            </nav>
+                <ul class="mshare">
+                    <li><a class="rss" href="<?php bloginfo('rss2_url'); ?>" target="_blank" title="RSS 2.0 Feed"></a></li>
+                    <li><a class="facebook" href="https://www.facebook.com/tuairisc.ie" target="_blank" title="Facebook"></a></li>
+                    <li><a class="twitter" href="https://twitter.com/tuairiscnuacht" target="_blank" title="Twitter"></a></li>
+                    <li><a class="youtube" href="https://www.youtube.com/user/tuairiscnuacht" target="_blank" title="YouTube"></a></li>
+                </ul>
+            </div>
         </div>
+        <nav>
+            <?php if (has_nav_menu('primary')) {
+                wp_nav_menu(array(
+                    'menu_id' => 'menu',
+                    'sort_column' => 'menu_order',
+                    'theme_location' => 'primary'
+                ));
+            } else {
+                echo '<p class="dropdown notice">Please set your Main navigation menu on the <strong><a href="'.get_admin_url().'nav-menus.php">Appearance > Menus</a></strong> page.</p>';
+            } ?>
+        </nav>
     <div class="content-wrap">

@@ -72,9 +72,30 @@
     padding: 20px 4%;
 }
 
+.g-2, .g-4 {
+    @include breakpoint(max, 768) {
+        .g-2, .g-4 {
+            margin-right: 2%;
+        }
+    }
+}
+
 .g-2, .g-4, .g-5 {
     /* Sidebar column adverts */
     margin-bottom: 20px;
+
+    @include breakpoint(max, 768) {
+        .g-2, .g-4, .g-5 {
+            float: left;
+            width: 32%;
+        }
+    }
+
+    @include breakpoint(smartphone) {
+        float: none;
+        margin-right: 0;
+        width: 99%;
+    }
 }
 
 .g-dyn {
@@ -97,19 +118,5 @@
 
     a {
         @extend %block;
-    }
-}
-
-/* Advert Responsiveness */
-
-@media screen and (max-width: 768px) {
-    /* Standard mobile view. For tablets or small desktop sizes. */
-    .g-2, .g-4, .g-5 {
-        float: left;
-        width: 32%;
-    }
-
-    .g-2, .g-4 {
-        margin-right: 2%;
     }
 }
