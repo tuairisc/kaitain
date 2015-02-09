@@ -25,12 +25,14 @@
                 
         </div><!-- /#side_ad -->
     <?php } ?>
-    
-    <?php // AdRotate groups 2, 4 and 5 ?>
-    <?php echo adrotate_group(2); ?>    
-    <?php echo adrotate_group(4); ?>    
-    <?php echo adrotate_group(5); ?>    
 
+    <?php // AdRotate groups 2, 4 and 5 
+    if (function_exists('adrotate_group')) {
+        printf('%s', adrotate_group(2));
+        printf('%s', adrotate_group(4));
+        printf('%s', adrotate_group(5));
+    } ?>
+    
     <div class="clear"></div>
 </section> 
 <div class="clear"></div>

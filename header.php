@@ -1,6 +1,6 @@
 <?php if (!is_user_logged_in() && strpos($_SERVER['SERVER_NAME'], 'kaitain.bhalash.com') !== false) {
     // REMOVE THIS WHEN FINISHED!!!!!!1ONEONEONE
-    header('Location: http://caladan.bhalash.com');
+    header('Location: http://www.bhalash.com');
     exit();
 }
 ?>
@@ -20,8 +20,10 @@
 <body <?php body_class(); ?>>
     <div class="inner-wrap">
 
-        <?php // AdRotate group 1 ?>
-        <?php echo adrotate_group(1); ?>
+        <?php // AdRotate group 1
+        if (function_exists('adrotate_group')) {
+            printf('%s', adrotate_group(1));
+        } ?>
 
         <div id="header">
             <div id="logo">

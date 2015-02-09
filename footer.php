@@ -7,8 +7,10 @@
 
     </div><!-- /.content-wrap -->
 
-    <?php // Adrotate group 3 ?>
-    <?php echo adrotate_group(3); ?>
+    <?php // AdRotate group 3
+    if (function_exists('adrotate_group')) {
+        printf('%s', adrotate_group(3));
+    } ?>
 
     <div id="footer">
         <div class="interior">
