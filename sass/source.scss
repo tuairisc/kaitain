@@ -65,115 +65,6 @@ a.download-link, .modal-box a, #foluntais-listings span,
     @extend %clearfix;
 }
 
-/* Tables
- * ------
- * Needed for tables to display correctly. */
-
-table.tg {
-    margin-bottom: 14px;
-    width: 100%;
-
-    a {
-        text-decoration: none;
-    }
-}
-
-/* 
- * Header Stylings
- * ---------------
- * General stylings for generic parts of the site, as directed by
- * Aidan, Ciaran or Sean.
- */
-
-h2 {
-    /* Requested by Ciaran. */
-    font-size: 20px;
-}
-
-h3 {
-    /* Requested by Adian. */
-    color: #999;
-    font-size: 16px;
-}
-
-/*
- * Content Wrappers
- * ----------------
- */
-
-.content-wrap {
-    /* Make #header strip regardless of whether #header advert group is blocked. */
-    background: center bottom/auto 6px no-repeat border-box url('..//images/rainbow_strip.svg');
-    padding: $bottom_default * 1.5 4% 0 4%;
-
-    @include breakpoint(smartphone) {
-        padding-top: 0;
-    }
-}
-
-.inner-wrap {
-    /* Stock colour is grey. */
-    background-color: #fff;
-
-    @include breakpoint(smartphone) {
-        padding-top: 40px;
-    }
-}
-
-/*
- * Miscellaneous Rules
- * -------------------
- */
-
-.caroufredsel_wrapper {
-    /* Carousel wrapper occasionally wigs out in a bad way. */
-    min-height: 200px;
-}
-
-#respond {
-    .form_fields input, #comment {
-        box-sizing: border-box;
-        width: 100%;
-    } 
-
-    textarea {
-        width: 98%
-    }
-}
-
-#slides li {
-    @extend %clearfix;
-}
-
-.feature-post-text {
-    float: right;
-    width: calc(100% - 90px);
-}
-
-#report {
-    margin-bottom: $bottom_default;
-}
-
-.recent-meta span {    
-    font-size: 14px;
-}
-
-#slider_nav {
-    .item, .item.current a {
-        font-size: 17px;
-
-        &:hover {
-            color: #000;
-            font-weight: normal;
-        }
-    }
-}
-
-.slide_content_holder {
-    /* Posts slider on front page. */
-    bottom: 10px;
-}
-
 /*
  * Imports
  * ------- 
@@ -205,6 +96,8 @@ h3 {
 @import 'plugins';
 // WPZOOM and Tuairisc widgets.
 @import 'widgets';
+// Miscellaneous styling rules.
+@import 'misc';
 
 /*
  * Print Queries
