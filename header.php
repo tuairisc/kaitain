@@ -1,3 +1,9 @@
+<?php if (!is_user_logged_in() && strpos($_SERVER['SERVER_NAME'], 'bhalash') !== false) {
+    // REMOVE THIS WHEN FINISHED!!!!!!1ONEONEONE
+    header('Location: http://caladan.bhalash.com');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
