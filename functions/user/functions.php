@@ -48,7 +48,7 @@ function tuairisc_scripts() {
     // wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_better_adrotate.js', array('jquery'), '1.0', true);
     wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_adrotate.js', array('jquery'), '1.0', true);
     // Some styling isn't handled correctly by CSS.
-    wp_enqueue_script('tuairisc-styling', get_stylesheet_directory_uri() . '/js/tuairisc_styling.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('tuairisc-functions', get_stylesheet_directory_uri() . '/js/tuairisc_functions.js', array('jquery'), '1.0', true);
     // Sharing links popout. 
     wp_enqueue_script('tuairisc-share-popout', get_stylesheet_directory_uri() . '/js/tuairisc_share_popout.js', array('jquery'), '1.0', true);
     // Modernizr, for menu touch events.
