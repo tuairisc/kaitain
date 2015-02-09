@@ -191,7 +191,7 @@ function hero_post_class() {
     return (has_post_thumbnail()) ? 'hero-post' : '';
 }
 
-function get_thumbnail_url($post_id = null, $size = null) {
+function get_thumbnail_url($post_id = null, $size = null, $arr = false) {
     /* Code snippet from http://goo.gl/NhcEU6
      * get_thumbnail_url returns the anchor url for the requested thumbnail. */
 
@@ -205,7 +205,7 @@ function get_thumbnail_url($post_id = null, $size = null) {
 
     $thumb_id = get_post_thumbnail_id($post_id);
     $thumb_url = wp_get_attachment_image_src($thumb_id, $size, true);
-    return $thumb_url[0];
+    return ($arr) ? $thumb_url : $thumb_url[0];
 }
 
 function remove_read_more($excerpt) {
@@ -595,15 +595,16 @@ function facebook_meta() {
      * ------------------------------------
      * This /should/ be all of the relevant information for Facebook. */
     global $fallback_desc, $fallback_image, $post;
+    $thumb = get_thumbnail_url($post->ID, 'full', true);
 
     $site_meta = array(
         'og:title' => get_the_title(),
         'og:site_name' => get_bloginfo('name'),
         'og:url' => get_site_url() . $_SERVER['REQUEST_URI'],
         'og:description' => (is_single()) ? get_the_excerpt() : $fallback_desc,
-        'og:image' => (is_single()) ? get_thumbnail_url() : $fallback_image,
-        'og:image:width' => 300,
-        'og:image:height' => 300,
+        'og:image' => (is_single()) ? $thumb[0] : $fallback_image,
+        'og:image:width' => $thumb[1],
+        'og:image:height' => $thumb[2],
         'og:type' => (is_single()) ? 'article' : 'website',
         'og:locale' => get_locale(),
     );
