@@ -84,6 +84,10 @@
             &:not(:last-child) {
                 margin-right: 0.5%;
             }
+
+            a {
+                @include flex_size(100%, 1);
+            }
         }
     }
 }
@@ -112,6 +116,14 @@
     .popular-text {
         float: right;
         width: 73%;
+
+        a {
+            font-family: $font_georgia;
+
+            &:hover {
+                color: $wpzoom_anchor;
+            }
+        }
     }
 }
 

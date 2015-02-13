@@ -16,6 +16,7 @@
 
     a {
         color: #fff;
+        font-family: $font_georgia;
         letter-spacing: 1px;
         text-transform: uppercase;
 
@@ -37,6 +38,7 @@
     span {
         color: #fff;
         float: right;
+        font: 14px $font_arial;
         margin: 10px 15px 0 0;
         text-align: right;
 
