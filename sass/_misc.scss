@@ -1,7 +1,8 @@
 
 /* Tables
  * ------
- * Needed for tables to display correctly. */
+ * Needed for tables to display correctly. 
+ */
 
 table.tg {
     margin-bottom: 14px;
@@ -15,17 +16,13 @@ table.tg {
 /* 
  * Header Stylings
  * ---------------
- * General stylings for generic parts of the site, as directed by
- * Aidan, Ciaran or Sean.
  */
 
 h2 {
-    /* Requested by Ciaran. */
     font-size: 20px;
 }
 
 h3 {
-    /* Requested by Adian. */
     color: #999;
     font-size: 16px;
 }
@@ -73,6 +70,10 @@ h3 {
     textarea {
         width: 98%
     }
+}
+
+span.date {
+    text-transform: none;
 }
 
 #slides li {
