@@ -1,44 +1,51 @@
 <?php get_header(); ?> 
-
-<?php if (is_author()) : ?> 
-    <?php $curauth = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author)); ?>
-<?php endif; ?>
-
 <div id="main" role="main">
     <div id="content">
-        <?php if (!is_category() && !is_foluntais()) : ?>
-            <h3 class="title">
-                <?php if(is_tag()) : ?>
-                    <?php // Tag archive. ?>
-                    <?php _e('Míreanna clibeáilte le:', 'wpzoom'); ?> "<?php single_tag_title(); ?>"
-                <?php elseif (is_day()) : ?>
-                    <?php // Daily archive. ?>
-                    <?php _e('Cartlann do', 'wpzoom'); ?> <?php the_time('F jS, Y'); ?>
-                <?php elseif (is_month()) : ?>
-                    <?php // Monthly archive. ?>
-                    <?php _e('Cartlann do', 'wpzoom'); ?> <?php the_time('F, Y'); ?>
-                <?php elseif (is_year()) : ?>
-                    <?php // Yearly archive. ?>
-                    <?php _e('Cartlann do', 'wpzoom'); ?> <?php the_time('Y'); ?>
-                  <?php elseif (is_author()) : ?>
-                    <?php // Author archive. ?>
-                    <?php _e( 'Altanna le: ', 'wpzoom' ); ?><a href="<?php echo $curauth->user_url; ?>"><?php echo $curauth->display_name; ?></a>  
-                <?php elseif (isset($_GET['paged']) && !empty($_GET['paged'])) : ?>
-                    <?php // Paged archive. ?>
-                    <?php _e('Mireanna', 'wpzoom'); ?>
-                <?php endif; ?>
-            </h3>
-        <?php endif; ?>
 
-        <?php get_template_part('banner'); ?>
-           
-        <?php if (is_foluntais()) {
-            get_template_part('loop','foluntais');
-        } else {
-            get_template_part('loop'); 
-        } ?>
+        <?php 
+        if (is_author()) {
+            $curauth = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author));
+        }
 
-    </div> <!-- /#content -->
+        if (!is_category() && !'foluntais' == get_post_type()) {
+            printf('<h3>');
+
+            if(is_tag()) {
+                // Tag archive. 
+                _e('Míreanna clibeáilte le:', 'wpzoom');
+                single_tag_title();
+            } else if (is_day()) { 
+                // Daily archive. 
+                _e('Cartlann do', 'wpzoom');
+                the_time('F jS, Y'); 
+            } else if (is_month()) { 
+                // Monthly archive. 
+                _e('Cartlann do', 'wpzoom');
+                the_time('F, Y'); 
+            } else if (is_year()) {
+                // Yearly archive. 
+                _e('Cartlann do', 'wpzoom'); 
+                the_time('Y'); 
+            } else if (is_author()) { 
+                // Author archive. 
+                _e( 'Altanna le: ', 'wpzoom' );
+                printf('<a href="%s">%s</a>', $curauth->user_url, $curauth->display_name);  
+            }else if (isset($_GET['paged']) && !empty($_GET['paged'])) {
+                // Paged archive. 
+                _e('Mireanna', 'wpzoom'); 
+            }
+
+            printf('</h3>');
+        }
+
+        if (!is_author()) {
+            get_template_part('banner');
+        }
+        
+        get_template_part('loop'); 
+        ?>
+
+    </div>
     <?php get_sidebar(); ?> 
-</div> <!-- /#main -->
+</div>
 <?php get_footer(); ?>
