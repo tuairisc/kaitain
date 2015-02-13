@@ -133,15 +133,3 @@ ul.mshare {
         border-radius: 3px;
     }
 }
-
-article .mshare {
-    float: right;
-
-    li {
-        list-style-type: none;
-    }
-
-    @include breakpoint(max, 1000) {
-        float: none;
-    } 
-}
