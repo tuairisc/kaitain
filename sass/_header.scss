@@ -6,11 +6,20 @@
 
 #header {
     /* Override gradient on #header. */ 
+    @extend %border-box;
     @extend %clearfix;
     background: #fff center top/auto 6px no-repeat border-box url('../images/rainbow_strip.svg');
     margin-bottom: $bottom_default * 2;
+    min-height: 70px;
     padding: $bottom_default * 2 4% 0 4%;
     position: relative;
+    width: 100%;
+
+    @include breakpoint(smartphone) {
+        min-height: 0;
+        position: initial;
+        width: auto;
+    }
 
     .share-search {
         @extend %clearfix;
@@ -31,16 +40,22 @@
             }
         }
 
-        @include breakpoint(max, 775) {
+        @include breakpoint(smartphone) {
             float: left;
-            margin-right: 0;
-            padding-top: $bottom_default * 1.5;
             position: initial;
-            width: auto;
         }
     }
 
     #logo {
+        bottom: 0;
+        position: absolute;
+
+        @include breakpoint(smartphone) {
+            display: inline-block;
+            position: initial;
+            margin-bottom: $bottom_default;
+        }
+
         a {
             @extend %block;
             font-size: 10px;
@@ -58,6 +73,10 @@
         /* This had godawful stock CSS. They floated the child inside the parent, 
          * instead of floating the parent. */
         width: 278px;
+
+        @include breakpoint(smartphone) {
+            margin-bottom: $bottom_default;
+        }
     }
 
     #searchform {
