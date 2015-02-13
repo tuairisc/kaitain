@@ -14,6 +14,9 @@ $font_arial: arial, "helvetica neue", helvetica, sans-serif;
 $wpzoom_anchor: #95c37c;
 $charcoal_grey: #87888a;
 $nav_blue: #506572;
+$border_grey: #ececec;
+$border_black: #333;
+$span_grey: #999;
 
 /*
  * Margins and Sizes
@@ -31,35 +34,12 @@ $button_size: $bottom_default * 2.5;
 @import 'mixins';
 @import 'partials';
 
-/*
- * General Rules
- * Rules for bits and pieces across the Tuairisc site that don't really require
- * their own space. 
- */
-
-/* Font Selectors
- * --------------
- * Who doesn't love Georgia? */
-
-.entry .wp-caption-text, .post-heading p, #foluntais-listings p,
-#foluntais-listings h3, .popular-text a, .breadcrumb-banner a, 
-.entry blockquote {    
-    font-family: $font_georgia;
-}
-
-a.download-link, .modal-box a, #foluntais-listings span, 
-.breadcrumb-banner span {    
-    font: 14px $font_arial;
-}
-
-.popular-text a:hover {
-    color: $wpzoom_anchor;
-}
-
-/* Self-clearing Floats 
+/* 
+ * Self-clearing Floats 
  * --------------------
- * WPZOOM's use of <div class="clear"></div> should be classed as a 
- * crime against humanity. */
+ * WPZOOM's use of <div class="clear"></div> should be classed as a crime 
+ * against humanity.
+ */
 
 .self-clear {
     @extend %clearfix;
@@ -76,20 +56,16 @@ a.download-link, .modal-box a, #foluntais-listings span,
 @import 'menu';
 // AdRotate adverts.
 @import 'adverts';
-// Intra-post category archives.
-@import 'archives';
 // Banenrs for single posts and archives. 
 @import 'banners';
 // Education category articles.
 @import 'education';
 // Website home page.
 @import 'home';
-// Tuairisc jobs section styles.
-@import 'jobs';
 // Social sharing links.
 @import 'sharing';
-// Single article.
-@import 'single';
+// Articles.
+@import 'article';
 // Website footer. 
 @import 'footer';
 // Tweaks for plugins that Tuairisc use.
