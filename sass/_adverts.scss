@@ -62,32 +62,23 @@
     }
 }
 
-.g-2, .g-4, .g-5 {
-    width: 100%;
-}
-
-/* Group Margins and Padding */
-
 .g-1, .g-3 {
     padding: 20px 4%;
-}
-
-.g-2, .g-4 {
-    @include breakpoint(max, 768) {
-        .g-2, .g-4 {
-            margin-right: 2%;
-        }
-    }
 }
 
 .g-2, .g-4, .g-5 {
     /* Sidebar column adverts */
     margin-bottom: 20px;
+    width: 100%;
 
-    @include breakpoint(max, 768) {
-        .g-2, .g-4, .g-5 {
-            float: left;
-            width: 32%;
+    @include breakpoint(portrait) {
+        float: left;
+        width: 32.667%;
+    }
+
+    &:not(.g-5) {
+        @include breakpoint(portrait) {
+            margin-right: 1%;
         }
     }
 
@@ -112,8 +103,10 @@
 
 .tuairisc-advert {
     /* Background image is set via tuairisc_adrotate.js */
-    @extend %cover-picture;
     @extend %border-box;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
     margin: 0 auto;
 
     a {
