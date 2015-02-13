@@ -31,12 +31,14 @@
         <div class="tuairisc-author-list self-clear">
             <?php printf('<h2>%s</h2>', apply_filters('widget_title', $instance['widget_title']));
 
-            foreach ($author_query as $author) {
-                printf('<div class="tuairisc-author">');
-                printf('<div class="avatar" style="background-image: url(%s);"></div>', get_avatar_url($author->ID));
-                printf('<h6><a href="%s">%s</a></h6>', get_author_posts_url($author->ID), $author->display_name);
-                printf('</div>');
-            } ?>
+            foreach ($author_query as $author) : ?>
+                <div class="tuairisc-author">
+                    <div class="avatar" style="background-image: url('<?php echo get_avatar_url($author->ID); ?>');" title="?php echo $author->display_name; ?>">
+                        <a href="<?php echo get_author_posts_url($author->ID); ?>"></a>
+                    </div>
+                    <h6><a href="<?php echo get_author_posts_url($author->ID); ?>"><?php echo $author->display_name; ?></a></h6>
+                </div>
+            <?php endforeach; ?>
         </div>
 
         <?php echo $after_widget;
