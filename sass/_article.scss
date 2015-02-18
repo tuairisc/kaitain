@@ -33,6 +33,16 @@ article {
     display: block;
     text-align: left;
 
+    blockquote, li, p {
+        a {
+            color: $wpzoom_anchor;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
     blockquote, ol, p, pre, ul {
         color: #000;
         font: 16px $font_georgia;
@@ -65,7 +75,7 @@ article {
         }
 
         span, .article-author {
-            color: $span_grey;
+            color: #000;
             text-transform: none;
 
             a {

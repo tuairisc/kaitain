@@ -54,6 +54,8 @@ function tuairisc_scripts() {
     // Styling and loading for jQuery scripts.
     // wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_better_adrotate.js', array('jquery'), '1.0', true);
     wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_adrotate.js', array('jquery'), '1.0', true);
+    // Event parser.
+    wp_enqueue_script('tuairisc-eventdrop', get_stylesheet_directory_uri() . '/js/tuairisc_eventdrop.js', array('jquery'), '1.0', true);
     // Some styling isn't handled correctly by CSS.
     wp_enqueue_script('tuairisc-functions', get_stylesheet_directory_uri() . '/js/tuairisc_functions.js', array('jquery'), '1.0', true);
     // Modernizr, for menu touch events.

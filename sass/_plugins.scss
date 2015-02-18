@@ -54,6 +54,45 @@
     }
 }
 
+/*
+ * Ninja Forms and Event Drop
+ * --------------------------
+ * Ninja Forms is used for Tuairisc's event submission form. Ninja Forms would 
+ * like you to either pay them $40 or use a PHP function to directly echo CSS 
+ * rules into the HTML.
+ * 
+ * Either way is shitty, so fuck that. !important 4 lyfe. See:
+ * https://ninjaforms.com/add-custom-css-to-your-ninja-forms/
+ */
+
+.ninja-forms-all-fields-wrap {
+    select.ninja-forms-field {
+        height: 30px !important;
+        width: 30% !important;
+    }
+}
+
+.event-drop {
+    border: 1px solid #ececec;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 10px;
+    overflow: hidden;
+    width: 75%;
+
+    h3 {
+        border: 4px dotted #ececec;
+        border-radius: 10px;
+        line-height: 75px;
+        text-align: center;
+    }
+}
+
+textarea.event-output {
+    min-height: 400px;
+    width: 50%;
+}
+
 /* Mailing List Link
  * ----------------- */
 
