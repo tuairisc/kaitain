@@ -106,7 +106,7 @@ jQuery(function($) {
             case 'donegal':
             case 'down':
             case 'fermanagh':
-            case 'londonderry':
+            case 'derry':
             case 'monaghan':
             case 'tyrone':
                 province = 'Ulster'; break;
