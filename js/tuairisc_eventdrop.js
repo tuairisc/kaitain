@@ -14,29 +14,43 @@ jQuery(function($) {
     ];
 
     var output = {
+        // Treating the output value as an array will grant me more fluidity if
+        // ever I find myself in a position where I have to edit its content. 
+        result: [],
         add: function(tag, string, addClosingTag) {
             /*
              * Add Output HTML
              * ---------------
              * This was easier on my sanity than a run-on mess of '' + ''. 
              * Accepts three variables, two of them optional:
-             * HTML tag, message string (optional) and is a closing tag added? 
+             * HTML tag (string, required), message (string, optional) and 
+             * whether to add the closing tag (Boolean, optional). 
              */
 
+            var html = '';
             string = string || '';
             addClosingTag = (addClosingTag !== false) ? true : addClosingTag;
 
-            this.value += tag;
-            this.value += string;
-            this.value += (addClosingTag) ? tag.replace('<', '</').replace(/\sclass=.*/, '>') : '';
-            this.value += '\n';
+            html += tag;
+            html += string;
+            html += (addClosingTag) ? tag.replace('<', '</').replace(/\sclass=.*/, '>') : '';
+            html += '\n';
+
+            this.result.push(html);
         },
-        value: '',
+        getHtml: function() {
+            return this.result.join('');
+        }, 
         elements: {
-            /* Only JSON keys here will be output in the final HTML. This gives
+            /* 
+             * Output HTML Elements
+             * --------------------
+             * Only JSON keys here will be output in the final HTML. This gives
              * you a measure of control over the final appearance, as well as
              * reduce the amount of work needed in the case that the form is
-             * later changed. */
+             * later changed.
+             */
+
             eventType: '<h5>',
             eventTitle: '<h1>',
             entryFee: '<span class="entry-fee">',
@@ -86,20 +100,20 @@ jQuery(function($) {
         // Get the province of a given county and return it.
         var province = '';
 
-        switch (county) {
+        switch (county.toLowerCase()) {
             case 'galway':
             case 'leitrim':
             case 'mayo':
             case 'roscommon':
             case 'sligo':
-                province = 'Connacht'; break;
+                province = provinces[0]; break;
             case 'clare':
             case 'cork':
             case 'kerry':
             case 'limerick':
             case 'tipperary':
             case 'waterford':
-                province = 'Munster'; break;
+                province = provinces[1]; break;
             case 'antrim':
             case 'armagh':
             case 'cavan':
@@ -109,7 +123,7 @@ jQuery(function($) {
             case 'derry':
             case 'monaghan':
             case 'tyrone':
-                province = 'Ulster'; break;
+                province = provinces[2]; break;
             case 'carlow':
             case 'dublin':
             case 'kildare':
@@ -122,7 +136,7 @@ jQuery(function($) {
             case 'westmeath':
             case 'wexford':
             case 'wicklow':
-                province = 'Lenister'; break;
+                province = provinces[3]; break;
             default:
                 break;
         }
@@ -182,7 +196,8 @@ jQuery(function($) {
              */
 
             output.value = '';
-            var rawCsv = event.target.result.split('\n'),
+
+            var rawCsv = event.target.result.split(/"\n/),
                 header = [], events = [];
 
             $.each(rawCsv[0].split(','), function(i,v) {
@@ -205,7 +220,7 @@ jQuery(function($) {
             // Generate output HTML.
             generateOutputHtml(provinces, events);
             // Insert the HTML into the output textarea.
-            $(dropbox.output).val(output.value);
+            $(dropbox.output).val(output.getHtml());
         }
 
         reader.onerror = function(event) {
