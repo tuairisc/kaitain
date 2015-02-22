@@ -60,6 +60,8 @@ function tuairisc_scripts() {
     wp_enqueue_script('tuairisc-functions', get_stylesheet_directory_uri() . '/js/tuairisc_functions.js', array('jquery'), '1.0', true);
     // Modernizr, for menu touch events.
     wp_enqueue_script('tuairisc-modernizr', get_stylesheet_directory_uri() . '/js/tuairisc_modernizr_touch.js', array('jquery'), '1.0', true);
+    // Emer's author report
+    wp_enqueue_script('tuairisc-author-report', get_stylesheet_directory_uri() . '/js/tuairisc_author_report.js', array('jquery'), '1.0', true);
 }
 
 function tuairisc_styles() {

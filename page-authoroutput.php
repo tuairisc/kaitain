@@ -1,9 +1,9 @@
 <?php 
 /*
-Template Name: Monthly Author Report
+Template Name: Author Report Output
 */
 
-/* Author Report Output v1.0
+/* Author Report Output v2
 * -------------------------
 * This report was requested by Emer for accounting purposes. 
 * In order to pay each author or contributor, Emer must see
@@ -17,12 +17,11 @@ Template Name: Monthly Author Report
 * -----------
 * Article ID | Article Title | Article Date | Views | Word Count
 * 
-* page-authorreport.php takes its input from page-authorform.php
-* 
 */
 
 // Sanitize input into array of start and end dates.
 if (empty($_POST)) {
+    printf('<script>window.location = %s;</script>', get_site_url());
     return;
 }
 
@@ -41,7 +40,7 @@ $all_author_info = array(
 );
 
 foreach ($_POST as $key => $field) {
-    $dates[$key] = (int) sanitize_text_field($field);
+    $dates[$key] = filter_var($field, FILTER_SANITIZE_NUMBER_INT);
 }
 
 // Get list of all site authors.

@@ -1,0 +1,76 @@
+'use strict';
+
+jQuery(function($) {
+    /* 
+     * Form Elements 
+     * ------------- 
+     */
+
+    var form = {
+        elements: {
+            form: '#author-report',
+            error: '#author-error',
+        },
+        validated: [],
+        incomplete: 'Please fill in all form fields!',
+        error: function(message) {
+            // Write message to the error box.
+            $(this.elements.error).append(message + '<br />');
+            console.error(message);
+        },
+        validate: function(element) {
+            // Validate each field input in turn using it's pattern regex.
+            if ($(element).val().match($(element).attr('pattern'))) {
+                this.validated.push(true);
+            } else {
+                var verb = $(element).attr('name').replace(/_.*$/, ''),
+                    noun = $(element).attr('name').replace(/^.*_/, '');
+
+                this.error('Error: ' + verb + ' ' + noun + ' must be a valid ' + noun);
+                this.validated.push(false);
+            }
+        }
+    };
+
+    /* 
+     * Form Functions 
+     * -------------- 
+     */
+
+    Array.prototype.allTrue = function() {
+        // Have all elements in the array successfully validated?
+        if (this.length < 6) { 
+            return false;
+        }
+
+        for (var i = 0; i < this.length; i++) {
+            if (!this[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /* 
+     * Validation
+     * ---------- 
+     */
+
+    $(form.elements.form).submit(function(event) {
+        form.validated = [];
+        $(form.elements.error).empty();
+        
+        $(form.elements.form).find('input:text').each(function() {
+            if ($(this).val().length == 0) {
+                form.error(form.incomplete);
+                return false;
+            } else {
+                // Push input validation results to an array.
+                form.validate(this);
+            }
+        });
+
+        return form.validated.allTrue();
+    });
+});
