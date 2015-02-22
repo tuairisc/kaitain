@@ -10,6 +10,7 @@ jQuery(function($) {
         elements: {
             form: '#author-report',
             error: '#author-error',
+            input: 'input:text'
         },
         validated: [],
         incomplete: 'Please fill in all form fields!',
@@ -35,14 +36,10 @@ jQuery(function($) {
     /* 
      * Form Functions 
      * -------------- 
+     * Check an array of Booleans to see if its values are all true.
      */
 
     Array.prototype.allTrue = function() {
-        // Have all elements in the array successfully validated?
-        if (this.length < 6) { 
-            return false;
-        }
-
         for (var i = 0; i < this.length; i++) {
             if (!this[i]) {
                 return false;
@@ -55,6 +52,7 @@ jQuery(function($) {
     /* 
      * Validation
      * ---------- 
+     * Validate form inputs have been filled and contain valid numbers.
      */
 
     $(form.elements.form).submit(function(event) {
@@ -66,11 +64,10 @@ jQuery(function($) {
                 form.error(form.incomplete);
                 return false;
             } else {
-                // Push input validation results to an array.
                 form.validate(this);
             }
         });
 
-        return form.validated.allTrue();
+        return (form.validated.allTrue() && form.validated.length == 6);
     });
 });
