@@ -21,8 +21,8 @@ Template Name: Author Report Output
 
 // Sanitize input into array of start and end dates.
 if (empty($_POST)) {
-    printf('<script>window.location = %s;</script>', get_site_url());
-    return;
+    printf('<script>window.location = "%s";</script>', get_site_url());
+    exit();
 }
 
 $dates = array();
