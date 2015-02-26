@@ -3,6 +3,7 @@
 jQuery(function($) {
     var dropbox = {
         input: '.event-drop',
+        drag: 'file-drag',
         output: 'textarea[class=event-output]',
     }
 
@@ -12,6 +13,11 @@ jQuery(function($) {
         'Munster',
         'Ulster'
     ];
+
+    String.prototype.sanitize = function() {
+        // Remove HTML and line breaks from the user-submitted string.
+        return this.replace(/\r?\n|\r/g,'').replace(/<(?:.|\n)*?>/gm, '');
+    }
 
     var output = {
         // Treating the output value as an array will grant me more fluidity if
@@ -75,8 +81,10 @@ jQuery(function($) {
 
     function csvRowtoJson(header, row) {
         // Parse each given row string into a valid JSON object.
+
         var json = '{ ';
-        row = row.split('","');
+        // Remove all line break from the CSV
+        row = row.sanitize().split('","');
 
         $.each(row, function(i,v) {
             // Sanitize extra quotation marks from each row item.
@@ -93,6 +101,7 @@ jQuery(function($) {
         });
 
         json += ' }';
+
         return JSON.parse(json);
     }
 
@@ -160,7 +169,7 @@ jQuery(function($) {
          *    element, grab the HTML and add it.
          */
 
-        for (var i in provinces) {
+        for (var i = 0; i < provinces.length; i++) {
             output.add('<h2>', provinces[i]);
 
             $.each(events, function(k,v) {
@@ -223,8 +232,9 @@ jQuery(function($) {
             $(dropbox.output).val(output.getHtml());
         }
 
-        reader.onerror = function(event) {
-            // TODO
+        reader.onerror = function(error) {
+            $(dropbox.output).val(error);
+            console.error(error);
         }
 
         reader.readAsText(file[0]);
@@ -236,23 +246,26 @@ jQuery(function($) {
          * ---------------------------------------------------------------
          */
 
-        $(dropbox.input).on('dragenter', function(evt) {
-            evt.stopPropagation();
-            evt.preventDefault();
+        $(dropbox.input).on('dragover', function(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            $(this).addClass(dropbox.drag);
         });
 
-        $(dropbox.input).on('dragover', function(evt) {
-            evt.stopPropagation();
-            evt.preventDefault();
+        $(dropbox.input).on('dragleave', function(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            $(this).removeClass(dropbox.drag);
         });
 
-        $(dropbox.input).on('drop', function(evt) {
-            evt.stopPropagation();
-            evt.preventDefault();
+        $(dropbox.input).on('drop', function(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            $(this).removeClass(dropbox.drag);
 
-            if (evt.originalEvent.dataTransfer.files[0].type === 'text/csv') {
+            if (event.originalEvent.dataTransfer.files[0].type === 'text/csv') {
                 // \o/ Magic \o/
-                workMagic(evt.originalEvent.dataTransfer.files);
+                workMagic(event.originalEvent.dataTransfer.files);
             } else {
                 return false;
             }
