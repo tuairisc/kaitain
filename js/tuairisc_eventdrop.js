@@ -67,17 +67,17 @@ jQuery(function($) {
              * later changed.
              */
 
-            eventType: { tag: '<span class="type">', contentBefore: 'Category: ', breakAfter: true },
+            eventType: { tag: '<span class="type">', contentBefore: 'Catagóir: ', breakAfter: true },
             eventTitle: { tag: '<h4>', contentBefore: '', useBreak: false },
-            entryFee: { tag: '<span class="fee">', contentBefore: 'Entry fee: €', breakAfter: true },
-            contactName: { tag: '<span class="contact-name">', contentBefore: 'Contact: ', breakAfter: false },
+            entryFee: { tag: '<span class="fee">', contentBefore: 'Táille iontrála: €', breakAfter: true },
+            contactName: { tag: '<span class="contact-name">', contentBefore: 'Teagmháil: ', breakAfter: false },
             contactInformation: { tag: '<span class="contact-info">', contentBefore: '', breakAfter: true },
-            location: { tag: '<span class="location">', contentBefore: 'Location: ', breakAfter: false },
+            location: { tag: '<span class="location">', contentBefore: 'Suíomh: ', breakAfter: false },
             county: { tag: '<span class="county">', contentBefore: ', Co. ', breakAfter: true },
             eventDescription: { tag: '<p class="description">', contentBefore: '', breakAfter: false },
-            startDate: { tag: '<span class="start-date">', contentBefore: 'Date: ', breakAfter: false },
+            startDate: { tag: '<span class="start-date">', contentBefore: 'Datá: ', breakAfter: false },
             time: { tag: '<span class="time">', contentBefore: ' @ ', breakAfter: true },
-            endDate: { tag: '<span class="end-date>', contentBefore: 'End date: ', breakAfter: true }
+            endDate: { tag: '<span class="end-date>', contentBefore: 'Dáta deiridh: ', breakAfter: true }
         }
     }
 
