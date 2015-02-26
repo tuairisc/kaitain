@@ -39,8 +39,18 @@ jQuery(function($) {
 
             html += tag;
             html += string;
-            html += (addClosingTag) ? tag.replace('<', '</').replace(/\sclass=.*/, '>') : '';
-            html += '\n';
+
+            if (addClosingTag) {
+                /* Remove all other characters from the tag, except for the tag
+                 * itself: e.g, 
+                 * In: '<br /><span class="location"> Location: '
+                 * Out: '</span>'
+                 */
+
+                html += tag.replace(/^.*</, '</').replace(/>.*$/, '>').replace(/\sclass=".*?"/, '');
+            }
+
+            // html += '\n';
 
             this.result.push(html);
         },
@@ -57,17 +67,17 @@ jQuery(function($) {
              * later changed.
              */
 
-            eventType: '<h5>',
-            eventTitle: '<h1>',
-            entryFee: '<span class="entry-fee">',
-            contactName: '<span class="contact-name">',
-            contactInformation: '<span class="contact-information">',
-            location: '<span class="location">',
-            county: '<span class="county">',
-            eventDescription: '<p class="description">',
-            startDate: '<span class="start-date">',
-            time: '<span class="time">',
-            endDate: '<span class="end-date>'
+            eventType: { tag: '<span class="type">', contentBefore: 'Category: ', breakAfter: true },
+            eventTitle: { tag: '<h4>', contentBefore: '', useBreak: false },
+            entryFee: { tag: '<span class="fee">', contentBefore: 'Entry fee: €', breakAfter: true },
+            contactName: { tag: '<span class="contact-name">', contentBefore: 'Contact: ', breakAfter: false },
+            contactInformation: { tag: '<span class="contact-info">', contentBefore: '', breakAfter: true },
+            location: { tag: '<span class="location">', contentBefore: 'Location: ', breakAfter: false },
+            county: { tag: '<span class="county">', contentBefore: ', Co. ', breakAfter: true },
+            eventDescription: { tag: '<p class="description">', contentBefore: '', breakAfter: false },
+            startDate: { tag: '<span class="start-date">', contentBefore: 'Date: ', breakAfter: false },
+            time: { tag: '<span class="time">', contentBefore: ' @ ', breakAfter: true },
+            endDate: { tag: '<span class="end-date>', contentBefore: 'End date: ', breakAfter: true }
         }
     }
 
@@ -87,8 +97,10 @@ jQuery(function($) {
         row = row.sanitize().split('","');
 
         $.each(row, function(i,v) {
-            // Sanitize extra quotation marks from each row item.
+            // Further parsing: Remove extra quotation marks and empty the time
+            // if it weren'r used.
             row[i] = v.replace('"', '');
+            row[i] = (row[i] === '00:00') ? '' : row[i];
         });
 
         $.each(header, function(i,v) {
@@ -170,7 +182,8 @@ jQuery(function($) {
          */
 
         for (var i = 0; i < provinces.length; i++) {
-            output.add('<h2>', provinces[i]);
+            output.add('<div class="province">', '', false);
+            output.add('<h1>', provinces[i]);
 
             $.each(events, function(k,v) {
                 if (v.province === provinces[i]) {
@@ -178,13 +191,19 @@ jQuery(function($) {
 
                     $.each(v, function(k,v) {
                         if (v && output.elements[k]) {
-                            output.add(output.elements[k], v);
+                            output.add(output.elements[k].tag, output.elements[k].contentBefore + v);
+
+                            if (output.elements[k].breakAfter) {
+                                output.add('<br />', '', false);
+                            }
                         }
                     });
 
                     output.add('</div>', '', false);
                 }
             });
+
+            output.add('</div>', '', false);
         }
     }
 
@@ -262,6 +281,7 @@ jQuery(function($) {
             event.stopPropagation();
             event.preventDefault();
             $(this).removeClass(dropbox.drag);
+            $(dropbox.output).val();
 
             if (event.originalEvent.dataTransfer.files[0].type === 'text/csv') {
                 // \o/ Magic \o/
@@ -270,10 +290,6 @@ jQuery(function($) {
                 return false;
             }
         });
-
-        $(dropbox.output).focus(function() {
-            this.setSelectionRange(0, this.value.length);
-        })
     } else {
         $(dropbox.input).remove();
         $(dropbox.output).remove();
