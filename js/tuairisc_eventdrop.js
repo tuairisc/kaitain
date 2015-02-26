@@ -209,6 +209,7 @@ jQuery(function($) {
 
     function workMagic(file) {
         var reader = new FileReader();
+        $('textarea').first().val('');
 
         reader.onload = function(event) {
             /* 
@@ -281,7 +282,6 @@ jQuery(function($) {
             event.stopPropagation();
             event.preventDefault();
             $(this).removeClass(dropbox.drag);
-            $(dropbox.output).val();
 
             if (event.originalEvent.dataTransfer.files[0].type === 'text/csv') {
                 // \o/ Magic \o/
