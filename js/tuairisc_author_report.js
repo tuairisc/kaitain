@@ -10,7 +10,7 @@ jQuery(function($) {
         elements: {
             form: '#author-report',
             error: '#author-error',
-            input: 'input:text'
+            input: '#author-report input:text'
         },
         validated: [],
         incomplete: 'Please fill in all form fields!',
@@ -59,7 +59,7 @@ jQuery(function($) {
         form.validated = [];
         $(form.elements.error).empty();
         
-        $(form.elements.form).find('input:text').each(function() {
+        $(form.elements.input).each(function() {
             if ($(this).val().length == 0) {
                 form.error(form.incomplete);
                 return false;
@@ -68,6 +68,6 @@ jQuery(function($) {
             }
         });
 
-        return (form.validated.allTrue() && form.validated.length == 6);
+        return (form.validated.allTrue() && form.validated.length == form.elements.input.length);
     });
 });
