@@ -8,10 +8,10 @@ jQuery(function($) {
     }
 
     var provinces = [
-        'Connacht',
-        'Lenister',
-        'Munster',
-        'Ulster'
+        'Connachta',
+        'Laighin',
+        'Mumhain',
+        'Ulaidh'
     ];
 
     String.prototype.sanitize = function() {
@@ -122,41 +122,41 @@ jQuery(function($) {
         var province = '';
 
         switch (county.toLowerCase()) {
-            case 'galway':
-            case 'leitrim':
-            case 'mayo':
-            case 'roscommon':
-            case 'sligo':
+            case 'gaillimh':
+            case 'liatroim':
+            case 'maigh eo':
+            case 'ros comáin':
+            case 'sligeach':
                 province = provinces[0]; break;
-            case 'clare':
-            case 'cork':
-            case 'kerry':
-            case 'limerick':
-            case 'tipperary':
-            case 'waterford':
+            case 'an clár':
+            case 'corcaigh':
+            case 'ciarraí':
+            case 'luimneach':
+            case 'tiobraid árainn':
+            case 'port láirge':
                 province = provinces[1]; break;
-            case 'antrim':
-            case 'armagh':
-            case 'cavan':
-            case 'donegal':
-            case 'down':
-            case 'fermanagh':
-            case 'derry':
-            case 'monaghan':
-            case 'tyrone':
+            case 'aontroim':
+            case 'ard mhacha':
+            case 'an cabhán':
+            case 'dún na ngall':
+            case 'an dún':
+            case 'fear manach':
+            case 'doire':
+            case 'muineachán':
+            case 'tír eoghain':
                 province = provinces[2]; break;
-            case 'carlow':
-            case 'dublin':
-            case 'kildare':
-            case 'kilkenny':
+            case 'ceatharlach':
+            case 'áth cliath':
+            case 'cill dara':
+            case 'cill chainnigh':
             case 'laois':
-            case 'longford':
-            case 'louth':
-            case 'meath':
-            case 'offaly':
-            case 'westmeath':
-            case 'wexford':
-            case 'wicklow':
+            case 'longfort':
+            case 'lú':
+            case 'an mhí':
+            case 'uibh fhailí':
+            case 'an iarmhí':
+            case 'loch garman':
+            case 'cill mhantáin':
                 province = provinces[3]; break;
             default:
                 break;
