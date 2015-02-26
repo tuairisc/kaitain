@@ -94,6 +94,26 @@ textarea.event-output {
     width: 100%;
 }
 
+div.province {
+    margin-bottom: $bottom_default * 2;
+}
+
+div.event {
+    span.contact-info {
+        &:before {
+            content: ' (';
+        }
+
+        &:after {
+            content: ')';
+        }
+    }
+
+    span.bold {
+        font-weight: bold;
+    }
+}
+
 /* Mailing List Link
  * ----------------- */
 
