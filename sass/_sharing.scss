@@ -10,22 +10,6 @@
     the links will open in a browser, but not the native 
     applications. So there is fundamentally no reason to show them.
 
-    You can choose from:
-
-    Colour      Class       Service
-    -------------------------------
-    #f5756c     .email      Email
-    #3b5998     .facebook   Facebook     
-    #ff0084     .flickr     Flickr
-    #333        .github     GitHub
-    #dd4b39     .google     Google+
-    #3f729b     .instagram  Instagram
-    #0976b4     .linkedin   LinkedIn
-    #cc2127     .interest   Pinterest
-    #35465c     .tumblr     Tumblr
-    #55acee     .twitter    Twitter
-    #b31217     .youtube    YouTube
-
     The menu takes the form of a horizontal ul.
     Just drop in links as so:
 
@@ -36,80 +20,31 @@
     </ul>
  */
 
+$social: (
+    comments: (#30b351, '../images/social/comments.png'),
+    email: (#f5756c, '../images/social/email.png'),
+    facebook: (#3B5998, '../images/social/facebook.png'),
+    flickr: (#ff0084, '../images/social/flickr.png'),
+    github: (#666666, '../images/social/github.png'),
+    google: (#dd4b39, '../images/social/google.png'),
+    instagram: (#3f729b, '../images/social/instagram.png'),
+    linkedin: (#0976b4, '../images/social/linkedin.png'),
+    pinterest: (#cc2127, '../images/social/pinterest.png'),
+    print: (#007aaf, '../images/social/print.png'),
+    reddit: (#ff5700, '../images/social/reddit.png'),
+    rmwb: (#343537, '../images/social/beard.png'),
+    rss: (#ff6600, '../images/social/rss.png'),
+    tumblr: (#35465c, '../images/social/tumblr.png'),
+    twitter: (#55acee, '../images/social/twitter.png'),
+    youtube: (#b31217, '../images/social/youtube.png')
+);
+
 ul.mshare {
-    .comments { 
-        background-color: #30b351;
-        background-image: url('../images/social/comments.png'); 
-    }
-
-    .email { 
-        background-color: #f5756c;
-        background-image: url('../images/social/email.png'); 
-    }
-
-    .facebook { 
-        background-color: #3B5998;
-        background-image: url('../images/social/facebook.png');
-    }
-
-    .flickr { 
-        background-color: #ff0084;
-        background-image: url('../images/social/flickr.png');
-    }
-
-    .github { 
-        background-color: #333;
-        background-image: url('../images/social/github.png');
-    }
-
-    .google { 
-        background-color: #dd4b39;
-        background-image: url('../images/social/google.png');
-    } 
-
-    .instagram { 
-        background-color: #3f729b;
-        background-image: url('../images/social/instagram.png');
-    } 
-
-    .linkedin { 
-        background-color: #0976b4;
-        background-image: url('../images/social/linkedin.png');
-    } 
-
-    .pinterest { 
-        background-color: #cc2127;
-        background-image: url('../images/social/pinterest.png');
-    } 
-
-    .print { 
-        background-color: #007aaf;
-        background-image: url('../images/social/print.png');
-    } 
-
-    .reddit {
-        background-color: #ff5700;
-        background-image: url('../images/social/reddit.png');
-    }
-
-    .rss { 
-        background-color: #ff6600;
-        background-image: url('../images/social/rss.png');
-    } 
-
-    .tumblr { 
-        background-color: #35465c;
-        background-image: url('../images/social/tumblr.png');
-    } 
-
-    .twitter { 
-        background-color: #55acee;
-        background-image: url('../images/social/twitter.png');
-    } 
-
-    .youtube { 
-        background-color: #b31217;
-        background-image: url('../images/social/youtube.png');
+    @each $value, $key in $social {
+        .#{$value} {
+            background-color: nth($key, 1);
+            background-image: url(nth($key, 2));
+        }
     }
 }
 
