@@ -68,6 +68,6 @@ jQuery(function($) {
             }
         });
 
-        return (form.validated.allTrue() && form.validated.length == form.elements.input.length);
+        return (form.validated.allTrue() && form.validated.length == $(form.elements.input).length);
     });
 });
