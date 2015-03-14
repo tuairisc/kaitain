@@ -12,6 +12,7 @@
     <?php if ((is_home()) && option::get('featured_enable') == 'on' ) { ui::js("flexslider"); } ?>
 </head>
 <body <?php body_class(); ?>>
+<body <?php body_class(); ?>>
     <div class="inner-wrap">
 
         <?php // AdRotate group 1
