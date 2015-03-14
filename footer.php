@@ -33,9 +33,7 @@
     <script type="text/javascript">
         <?php if (option::get('featured_enable') == 'on' ) :  /* Main Slider */ ?>
             jQuery(document).ready(function() {
-
-                if ( jQuery('.slides li').length > 0 ) {
-
+                if (jQuery('.slides li').length > 0) {
                     jQuery('#slides').flexslider({
                         controlNav: false,
                         directionNav: true,
@@ -48,20 +46,26 @@
                         <?php if ( option::get('featured_rotate') == 'on' ) echo 'slideshowSpeed: ' . option::get('featured_interval') . ','; ?>
                         pauseOnAction: true,
                         animationSpeed: 10,
-                        start: function(slider){
+                        start: function(slider) {
                             jQuery('#slider_nav .item').hover(function(){
                                 var id = getPostIdClass(this);
-                                if ( id <= 0 ) return;
 
-                                var index = slider.slides.index( slider.slides.filter('.' + id) );
+                                if (id <= 0) {
+                                    return;
+                                }
+
+                                var index = slider.slides.index(slider.slides.filter('.' + id));
 
                                 slider.direction = (index > slider.currentSlide) ? 'next' : 'prev';
                                 slider.flexAnimate(index, slider.pauseOnAction);
                             });
                         },
-                        before: function(slider){
-                            var id = getPostIdClass( slider.slides.eq(slider.animatingTo) );
-                            if ( id <= 0 ) return;
+                        before: function(slider) {
+                            var id = getPostIdClass(slider.slides.eq(slider.animatingTo));
+
+                            if (id <= 0) {
+                                return;
+                            }
 
                             jQuery('#slider_nav .item').removeClass('current');
                             jQuery('#slider_nav .item.' + id).addClass('current');
@@ -69,6 +73,7 @@
                             if ( jQuery('#slider_nav .row').length > 1 ) {
                                 var navSlider = jQuery('#slider_nav').data('flexslider'),
                                     currPage = navSlider.slides.index( navSlider.slides.find('.item.' + id).parent('.row') );
+
                                 navSlider.direction = (currPage > navSlider.currentSlide) ? 'next' : 'prev';
                                 navSlider.flexAnimate(currPage, navSlider.pauseOnAction);
                             }
@@ -91,7 +96,6 @@
                         pauseOnAction: true,
                         animationSpeed: 10
                     });
-
                 }
             });
         <?php endif; ?>
