@@ -53,9 +53,7 @@ function tuairisc_scripts() {
     // Über-crude operating system and browser detection using user agent strins.
     wp_enqueue_script('tuairisc-browser-detect', get_stylesheet_directory_uri() . '/js/tuairisc_browser_detect.js', array(), '1.0', true);
     // Styling and loading for jQuery scripts.
-    wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_better_adrotate.js', array('jquery'), '1.0', true);
-    // Turned off while I config the CSS. 
-    // wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_adrotate.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_adrotate.js', array('jquery'), '1.0', true);
     // Event parser.
     wp_enqueue_script('tuairisc-eventdrop', get_stylesheet_directory_uri() . '/js/tuairisc_eventdrop.js', array('jquery'), '1.0', true);
     // Some styling isn't handled correctly by CSS.
