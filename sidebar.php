@@ -28,9 +28,11 @@
 
     <?php // AdRotate groups 2, 4 and 5 
     if (function_exists('adrotate_group')) {
+        printf('<div class="sidebar-adverts">');
         printf('%s', adrotate_group(2));
         printf('%s', adrotate_group(4));
         printf('%s', adrotate_group(5));
+        printf('</div>');
     } ?>
     
     <div class="clear"></div>
