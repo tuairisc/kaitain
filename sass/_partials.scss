@@ -12,36 +12,22 @@
 
 %smooth-gradient {
     // Gradient via http://www.colorzilla.com/gradient-editor/
-    background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); 
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0))); 
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); 
-    background: -o-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); 
-    background: -ms-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); 
-    background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); 
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); 
+    @include prefix_value(background, inear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%));
 }
 
 %noselect {
     cursor: default;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    @include prefix(user-select, none);
 }
 
 %top-box-shadow {
     // Add a box shadow to the top of an element.
-    -webkit-box-shadow: 0 0 60px 20px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0 0 60px 20px rgba(0,0,0,0.75);
-    box-shadow: 0 0 60px 20px rgba(0,0,0,0.75);    
+    @include prefix(box-shadow, 0 0 60px 20px rgba(0,0,0,0.75));
 }
 
 %no-box-shadow {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+    @include prefix(box-shadow, none);
 }
 
 /*
@@ -58,9 +44,7 @@
 %border-box {
     /* ALL GLORY TO THE BORDER BOX-this is used across the site in a great many
      * spots where I need to pad an element without increasing the size. */
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+    @include prefix(box-sizing, border-box);
 }
 
 %clearfix {
@@ -88,55 +72,6 @@
     // the child of a parent with both.  
     margin: 0;
     padding: 0;
-}
-
-/* 
- * Flexible Columns
- * ----------------
- * Used in the site's footer. These ultimately weren't used on the index page as
- * the final layout was rather convoluted. 
-*/
-
-.split {
-    @extend %clearfix;
-}
-
-.twothirds {
-    width: 66%;
-}
-
-.onethird {
-    width: 33%;
-}
-
-.quarter {
-    width: 25%; 
-}
-
-.half {
-    width: 50%;
-}
-
-.onefifth {
-    width: 66%;
-}
-
-.twothirds, .onethird, .quarter, .half, .onefifth {
-    @extend %border-box;
-    float: left;
-    height: 100%;
-    min-height: 1px;
-    padding-right: $bottom_default;
-
-    &:last-child {
-        padding-right: 0;
-    }
-
-    @include breakpoint(smartphone) {
-        float: none;
-        margin-bottom: $bottom_default;
-        width: 100%;
-    } 
 }
 
 /*
