@@ -85,19 +85,20 @@
  */
 
 .foras-attribution {
-    background: right top/auto 100% no-repeat url('../images/foras_na_gaeilge_logo.png');
-    height: 60px;
-    width: 100%;
-
-    @include breakpoint(max, 768) {
-        background-position: left top;
-    }
-
-    @include breakpoint(smartphone) {
-        margin-top: $bottom_default;
-    }
+    background: center center/100% auto no-repeat url('../images/foras_na_gaeilge_logo.png');
+    margin: 0 auto;
+    @include flex_size(100px, 0.8);
+    display: block;
 
     a {
-        @extend %block;
+        @include flex_size(100%, 1);
     }
+
+    // @include breakpoint(max, 768) {
+    //     background-position: left top;
+    // }
+
+    // @include breakpoint(smartphone) {
+    //     margin-top: $bottom_default;
+    // }
 }
