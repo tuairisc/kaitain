@@ -39,6 +39,30 @@
     }
 }
 
+@mixin prefix($property, $value) {
+    // Automatically add vendor prefixed to a CSS property.
+    -khtml-#{$property}: $value;
+    // Mozilla Firefox.
+    -moz-#{$property}: $value;
+    // Microsoft Internet Explorer.
+    -ms-#{$property}: $value;
+    // Webkit Browsers (Chrome, Safari);
+    -webkit-#{$property}: $value;
+    #{$property}: $value;
+}
+
+@mixin prefix_value($property, $value) {
+    // Automatically add vendor prefixed to a CSS value.
+    #{$property}: -khtml-#{$value};
+    // Mozilla Firefox.
+    #{$property}: -moz-#{$value};
+    // Microsoft Internet Explorer.
+    #{$property}: -ms-#{$value};
+    // Webkit Browsers (Chrome, Safari);
+    #{$property}: -webkit-#{$value};
+    #{$property}: $value;
+}
+
 @mixin flex_size($width, $ratio) {
     // Ratio should be between 0 and foo.
     display: inline-block;
@@ -65,46 +89,31 @@
 }
 
 @mixin columns($count, $gap) {
-    // Mozilla Firefox
-    -moz-column-count: $count;
-    -moz-column-gap: $gap;
-    // Webkit Browsers.
-    -webkit-column-count: $count;
-    -webkit-column-gap : $gap;
-    // CSS 3
-    column-count: $count;
-    column-gap: $gap;
+    @include prefix(column-count, $count);
+    @include prefix(column-gap, $gap);
 }
 
-@mixin placeholder_style($color, $font: '') {
-    // See: http://css-tricks.com/snippets/css/style-placeholder-text/
-    input[placeholder], textarea[placeholder] {
-        color: $color;
-        font: $font;
+@mixin placeholder_style() {
+    &::-webkit-input-placeholder {
+       @content;
     }
 
-    input::-moz-placeholder {
-        // Mozilla Firefox 19+
-        color: $color;
-        font: $font;
+    &::-webkit-input-placeholder {
+        @content;
     }
 
-    input:-moz-placeholder {
-        // Mozilla Firefox 19+
-        color: $color;
-        font: $font;
+    &:-moz-placeholder {
+        @content;
+        opacity: 1;
     }
 
-    input:-ms-input-placeholder {
-        // Internet Explorer 10+
-        color: $color;
-        font: $font;
+    &::-moz-placeholder {
+        @content;
+        opacity: 1;
     }
 
-    input::-webkit-input-placeholder {
-        // Webkit browsers-Chrome and Opera
-        color: $color;
-        font: $font;
+    &:-ms-input-placeholder {
+        @content;
     }
 }
 
