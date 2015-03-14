@@ -13,9 +13,9 @@
 #footer {
     background: #fff left bottom/auto 65px no-repeat url('../images/rainbow_footer.svg');
     height: auto;
-    padding: 0 4% $bottom_default * 5 4%;
     /* The site is unbalanced. */
     margin-bottom: 0;
+    padding: 0 4% $bottom_default * 5 4%;
 
     @include breakpoint(smartphone) {
         background-image: none;
@@ -60,9 +60,20 @@
 
 .widget-area {
     width: 100%;
+    @include prefix_value(display, flex);
+    @include prefix(flex-direction, row);
+    @include prefix(flex-wrap, nowrap);
 
     @include breakpoint(smartphone) {
-        margin-bottom: $bottom_default;
+        @include prefix(flex-direction, column);
+        margin-bottom: 20px;
+    }
+
+    .widget {
+        float: none;
+        min-height: 1px;
+        width: initial;
+        @include prefix(flex, 1);
     }
 }
 
