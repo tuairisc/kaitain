@@ -51,41 +51,45 @@
 /* General Advert Styles */
 
 .g {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-
-    img {
-        display: block;
-        height: auto;
-        max-width: 100%;
-    }
+    @extend %zero;
 }
 
 .g-1, .g-3 {
     padding: 20px 4%;
 }
 
-.g-2, .g-4, .g-5 {
-    /* Sidebar column adverts */
-    margin-bottom: 20px;
+.sidebar-adverts {
+    // Importrant: width collapses otherwise.
     width: 100%;
+    @include prefix_value(display, flex);
+    @include prefix(flex-direction, column);
+    @include prefix(flex-wrap, nowrap);
 
     @include breakpoint(portrait) {
-        float: left;
-        width: 32.667%;
-    }
-
-    &:not(.g-5) {
-        @include breakpoint(portrait) {
-            margin-right: 1%;
-        }
+        // Spread out each of the three boxes evenly in tablet portrait mode.
+        @include prefix(flex-direction, row);
+        @include prefix(justify-content, space-between);
     }
 
     @include breakpoint(smartphone) {
-        float: none;
-        margin-right: 0;
-        width: 99%;
+        @include prefix(flex-direction, column);
+    }
+
+    > div {
+        // Advert groups: .g-2, .g-4 and .g-5
+        @include prefix(flex, 1);
+        margin-bottom: 20px;
+
+        @include breakpoint(portrait) {
+            @include prefix(flex, 0 1 32.5%);
+        }
+
+        @include breakpoint(smartphone) {
+            /* There is a bug on the iPhone in (at least) iOS 8 where the height
+             * collapses to 0 the content of a column flexbox is set to anything
+             * but 1/auto. */
+            @include prefix(flex, 1);
+        }
     }
 }
 
@@ -95,21 +99,16 @@
     display: none;
 }
 
-/* This is the actual advert div. Structure is:
- * 
- *  .tuarisic-advert
- *      a
- */
-
 .tuairisc-advert {
-    /* Background image is set via tuairisc_adrotate.js */
-    @extend %border-box;
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin: 0 auto;
-
     a {
-        @extend %block;
+        display: block;
+        text-align: center;
+    }
+
+    img {
+        // The actual advert div.
+        height: auto;
+        margin: 0 auto;
+        max-width: 100%;
     }
 }
