@@ -40,7 +40,7 @@ jQuery(window).ready(function($) {
 
         var advert = '', fallbackImage = '';
         // Monsensical number that be used for an advert, to avoid false impressions.
-        classes[1] = 'a-0000000';
+        classes[1] = 'a-0';
 
         advert += '<div id="' + fallback.identifier + '-' + fallback.id + '" '; 
         advert += 'class="' + fallback.identifier + ' ';
@@ -84,7 +84,7 @@ jQuery(window).ready(function($) {
             var $advert = $(this).parent();
 
             // TODO
-            console.log(error, $advert);
+            // console.log(error, $advert);
 
             if (!$advert.hasClass('fallback')) {
                 replaceAdvert($advert); 
