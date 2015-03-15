@@ -12,6 +12,9 @@
  * .g-5    Sidebar #3
  */
 
+// Set by the theme. 
+$width_breakpoint: 768px;
+
 /* 
  * General Advert Styles 
  * ---------------------
@@ -73,14 +76,14 @@
         @include prefix(flex, 1);
         margin-bottom: 20px;
 
+        // @include breakpoint(max, $width_breakpoint) {
         @include breakpoint(portrait) {
             @include prefix(flex, 0 1 32.5%);
         }
 
         @include breakpoint(smartphone) {
             /* There is a bug on the iPhone in (at least) iOS 8 where the height
-             * collapses to 0 the content of a column flexbox is set to anything
-             * but 1/auto. */
+             * collapses to 0 if flex is set to anything but 1. */
             @include prefix(flex, 1);
         }
     }
