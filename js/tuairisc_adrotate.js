@@ -1,36 +1,33 @@
 /* global $:false */
 
 jQuery(window).ready(function($) {
+    /*
+     * AdRotate Fallback
+     * -----------------
+     * If an advertisement errors or otherwise fails to display, replce it with
+     * a fallback. If the fallback fails, remove the advert entirely. 
+     */
     'use strict';
 
-    var ads = {
-        group: '.g',
-        groups: {
-            banner: [ '.g-1', '.g-3' ],
-            sidebar: [ '.g-2', '.g-4', '.g-.5' ]
-        },
-        tuairisc: '.tuairisc-advert',
-        type: {
-            dynamic: '.g-dyn',
-            single: '.g-single'
-        }, 
-        suffix: {
-            desktop: '_desktop_',
-            mobile:  '_mobile_'
-        }
-    };
-
     var fallback = {
-        link: '//' + window.location.hostname + '/catnip.bhalash.com/glac-fograi-linn/',
+        /* 
+         * Fallback Attributes
+         * -------------------
+         * Target link and images related to the fallback advertisement.
+         */
         identifier: 'fallback',
+        id: 0,
         title: 'Tuairisc',
+        link: '//' + window.location.hostname + '/glac-fograi-linn/',
         image: {
             mobile: '//' + window.location.hostname + '/wp-content/uploads/tuairisc_fallback_mobile_.gif', 
             desktop: '//' + window.location.hostname + '/wp-content/uploads/tuairisc_fallback_desktop_.gif'
         },
         classes: {
             dynamic: 'g-dyn',
-            tuairisc: 'tuairisc-advert'
+            tuairisc: 'tuairisc-advert',
+            desktop: 'desktop',
+            mobile: 'mobile'
         }
     };
 
@@ -38,22 +35,15 @@ jQuery(window).ready(function($) {
         /*
          * Fallback Advert
          * ---------------
-         * Generate fallback advert on occasions where it is required within a 
-         * group.
+         * Generate HTML for the fallback advert.
          */
 
-        // Advert wrapper div and repalcement image.
         var advert = '', fallbackImage = '';
+        // Monsensical number that be used for an advert, to avoid false impressions.
         classes[1] = 'a-0000000';
 
-        if ($('html').hasClass('mobile')) {
-            fallbackImage = fallback.image.mobile;
-        } else {
-            fallbackImage = fallback.image.desktop;
-        }
-
-        // Add type.
-        advert += '<div class="' + fallback.identifier + ' ';
+        advert += '<div id="' + fallback.identifier + '-' + fallback.id + '" '; 
+        advert += 'class="' + fallback.identifier + ' ';
 
         $.each(classes,function(i, v) {
             advert += v;
@@ -61,14 +51,13 @@ jQuery(window).ready(function($) {
         });
 
         advert += '">';
-        // Advert child div.
-        advert += '<div class="' + fallback.classes.tuairisc + '">';
         // Advert anchor.
-        advert += '<a href="' + fallback.link + '" target="_blank" title="' + fallback.title + '">';
+        advert += '<a class="' + fallback.classes.tuairisc + '" href="' + fallback.link + '" target="_blank" title="' + fallback.title + '">';
         // Advert image.
-        advert += '<img src="' + fallbackImage + '" alt="' + fallback.title + '" />';
+        advert += '<img class="' + fallback.classes.desktop + '" src="' + fallback.image.desktop + '" alt="' + fallback.title + '" />';
+        advert += '<img class="' + fallback.classes.mobile + '" src="' + fallback.image.mobile + '" alt="' + fallback.title + '" />';
         // Close anchor, parent and child div.
-        advert += '</a></div></div>';
+        advert += '</a></div>';
 
         return advert;
     }
@@ -78,48 +67,33 @@ jQuery(window).ready(function($) {
             display = $(advert).parent().css('display');
 
         $(advert).parent().replaceWith(fallbackAdvert(classes));
-        $(advert).parent().hide();
+        /* New advertisement should inherit the display of the old, in case it is
+         * is a dyngroup. */
+        $(fallback.identifier + '-' + fallback.id++).hide();
     }
 
-    function logReplacement(advert, error) {
-        // TODO
-        console.log(advert, error); 
-    }
-
-    $(ads.tuairisc).each(function() {
+    $('.' + fallback.classes.tuairisc).children('img').each(function() {
         /* 1. Replace advert with fallback if it doesn't exist.
          * 2. Remove entire advert if fallback fails to load.
          * 3. This should cause a cascade which will remove every advert if 
-         *    Everything Goes Wrong. */
-        var $advert = $(this),
-            $image = $(this).find('img');
+         *    Everything Goes Wrong.
 
-        $image.bind('error', function(error) {
+         *    TODO:
+         * 4. Log failure details to the console if the viewer is logged in.
+         * 5. Display errors on the page. */
+
+        $(this).bind('error', function(error) {
+            var $advert = $(this).parent();
+
+            // TODO
+            console.log(error, $advert);
+
             if (!$advert.hasClass('fallback')) {
                 replaceAdvert($advert); 
-                logReplacement($advert, error);
             } else {
                 // If the fallback fails, all is lost.
                 $advert.remove();
             }
-        });
-    });
-
-    $.each(ads.groups.banner, function(k, v) {
-        $(v).children('div').each(function() {
-            var $advert = $(this),
-                $image = $(this).find('img'),
-                $src = $image.attr('src');
-
-            $image.bind('load', function() {
-                if ($src.indexOf(ads.suffix.mobile) == -1 && $src.indexOf(ads.suffix.desktop) == -1) {
-                    replaceAdvert($advert);
-                } else if ($('html').hasClass('mobile') && $src.indexOf(ads.suffix.mobile) === -1) {
-                    $image.attr('src', $src.replace(new RegExp(ads.suffix.desktop, 'g'), ads.suffix.mobile));
-                } else if (!$('html').hasClass('mobile') && $src.indexOf(ads.suffix.desktop) === -1) {
-                    $image.attr('src', $src.replace(new RegExp(ads.suffix.mobile, 'g'), ads.suffix.desktop));
-                }
-            });
         });
     });
 });

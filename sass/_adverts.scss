@@ -2,8 +2,6 @@
  * AdRotate Groups
  * ---------------
  * AdRotate's groups are numeric classes from .g-1 to .g-∞
- * It's stock CSS is awful and loaded at run time via JS. This
- * section hopefully overrides all of those stock rules.
  * 
  * Group   Location
  * ------------------
@@ -12,54 +10,49 @@
  * .g-3    Footer
  * .g-4    Sidebar #2
  * .g-5    Sidebar #3
- * 
- * If the AdRotate Pro plugin is ever updated then this CSS will break. 
- * AdRotate injects its own CSS upon page load. I have prevented this behaviour
- * with the following alteration of its files:
- * 
- * adrotate.php:
- * -------------
- * Commented line 68:
- *     Before:
- *         add_action('wp_head', 'adrotate_custom_css');
- *     After:
- *         // add_action('wp_head', 'adrotate_custom_css');
- *
- * If this line is uncommented then AdRotate Pro will inject its own CSS on
- * load. This is a Bad Thing which will bork advert display.
- * 
- * ./library/jquery.adrotate.dyngroup.js:
- * --------------------------------------
- * Altered line 58:
- *      Before:
- *          $cont.find(".c-" + counter).fadeIn(300)
- *      After:
- *          $cont.find(".c-" + counter).show()
- * 
- * Altered line 61:
- *      Before:
- *          $cont.find(".c-" + index).fadeOut(300)
- *      After:
- *          $cont.find(".c-" + index).hide()
- * 
- * This stock behaviour causes the next advert in rotation to appear before the
- * previous one disappears. It causes a brief "stack" of one advert atop the 
- * other. It would've made sense to do the second fade as a callback to the 
- * first, but what would I know, eh? 
- * Regardless-if AdRotate Pro is updated, these changes will be wiped out. */
+ */
 
-/* General Advert Styles */
+/* 
+ * General Advert Styles 
+ * ---------------------
+ */
 
 .g {
     @extend %zero;
 }
 
 .g-1, .g-3 {
+    /* 
+     * Banner Advertisements
+     * ---------------------
+     * Banner advertismeents have two images, .mobile and .desktop, and which 
+     * are swapped here.
+     * Sidebar advertisements have neither class and just display.
+     */
     padding: 20px 4%;
+
+    img.mobile {
+        display: none;
+
+        @include breakpoint(smartphone) {
+            display: initial;
+        }
+    }
+
+    img.desktop {
+        display: initial; 
+
+        @include breakpoint(smartphone) {
+            display: none;
+        }
+    }
 }
 
 .sidebar-adverts {
-    // Importrant: width collapses otherwise.
+    /*
+     * Sidebar Advertisements
+     * ----------------------
+     */
     width: 100%;
     @include prefix_value(display, flex);
     @include prefix(flex-direction, column);
@@ -76,7 +69,7 @@
     }
 
     > div {
-        // Advert groups: .g-2, .g-4 and .g-5
+        // Sidebar adverts groups: .g-2, .g-4 and .g-5
         @include prefix(flex, 1);
         margin-bottom: 20px;
 
@@ -95,15 +88,19 @@
 
 .g-dyn {
     /* Dynamic adverts on rotation. AdRotate will toggle each g-dyn block in 
-     * sequence, but they initially all need to be hidden. */
+     * sequence, but they initially all need to be hidden on or rare occasions
+     * the advert will "jump". */
     display: none;
 }
 
-.tuairisc-advert {
-    a {
-        display: block;
-        text-align: center;
-    }
+a.tuairisc-advert {
+    /*
+     * Tuairisc Advertisement
+     * ----------------------
+     */
+
+    display: block;
+    text-align: center;
 
     img {
         max-width: 100%;
