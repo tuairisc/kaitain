@@ -63,9 +63,7 @@ jQuery(window).ready(function($) {
     }
 
     function replaceAdvert(advert) {
-        var classes = $(advert).parent().attr('class').split(' '),
-            display = $(advert).parent().css('display');
-
+        var classes = $(advert).parent().attr('class').split(' ');
         $(advert).parent().replaceWith(fallbackAdvert(classes));
         /* New advertisement should inherit the display of the old, in case it is
          * is a dyngroup. */
