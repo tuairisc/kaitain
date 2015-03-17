@@ -63,11 +63,22 @@ jQuery(window).ready(function($) {
     }
 
     function replaceAdvert(advert) {
-        var classes = $(advert).parent().attr('class').split(' ');
-        $(advert).parent().replaceWith(fallbackAdvert(classes));
-        /* New advertisement should inherit the display of the old, in case it is
-         * is a dyngroup. */
-        $(fallback.identifier + '-' + fallback.id++).hide();
+        /* 
+         * Replace Advertisement
+         * ---------------------
+         * 1. Get old advert attributes.
+         * 2. Replace it.
+         * 3. Pass old display state to replacement.
+         * 4. Increment ID.
+         */
+        var $advert = $(advert).parent(),
+            classes = $advert.attr('class').split(' '),
+            display = $advert.css('display');
+
+        $advert.replaceWith(fallbackAdvert(classes));
+        var $fallback = $('#' + fallback.identifier + '-' + fallback.id);
+        $fallback.css('display', display);
+        fallback.id++;
     }
 
     $('.' + fallback.classes.tuairisc).children('img').each(function() {
@@ -82,9 +93,6 @@ jQuery(window).ready(function($) {
 
         $(this).bind('error', function(error) {
             var $advert = $(this).parent();
-
-            // TODO
-            // console.log(error, $advert);
 
             if (!$advert.hasClass('fallback')) {
                 replaceAdvert($advert); 
