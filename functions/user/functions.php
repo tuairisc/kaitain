@@ -230,7 +230,7 @@ function replace_breaks($excerpt) {
     return str_replace('<br />', '</p><p>', $excerpt);
 }
 
-function get_avatar_url($user_id, $size) {
+function get_avatar_url($user_id = null, $size = null) {
     /* Return the hyperlink for the given avatar, without the <img /> code. */
 
     if ('' == $user_id) {
@@ -245,7 +245,7 @@ function get_avatar_url($user_id, $size) {
     return preg_replace('/(^.*src="|".*$)/', '', $avatar_url);
 }
 
-function has_local_avatar($user_id) {
+function has_local_avatar($user_id = null) {
     /* This site uses 'WP USer Avatar' for avatar control.
      * It serves avatars in this priority:
      *  

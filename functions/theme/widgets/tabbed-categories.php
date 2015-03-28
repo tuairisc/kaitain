@@ -25,6 +25,7 @@ class Tabbed_Widget extends WP_Widget {
         $title = apply_filters("widget_title", $instance["title"]);
         $category = $instance['category'];
         $count = $instance["count"];
+        $category_link = null;
  
         if ($category) {
             $category_link = get_category_link($category);
