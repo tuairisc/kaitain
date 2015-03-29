@@ -31,6 +31,8 @@ $widget_collapsed: 48%;
     }
 
     article {
+        margin-bottom: $bottom_default * 0.5;
+
         @include webkit(flex, 0 1 $widget_full);
 
         @include breakpoint(max, $homepage_breakpoint) {
@@ -39,12 +41,6 @@ $widget_collapsed: 48%;
 
         @include breakpoint(smartphone) {
             @include webkit(flex, 1);
-        }
-
-        &:not(:last-child) {
-            @include breakpoint(max, $homepage_breakpoint) {
-                margin-bottom: $bottom_default * 0.5;
-            }
         }
     }
 }
