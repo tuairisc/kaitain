@@ -47,6 +47,52 @@
 }
 
 /* 
+ * Tuairisc Authors Widget
+ * ----------------------- 
+ */
+
+.widget_tuairisc_authors {
+    width: 100% !important;
+
+    .tuairisc-author-list {
+        background: #e5e5e5;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+        padding: 15px;
+
+        h2 {
+            margin-bottom: 5px;
+        }
+    }
+
+    .tuairisc-author {
+        float: left;
+        width: 23.5%;
+
+        &:not(:last-child) {
+            margin-right: 2%;
+        }
+
+        .avatar {
+            @extend %cover-picture;
+            background-color: #000;
+            display: inline-block;
+            height: 0;
+            padding-bottom: 100%;
+            width: 100%;
+
+            &:not(:last-child) {
+                margin-right: 0.5%;
+            }
+
+            a {
+                @include flex_size(100%, 1);
+            }
+        }
+    }
+}
+
+/* 
  * Popular Posts Widget
  * -------------------- 
  */

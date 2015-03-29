@@ -28,9 +28,10 @@
             echo $before_widget;
         } ?>
 
-        <?php printf('<h2>%s</h2>', apply_filters('widget_title', $instance['widget_title'])); ?>
-        <div class="tuairisc-author-list">
-            <?php foreach ($author_query as $author) : ?>
+        <div class="tuairisc-author-list self-clear">
+            <?php printf('<h2>%s</h2>', apply_filters('widget_title', $instance['widget_title']));
+
+            foreach ($author_query as $author) : ?>
                 <div class="tuairisc-author">
                     <div class="avatar" style="background-image: url('<?php echo get_avatar_url($author->ID); ?>');" title="?php echo $author->display_name; ?>">
                         <a href="<?php echo get_author_posts_url($author->ID); ?>"></a>
