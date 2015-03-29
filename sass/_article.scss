@@ -24,6 +24,11 @@
     color: #000;
 }
 
+/*
+ * All Article Shared Rules
+ * ------------------------
+ */
+
 article {
     @extend %clearfix;
     @extend %border-box;
@@ -53,6 +58,11 @@ article {
     div.article-thumb {
         @extend %cover-picture;
     }
+
+    /*
+     * Article Header
+     * --------------
+     */
 
     header {
         @extend %clearfix;
@@ -87,6 +97,11 @@ article {
             font-weight: bold;
         }
     }
+
+    /*
+     * Article Content Body
+     * --------------------
+     */
 
     div.article-body {
         @extend %border-box;
@@ -141,6 +156,11 @@ article {
         }
     }
 }
+
+/*
+ * Full Single Post Article
+ * ------------------------
+ */
 
 article.full {
     padding: 0 4% $bottom_default 4%;
@@ -202,6 +222,11 @@ article.full {
     }
 }
 
+/*
+ * Non-main Archive Index Article
+ * ------------------------------
+ */
+
 article.archive {
     padding-bottom: $bottom_default * 2;
 
@@ -232,6 +257,11 @@ article.archive {
         margin: 0;
     }
 }
+
+/*
+ * Job Archive Index Article 
+ * -------------------------
+ */
 
 article.jobarchive {
     header, .text, p {
@@ -297,6 +327,11 @@ article.jobarchive {
     }
 }
 
+/*
+ * Lead Article Shared Rules
+ * -------------------------
+ */
+
 article.archive, article.jobarchive {
     padding-bottom: $bottom_default * 2;
 
@@ -305,6 +340,11 @@ article.archive, article.jobarchive {
         margin-bottom: $bottom_default * 2;
     }
 }
+
+/*
+ * Lead Archive Index Article 
+ * --------------------------
+ */
 
 article.leadarchive {
     div.article-thumb {
@@ -335,6 +375,11 @@ article.archive, article.leadarchive {
         }
     }
 }
+
+/*
+ * Homepage Lead Article 
+ * ---------------------
+ */
 
 article.lead {
     border-bottom: 1px solid $border_black;
@@ -383,27 +428,6 @@ article.lead {
 
         p {
             margin: 0;
-        }
-    }
-}
-
-article.featured {
-    box-sizing: border-box;
-    display: inline-block;
-    float: left;
-    margin-bottom: $bottom_default;
-    padding: 0 10px;
-    width: 50%;
-
-    &:first-child {
-        @include breakpoint(max, 950) {
-            padding-left: 0;
-        }
-    }
-
-    &:last-child {
-        @include breakpoint(max, 950) {
-            padding-right: 0;
         }
     }
 }

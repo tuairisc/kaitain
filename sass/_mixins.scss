@@ -39,38 +39,52 @@
     }
 }
 
+/*
+ * Vendor Property and Value Prefixes
+ * ----------------------------------
+ */
+
 @mixin prefix($property, $value) {
     // Automatically add vendor prefixed to a CSS property.
-    -khtml-#{$property}: $value;
-    // Mozilla Firefox.
     -moz-#{$property}: $value;
-    // Microsoft Internet Explorer.
     -ms-#{$property}: $value;
-    // Webkit Browsers (Chrome, Safari);
     -webkit-#{$property}: $value;
     #{$property}: $value;
 }
 
 @mixin prefix_value($property, $value) {
     // Automatically add vendor prefixed to a CSS value.
-    #{$property}: -khtml-#{$value};
-    // Mozilla Firefox.
     #{$property}: -moz-#{$value};
-    // Microsoft Internet Explorer.
     #{$property}: -ms-#{$value};
-    // Webkit Browsers (Chrome, Safari);
     #{$property}: -webkit-#{$value};
     #{$property}: $value;
 }
 
+@mixin webkit($property, $value) {
+    /* Flexbox rules need to be prefixed with -webkit for Safari Mobile. Using
+     * the general prefix mixin for flexbox cluttered up the compiled CSS with 
+     * useless rules. */
+    -webkit-#{$property}: $value;
+    #{$property}: $value;
+}
+
+@mixin webkit_value($property, $value) {
+    #{$property}: -webkit-#{$value};
+    #{$property}: $value;
+}
+
+/*
+ * Miscellaneous Mixins
+ * --------------------
+ */
+
 @mixin flex_size($width, $ratio) {
     // Ratio should be between 0 and foo.
-    display: inline-block;
     height: 0;
     padding-bottom: $width * $ratio;
     width: $width;
 }
-
+ 
 @mixin vertical_center($amount) {
     // Useful for vertically centering elements.
     padding-bottom: $amount;
