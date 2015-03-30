@@ -7,7 +7,7 @@
 %footer-text {
     color: #000;
     font: 11px $font_arial;
-    line-height: $bottom_default * 1.5;
+    line-height: $bottom-margin-19;
 }
 
 #footer {
@@ -15,11 +15,11 @@
     height: auto;
     /* The site is unbalanced. */
     margin-bottom: 0;
-    padding: 0 4% $bottom_default * 5 4%;
+    padding: 0 4% $bottom-margin-65 4%;
 
     @include breakpoint(smartphone) {
         background-image: none;
-        padding-bottom: $bottom_default * 2;
+        padding-bottom: $bottom-margin-26;
     }
 
     a {
@@ -93,12 +93,4 @@
     a {
         @include flex_size(100%, 1);
     }
-
-    // @include breakpoint(max, 768) {
-    //     background-position: left top;
-    // }
-
-    // @include breakpoint(smartphone) {
-    //     margin-top: $bottom_default;
-    // }
 }

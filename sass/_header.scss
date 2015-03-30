@@ -6,12 +6,12 @@
 
 #header {
     /* Override gradient on #header. */ 
-    @extend %border-box;
     @extend %clearfix;
     background: #fff center top/auto 6px no-repeat border-box url('../images/rainbow_strip.svg');
-    margin-bottom: $bottom_default * 2;
+    box-sizing: border-box;
+    margin-bottom: $bottom-margin-26;
     min-height: 70px;
-    padding: $bottom_default * 2 4% 0 4%;
+    padding: $bottom-margin-26 4% 0 4%;
     position: relative;
     width: 100%;
 
@@ -31,12 +31,12 @@
 
         > * {
             float: right;
-            margin-left: $bottom_default * 0.5;
+            margin-left: $bottom-margin-7;
 
             @include breakpoint(smartphone) {
                 float: left;
                 margin-left: 0;
-                margin-bottom: $bottom_default * 0.5;
+                margin-bottom: $bottom-margin-7;
             }
         }
 
@@ -53,7 +53,7 @@
         @include breakpoint(smartphone) {
             display: inline-block;
             position: initial;
-            margin-bottom: $bottom_default;
+            margin-bottom: $bottom-margin;
         }
 
         a {
@@ -75,7 +75,7 @@
         width: 278px;
 
         @include breakpoint(smartphone) {
-            margin-bottom: $bottom_default;
+            margin-bottom: $bottom-margin;
         }
     }
 

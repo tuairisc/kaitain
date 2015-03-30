@@ -74,7 +74,7 @@
 
 .event-drop {
     border: 3px dotted #bdbdbd;
-    margin-bottom: $bottom_default;
+    margin-bottom: $bottom-margin;
     overflow: hidden;
 
     h3 {
@@ -89,13 +89,13 @@
 }
 
 textarea.event-output {
-    @extend %border-box;
+    box-sizing: border-box;
     min-height: 300px;
     width: 100%;
 }
 
 div.province {
-    margin-bottom: $bottom_default * 2;
+    margin-bottom: $bottom-margin-26;
 }
 
 div.event {

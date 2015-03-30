@@ -20,6 +20,15 @@
  * 6. article.jobarchive - job archive index post.
  */
 
+// Archive width.
+$archive-width-25: 25%;
+$archive-width-35: 35%;
+$archive-width-65: 65%;
+$archive-width-75: 75%;
+
+$article-thumb-height-170: 170px;
+$article-thumb-height-325: 325px;
+
 .related_posts .title {
     color: #000;
 }
@@ -30,13 +39,16 @@
  */
 
 article {
-    @extend %clearfix;
-    @extend %border-box;
-    @extend %zero;
+    @extend %cleafix;
+    box-sizing: border-box;
+    // Remove border that Gazeti sets.
     border: 0;
     box-shadow: none;
     display: block;
+    margin: 0;
+    padding: 0;
     text-align: left;
+
 
     blockquote, li, p {
         a {
@@ -52,108 +64,109 @@ article {
         color: #000;
         font: 16px $font_georgia;
         line-height: 150%;
-        margin-bottom: $bottom_default;
+        margin-bottom: $bottom-margin;
     }
 
     div.article-thumb {
         @extend %cover-picture;
     }
+}
 
-    /*
-     * Article Header
-     * --------------
-     */
+/*
+ * Article Header
+ * --------------
+ */
 
-    header {
-        @extend %clearfix;
-        @extend %zero;
-        background: none;
+header {
+    @extend %clearfix;
+    background: none;
+    margin: 0;
+    padding: 0;
 
-        .title {
-            padding: 0;
+    .title {
+        padding: 0;
+    }
+
+    div.excerpt {
+        .more-link a {
+            /* Remove 'read more' link from excerpt/description. */
+            display: none;
         }
 
-        div.excerpt {
-            .more-link a {
-                /* Remove 'read more' link from excerpt/description. */
-                display: none;
-            }
-
-            p {
-                color: $span_grey;
-            }
-        }
-
-        span, .article-author {
-            color: #000;
-            text-transform: none;
-
-            a {
-                color: inherit;
-            }
-        } 
-
-        .article-author {
-            font-weight: bold;
+        p {
+            color: $span_grey;
         }
     }
 
-    /*
-     * Article Content Body
-     * --------------------
-     */
+    span, .article-author {
+        color: #000;
+        text-transform: none;
 
-    div.article-body {
-        @extend %border-box;
-        @extend %clearfix;
-        border: 0;
-
-        blockquote {
-            background-image: url('../images/quotation_open.svg'), url('../images/quotation_close.svg');
-            background-position: -4% 4%, 104% 88%;
-            background-origin: content-box;
-            background-repeat: no-repeat;
-            background-size: auto 25px;
-            border-color: 1px solid #f1f1f1;
-            border-width: 1px 0 1px 0;
-            font-size: 18px;
-            font-style: italic;
-            padding: 15px 30px;
-
-            cite {
-                color: #444;
-                display: block;
-                font-style: none;
-                font-weight: bold;
-                font-size: 80%;
-                width: 100%;
-
-                &:before {
-                    content: ' -';
-                }
-            }
-
-            >:last-child {
-                margin-bottom: 0;
-            }
+        a {
+            color: inherit;
         }
+    } 
 
-        div, img {
-            height: auto;
-            overflow: hidden;
-            max-width: 100%;
-        }
+    .article-author {
+        font-weight: bold;
+    }
+}
 
-        .wp-caption img {
-            margin-bottom: 10px;
-        }
+/*
+ * Article Content Body
+ * --------------------
+ */
 
-        p.wp-caption-text {
-            color: $span_grey;
-            font-size: 14px;
-            padding: 0;
-            text-align: left;
+div.article-body {
+    @extend %clearfix;
+    box-sizing: border-box;
+    border: 0;
+
+    blockquote {
+        background-image: url('../images/quotation_open.svg'), url('../images/quotation_close.svg');
+        background-position: -4% 4%, 104% 88%;
+        background-origin: content-box;
+        background-repeat: no-repeat;
+        background-size: auto 25px;
+        border-color: 1px solid #f1f1f1;
+        border-width: 1px 0 1px 0;
+        font-size: 18px;
+        font-style: italic;
+        padding: 15px 30px;
+
+        >:last-child {
+            margin-bottom: 0;
         }
+    }
+
+    cite {
+        color: #444;
+        display: block;
+        font-style: none;
+        font-weight: bold;
+        font-size: 80%;
+        width: 100%;
+
+        &:before {
+            content: ' -';
+        }
+    }
+
+    div, img {
+        height: auto;
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    .wp-caption img {
+        margin-bottom: 10px;
+    }
+
+    p.wp-caption-text {
+        color: $span_grey;
+        font-size: 14px;
+        padding: 0;
+        text-align: left;
     }
 }
 
@@ -163,10 +176,10 @@ article {
  */
 
 article.full {
-    padding: 0 4% $bottom_default 4%;
+    padding: 0 4% $bottom-margin 4%;
 
     header {
-        margin-bottom: $bottom_default * 2;
+        margin-bottom: $bottom-margin-26;
 
         div.meta {
             @extend %clearfix;
@@ -186,7 +199,7 @@ article.full {
 
             @include breakpoint(max, 1050) {
                 float: none;
-                margin-bottom: $bottom_default;
+                margin-bottom: $bottom-margin;
             }
         }
 
@@ -198,7 +211,7 @@ article.full {
         }
 
         h1.title {
-            margin-bottom: $bottom_default;
+            margin-bottom: $bottom-margin;
         }
 
         ul.mshare {
@@ -212,7 +225,7 @@ article.full {
 
     div.article-body {
         ul.mshare {
-            margin-bottom: $bottom_default;
+            margin-bottom: $bottom-margin;
 
             li {
                 float: right;
@@ -223,44 +236,11 @@ article.full {
 }
 
 /*
- * Non-main Archive Index Article
- * ------------------------------
- */
-
-article.archive {
-    padding-bottom: $bottom_default * 2;
-
-    &:not(:last-child) {
-        border-bottom: 1px solid $border_grey;
-        margin-bottom: $bottom_default * 2;
-    }
-
-    header {
-        margin-bottom: $bottom_default;        
-    }
-
-    div.article-thumb {
-        float: left;
-        width: 200px;
-
-        a {
-            @include flex-size(100%, 1);
-        }
-    }
-
-    div.article-body {
-        float: right;
-        width: calc(100% - 215px);
-    }
-
-    div.excerpt p {
-        margin: 0;
-    }
-}
-
-/*
  * Job Archive Index Article 
  * -------------------------
+ * The rules here are specific to job archive articles as they have a sligtly
+ * different layout. Most of their position and sizing is set below in the
+ * archives.
  */
 
 article.jobarchive {
@@ -279,10 +259,10 @@ article.jobarchive {
     }
 
     span.job-category {
-        @extend %border-box;
+        box-sizing: border-box;
         color: #fff;
         display: inline-block;
-        margin-bottom: $bottom_default * 0.5;
+        margin-bottom: $bottom-margin-7;
         width: 100%;
 
         @include breakpoint(smartphone) {
@@ -296,98 +276,108 @@ article.jobarchive {
         padding: 2px 5px;
     }
 
-    div.category {
-        float: left;
-        margin: 0;
-        width: 15%;
-    }
-
-    div.article-thumb {
-        @include flex_size(100%, 1);
-
-        a {
-            @include flex_size(100%, 1);
-        }
-    }
-
-    div.article-body {
-        float: right;
-        width: 83%;
-    }
-
     div.article-body p, .more {
-        margin-top: $bottom_default * 0.5;
-    }
-
-    div.article-body, div.category {
-        @include breakpoint(smartphone) {
-            float: none;
-            width: 100%;
-        }
+        margin-top: $bottom-margin-7;
     }
 }
 
 /*
- * Lead Article Shared Rules
- * -------------------------
+ * Archive Articles
+ * ----------------
+ * Archive articles have two styles:
+ * 
+ * 1. Thumbnail is 25% width and 170px height.
+ * 2. Lead article thumbnail is 65% width and 325px height. This excludes job
+ *    articles.
  */
 
-article.archive, article.jobarchive {
-    padding-bottom: $bottom_default * 2;
+#recent-posts article {
+    padding-bottom: $bottom-margin-26;
+    @include webkit_value(display, flex);
+    @include webkit(flex-direction, row);
+
+    @include breakpoint(smartphone) {
+        @include webkit_value(display, block);
+    }
 
     &:not(:last-child) {
         border-bottom: 1px solid $border_grey;
-        margin-bottom: $bottom_default * 2;
-    }
-}
-
-/*
- * Lead Archive Index Article 
- * --------------------------
- */
-
-article.leadarchive {
-    div.article-thumb {
-        float: right;
-        height: 325px;
-        margin-bottom: $bottom_default;
-        padding: 0;
-        width: 65%;
-
-        a {
-            height: 325px;
-            padding: 0;
-            width: 100%;
-        }
+        margin-bottom: $bottom-margin-26;
     }
 
-    div.article-body {
-        float: left;
-        width: calc(35% - 15px);
+    header {
+        margin-bottom: $bottom-margin;        
     }
-}
 
-article.archive, article.leadarchive {
-    div.article-thumb, div.article-body {
+    .article-thumb {
         @include breakpoint(smartphone) {
-            float: none;
-            width: 100%;
+            margin-bottom: $bottom-margin-7;
         }
+    }
+
+    .article-thumb a {
+        display: block;
+        height: inherit;
+        width: 100%;
+    }
+}
+
+#recent-posts article:nth-child(1):not(.jobarchive) {
+    /* Lead article has a reversed layout. This does not apply to a job article.
+     * Job articles do not reverse. */
+    @include webkit(flex-direction, row-reverse);
+
+    >:first-child {
+        @include webkit(flex, 0 1 $archive-width-65); 
+    }
+
+    >:last-child {
+        padding: 0 $bottom-margin 0 0;
+
+        @include breakpoint(smartphone) {
+            padding: 0;
+        }
+    }
+
+    .article-thumb {
+        height: $article-thumb-height-325;
+    }
+}
+
+#recent-posts article {
+    // Non-first-child articles.
+    >:first-child {
+        @include webkit(flex, 0 1 $archive-width-25);
+    }
+
+    >:last-child {
+        padding: 0 0 0 $bottom-margin;
+        @include webkit(flex, 1); 
+
+        @include breakpoint(smartphone) {
+            padding: 0;
+        }
+    } 
+
+    .article-thumb {
+        height: $article-thumb-height-170;
     }
 }
 
 /*
  * Homepage Lead Article 
  * ---------------------
+ * This is the hero article on the site, the first one that you see when the 
+ * page loads. 
  */
 
 article.lead {
     border-bottom: 1px solid $border_black;
-    margin-bottom: $bottom_default * 2;
-    padding-bottom: $bottom_default * 2;
+    margin-bottom: $bottom-margin-26;
+    padding-bottom: $bottom-margin-26;
 
     header {
-        margin-bottom: $bottom_default * 0.5; 
+        margin-bottom: $bottom-margin-7; 
 
         h1 {
             margin: 0;

@@ -37,7 +37,7 @@ ul#menu {
     }
 
     a {
-        @extend %border-box;
+        box-sizing: border-box;
         color: #fff;
         display: inline-block;
         font: 16px $font_arial;

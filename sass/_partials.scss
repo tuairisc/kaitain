@@ -41,12 +41,6 @@
     background-size: cover; 
 }
 
-%border-box {
-    /* ALL GLORY TO THE BORDER BOX-this is used across the site in a great many
-     * spots where I need to pad an element without increasing the size. */
-    @include prefix(box-sizing, border-box);
-}
-
 %clearfix {
     /* Bulletproof and Rock-Solid self-clearing float. You can tell it is both
     * Bulletproof and Rock-Solid since I capitalized the words. There are very

@@ -35,7 +35,7 @@ h3 {
 .content-wrap {
     /* Make #header strip regardless of whether #header advert group is blocked. */
     background: center bottom/auto 6px no-repeat border-box url('..//images/rainbow_strip.svg');
-    padding: $bottom_default * 1.5 4% 0 4%;
+    padding: $bottom-margin-19 4% 0 4%;
 
     @include breakpoint(smartphone) {
         padding-top: 0;
@@ -86,7 +86,7 @@ span.date {
 }
 
 #report {
-    margin-bottom: $bottom_default;
+    margin-bottom: $bottom-margin;
 }
 
 .recent-meta span {    

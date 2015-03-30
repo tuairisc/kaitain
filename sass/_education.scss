@@ -1,10 +1,10 @@
-$education_0: #424045;
-$education_1: #c44b54;
-$education_2: #7c5c91;
-$education_3: #c9ab5f;
-$education_4: #89b0d4;
-$education_5: #e34284;
-$education_download: #d2d3d5;
+$education-0: #424045;
+$education-1: #c44b54;
+$education-2: #7c5c91;
+$education-3: #c9ab5f;
+$education-4: #89b0d4;
+$education-5: #e34284;
+$education-download: #d2d3d5;
 
 /*
  * Education Post Section Headers
@@ -51,14 +51,16 @@ $education_download: #d2d3d5;
     }
 
     a {
-        @extend %border-box;
-        @extend %block;
+        box-sizing: border-box;
         color: inherit;
+        display: block;
+        height: 100%;
         padding: 30px 15px 15px 17%;
         text-decoration: none;
+        width: 100%;
 
         @include breakpoint(max, 1000) {
-            padding: $bottom_default;
+            padding: $bottom-margin;
         }
     }
 
@@ -77,7 +79,7 @@ $education_download: #d2d3d5;
 
         &:nth-child(1) {
             @include breakpoint(smartphone) {
-                margin-bottom: $bottom_default;
+                margin-bottom: $bottom-margin;
             }
         }
     }
@@ -104,7 +106,7 @@ $education_download: #d2d3d5;
 
 .education-0 { 
     /* Description of the education section. */
-    background-color: $education_0;
+    background-color: $education-0;
 
     &:hover { 
         background-image: none;
@@ -113,31 +115,31 @@ $education_download: #d2d3d5;
 
 .education-1 { 
     /* Sraith Pictiúr / Picture Exercises */
-    background-color: $education_1;
+    background-color: $education-1;
     background-image: url('../images/education/picture.svg');
 }
 
 .education-2 { 
     /* Léamhthuiscintí / Quiz */ 
-    background-color: $education_2;
+    background-color: $education-2;
     background-image: url('../images/education/book.svg');
 }
 
 .education-3 { 
     /* Físeáin / Videos */ 
-    background-color: $education_3;
+    background-color: $education-3;
     background-image: url('../images/education/video.svg');
 }
 
 .education-4 { 
     /* Úrscéal d’fhoghlaimeoirí / Short Stories */
-    background-color: $education_4;
+    background-color: $education-4;
     background-image: url('../images/education/reading.svg');
 }
 
 .education-5 { 
     /* Crossfhocal / Crossword */
-    background-color: $education_5;
+    background-color: $education-5;
     background-image: url('../images/education/crossword.svg');
 }
 
@@ -148,7 +150,7 @@ $education_download: #d2d3d5;
 */
 
 a.download-link {
-    background: $education_download 90% center/auto 70% no-repeat url('../images/download_arrow.svg');
+    background: $education-download 90% center/auto 70% no-repeat url('../images/download_arrow.svg');
     display: inline-block;
     padding: 12px 50px 12px 12px;
  

@@ -3,23 +3,23 @@
  * ---------------------- 
  */
 
-$widget_full: 23%;
-$widget_collapsed: 48%;
+$widget-23: 23%;
+$widget-48: 48%;
 
 .featured-main {
-    @include breakpoint(max, $homepage_breakpoint) {
+    @include breakpoint(max, $homepage-break) {
         padding-bottom: 0;
     }
 }
 
 .featured-main .hero-image, .featured-main .post-content {
-    @include breakpoint(max, $homepage_breakpoint) {
+    @include breakpoint(max, $homepage-break) {
         width: 100%;
     }
 }
 
 .tuairisc-featured-row {
-    margin-bottom: $bottom_default;
+    margin-bottom: $bottom-margin;
 
     @include webkit_value(display, flex);
     @include webkit(flex-direction, row);
@@ -31,12 +31,12 @@ $widget_collapsed: 48%;
     }
 
     article {
-        margin-bottom: $bottom_default * 0.5;
+        margin-bottom: $bottom-margin-7;
 
-        @include webkit(flex, 0 1 $widget_full);
+        @include webkit(flex, 0 1 $widget-23);
 
-        @include breakpoint(max, $homepage_breakpoint) {
-            @include webkit(flex, 0 1 $widget_collapsed);
+        @include breakpoint(max, $homepage-break) {
+            @include webkit(flex, 0 1 $widget-48);
         }
 
         @include breakpoint(smartphone) {
@@ -68,7 +68,7 @@ $widget_collapsed: 48%;
 .widget_tuairisc_authors {
     background: #e5e5e5;
     box-sizing: border-box;
-    margin-bottom: $bottom_default;
+    margin-bottom: $bottom-margin;
     padding: 15px;
     // The Gazeti theme applies inline CSS which otherwise overrides this.
     width: 100% !important;
@@ -90,11 +90,11 @@ $widget_collapsed: 48%;
 
     .tuairisc-author {
         box-sizing: border-box;
-        @include webkit(flex, 0 1 $widget_full);
+        @include webkit(flex, 0 1 $widget-23);
 
         @include breakpoint(smartphone) {
-            margin-bottom: $bottom_default * 0.5;
-            @include webkit(flex, 0 1 $widget_collapsed);
+            margin-bottom: $bottom-margin-7;
+            @include webkit(flex, 0 1 $widget-48);
         }
 
         .avatar {
