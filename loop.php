@@ -9,13 +9,6 @@
         } else {
             get_template_part('article', 'archive');
         }
-
-        if ($wp_query->current_post == 0 && $paged == 1 && !is_job()) {
-            // Change the first article in the stack to the hero type (image is bigger and the position reversed).
-            ?><script>
-                jQuery('#recent-posts').find('article').first().addClass('leadarchive');
-            </script><?php
-        }
     } ?>
 </div>
 
