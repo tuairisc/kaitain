@@ -23,7 +23,7 @@ jQuery(window).ready(function($) {
             mobile: '//' + window.location.hostname + '/wp-content/uploads/tuairisc_fallback_mobile_.gif', 
             desktop: '//' + window.location.hostname + '/wp-content/uploads/tuairisc_fallback_desktop_.gif'
         },
-        classes: {
+        types: {
             dynamic: 'g-dyn',
             tuairisc: 'tuairisc-advert',
             desktop: 'desktop',
@@ -52,10 +52,10 @@ jQuery(window).ready(function($) {
 
         advert += '">';
         // Advert anchor.
-        advert += '<a class="' + fallback.classes.tuairisc + '" href="' + fallback.link + '" target="_blank" title="' + fallback.title + '">';
+        advert += '<a class="' + fallback.types.tuairisc + '" href="' + fallback.link + '" target="_blank" title="' + fallback.title + '">';
         // Advert image.
-        advert += '<img class="' + fallback.classes.desktop + '" src="' + fallback.image.desktop + '" alt="' + fallback.title + '" />';
-        advert += '<img class="' + fallback.classes.mobile + '" src="' + fallback.image.mobile + '" alt="' + fallback.title + '" />';
+        advert += '<img class="' + fallback.types.desktop + '" src="' + fallback.image.desktop + '" alt="' + fallback.title + '" />';
+        advert += '<img class="' + fallback.types.mobile + '" src="' + fallback.image.mobile + '" alt="' + fallback.title + '" />';
         // Close anchor, parent and child div.
         advert += '</a></div>';
 
@@ -81,7 +81,7 @@ jQuery(window).ready(function($) {
         fallback.id++;
     }
 
-    $('.' + fallback.classes.tuairisc).children('img').each(function() {
+    $('.' + fallback.types.tuairisc).children('a, img').each(function() {
         /* 1. Replace advert with fallback if it doesn't exist.
          * 2. Remove entire advert if fallback fails to load.
          * 3. This should cause a cascade which will remove every advert if 

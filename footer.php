@@ -9,7 +9,7 @@
 
     <?php // AdRotate group 3
     if (function_exists('adrotate_group')) {
-        printf('%s', adrotate_group(3));
+        printf('%s', adrotate_group(2));
     } ?>
 
     <div id="footer">

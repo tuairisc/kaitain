@@ -6,8 +6,8 @@
  * Group   Location
  * ------------------
  * .g-1    Header
- * .g-2    Sidebar #1
- * .g-3    Footer
+ * .g-2    Footer
+ * .g-3    Sidebar #1
  * .g-4    Sidebar #2
  * .g-5    Sidebar #3
  */
@@ -24,7 +24,7 @@ $width_breakpoint: 768px;
     @extend %zero;
 }
 
-.g-1, .g-3 {
+.g-1, .g-2 {
     /* 
      * Banner Advertisements
      * ---------------------
