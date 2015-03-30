@@ -25,23 +25,24 @@ $archive-width-25: 25%;
 $archive-width-35: 35%;
 $archive-width-65: 65%;
 $archive-width-75: 75%;
-
-$article-thumb-height-170: 170px;
-$article-thumb-height-325: 325px;
+// Archive thumbnail heights.
+$archive-article-thumb-height-170: 170px;
+$archive-article-thumb-height-325: 325px;
 
 .related_posts .title {
     color: #000;
 }
 
 /*
- * All Article Shared Rules
- * ------------------------
+ * Article Reset
+ * -------------
+ * The Gazeti theme does odd things with articles. All of the rules in this 
+ * section were written
  */
 
 article {
-    @extend %cleafix;
+    @extend %clearfix;
     box-sizing: border-box;
-    // Remove border that Gazeti sets.
     border: 0;
     box-shadow: none;
     display: block;
@@ -67,8 +68,10 @@ article {
         margin-bottom: $bottom-margin;
     }
 
-    div.article-thumb {
-        @extend %cover-picture;
+    div, img {
+        height: auto;
+        overflow: hidden;
+        max-width: 100%;
     }
 }
 
@@ -118,13 +121,16 @@ header {
  */
 
 div.article-body {
-    @extend %clearfix;
     box-sizing: border-box;
     border: 0;
 
     blockquote {
-        background-image: url('../images/quotation_open.svg'), url('../images/quotation_close.svg');
-        background-position: -4% 4%, 104% 88%;
+        background-image: 
+            url('../images/quotation_open.svg'), 
+            url('../images/quotation_close.svg');
+        background-position: 
+            -4% 4%, 
+            104% 88%;
         background-origin: content-box;
         background-repeat: no-repeat;
         background-size: auto 25px;
@@ -150,12 +156,6 @@ div.article-body {
         &:before {
             content: ' -';
         }
-    }
-
-    div, img {
-        height: auto;
-        overflow: hidden;
-        max-width: 100%;
     }
 
     .wp-caption img {
@@ -259,7 +259,6 @@ article.jobarchive {
     }
 
     span.job-category {
-        box-sizing: border-box;
         color: #fff;
         display: inline-block;
         margin-bottom: $bottom-margin-7;
@@ -310,6 +309,8 @@ article.jobarchive {
     }
 
     .article-thumb {
+        @extend %cover-picture;
+
         @include breakpoint(smartphone) {
             margin-bottom: $bottom-margin-7;
         }
@@ -340,7 +341,7 @@ article.jobarchive {
     }
 
     .article-thumb {
-        height: $article-thumb-height-325;
+        height: $archive-article-thumb-height-325;
     }
 }
 
@@ -360,7 +361,7 @@ article.jobarchive {
     } 
 
     .article-thumb {
-        height: $article-thumb-height-170;
+        height: $archive-article-thumb-height-170;
     }
 }
 
@@ -402,9 +403,6 @@ article.lead {
     }
 
     div.article-thumb {
-        padding: 0;
-        width: 100%;
-
         @include flex_size(100%, 0.5);
 
         a {
