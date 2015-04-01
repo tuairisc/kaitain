@@ -126,7 +126,13 @@
                     <option value="36500">All Time</option>
                     <option value="365">This Year</option>
                     <option value="28">This Month</option>
-                    <option value="7">This Week</option>
+                    <option value="14">Two Weeks</option>
+                    <option value="7">Seven Days</option>
+                    <option value="6">Six Days</option>
+                    <option value="5">Five Days</option>
+                    <option value="4">Four Days</option>
+                    <option value="3">Three Days</option>
+                    <option value="2">Two Days</option>
                     <option value="1">Today</option>
                 </select>
             </p>
