@@ -20,14 +20,14 @@ jQuery(window).ready(function($) {
         title: 'Tuairisc',
         link: '//' + window.location.hostname + '/glac-fograi-linn/',
         image: {
-            mobile: '//' + window.location.hostname + '/wp-content/uploads/tuairisc_fallback_mobile_.gif', 
-            desktop: '//' + window.location.hostname + '/wp-content/uploads/tuairisc_fallback_desktop_.gif'
+            banner: '//' + window.location.hostname + '/wp-content/uploads/tuairisc_fallback_desktop_.gif',
+            square: '//' + window.location.hostname + '/wp-content/uploads/tuairisc_fallback_mobile_.gif'
         },
         types: {
             dynamic: 'g-dyn',
             tuairisc: 'tuairisc-advert',
-            desktop: 'desktop',
-            mobile: 'mobile'
+            banner: 'banner',
+            square: 'square'
         }
     };
 
@@ -54,8 +54,8 @@ jQuery(window).ready(function($) {
         // Advert anchor.
         advert += '<a class="' + fallback.types.tuairisc + '" href="' + fallback.link + '" target="_blank" title="' + fallback.title + '">';
         // Advert image.
-        advert += '<img class="' + fallback.types.desktop + '" src="' + fallback.image.desktop + '" alt="' + fallback.title + '" />';
-        advert += '<img class="' + fallback.types.mobile + '" src="' + fallback.image.mobile + '" alt="' + fallback.title + '" />';
+        advert += '<img class="' + fallback.types.banner + '" src="' + fallback.image.banner + '" alt="' + fallback.title + '" />';
+        advert += '<img class="' + fallback.types.square + '" src="' + fallback.image.square + '" alt="' + fallback.title + '" />';
         // Close anchor, parent and child div.
         advert += '</a></div>';
 

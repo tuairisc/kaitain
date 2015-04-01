@@ -34,7 +34,7 @@ $width_breakpoint: 768px;
      */
     padding: 20px 4%;
 
-    img.mobile {
+    img.square {
         display: none;
 
         @include breakpoint(smartphone) {
@@ -42,12 +42,18 @@ $width_breakpoint: 768px;
         }
     }
 
-    img.desktop {
+    img.banner {
         display: initial; 
 
         @include breakpoint(smartphone) {
             display: none;
         }
+    }
+}
+
+.g-3, .g-4, .g-5 {
+    img.banner {
+        display: none;
     }
 }
 
