@@ -73,6 +73,17 @@ article {
         overflow: hidden;
         max-width: 100%;
     }
+
+    header {
+        background: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    div.article-body {
+        border: 0;
+        box-sizing: border-box;
+    }
 }
 
 /*
@@ -82,9 +93,6 @@ article {
 
 header {
     @extend %clearfix;
-    background: none;
-    margin: 0;
-    padding: 0;
 
     .title {
         padding: 0;
@@ -121,10 +129,8 @@ header {
  */
 
 div.article-body {
-    box-sizing: border-box;
-    border: 0;
-
     blockquote {
+        // Ciaran asked for a meticulously-styled blockquote area.
         background-image: 
             url('../images/quotation_open.svg'), 
             url('../images/quotation_close.svg');
@@ -204,7 +210,7 @@ article.full {
         }
 
         div.avatar {
-            /* background-image is set in single.php */ 
+            // background-image is set in single.php
             @extend %cover-picture;
             margin-right: 10px;
             @include flex_size(67px, 1);
@@ -223,14 +229,13 @@ article.full {
         }
     } 
 
-    div.article-body {
-        ul.mshare {
-            margin-bottom: $bottom-margin;
+    div.article-body ul.mshare {
+        // Position footer share menu differently.
+        margin-bottom: $bottom-margin;
 
-            li {
-                float: right;
-                display: inline-block;
-            }
+        li {
+            float: right;
+            display: inline-block;
         }
     }
 }
@@ -290,6 +295,20 @@ article.jobarchive {
  *    articles.
  */
 
+.article-thumb {
+    @extend %cover-picture;
+
+    @include breakpoint(smartphone) {
+        margin-bottom: $bottom-margin-7;
+    }
+
+    a {
+        display: block;
+        height: inherit;
+        width: 100%;
+    }
+}
+
 #recent-posts article {
     padding-bottom: $bottom-margin-26;
     @include webkit_value(display, flex);
@@ -306,20 +325,6 @@ article.jobarchive {
 
     header {
         margin-bottom: $bottom-margin;        
-    }
-
-    .article-thumb {
-        @extend %cover-picture;
-
-        @include breakpoint(smartphone) {
-            margin-bottom: $bottom-margin-7;
-        }
-    }
-
-    .article-thumb a {
-        display: block;
-        height: inherit;
-        width: 100%;
     }
 }
 
@@ -377,32 +382,29 @@ article.lead {
     margin-bottom: $bottom-margin-26;
     padding-bottom: $bottom-margin-26;
 
-    header {
-        margin-bottom: $bottom-margin-7; 
+    h1 {
+        margin: 0;
+    }
 
-        h1 {
-            margin: 0;
-        }
+    h3 {
+        display: inline-block;
 
-        h3 {
-            display: inline-block;
-
-            &:after {
-                content: ', ';
-                padding-right: 5px;
-
-                @include breakpoint(smartphone) {
-                    display: none;
-                }
-            }
+        &:after {
+            content: ', ';
+            padding-right: 5px;
 
             @include breakpoint(smartphone) {
-                display: block;
+                display: none;
             }
+        }
+
+        @include breakpoint(smartphone) {
+            display: block;
         }
     }
 
     div.article-thumb {
+        margin-bottom: $bottom-margin; 
         @include flex_size(100%, 0.5);
 
         a {
@@ -410,12 +412,7 @@ article.lead {
         }
     }
 
-    div.article-body {
-        float: none;
-        width: 100%;
-
-        p {
-            margin: 0;
-        }
+    div.article-body p {
+        margin: 0;
     }
 }
