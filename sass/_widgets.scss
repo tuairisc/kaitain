@@ -57,7 +57,7 @@
     }
 
     .popular-thumb {
-        background-size: cover;
+        @extend %cover-picture;
         float: left;
         height: 50px;
         width: 23%;
