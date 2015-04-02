@@ -5,7 +5,7 @@
  */
 
 table.tg {
-    margin-bottom: 14px;
+    margin-bottom: $margin;
     width: 100%;
 
     a {
@@ -14,17 +14,17 @@ table.tg {
 }
 
 /* 
- * Header Stylings
- * ---------------
+ * Headline Stylings
+ * -----------------
  */
 
 h2 {
-    font-size: 20px;
+    font-size: $font-size-20;
 }
 
 h3 {
     color: #999;
-    font-size: 16px;
+    font-size: $font-size-16;
 }
 
 /*
@@ -34,8 +34,8 @@ h3 {
 
 .content-wrap {
     /* Make #header strip regardless of whether #header advert group is blocked. */
-    background: center bottom/auto 6px no-repeat border-box url('..//images/rainbow_strip.svg');
-    padding: $bottom-margin-19 4% 0 4%;
+    background: center bottom/auto 6px no-repeat border-box url($background-rainbow-strip);
+    padding: $margin-19 4% 0 4%;
 
     @include breakpoint(smartphone) {
         padding-top: 0;
@@ -54,10 +54,12 @@ h3 {
 /*
  * Miscellaneous Rules
  * -------------------
+ * These are one-line fixes to fix quirks in the Gazeti theme.
  */
 
 .caroufredsel_wrapper {
-    /* Carousel wrapper occasionally wigs out in a bad way. */
+    /* Carousel wrapper occasionally wigs out in a bad way because it goes by
+     * parent height as set by jQuery, and sometimes runs before images load. */
     min-height: 200px;
 }
 
@@ -86,7 +88,7 @@ span.date {
 }
 
 #report {
-    margin-bottom: $bottom-margin;
+    margin-bottom: $margin;
 }
 
 .recent-meta span {    
@@ -95,7 +97,7 @@ span.date {
 
 #slider_nav {
     .item, .item.current a {
-        font-size: 17px;
+        font-size: $font-size-16;
 
         &:hover {
             color: #000;

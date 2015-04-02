@@ -17,34 +17,33 @@
  * -----------
  * Aidan uses modal popup links. This is styling per Ciaran for 
  * post-embedded Soundcloud links. I will flesh this out later for 
- * other segments on the site. */
+ * other segments on the site. 
+ */
 
-.modal-row {
-    @extend %clearfix;
+.modal-boxes {
+    @include webkit_value(display, flex);
+    @include webkit(flex-direction, row);
+    @include webkit(flex-wrap, wrap);
+    @include webkit(justify-content, space-between);
 }
 
 .modal-box {
-    background: #d1d2d4 center center/auto 70% no-repeat border-box url('../images/education_soundwave.svg');
-    float: left;
+    background: $modal-background center center/auto 70% no-repeat border-box url($education-soundwave);
     margin-bottom: 4px;
-    width: 32.66%;
-
-    &:not(:last-child) {
-        margin-right: 1%;
-    }
+    @include webkit(flex, 0 1 32.67%);
 
     &:hover {
-        background-color: #5992cf;
+        background-color: $modal-background-hover;
     }
 
     &:active {
-        background-color: #5e83c4;
+        background-color: $modal-background-active;
     }
 
     a {
         color: #000;
         display: block;
-        font-family: $font_arial;
+        font-family: $font-family-arial;
         font-size: 175%;
         font-weight: bold;
         padding: 30px 0;
@@ -65,16 +64,14 @@
  * https://ninjaforms.com/add-custom-css-to-your-ninja-forms/
  */
 
-.ninja-forms-all-fields-wrap {
-    select.ninja-forms-field {
-        height: 30px !important;
-        width: 30% !important;
-    }
+.ninja-forms-all-fields-wrap select.ninja-forms-field {
+    height: 30px !important;
+    width: 30% !important;
 }
 
 .event-drop {
     border: 3px dotted #bdbdbd;
-    margin-bottom: $bottom-margin;
+    margin-bottom: $margin;
     overflow: hidden;
 
     h3 {
@@ -95,7 +92,7 @@ textarea.event-output {
 }
 
 div.province {
-    margin-bottom: $bottom-margin-26;
+    margin-bottom: $margin-26;
 }
 
 div.event {
@@ -114,17 +111,20 @@ div.event {
     }
 }
 
-/* Mailing List Link
- * ----------------- */
+/* 
+ * Mailing List Signup Box
+ * -----------------------
+ */
 
 .newsletter {
     background-color: #e44284;
     background-image:
-        url('../images/rainbow_strip_alternate.svg'),
-        url('../images/tuairisc_logo_alternate.svg');
+        url($background-rainbow-strip-alt),
+        url($logo-tuairisc-alt);
     background-position: center bottom, 90% 90%;
     background-size: 100% 10px, 132px auto;
     background-repeat: no-repeat;
+    // max-width: 350px;
      
     a {
         box-sizing: border-box;
@@ -136,6 +136,6 @@ div.event {
 
         > * {
             color: inherit;
-        }   max-width: 350px;
+        }
     }
 }

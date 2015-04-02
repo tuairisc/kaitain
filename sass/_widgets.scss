@@ -1,12 +1,16 @@
+/*
+ * Gazeti Widget Overrides
+ * -----------------------
+ */
+
 .three-columns .widget:nth-child(3n+2) .title {
     /* WPZOOM gives the middle column a wider margin because no good reason 
      * that I can fathom. */
-    margin: 0 0 5px 0;
-    padding: 10px 0;
+    margin-bottom: $margin-7;
+    padding: $padding-10 0;
 }
 
-.recent-meta span,
-.widget .feature-posts-list small {
+.recent-meta span, .widget .feature-posts-list small {
     /* Widgets are capitalized. This causes issues with some Irish 
      * spellings. Removing capitalization affected legibility so I bumped
      * font size. */
@@ -49,11 +53,13 @@
 /* 
  * Popular Posts Widget
  * -------------------- 
+ * TODO: Merge this with Gazeti's equivalent widget and replace the CSS for 
+ * both. 
  */
 
 .widget_tuairisc_popular {
     li {
-        padding: 6px 0;
+        padding: $padding-7 0;
     }
 
     .popular-thumb {
@@ -63,7 +69,9 @@
         width: 23%;
 
         a {
-            @extend %block;
+            display: block;
+            height: inherit;
+            width: 100%;
         }
     }
 
@@ -72,10 +80,10 @@
         width: 73%;
 
         a {
-            font-family: $font_georgia;
+            font-family: $font-family-georgia;
 
             &:hover {
-                color: $wpzoom_anchor;
+                color: $colour-green-anchor;
             }
         }
     }

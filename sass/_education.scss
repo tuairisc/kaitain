@@ -1,26 +1,17 @@
-$education-0: #424045;
-$education-1: #c44b54;
-$education-2: #7c5c91;
-$education-3: #c9ab5f;
-$education-4: #89b0d4;
-$education-5: #e34284;
-$education-download: #d2d3d5;
-
 /*
- * Education Post Section Headers
- * ------------------------------
- * This area will be fleshed out later. */
+ * Education Post Section Headers and Banners
+ * ------------------------------------------
+ */
 
-.edu-heading,
-.edu-subheading {
-    background: #c44b54;
+.edu-heading, .edu-subheading {
+    background-color: nth(map-get($education-banners, education-0), 1);
     color: #fff;
     /* Important, or WPZOOM will override it. */
-    margin: 20px 0 10px 0 !important;
+    margin: $margin-19 0 $margin-10 0 !important;
 }
 
 .edu-heading {
-    padding: 10px;
+    padding: $padding-10;
 }
 
 .edu-subheading {
@@ -39,7 +30,7 @@ $education-download: #d2d3d5;
     background-size: auto 60px;
     background-repeat: no-repeat;
     color: #fff;
-    margin-bottom: -10px;
+    margin-bottom: -#{$margin-10};
     min-height: 120px;
 
     @include breakpoint(max, 1000) {
@@ -60,26 +51,26 @@ $education-download: #d2d3d5;
         width: 100%;
 
         @include breakpoint(max, 1000) {
-            padding: $bottom-margin;
+            padding: $margin;
         }
     }
 
     h1, p {
-        font-family: $font_arial;
+        font-family: $font-family-arial;
     }
 
     h1 {
-        margin-bottom: 22px;
+        margin-bottom: $margin-23;
     }
 
     p {
-        font-size: 16px;
+        font-size: $font-size-16;
         line-height: 21px;
         margin-bottom: 0;
 
         &:nth-child(1) {
             @include breakpoint(smartphone) {
-                margin-bottom: $bottom-margin;
+                margin-bottom: $margin;
             }
         }
     }
@@ -94,53 +85,32 @@ $education-download: #d2d3d5;
     }
 }
 
-@media screen and (max-width: 768px) {
-    .education-box {
+.education-box {
+    @include breakpoint(max, 768) {
         padding: 20px;
+    }
 
-        &:hover {
+    &:hover {
+        @include breakpoint(max, 768) {
             background-image: none;
         }
     }
 }
 
-.education-0 { 
-    /* Description of the education section. */
-    background-color: $education-0;
+/*
+ * Section Banners
+ * ---------------
+ */
 
-    &:hover { 
-        background-image: none;
+.education-0:hover { 
+    background-image: none;
+}
+
+@each $child, $list in $education-banners {
+    .#{$child} {
+        background-color: nth($list, 1);
+        background-image: url(nth($list, 2));
     }
-}
-
-.education-1 { 
-    /* Sraith Pictiúr / Picture Exercises */
-    background-color: $education-1;
-    background-image: url('../images/education/picture.svg');
-}
-
-.education-2 { 
-    /* Léamhthuiscintí / Quiz */ 
-    background-color: $education-2;
-    background-image: url('../images/education/book.svg');
-}
-
-.education-3 { 
-    /* Físeáin / Videos */ 
-    background-color: $education-3;
-    background-image: url('../images/education/video.svg');
-}
-
-.education-4 { 
-    /* Úrscéal d’fhoghlaimeoirí / Short Stories */
-    background-color: $education-4;
-    background-image: url('../images/education/reading.svg');
-}
-
-.education-5 { 
-    /* Crossfhocal / Crossword */
-    background-color: $education-5;
-    background-image: url('../images/education/crossword.svg');
 }
 
 /* 
@@ -150,9 +120,11 @@ $education-download: #d2d3d5;
 */
 
 a.download-link {
-    background: $education-download 90% center/auto 70% no-repeat url('../images/download_arrow.svg');
+    background: nth($education-download, 1) 90% center/auto 70% no-repeat url(nth($education-download, 2));
+    color: #000;
     display: inline-block;
-    padding: 12px 50px 12px 12px;
+    padding: 12px;
+    padding-right: 50px;
  
     &:hover {
         color: inherit;

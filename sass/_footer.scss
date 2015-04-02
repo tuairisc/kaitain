@@ -4,22 +4,16 @@
  * The #footer block and its many children.
  */
 
-%footer-text {
-    color: #000;
-    font: 11px $font_arial;
-    line-height: $bottom-margin-19;
-}
-
 #footer {
-    background: #fff left bottom/auto 65px no-repeat url('../images/rainbow_footer.svg');
+    background: #fff left bottom/auto 65px no-repeat url($background-rainbow-footer);
     height: auto;
     /* The site is unbalanced. */
     margin-bottom: 0;
-    padding: 0 4% $bottom-margin-65 4%;
+    padding: 0 4% $margin-65 4%;
 
     @include breakpoint(smartphone) {
         background-image: none;
-        padding-bottom: $bottom-margin-26;
+        padding-bottom: $margin-26;
     }
 
     a {
@@ -27,7 +21,7 @@
     }
 
     .interior {
-        border-top: 1px solid #f1f1f1;
+        border-top: 1px solid $colour-grey-article-border;
         padding-top: 20px;
     }
 }
@@ -85,7 +79,7 @@
  */
 
 .foras-attribution {
-    background: center center/100% auto no-repeat url('../images/foras_na_gaeilge_logo.png');
+    background: center center/100% auto no-repeat url($logo-foras);
     margin: 0 auto;
     @include flex_size(100px, 0.8);
     display: block;

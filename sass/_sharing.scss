@@ -1,72 +1,54 @@
-
 /*
-    Nav Menu Social Links
-    ----------------------
-    The stock widgets look like crap. These layout better,
-    don't hog the site or break layout when the page is 
-    resized. 
-
-    Triggered to hide at mobile sizes. The rationale is that
-    the links will open in a browser, but not the native 
-    applications. So there is fundamentally no reason to show them.
-
-    The menu takes the form of a horizontal ul.
-    Just drop in links as so:
-
-    <ul class="mshare">
-        <li><a class="email" href="#"></a></li>
-        ...
-        <li><a class="youtube" href="#"></a></li>
-    </ul>
+ * Sitewide Social Links
+ * ---------------------
  */
 
-$images_path: '../images/social';
-
-$social: (
-    comments: (#30b351, $images_path + '/comments.png'),
-    email: (#f5756c, $images_path + '/email.png'),
-    facebook: (#3B5998, $images_path + '/facebook.png'),
-    flickr: (#ff0084, $images_path + '/flickr.png'),
-    github: (#666666, $images_path + '/github.png'),
-    google: (#dd4b39, $images_path + '/google.png'),
-    instagram: (#3f729b, $images_path + '/instagram.png'),
-    linkedin: (#0976b4, $images_path + '/linkedin.png'),
-    pinterest: (#cc2127, $images_path + '/pinterest.png'),
-    print: (#007aaf, $images_path + '/print.png'),
-    reddit: (#ff5700, $images_path + '/reddit.png'),
-    rmwb: (#343537, $images_path + '/beard.png'),
-    rss: (#ff6600, $images_path + '/rss.png'),
-    tumblr: (#35465c, $images_path + '/tumblr.png'),
-    twitter: (#55acee, $images_path + '/twitter.png'),
-    youtube: (#b31217, $images_path + '/youtube.png')
-);
+$social-button-size: $margin * 2.5;
 
 ul.mshare {
-    @each $value, $key in $social {
-        .#{$value} {
-            background-color: nth($key, 1);
-            background-image: url(nth($key, 2));
-        }
-    }
-}
-
-ul.mshare {
-    @extend %zero;
     list-style-type: none;
+    margin: 0;
+    padding: 0;
 
     li {
         float: left;
         line-height: initial;
-        height: $button_size;
         margin-right: 2px;
-        width: $button_size;
+        @include flex_size($social-button-size, 1);
     }
 
     a {
-        @extend %block;
+        @extend %cover-picture;
         background-size: 90% auto;
-        background-repeat: no-repeat;
-        background-position: center center;
         border-radius: 3px;
+        display: block;
+        @include flex_size(100%, 1);
+    }
+
+    @each $child, $list in $social-buttons {
+        .#{$child} {
+            background-color: nth($list, 1);
+            background-image: url(nth($list, 2));
+        }
+    }
+}
+
+article {
+    ul.mshare {
+        float: right;
+
+        @include breakpoint(max, 1050) {
+            float: left;
+        }
+    }
+
+    div.article-body ul.mshare {
+        // Position footer share menu differently.
+        margin-bottom: $margin;
+
+        li {
+            display: inline-block;
+            float: right;
+        }
     }
 }

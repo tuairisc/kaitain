@@ -5,6 +5,17 @@
  * aren't attached to a given section of the site. 
 */
 
+/* 
+ * Self-clearing Floats 
+ * --------------------
+ * WPZOOM's use of <div class="clear"></div> should be classed as a crime 
+ * against humanity.
+ */
+
+.self-clear {
+    @extend %clearfix;
+}
+
 /*
  * Shadows and Gradients
  * ---------------------
@@ -19,15 +30,6 @@
 %noselect {
     cursor: default;
     @include prefix(user-select, none);
-}
-
-%top-box-shadow {
-    // Add a box shadow to the top of an element.
-    @include prefix(box-shadow, 0 0 60px 20px rgba(0,0,0,0.75));
-}
-
-%no-box-shadow {
-    @include prefix(box-shadow, none);
 }
 
 /*
@@ -53,19 +55,6 @@
         content: '';
         display: table;
     }
-}
-
-%block {
-    display: block;
-    height: 100%;
-    width: 100%;
-}
-
-%zero {
-    // There are a few cases where I need to zero the margin and padding of the
-    // the child of a parent with both.  
-    margin: 0;
-    padding: 0;
 }
 
 /*

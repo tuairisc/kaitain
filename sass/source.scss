@@ -1,36 +1,149 @@
 /*
- * Fonts
- * -------
+ * Variables
+ * ---------
+ * The Gazeti theme is a mish-mash of everrrr-so-slightly different margins, 
+ * colours and padding. All ofthe variables below have been collected from 
+ * around the site.
+ * 
+ * 1. Are aggregatd as I found them within the theme CSS.
+ * 2. Here so that I can work on later reduction.
+ * 
+ * O you who know what we suffer here, do not forget us in your prayers.
  */
 
-$font_georgia: Georgia, Times, "Times New Roman", serif;
-$font_arial: arial, "helvetica neue", helvetica, sans-serif;
+$assets-folder: '../images';
+$assets-folder-social: $assets-folder + '/social';
+
+/*
+ * Education Section
+ * -----------------
+ */
+
+$education-download: (#d2d3d5, $assets-folder + '/download_arrow.svg');
+$education-soundwave: '../images/education_soundwave.svg';
+
+$education-banners: (
+    education-0: (#424025, ''),
+    education-1: (#c44b54, $assets-folder + '/education/picture.svg'),
+    education-2: (#7c5c91, $assets-folder + '/education/book.svg'),
+    education-3: (#c9ab5f, $assets-folder + '/education/video.svg'),
+    education-4: (#89b0d4, $assets-folder + '/education/reading.svg'),
+    education-5: (#e34284, $assets-folder + '/education/crossword.svg')
+);
+
+$modal-background: #d1d2d4;
+$modal-background-hover: #5992cf;
+$modal-background-active: #5e83c4;
+
+/*
+ * Social Buttons
+ * --------------
+ */
+
+$social-buttons: (
+    comments: (#30b351, $assets-folder-social + '/comments.png'),
+    email: (#f5756c, $assets-folder-social + '/email.png'),
+    facebook: (#3B5998, $assets-folder-social + '/facebook.png'),
+    flickr: (#ff0084, $assets-folder-social + '/flickr.png'),
+    github: (#666666, $assets-folder-social + '/github.png'),
+    google: (#dd4b39, $assets-folder-social + '/google.png'),
+    instagram: (#3f729b, $assets-folder-social + '/instagram.png'),
+    linkedin: (#0976b4, $assets-folder-social + '/linkedin.png'),
+    pinterest: (#cc2127, $assets-folder-social + '/pinterest.png'),
+    print: (#007aaf, $assets-folder-social + '/print.png'),
+    reddit: (#ff5700, $assets-folder-social + '/reddit.png'),
+    rmwb: (#343537, $assets-folder-social + '/beard.png'),
+    rss: (#ff6600, $assets-folder-social + '/rss.png'),
+    tumblr: (#35465c, $assets-folder-social + '/tumblr.png'),
+    twitter: (#55acee, $assets-folder-social + '/twitter.png'),
+    youtube: (#b31217, $assets-folder-social + '/youtube.png')
+);
+
+
+/*
+ * Sitewide Background Images
+ * --------------------------
+ */
+
+$background-rainbow-footer: $assets-folder + '/rainbow_footer.svg';
+$background-rainbow-strip: $assets-folder + '/rainbow_strip.svg';
+$background-rainbow-strip-alt: $assets-folder + '/rainbow_strip_alternate.svg';
+
+
+/*
+ * Branding Images
+ * ---------------
+ */
+
+$logo-foras: $assets-folder + '/foras_na_gaeilge_logo.png';
+$logo-tuairisc: $assets-folder + '/tuairisc_logo.svg';
+$logo-tuairisc-alt: $assets-folder + '/tuairisc_logo_alternate.svg';
+
+/*
+ * Fonts
+ * -------
+ * There are two font stacks used in the theme.
+ */
+
+// Font-families.
+$font-family-georgia: Georgia, Times, 'Times New Roman', serif;
+$font-family-arial: Arial, 'Helvetica Neue', helvetica, sans-serif;
+
+// Font-sizes.
+$font-size: 14px;
+$font-size-10: 10px;
+$font-size-11: 11px;
+$font-size-16: 16px;
+$font-size-18: 18px;
+$font-size-20: 20px;
+$font-size-22: 22px;
+$font-size-25: 25px;
 
 /*
  * Colours
  * -------
  */
 
-$wpzoom_anchor: #95c37c;
-$charcoal_grey: #87888a;
-$nav_blue: #506572;
-$border_grey: #ececec;
-$border_black: #333;
-$span_grey: #999;
+$colour-blue-navigation: #506572;
+$colour-grey-dark: #87888a;
+$colour-green-anchor: #95c37c;
+$colour-grey-box: #e5e5e5;
+$colour-grey-cite: #444;
+$colour-grey-dark-border: #333;
+$colour-grey-light-border: #ececec;
+$colour-grey-article-border: #f1f1f1;
+$colour-grey-light-span: #999;
+$colour-white-text: #fff;
+
+$colour-grey-jobarchive-span: #d2d3d5;
 
 /*
- * Margins and Sizes
- * -----------------
+ * Margins, Sizes and Padding
+ * --------------------------
  */
 
-$bottom-margin: 13px;
-$bottom-margin-7: $bottom-margin * 0.5;
-$bottom-margin-19: $bottom-margin * 1.5;
-$bottom-margin-26: $bottom-margin * 2;
-$bottom-margin-65: $bottom-margin * 5;
+// Margins.
+$margin: 13px;
+$margin-7: $margin * 0.5;
+$margin-10: $margin * 0.75;
+$margin-19: $margin * 1.5;
+$margin-23: $margin * 1.75;
+$margin-26: $margin * 2;
+$margin-33: $margin * 2.5;
+$margin-65: $margin * 5;
 
-$button_size: $bottom-margin * 2.5;
-$homepage-break: 950;
+// Padding.
+$padding: $margin;
+$padding-7: $margin-7;
+$padding-10: $margin-10;
+$padding-19: $margin-19;
+$padding-23: $margin-23;
+$padding-26: $margin-26;
+$padding-33: $margin-33;
+$padding-65: $margin-65;
+
+// Default side padding of main-column segments.
+$padding-sections: 0 4%;
 
 /*
  * Partials and Mixins 
@@ -39,17 +152,6 @@ $homepage-break: 950;
 
 @import 'mixins';
 @import 'partials';
-
-/* 
- * Self-clearing Floats 
- * --------------------
- * WPZOOM's use of <div class="clear"></div> should be classed as a crime 
- * against humanity.
- */
-
-.self-clear {
-    @extend %clearfix;
-}
 
 /*
  * Imports
@@ -80,11 +182,3 @@ $homepage-break: 950;
 @import 'widgets';
 // Miscellaneous styling rules.
 @import 'misc';
-
-/*
- * Print Queries
- * -----------------------
- * This should _always_ come after all other rules.
- */
-
-@import 'print';

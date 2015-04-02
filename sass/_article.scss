@@ -29,10 +29,6 @@ $archive-width-75: 75%;
 $archive-article-thumb-height-170: 170px;
 $archive-article-thumb-height-325: 325px;
 
-.related_posts .title {
-    color: #000;
-}
-
 /*
  * Article Reset
  * -------------
@@ -53,7 +49,7 @@ article {
 
     blockquote, li, p {
         a {
-            color: $wpzoom_anchor;
+            color: $colour-green-anchor;
 
             &:hover {
                 text-decoration: underline;
@@ -63,9 +59,9 @@ article {
 
     blockquote, ol, p, pre, ul {
         color: #000;
-        font: 16px $font_georgia;
+        font: 16px $font-family-georgia;
         line-height: 150%;
-        margin-bottom: $bottom-margin;
+        margin-bottom: $margin;
     }
 
     div, img {
@@ -86,6 +82,11 @@ article {
     }
 }
 
+.related_posts .title {
+    color: #000;
+}
+
+
 /*
  * Article Header
  * --------------
@@ -105,7 +106,7 @@ header {
         }
 
         p {
-            color: $span_grey;
+            color: $colour-grey-light-span;
         }
     }
 
@@ -140,9 +141,9 @@ div.article-body {
         background-origin: content-box;
         background-repeat: no-repeat;
         background-size: auto 25px;
-        border-color: 1px solid #f1f1f1;
-        border-width: 1px 0 1px 0;
-        font-size: 18px;
+        border-color: 1px solid $colour-grey-article-border;
+        border-width: 1px 0;
+        font-size: $font-size-18;
         font-style: italic;
         padding: 15px 30px;
 
@@ -152,7 +153,7 @@ div.article-body {
     }
 
     cite {
-        color: #444;
+        color: $colour-grey-cite;
         display: block;
         font-style: none;
         font-weight: bold;
@@ -163,17 +164,22 @@ div.article-body {
             content: ' -';
         }
     }
+}
 
-    .wp-caption img {
-        margin-bottom: 10px;
-    }
+/*
+ * WordPress Image Captions
+ * ------------------------
+ */
 
-    p.wp-caption-text {
-        color: $span_grey;
-        font-size: 14px;
-        padding: 0;
-        text-align: left;
-    }
+.wp-caption img {
+    margin-bottom: $margin-10;
+}
+
+p.wp-caption-text {
+    color: $colour-grey-light-span;
+    font-size: $font-size;
+    padding: 0;
+    text-align: left;
 }
 
 /*
@@ -182,15 +188,15 @@ div.article-body {
  */
 
 article.full {
-    padding: 0 4% $bottom-margin 4%;
+    padding: 0 4% $padding 4%;
 
     header {
-        margin-bottom: $bottom-margin-26;
+        margin-bottom: $margin-26;
 
         div.meta {
             @extend %clearfix;
             /* For legibility when its white-on-white. */
-            border: 1px solid #f1f1f1;
+            border: 1px solid $colour-grey-article-border;
             border-width: 1px 0;
             padding: 9px 0;
         }
@@ -205,7 +211,7 @@ article.full {
 
             @include breakpoint(max, 1050) {
                 float: none;
-                margin-bottom: $bottom-margin;
+                margin-bottom: $margin;
             }
         }
 
@@ -217,27 +223,9 @@ article.full {
         }
 
         h1.title {
-            margin-bottom: $bottom-margin;
-        }
-
-        ul.mshare {
-            float: right;
-
-            @include breakpoint(max, 1050) {
-                float: left;
-            }
+            margin-bottom: $margin;
         }
     } 
-
-    div.article-body ul.mshare {
-        // Position footer share menu differently.
-        margin-bottom: $bottom-margin;
-
-        li {
-            float: right;
-            display: inline-block;
-        }
-    }
 }
 
 /*
@@ -254,11 +242,11 @@ article.jobarchive {
     }
 
     span, h3 {
-        font: $font_arial;
+        font-family: $font-family-arial;
     }
 
     span {
-        font: 12px $font_arial;
+        font: 12px $font-family-arial;
         text-transform: uppercase;
         padding: 3px 5px;
     }
@@ -266,22 +254,22 @@ article.jobarchive {
     span.job-category {
         color: #fff;
         display: inline-block;
-        margin-bottom: $bottom-margin-7;
+        margin-bottom: $margin-7;
         width: 100%;
 
         @include breakpoint(smartphone) {
-            font-size: 16px;
+            font-size: $font-size-16;
         }
     }
 
     span.more {
-        background: #d2d3d5;
+        background: $colour-grey-jobarchive-span;
         display: inline-block;
         padding: 2px 5px;
     }
 
     div.article-body p, .more {
-        margin-top: $bottom-margin-7;
+        margin-top: $margin-7;
     }
 }
 
@@ -299,7 +287,7 @@ article.jobarchive {
     @extend %cover-picture;
 
     @include breakpoint(smartphone) {
-        margin-bottom: $bottom-margin-7;
+        margin-bottom: $margin-7;
     }
 
     a {
@@ -310,7 +298,7 @@ article.jobarchive {
 }
 
 #recent-posts article {
-    padding-bottom: $bottom-margin-26;
+    padding-bottom: $margin-26;
     @include webkit_value(display, flex);
     @include webkit(flex-direction, row);
 
@@ -319,12 +307,12 @@ article.jobarchive {
     }
 
     &:not(:last-child) {
-        border-bottom: 1px solid $border_grey;
-        margin-bottom: $bottom-margin-26;
+        border-bottom: 1px solid $colour-grey-light-span;
+        margin-bottom: $margin-26;
     }
 
     header {
-        margin-bottom: $bottom-margin;        
+        margin-bottom: $margin;        
     }
 }
 
@@ -338,7 +326,7 @@ article.jobarchive {
     }
 
     >:last-child {
-        padding: 0 $bottom-margin 0 0;
+        padding-bottom: $padding;
 
         @include breakpoint(smartphone) {
             padding: 0;
@@ -357,7 +345,7 @@ article.jobarchive {
     }
 
     >:last-child {
-        padding: 0 0 0 $bottom-margin;
+        padding: 0 0 0 $margin;
         @include webkit(flex, 1); 
 
         @include breakpoint(smartphone) {
@@ -378,9 +366,9 @@ article.jobarchive {
  */
 
 article.lead {
-    border-bottom: 1px solid $border_black;
-    margin-bottom: $bottom-margin-26;
-    padding-bottom: $bottom-margin-26;
+    border-bottom: 1px solid $colour-grey-dark-border;
+    margin-bottom: $margin-26;
+    padding-bottom: $margin-26;
 
     h1 {
         margin: 0;
@@ -404,7 +392,7 @@ article.lead {
     }
 
     div.article-thumb {
-        margin-bottom: $bottom-margin; 
+        margin-bottom: $margin; 
         @include flex_size(100%, 0.5);
 
         a {

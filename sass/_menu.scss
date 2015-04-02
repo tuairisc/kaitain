@@ -6,7 +6,7 @@
  */
 
 nav {
-    padding: 0 4%;
+    padding: $padding-sections;
 }
 
 #menu {
@@ -16,10 +16,19 @@ nav {
 }
 
 ul#menu {
+    /*
+     * Main Site Navigation
+     * --------------------
+     * The navigation menu has two-and-a-half states:
+     * 
+     * 1. Horizontal list, left aligned, on desktops.
+     * 2. Horizontal list, center aligned, on tables.
+     * 3. Horizontal list, no dropdowns, fixed on top, on smartphones.
+     */
+
     list-style-type: none;
 
     @include breakpoint(smartphone) {
-        /* Nav collapses to a simple side-scrolling list on smartphones. */
         left: 0;
         margin: 0;
         padding: 0;
@@ -40,13 +49,13 @@ ul#menu {
         box-sizing: border-box;
         color: #fff;
         display: inline-block;
-        font: 16px $font_arial;
+        font: $font-size-16 $font-family-arial;
         line-height: 24px;
         padding: 10px;
         white-space: nowrap;
 
         @include breakpoint(portrait) {
-            font-size: 14px;
+            font-size: $font-size;
             padding: 10px 4px;
         }
 
@@ -62,14 +71,14 @@ ul#menu {
 
         &:not(:last-child):after {
             content: '|';
-            color: $wpzoom_anchor;
+            color: $colour-green-anchor;
             display: inline-block;
-            font-size: 14px;
+            font-size: $font-size;
         }
 
         &:hover {
             > a {
-                background-color: $nav_blue;
+                background-color: $colour-blue-navigation;
                 color: #fff;
             }
 
@@ -89,17 +98,18 @@ ul#menu {
                 display: none;
 
                 @include breakpoint(smartphone) {
-                    font-size: 25px;
+                    font-size: $font-size-25;
                 }
             }
 
             &:hover {
-                background-color: $nav_blue;
+                background-color: $colour-blue-navigation;
 
-                a {
-                    color: #fff;
-                    background-color: transparent;
-                }
+            }
+
+            &:hover a {
+                color: #fff;
+                background-color: transparent;
             }
 
             a {
@@ -124,10 +134,9 @@ ul#menu {
 
     .submenu-indicator {
         &:after {
-            color: $wpzoom_anchor;
+            color: $colour-green-anchor;
             content: ' ▼';
             font-size: 52%;
-            padding-left: 3px;
 
             @include breakpoint(smartphone) {
                 display: none;

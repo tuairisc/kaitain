@@ -21,18 +21,20 @@ $width_breakpoint: 768px;
  */
 
 .g {
-    @extend %zero;
+    margin: 0;
+    padding: 0;
 }
 
+/* 
+ * Banner Advertisements
+ * ---------------------
+ * Banner advertismeents have two images, .mobile and .desktop, and which 
+ * are swapped here.
+ * Sidebar advertisements have neither class and just display.
+ */
+
 .g-1, .g-2 {
-    /* 
-     * Banner Advertisements
-     * ---------------------
-     * Banner advertismeents have two images, .mobile and .desktop, and which 
-     * are swapped here.
-     * Sidebar advertisements have neither class and just display.
-     */
-    padding: 20px 4%;
+    padding: $padding-19 4%;
 
     img.square {
         display: none;
@@ -57,11 +59,12 @@ $width_breakpoint: 768px;
     }
 }
 
+/*
+ * Sidebar Advertisements
+ * ----------------------
+ */
+
 .sidebar-adverts {
-    /*
-     * Sidebar Advertisements
-     * ----------------------
-     */
     width: 100%;
     @include webkit_value(display, flex);
     @include webkit(flex-direction, column);
