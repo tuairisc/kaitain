@@ -12,7 +12,7 @@
         );
 
         if (option::get('post_date') == 'on' || option::get('post_author') == 'on') {
-            if (option::get('post_author') == 'on' && !default_author()) { 
+            if (option::get('post_author') == 'on' && !is_default_author()) { 
                 printf(
                     '<h3 class="article-author"><a href="%s" rel="author" title="Posts by %t">%s</a></h3>',
                     get_author_posts_url(get_the_author_meta('ID')),

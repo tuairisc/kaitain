@@ -18,7 +18,7 @@
             <h2 class="title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e('%s', 'wpzoom'); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
             <div class="text">
                 <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') {
-                    if (option::get('post_author') == 'on' && !default_author()) { 
+                    if (option::get('post_author') == 'on' && !is_default_author()) { 
                         $location = get_post_meta($post->ID, 'foluntais_location', true); 
                         printf('<h3 class="article-author">%s</h3>', get_post_meta($post->ID, 'foluntais_employer', true));
                     }

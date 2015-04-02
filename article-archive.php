@@ -14,7 +14,7 @@
             <h2 class="title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e('%s', 'wpzoom'); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
             <div class="text">
                 <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') {
-                    if (option::get('post_author') == 'on' && !default_author()) { 
+                    if (option::get('post_author') == 'on' && !is_default_author()) { 
                         printf(
                             '<h3 class="article-author"><a href="%s" rel="author" title="Posts by %t">%s</a></h3>',
                             get_author_posts_url(get_the_author_meta('ID')),
