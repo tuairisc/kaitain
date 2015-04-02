@@ -64,6 +64,10 @@ article {
         margin-bottom: $margin;
     }
 
+    a img, blockquote, ol, p, pre, ul {
+        margin-bottom: $margin;
+    }
+
     div, img {
         height: auto;
         overflow: hidden;
