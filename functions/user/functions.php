@@ -3,417 +3,478 @@
 /* You can add custom functions below, in the empty area
 =========================================================== */
 
-// Load custom Tuairisc widgets.
+/**
+ * The Glorious Tuairisc Functions
+ * -------------------------------
+ * Except for the files included in the head, this represents most of the PHP 
+ * work on the Tuairisc site. 
+ */
+
+$banners = array(
+    /* Classes and the current category ID for the Greann category, which has
+     * a different banner style. */
+    'classes' => array(
+        /* See $banner_colours: If the correct colour-from-ID can't be 
+         * determined by category ID, then consult this array for the ID to 
+         * use. */
+        'normal', 'greann'
+    ),
+    'greann_cat' => 158,
+);
+
+$irish_calendar_terms = array(
+    'days' => array(
+        'Dé Luain', 'Dé Máirt', 'Dé Céadaoin', 'Déardaoin', 'Dé hAoine', 
+        'Dé Sathairn', 'Dé Domhnaigh'
+    ),
+    'months' => array(
+        'Eanáir', 'Feabhra', 'Márta', 'Aibreán', 'Bealtaine', 'Meitheamh',
+        'Iúil', 'Lúnasa', 'Meán Fómhair', 'Deireadh Fómhair', 'Samhain', 
+        'Nollaig'
+    )
+);
+
+/* This is the author account used for small or generic posts on the Tuairisc 
+ * site. By default Sean does not want any attribution to appear for them. */
+$default_author_id = 37;
+
+$education_categories = array(
+    /* There are five sub-categories within the education category, 187 being
+     * the parent. */
+    187, 202, 203, 204, 205, 206
+);
+
+$custom_post_types = array(
+    // All custom post types declared and used in this theme.
+    'foluntais'
+);
+
+$custom_post_fields = array(
+    // All important custom fields.
+    'tuairisc_view_counter'
+);
+
+$index_excluded_categories = array(
+    // Categories specified for exclusion from index loop display.
+    216, 182
+);
+
+$tuairisc_scripts = array(
+    /* All JavaScript loaded by me for the theme.
+     * Path is $theme_folder/js/tuairisc/ */
+    'modernizr' => '/modernizr_touch.min.js',
+    'tuairisc-browser-detect' => '/browser_detect.min.js',
+    'tuairisc-adrotate-fallback' => '/adrotate.min.js',
+    'tuairisc-eventdrop' => '/eventdrop.min.js',
+    'tuairisc-functions' => '/functions.min.js',
+    'tuairis-author-report' => '/author_report.min.js'
+);
+
+$fallback = array(
+    /* Social media (Open Graph, Twitter Cards) fallback information in cases 
+     * where it may be missing. */
+    'publisher' => 'https://www.facebook.com/tuairisc.ie',
+    'image' => get_template_directory_uri() . '/images/tuairisc_fallback.jpg',
+    'twitter' => '@tuairiscnuacht',
+    'description' => 'Cuireann Tuairisc.ie seirbhís nuachta Gaeilge '
+        . 'ar fáil do phobal uile na Gaeilge, in Éirinn agus thar lear. Té sé '
+        . 'mar aidhm againn oibriú i gcónaí ar leas an phobail trí nuacht, '
+        . 'eolas, anailís agus siamsaíocht ar ardchaighdeán a bhailiú, a '
+        . 'fhoilsiú agus a chur sa chúrsaíocht.',
+);
+
+/*
+ * Tuairisc Custom PHP Scripts and Widgets
+ * ---------------------------------------
+ */
+
 $widget_path = get_template_directory() . '/functions/user/';
 require_once $widget_path . 'tuairisc-authors.php';
 require_once $widget_path . 'tuairisc-mostviewed.php';
-// Load jobs
 require_once $widget_path . 'tuairisc-jobs.php';
 
-/* 
- * # Category Name   Hex Colour  Category ID
- * -----------------------------------------
- * 1 Nuacht          #516671     191  
- * 2 Tuairmíocht     #8eb2d3     154   
- * 3 Spoirt          #c54b54     155
- * 4 Cultúr          #96c381     156
- * 5 Saol            #e04184     157
- * 6 Pobal           #7d5e90     159
- * 7 Greann          #e6192a     158
- * 8 Foghlaimeoirí   #d4bb85     187 
- */
-
-$banner_colors = array(
-    // Categories
-    154 => '#8eb2d3',
-    155 => '#c54b54',
-    156 => '#96c381',
-    157 => '#e04184',
-    158 => '#e6192a',
-    159 => '#7d5e90',
-    187 => '#424045',
-    191 => '#516671',
-    // Custom foluntais
-    224 => '#9ac485',
-    225 => '#90b5d2',
-    // Foluntais fallback
-    799 => '#424045',
-    // Single posts
-    899 => '#000',
-    // Fallback
-    999 => '#c7c009',
-);
-
-/* Script Loading
- * ---------------
- * Load /all/ the things! */
-
 function tuairisc_scripts() {
-    /* This handles loading for all of the custom scripts used in the theme. */
-    // Über-crude operating system and browser detection using user agent strins.
-    wp_enqueue_script('tuairisc-browser-detect', get_stylesheet_directory_uri() . '/js/tuairisc_browser_detect.js', array(), '1.0', true);
-    // Styling and loading for jQuery scripts.
-    wp_enqueue_script('tuairisc-adrotate', get_stylesheet_directory_uri() . '/js/tuairisc_adrotate.js', array('jquery'), '1.0', true);
-    // Event parser.
-    wp_enqueue_script('tuairisc-eventdrop', get_stylesheet_directory_uri() . '/js/tuairisc_eventdrop.js', array('jquery'), '1.0', true);
-    // Some styling isn't handled correctly by CSS.
-    wp_enqueue_script('tuairisc-functions', get_stylesheet_directory_uri() . '/js/tuairisc_functions.js', array('jquery'), '1.0', true);
-    // Modernizr, for menu touch events.
-    wp_enqueue_script('tuairisc-modernizr', get_stylesheet_directory_uri() . '/js/tuairisc_modernizr_touch.js', array('jquery'), '1.0', true);
-    // Emer's author report
-    wp_enqueue_script('tuairisc-author-report', get_stylesheet_directory_uri() . '/js/tuairisc_author_report.js', array('jquery'), '1.0', true);
+    /** 
+     * Load Tuairisc JavaScript
+     * ------------------------
+     * Load all theme JavaScript.
+     * 
+     * @param {none}
+     * @return {none}
+     */
+
+    global $tuairisc_scripts;
+    $path = get_stylesheet_directory_uri() . '/js/tuairisc';
+
+    foreach ($tuairisc_scripts as $key => $value) {
+        wp_enqueue_script($key, $path . $value, array(), '1.0', true);
+    }
 }
 
 function tuairisc_styles() {
-    /* This handles loading for all of the custom stylesheets used 
-     * throughout the theme. */ 
+    /**
+     * Load Tuairisc Custom Styles
+     * ---------------------------
+     * Load all theme CSS.
+     * 
+     * @param {none}
+     * @return {none}
+     */
 }
 
-/* Breadcrumb Banners
- * ------------------
- * These were a requested feature on the site. */
-
-function get_parent_id($cat_id = null) {
-    /* Return the ID of the top parent of any category. */
-
-    if ('' == $cat_id) {
-        $cat_id = get_query_var('cat');
-    }
-
-    $parent = get_category_parents($cat_id, false, '/'); 
-    $parent = preg_replace('/\/.*/', '', $parent); 
-    return get_cat_id($parent); 
-}
-
-function get_breadcrumb() {
-    /* This returns the appropriate set of breadcrumb links for the given 
+function get_banner_breadcrumb() {
+    /** 
+     * Get Post or Archive Banner
+     * --------------------------
+     * This returns the appropriate set of breadcrumb links for the given 
      * category/single post. Breadcrumb links are created in three different 
      * ways:
      * 
      * 1. Single, categorized posts and archive pages use get_category_parents
      * 2. The Greann category archive pages uses the category's description. 
-     * 3. Foluntais posts use get_job_category_link. */
+     * 3. Foluntais posts use get_job_category_link. 
+     * 
+     * @param {none}
+     * @return {none}
+     */
 
-    if (is_category() && !is_greann() || is_singular('post') && has_category()) {
-        $id = get_the_category();
-        echo get_category_parents($id[0]->cat_ID, true, '&nbsp;');
-    } else if (is_category() && is_greann()) {
-        echo '<span>' . category_description() . '</span>';
-    } else if (is_singular('foluntais')) {
-        get_job_category_link($post_id, true, '&nbsp;');
-    } else if (is_job()) {
-        get_job_category_link($post_id, false, '&nbsp;');
-    }
-}
+    global $banners, $custom_post_types;
 
-function is_greann() {
-    /* The Greann category has a unique breadcrumb style, to differentiate it 
-     * with other, more serious, segments of the website. */
+    if (has_category($banners['greann_cat'])) {
+        // 1. Greann category post.
+        printf('<span>%s</span>', category_description($greann));
+    } else if (!in_array(get_post_type(), $custom_post_types)) {
+        // 2. Single post or archive category of non-job type.
 
-    if (is_category()) {
-        $cat_id = get_parent_id(get_query_var('cat'));
-    } else if (is_single() && has_category()) {
-        $cat_id = get_the_category();
-        $cat_id = $cat[0]->cat_ID;
-    }
-
-    return ($cat_id == 158) ? true : false;
-}
-
-function breadcrumbs_get_id() {
-    /* Three objects have banners:
-     *
-     * 1. Single posts
-     * 2. Single foluntais listings
-     * 3. Category archives
-     *
-     * get_id figures out which is which and returns the appropriate ID. Dirty 
-     * shorthand until I have a better solution. */
-
-    if (is_singular('post') && has_category()) {
-        $id = get_the_category();
-        $id = $id[0]->cat_ID;
-
-        if ($id == 158) {
-            return $id;
+        if (is_category()) {
+            $category = get_query_var('cat');
         } else {
-            $id = 899;
+            $category = get_the_category();
+            $category = $category[0]->cat_ID;
         }
-    } else if (is_category()) {
-        $id = get_parent_id(get_query_var('cat'));
-    } else if (is_job()) {
-        $id = 799;
-    } else {
-        return;
-    }
 
-    return $id;
+        printf(get_category_parents($category, true, '&nbsp;'));
+    } else {
+        // 3. Is in custom post type.
+        get_job_category_link(get_the_ID(), false, '&nbsp;');
+    }
 }
 
-function get_banner_color() {
-    /* Return a unique colour for each given parent category. */
+function banner_classes() {
+    /**
+     * Return Unique Banner Class
+     * --------------------------
+     * Despite different colours, there are only two CSS styles:
+     * 
+     * 1. Narrow width banner wih left-aligned breadcrumb.
+     * 2. Wide Greann banner with the Greann logo.
+     * 
+     * This returns the correct CSS class.
+     * 
+     * @param {none}
+     * @return {string} $banner_classes CSS classes for banner.
+     */
 
-    global $banner_colors;
-    $color = '';
-    $id = breadcrumbs_get_id();
+    global $banners;
 
-    if (array_key_exists($id, $banner_colors)) {
-        $color = $banner_colors[$id];
-    } else {
-        $color = $banner_colors[999];
-    }
-
-    echo 'background-color: ' . $color . ';';
-}
-
-function banner_class() {
-    /* Some banners have custom CSS styles attached. 
-     * This function looks at the ID and type of object and returns
-     * the custom class, should it exist. */
-
-    $classes = array(
-        158 => 'greann',
-        899 => 'banner-post',
+    $banner_classes = array(
+        'breadcrumb-banner ',
+        'banner-'
     );
 
-    $class = '';
-    $id = breadcrumbs_get_id();
-
-    if (is_greann() && array_key_exists($id, $classes)) {
-        $class = $classes[$id];
+    if (has_category($banners['greann_cat'])) {
+        $banner_classes[] = $banners['classes'][1];
     } else {
-        $class = $classes[899];
+        $banner_classes[] = $banners['classes'][0];
     }
 
-    echo $class;
+    if (is_category()) {
+        // Coloured banners only for categories.
+        $category = get_category(get_query_var('cat'));
+        $banner_classes[] = ' category-';
+
+        if ($category->category_parent > 0) {
+            $banner_classes[] = $category->category_parent;
+        } else {
+            $banner_classes[] = $category->cat_ID;
+        }
+    }
+
+    return implode('', $banner_classes);
 }
 
-/* 'Hero'-style Posts 
- * ------------------
- * The first post on the each page of the category display has a different, custom
- * style. */
-
-function hero_post_class() {
-    /* If the lead post has thumbnail images, mark it as a 'hero' post, whose 
-     * style is very different than other posts in the cateory loop. */
-
-    return (has_post_thumbnail()) ? 'hero-post' : '';
-}
-
-function get_thumbnail_url($post_id = null, $size = null, $arr = false) {
-    /* Code snippet from http://goo.gl/NhcEU6
-     * get_thumbnail_url returns the anchor url for the requested thumbnail. */
+function get_thumbnail_url($post_id = null, $thumb_size = null, $return_arr = false) {
+    /** 
+     * Return Thumbnail Image URL
+     * --------------------------
+     * Taken from: http://goo.gl/NhcEU6
+     * 
+     * WordPress, by default, only has a handy function to return a glob of HTML
+     * -an image inside an anchor-for a post thumbnail. This wrapper extracts
+     * and returns only the URL.
+     * 
+     * @param {int} $post_id The ID of the post.
+     * @param {int} $thumb_size The requested size of the thumbnail.
+     * @param {bool} $return_arr Return either the entire thumbnail object or just the URL.
+     * @return {string} $thumb_url[0] URL of the thumbnail.
+     * @return {array} $thumb_url All information on the attachment.
+     */
 
     if ('' == $post_id) {
         $post_id = get_the_ID();
     }
 
-    if ('' == $size) {
+    if ('' == $thumb_size) {
         $size = 'large';
     }
 
     $thumb_id = get_post_thumbnail_id($post_id);
-    $thumb_url = wp_get_attachment_image_src($thumb_id, $size, true);
-    return ($arr) ? $thumb_url : $thumb_url[0];
+    $thumb_url = wp_get_attachment_image_src($thumb_id, $thumb_size, true);
+    return ($return_arr) ? $thumb_url : $thumb_url[0];
 }
 
 function remove_read_more($excerpt) {
-    /* Remove the read more link from page and post excerpts. */
+    /** 
+     * Remove Excerpt Read More Link
+     * -----------------------------
+     * @param {string} $excerpt The post excerpt.
+     * @return {string} $excerpt THe post excerpt sans the read more link.
+     */
 
     return preg_replace('/(<a class="more.*<\/a>)/', '', $excerpt);
 }
 
-function replace_breaks($excerpt) {
-    /* Replace <br /> tags in excerpts with <p>. 
-     * Excerpt are used site-wide as a 'blurb' for posts. */
+function replace_excerpt_breaks($excerpt) {
+    /** 
+     * Replace Excerpt Break Tags
+     * --------------------------
+     * Replace break tags in an excerpt with a paragaraph tag. The excerpt will
+     * already have an opening and closing <p></p> tags.
+     * 
+     * @param {string} $excerpt The post excerpt.
+     * @return {string} $excerpt The post excerpt.
+     */
 
     return str_replace('<br />', '</p><p>', $excerpt);
 }
 
-function get_avatar_url($user_id = null, $size = null) {
-    /* Return the hyperlink for the given avatar, without the <img /> code. */
+function get_avatar_url($user_id = null, $avatar_size = null) {
+    /**
+     * Return URL of User Avatar 
+     * -------------------------
+     * WordPress does not provide an easy way to access only the URL of the 
+     * user's avatar, hence this.
+     * 
+     * @param {int} $user_id The ID of the user.
+     * @param {int} $avatar_size Size of the avatar to be returned.
+     * @return {string} $avatar_url The URL of the avatar. 
+     */
 
     if ('' == $user_id) {
         $user_id = get_the_author_meta('ID');
     }
 
-    if ('' == $size) {
-        $size = 100;
+    if ('' == $avatar_size) {
+        $avatar_size = 100;
     }
 
-    $avatar_url = get_avatar($user_id, $size);
-    return preg_replace('/(^.*src="|".*$)/', '', $avatar_url);
+    $avatar_url = get_avatar($user_id, $avatar_size);
+    $avatar_url = preg_replace('/(^.*src="|".*$)/', '', $avatar_url);
+    return $avatar_url;
 }
 
 function has_local_avatar($user_id = null) {
-    /* This site uses 'WP USer Avatar' for avatar control.
-     * It serves avatars in this priority:
-     *  
-     * 1. Local user avatar
-     * 2. Gravatar user avatar
-     * 3. Gravatar stock avatar
+    /**
+     * Check Avatar Source
+     * -------------------
+     * WordPress fetches avatars by sending the user's email to Gravatar. The 
+     * plugin 'WP User Avatar' allows you to upload and serve avatars locally.
      * 
-     * I need to see if a local avatar is served and switch based on it.
-     * This function checks to see if the avatar is being served from the local 
-     * site. */
+     * Gravatar is treated as a fallback from this. The preference from Sean is
+     * that /only/ local avatars should be shown.
+     * 
+     * @param {int} $user_id
+     * @return {bool} $avatar_is_local
+     */
 
     if ('' == $user_id) {
         $user_id = get_the_author_meta('ID');
     }
 
-    return (strpos(get_avatar_url($user_id), 'gravatar') == false);
+    $avatar_is_local = (strpos(get_avatar_url($user_id), 'gravatar') === false);
+
+    return $avatar_is_local;
 }
 
-function day_to_irish($day) {
-    /* day_to_irish returns the Irish translation of the day. */
+function is_default_author($author_id = null) {
+    /**
+     * Identify Site Default Author
+     * ----------------------------
+     * Certain articles are written on behalf of the site without attribution to
+     * a specific author-recycled articles and press releases are typical of 
+     * such posts.
+     * 
+     * Sean does not want any attribution for this account to appear at or above
+     * these articles.
+     * 
+     * @param {int} $author_id
+     * @return {bool} $is_default_account
+     */
 
-    $irish_days = array(
-        'Dé Luain', 'Dé Máirt', 'Dé Céadaoin', 'Déardaoin', 
-        'Dé hAoine', 'Dé Sathairn', 'Dé Domhnaigh'
-    ); 
-
-    switch ($day) {
-        case 'Monday': 
-            $day = $irish_days[0]; break;
-        case 'Tuesday': 
-            $day = $irish_days[1]; break;
-        case 'Wednesday': 
-            $day = $irish_days[2]; break;
-        case 'Thursday': 
-            $day = $irish_days[3]; break;
-        case 'Friday': 
-            $day = $irish_days[4]; break;
-        case 'Saturday': 
-            $day = $irish_days[5]; break;
-        case 'Sunday': 
-            $day = $irish_days[6]; break;
-        default: break;
-    }
-
-    return $day;
-}
-
-function default_author($author_id = null) {
-    /* The UID for the admin account is 37. If the article's author is the
-     * 'site', then neither Ciaran nor Sean want the author's name to appear. */
+    global $default_author_id;
 
     if ('' == $author_id) {
         $author_id = get_the_author_meta('ID');
     }
 
-    $default_author = 37;
-    return ($author_id == $default_author);
+    $is_default_account = ($author_id === $default_author_id);
+    return $is_default_account;
 }
 
-function month_to_irish($month) {
-    /* month_to_irish returns the Irish translation of the month. */
+function translate_day_to_irish($day) {
+    /**
+     * Translate Day to Irish
+     * ----------------------
+     * The language of the date is set by the localization of the server. Catch
+     * the date based on Tuairisc's preferred format and translate it to Irish.
+     * 
+     * @param {string} $day The day in English.
+     * @return {string} $day The day in Irish.
+     */
 
-    $irish_months = array(
-        'Eanáir', 'Feabhra', 'Márta', 'Aibreán', 
-        'Bealtaine', 'Meitheamh', 'Iúil', 'Lúnasa', 
-        'Meán Fómhair', 'Deireadh Fómhair', 'Samhain', 'Nollaig'
-    );
+    global $irish_calendar_terms;
+
+    switch ($day) {
+        case 'Monday': $day = $irish_calendar_terms['days'][0]; break;
+        case 'Tuesday': $day = $irish_calendar_terms['days'][1]; break;
+        case 'Wednesday': $day = $irish_calendar_terms['days'][2]; break;
+        case 'Thursday': $day = $irish_calendar_terms['days'][3]; break;
+        case 'Friday': $day = $irish_calendar_terms['days'][4]; break;
+        case 'Saturday': $day = $irish_calendar_terms['days'][5]; break;
+        case 'Sunday': $day = $irish_calendar_terms['days'][6]; break;
+    }
+
+    return $day;
+}
+
+function translate_month_to_irish($month) {
+    /**
+     * Translate Day to Irish
+     * ----------------------
+     * The language of the date is set by the localization of the server. Catch
+     * the date based on Tuairisc's preferred format and translate it to Irish.
+     * 
+     * @param {string} $month The month in English.
+     * @return {string} $month The month in Irish.
+     */
+
+    global $irish_calendar_terms;
 
     switch ($month) {
-        case 'January': 
-            $month = $irish_months[0]; break;
-        case 'February': 
-            $month = $irish_months[1]; break;
-        case 'March': 
-            $month = $irish_months[2]; break;
-        case 'April': 
-            $month = $irish_months[3]; break;
-        case 'May': 
-            $month = $irish_months[4]; break;
-        case 'June': 
-            $month = $irish_months[5]; break;
-        case 'July': 
-            $month = $irish_months[6]; break;
-        case 'August': 
-            $month = $irish_months[7]; break;
-        case 'September': 
-            $month = $irish_months[8]; break;
-        case 'October': 
-            $month = $irish_months[9]; break;
-        case 'November': 
-            $month = $irish_months[10]; break;
-        case 'December': 
-            $month = $irish_months[11]; break;
-        default: 
-            break;
+        case 'January': $month = $irish_calendar_terms['months'][0]; break;
+        case 'February': $month = $irish_calendar_terms['months'][1]; break;
+        case 'March': $month = $irish_calendar_terms['months'][2]; break;
+        case 'April': $month = $irish_calendar_terms['months'][3]; break;
+        case 'May': $month = $irish_calendar_terms['months'][4]; break;
+        case 'June': $month = $irish_calendar_terms['months'][5]; break;
+        case 'July': $month = $irish_calendar_terms['months'][6]; break;
+        case 'August': $month = $irish_calendar_terms['months'][7]; break;
+        case 'September': $month = $irish_calendar_terms['months'][8]; break;
+        case 'October': $month = $irish_calendar_terms['months'][9]; break;
+        case 'November': $month = $irish_calendar_terms['months'][10]; break;
+        case 'December': $month = $irish_calendar_terms['months'][11]; break;
     }
 
     return $month;
 }
 
-function date_to_irish($the_date) {
-    /* Localization attempts fell short as date localization requires files on 
-     * the server. */
+function translate_date_to_irish($the_date) {
+    /**
+     * Translate Date to Irish 
+     * -----------------------
+     * The language of the date is set by the localization of the server. Catch
+     * the date based on Tuairisc's preferred format and translate it to Irish.
+     *
+     * @param {string} $the_date
+     * @return {string} $the_date
+     */
+
+    $english_month = '';
+    $english_day = '';
+    $irish_day = '';
+    $irish_month = '';
 
     $day_regex = '/(,.*)/';
     $month_regex = '/(^.*, | [0-9].*$)/'; 
 
+
     $english_month = preg_replace($month_regex, '', $the_date);
     $english_day = preg_replace($day_regex, '', $the_date);
-    $irish_day = day_to_irish($english_day);
-    $irish_month = month_to_irish($english_month);
+
+    $irish_day = translate_day_to_irish($english_day);
+    $irish_month = translate_month_to_irish($english_month);
 
     $the_date = str_replace($english_day, $irish_day, $the_date);
     $the_date = str_replace($english_month, $irish_month, $the_date);
     return $the_date;
 }
 
-function education_category_id($id) {
-    /* Used for eduation_landing_shortcode below. Users cannot be expected to 
-     * know the actual category. */
+function education_landing_shortcode($atts) {
+    /**
+     * Education Landing Shortcode
+     * ---------------------------
+     * The education landing page links through to the five different segments. 
+     * These are boxy clickable boxes complete with title and description.
+     *
+     * @param {array} $attributes Shortcode values.
+     * @return {string} $education
+     */
 
-    switch ($id) {
-        case 1: 
-            $id = 202; break;
-        case 2: 
-            $id = 203; break;
-        case 3: 
-            $id = 204; break;
-        case 4: 
-            $id = 205; break;
-        case 5: 
-            $id = 206; break;
-        default: 
-            $id = 187; break;
+    global $education_categories;
+    $shortcode_atts = shortcode_atts(array('id' => 0), $atts);
+    $category_id = '';
+    $education_html = '';
+
+    // Change $id to 0 if it falls outside 0-5 range. 
+    if ($shortcode_atts['id'] < 0 || $shortcode_atts['id'] > 5) {
+        $category_id = $education_categories[0];
+    } else {
+        $category_id = $education_categories[$shortcode_atts['id']];
     }
 
-    return $id;
+    $education_html = '<div class="education-box education-'
+        . $category_id . '"><a href="' . get_category_link($category_id) 
+        . '"><p><span>' . get_cat_name($category_id) . '</span><br />' 
+        . category_description($category_id) . '</a></p></div>';
+
+    return $education_html;
 }
 
-function education_landing_shortcode($atts) {
-    /* The education landing page links through to the five different segments. 
-     * These are boxy clickable boxes complete with title and description. */
+function education_banner_shortcode($attributes, $content = null) {
+    /**
+     * Education Banner Shortcode
+     * --------------------------
+     * Generate either a tall or short dividing subheading banners for within 
+     * education section posts.
+     * 
+     * @param {array} $attributes Shortcode attributes.
+     * @param {string} $content Banner message.
+     * @return {string} $banner Dividing banner.
+     */
 
-    $a = shortcode_atts(array('id' => 0), $atts);
-    // Change $id to 0 if it falls outside 0-5 range. 
-    $id = ($a['id'] < 0 || $a['id'] > 5) ? 0 : $a['id'];
-    $cat_id = education_category_id($id);
-
-    return 
-        '<div class="education-box education-' . 
-        $id . '"><a href="' . get_category_link($cat_id) . '
-        "><p><span>' . get_cat_name($cat_id) . '</span><br />' . 
-        category_description($cat_id) . '</a></p></div>';
-}
-
-function education_banner_shortcode($atts, $content = null) {
-    /* These are shortcodes to use on the education page to deliniate sections 
-     * and subsections of the page. */
+    $open = '';
+    $close = '';
+    $banner = '';
 
     $head = 'edu-heading';
     $sub  = 'edu-subheading';
-    $a = shortcode_atts(array('type' => 'main'), $atts);
+    $shortcode_atts = shortcode_atts(array('type' => 'main'), $attributes);
 
     if ('' == $content) {
         $content = 'Did you forget to include text?';
     }
 
-    if ('main' == $a['type']) {
+    if ('main' == $shortcode_atts['type']) {
         $open = '<h2 class="' . $head . '">';
         $close = '</h2>';
     } else {
@@ -421,53 +482,68 @@ function education_banner_shortcode($atts, $content = null) {
         $close = '</h3>';
     }
 
-    return $open . $content . $close;
+    $banner = $open . $content . $close;
+
+    return $banner;
 }
 
-function parse_columnist_role($author_id) {
-    /* See author_is_columnist, below.
+function author_is_columnist($author_id = null) {
+    /**
+     * Parse User Role
+     * ---------------
+     * Sean wished to flag certain users are site columnists. This flag is set
+     * as a 'yes' through extra user fields.
      * 
-     * This function takes the string 'yes' or no' and parses it. I probably go 
-     * overboard in sanitization, but I've seen the dedication of our local 
-     * users. */
+     * @param {int} $author_id ID of the author.
+     * @return {bool} $is_columnist Is user a columnist true/false.
+      */
+
+    if ('' === $author_id) {
+       $author_id = get_the_author_meta('id');
+    }
 
     $meta_tag = get_the_author_meta('columnist', $author_id);
+    $is_columnist = false;
 
     if (!empty($meta_tag)) {
         $meta_tag = strtolower($meta_tag);
         $meta_tag = strip_tags($meta_tag);
-
-        if ($meta_tag === 'yes') {
-            return true;
-        }
+        $is_columnist = ($meta_tag === 'yes');
     } 
 
-    return false;
-}
-
-function author_is_columnist() {
-    /* We've (currently unused) added a flag to each user in order to indicate
-     * that they have a serial column. */
-
-    $id = get_the_author_meta('ID');
-    return parse_columnist_role($id);
+    return $is_columnist;
 }
 
 function is_columnist_article() {
-    /* We've added a 'is_column' flag in extended post fields in order to 
-     * indicate whether a post is part of an ongoing column. */
+    /**
+     * Article-is-Column
+     * -----------------
+     * Identiy whether an article is part of an ongoing column, as set through
+     * post custom fields.
+     * 
+     * @param {none}
+     * @return {bool} $is_column Is article a column piece true/false.
+     */
 
     $col_article = get_post_meta(get_the_ID(), 'is_column', true);
     $col_article = strtolower($col_article);
     $col_article = strip_tags($col_article);
+    $is_column = ($col_article === '1');
 
-    return ($col_article === '1');
+    return $is_column;
 }
 
 function tweak_title($title, $sep) {
-    /* Customize the title format so it looks like:
+    /**
+     * Title Tweak
+     * -------------
+     * Customize the title format so it looks like:
+     *  site_title | section_title 
      * 
-     *  site_title | section_title */
+     * @param {string} $title Item title.
+     * @param {string} $sep Separator between title words.
+     * @return {string} $title
+     */
 
     $title = str_replace($sep, '', $title); 
 
@@ -479,16 +555,54 @@ function tweak_title($title, $sep) {
     return $title;
 }
 
+function is_excluded_category() {
+    /** 
+     * Index Category Exclusion
+     * ------------------------
+     * Global exclusion and different treatment of the job categories were 
+     * requested by Ciaran and Sean. The currently excluded categories are: 
+     * 
+     * # Category Name               Category ID
+     * -----------------------------------------
+     * 1 Imeachtaí                   182  
+     * 2 Fógraí Poiblí/Folúntais     216   
+     * 
+     * I can exclude categories from post display with WP_Query, but these
+     * exclusions are more nuanced, in that we want to both change how the 
+     * categories are styled in the loop or exclude it entirely.
+     * 
+     * @param {none}
+     * @return {bool} Article is in excluded category true/false.
+     */
+
+    global $index_excluded_categories;
+
+    foreach(get_the_category() as $c) {
+        $cat_id = get_cat_id($c->cat_name);
+
+        if (in_array($cat_id, $index_excluded_categories)) {
+            return true;
+        }
+    }
+
+    return false;;
+}
+
 function get_view_count($post_id = null) {
-    /* Return the view count for the specified post. Used for a report on posts. 
-     * This should be used for quick estimates only. You should /not/ consider 
-     * this a canonical and absolute count of views on a post. */
+    /**
+     * Fetch Article View Count
+     * ------------------------
+     * @param {int} $post_id
+     * @return {int} $count Post view count.
+     */
+
+    global $custom_post_fields;
 
     if ('' == $post_id) {
         return;
     }
 
-    $key = 'tuairisc_view_counter';
+    $key = $custom_post_fields[0];
     $count = (int) get_post_meta($post_id, $key, true);
 
     if ('' == $count) {
@@ -499,43 +613,25 @@ function get_view_count($post_id = null) {
     return $count;
 }
 
-function is_excluded_category() {
-    /* Global exclusion and different treatment of the job categories were 
-     * requested by Ciaran and Sean. The currently excluded categories are: 
-     * 
-     * # Category Name               Category ID
-     * -----------------------------------------
-     * 1 Imeachtaí                   182  
-     * 2 Fógraí Poiblí/Folúntais     216   
-     * 
-     * I can exclude categories from post display with WP_Query, but these
-     * exclusions are more nuanced, in that we want to both change how the 
-     * categories are styled in the loop or exclude it entirely. */
-
-    $excluded_categories = array(216, 182);
-
-    foreach(get_the_category() as $c) {
-        $cat_id = get_cat_id($c->cat_name);
-
-        if (in_array($cat_id, $excluded_categories)) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
 function increment_view_counter($post_id = null) {
-    /* This a crude incrementing view counter. I'll parse the values 
-     * every day or so for a few days to see if results are even moderately 
-     * accurate. */
+    /**
+     * Increment Post View Count
+     * -------------------------
+     * Requested by Sean. If post is not of custom type and viewer is not logged
+     * in, then increment counter by +1.
+     *  
+     * @param {int} $post_id
+     * @return {none}
+     */
+
+    global $custom_post_types, $custom_post_fields;
 
     if ('' == $post_id) {
         $post_id = get_the_ID();
     }
 
-    if (is_singular('foluntais') || is_singular('post') && !is_user_logged_in()) {
-        $key = 'tuairisc_view_counter';
+    if (!in_array(get_post_type(), $custom_post_types) && !is_user_logged_in()) {
+        $key = $custom_post_fields[0];
         $count = (int) get_post_meta($post_id, $key, true);
         $count++;
         update_post_meta($post_id, $key, $count);
@@ -543,8 +639,12 @@ function increment_view_counter($post_id = null) {
 }
 
 function list_post_types() {
-    /* This has been helpful in debugging: output a list of all custom post 
-     * types to the browser's JavaScript console. */
+    /**
+     * Dump Post Types to JavaScript Console
+     * -------------------------------------
+     * @param {none}
+     * @return {none}
+     */
     
     $args = array('public' => true, '_builtin' => false);
     $output = 'names';
@@ -552,7 +652,7 @@ function list_post_types() {
     $post_types = get_post_types($args, $output, $operator); 
 
     foreach ($post_types as $post_type) {
-        echo '<script>console.log("' . $post_type . '");</script>';
+        printf('<script>console.log("%s");</script>', $post_type);
     }
 }
 
@@ -563,30 +663,31 @@ function list_post_types() {
  * 
  * 1. They were overly-complex for lay users to configure.
  * 2. They worked in an inconsistent and buggy manner, at best.
- * 3. They chosen one occasionally inserted annoying upsell banners on admin
- *    pages.
+ * 3. The chosen one occasionally inserted annoying upsell banners. 
  */
 
 function social_meta() {
-    facebook_meta();
-    twitter_meta();
+    /**
+     * Output Social Meta Information 
+     * ------------------------------
+     * @param {none}
+     * @return {none}
+     */
+
+    open_graph_meta();
+    twitter_card_meta();
 }
 
-$fallback = array(
-    'publisher' => 'https://www.facebook.com/tuairisc.ie',
-    'image' => get_template_directory_uri() . '/images/tuairisc_fallback.jpg',
-    'twitter' => '@tuairiscnuacht',
-    'description' => 'Cuireann Tuairisc.ie seirbhís nuachta Gaeilge '
-        . 'ar fáil do phobal uile na Gaeilge, in Éirinn agus thar lear. Té sé '
-        . 'mar aidhm againn oibriú i gcónaí ar leas an phobail trí nuacht, '
-        . 'eolas, anailís agus siamsaíocht ar ardchaighdeán a bhailiú, a '
-        . 'fhoilsiú agus a chur sa chúrsaíocht.',
-);
+function twitter_card_meta() {
+    /**
+     * Output Twitter Card
+     * -------------------
+     * This /should/ be all of the relevant information for Twitter. 
+     * 
+     * @param {none}
+     * @return {string} Twitter Card header meta information.
+     */
 
-function twitter_meta() {
-    /* Social Meta Information for Twitter
-     * ------------------------------------
-     * This /should/ be all of the relevant information for Twitter. */
     global $fallback, $post;
     $the_post = get_post($post->ID);
     setup_postdata($the_post);
@@ -605,10 +706,17 @@ function twitter_meta() {
     }
 }
 
-function facebook_meta() {
-    /* Social Meta Information for Facebook
-     * ------------------------------------
-     * This /should/ be all of the relevant information for Facebook. */
+function open_graph_meta() {
+    /**
+     * Output Open Graph
+     * -----------------
+     * This /should/ be all of the relevant information for an Open Graph 
+     * scraper
+     * 
+     * @param {none}
+     * @return {string} Open Graph header meta information.
+     */
+
     global $fallback, $post;
     $the_post = get_post($post->ID);
     setup_postdata($the_post);
@@ -632,13 +740,15 @@ function facebook_meta() {
         $taglist = '';
         $i = 0;
 
-        foreach ($tags as $the_tag) {
-            if ($i > 0) {
-                $taglist .= ', ';
-            }
+        if (!empty($tags)) {
+            foreach ($tags as $the_tag) {
+                if ($i > 0) {
+                    $taglist .= ', ';
+                }
 
-            $taglist .= $the_tag->name;
-            $i++;
+                $taglist .= $the_tag->name;
+                $i++;
+            }
         }
 
         $article_meta = array(
@@ -664,7 +774,7 @@ add_action('wp_enqueue_scripts', 'tuairisc_styles');
 add_filter('wp_title', 'tweak_title', 10, 2);
 // Remove read more links from excerpts.
 add_filter('the_excerpt', 'remove_read_more');
-add_filter('the_excerpt', 'replace_breaks');
+add_filter('the_excerpt', 'replace_excerpt_breaks');
 // Add shortcode for landing.
 add_shortcode('landing', 'education_landing_shortcode');
 // Add shortcode for education banners.
@@ -672,8 +782,8 @@ add_shortcode('banner', 'education_banner_shortcode');
 // Page excerpts for SEO and the education landing page. 
 add_action('init', add_post_type_support('page', 'excerpt'));
 // Filter date to return as Gaeilge.
-add_filter('get_the_date', 'date_to_irish');
-add_filter('get_comment_date', 'date_to_irish');
+add_filter('get_the_date', 'translate_date_to_irish');
+add_filter('get_comment_date', 'translate_date_to_irish');
 
 /*  Don't add any code below here or the sky will fall down
 =========================================================== */
