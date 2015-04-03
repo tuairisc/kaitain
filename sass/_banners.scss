@@ -9,10 +9,9 @@
  */
 
 .breadcrumb-banner {
-    @extend %clearfix;
-    margin-bottom: $margin-19;
-    padding: 5px 0;  
-    width: 100%;    
+    background-color: #000;
+    margin-bottom: $margin;
+    padding: $padding-7 0;  
 
     a {
         color: #fff;
@@ -20,23 +19,54 @@
         letter-spacing: 1px;
         text-transform: uppercase;
 
-        &:last-child {
-            font-size: $font-size-10;
-        }
-
-        &:first-child {
+        &:nth-child(1) {
+            // Parent category in breadcrumb.
             font-size: $font-size-18;
             margin-left: $margin;
         }
 
         &:nth-child(2):before {
+            // Separation chevron.
             content: '» ';
             font-size: $font-size-22;
         }
+
+        &:nth-child(3) {
+            // Child category in breadcrumb.
+            font-size: $font-size-10;
+        }
+    }
+}
+
+@each $item, $list in $category_colours {
+    .category-#{$item} {
+        background-color: nth($list, 1);
+    }
+}
+
+/* 
+ * Wider Banner for Greann Category (158) 
+ * --------------------------------------
+ * The Greann category (158) must be taller in order to separate content. 
+ */
+
+.banner-greann {
+    @extend %clearfix;
+    background-image: url($assets-folder + '/asnc_logo.svg');
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: auto 60px;
+    min-height: 60px;
+    padding: $margin 0;
+
+    @include breakpoint(smartphone) {
+        background-size: auto 33px;
     }
 
     span {
+        // Greann banner.
         color: #fff;
+        display: inline-block;
         float: right;
         font-family: $font-family-arial;
         font-size: $font-size;
@@ -46,29 +76,5 @@
         &::first-line {
             font-weight: bold;
         }
-    }
-}
-
-.breadcrumb-post a {
-    color: #000;
-}
-
-.banner-post {
-    margin-bottom: $margin;
-}
-
-/* 
- * Wider Banner for Greann Category (158) 
- * --------------------------------------
- * The Greann category (158) must be taller in order to separate content. 
- */
-
-.greann {
-    background: 10px center/auto 60px no-repeat url('../images/asnc_logo.svg');
-    min-height: 60px;
-    padding: $margin 0;
-
-    @include breakpoint(smartphone) {
-        background-size: auto 33px;
     }
 }
