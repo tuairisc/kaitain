@@ -330,7 +330,8 @@ article.jobarchive {
     }
 
     >:last-child {
-        padding-bottom: $padding;
+        // Explicit, to remove padding set in other block.
+        padding: 0 $padding $padding 0;
 
         @include breakpoint(smartphone) {
             padding: 0;
@@ -349,7 +350,7 @@ article.jobarchive {
     }
 
     >:last-child {
-        padding: 0 0 0 $margin;
+        padding-left: $padding;
         @include webkit(flex, 1); 
 
         @include breakpoint(smartphone) {
