@@ -23,12 +23,12 @@ $education-download: (#d2d3d5, $assets-folder + '/download_arrow.svg');
 $education-soundwave: '../images/education_soundwave.svg';
 
 $education-banners: (
-    education-0: (#424025, ''),
-    education-1: (#c44b54, $assets-folder + '/education/picture.svg'),
-    education-2: (#7c5c91, $assets-folder + '/education/book.svg'),
-    education-3: (#c9ab5f, $assets-folder + '/education/video.svg'),
-    education-4: (#89b0d4, $assets-folder + '/education/reading.svg'),
-    education-5: (#e34284, $assets-folder + '/education/crossword.svg')
+    education-187: (#424025, ''),
+    education-202: (#c44b54, $assets-folder + '/education/picture.svg'),
+    education-203: (#7c5c91, $assets-folder + '/education/book.svg'),
+    education-204: (#c9ab5f, $assets-folder + '/education/video.svg'),
+    education-205: (#89b0d4, $assets-folder + '/education/reading.svg'),
+    education-206: (#e34284, $assets-folder + '/education/crossword.svg')
 );
 
 $modal-background: #d1d2d4;
@@ -57,6 +57,27 @@ $social-buttons: (
     tumblr: (#35465c, $assets-folder-social + '/tumblr.png'),
     twitter: (#55acee, $assets-folder-social + '/twitter.png'),
     youtube: (#b31217, $assets-folder-social + '/youtube.png')
+);
+
+/*
+ * Site Section Colours
+ * --------------------
+ */
+
+$category_colours: (
+    154: #8eb2d3, 
+    155: #c54b54, 
+    156: #96c381, 
+    157: #e04184,
+    158: #e6192a, 
+    159: #7d5e90, 
+    187: #424045, 
+    191: #516671,
+    224: #9ac485, 
+    225: #90b5d2, 
+    799: #424045, 
+    899: "#000000",
+    fallback: #c7c009
 );
 
 
