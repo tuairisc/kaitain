@@ -4,7 +4,7 @@
  */
 
 .edu-heading, .edu-subheading {
-    background-color: nth(map-get($education-banners, education-0), 1);
+    background-color: nth(map-get($education-banners, education-187), 1);
     color: #fff;
     /* Important, or WPZOOM will override it. */
     margin: $margin-19 0 $margin-10 0 !important;
@@ -33,11 +33,11 @@
     margin-bottom: -#{$margin-10};
     min-height: 120px;
 
-    @include breakpoint(max, 1000) {
+    @include media(max, 1000) {
         min-height: 90px;
     }
 
-    @include breakpoint(smartphone) {
+    @include media(smartphone) {
         background-position: 7px 7px;
     }
 
@@ -50,7 +50,7 @@
         text-decoration: none;
         width: 100%;
 
-        @include breakpoint(max, 1000) {
+        @include media(max, 1000) {
             padding: $margin;
         }
     }
@@ -69,7 +69,7 @@
         margin-bottom: 0;
 
         &:nth-child(1) {
-            @include breakpoint(smartphone) {
+            @include media(smartphone) {
                 margin-bottom: $margin;
             }
         }
@@ -79,19 +79,19 @@
         font-size: 175%;
         text-transform: uppercase;
 
-        @include breakpoint(smartphone) {
+        @include media(smartphone) {
             font-size: 125%;
         }
     }
 }
 
 .education-box {
-    @include breakpoint(max, 768) {
+    @include media(max, 768) {
         padding: 20px;
     }
 
     &:hover {
-        @include breakpoint(max, 768) {
+        @include media(max, 768) {
             background-image: none;
         }
     }

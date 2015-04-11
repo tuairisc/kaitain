@@ -10,13 +10,13 @@ $widget-size-23: 23%;
 $widget-size-48: 48%;
 
 .featured-main {
-    @include breakpoint(max, $breakpoint-home) {
+    @include media(max, $breakpoint-home) {
         padding-bottom: 0;
     }
 }
 
 .featured-main .hero-image, .featured-main .post-content {
-    @include breakpoint(max, $breakpoint-home) {
+    @include media(max, $breakpoint-home) {
         width: 100%;
     }
 }
@@ -29,7 +29,7 @@ $widget-size-48: 48%;
     @include webkit(flex-wrap, wrap);
     @include webkit(justify-content, space-between);
 
-    @include breakpoint(smartphone) {
+    @include media(smartphone) {
         @include webkit(flex-direction, column);
     }
 
@@ -38,11 +38,11 @@ $widget-size-48: 48%;
 
         @include webkit(flex, 0 1 $widget-size-23);
 
-        @include breakpoint(max, $breakpoint-home) {
+        @include media(max, $breakpoint-home) {
             @include webkit(flex, 0 1 $widget-size-48);
         }
 
-        @include breakpoint(smartphone) {
+        @include media(smartphone) {
             @include webkit(flex, 1);
         }
     }
@@ -86,7 +86,7 @@ $widget-size-48: 48%;
         @include webkit(flex-wrap, nowrap);
         @include webkit(justify-content, space-between);
 
-        @include breakpoint(smartphone) {
+        @include media(smartphone) {
             @include webkit(flex-wrap, wrap);
         }
     }
@@ -95,7 +95,7 @@ $widget-size-48: 48%;
         box-sizing: border-box;
         @include webkit(flex, 0 1 $widget-size-23);
 
-        @include breakpoint(smartphone) {
+        @include media(smartphone) {
             margin-bottom: $margin-7;
             @include webkit(flex, 0 1 $widget-size-48);
         }

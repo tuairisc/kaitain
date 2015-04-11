@@ -14,30 +14,20 @@ ul.mshare {
         float: left;
         line-height: initial;
         margin-right: 2px;
-        @include flex_size($social-button-size, 1);
     }
 
     a {
-        @extend %cover-picture;
-        background-size: 90% auto;
         border-radius: 3px;
-        display: block;
-        @include flex_size(100%, 1);
     }
 
-    @each $child, $list in $social-buttons {
-        .#{$child} {
-            background-color: nth($list, 1);
-            background-image: url(nth($list, 2));
-        }
-    }
+    @include generate-social-links(a, $social-button-size, $social-sprites);
 }
 
 article {
     ul.mshare {
         float: right;
 
-        @include breakpoint(max, 1050) {
+        @include media(max, 1050) {
             float: left;
         }
     }

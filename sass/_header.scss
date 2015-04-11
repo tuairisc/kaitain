@@ -15,7 +15,7 @@
     position: relative;
     width: 100%;
 
-    @include breakpoint(smartphone) {
+    @include media(smartphone) {
         min-height: 0;
         position: initial;
         width: auto;
@@ -33,14 +33,14 @@
             float: right;
             margin-left: $margin-7;
 
-            @include breakpoint(smartphone) {
+            @include media(smartphone) {
                 float: left;
                 margin-left: 0;
                 margin-bottom: $margin-7;
             }
         }
 
-        @include breakpoint(smartphone) {
+        @include media(smartphone) {
             float: left;
             position: initial;
         }
@@ -50,7 +50,7 @@
         bottom: 0;
         position: absolute;
 
-        @include breakpoint(smartphone) {
+        @include media(smartphone) {
             display: inline-block;
             position: initial;
             margin-bottom: $margin;
@@ -76,7 +76,7 @@
          * instead of floating the parent. */
         width: 278px;
 
-        @include breakpoint(smartphone) {
+        @include media(smartphone) {
             margin-bottom: $margin;
         }
     }

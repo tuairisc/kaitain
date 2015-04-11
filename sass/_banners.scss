@@ -59,7 +59,7 @@
     min-height: 60px;
     padding: $margin 0;
 
-    @include breakpoint(smartphone) {
+    @include media(smartphone) {
         background-size: auto 33px;
     }
 

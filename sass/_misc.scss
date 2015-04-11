@@ -37,7 +37,7 @@ h3 {
     background: center bottom/auto 6px no-repeat border-box url($background-rainbow-strip);
     padding: $margin-19 4% 0 4%;
 
-    @include breakpoint(smartphone) {
+    @include media(smartphone) {
         padding-top: 0;
     }
 }
@@ -46,7 +46,7 @@ h3 {
     /* Stock colour is grey. */
     background-color: #fff;
 
-    @include breakpoint(smartphone) {
+    @include media(smartphone) {
         padding-top: 40px;
     }
 }

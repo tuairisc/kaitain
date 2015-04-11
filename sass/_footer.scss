@@ -11,7 +11,7 @@
     margin-bottom: 0;
     padding: 0 4% $margin-65 4%;
 
-    @include breakpoint(smartphone) {
+    @include media(smartphone) {
         background-image: none;
         padding-bottom: $margin-26;
     }
@@ -58,7 +58,7 @@
     @include prefix(flex-direction, row);
     @include prefix(flex-wrap, nowrap);
 
-    @include breakpoint(smartphone) {
+    @include media(smartphone) {
         @include prefix(flex-direction, column);
         margin-bottom: 20px;
     }

@@ -213,7 +213,7 @@ article.full {
             float: left;
             text-transform: initial;
 
-            @include breakpoint(max, 1050) {
+            @include media(max, 1050) {
                 float: none;
                 margin-bottom: $margin;
             }
@@ -261,7 +261,7 @@ article.jobarchive {
         margin-bottom: $margin-7;
         width: 100%;
 
-        @include breakpoint(smartphone) {
+        @include media(smartphone) {
             font-size: $font-size-16;
         }
     }
@@ -290,7 +290,7 @@ article.jobarchive {
 .article-thumb {
     @extend %cover-picture;
 
-    @include breakpoint(smartphone) {
+    @include media(smartphone) {
         margin-bottom: $margin-7;
     }
 
@@ -306,7 +306,7 @@ article.jobarchive {
     @include webkit_value(display, flex);
     @include webkit(flex-direction, row);
 
-    @include breakpoint(smartphone) {
+    @include media(smartphone) {
         @include webkit_value(display, block);
     }
 
@@ -333,7 +333,7 @@ article.jobarchive {
         // Explicit, to remove padding set in other block.
         padding: 0 $padding $padding 0;
 
-        @include breakpoint(smartphone) {
+        @include media(smartphone) {
             padding: 0;
         }
     }
@@ -353,7 +353,7 @@ article.jobarchive {
         padding-left: $padding;
         @include webkit(flex, 1); 
 
-        @include breakpoint(smartphone) {
+        @include media(smartphone) {
             padding: 0;
         }
     } 
@@ -386,12 +386,12 @@ article.lead {
             content: ', ';
             padding-right: 5px;
 
-            @include breakpoint(smartphone) {
+            @include media(smartphone) {
                 display: none;
             }
         }
 
-        @include breakpoint(smartphone) {
+        @include media(smartphone) {
             display: block;
         }
     }
