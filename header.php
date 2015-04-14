@@ -48,7 +48,7 @@
                 </ul>
             </div>
         </div>
-        <nav>
+        <nav id="menu-container">
             <?php if (has_nav_menu('primary')) {
                 wp_nav_menu(array(
                     'menu_id' => 'menu',
