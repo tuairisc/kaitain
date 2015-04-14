@@ -132,7 +132,7 @@ function tuairisc_styles() {
      */
 }
 
-function get_banner_breadcrumb($post_id = null) {
+function get_banner_breadcrumb() {
     /** 
      * Get Post or Archive Banner
      * --------------------------
@@ -152,65 +152,42 @@ function get_banner_breadcrumb($post_id = null) {
 
     global $banners, $custom_post_types;
     $breadcrumb = '';
-
-    if (is_null($post_id)) {
-        $post_id = get_the_ID();
-    }
  
     if (has_category($banners['greann_cat'])) {
         // 1. Greann category post.
         $breadcrumb = '<span>' .  category_description($greann) . '</span>';
     } else if (!is_custom_type()) {
         // 2. Non-Foluntais posts and archives.
-
-        if (is_category()) {
-            // 2a. Non-Foluntais archive.
-            $category = get_query_var('cat');
-        } else {
-            // 2b. Non-Foluntais single.
-            $category = get_the_category();
-            $category = $category[0]->cat_ID;
-        }
-
-        $breadcrumb = get_category_parents($category, true, '&nbsp;');
-    } else if (is_custom_type()) {
-        /* 3. All Foluntais posts. 
-         * I couldn't think of a better way to do this, because I needed to 
-         * ultimately link back to the /custom type archive/ instead of a 
-         * category archive. 
-         *
-         * I build a breadcrumb back to the type archive and then append a link
-         * to the first category attached to the custom type post.
-         */
-
-        // 3a. Foluntais archive.
-        $foluntais_link = array();
-        $foluntais_link[] = '<a href="';
-        $foluntais_link[] = get_post_type_archive_link($custom_post_types[0]);
-        $foluntais_link[] = '">';
-        $foluntais_link[] = get_post_type(); 
-        $foluntais_link[] = '</a>';
-
-        if (is_category()) {
-            $category = get_query_var('cat');
-        } else {
-            $category = get_the_category();
-        }
-
-        if (is_custom_type_singular() || is_category()) {
-            // 3b. Foluntais single.
-
-            $foluntais_link[] = '<a href="';
-            $foluntais_link[] = get_category_link($category[0]->cat_ID); 
-            $foluntais_link[] = '">';
-            $foluntais_link[] = $category[0]->name;
-            $foluntais_link[] = '</a>';
-        }
-
-        $breadcrumb = implode('', $foluntais_link);
+        $breadcrumb = generate_breadcrumbs();
+    } else {
+        // 3. Foluntais custom type archive, category archive and single posts.
+        $breadcrumb = generate_job_breadcrumbs();
     }
 
     printf($breadcrumb);
+}
+
+function generate_breadcrumbs() {
+    /** 
+     * Generate Breadcrumbs
+     * -------------------- 
+     * Generate the breadcrumb trail for non-foluntais single posts and post 
+     * archives.
+     * 
+     * @param {none}
+     * @return {string} Breadcrumb trail for category-> parent category.
+     */
+
+    if (is_category()) {
+        // Non-foluntais archive.
+        $category = get_query_var('cat');
+    } else {
+        // Non-foluntais single.
+        $category = get_the_category();
+        $category = $category[0]->cat_ID;
+    }
+
+    return get_category_parents($category, true, '&nbsp;');
 }
 
 function banner_classes() {

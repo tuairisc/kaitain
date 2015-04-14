@@ -56,6 +56,7 @@ $foluntais_options = array(
     )
 );
 
+
 function register_job_type() {
     /**
      * Register Custom Foluntais Post Type
@@ -102,6 +103,49 @@ function job_messages($messages) {
     );
 
     return $messages;
+}
+
+function generate_job_breadcrumbs() {
+    /** 
+     * Generate Foluntais Breadcrumbs
+     * ------------------------------ 
+     * I couldn't think of a better way to do this, because I needed to 
+     * ultimately link back to the /custom type archive/ instead of a 
+     * category archive. 
+     *
+     * I build a breadcrumb back to the type archive and then append a link
+     * to the first category attached to the custom type post.
+     * 
+     * @param {none}
+     * @return {string} $foluntais_link The generated breadcrumb trail.
+     */
+
+    global $custom_post_types;
+
+    $foluntais_link = array();
+    $foluntais_link[] = '<a href="';
+    $foluntais_link[] = get_post_type_archive_link($custom_post_types[0]);
+    $foluntais_link[] = '">';
+    $foluntais_link[] = get_post_type(); 
+    $foluntais_link[] = '</a>';
+
+    if (is_category()) {
+        $category = get_query_var('cat');
+    } else {
+        $category = get_the_category();
+    }
+
+    if (is_custom_type_singular() && has_category() || is_category()) {
+        /* If a category or single post with category, append the object's 
+         * category, or first category if single. */
+        $foluntais_link[] = '<a href="';
+        $foluntais_link[] = get_category_link($category[0]->cat_ID); 
+        $foluntais_link[] = '">';
+        $foluntais_link[] = $category[0]->name;
+        $foluntais_link[] = '</a>';
+    }
+
+    return implode('', $foluntais_link);
 }
 
 // Add custom post type for job listings.
