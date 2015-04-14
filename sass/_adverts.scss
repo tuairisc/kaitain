@@ -110,6 +110,8 @@ span[style^=font-weight] {
      * sequence, but they initially all need to be hidden on or rare occasions
      * the advert will "jump". */
     display: none;
+    margin: 0 auto;
+    text-align: center;
 }
 
 a.tuairisc-advert {
@@ -117,9 +119,6 @@ a.tuairisc-advert {
      * Tuairisc Advertisement
      * ----------------------
      */
-
-    display: block;
-    text-align: center;
 
     img {
         max-width: 100%;
