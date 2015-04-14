@@ -1,9 +1,20 @@
-<?php class tuairisc_authors extends WP_Widget {
-    /* tuairisc_authors Widget
-     * -----------------------
-     * This widget displays an ordered horizontal lists of selected Tuairisc 
-     * authors and other contributors. 
-     */ 
+<?php 
+/**
+ * tuairisc_authors Widget
+ * -------------------------------
+ * This widget displays an ordered horizontal lists of selected Tuairisc 
+ * authors and other contributors. 
+ * 
+ * @category   WordPress File
+ * @package    Tuairisc.ie Gazeti Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  2015 Mark Grealish
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ */
+
+class tuairisc_authors extends WP_Widget {
     public function __construct() {
         parent::__construct(
             'tuairisc_authors',
@@ -94,4 +105,5 @@
 add_action('widgets_init',
     create_function('', 'return register_widget("tuairisc_authors");')
 );
+
 ?>
