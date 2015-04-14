@@ -105,13 +105,17 @@ span[style^=font-weight] {
     }
 }
 
+.g-single, .g-dyn {
+    // To ensure banners are centered.
+    margin: 0 auto;
+    text-align: center;
+}
+
 .g-dyn {
     /* Dynamic adverts on rotation. AdRotate will toggle each g-dyn block in 
      * sequence, but they initially all need to be hidden on or rare occasions
      * the advert will "jump". */
     display: none;
-    margin: 0 auto;
-    text-align: center;
 }
 
 a.tuairisc-advert {
