@@ -3,15 +3,16 @@
  * ---------------------
  */
 
-$social-button-size: $margin * 2.5;
+$social-button-size: $margin-33;
 
 ul.mshare {
     list-style-type: none;
+    // Necessary reset because of Gazeti's default styles.
     margin: 0;
     padding: 0;
 
     li {
-        float: left;
+        display: inline-block;
         line-height: initial;
         margin-right: 2px;
     }
@@ -23,22 +24,10 @@ ul.mshare {
     @include generate-social-links(a, $social-button-size, $social-sprites);
 }
 
-article {
-    ul.mshare {
-        float: right;
+article ul.mshare {
+    float: right;
 
-        @include media(max, 1050) {
-            float: left;
-        }
-    }
-
-    div.article-body ul.mshare {
-        // Position footer share menu differently.
-        margin-bottom: $margin;
-
-        li {
-            display: inline-block;
-            float: right;
-        }
+    @include media(max, 1050) {
+        float: left;
     }
 }
