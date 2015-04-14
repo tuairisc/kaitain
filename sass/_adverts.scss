@@ -118,11 +118,13 @@ span[style^=font-weight] {
     display: none;
 }
 
+/*
+ * Tuairisc Advertisement
+ * ----------------------
+ * Not a whole lot of rules are required: This is an image inside an anchor.
+ */
+
 a.tuairisc-advert {
-    /*
-     * Tuairisc Advertisement
-     * ----------------------
-     */
 
     img {
         max-width: 100%;
