@@ -23,8 +23,8 @@
 
     @include media(print) {
         background: none;
-        margin-bottom: 0;
-        padding: 0 20px;
+        margin-bottom: $margin;
+        padding: 0;
     }
 
     .share-search {

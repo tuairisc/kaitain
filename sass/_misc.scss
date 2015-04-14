@@ -45,7 +45,7 @@ h3 {
 .content-wrap {
     /* Make #header strip regardless of whether #header advert group is blocked. */
     background: center bottom/auto 6px no-repeat border-box url($background-rainbow-strip);
-    padding: $margin-19 4% 0 4%;
+    padding: $padding-19 4% 0 4%;
 
     @include media(smartphone) {
         padding-top: 0;
@@ -53,7 +53,7 @@ h3 {
 
     @include media(print) {
         background: none;
-        padding: $padding-19;
+        padding: 0;
     }
 }
 
