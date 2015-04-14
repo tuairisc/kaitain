@@ -100,11 +100,11 @@
             background-position: nth(map-get($social-styles, $service), 2) nth(map-get($social-styles, $service), 3);
         }
     } @else {
-        // Else iterate map to produce social links.
-        @each $service, $nth in $social-styles {
-            #{$element}.#{$service} {
-                background-color: nth($nth, 1);
-                background-position: nth($nth, 2) nth($nth, 3);
+        // Else iterate map-list to produce social links.
+        @each $map, $item in $social-styles {
+            #{$element}.#{$map} {
+                background-color: nth($item, 1);
+                background-position: nth($item, 2) nth($item, 3);
             }
         }
     }
