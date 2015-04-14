@@ -4,7 +4,7 @@
     while (have_posts()) {
         the_post();
         
-        if (is_job()) {
+        if (is_custom_type()) {
             get_template_part('article', 'jobarchive');
         } else {
             get_template_part('article', 'archive');

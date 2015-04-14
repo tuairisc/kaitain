@@ -10,7 +10,7 @@ while(have_posts()) {
     get_template_part('banner'); 
     get_template_part('article', 'full'); 
 
-    if (option::get('post_related') == 'on' && !is_job()) {
+    if (option::get('post_related') == 'on' && !is_custom_type()) {
         get_template_part('related-posts'); 
     }
 

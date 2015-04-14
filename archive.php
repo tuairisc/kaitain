@@ -7,7 +7,7 @@
             $curauth = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author));
         }
 
-        if (!is_category() && !'foluntais' == get_post_type()) {
+        if (!is_category() && !is_custom_type()) {
             printf('<h3>');
 
             if(is_tag()) {

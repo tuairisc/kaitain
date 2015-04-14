@@ -1,12 +1,34 @@
+<?php
+
+/**
+ * Foluntais Job Archive
+ * ---------------------
+ * Generate the archive list for the Foluntais category of the Tuairisc.ie site.
+ *  
+ * @category   WordPress File
+ * @package    Tuairisc.ie Gazeti Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  2014-2015 Mark Grealish
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ */
+
+?>
+
 <article id="post-<?php the_ID(); ?>" <?php post_class('jobarchive'); ?>>
     <?php if (is_columnist_article() && has_local_avatar()) {
         $thumbnail_url = get_avatar_url(get_the_author_meta('ID'), 200);
     } else if (option::get('index_thumb') == 'on') {
         $thumbnail_url = get_thumbnail_url();
-    } ?>
+    } 
+    
+    $category = get_the_category();
+    $category = $category[0]->name;
+    ?>
 
     <div class="category">
-        <span class="job-category" style="<?php job_category_color(); ?>"><?php echo job_category_name(); ?></span>
+        <span class="job-category"><?php printf($category); ?></span>
 
         <div class="article-thumb" style="background-image: url('<?php echo $thumbnail_url; ?>');">
             <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"></a>

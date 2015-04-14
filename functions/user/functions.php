@@ -1,13 +1,18 @@
 <?php
 
-/* You can add custom functions below, in the empty area
-=========================================================== */
-
 /**
  * The Glorious Tuairisc Functions
  * -------------------------------
  * Except for the files included in the head, this represents most of the PHP 
  * work on the Tuairisc site. 
+ * 
+ * @category   WordPress File
+ * @package    Tuairisc.ie Gazeti Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  2014-2015 Mark Grealish
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
  */
 
 $banners = array(
@@ -89,9 +94,14 @@ $fallback = array(
  */
 
 $widget_path = get_template_directory() . '/functions/user/';
-require_once $widget_path . 'tuairisc-authors.php';
-require_once $widget_path . 'tuairisc-mostviewed.php';
-require_once $widget_path . 'tuairisc-jobs.php';
+require_once($widget_path . 'tuairisc-authors.php');
+require_once($widget_path . 'tuairisc-mostviewed.php');
+require_once($widget_path . 'tuairisc-jobs.php');
+
+/*
+ * Functions
+ * ---------
+ */
 
 function tuairisc_scripts() {
     /** 
@@ -122,7 +132,7 @@ function tuairisc_styles() {
      */
 }
 
-function get_banner_breadcrumb() {
+function get_banner_breadcrumb($post_id = null) {
     /** 
      * Get Post or Archive Banner
      * --------------------------
@@ -134,30 +144,73 @@ function get_banner_breadcrumb() {
      * 2. The Greann category archive pages uses the category's description. 
      * 3. Foluntais posts use get_job_category_link. 
      * 
+     * Breadcrumbs are a pain in the ass. 
+     *
      * @param {none}
      * @return {none}
      */
 
     global $banners, $custom_post_types;
+    $breadcrumb = '';
 
+    if (is_null($post_id)) {
+        $post_id = get_the_ID();
+    }
+ 
     if (has_category($banners['greann_cat'])) {
         // 1. Greann category post.
-        printf('<span>%s</span>', category_description($greann));
-    } else if (!in_array(get_post_type(), $custom_post_types)) {
-        // 2. Single post or archive category of non-job type.
+        $breadcrumb = '<span>' .  category_description($greann) . '</span>';
+    } else if (!is_custom_type()) {
+        // 2. Non-Foluntais posts and archives.
+
+        if (is_category()) {
+            // 2a. Non-Foluntais archive.
+            $category = get_query_var('cat');
+        } else {
+            // 2b. Non-Foluntais single.
+            $category = get_the_category();
+            $category = $category[0]->cat_ID;
+        }
+
+        $breadcrumb = get_category_parents($category, true, '&nbsp;');
+    } else if (is_custom_type()) {
+        /* 3. All Foluntais posts. 
+         * I couldn't think of a better way to do this, because I needed to 
+         * ultimately link back to the /custom type archive/ instead of a 
+         * category archive. 
+         *
+         * I build a breadcrumb back to the type archive and then append a link
+         * to the first category attached to the custom type post.
+         */
+
+        // 3a. Foluntais archive.
+        $foluntais_link = array();
+        $foluntais_link[] = '<a href="';
+        $foluntais_link[] = get_post_type_archive_link($custom_post_types[0]);
+        $foluntais_link[] = '">';
+        $foluntais_link[] = get_post_type(); 
+        $foluntais_link[] = '</a>';
 
         if (is_category()) {
             $category = get_query_var('cat');
         } else {
             $category = get_the_category();
-            $category = $category[0]->cat_ID;
         }
 
-        printf(get_category_parents($category, true, '&nbsp;'));
-    } else {
-        // 3. Is in custom post type.
-        get_job_category_link(get_the_ID(), false, '&nbsp;');
+        if (is_custom_type_singular() || is_category()) {
+            // 3b. Foluntais single.
+
+            $foluntais_link[] = '<a href="';
+            $foluntais_link[] = get_category_link($category[0]->cat_ID); 
+            $foluntais_link[] = '">';
+            $foluntais_link[] = $category[0]->name;
+            $foluntais_link[] = '</a>';
+        }
+
+        $breadcrumb = implode('', $foluntais_link);
     }
+
+    printf($breadcrumb);
 }
 
 function banner_classes() {
@@ -220,11 +273,11 @@ function get_thumbnail_url($post_id = null, $thumb_size = null, $return_arr = fa
      * @return {array} $thumb_url All information on the attachment.
      */
 
-    if ('' == $post_id) {
+    if (is_null($post_id)) {
         $post_id = get_the_ID();
     }
 
-    if ('' == $thumb_size) {
+    if (is_null($thumb_size)) {
         $size = 'large';
     }
 
@@ -270,11 +323,11 @@ function get_avatar_url($user_id = null, $avatar_size = null) {
      * @return {string} $avatar_url The URL of the avatar. 
      */
 
-    if ('' == $user_id) {
+    if (is_null($user_id)) {
         $user_id = get_the_author_meta('ID');
     }
 
-    if ('' == $avatar_size) {
+    if (is_null($avatar_size)) {
         $avatar_size = 100;
     }
 
@@ -297,7 +350,7 @@ function has_local_avatar($user_id = null) {
      * @return {bool} $avatar_is_local
      */
 
-    if ('' == $user_id) {
+    if (is_null($user_id)) {
         $user_id = get_the_author_meta('ID');
     }
 
@@ -323,7 +376,7 @@ function is_default_author($author_id = null) {
 
     global $default_author_id;
 
-    if ('' == $author_id) {
+    if (is_null($author_id)) {
         $author_id = get_the_author_meta('ID');
     }
 
@@ -462,29 +515,27 @@ function education_banner_shortcode($attributes, $content = null) {
      * @return {string} $banner Dividing banner.
      */
 
-    $open = '';
-    $close = '';
-    $banner = '';
-
-    $head = 'edu-heading';
-    $sub  = 'edu-subheading';
+    $banner = array();
+    // h2
+    $headline_type = 2;
+    $headline_class = 'edu-heading';
     $shortcode_atts = shortcode_atts(array('type' => 'main'), $attributes);
 
-    if ('' == $content) {
+    if (is_null($content)) {
         $content = 'Did you forget to include text?';
     }
 
-    if ('main' == $shortcode_atts['type']) {
-        $open = '<h2 class="' . $head . '">';
-        $close = '</h2>';
-    } else {
-        $open = '<h3 class="' . $sub . '">';
-        $close = '</h3>';
+    if ('main' !== $shortcode_atts['type']) {
+        // If the banner is not 'main', change h2 to h2 and heading to subheading.
+        $headline_type = 3;
+        $headline_class = str_replace('-h', '-subh', $headline_class);
     }
 
-    $banner = $open . $content . $close;
+    $banner[] = '<h' . $headline_type . ' class="' . $headline_class . '">';
+    $banner[] = $content;
+    $banner[] = '</h' . $headline_type . '>';
 
-    return $banner;
+    return implode('', $banner);
 }
 
 function author_is_columnist($author_id = null) {
@@ -498,7 +549,7 @@ function author_is_columnist($author_id = null) {
      * @return {bool} $is_columnist Is user a columnist true/false.
       */
 
-    if ('' === $author_id) {
+    if (is_null($author_id)) {
        $author_id = get_the_author_meta('id');
     }
 
@@ -598,14 +649,14 @@ function get_view_count($post_id = null) {
 
     global $custom_post_fields;
 
-    if ('' == $post_id) {
+    if (is_null($post_id)) {
         return;
     }
 
     $key = $custom_post_fields[0];
     $count = (int) get_post_meta($post_id, $key, true);
 
-    if ('' == $count) {
+    if (!is_integer($count)) {
         update_post_meta($post_id, $key, 0);
         return 0;
     }
@@ -624,13 +675,13 @@ function increment_view_counter($post_id = null) {
      * @return {none}
      */
 
-    global $custom_post_types, $custom_post_fields;
+    global $custom_post_fields;
 
-    if ('' == $post_id) {
+    if (is_null($post_id)) {
         $post_id = get_the_ID();
     }
 
-    if (!in_array(get_post_type(), $custom_post_types) && !is_user_logged_in()) {
+    if (!is_custom_type() && !is_user_logged_in()) {
         $key = $custom_post_fields[0];
         $count = (int) get_post_meta($post_id, $key, true);
         $count++;
@@ -638,22 +689,63 @@ function increment_view_counter($post_id = null) {
     }
 }
 
+/*
+ * Debug and Helpers
+ * -----------------
+ */
+
 function list_post_types() {
     /**
      * Dump Post Types to JavaScript Console
      * -------------------------------------
+     * Useful for debug on occasion. 
+     * 
      * @param {none}
      * @return {none}
      */
     
-    $args = array('public' => true, '_builtin' => false);
+    $type_args = array(
+        'public' => true,
+        '_builtin' => false
+    );
+
     $output = 'names';
     $operator = 'and';
-    $post_types = get_post_types($args, $output, $operator); 
+    $post_types = get_post_types($type_args, $output, $operator); 
 
     foreach ($post_types as $post_type) {
         printf('<script>console.log("%s");</script>', $post_type);
     }
+}
+
+function is_custom_type() {
+    /**
+     * Evaluate Post Type 
+     * ------------------
+     * Evaluate whether the post/archive/whatever is part of any custom Tuairisc
+     * type.
+     * 
+     * @param {none}
+     * @return {bool} Whether the post is of a custom type true/false.
+     */
+
+    global $custom_post_types;
+    return (in_array(get_post_type(), $custom_post_types));
+}
+
+function is_custom_type_singular() {
+    /**
+     * Evaluate Post Type 
+     * ------------------
+     * Evaluate whether the post/archive/whatever is part of any custom Tuairisc
+     * type.
+     * 
+     * @param {none}
+     * @return {bool} Whether the post is of a custom type true/false.
+     */
+
+    global $custom_post_types;
+    return (in_array(get_post_type(), $custom_post_types) && is_singular($custom_post_types));
 }
 
 /*
@@ -711,7 +803,7 @@ function open_graph_meta() {
      * Output Open Graph
      * -----------------
      * This /should/ be all of the relevant information for an Open Graph 
-     * scraper
+     * scraper.
      * 
      * @param {none}
      * @return {string} Open Graph header meta information.
@@ -784,8 +876,5 @@ add_action('init', add_post_type_support('page', 'excerpt'));
 // Filter date to return as Gaeilge.
 add_filter('get_the_date', 'translate_date_to_irish');
 add_filter('get_comment_date', 'translate_date_to_irish');
-
-/*  Don't add any code below here or the sky will fall down
-=========================================================== */
 
 ?>

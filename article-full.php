@@ -11,9 +11,9 @@
                 <div class="avatar" style="background-image: url('<?php echo get_avatar_url(); ?>');"></div>
             <?php endif; ?>
 
-            <div class="text <?php echo (is_job()) ? 'jobtext' : ''; ?>">
+            <div class="text <?php echo (is_custom_type()) ? 'jobtext' : ''; ?>">
                 <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') {
-                    if (option::get('post_author') == 'on' && !is_default_author() && !is_job()) { 
+                    if (option::get('post_author') == 'on' && !is_default_author() && !is_custom_type()) { 
                         printf(
                             '<span class="article-author"><a href="%s" rel="author" title="Posts by %t">%s</a></span><br />',
                             get_author_posts_url(get_the_author_meta('ID')),
