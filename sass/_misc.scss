@@ -107,10 +107,6 @@ span.date {
     text-transform: none;
 }
 
-#slides li {
-    @extend %clearfix;
-}
-
 .navigation {
     // Page/index bottom pagination.
     @include media(print) {
@@ -118,20 +114,13 @@ span.date {
     }
 }
 
-.feature-post-text {
-    float: right;
-    width: calc(100% - 90px);
-}
-
-#report {
-    margin-bottom: $margin;
-}
-
 .recent-meta span {    
-    font-size: 14px;
+    // Post header meta spans. 
+    font-size: $font-size;
 }
 
 #slider_nav {
+    // Gazeti's sliding navigation.
     .item, .item.current a {
         font-size: $font-size-16;
 
@@ -145,4 +134,23 @@ span.date {
 .slide_content_holder {
     // Posts slider on front page.
     bottom: 10px;
+}
+
+/*
+ * Unsure
+ * ------
+ * I am not 100% to what these apply because of poor commenting. 
+ */
+ 
+.feature-post-text {
+    float: right;
+    width: calc(100% - 90px);
+}
+
+#slides li {
+    @extend %clearfix;
+}
+
+#report {
+    margin-bottom: $margin;
 }
