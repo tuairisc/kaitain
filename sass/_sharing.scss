@@ -13,8 +13,8 @@ ul.mshare {
 
     li {
         display: inline-block;
+        font-size: 0;
         line-height: initial;
-        margin-right: 2px;
     }
 
     a {
@@ -26,13 +26,6 @@ ul.mshare {
 
 article ul.mshare {
     float: right;
-
-    @include webkit_value(display, flex);
-    @include webkit(flex-direction, row-reverse);
-
-    li {
-        @include webkit(flex, 1);
-    }
 
     @include media(max, 1050) {
         float: left;
