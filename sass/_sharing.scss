@@ -22,16 +22,23 @@ ul.mshare {
     }
 
     @include generate-social-links(a, $social-button-size, $social-sprites);
-
-    @include media(print) {
-        display: none;
-    }
 }
 
 article ul.mshare {
     float: right;
 
+    @include webkit_value(display, flex);
+    @include webkit(flex-direction, row-reverse);
+
+    li {
+        @include webkit(flex, 1);
+    }
+
     @include media(max, 1050) {
         float: left;
+    }
+
+    @include media(print) {
+        display: none;
     }
 }
