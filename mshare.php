@@ -9,12 +9,6 @@
     ); ?> 
 
     <li>
-        <a class="print" 
-        href="javascript:window.print()" 
-        data-rel="-1" 
-        title="Print <?php the_title_attribute(); ?>"></a>
-    </li>
-    <li>
         <a class="email" 
         href="mailto:?subject=<?php echo $share['title']; ?>&amp;body=<?php echo $share['url']; ?>" 
         data-rel="0" 
@@ -22,11 +16,11 @@
         title="Email <?php the_title_attribute(); ?>"></a>
     </li>
     <li>
-        <a class="facebook" 
-        href="//facebook.com/sharer.php?u=<?php echo $share['url'] ?>" 
-        data-rel="1" 
-        target="_blank" 
-        title="Share <?php the_title_attribute(); ?> on Facebook"></a>
+        <a class="reddit" 
+        href="//reddit.com/submit?url=<?php echo $share['url']; ?>&title=<?php echo $share['title']; ?>" 
+        data-rel="5"
+        target="_blank"
+        title="Upvote <?php the_title_attribute(); ?> on Reddit"></a>
     </li>
     <li>
         <a class="google"
@@ -43,11 +37,17 @@
         title="Tweet about <?php the_title_attribute(); ?>"></a>
     </li>
     <li>
-        <a class="reddit" 
-        href="//reddit.com/submit?url=<?php echo $share['url']; ?>&title=<?php echo $share['title']; ?>" 
-        data-rel="5"
-        target="_blank"
-        title="Upvote <?php the_title_attribute(); ?> on Reddit"></a>
+        <a class="facebook" 
+        href="//facebook.com/sharer.php?u=<?php echo $share['url'] ?>" 
+        data-rel="1" 
+        target="_blank" 
+        title="Share <?php the_title_attribute(); ?> on Facebook"></a>
+    </li>
+    <li>
+        <a class="print" 
+        href="javascript:window.print()" 
+        data-rel="-1" 
+        title="Print <?php the_title_attribute(); ?>"></a>
     </li>
     <?php if (is_singular('post') && comments_open()) : ?>
         <li>
