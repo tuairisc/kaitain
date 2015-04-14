@@ -5,8 +5,12 @@
  * nav menu.
  */
 
-nav {
+nav#menu-container {
     padding: $padding-sections;
+
+    @include media(print) {
+        display: none;
+    }
 }
 
 #menu {

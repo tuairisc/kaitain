@@ -46,7 +46,6 @@ article {
     padding: 0;
     text-align: left;
 
-
     blockquote, li, p {
         a {
             color: $colour-green-anchor;
@@ -72,6 +71,13 @@ article {
         height: auto;
         overflow: hidden;
         max-width: 100%;
+    }
+
+    img {
+        @include media(print) {
+            display: block;
+            page-break-inside: avoid;
+        }
     }
 
     header {
@@ -194,8 +200,16 @@ p.wp-caption-text {
 article.full {
     padding: 0 4% $padding 4%;
 
+    @include media(print) {
+        padding: 0;
+    }
+
     header {
         margin-bottom: $margin-26;
+
+        @include media(print) {
+            margin-bottom: 0;
+        }
 
         div.meta {
             @extend %clearfix;
@@ -228,6 +242,10 @@ article.full {
 
         h1.title {
             margin-bottom: $margin;
+
+            @include media(print) {
+                margin-bottom: 0;
+            }
         }
     } 
 }
@@ -298,6 +316,10 @@ article.jobarchive {
         display: block;
         height: inherit;
         width: 100%;
+
+        @include media(print) {
+            page-break-inside: avoid;
+        }
     }
 }
 
@@ -327,6 +349,10 @@ article.jobarchive {
 
     >:first-child {
         @include webkit(flex, 0 1 $archive-width-65); 
+
+        @include media(print) {
+            margin-top: $margin;
+        }
     }
 
     >:last-child {

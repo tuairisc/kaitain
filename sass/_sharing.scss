@@ -22,6 +22,10 @@ ul.mshare {
     }
 
     @include generate-social-links(a, $social-button-size, $social-sprites);
+
+    @include media(print) {
+        display: none;
+    }
 }
 
 article ul.mshare {

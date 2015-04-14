@@ -1,3 +1,13 @@
+/*
+ * Body and HTML
+ * ------------
+ */
+
+body {
+    @include media(print) {
+        margin: 0;
+    }
+}
 
 /* Tables
  * ------
@@ -40,6 +50,11 @@ h3 {
     @include media(smartphone) {
         padding-top: 0;
     }
+
+    @include media(print) {
+        background: none;
+        padding: $padding-19;
+    }
 }
 
 .inner-wrap {
@@ -48,6 +63,12 @@ h3 {
 
     @include media(smartphone) {
         padding-top: 40px;
+    }
+}
+
+.related_posts, #sidebar, .full-widget-area {
+    @include media(print) {
+        display: none;
     }
 }
 
@@ -80,6 +101,12 @@ span.date {
 
 #slides li {
     @extend %clearfix;
+}
+
+.navigation {
+    @include media(print) {
+        display: none;
+    }
 }
 
 .feature-post-text {

@@ -13,6 +13,10 @@
     margin-bottom: $margin;
     padding: $padding-7 0;  
 
+    @include media(print) {
+        margin-bottom: 0;
+    }
+
     a {
         color: #fff;
         font-family: $font-family-georgia;
@@ -52,6 +56,7 @@
 
 .banner-greann {
     @extend %clearfix;
+    background-color: map-get($category_colours, 158);
     background-image: url($assets-folder + '/asnc_logo.svg');
     background-position: 10px center;
     background-repeat: no-repeat;

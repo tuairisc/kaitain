@@ -11,7 +11,7 @@
     box-sizing: border-box;
     margin-bottom: $margin-26;
     min-height: 70px;
-    padding: $margin-26 4% 0 4%;
+    padding: $padding-26 4% 0 4%;
     position: relative;
     width: 100%;
 
@@ -19,6 +19,12 @@
         min-height: 0;
         position: initial;
         width: auto;
+    }
+
+    @include media(print) {
+        background: none;
+        margin-bottom: 0;
+        padding: 0 20px;
     }
 
     .share-search {
@@ -43,6 +49,10 @@
         @include media(smartphone) {
             float: left;
             position: initial;
+        }
+
+        @include media(print) {
+            display: none;
         }
     }
 
