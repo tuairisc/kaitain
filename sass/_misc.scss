@@ -66,17 +66,18 @@ h3 {
     }
 }
 
-.related_posts, #sidebar, .full-widget-area {
-    @include media(print) {
-        display: none;
-    }
-}
-
 /*
  * Miscellaneous Rules
  * -------------------
  * These are one-line fixes to fix quirks in the Gazeti theme.
  */
+
+.related_posts, #sidebar, .full-widget-area {
+    // All otherwise-unrelated areas to hide when printing.
+    @include media(print) {
+        display: none;
+    }
+}
 
 .caroufredsel_wrapper {
     /* Carousel wrapper occasionally wigs out in a bad way because it goes by
@@ -85,6 +86,11 @@ h3 {
 }
 
 #respond {
+    // WordPress comment response form.
+    @include media(print) {
+        display: none;
+    }
+
     .form_fields input, #comment {
         box-sizing: border-box;
         width: 100%;
@@ -96,6 +102,8 @@ h3 {
 }
 
 span.date {
+    /* Gazeti transforms hyperlinks to uppercase by default, which can render
+     * an Irish name to be nonsensical. */
     text-transform: none;
 }
 
@@ -104,6 +112,7 @@ span.date {
 }
 
 .navigation {
+    // Page/index bottom pagination.
     @include media(print) {
         display: none;
     }
@@ -134,6 +143,6 @@ span.date {
 }
 
 .slide_content_holder {
-    /* Posts slider on front page. */
+    // Posts slider on front page.
     bottom: 10px;
 }
