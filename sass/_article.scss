@@ -73,13 +73,6 @@ article {
         max-width: 100%;
     }
 
-    img {
-        @include media(print) {
-            display: block;
-            page-break-inside: avoid;
-        }
-    }
-
     header {
         background: none;
         margin: 0;
