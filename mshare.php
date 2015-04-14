@@ -1,6 +1,6 @@
 <?php global $post; ?>
 
-<ul class="self-clear mshare">
+<ul class="mshare">
     <?php $share = array(
         'blog'  => urlencode(get_bloginfo('name')),
         'url'   => urlencode(get_the_permalink()),
@@ -51,7 +51,7 @@
     </li>
     <?php if (is_singular('post') && comments_open()) : ?>
         <li>
-            <a class="comments"
+            <a class="discuss"
             href="#comments" 
             data-rel="-1" 
             title="Read comments on <?php the_title_attribute(); ?>"></a>
