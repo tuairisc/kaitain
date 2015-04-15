@@ -17,10 +17,6 @@
     text-transform: none;
 }
 
-.feature-posts-list, .feature-posts-list li {
-    @extend %clearfix;
-}
-
 .column_1 a {
     /* Yay for JS-loaded CSS!
      * Removes bottom margin from homepage widget hyperlinks. 
@@ -57,34 +53,34 @@
  * both. 
  */
 
-.widget_tuairisc_popular {
+ul.feature-posts-list, ul.tuairisc-popular-list {
     li {
-        padding: $padding-7 0;
-    }
+        padding: 6px 0;
+        @include webkit_value(display, flex);
+        @include webkit(flex-direction, row);
+        @include webkit(flex-wrap, nowrap);
 
-    .popular-thumb {
-        @extend %cover-picture;
-        float: left;
-        height: 50px;
-        width: 23%;
-
-        a {
-            display: block;
-            height: inherit;
-            width: 100%;
+        > a {
+            @include webkit(flex, 0 1 75px);
         }
-    }
 
-    .popular-text {
-        float: right;
-        width: 73%;
+        div.feature-post-text {
+            box-sizing: border-box;
+            float: none;
+            padding-left: $padding;
+            @include webkit(flex, 1);
+        }
 
-        a {
-            font-family: $font-family-georgia;
+        img {
+            margin: 4px 0;   
+            max-width: 100%;
+            float: none;
+        }
 
-            &:hover {
-                color: $colour-green-anchor;
-            }
+        small {
+            color: $colour-grey-light-span;
+            font-size: $font-size-12;
+            margin: 2px 0;
         }
     }
 }
