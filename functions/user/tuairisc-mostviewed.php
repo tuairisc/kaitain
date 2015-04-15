@@ -63,12 +63,12 @@
                 $popular_query->the_post();
 
                 ?>
-                <li class="self-clear">
+                <li>
                     <?php if (has_post_thumbnail()) : ?>
-                        <div class="popular-thumb" style="background-image: url('<?php echo get_thumbnail_url(); ?>')">
-                            <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"></a>
-                        </div>
-                        <div class="popular-text">
+                        <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+                            <img src="<?php printf(get_thumbnail_url(get_the_id(), array(75, 50))); ?>" alt="" />
+                        </a>
+                        <div class="feature-post-text">
                             <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
                             <br />
                             <small><?php the_date(); ?></small>
