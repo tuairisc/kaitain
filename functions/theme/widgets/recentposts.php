@@ -88,7 +88,6 @@ class Wpzoom_Feature_Posts extends WP_Widget {
             //Reset query_posts
             wp_reset_query(); ?>
         </ul>
-        <div class="clear"></div>
 
         <?php /* After widget (defined by themes). */
         echo $after_widget;
