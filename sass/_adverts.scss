@@ -74,33 +74,33 @@ span[style^=font-weight] {
 
 .sidebar-adverts {
     width: 100%;
-    @include webkit_value(display, flex);
-    @include webkit(flex-direction, column);
-    @include webkit(flex-wrap, nowrap);
+    @include prefix-value(display, flex);
+    @include prefix(flex-direction, column);
+    @include prefix(flex-wrap, nowrap);
 
     @include media(portrait) {
         // Spread out each of the three boxes evenly in tablet portrait mode.
-        @include webkit(flex-direction, row);
-        @include webkit(justify-content, space-between);
+        @include prefix(flex-direction, row);
+        @include prefix(justify-content, space-between);
     }
 
     @include media(smartphone) {
-        @include webkit(flex-direction, column);
+        @include prefix(flex-direction, column);
     }
 
     > div {
         // Sidebar adverts groups: .g-2, .g-4 and .g-5
-        @include webkit(flex, 1);
+        @include prefix(flex, 1);
         margin-bottom: 20px;
 
         @include media(portrait) {
-            @include webkit(flex, 0 1 32.5%);
+            @include prefix(flex, 0 1 32.5%);
         }
 
         @include media(smartphone) {
             /* There is a bug on the iPhone in (at least) iOS 8 where the height
              * collapses to 0 if flex is set to anything but 1. */
-            @include webkit(flex, 1);
+            @include prefix(flex, 1);
         }
     }
 }

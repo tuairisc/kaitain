@@ -57,19 +57,19 @@ ul.feature-posts-list, ul.tuairisc-popular-list {
     li {
         padding: 6px 0;
         line-height: 1.4;
-        @include webkit_value(display, flex);
-        @include webkit(flex-direction, row);
-        @include webkit(flex-wrap, nowrap);
+        @include prefix-value(display, flex);
+        @include prefix(flex-direction, row);
+        @include prefix(flex-wrap, nowrap);
 
         > a {
-            @include webkit(flex, 0 1 75px);
+            @include prefix(flex, 0 1 75px);
         }
 
         div.feature-post-text {
             box-sizing: border-box;
             float: none;
             padding-left: $padding;
-            @include webkit(flex, 1);
+            @include prefix(flex, 1);
         }
 
         img {

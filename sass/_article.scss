@@ -83,12 +83,17 @@ article {
         border: 0;
         box-sizing: border-box;
     }
+
+    embed, iframe {
+        @include media(print) {
+            display: none;
+        }
+    }
 }
 
 .related_posts .title {
     color: #000;
 }
-
 
 /*
  * Article Header
@@ -318,11 +323,11 @@ article.jobarchive {
 
 #recent-posts article {
     padding-bottom: $margin-26;
-    @include webkit_value(display, flex);
-    @include webkit(flex-direction, row);
+    @include prefix-value(display, flex);
+    @include prefix(flex-direction, row);
 
     @include media(smartphone) {
-        @include webkit_value(display, block);
+        @include prefix-value(display, block);
     }
 
     &:not(:last-child) {
@@ -338,10 +343,10 @@ article.jobarchive {
 #recent-posts article:nth-child(1):not(.jobarchive) {
     /* Lead article has a reversed layout. This does not apply to a job article.
      * Job articles do not reverse. */
-    @include webkit(flex-direction, row-reverse);
+    @include prefix(flex-direction, row-reverse);
 
     >:first-child {
-        @include webkit(flex, 0 1 $archive-width-65); 
+        @include prefix(flex, 0 1 $archive-width-65); 
 
         @include media(print) {
             margin-top: $margin;
@@ -365,12 +370,12 @@ article.jobarchive {
 #recent-posts article {
     // Non-first-child articles.
     >:first-child {
-        @include webkit(flex, 0 1 $archive-width-25);
+        @include prefix(flex, 0 1 $archive-width-25);
     }
 
     >:last-child {
         padding-left: $padding;
-        @include webkit(flex, 1); 
+        @include prefix(flex, 1); 
 
         @include media(smartphone) {
             padding: 0;

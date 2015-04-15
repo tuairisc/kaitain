@@ -21,16 +21,16 @@
  */
 
 .modal-boxes {
-    @include webkit_value(display, flex);
-    @include webkit(flex-direction, row);
-    @include webkit(flex-wrap, wrap);
-    @include webkit(justify-content, space-between);
+    @include prefix-value(display, flex);
+    @include prefix(flex-direction, row);
+    @include prefix(flex-wrap, wrap);
+    @include prefix(justify-content, space-between);
 }
 
 .modal-box {
     background: $modal-background center center/auto 70% no-repeat border-box url($education-soundwave);
     margin-bottom: 4px;
-    @include webkit(flex, 0 1 32.67%);
+    @include prefix(flex, 0 1 32.67%);
 
     &:hover {
         background-color: $modal-background-hover;

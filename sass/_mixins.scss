@@ -1,37 +1,30 @@
 /*
  * Vendor Property and Value Prefixes
  * ----------------------------------
+ * Automatically vendor prefixes to CSS properties and values.
+ * For the most part I only need to prefix for webkit, so that is the default
+ * set.
  */
 
-@mixin prefix($property, $value) {
-    // Automatically add vendor prefixed to a CSS property.
-    -moz-#{$property}: $value;
-    -ms-#{$property}: $value;
-    -webkit-#{$property}: $value;
-    #{$property}: $value;
+@mixin prefix($property, $value, $prefixes: webkit) {
+    @if ($prefixes) {
+        @each $prefix in $prefixes {
+            #{'-' + $prefix + '-' + $property}: $value;
+        }
+    }
+
+    $property: $value;
 }
 
-@mixin prefix_value($property, $value) {
-    // Automatically add vendor prefixed to a CSS value.
-    #{$property}: -moz-#{$value};
-    #{$property}: -ms-#{$value};
-    #{$property}: -webkit-#{$value};
+@mixin prefix-value($property, $value, $prefixes: webkit) {
+    @if ($prefixes) {
+        @each $prefix in $prefixes {
+            #{$property}: #{'-' + $prefix + '-' + $value};
+        }
+    }
+
     #{$property}: $value;
 }
-
-@mixin webkit($property, $value) {
-    /* Flexbox rules need to be prefixed with -webkit for Safari Mobile. Using
-     * the general prefix mixin for flexbox cluttered up the compiled CSS with 
-     * useless rules. */
-    -webkit-#{$property}: $value;
-    #{$property}: $value;
-}
-
-@mixin webkit_value($property, $value) {
-    #{$property}: -webkit-#{$value};
-    #{$property}: $value;
-}
-
 /*
  * Social Images and Colours
  * -------------------------
@@ -115,20 +108,20 @@
  * --------------------
  */
 
-@mixin flex_size($width, $ratio) {
+@mixin flex-size($width, $ratio) {
     // Ratio should be between 0 and foo.
     height: 0;
     padding-bottom: $width * $ratio;
     width: $width;
 }
  
-@mixin vertical_center($amount) {
+@mixin vertical-center($amount) {
     // Useful for vertically centering elements.
     padding-bottom: $amount;
     padding-top: $amount;
 }
 
-@function rgba_opposite($red: 255, $green: 255, $blue: 255, $alpha: 0) {
+@function rgba-opposite($red: 255, $green: 255, $blue: 255, $alpha: 0) {
     // I do not intend for this to be called directly. 
     // This function inverts RGB colours.
     $red: 255 - $red;
@@ -144,7 +137,7 @@
     @include prefix(column-gap, $gap);
 }
 
-@mixin placeholder_style() {
+@mixin placeholder-style() {
     &::-webkit-input-placeholder {
        @content;
     }

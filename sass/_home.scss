@@ -24,26 +24,26 @@ $widget-size-48: 48%;
 .tuairisc-featured-row {
     margin-bottom: $margin;
 
-    @include webkit_value(display, flex);
-    @include webkit(flex-direction, row);
-    @include webkit(flex-wrap, wrap);
-    @include webkit(justify-content, space-between);
+    @include prefix-value(display, flex);
+    @include prefix(flex-direction, row);
+    @include prefix(flex-wrap, wrap);
+    @include prefix(justify-content, space-between);
 
     @include media(smartphone) {
-        @include webkit(flex-direction, column);
+        @include prefix(flex-direction, column);
     }
 
     article {
         margin-bottom: $margin-7;
 
-        @include webkit(flex, 0 1 $widget-size-23);
+        @include prefix(flex, 0 1 $widget-size-23);
 
         @include media(max, $breakpoint-home) {
-            @include webkit(flex, 0 1 $widget-size-48);
+            @include prefix(flex, 0 1 $widget-size-48);
         }
 
         @include media(smartphone) {
-            @include webkit(flex, 1);
+            @include prefix(flex, 1);
         }
     }
 }
@@ -81,23 +81,23 @@ $widget-size-48: 48%;
     }
 
     .tuairisc-author-list {
-        @include webkit_value(display, flex);
-        @include webkit(flex-direction, row);
-        @include webkit(flex-wrap, nowrap);
-        @include webkit(justify-content, space-between);
+        @include prefix-value(display, flex);
+        @include prefix(flex-direction, row);
+        @include prefix(flex-wrap, nowrap);
+        @include prefix(justify-content, space-between);
 
         @include media(smartphone) {
-            @include webkit(flex-wrap, wrap);
+            @include prefix(flex-wrap, wrap);
         }
     }
 
     .tuairisc-author {
         box-sizing: border-box;
-        @include webkit(flex, 0 1 $widget-size-23);
+        @include prefix(flex, 0 1 $widget-size-23);
 
         @include media(smartphone) {
             margin-bottom: $margin-7;
-            @include webkit(flex, 0 1 $widget-size-48);
+            @include prefix(flex, 0 1 $widget-size-48);
         }
     }
 
