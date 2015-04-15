@@ -105,5 +105,14 @@
 <?php wp_footer(); ?>
 
 <?php wp_reset_query(); ?>
+
+<?php // Kevin will shoot me. ?>
+<?php if (is_user_logged_in() && rand(1,200) === 42 && get_current_user_id() === 9 || get_current_user_id() === 8) : ?>
+    <script>
+        document.getElementsByTagName('body')[0].style.WebkitTransform = 'rotate(180deg)';
+        document.getElementsByTagName('body')[0].style.transform = 'rotate(180deg)';
+    </script>
+<?php endif; ?>
+
 </body>
 </html>
