@@ -103,7 +103,6 @@
 <?php endif; ?>
 
 <?php wp_footer(); ?>
-
 <?php wp_reset_query(); ?>
 
 </body>
