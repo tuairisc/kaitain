@@ -1,6 +1,7 @@
 /**
  * Sass Root Source File
  * ---------------------
+ * O you who know what we suffer here, do not forget us in your prayers.
  * 
  * @category   Sass Source Stylesheet
  * @package    Tuairisc.ie Theme
@@ -9,8 +10,6 @@
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
  * @version    2.0
  * @link       https://github.com/bhalash/tuairisc.ie
- * 
- * This file is part of Tuairsc
  * 
  * Tuairisc.ie is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,14 +28,9 @@
 /**
  * Variables
  * ---------
- * The Gazeti theme is a mish-mash of everrrr-so-slightly different margins, 
- * colours and padding. All ofthe variables below have been collected from 
- * around the site.
- * 
- * 1. Are aggregatd as I found them within the theme CSS.
- * 2. Here so that I can work on later reduction.
- * 
- * O you who know what we suffer here, do not forget us in your prayers.
+ * Variables...
+ * ...are aggregatd as I found them within the theme CSS.
+ * ...are here so that I can work on later reduction.
  */
 
 $assets: '../images';
@@ -195,6 +189,7 @@ $padding-sections: 0 4%;
  */
 
 @import 'reset';
+@import 'containers';
 // Website header. 
 @import 'header';
 // Website nav menu.
