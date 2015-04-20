@@ -1,0 +1,57 @@
+/**
+ * Theme Containers Stylesheet
+ * ---------------------------
+ * These are the rules for the top-level containers in the Tuairisc theme.
+ * 
+ * @category   Sass Main Containers Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  2014-2015 Mark Grealish
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * 
+ * Tuairisc.ie is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Tuairisc.ie is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#site {
+    background: #fff;
+    border: 1px solid $colour-grey-light-border;
+    border-width: 0 1px;
+    margin: 0 auto;
+    max-width: 1180px;
+    width: 94%;
+}
+
+#main {
+    @include prefix_value(display, flex);
+    @include prefix(flex-direction, row);
+    @include prefix(flex-wrap, nowrap);
+
+    @include media(max, 768px) {
+        @include prefix(flex-direction, column);
+    }
+}
+
+#content {
+    @include prefix(flex, 1);
+} 
+
+#sidebar {
+    @include prefix(flex, 0 1 30%);
+
+    @include media(max, 768px) {
+        @include prefix(flex, 1);
+    }
+}
