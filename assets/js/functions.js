@@ -51,8 +51,8 @@ jQuery(function($) {
      * ----------------------
      */
 
-    $('article .mshare a').click(function(click) {
-        // .mshare sharing links.
+    $('article .sharing a').click(function(click) {
+        // .sharing sharing links.
         var rel = parseInt($(this).data('rel'));
 
         if (sizes[rel] != '' && rel > 0) {

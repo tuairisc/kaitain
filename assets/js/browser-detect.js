@@ -1,15 +1,39 @@
+/**
+ * Ghetto Browser Detection
+ * ------------------------
+ * Now with 100% less jQuery! \o/
+ * Please don't use this to disable features on your page; my own goal for 
+ * it stems from needing to tweak layout because of browser quirks.
+ * 
+ * This is not a canonical list of every browser and OS; I tend to add to 
+ * this as required.
+ *
+ * @category   Browser Detection/UA Sniffer
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  2014-2015 Mark Grealish
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * 
+ * This file is part of Tuairisc
+ * 
+ * Tuairisc is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Tuairisc is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Ouro_botics. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 (function() {
     'use strict';
-    /**
-     * Ghetto Browser Detection
-     * ------------------------
-     * Now with 100% less jQuery! \o/
-     * Please don't use this to disable features on your page; my own goal for 
-     * it stems from needing to tweak layout because of browser quirks.
-     * 
-     * This is not a canonical list of every browser and OS; I tend to add to 
-     * this as required.
-     */
 
     var agent = navigator.userAgent.toLowerCase();
     var html = document.getElementsByTagName('html')[0];
@@ -28,17 +52,22 @@
 
     if (!!agent.match(/i(pad|phone|pod).+(version\/6\.\d+ mobile)/i)) {
         // iOS 6
-        html.classList.add('ios').add('ios-6');
+        html.classList.add('ios-6');
     }
 
     if (!!agent.match(/i(pad|phone|pod).+(version\/7\.\d+ mobile)/i)) {
         // iOS 7 
-        html.classList.add('ios').add('ios-7');
+        html.classList.add('ios-7');
     }
 
     if (!!agent.match(/i(pad|phone|pod).+(version\/8\.\d+ mobile)/i)) {
         // iOS 8
-        html.classList.add('ios').add('ios-8');
+        html.classList.add('ios-8');
+    }
+
+    if (!!agent.match(/i(pad|phone|pod)/i)) {
+        // iOS
+        html.classList.add('ios');
     }
 
     /**
@@ -81,7 +110,7 @@
         html.classList.add('firefox');
     }
 
-    if (/msie/.test(agent) || /trident/.test(agent)) {
+    if (/MSIE\s([0-9]{1,}[\.0-9]{0,})/.test(agent) || /trident/.test(agent)) {
         // Microsoft Internet Explorer
         html.classList.add('ie');
     }
