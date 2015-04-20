@@ -7,7 +7,7 @@
  * work on the Tuairisc site. 
  * 
  * @category   WordPress File
- * @package    Tuairisc.ie Gazeti Theme
+ * @package    Tuairisc.ie Theme
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  2014-2015 Mark Grealish
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
