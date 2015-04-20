@@ -13,7 +13,7 @@
 </head>
 <body <?php body_class(); ?>>
 <body <?php body_class(); ?>>
-    <div class="inner-wrap">
+    <div id="site">
 
         <?php // AdRotate group 1
         if (function_exists('adrotate_group')) {

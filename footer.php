@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-</div><!-- /.inner-wrap -->
+</div><?php // End #site ?>
 
 <?php if ($paged < 2 && is_home()) : ?>
     <script type="text/javascript">
