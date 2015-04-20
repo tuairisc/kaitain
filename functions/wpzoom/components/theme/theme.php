@@ -215,26 +215,6 @@ class WPZOOM_Theme {
                 wp_enqueue_style('wpzoom-theme');
             }
         }
-
-        /**
-         * Deprecated file, but we still register this stylesheet for
-         * backwards comptability.
-         */
-
-        if (file_exists(get_template_directory() . '/custom.css')) {
-            wp_register_style('wpzoom-custom', get_template_directory_uri() . '/custom.css');
-            wp_enqueue_style('wpzoom-custom');
-        }
-        
-        if (file_exists(get_template_directory() . '/sass/custom.css')) {
-            wp_register_style('wpzoom-custom', get_template_directory_uri() . '/sass/custom.css');
-            wp_enqueue_style('wpzoom-custom');
-        }
-
-        if (file_exists(get_template_directory() . '/css/custom.css')) {
-            wp_register_style('theme-custom', get_template_directory_uri() . '/css/custom.css');
-            wp_enqueue_style('theme-custom');
-        }
     }
 
     public static function theme_scripts() {
