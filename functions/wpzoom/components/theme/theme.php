@@ -124,26 +124,34 @@ class WPZOOM_Theme {
         }
     }
 
-    /**
-     * Robots meta tag for SEO
-     */
     public static function index() {
+        /**
+         * Robots meta tag for SEO
+         */
+
         global $post, $wpdb;
 
-        if(!empty($post)){
+        if(!empty($post)) {
             $post_id = $post->ID;
         }
 
-        /* Robots */
+        // Robots defaults
         $index = 'index';
         $follow = 'follow';
 
-        if ( is_tag() && option::get('index_tag') != 'index') { $index = 'noindex'; }
-        elseif ( is_search() && option::get('index_search') != 'index' ) { $index = 'noindex'; }
-        elseif ( is_author() && option::get('index_author') != 'index') { $index = 'noindex'; }
-        elseif ( is_date() && option::get('index_date') != 'index') { $index = 'noindex'; }
-        elseif ( is_category() && option::get('index_category') != 'index' ) { $index = 'noindex'; }
-        echo '<meta name="robots" content="'. $index .', '. $follow .'" />' . "\n";
+        if ( is_tag() && option::get('index_tag') != 'index') { 
+            $index = 'noindex'; 
+        } elseif (is_search() && option::get('index_search') != 'index') {
+            $index = 'noindex';
+        } elseif (is_author() && option::get('index_author') != 'index') {
+            $index = 'noindex';
+        } elseif (is_date() && option::get('index_date') != 'index') {
+            $index = 'noindex';
+        } elseif (is_category() && option::get('index_category') != 'index') {
+            $index = 'noindex';
+        }
+
+        printf('<meta name="robots" content="%s, %s" />', $index, $follow);
     }
 
     public static function description() {
@@ -151,15 +159,17 @@ class WPZOOM_Theme {
          * Returns meta description if is specified in theme options, if not
          * return WordPress' one
          *
-         * @return string
+         * @param {none}
+         * @return {string} $description
          */
 
         $description = esc_attr(trim(option::get('meta_desc')));
+
         if (!$description) {
-            return get_bloginfo('description');
-        } else {
-            return $description;
+            $description = get_bloginfo('description');
         }
+
+        return $description;
     }
 
     public static function add_feed_links() {
