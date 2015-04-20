@@ -67,12 +67,12 @@ $index_excluded_categories = array(
 $tuairisc_scripts = array(
     /* All JavaScript loaded by me for the theme.
      * Path is $theme_folder/js/tuairisc/ */
-    'modernizr' => '/modernizr_touch.min.js',
-    'tuairisc-browser-detect' => '/browser_detect.min.js',
+    'modernizr' => '/modernizr-touch.min.js',
+    'tuairisc-browser-detect' => '/browser-detect.min.js',
     'tuairisc-adrotate-fallback' => '/adrotate.min.js',
     'tuairisc-eventdrop' => '/eventdrop.min.js',
     'tuairisc-functions' => '/functions.min.js',
-    'tuairis-author-report' => '/author_report.min.js'
+    'tuairis-author-report' => '/author-report.min.js'
 );
 
 $fallback = array(
