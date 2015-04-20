@@ -40,7 +40,7 @@
                     </div>
                 <?php endif; ?>
 
-                <ul class="mshare">
+                <ul class="sharing">
                     <li><a class="rss" href="<?php bloginfo('rss2_url'); ?>" target="_blank" title="RSS 2.0 Feed"></a></li>
                     <li><a class="facebook" href="https://www.facebook.com/tuairisc.ie" target="_blank" title="Facebook"></a></li>
                     <li><a class="twitter" href="https://twitter.com/tuairiscnuacht" target="_blank" title="Twitter"></a></li>
@@ -59,4 +59,3 @@
                 echo '<p class="dropdown notice">Please set your Main navigation menu on the <strong><a href="'.get_admin_url().'nav-menus.php">Appearance > Menus</a></strong> page.</p>';
             } ?>
         </nav>
-    <div id="main">

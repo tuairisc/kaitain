@@ -5,7 +5,7 @@
 
 $social-button-size: $margin-33;
 
-ul.mshare {
+ul.share {
     list-style-type: none;
     // Necessary reset because of Gazeti's default styles.
     margin: 0;
@@ -24,7 +24,7 @@ ul.mshare {
     @include generate-social-links(a, $social-button-size, $social-sprites);
 }
 
-article ul.mshare {
+article ul.share {
     float: right;
 
     @include media(max, 1050) {
