@@ -19,4 +19,30 @@
  * 9. Footer  ----------------------------  footer.php
  * 
  * Unless otherwise noted all files in this theme are licensed under the GPL v3.
+ * 
+ * Where is the CSS?!
+ * ------------------
+ * The appearance of the Tuairisc site, excluding some plugins, was an aggregate
+ * of four stylesheets and one set of injected CSS:
+ * 
+ * 1. style.css - the root Gazeti stylesheet.
+ * 2. media-queries.css - responsive styling rules for the Gazeti theme.
+ * 3. silver.css - the Gazeti Silver theme.
+ * 4. custom.css - user-input custm CSS.
+ * 
+ * For the purposes of our work, we focused on custom.css. We added something 
+ * north of one thousand lines of CSS to this file. This was eventually 
+ * refactored into a SCSS framework in February 2015.
+ * 
+ * In April 2015 we decided to completely replace the rest of Gazeti's CSS in
+ * order to comply with the terms of both the GPL and the developer's wish for
+ * us to excise any remaining code.
+ * 
+ * /All/ of the presentation style can be found in /assets/sass/ in the form of
+ * uncompiled Sass files. To stop a pointless compiled file from polluting git
+ * commits, I have excluded the compiled tuairisc.scss.
+ * 
+ * The Tuairisc style is copyrighted, property of Tuairisc Bheo Treo and 
+ * excluded from the GPL license that covers the functional PHP code in this
+ * theme.
  */
