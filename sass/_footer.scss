@@ -83,7 +83,7 @@
  */
 
 .foras-attribution {
-    background: center center/100% auto no-repeat url($logo-foras);
+    background: center center/100% auto no-repeat url($brand-foras);
     margin: 0 auto;
     @include flex_size(100px, 0.8);
     display: block;

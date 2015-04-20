@@ -1,4 +1,4 @@
-/*
+/**
  * Variables
  * ---------
  * The Gazeti theme is a mish-mash of everrrr-so-slightly different margins, 
@@ -11,24 +11,26 @@
  * O you who know what we suffer here, do not forget us in your prayers.
  */
 
-$assets-folder: '../images';
-$assets-folder-social: $assets-folder + '/social';
+$assets: '../assets/images';
+$assets-social: $assets + '/social';
+$assets-education: $assets + '/education';
+$assets-branding: $assets + '/branding';
 
 /*
  * Education Section
  * -----------------
  */
 
-$education-download: (#d2d3d5, $assets-folder + '/download_arrow.svg');
-$education-soundwave: '../images/education_soundwave.svg';
+$education-download: (#d2d3d5, $assets-education + '/download.svg');
+$education-soundwave: $assets-education + '/soundwave.svg';
 
 $education-banners: (
     education-187: (#e3393c, ''),
-    education-202: (#c44b54, $assets-folder + '/education/picture.svg'),
-    education-203: (#7c5c91, $assets-folder + '/education/book.svg'),
-    education-204: (#c9ab5f, $assets-folder + '/education/video.svg'),
-    education-205: (#89b0d4, $assets-folder + '/education/reading.svg'),
-    education-206: (#e34284, $assets-folder + '/education/crossword.svg')
+    education-202: (#c44b54, $assets-education + '/section-picture.svg'),
+    education-203: (#7c5c91, $assets-education + '/section-book.svg'),
+    education-204: (#c9ab5f, $assets-education + '/section-video.svg'),
+    education-205: (#89b0d4, $assets-education + '/section-reading.svg'),
+    education-206: (#e34284, $assets-education + '/section-crossword.svg')
 );
 
 $modal-background: #d1d2d4;
@@ -40,7 +42,7 @@ $modal-background-active: #5e83c4;
  * --------------
  */
  
-$social-sprites: $assets-folder + '/social/social-sprites.svg';
+$social-sprites: $assets-social + '/social-sprites.svg';
 
 /*
  * Site Section Colours
@@ -69,19 +71,19 @@ $category_colours: (
  * --------------------------
  */
 
-$background-rainbow-footer: $assets-folder + '/rainbow_footer.svg';
-$background-rainbow-strip: $assets-folder + '/rainbow_strip.svg';
-$background-rainbow-strip-alt: $assets-folder + '/rainbow_strip_alternate.svg';
-
+$background-rainbow-footer: $assets + '/strip-footer.svg';
+$background-rainbow-strip: $assets + '/strip.svg';
+$background-rainbow-strip-alt: $assets + '/strip-alt.svg';
 
 /*
  * Branding Images
  * ---------------
  */
 
-$logo-foras: $assets-folder + '/foras_na_gaeilge_logo.png';
-$logo-tuairisc: $assets-folder + '/tuairisc_logo.svg';
-$logo-tuairisc-alt: $assets-folder + '/tuairisc_logo_alternate.svg';
+$brand-foras: $assets + '/brand-foras.svg';
+$brand-tuairisc: $assets + '/brand-tuairisc.svg';
+$brand-tuairisc-alt: $assets + '/brand-tuairisc-alt.svg';
+$brand-greann: $assets-branding + '/brand-asnc.svg';
 
 /*
  * Fonts

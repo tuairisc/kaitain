@@ -57,7 +57,7 @@
 .banner-greann {
     @extend %clearfix;
     background-color: map-get($category_colours, 158);
-    background-image: url($assets-folder + '/asnc_logo.svg');
+    background-image: url($brand-greann);
     background-position: 10px center;
     background-repeat: no-repeat;
     background-size: auto 60px;
