@@ -3,6 +3,7 @@
 
     <div id="content">
         <?php if (is_home() && $paged < 2 && option::get('featured_enable') == 'on') : ?>
+            <?php // README FIXME TODO SUDO PLEASE ?>
             <?php // get_template_part('wpzoom-slider'); ?>
             <?php get_template_part('tuairisc-featured'); ?>
         <?php endif; ?>
@@ -10,14 +11,10 @@
         <?php if(is_home() && $paged < 2) : ?>
             <div class="home_widgets">
                 <?php dynamic_sidebar('home-main') ?>
-                <div class="clear"></div>
             </div>
-            <div class="clear"></div>
             <div class="home_widgets three-columns">
                 <?php dynamic_sidebar('home-columns') ?>
-                <div class="clear"></div>
             </div>
-            <div class="clear"></div>
         <?php endif; ?>
 
         <?php if ( $paged > 1 || option::get('recent_posts') == 'on') : ?>
@@ -62,9 +59,9 @@
                 } 
 
                 get_template_part('loop'); ?>
-             </div> <!-- /.archiveposts -->
+             </div> <?php // End .archiveposts ?>
         <?php endif; ?>
-    </div><!-- /#content -->
+    </div> <?php // End #content ?>
     <?php get_sidebar(); ?>
-</div><!-- /#main -->
+</div> <?php // End #main ?>
 <?php get_footer(); ?>
