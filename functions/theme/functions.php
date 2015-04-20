@@ -162,10 +162,7 @@ if ( !function_exists( 'the_content_limit' ) ) {
     }
 }
 
-
- 
-
-/* Comments Custom Template                        
+/* Comments Custom Template
 ==================================== */
 
 function wpzoom_comment( $comment, $args, $depth ) {
