@@ -8,7 +8,7 @@ while(have_posts()) {
 
     increment_view_counter(); 
     get_template_part('banner'); 
-    get_template_part('article', 'full'); 
+    get_template_part('/partials/articles/article', 'full'); 
 
     if (option::get('post_related') == 'on' && !is_custom_type()) {
         get_template_part('related-posts'); 
@@ -20,12 +20,5 @@ while(have_posts()) {
 }
 
 printf('</div>');
-
-if ($template != 'full') {
-    get_sidebar();
-} else {
-    printf('<div class="clear"></div>');
-}
-
 printf('</div>');
 get_footer(); ?>
