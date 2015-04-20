@@ -1,8 +1,15 @@
-<?php return array(
+<?php 
+
 /**
- * Theme configuration goes there
+ * Theme Configuration
+ * -------------------
  */
-    'name'    => 'Gazeti',                                       // theme name
-    'styled'  => true,                                            // true if current theme supports styling
-    'scripts' => array( 'fredsel', 'tabs', 'dropdown')          // javascripts theme uses
+
+return array(
+    // theme name
+    'name' => 'Tuairisc',  
+    // true if current theme supports styling
+    'styled' => true,                              
+    // javascripts theme uses        
+    'scripts' => array('fredsel', 'tabs', 'dropdown')
 );
