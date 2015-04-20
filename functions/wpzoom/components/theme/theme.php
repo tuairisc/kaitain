@@ -6,10 +6,6 @@ class WPZOOM_Theme {
     public static function init() {
         add_action('after_setup_theme', array(__CLASS__, 'add_feed_links'));
 
-        if (option::is_on("meta_generator")) {
-            add_action('wp_head', array(__CLASS__, 'meta_generator'));
-        }
-
         if (get_option('blog_public') != 0) {
             add_action('wp_head', array(__CLASS__, 'seo'), 1);
             add_action('wp_head', array(__CLASS__, 'canonical'), 1);
@@ -18,16 +14,14 @@ class WPZOOM_Theme {
         add_action('wp_head', array(__CLASS__, 'favicon'));
         add_action('wp_head', array(__CLASS__, 'generate_options_css'));
         add_action('wp_head', array(__CLASS__, 'header_code'));
-
         add_action('wp_enqueue_scripts', array(__CLASS__, 'theme_scripts'));
-
         add_action('wp_footer', array(__CLASS__, 'footer_code'));
     }
 
-    /**
-     * Shows favicon if it's set in theme options
-     */
     public static function favicon() {
+        /**
+         * Shows favicon if it's set in theme options
+         */
         $favicon = option::get('misc_favicon');
 
         if ($favicon) {
@@ -35,10 +29,10 @@ class WPZOOM_Theme {
         }
     }
 
-    /**
-     * Includes header/footer scripts if they are set in theme options
-     */
     public static function header_code() {
+        /**
+         * Includes header/footer scripts if they are set in theme options
+         */
         $header_code = trim(stripslashes(option::get('header_code')));
 
         if ($header_code) {
@@ -54,10 +48,10 @@ class WPZOOM_Theme {
         }
     }
 
-    /**
-     * Keywords meta tag for SEO on posts
-     */
     public static function metaPostKeywords() {
+        /**
+         * Keywords meta tag for SEO on posts
+         */
         $posttags = get_the_tags();
         $meta_post_keywords = '';
         if (!$posttags) {
@@ -72,20 +66,20 @@ class WPZOOM_Theme {
         echo '<meta name="keywords" content="'.$meta_post_keywords.'" />' . "\n";
     }
 
-    /**
-     * Keywords meta tag for SEO on homepage
-     */
     public static function metaHomeKeywords() {
+        /**
+         * Keywords meta tag for SEO on homepage
+         */
         $keywords = esc_attr(stripslashes(trim(option::get('meta_key'))));
         if ($keywords) {
             echo '<meta name="keywords" content="' . $keywords . '" />' . "\n";
         }
     }
 
-    /**
-     * Canonical meta tag for SEO
-     */
     public static function canonical() {
+        /**
+         * Canonical meta tag for SEO
+         */
         global $wp_query;
 
         if(option::is_on('canonical')) {
@@ -103,10 +97,10 @@ class WPZOOM_Theme {
         }
     }
 
-    /**
-     * Handles SEO Options
-     */
     public static function seo() {
+        /**
+         * Handles SEO Options
+         */
         global $post;
 
         if (option::is_on('seo_enable')) {
@@ -134,8 +128,8 @@ class WPZOOM_Theme {
      * Robots meta tag for SEO
      */
     public static function index() {
-        global $post;
-        global $wpdb;
+        global $post, $wpdb;
+
         if(!empty($post)){
             $post_id = $post->ID;
         }
@@ -152,13 +146,14 @@ class WPZOOM_Theme {
         echo '<meta name="robots" content="'. $index .', '. $follow .'" />' . "\n";
     }
 
-    /**
-     * Returns meta description if is specified in theme options, if not
-     * return WordPress' one
-     *
-     * @return string
-     */
     public static function description() {
+        /**
+         * Returns meta description if is specified in theme options, if not
+         * return WordPress' one
+         *
+         * @return string
+         */
+
         $description = esc_attr(trim(option::get('meta_desc')));
         if (!$description) {
             return get_bloginfo('description');
@@ -186,49 +181,41 @@ class WPZOOM_Theme {
         return $feed;
     }
 
-    /**
-     * Adds WPZOOM to html meta generator
-     *
-     * @return void
-     */
-    public static function meta_generator() {
-        $mg = "<!-- WPZOOM Theme / Framework -->\n";
-        $mg.= '<meta name="generator" content="' . WPZOOM::$themeName . ' ' . WPZOOM::$themeVersion . '" />' . "\n";
-        $mg.= '<meta name="generator" content="WPZOOM Framework ' . WPZOOM::$wpzoomVersion . '" />' . "\n";
-
-        echo $mg;
-    }
-
     public static function theme_scripts() {
         if (is_singular()) {
             wp_enqueue_script('comment-reply');
         }
 
-        /**
-         * Enqueue initialization script, HTML5 Shim included.
-         *
-         * Only if this file exists.
-         */
         if (file_exists(get_template_directory() . '/js/init.js')) {
+            /**
+             * Enqueue initialization script, HTML5 Shim included.
+             *
+             * Only if this file exists.
+             */
             wp_enqueue_script('wpzoom-init',  get_template_directory_uri() . '/js/init.js', array('jquery'));
         }
 
-        /**
-         * Enqueue all theme scripts specified in config file to the footer
-         */
         if (isset(WPZOOM::$config['scripts'])) {
+            /**
+             * Enqueue all theme scripts specified in config file to the footer
+             */
             foreach (WPZOOM::$config['scripts'] as $script) {
                 wp_enqueue_script('wpzoom-' . $script,  get_template_directory_uri() . '/js/' . $script . '.js', array(), false, true);
             }
         }
     }
 
-    /**
-     * Generate custom css from options
-     */
     public static function generate_options_css() {
-        $css = '';
+        /**
+         * Generate CSS for Options
+         * ------------------------
+         * @param {none}
+         * @return {none}
+         */
+
+        $css = array();
         $enable = false;
+
         foreach (option::$evoOptions as $Eoption) {
             foreach ($Eoption as $option) {
                 if ((isset($option['type']) && $option['type'] == 'color') || isset($option['css'])) {
@@ -241,48 +228,54 @@ class WPZOOM_Theme {
                         $value = $value . 'px';
                     }
 
-                    $css .= "{$option['selector']}{{$option['attr']}:$value;}\n";
+                    $css[] = "{$option['selector']}{{$option['attr']}:$value;}\n";
                 }
 
                 if ((isset($option['type']) && $option['type'] == 'typography')) {
                     $enable = true;
-                    $css .= self::dynamic_typography_css($option);
+                    $css[] = self::dynamic_typography_css($option);
                 }
             }
         }
 
         if ($enable) {
-            echo '<style type="text/css">';
-            echo self::dynamic_google_webfonts_css();
-            echo $css;
-            echo "</style>\n";
+            printf('<style type="text/css">%s%s</style>', self::dynamic_google_webfonts_css(), implode('', $css));
         }
     }
 
-    /**
-     * Registers Google Web Fonts in use so later we know what fonts
-     * to include from Web Fonts directory
-     *
-     * @param  array $font Font data
-     * @return void
-     */
     public static function dynamic_google_webfonts_register($font) {
+        /**
+         * Register Google Fonts
+         * ---------------------
+         * Registers Google Fonts so you can later determine what fonts to
+         * include from the service.
+         *
+         * @param {array} $font Google Fonts data.
+         * @return {none}
+         */
+
         self::$dynamic_google_webfonts[] = $font;
     }
 
-    /**
-     * Generates CSS import for used Google Web Fonts
-     *
-     * @return string The CSS Import String
-     */
     public static function dynamic_google_webfonts_css() {
+        /**
+         * Generate Google Fonts CSS
+         * -------------------------
+         * Generates CSS for Google Fonts.
+         *
+         * @param {none}
+         * @return {string} $css The CSS import string.
+         */
+
         $fonts = '';
 
         foreach (self::$dynamic_google_webfonts as $font) {
             $fonts.= $font['name'] . $font['variant'] . '|';
         }
 
-        if (!$fonts) return '';
+        if (!$fonts) {
+            return '';
+        }
 
         $fonts = str_replace( " ","+",$fonts);
         $css = '@import url("http'. (is_ssl() ? 's' : '') .'://fonts.googleapis.com/css?family=' . $fonts . "\");\n";
@@ -291,16 +284,21 @@ class WPZOOM_Theme {
         return $css;
     }
 
-    /**
-     * Generates CSS for typography options from ZOOM Admin
-     *
-     * @param  array $option
-     * @return string The CSS
-     */
     public static function dynamic_typography_css($option) {
+        /**
+         * Generate Admin Typography Options CSS 
+         * -------------------------------------
+         * Generates CSS for typography options from ZOOM Admin.
+         *
+         * @param {array} $option
+         * @return {string} The CSS
+         */
+
         $value = option::get($option['id']);
 
-        if (!is_array($value)) return '';
+        if (!is_array($value)) {
+            return '';
+        }
 
         $google_fonts = array();
         $font = array();
@@ -318,14 +316,15 @@ class WPZOOM_Theme {
             }
 
             foreach ($google_font_families as $google_font_v) {
-                if (isset($google_font_v['separator'])) continue;
+                if (isset($google_font_v['separator'])) {
+                    continue;
+                }
 
                 $key = str_replace(' ', '-', strtolower($google_font_v['name']));
 
                 if ($value['font-family'] == $key) {
                     $font[] = "font-family: " . $google_font_v['name'] . ";";
                     self::dynamic_google_webfonts_register($google_font_v);
-
                     break;
                 }
             }
@@ -346,7 +345,9 @@ class WPZOOM_Theme {
             }
         }
 
-        if (empty($font)) return '';
+        if (empty($font)) {
+            return '';
+        }
 
         return $option['selector'] . '{' . implode('', $font) . '}';
     }
