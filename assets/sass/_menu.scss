@@ -5,7 +5,7 @@
  * nav menu.
  */
 
-nav#menu-container {
+nav#menu {
     padding: $padding-sections;
 
     @include media(print) {
@@ -13,13 +13,13 @@ nav#menu-container {
     }
 }
 
-#menu {
+ul#primary-menu {
     @include media(portrait) {
         padding: 0;
     }
 }
 
-ul#menu {
+ul#primary-menu {
     /*
      * Main Site Navigation
      * --------------------

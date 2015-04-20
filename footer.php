@@ -5,7 +5,7 @@
             <div class="clear"></div>
         <?php endif; ?>
 
-    </div><!-- /.content-wrap -->
+    </div><?php // End #main ?>
 
     <?php // AdRotate group 3
     if (function_exists('adrotate_group')) {

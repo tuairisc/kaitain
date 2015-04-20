@@ -48,10 +48,10 @@
                 </ul>
             </div>
         </div>
-        <nav id="menu-container">
+        <nav id="menu">
             <?php if (has_nav_menu('primary')) {
                 wp_nav_menu(array(
-                    'menu_id' => 'menu',
+                    'menu_id' => 'primary-menu',
                     'sort_column' => 'menu_order',
                     'theme_location' => 'primary'
                 ));
@@ -59,4 +59,4 @@
                 echo '<p class="dropdown notice">Please set your Main navigation menu on the <strong><a href="'.get_admin_url().'nav-menus.php">Appearance > Menus</a></strong> page.</p>';
             } ?>
         </nav>
-    <div class="content-wrap">
+    <div id="main">
