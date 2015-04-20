@@ -75,6 +75,10 @@ $tuairisc_scripts = array(
     'tuairis-author-report' => '/author-report.min.js'
 );
 
+$tuairisc_styles = array(
+    'tuairisc' => get_template_directory_uri() . '/assets/sass/tuairisc.css'
+);
+
 $fallback = array(
     /* Social media (Open Graph, Twitter Cards) fallback information in cases 
      * where it may be missing. */
@@ -103,7 +107,7 @@ require_once($widget_path . 'tuairisc-jobs.php');
  * ---------
  */
 
-function tuairisc_scripts() {
+function load_tuairisc_scripts() {
     /** 
      * Load Tuairisc JavaScript
      * ------------------------
@@ -121,7 +125,7 @@ function tuairisc_scripts() {
     }
 }
 
-function tuairisc_styles() {
+function load_tuairisc_styles() {
     /**
      * Load Tuairisc Custom Styles
      * ---------------------------
@@ -130,6 +134,12 @@ function tuairisc_styles() {
      * @param {none}
      * @return {none}
      */
+
+    global $tuairisc_styles;
+
+    foreach ($tuairisc_styles as $key => $value) {
+        wp_enqueue_style($key, $value);
+    }
 }
 
 function get_banner_breadcrumb() {
@@ -233,7 +243,7 @@ function banner_classes() {
     return implode('', $banner_classes);
 }
 
-function get_thumbnail_url($post_id = null, $thumb_size = null, $return_arr = false) {
+function get_thumbnail_url($post_id = null, $thumb_size = 'large', $return_arr = false) {
     /** 
      * Return Thumbnail Image URL
      * --------------------------
@@ -252,10 +262,6 @@ function get_thumbnail_url($post_id = null, $thumb_size = null, $return_arr = fa
 
     if (is_null($post_id)) {
         $post_id = get_the_ID();
-    }
-
-    if (is_null($thumb_size)) {
-        $size = 'large';
     }
 
     $thumb_id = get_post_thumbnail_id($post_id);
@@ -837,8 +843,8 @@ function open_graph_meta() {
 // Change large size to match post content width.
 update_option('large_size_w', 770);
 // Load JavaScript scripts. 
-add_action('wp_enqueue_scripts', 'tuairisc_scripts');
-add_action('wp_enqueue_scripts', 'tuairisc_styles');
+add_action('wp_enqueue_scripts', 'load_tuairisc_scripts');
+add_action('wp_enqueue_scripts', 'load_tuairisc_styles');
 // Rearrange title.
 add_filter('wp_title', 'tweak_title', 10, 2);
 // Remove read more links from excerpts.
