@@ -21,13 +21,6 @@
      array("type"  => "preheader",
           "name"  => "Theme Settings"),
 
-     array("name"  => "Color Style",
-          "desc"  => "Choose the style that you would like to use.<br />",
-          "id"    => "theme_style",
-          "options" => array('Default', 'Silver', 'Black'),
-          "std"   => "Default",
-          "type"  => "select"),
-
     array("name"  => "Logo Image",
           "desc"  => "Upload a custom logo image for your site, or you can specify an image URL directly.",
           "id"    => "misc_logo_path",

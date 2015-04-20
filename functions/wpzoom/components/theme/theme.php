@@ -19,7 +19,6 @@ class WPZOOM_Theme {
         add_action('wp_head', array(__CLASS__, 'generate_options_css'));
         add_action('wp_head', array(__CLASS__, 'header_code'));
 
-        add_action('wp_enqueue_scripts', array(__CLASS__, 'theme_styles'), 20);
         add_action('wp_enqueue_scripts', array(__CLASS__, 'theme_scripts'));
 
         add_action('wp_footer', array(__CLASS__, 'footer_code'));
@@ -198,23 +197,6 @@ class WPZOOM_Theme {
         $mg.= '<meta name="generator" content="WPZOOM Framework ' . WPZOOM::$wpzoomVersion . '" />' . "\n";
 
         echo $mg;
-    }
-
-    /**
-     * Include css file for specified style
-     */
-    public static function theme_styles() {
-        /**
-         * If current theme supports styles use them
-         */
-        if (WPZOOM::$config['styled']) {
-            $style = str_replace(" ", "-", strtolower(option::get('theme_style')));
-
-            if (file_exists(get_template_directory() . '/styles/' . $style . '.css')) {
-                wp_register_style('wpzoom-theme', get_template_directory_uri() . '/styles/' . $style . '.css');
-                wp_enqueue_style('wpzoom-theme');
-            }
-        }
     }
 
     public static function theme_scripts() {
