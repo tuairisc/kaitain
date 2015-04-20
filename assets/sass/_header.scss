@@ -1,13 +1,34 @@
-/* 
- * Header Block
- * ------------ 
- * The #header block and its many children. 
+/**
+ * Site Header Stylesheet 
+ * ----------------------
+ * These are the rules for the top-level containers in the Tuairisc theme.
+ * 
+ * @category   Sass Header Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  2014-2015 Mark Grealish
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * 
+ * This file is part of Tuairsc
+ * 
+ * Tuairisc.ie is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Tuairisc.ie is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #header {
-    /* Override gradient on #header. */ 
-    @extend %clearfix;
-    background: #fff center top/auto 6px no-repeat border-box url($background-rainbow-strip);
+    background: center top/auto 6px no-repeat border-box url($background-rainbow-strip);
     box-sizing: border-box;
     margin-bottom: $margin-26;
     min-height: 70px;
@@ -28,7 +49,6 @@
     }
 
     .share-search {
-        @extend %clearfix;
         bottom: 0;
         margin-right: 4%;
         right: 0;
