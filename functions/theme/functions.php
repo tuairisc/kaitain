@@ -27,17 +27,6 @@ if ( function_exists( 'add_image_size' ) ) {
 
 }
 
-
-/* CSS file for responsive design
-==================================== */
-
-function responsive_styles() {
-    wp_enqueue_style( 'media-queries', get_template_directory_uri() . '/media-queries.css', array() );
-}
-add_action( 'wp_enqueue_scripts', 'responsive_styles' );
-
-
-
 /* Enqueue jQuery UI Tabs
 ==================================== */
 
