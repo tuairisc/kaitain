@@ -66,13 +66,13 @@ $index_excluded_categories = array(
 
 $tuairisc_scripts = array(
     /* All JavaScript loaded by me for the theme.
-     * Path is $theme_folder/js/tuairisc/ */
-    'modernizr' => '/modernizr-touch.min.js',
-    'tuairisc-browser-detect' => '/browser-detect.min.js',
-    'tuairisc-adrotate-fallback' => '/adrotate.min.js',
-    'tuairisc-eventdrop' => '/eventdrop.min.js',
-    'tuairisc-functions' => '/functions.min.js',
-    'tuairis-author-report' => '/author-report.min.js'
+     * Path is $theme_folder/assets/js/ */
+    'modernizr' => 'modernizr-touch.min.js',
+    'tuairisc-browser-detect' => 'browser-detect.min.js',
+    'tuairisc-adrotate-fallback' => 'adrotate.min.js',
+    'tuairisc-eventdrop' => 'eventdrop.min.js',
+    'tuairisc-functions' => 'functions.min.js',
+    'tuairis-author-report' => 'author-report.min.js'
 );
 
 $tuairisc_styles = array(
@@ -118,7 +118,7 @@ function load_tuairisc_scripts() {
      */
 
     global $tuairisc_scripts;
-    $path = get_stylesheet_directory_uri() . '/js/tuairisc';
+    $path = get_stylesheet_directory_uri() . '/assets/js/';
 
     foreach ($tuairisc_scripts as $key => $value) {
         wp_enqueue_script($key, $path . $value, array(), '1.0', true);
