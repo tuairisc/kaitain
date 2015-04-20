@@ -183,9 +183,9 @@ function wpzoom_comment( $comment, $args, $depth ) {
                 <?php printf( __('%s ag %s', 'wpzoom'), get_comment_date(), get_comment_time()); ?></a><?php edit_comment_link( __( '(Edit)', 'wpzoom' ), ' ' );
                 ?>
                 
-            </div><!-- .comment-meta .commentmetadata -->
+            </div><?php // End .comment-meta .commentmetadata ?>
         
-        </div><!-- .comment-author .vcard -->
+        </div> <?php // End .comment-author .vcard ?>
         <?php if ( $comment->comment_approved == '0' ) : ?>
             <em class="comment-awaiting-moderation"><?php _e( 'Tá do thrácht á mheas.', 'wpzoom' ); ?></em>
             <br />
@@ -204,8 +204,8 @@ function wpzoom_comment( $comment, $args, $depth ) {
                     'reply_text' => 'Freagair',
                 )
              )); ?>
-        </div><!-- .reply -->
-    </div><!-- #comment-##  -->
+        </div> <?php // End .reply ?>
+    </div> <?php // End #comment-## ?>
 
     <?php
             break;
