@@ -1,10 +1,17 @@
-/* 
+/**
  * Category Header Banners
  * ------------------------
- * Each category has a custom #header bannner.
- * Children have the same colour as the parent.
- * Colours are set via PHP. 
- * 
+ * @category   Breadcrumb Banner Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  2014-2015 Mark Grealish and Tuairisc Bheo Treo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ *
+ * Each category has a custom #header bannner. Children have the same colour as
+ * the parent. Colours are set via PHP. 
+ *
  * See: gazeti/functions/user/functions.php
  */
 
@@ -48,7 +55,7 @@
     }
 }
 
-/* 
+/**
  * Wider Banner for Greann Category (158) 
  * --------------------------------------
  * The Greann category (158) must be taller in order to separate content. 

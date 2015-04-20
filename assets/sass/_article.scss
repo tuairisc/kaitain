@@ -1,6 +1,14 @@
-/* 
- * Article Element Styles
- * ----------------------
+/**
+ * Article Styling 
+ * ---------------
+ * @category   Articles Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  2014-2015 Mark Grealish and Tuairisc Bheo Treo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * 
  * Styles for articles and their child elements. WPZOOM is pretty disorganized 
  * when it comes to posts. <article>, <div class="entry"> and <div class="post">
  * are all used interchangably in different sections of the site. 
@@ -29,7 +37,7 @@ $archive-width-75: 75%;
 $archive-article-thumb-height-170: 170px;
 $archive-article-thumb-height-325: 325px;
 
-/*
+/**
  * Article Reset
  * -------------
  * The Gazeti theme does odd things with articles. All of the rules in this 
@@ -42,8 +50,6 @@ article {
     border: 0;
     box-shadow: none;
     display: block;
-    margin: 0;
-    padding: 0;
     text-align: left;
 
     blockquote, li, p {
@@ -95,7 +101,7 @@ article {
     color: #000;
 }
 
-/*
+/**
  * Article Header
  * --------------
  */
@@ -132,7 +138,7 @@ header {
     }
 }
 
-/*
+/**
  * Article Content Body
  * --------------------
  */
@@ -174,7 +180,7 @@ div.article-body {
     }
 }
 
-/*
+/**
  * WordPress Image Captions
  * ------------------------
  */
@@ -248,7 +254,7 @@ article.full {
     } 
 }
 
-/*
+/**
  * Job Archive Index Article 
  * -------------------------
  * The rules here are specific to job archive articles as they have a sligtly
@@ -293,7 +299,7 @@ article.jobarchive {
     }
 }
 
-/*
+/**
  * Archive Articles
  * ----------------
  * Archive articles have two styles:
@@ -387,7 +393,7 @@ article.jobarchive {
     }
 }
 
-/*
+/**
  * Homepage Lead Article 
  * ---------------------
  * This is the hero article on the site, the first one that you see when the 
