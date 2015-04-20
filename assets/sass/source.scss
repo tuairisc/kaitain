@@ -1,4 +1,32 @@
 /**
+ * Sass Root Source File
+ * ---------------------
+ * 
+ * @category   Sass Source Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  2014-2015 Mark Grealish
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * 
+ * This file is part of Tuairsc
+ * 
+ * Tuairisc.ie is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Tuairisc.ie is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
  * Variables
  * ---------
  * The Gazeti theme is a mish-mash of everrrr-so-slightly different margins, 
@@ -11,7 +39,7 @@
  * O you who know what we suffer here, do not forget us in your prayers.
  */
 
-$assets: '../assets/images';
+$assets: '../images';
 $assets-social: $assets + '/social';
 $assets-education: $assets + '/education';
 $assets-branding: $assets + '/branding';
@@ -80,9 +108,9 @@ $background-rainbow-strip-alt: $assets + '/strip-alt.svg';
  * ---------------
  */
 
-$brand-foras: $assets + '/brand-foras.svg';
-$brand-tuairisc: $assets + '/brand-tuairisc.svg';
-$brand-tuairisc-alt: $assets + '/brand-tuairisc-alt.svg';
+$brand-foras: $assets-branding + '/brand-foras.svg';
+$brand-tuairisc: $assets-branding + '/brand-tuairisc.svg';
+$brand-tuairisc-alt: $assets-branding + '/brand-tuairisc-alt.svg';
 $brand-greann: $assets-branding + '/brand-asnc.svg';
 
 /*
@@ -166,6 +194,7 @@ $padding-sections: 0 4%;
  * ------- 
  */
 
+@import 'reset';
 // Website header. 
 @import 'header';
 // Website nav menu.
