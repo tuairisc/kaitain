@@ -1,5 +1,5 @@
         <?php if (is_active_sidebar('footer-full')) : ?>
-            <div class="widgets">
+            <div id="widgets">
                 <?php dynamic_sidebar('Footer (full-width)'); ?>
             </div>
         <?php endif; ?>
