@@ -144,12 +144,6 @@
     array("type"  => "preheader",
           "name"  => "Framework Options"),
 
-    array("name"  => "Framework Generator Meta Tags",
-          "desc"  => "Includes information about theme and framework you use in meta tags along to WordPress ones, they are used just for information and doesn't impact your SEO.",
-          "id"    => "meta_generator",
-          "std"   => "on",
-          "type"  => "checkbox"),
-
     array("name"  => "Typography Preview",
           "desc"  => "Preview fonts in typography option dropdown. Disable this if this page takes long to load or you never need that.",
           "id"    => "framework_fonts_preview",
