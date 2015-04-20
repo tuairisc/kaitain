@@ -1,11 +1,8 @@
         <?php if (is_active_sidebar('footer-full')) : ?>
-            <div class="full-widget-area clearfix">
+            <div class="widgets">
                 <?php dynamic_sidebar('Footer (full-width)'); ?>
             </div>
-            <div class="clear"></div>
         <?php endif; ?>
-
-    </div><?php // End #main ?>
 
     <?php // AdRotate group 3
     if (function_exists('adrotate_group')) {
@@ -23,7 +20,7 @@
                 </div>
             <?php endif; ?>
             <div class="copyright">
-                <p><?php _e('', 'wpzoom'); ?> &copy; <?php echo date("Y",time()); ?> <?php _e('Tuairisc Bheo Teoranta', 'wpzoom'); ?>.</p>
+                <p><?php _e('', 'wpzoom'); ?> &copy; <?php printf(date("Y",time())); ?> <?php _e('Tuairisc Bheo Teoranta', 'wpzoom'); ?>.</p>
             </div>
         </div>
     </div>
