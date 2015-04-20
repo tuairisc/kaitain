@@ -1,9 +1,11 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class('full'); ?>>
     <header>
         <h1 class="title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+
         <div class="excerpt">
             <?php the_excerpt(); ?>
         </div>
+
         <div class="meta">
             <?php if (has_local_avatar()) : ?>
                 <div class="avatar" style="background-image: url('<?php echo get_avatar_url(); ?>');"></div>
@@ -27,11 +29,12 @@
 
                 edit_post_link( __('Edit', 'wpzoom'), '<br /><span>', '</span>'); ?>
             </div>
-            <?php get_template_part('partials/sharing'); ?>
+            <?php get_template_part('mshare'); ?>
         </div>
     </header> 
+
     <div class="article-body">
-        <?php the_content(); get_template_part('partials/sharing'); ?>
+        <?php the_content(); get_template_part('mshare'); ?>
 
         <?php wp_link_pages(array(
             'before' => '<div class="page-link"><span>' . __('Pages:', 'wpzoom') . '</span>', 
