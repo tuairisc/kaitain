@@ -5,9 +5,9 @@
         the_post();
         
         if (is_custom_type()) {
-            get_template_part('article', 'jobarchive');
+            get_template_part('article', '/partials/articles/jobarchive');
         } else {
-            get_template_part('article', 'archive');
+            get_template_part('article', '/partials/articles/archive');
         }
     } ?>
 </div>
