@@ -10,7 +10,7 @@
         printf('%s', adrotate_group(2));
     } ?>
 
-    <div id="footer">
+    <div id="footer" role="footer">
         <div class="interior">
             <?php if (is_active_sidebar('footer_1') || is_active_sidebar('footer_2') || is_active_sidebar('footer_3') || is_active_sidebar('footer_4')) : ?>
                 <div class="widget-area">

@@ -19,7 +19,7 @@
             printf('%s', adrotate_group(1));
         } ?>
 
-        <div id="header">
+        <div id="header" role="header">
             <div id="logo">
                 <?php if (!option::get('misc_logo_path')) echo "<h1>"; ?>
                     <a href="<?php echo home_url(); ?>" title="<?php bloginfo('description'); ?>">
@@ -33,6 +33,7 @@
             </div>
 
             <div class="share-search">
+
                 <?php if (option::get('searchform_enable') === 'on') : ?>
                     <div class="search_form">
                         <?php get_search_form(); ?>
@@ -45,6 +46,7 @@
                     <li><a class="twitter" href="https://twitter.com/tuairiscnuacht" target="_blank" title="Twitter"></a></li>
                     <li><a class="youtube" href="https://www.youtube.com/user/tuairiscnuacht" target="_blank" title="YouTube"></a></li>
                 </ul>
+
             </div>
         </div>
         <nav id="menu">
@@ -54,8 +56,10 @@
                     'sort_column' => 'menu_order',
                     'theme_location' => 'primary'
                 ));
-            } else {
-                echo '<p class="dropdown notice">Please set your Main navigation menu on the <strong><a href="'.get_admin_url().'nav-menus.php">Appearance > Menus</a></strong> page.</p>';
-            } ?>
+            } else { ?>
+                <p class="dropdown notice">
+                    Please set your Main navigation menu on the <strong><a href="printf('%s', get_admin_url() . 'nav-menus.php'); ?>">Appearance > Menus</a></strong> page.
+                </p>
+            <?php } ?>
         </nav>
         <div id="main" role="main">
