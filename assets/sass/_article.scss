@@ -45,6 +45,7 @@ $archive-article-thumb-height-325: 325px;
  */
 
 article {
+    @extend %clearfix;
     box-sizing: border-box;
     border: 0;
     box-shadow: none;
@@ -105,8 +106,6 @@ article {
  */
 
 header {
-    @extend %clearfix;
-
     .title {
         padding: 0;
     }
