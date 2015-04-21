@@ -4,7 +4,7 @@
 This repository is the WordPress theme for the [Tuairisc.ie](http://www.tuairisc.ie), derived from the [Gazeti](http://www.wpzoom.com/themes/gazeti/) theme by [WPZOOM](http://www.wpzoom.com/) and published in compliance with the GPL.
 
 ## Description
-This is the source code for the Ouro\_botics introduction and landing page.
+This is the WordPress theme for [Tuairisc.ie](http://www.tuairisc.ie). The majority of the code in this project is derived from Gazeti. The Sass appearance framework is wholly original code. I'm not sure how much excitement you expect from a WordPress theme, but this is a responsive. It runs /okay-ish/. I like ponies. 
 
 ## License
 All of the PHP code in the project is licensed under the GPL v3 or later, except as otherwise noted.
