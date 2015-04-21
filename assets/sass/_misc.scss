@@ -6,7 +6,7 @@
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    All rights reserved
- * @version    2.0
+ * @version    2.1
  * @link       https://github.com/bhalash/tuairisc.ie
  */
 
@@ -43,35 +43,6 @@ h2 {
 h3 {
     color: #999;
     font-size: $font-size-16;
-}
-
-/**
- * Content Wrappers
- * ----------------
- */
-
-.content-wrap {
-    /* Make #header strip regardless of whether #header advert group is blocked. */
-    background: center bottom/auto 6px no-repeat border-box url($background-rainbow-strip);
-    padding: $padding-19 4% 0 4%;
-
-    @include media(smartphone) {
-        padding-top: 0;
-    }
-
-    @include media(print) {
-        background: none;
-        padding: 0;
-    }
-}
-
-.inner-wrap {
-    /* Stock colour is grey. */
-    background-color: #fff;
-
-    @include media(smartphone) {
-        padding-top: 40px;
-    }
 }
 
 /**
