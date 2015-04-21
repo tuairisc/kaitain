@@ -1,4 +1,31 @@
-/*
+/**
+ * Useful Sass Mixins
+ * ------------------
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2015, Mark Grealish
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * 
+ * This file is part of Tuairisc.ie
+ * 
+ * Tuairisc.ie is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Tuairisc.ie is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Ouro_botics. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
  * Vendor Property and Value Prefixes
  * ----------------------------------
  * Automatically vendor prefixes to CSS properties and values.
@@ -25,13 +52,14 @@
 
     #{$property}: $value;
 }
-/*
+
+/**
  * Social Images and Colours
  * -------------------------
  */
 
 @mixin generate-social-links($element, $size, $sprites, $service: null) {
-    /*
+    /**
      * Generate social Links
      * ---------------------
      * I wanted to reduce the work (and load time) of ubiqui-cancerous social 
@@ -103,13 +131,15 @@
     }
 }
 
-/*
+/**
  * Miscellaneous Mixins
  * --------------------
  */
 
 @mixin flex-size($width, $ratio) {
     // Ratio should be between 0 and foo.
+    // See: http://stackoverflow.com/a/13625843/1433400
+    // See: http://alistapart.com/article/creating-intrinsic-ratios-for-video
     height: 0;
     padding-bottom: $width * $ratio;
     width: $width;
@@ -161,10 +191,10 @@
     }
 }
 
-@mixin light_mask($opacity) {
+@mixin light-mask($opacity) {
     background-color: rgba(255,255,255,$opacity);
 }
 
-@mixin dark_mask($opacity) {
+@mixin dark-mask($opacity) {
     background-color: rgba(0,0,0,$opacity);
 }

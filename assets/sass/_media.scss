@@ -1,13 +1,39 @@
-/*
+/**
  * Media Queries
  * -------------
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2015, Mark Grealish
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * 
+ * This file is part of Tuairisc.ie
+ * 
+ * Tuairisc.ie is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Tuairisc.ie is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Ouro_botics. If not, see <http://www.gnu.org/licenses/>.
  */
 
-$smartphone-min-width: 200px; $smartphone-max-width: 599px;
-$tablet-min-width: 600px; $tablet-max-width: 1024px;
+// Smartphone approximate min and max sizes. Held to be /good enough/.
+$smartphone-min-width: 200px; 
+$smartphone-max-width: 599px;
+// Tablet approximate min and max sizes. Held to be /good enough/.
+$tablet-min-width: 600px; 
+$tablet-max-width: 1024px;
 
 @mixin media($type, $range-low: '', $range-high: '') {
-    /*
+    /**
      * Cellphone and Tablet
      * --------------------
      */
@@ -24,7 +50,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
         }
     }
 
-    /*
+    /**
      * Device Orientation and Aspect Ratio
      * -----------------------------------
      */
@@ -47,7 +73,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
         }
     }
 
-    /*
+    /**
      * Min and Max Window Width
      * ------------------------
      */
@@ -64,7 +90,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
         }
     }
 
-    /*
+    /**
      * Min and Max Window Height
      * -------------------------
      */
@@ -81,7 +107,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
         }
     }
 
-    /*
+    /**
      * Min and Max Device Width
      * ------------------------
      */
@@ -98,7 +124,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
         }
     }
 
-    /*
+    /**
      * Min and Max Device Height
      * -------------------------
      */
@@ -115,7 +141,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
         }
     }
 
-    /*
+    /**
      * Window Ranges
      * -------------
      */
@@ -132,7 +158,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
         }
     }
 
-    /*
+    /**
      * Device Ranges
      * -------------
      */
@@ -149,7 +175,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
         }
     }
 
-    /*
+    /**
      * By Density
      * ---------
      */
@@ -167,7 +193,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Print or PDF
  * ------------
  */
@@ -178,7 +204,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Generic Smartphone
  * --------------
  * Should generally fit small smarphone screen sizes.
@@ -191,7 +217,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Generic Tablet
  * --------------
  * Should likewise fit tablet screen sizes.
@@ -204,7 +230,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Min and Max Window Width
  * ------------------------
  */
@@ -221,7 +247,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Min and Max Window Height
  * -------------------------
  */
@@ -238,7 +264,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Min and Max Device Width
  * ------------------------
  */
@@ -255,7 +281,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Min and Max Device Height
  * -------------------------
  */
@@ -272,7 +298,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Device Orientation and Aspect Ratio
  * -----------------------------------
  */
@@ -295,7 +321,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Min-to-Max Window Width
  * -----------------------
  */
@@ -306,7 +332,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Min-to-Max Window Height
  * ------------------------
  */
@@ -317,7 +343,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Min-to-Max Device Width
  * -----------------------
  */
@@ -328,7 +354,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Min-to-Max Window Height
  * ------------------------
  */
@@ -339,7 +365,7 @@ $tablet-min-width: 600px; $tablet-max-width: 1024px;
     }
 }
 
-/*
+/**
  * Retina Pixel Density Screen
  * ---------------------------
  */
