@@ -32,7 +32,7 @@ if ($query->have_posts()) {
 
         if ($query->current_post == 0 && $paged == 1) {
             // Call lead article.
-            get_template_part('article', 'lead');
+            get_template_part('/partials/articles/article', 'lead');
 
         } else {
 
@@ -41,7 +41,7 @@ if ($query->have_posts()) {
             }
 
             // Call secondary article.
-            get_template_part('article', 'featured');
+            get_template_part('/partials/articles/article', 'featured');
 
             if ($query->current_post == 8) {
                 printf('</div>');
