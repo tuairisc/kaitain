@@ -12,7 +12,7 @@
 
 $social-button-size: $margin-33;
 
-ul.share {
+ul.sharing {
     list-style-type: none;
 
     li {
@@ -28,7 +28,7 @@ ul.share {
     @include generate-social-links(a, $social-button-size, $social-sprites);
 }
 
-article ul.share {
+article ul.sharing {
     float: right;
 
     @include media(max, 1050) {
