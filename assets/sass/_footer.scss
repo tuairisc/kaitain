@@ -8,35 +8,9 @@
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    All rights reserved
- * @version    2.0
+ * @version    2.1
  * @link       https://github.com/bhalash/tuairisc.ie
  */
-
-#footer {
-    background: left bottom/auto 65px no-repeat url($background-rainbow-footer);
-    height: auto;
-    /* The site is unbalanced. */
-    margin-bottom: 0;
-    padding: 0 4% $margin-65 4%;
-
-    @include media(smartphone) {
-        background-image: none;
-        padding-bottom: $margin-26;
-    }
-
-    @include media(print) {
-        display: none;
-    }
-
-    a {
-        color: inherit;
-    }
-
-    .interior {
-        border-top: 1px solid $colour-grey-article-border;
-        padding-top: 20px;
-    }
-}
 
 .carousel-slider {
     margin-bottom: 30px;
