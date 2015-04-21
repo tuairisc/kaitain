@@ -9,7 +9,7 @@
                 <div class="avatar" style="background-image: url('<?php echo get_avatar_url(); ?>');"></div>
             <?php endif; ?>
 
-            <div class="text <?php echo (is_custom_type()) ? 'jobtext' : ''; ?>">
+            <div class="text<?php printf('%s', (is_custom_type()) ? ' jobtext' : ''); ?>">
                 <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') {
                     if (option::get('post_author') == 'on' && !is_default_author() && !is_custom_type()) { 
                         printf(
