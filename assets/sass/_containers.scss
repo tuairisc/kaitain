@@ -8,37 +8,89 @@
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    All rights reserved
- * @version    2.0
+ * @version    2.1
  * @link       https://github.com/bhalash/tuairisc.ie
+ * 
+ * The HTML structure is approximately this:
+ * 
+ * #site
+ *      #header
+ *      #menu
+ *      #main
+ *          #content
+ *          #sidebar
+ *      #widgets
+ *      #footer
  */
 
 #site {
+    // Top level container for site.
     background: #fff;
     border: 1px solid $colour-grey-light-border;
     border-width: 0 1px;
     margin: 0 auto;
     max-width: 1180px;
     width: 94%;
+
+    @include media(smartphone) {
+        padding-top: $padding-39;
+    }
 }
 
 #main {
+    // Parent of #content and #sidebar.
+    background: center bottom/auto 6px no-repeat border-box url($background-rainbow-strip);
+    padding: $padding-sections;
+    padding-top: $padding-19;
     @include prefix_value(display, flex);
     @include prefix(flex-direction, row);
     @include prefix(flex-wrap, nowrap);
 
-    @include media(max, 768px) {
+    @include media(max, $break-768) {
         @include prefix(flex-direction, column);
+    }
+
+    @include media(smartphone) {
+        padding-top: 0;
+    }
+
+    @include media(print) {
+        background: none;
+        padding: 0;
     }
 }
 
 #content {
+    // The main content area of site.
     @include prefix(flex, 1);
 } 
 
 #sidebar {
     @include prefix(flex, 0 1 30%);
 
-    @include media(max, 768px) {
+    @include media(max, $break-768) {
         @include prefix(flex, 1);
+    }
+}
+
+#footer {
+    background: left bottom/auto 65px no-repeat url($background-rainbow-footer);
+
+    @include media(smartphone) {
+        background-image: none;
+        padding-bottom: $margin-26;
+    }
+
+    @include media(print) {
+        display: none;
+    }
+
+    a {
+        color: inherit;
+    }
+
+    .interior {
+        border-top: 1px solid $colour-grey-article-border;
+        padding-top: 20px;
     }
 }
