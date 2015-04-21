@@ -130,7 +130,6 @@ $colour-grey-light-border: #ececec;
 $colour-grey-article-border: #f1f1f1;
 $colour-grey-light-span: #999;
 $colour-white-text: #fff;
-
 $colour-grey-jobarchive-span: #d2d3d5;
 
 /**
@@ -146,6 +145,7 @@ $margin-19: $margin * 1.5;
 $margin-23: $margin * 1.75;
 $margin-26: $margin * 2;
 $margin-33: $margin * 2.5;
+$margin-39: $margin * 3;
 $margin-65: $margin * 5;
 
 // Padding.
@@ -156,19 +156,28 @@ $padding-19: $margin-19;
 $padding-23: $margin-23;
 $padding-26: $margin-26;
 $padding-33: $margin-33;
+$padding-39: $margin-33;
 $padding-65: $margin-65;
 
 // Default side padding of main-column segments.
 $padding-sections: 0 4%;
 
 /**
+ * Breakpoints
+ * -----------
+ */
+
+$break-1200: 1200px;
+$break-768: 768px;
+
+/**
  * Partials and Mixins 
  * -------------------
  */
 
-@import 'media';
-@import 'mixins';
-@import 'partials';
+@import 'lib/media';
+@import 'lib/mixins';
+@import 'lib/partials';
 
 /**
  * Imports
