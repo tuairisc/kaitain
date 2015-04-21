@@ -14,7 +14,6 @@
 <body <?php body_class(); ?>>
 <body <?php body_class(); ?>>
     <div id="site">
-
         <?php // AdRotate group 1
         if (function_exists('adrotate_group')) {
             printf('%s', adrotate_group(1));
@@ -34,7 +33,7 @@
             </div>
 
             <div class="share-search">
-                <?php if (option::get('searchform_enable') == 'on') : ?>
+                <?php if (option::get('searchform_enable') === 'on') : ?>
                     <div class="search_form">
                         <?php get_search_form(); ?>
                     </div>
@@ -59,3 +58,4 @@
                 echo '<p class="dropdown notice">Please set your Main navigation menu on the <strong><a href="'.get_admin_url().'nav-menus.php">Appearance > Menus</a></strong> page.</p>';
             } ?>
         </nav>
+        <div id="main" role="main">

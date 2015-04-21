@@ -1,6 +1,4 @@
 <?php get_header(); ?>
-<div id="main" role="main">
-
     <div id="content">
         <?php if (is_home() && $paged < 2 && option::get('featured_enable') == 'on') : ?>
             <?php // README FIXME TODO SUDO PLEASE ?>
@@ -63,5 +61,4 @@
         <?php endif; ?>
     </div> <?php // End #content ?>
     <?php get_sidebar(); ?>
-</div> <?php // End #main ?>
 <?php get_footer(); ?>

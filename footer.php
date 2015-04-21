@@ -1,8 +1,9 @@
-        <?php if (is_active_sidebar('footer-full')) : ?>
-            <div id="widgets">
-                <?php dynamic_sidebar('Footer (full-width)'); ?>
-            </div>
-        <?php endif; ?>
+        </div> <?php // End #main ?>
+    <?php if (is_active_sidebar('footer-full')) : ?>
+        <div id="widgets">
+            <?php dynamic_sidebar('Footer (full-width)'); ?>
+        </div>
+    <?php endif; ?>
 
     <?php // AdRotate group 3
     if (function_exists('adrotate_group')) {
