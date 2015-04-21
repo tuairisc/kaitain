@@ -810,7 +810,7 @@ function social_link_code($service = 'facebook', $is_list_item = false) {
             'title' => 'Email ' . $share_meta['title_attr']
         ),
         'reddit' => array(
-            'title' => '//reddit.com/submit?url=' . $share_meta['url'] . '&title=' . $share_meta['title'], 
+            'href' => '//reddit.com/submit?url=' . $share_meta['url'] . '&title=' . $share_meta['title'], 
             'rel' => 5, 
             'target' => '_blank',
             'title' => 'Upvote ' . $share_meta['title_attr'] . ' on Reddit'
