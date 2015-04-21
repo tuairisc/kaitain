@@ -1,6 +1,15 @@
-/*
+/**
  * Gallery Plugins
  * ---------------
+ * These are the rules for the top-level containers in the Tuairisc theme.
+ * 
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
  */
 
 .galleria-info-title {
@@ -12,7 +21,7 @@
     margin-bottom: 14px;
 }
 
-/*
+/**
  * Modal Links
  * -----------
  * Aidan uses modal popup links. This is styling per Ciaran for 
@@ -53,7 +62,7 @@
     }
 }
 
-/*
+/**
  * Ninja Forms and Event Drop
  * --------------------------
  * Ninja Forms is used for Tuairisc's event submission form. Ninja Forms would 
@@ -111,7 +120,7 @@ div.event {
     }
 }
 
-/* 
+/**
  * Mailing List Signup Box
  * -----------------------
  */

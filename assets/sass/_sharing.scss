@@ -1,15 +1,19 @@
-/*
+/**
  * Sitewide Social Links
  * ---------------------
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
  */
 
 $social-button-size: $margin-33;
 
 ul.share {
     list-style-type: none;
-    // Necessary reset because of Gazeti's default styles.
-    margin: 0;
-    padding: 0;
 
     li {
         display: inline-block;

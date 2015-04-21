@@ -3,10 +3,10 @@
  * ---------------------
  * O you who know what we suffer here, do not forget us in your prayers.
  * 
- * @category   Sass Source Stylesheet
+ * @category   Stylesheet
  * @package    Tuairisc.ie Theme
  * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  2014-2015 Mark Grealish and Tuairisc Bheo Treo
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    All rights reserved
  * @version    2.0
  * @link       https://github.com/bhalash/tuairisc.ie
@@ -25,7 +25,7 @@ $assets-social: $assets + '/social';
 $assets-education: $assets + '/education';
 $assets-branding: $assets + '/branding';
 
-/*
+/**
  * Education Section
  * -----------------
  */
@@ -46,14 +46,14 @@ $modal-background: #d1d2d4;
 $modal-background-hover: #5992cf;
 $modal-background-active: #5e83c4;
 
-/*
+/**
  * Social Buttons
  * --------------
  */
  
 $social-sprites: $assets-social + '/social-sprites.svg';
 
-/*
+/**
  * Site Section Colours
  * --------------------
  * Keyed to category number, with single post, job posts and fallback too:
@@ -75,7 +75,7 @@ $category_colours: (
     fallback: #c7c009
 );
 
-/*
+/**
  * Sitewide Background Images
  * --------------------------
  */
@@ -84,7 +84,7 @@ $background-rainbow-footer: $assets + '/strip-footer.svg';
 $background-rainbow-strip: $assets + '/strip.svg';
 $background-rainbow-strip-alt: $assets + '/strip-alt.svg';
 
-/*
+/**
  * Branding Images
  * ---------------
  */
@@ -94,7 +94,7 @@ $brand-tuairisc: $assets-branding + '/brand-tuairisc.svg';
 $brand-tuairisc-alt: $assets-branding + '/brand-tuairisc-alt.svg';
 $brand-greann: $assets-branding + '/brand-asnc.svg';
 
-/*
+/**
  * Fonts
  * -------
  * There are two font stacks used in the theme.
@@ -115,7 +115,7 @@ $font-size-20: 20px;
 $font-size-22: 22px;
 $font-size-25: 25px;
 
-/*
+/**
  * Colours
  * -------
  */
@@ -133,7 +133,7 @@ $colour-white-text: #fff;
 
 $colour-grey-jobarchive-span: #d2d3d5;
 
-/*
+/**
  * Margins, Sizes and Padding
  * --------------------------
  */
@@ -161,7 +161,7 @@ $padding-65: $margin-65;
 // Default side padding of main-column segments.
 $padding-sections: 0 4%;
 
-/*
+/**
  * Partials and Mixins 
  * -------------------
  */
@@ -170,7 +170,7 @@ $padding-sections: 0 4%;
 @import 'mixins';
 @import 'partials';
 
-/*
+/**
  * Imports
  * ------- 
  */

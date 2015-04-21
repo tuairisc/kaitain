@@ -1,6 +1,13 @@
-/*
+/**
  * Body and HTML
- * ------------
+ * -------------
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
  */
 
 body {
@@ -9,7 +16,8 @@ body {
     }
 }
 
-/* Tables
+/** 
+ * Tables
  * ------
  * Needed for tables to display correctly. 
  */
@@ -23,7 +31,7 @@ table.tg {
     }
 }
 
-/* 
+/**
  * Headline Stylings
  * -----------------
  */
@@ -37,7 +45,7 @@ h3 {
     font-size: $font-size-16;
 }
 
-/*
+/**
  * Content Wrappers
  * ----------------
  */
@@ -66,7 +74,7 @@ h3 {
     }
 }
 
-/*
+/**
  * Miscellaneous Rules
  * -------------------
  * These are one-line fixes to fix quirks in the Gazeti theme.
@@ -136,7 +144,7 @@ span.date {
     bottom: 10px;
 }
 
-/*
+/**
  * Unsure
  * ------
  * I am not 100% to what these apply because of poor commenting. 

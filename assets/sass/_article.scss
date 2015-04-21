@@ -1,10 +1,10 @@
 /**
  * Article Styling 
  * ---------------
- * @category   Articles Stylesheet
+ * @category   Stylesheet
  * @package    Tuairisc.ie Theme
  * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  2014-2015 Mark Grealish and Tuairisc Bheo Treo
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    All rights reserved
  * @version    2.0
  * @link       https://github.com/bhalash/tuairisc.ie
@@ -45,12 +45,10 @@ $archive-article-thumb-height-325: 325px;
  */
 
 article {
-    @extend %clearfix;
     box-sizing: border-box;
     border: 0;
     box-shadow: none;
     display: block;
-    text-align: left;
 
     blockquote, li, p {
         a {
@@ -202,6 +200,7 @@ p.wp-caption-text {
  */
 
 article.full {
+    @extend %clearfix;
     padding: 0 4% $padding 4%;
 
     @include media(print) {

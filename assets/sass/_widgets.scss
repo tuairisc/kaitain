@@ -1,6 +1,13 @@
-/*
- * Gazeti Widget Overrides
- * -----------------------
+/**
+ * Gazeti Widget Styles
+ * --------------------
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
  */
 
 .three-columns .widget:nth-child(3n+2) .title {
@@ -25,7 +32,7 @@
     margin-bottom: 0 !important;
 }
 
-/*
+/**
  * Tabbed Category Widgets
  * -----------------------
  */
@@ -46,11 +53,9 @@
     }
 }
 
-/* 
+/**
  * Popular Posts Widget
  * -------------------- 
- * TODO: Merge this with Gazeti's equivalent widget and replace the CSS for 
- * both. 
  */
 
 ul.feature-posts-list, ul.tuairisc-popular-list {
@@ -86,7 +91,7 @@ ul.feature-posts-list, ul.tuairisc-popular-list {
     }
 }
 
-/*
+/**
  * Main Content Widget
  * -------------------
  * The author's name will appear above the widget. 
