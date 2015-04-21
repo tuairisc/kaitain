@@ -4,7 +4,7 @@
 This repository is the WordPress theme for the [Tuairisc.ie](http://www.tuairisc.ie), derived from the [Gazeti](http://www.wpzoom.com/themes/gazeti/) theme by [WPZOOM](http://www.wpzoom.com/) and published in compliance with the GPL.
 
 ## Description
-This is the source code for the Ouro_botics introduction and landing page.
+This is the source code for the Ouro\_botics introduction and landing page.
 
 ## License
 All of the PHP code in the project is licensed under the GPL v3 or later, except as otherwise noted.
@@ -18,7 +18,12 @@ All of the PHP code in the project is licensed under the GPL v3 or later, except
 A copy of the license is included in the root of the plugin’s directory. The file is named LICENSE.
 
 ### Code 
-All of the project's PHP code is GPL.
+#### PHP
+All of the project's PHP code and derived HTML is licensed under the GPL v3.
+
+#### CSS
+* The CSS theme is copyright of [Tuairisc Bheo Teo](http://www.tuairisc.ie/). All rights are reserved.
+* The files [_media.scss](/assets/sass/_media.scss), [_partials.scs](/assets/sass/_partials.scss) and [_mixins.scss](/assets/sass/_mixins.scss) are included from a separate project under the GPL v3.
 
 ### Media
 * The Tuairisc.ie and Ar Son na Cúise brands are copyright and trademark of [Tuairisc.ie](http://tuairisc.ie/) and all rights are reserved.
