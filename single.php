@@ -17,7 +17,5 @@ $template = get_post_meta($post->ID, 'wpzoom_post_template', true); ?>
         }
     } ?>
 </div>
-
-<?php get_template_part('/partials/sharing');
-get_sidebar();
+<?php get_sidebar();
 get_footer(); ?>

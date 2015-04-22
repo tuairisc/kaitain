@@ -29,16 +29,19 @@
             </div>
         </div>
     </header> 
-    <div class="article-body">
-        <?php the_content(); ?>
+    <div class="article-content">
+        <div class="article-body">
+            <?php the_content(); ?>
 
-        <?php wp_link_pages(array(
-            'before' => '<div class="page-link"><span>' . __('Pages:', 'wpzoom') . '</span>', 
-            'after' => '</div>'
-        )); ?>
+            <?php wp_link_pages(array(
+                'before' => '<div class="page-link"><span>' . __('Pages:', 'wpzoom') . '</span>', 
+                'after' => '</div>'
+            )); ?>
 
-        <?php if (option::get('post_tags') == 'on') : ?>
-            <?php the_tags('<div class="tag-list"><strong>' . __('Tags:', 'wpzoom') . '</strong> ', ', ', '</div>'); ?>
-        <?php endif; ?>
+            <?php if (option::get('post_tags') == 'on') : ?>
+                <?php the_tags('<div class="tag-list"><strong>' . __('Tags:', 'wpzoom') . '</strong> ', ', ', '</div>'); ?>
+            <?php endif; ?>
+         </div>
+        <?php get_template_part('/partials/sharing'); ?>
      </div>
 </article>
