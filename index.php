@@ -1,7 +1,7 @@
 <?php get_header(); ?>
     <div id="content">
         <?php if (is_home() && $paged < 2) : ?>
-            <?php get_template_part('tuairisc-featured'); ?>
+            <?php get_template_part('featured'); ?>
 
             <div class="home-widgets">
                 <?php dynamic_sidebar('home-main') ?>
