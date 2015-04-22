@@ -21,9 +21,7 @@ wpzShortcodeMeta={
         // c=c.split( "|" );
         
         var g = '[unordered_list style="' + b.style + '"]<ul>';
-        
         g += "<li>" + "Place your list items here" + "</li>"
-                
         g += '</ul>[/unordered_list] ';
         
         return g
