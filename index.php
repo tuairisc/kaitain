@@ -17,7 +17,7 @@
 
         <?php if ( $paged > 1 || option::get('recent_posts') == 'on') : ?>
             <div class="archiveposts">
-                <h3 class="title"><?php echo option::get('recent_title'); ?></h3>
+                <h6 class="title"><?php echo option::get('recent_title'); ?></h6>
 
                 <?php global $query_string; // required
 

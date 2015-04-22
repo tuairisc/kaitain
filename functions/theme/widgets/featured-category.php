@@ -93,7 +93,7 @@
                                 <?php endif; ?>
 
                                 <div <?php if ($x == 1) echo ' class="featured"'; ?>>
-                                    <h3><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
+                                    <h6><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h6>
                                     <!--<span class="date"><?php echo get_the_date(); ?></span>-->  
                                 </div>
                                 <div class="clear"></div>

@@ -42,7 +42,7 @@
                 <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') {
                     if (option::get('post_author') == 'on' && !is_default_author()) { 
                         $location = get_post_meta($post->ID, 'foluntais_location', true); 
-                        printf('<h3 class="article-author">%s</h3>', get_post_meta($post->ID, 'foluntais_employer', true));
+                        printf('<h6 class="article-author">%s</h6>', get_post_meta($post->ID, 'foluntais_employer', true));
                     }
 
                     if (option::get('post_date') == 'on') {

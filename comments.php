@@ -6,7 +6,7 @@
 
 <?php if (have_comments()) : ?>
 
-    <h3><?php comments_number(__('Gan Tráchtanna','wpzoom'), __('Trácht Amháin','wpzoom'), __('% Nóta Tráchta','wpzoom'));?></h3>
+    <h6><?php comments_number(__('Gan Tráchtanna','wpzoom'), __('Trácht Amháin','wpzoom'), __('% Nóta Tráchta','wpzoom'));?></h6>
 
     <?php if (get_comment_pages_count() > 1 && get_option('page_comments')) : ?>
         <div class="navigation">

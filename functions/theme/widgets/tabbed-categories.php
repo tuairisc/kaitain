@@ -125,7 +125,7 @@ class Tabbed_Widget extends WP_Widget {
                                     <div class="column_2 col_3">
                                         <ul class="posts_med">
                                 <?php else : ?>
-                                    <li><h3><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3></li>
+                                    <li><h6><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h6></li>
                                 <?php endif; ?>    
                             <?php endwhile; //  ?>
                         <?php endif; ?>
