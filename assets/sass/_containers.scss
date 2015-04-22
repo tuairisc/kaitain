@@ -14,23 +14,22 @@
  * The HTML structure is approximately this:
  * 
  * #site
- *      #header
- *      #menu
- *      #main
- *          #content
- *          #sidebar
- *      #widgets
- *      #footer
+ *     #header
+ *         #menu
+ *     #main
+ *         #content
+ *         #sidebar
+ *         #widgets
+ *     #footer
  */
 
 #site {
     // Top level container for site.
-    background: #fff;
-    border: 1px solid $colour-grey-light-border;
-    border-width: 0 1px;
+    box-sizing: border-box;
+    // border: 1px solid $colour-grey-light-border;
+    // border-width: 0 1px;
     margin: 0 auto;
-    max-width: 1180px;
-    width: 94%;
+    padding: $padding-sections;
 
     @include media(smartphone) {
         padding-top: $padding-39;
@@ -39,33 +38,46 @@
 
 #main {
     // Parent of #content and #sidebar.
-    background: center bottom/auto 6px no-repeat border-box url($background-rainbow-strip);
-    padding: $padding-sections;
-    padding-top: $padding-19;
-    @include prefix_value(display, flex);
-    @include prefix(flex-direction, row);
-    @include prefix(flex-wrap, nowrap);
-
-    @include media(max, $break-768) {
-        @include prefix(flex-direction, column);
-    }
-
-    @include media(smartphone) {
-        padding-top: 0;
-    }
+    background-color: #fff;
+    background-image:
+        url($background-rainbow-strip),
+        url($background-rainbow-strip);
+    background-position: 
+        center top,
+        center bottom;
+    background-repeat: no-repeat;
+    background-size: auto 6px;
+    box-shadow: 0px 0px 4px -2px rgba(0,0,0,1);
+    box-sizing: border-box;
 
     @include media(print) {
         background: none;
         padding: 0;
     }
+
+    #main-interior {
+        @include prefix_value(display, flex);
+        @include prefix(flex-direction, row);
+        @include prefix(flex-wrap, nowrap);
+
+        @include media(max, $break-768) {
+            @include prefix(flex-direction, column);
+        }
+    }
 }
 
 #content {
     // The main content area of site.
+    box-sizing: border-box;
+    padding: $padding-19;
+    padding-right: $padding-10;
     @include prefix(flex, 1);
 } 
 
 #sidebar {
+    box-sizing: border-box;
+    padding: $padding-19;
+    padding-left: $padding-10;
     @include prefix(flex, 0 1 30%);
 
     @include media(max, $break-768) {
@@ -74,7 +86,9 @@
 }
 
 #footer {
-    background: left bottom/auto 65px no-repeat url($background-rainbow-footer);
+    // background: #fff left bottom/auto 65px no-repeat url($background-rainbow-footer);
+    background-color: #fff;
+    box-shadow: 0px 0px 7px -2px rgba(0,0,0,2);
 
     @include media(smartphone) {
         background-image: none;
@@ -87,10 +101,5 @@
 
     a {
         color: inherit;
-    }
-
-    .interior {
-        border-top: 1px solid $colour-grey-article-border;
-        padding-top: 20px;
     }
 }
