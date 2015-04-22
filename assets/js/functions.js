@@ -1,7 +1,7 @@
 'use strict';
 
 jQuery(function($) {
-    /*
+    /**
      * Site Navigation Menu
      * --------------------
      */
@@ -46,7 +46,15 @@ jQuery(function($) {
         'width=470,height=470',
     ]; 
 
-    /*
+    /**
+     * Header Size
+     * -----------
+     * Temporary / TODO / FIXME
+     */
+
+    $('#site').css('padding-top', $('#header').outerHeight());
+
+    /**
      * Social Sharing Popouts
      * ----------------------
      */
