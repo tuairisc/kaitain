@@ -90,16 +90,16 @@ function job_messages($messages) {
     
     $messages[$foluntais['type']] = array(
         '', 
-        sprintf(__('Job updated. <a href="%s">View job</a>', 'wpzoom'), esc_url(get_permalink($post_ID))),
-        __('Custom field updated.', 'wpzoom'),
-        __('Custom field deleted.', 'wpzoom'),
+        sprintf(__('Job updated. <a href="%s">View job</a>', 'tuairisc'), esc_url(get_permalink($post_ID))),
+        __('Custom field updated.', 'tuairisc'),
+        __('Custom field deleted.', 'tuairisc'),
         __('Job updated.'),
-        isset($_GET['revision']) ? sprintf( __('Job restored to revision from %s', 'wpzoom'), wp_post_revision_title( (int) $_GET['revision'], false)) : false,
-        sprintf(__('Job published. <a href="%s">View job</a>', 'wpzoom'), esc_url(get_permalink($post_ID))),
-        __('Product saved.', 'wpzoom'),
-        sprintf(__('Job submitted. <a target="_blank" href="%s">Preview job</a>', 'wpzoom'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
-        sprintf(__('Job scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview job</a>', 'wpzoom'), date_i18n(__('M j, Y @ G:i',' wpzoom'), strtotime($post->post_date)), esc_url(get_permalink($post_ID))),
-        sprintf(__('Job draft updated. <a target="_blank" href="%s">Preview job</a>','wpzoom'), esc_url(add_query_arg('preview','true', get_permalink($post_ID) ) ) ),
+        isset($_GET['revision']) ? sprintf( __('Job restored to revision from %s', 'tuairisc'), wp_post_revision_title( (int) $_GET['revision'], false)) : false,
+        sprintf(__('Job published. <a href="%s">View job</a>', 'tuairisc'), esc_url(get_permalink($post_ID))),
+        __('Product saved.', 'tuairisc'),
+        sprintf(__('Job submitted. <a target="_blank" href="%s">Preview job</a>', 'tuairisc'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+        sprintf(__('Job scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview job</a>', 'tuairisc'), date_i18n(__('M j, Y @ G:i',' tuairisc'), strtotime($post->post_date)), esc_url(get_permalink($post_ID))),
+        sprintf(__('Job draft updated. <a target="_blank" href="%s">Preview job</a>','tuairisc'), esc_url(add_query_arg('preview','true', get_permalink($post_ID) ) ) ),
     );
 
     return $messages;

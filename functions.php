@@ -5,78 +5,39 @@
  * Except for the files included in the head, this represents most of the PHP 
  * work on the Tuairisc site. 
  * 
- * @category   WordPress File
+ * @category   PHP Script
  * @package    Tuairisc.ie Theme
  * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  2014-2015 Mark Grealish
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
  * @version    2.0
  * @link       https://github.com/bhalash/tuairisc.ie
  */
 
-/**
- * Paths to WPZOOM Theme Functions
- */
-define('FUNC_INC', get_template_directory() . '/functions');
-define('WPZOOM_INC', FUNC_INC . '/wpzoom');
-define('THEME_INC', FUNC_INC . '/theme');
+define('TUAIRISC_WIDGETS', get_template_directory() . '/widgets/');
+define('TUAIRISC_FUNCTIONS', get_template_directory() . '/functions/');
+define('TUAIRISC_INCLUDES', get_template_directory() . '/includes/');
 
-/** WPZOOM Framework Core */
-require_once WPZOOM_INC . '/init.php';
+require_once(TUAIRISC_FUNCTIONS . 'irish-dates.php');
+require_once(TUAIRISC_FUNCTIONS . 'sharing-links.php');
+require_once(TUAIRISC_FUNCTIONS . 'section-banners.php');
+require_once(TUAIRISC_FUNCTIONS . 'sidebar.php');
+require_once(TUAIRISC_FUNCTIONS . 'social-meta.php');
 
-/** WPZOOM Theme */
-require_once THEME_INC . '/functions.php';
-require_once THEME_INC . '/sidebar.php';
-require_once THEME_INC . '/post-options.php';
+// Used internally.
+require_once(TUAIRISC_FUNCTIONS . 'tuairisc/tuairisc-mostviewed.php');
 
-/* Theme widgets */
-require_once THEME_INC . '/widgets/social.php';
-require_once THEME_INC . '/widgets/recentposts.php';
-require_once THEME_INC . '/widgets/recentcomments.php';
-require_once THEME_INC . '/widgets/twitter.php';
-require_once THEME_INC . '/widgets/facebook-like-box.php';
-require_once THEME_INC . '/widgets/featured-category.php';
-require_once THEME_INC . '/widgets/popularnews.php';
-require_once THEME_INC . '/widgets/tabbed-categories.php';
-require_once THEME_INC . '/widgets/carousel.php';
+require_once(TUAIRISC_WIDGETS . 'recentposts.php');
+require_once(TUAIRISC_WIDGETS . 'featured-category.php');
+require_once(TUAIRISC_WIDGETS . 'popularnews.php');
+require_once(TUAIRISC_WIDGETS . 'tabbed-categories.php');
+require_once(TUAIRISC_WIDGETS . 'tuairisc-authors.php');
 
-// FIXME
-require_once(FUNC_INC . '/user/tuairisc-mostviewed.php');
-require_once(FUNC_INC . '/user/tuairisc-authors.php');
-
-$banners = array(
-    /* Classes and the current category ID for the Greann category, which has
-     * a different banner style. */
-    'classes' => array(
-        /* See $banner_colours: If the correct colour-from-ID can't be 
-         * determined by category ID, then consult this array for the ID to 
-         * use. */
-        'normal', 'greann'
-    ),
-    'greann_cat' => 158,
-);
-
-$irish_calendar_terms = array(
-    'days' => array(
-        'Dé Luain', 'Dé Máirt', 'Dé Céadaoin', 'Déardaoin', 'Dé hAoine', 
-        'Dé Sathairn', 'Dé Domhnaigh'
-    ),
-    'months' => array(
-        'Eanáir', 'Feabhra', 'Márta', 'Aibreán', 'Bealtaine', 'Meitheamh',
-        'Iúil', 'Lúnasa', 'Meán Fómhair', 'Deireadh Fómhair', 'Samhain', 
-        'Nollaig'
-    )
-);
+require_once(TUAIRISC_INCLUDES . '/get-the-image/get-the-image.php');
 
 /* This is the author account used for small or generic posts on the Tuairisc 
  * site. By default Sean does not want any attribution to appear for them. */
 $default_author_id = 37;
-
-$education_categories = array(
-    /* There are five sub-categories within the education category, 187 being
-     * the parent. */
-    187, 202, 203, 204, 205, 206
-);
 
 $custom_post_types = array(
     // All custom post types declared and used in this theme.
@@ -93,7 +54,7 @@ $index_excluded_categories = array(
     216, 182
 );
 
-$tuairisc_scripts = array(
+$tuairisc_javascript = array(
     // All JavaScript loaded by theme.
     'modernizr' => 'modernizr-touch.min.js',
     'browser-detect' => 'browser-detect.min.js',
@@ -103,28 +64,9 @@ $tuairisc_scripts = array(
     'author-report' => 'author-report.min.js'
 );
 
-$tuairisc_styles = array(
+$tuairisc_css = array(
     'tuairisc' => get_template_directory_uri() . '/assets/sass/tuairisc.css'
 );
-
-$fallback = array(
-    /* Social media (Open Graph, Twitter Cards) fallback information in cases 
-     * where it may be missing. */
-    'publisher' => 'https://www.facebook.com/tuairisc.ie',
-    'image' => get_template_directory_uri() . '/images/tuairisc_fallback.jpg',
-    'twitter' => '@tuairiscnuacht',
-    'description' => 'Cuireann Tuairisc.ie seirbhís nuachta Gaeilge '
-        . 'ar fáil do phobal uile na Gaeilge, in Éirinn agus thar lear. Té sé '
-        . 'mar aidhm againn oibriú i gcónaí ar leas an phobail trí nuacht, '
-        . 'eolas, anailís agus siamsaíocht ar ardchaighdeán a bhailiú, a '
-        . 'fhoilsiú agus a chur sa chúrsaíocht.',
-);
-
-// FIXME
-// $widget_path = get_template_directory() . '/functions/user/';
-// require_once($widget_path . 'tuairisc-authors.php');
-// require_once($widget_path . 'tuairisc-mostviewed.php');
-// require_once($widget_path . 'tuairisc-jobs.php');
 
 function load_tuairisc_scripts() {
     /** 
@@ -136,10 +78,10 @@ function load_tuairisc_scripts() {
      * @return {none}
      */
 
-    global $tuairisc_scripts;
+    global $tuairisc_javascript;
     $path = get_stylesheet_directory_uri() . '/assets/js/';
 
-    foreach ($tuairisc_scripts as $key => $value) {
+    foreach ($tuairisc_javascript as $key => $value) {
         if (WP_DEBUG) {
             $value = str_replace('.min', '', $value);
         }
@@ -158,112 +100,11 @@ function load_tuairisc_styles() {
      * @return {none}
      */
 
-    global $tuairisc_styles;
+    global $tuairisc_css;
 
-    foreach ($tuairisc_styles as $key => $value) {
+    foreach ($tuairisc_css as $key => $value) {
         wp_enqueue_style($key, $value);
     }
-}
-
-function get_banner_breadcrumb() {
-    /** 
-     * Get Post or Archive Banner
-     * --------------------------
-     * This returns the appropriate set of breadcrumb links for the given 
-     * category/single post. Breadcrumb links are created in three different 
-     * ways:
-     * 
-     * 1. Single, categorized posts and archive pages use get_category_parents
-     * 2. The Greann category archive pages uses the category's description. 
-     * 3. Foluntais posts use get_job_category_link. 
-     * 
-     * Breadcrumbs are a pain in the ass. 
-     *
-     * @param {none}
-     * @return {none}
-     */
-
-    global $banners, $custom_post_types;
-    $breadcrumb = '';
- 
-    if (has_category($banners['greann_cat'])) {
-        // 1. Greann category post.
-        $breadcrumb = '<span>' .  category_description($greann) . '</span>';
-    } else if (!is_custom_type()) {
-        // 2. Non-Foluntais posts and archives.
-        $breadcrumb = generate_breadcrumbs();
-    } else {
-        // 3. Foluntais custom type archive, category archive and single posts.
-        $breadcrumb = generate_job_breadcrumbs();
-    }
-
-    printf($breadcrumb);
-}
-
-function generate_breadcrumbs() {
-    /** 
-     * Generate Breadcrumbs
-     * -------------------- 
-     * Generate the breadcrumb trail for non-foluntais single posts and post 
-     * archives.
-     * 
-     * @param {none}
-     * @return {string} Breadcrumb trail for category-> parent category.
-     */
-
-    if (is_category()) {
-        // Non-foluntais archive.
-        $category = get_query_var('cat');
-    } else {
-        // Non-foluntais single.
-        $category = get_the_category();
-        $category = $category[0]->cat_ID;
-    }
-
-    return get_category_parents($category, true, '&nbsp;');
-}
-
-function banner_classes() {
-    /**
-     * Return Unique Banner Class
-     * --------------------------
-     * Despite different colours, there are only two CSS styles:
-     * 
-     * 1. Narrow width banner wih left-aligned breadcrumb.
-     * 2. Wide Greann banner with the Greann logo.
-     * 
-     * This returns the correct CSS class.
-     * 
-     * @param {none}
-     * @return {string} $banner_classes CSS classes for banner.
-     */
-
-    global $banners;
-
-    $banner_classes = array(
-        'breadcrumb-banner ',
-        'banner-'
-    );
-
-    if (has_category($banners['greann_cat'])) {
-        $banner_classes[] = $banners['classes'][1];
-    } else {
-        $banner_classes[] = $banners['classes'][0];
-    }
-
-    if (is_category()) {
-        // Coloured banners only for categories.
-        $category = get_category(get_query_var('cat'));
-        $banner_classes[] = ' category-';
-
-        if ($category->category_parent > 0) {
-            $banner_classes[] = $category->category_parent;
-        } else {
-            $banner_classes[] = $category->cat_ID;
-        }
-    }
-
-    return implode('', $banner_classes);
 }
 
 function get_thumbnail_url($post_id = null, $thumb_size = 'large', $return_arr = false) {
@@ -388,160 +229,6 @@ function is_default_author($author_id = null) {
 
     $is_default_account = ($author_id === $default_author_id);
     return $is_default_account;
-}
-
-function translate_day_to_irish($day) {
-    /**
-     * Translate Day to Irish
-     * ----------------------
-     * The language of the date is set by the localization of the server. Catch
-     * the date based on Tuairisc's preferred format and translate it to Irish.
-     * 
-     * @param {string} $day The day in English.
-     * @return {string} $day The day in Irish.
-     */
-
-    global $irish_calendar_terms;
-
-    switch ($day) {
-        case 'Monday': $day = $irish_calendar_terms['days'][0]; break;
-        case 'Tuesday': $day = $irish_calendar_terms['days'][1]; break;
-        case 'Wednesday': $day = $irish_calendar_terms['days'][2]; break;
-        case 'Thursday': $day = $irish_calendar_terms['days'][3]; break;
-        case 'Friday': $day = $irish_calendar_terms['days'][4]; break;
-        case 'Saturday': $day = $irish_calendar_terms['days'][5]; break;
-        case 'Sunday': $day = $irish_calendar_terms['days'][6]; break;
-    }
-
-    return $day;
-}
-
-function translate_month_to_irish($month) {
-    /**
-     * Translate Day to Irish
-     * ----------------------
-     * The language of the date is set by the localization of the server. Catch
-     * the date based on Tuairisc's preferred format and translate it to Irish.
-     * 
-     * @param {string} $month The month in English.
-     * @return {string} $month The month in Irish.
-     */
-
-    global $irish_calendar_terms;
-
-    switch ($month) {
-        case 'January': $month = $irish_calendar_terms['months'][0]; break;
-        case 'February': $month = $irish_calendar_terms['months'][1]; break;
-        case 'March': $month = $irish_calendar_terms['months'][2]; break;
-        case 'April': $month = $irish_calendar_terms['months'][3]; break;
-        case 'May': $month = $irish_calendar_terms['months'][4]; break;
-        case 'June': $month = $irish_calendar_terms['months'][5]; break;
-        case 'July': $month = $irish_calendar_terms['months'][6]; break;
-        case 'August': $month = $irish_calendar_terms['months'][7]; break;
-        case 'September': $month = $irish_calendar_terms['months'][8]; break;
-        case 'October': $month = $irish_calendar_terms['months'][9]; break;
-        case 'November': $month = $irish_calendar_terms['months'][10]; break;
-        case 'December': $month = $irish_calendar_terms['months'][11]; break;
-    }
-
-    return $month;
-}
-
-function translate_date_to_irish($the_date) {
-    /**
-     * Translate Date to Irish 
-     * -----------------------
-     * The language of the date is set by the localization of the server. Catch
-     * the date based on Tuairisc's preferred format and translate it to Irish.
-     *
-     * @param {string} $the_date
-     * @return {string} $the_date
-     */
-
-    $english_month = '';
-    $english_day = '';
-    $irish_day = '';
-    $irish_month = '';
-
-    $day_regex = '/(,.*)/';
-    $month_regex = '/(^.*, | [0-9].*$)/'; 
-
-
-    $english_month = preg_replace($month_regex, '', $the_date);
-    $english_day = preg_replace($day_regex, '', $the_date);
-
-    $irish_day = translate_day_to_irish($english_day);
-    $irish_month = translate_month_to_irish($english_month);
-
-    $the_date = str_replace($english_day, $irish_day, $the_date);
-    $the_date = str_replace($english_month, $irish_month, $the_date);
-    return $the_date;
-}
-
-function education_landing_shortcode($atts) {
-    /**
-     * Education Landing Shortcode
-     * ---------------------------
-     * The education landing page links through to the five different segments. 
-     * These are boxy clickable boxes complete with title and description.
-     *
-     * @param {array} $attributes Shortcode values.
-     * @return {string} $education
-     */
-
-    global $education_categories;
-    $shortcode_atts = shortcode_atts(array('id' => 0), $atts);
-    $category_id = '';
-    $education_html = '';
-
-    // Change $id to 0 if it falls outside 0-5 range. 
-    if ($shortcode_atts['id'] < 0 || $shortcode_atts['id'] > 5) {
-        $category_id = $education_categories[0];
-    } else {
-        $category_id = $education_categories[$shortcode_atts['id']];
-    }
-
-    $education_html = '<div class="education-box education-'
-        . $category_id . '"><a href="' . get_category_link($category_id) 
-        . '"><p><span>' . get_cat_name($category_id) . '</span><br />' 
-        . category_description($category_id) . '</a></p></div>';
-
-    return $education_html;
-}
-
-function education_banner_shortcode($attributes, $content = null) {
-    /**
-     * Education Banner Shortcode
-     * --------------------------
-     * Generate either a tall or short dividing subheading banners for within 
-     * education section posts.
-     * 
-     * @param {array} $attributes Shortcode attributes.
-     * @param {string} $content Banner message.
-     * @return {string} $banner Dividing banner.
-     */
-
-    $banner = array();
-    // h2
-    $headline_type = 2;
-    $headline_class = 'edu-heading';
-    $shortcode_atts = shortcode_atts(array('type' => 'main'), $attributes);
-
-    if (is_null($content)) {
-        $content = 'Did you forget to include text?';
-    }
-
-    if ('main' !== $shortcode_atts['type']) {
-        // If the banner is not 'main', change h2 to h2 and heading to subheading.
-        $headline_type = 3;
-        $headline_class = str_replace('-h', '-subh', $headline_class);
-    }
-
-    $banner[] = '<h' . $headline_type . ' class="' . $headline_class . '">';
-    $banner[] = $content;
-    $banner[] = '</h' . $headline_type . '>';
-
-    return implode('', $banner);
 }
 
 function author_is_columnist($author_id = null) {
@@ -754,256 +441,6 @@ function is_custom_type_singular() {
     return (in_array(get_post_type(), $custom_post_types) && is_singular($custom_post_types));
 }
 
-/**
- * Generate Social Sharing Links
- * -----------------------------
- */
-
-function social_link_code($service = 'facebook', $is_list_item = false) {
-    /**
-     * Generate Social Network Link Code
-     * ---------------------------------
-     * Return the sharing link for the provided network, with an optional 
-     * <li></li> wrapper. Currently supported:
-     * 
-     * facebook, twitter, google, reddit, email, discussion, printing
-     * 
-     * @param {string} $service The social service/sharing action.
-     * @param {bool} $is_list_item Optionally wrap link in <li>
-     * @return {string} $service_link The generated link to the network.
-     */
-
-    global $post; 
-
-    $share_meta = array(
-        'blog'  => urlencode(get_bloginfo('name')),
-        'url'   => urlencode(get_permalink($post->ID)),
-        'title' => urlencode($post->post_title),
-        'tuser' => 'tuairiscnuacht',
-        'title_attr' => the_title_attribute('echo=0')
-    );
-
-    $networks = array(
-        'print' => array(
-            'href' => 'javascript:window.print()', 
-            'rel' => -1, 
-            'target' => '', 
-            'title' => 'Print ' . $share_meta['title_attr']
-        ),
-        'facebook' => array(
-            'href' => '//facebook.com/share.php?u=' . $share_meta['url'],
-            'rel' => 1,
-            'target' => '_blank', 
-            'title' => 'Share ' . $share_meta['title_attr'] . ' on Facebook'
-        ),
-        'twitter' => array(
-            'href' => '//twitter.com/share?via='. $share_meta['tuser'] . '&text=' . $share_meta['title'] . '&url=' . $share_meta['url'] . '&related=@' . $share_meta['tuser'], 
-            'rel' => 3, 
-            'target' => '_blank', 
-            'title' => 'Tweet about ' . $share_meta['title_attr']
-        ),
-        'google' => array(
-            'href' => '//plus.google.com/share?url=' . $share_meta['url'],
-            'rel' => 2, 
-            'target' => '_blank', 
-            'title' => '+1 ' . $share_meta['title_attr']
-        ),
-        'email' => array(
-            'href' => 'mailto:?subject=' . $share_meta['title'] . '&amp;body=' . $share_meta['url'], 
-            'rel' => 0, 
-            'target' => '_blank', 
-            'title' => 'Email ' . $share_meta['title_attr']
-        ),
-        'reddit' => array(
-            'href' => '//reddit.com/submit?url=' . $share_meta['url'] . '&title=' . $share_meta['title'], 
-            'rel' => 5, 
-            'target' => '_blank',
-            'title' => 'Upvote ' . $share_meta['title_attr'] . ' on Reddit'
-        ),
-        'discuss' => array(
-            'href' => '#comments',
-            'rel' => '-1',
-            'target' => '',
-            'title' => 'Read comments on ' . $share_meta['title_attr'] 
-        )
-    ); 
-
-    $service_link = array();
-
-    if ($is_list_item) {
-        $service_link[] = '<li>';
-    }
-
-    $service_link[] = '<a ';
-    $service_link[] = 'class="' . $service . '" ';
-    $service_link[] = 'href="' . $networks[$service]['href'] . '" ';
-    $service_link[] = 'data-rel="' . $networks[$service]['rel'] . '" ';
-    $service_link[] = 'title="' . $networks[$service]['title'] . '"';
-    $service_link[] = '></a>';
-
-    if ($is_list_item) {
-        $service_link[] = '</li>';
-    }
-
-    return implode('', $service_link);
-}
-
-function get_sharing_links($services = null, $is_list_item = false) {
-    /**
-     * Get Sharing Links Array
-     * -----------------------
-     * Return the sharing link for the provided network, with an optional 
-     * <li></li> wrapper. Currently supported:
-     * 
-     * facebook, twitter, google, reddit, email, discussion, printing
-     * 
-     * @param {string} $service The social service/sharing action.
-     * @param {bool} $is_list_item Optionally wrap link in <li>
-     * @return {array} $service_links Array of social links.
-     */
-
-    $services_links = array();
-
-    if (is_null($services)) {
-        // Default networks for which to generate links.
-        $services = array('twitter', 'facebook', 'email', 'print');
-    } else if (!is_array($services)) {
-        // Convert string input to array.
-        $services = str_replace(' ', '', $services);
-        $services = explode(',', $services);
-    }
-
-    foreach ($services as $service) {
-        $services_links[] = social_link_code($service, $is_list_item);
-    }
-
-    return $services_links;
-}
-
-function sharing_links($services = null, $is_list_item = false) {
-    /**
-     * Print Sharing Links Array
-     * -------------------------
-     * Fetch, collapse and print array of social links.
-     * 
-     * @param {array} $services
-     * @param {bool} $is_list_item
-     * @return {none}
-     */
-    
-    $sharing_links = get_sharing_links($services, $is_list_item);
-    printf('%s', implode('', $sharing_links));
-}
-
-/*
- * Header Social Meta Information
- * ------------------------------
- * We tried a few different existing plugins for this, but:
- * 
- * 1. They were overly-complex for lay users to configure.
- * 2. They worked in an inconsistent and buggy manner, at best.
- * 3. The chosen one occasionally inserted annoying upsell banners. 
- */
-
-function social_meta() {
-    /**
-     * Output Social Meta Information 
-     * ------------------------------
-     * @param {none}
-     * @return {none}
-     */
-
-    open_graph_meta();
-    twitter_card_meta();
-}
-
-function twitter_card_meta() {
-    /**
-     * Output Twitter Card
-     * -------------------
-     * This /should/ be all of the relevant information for Twitter. 
-     * 
-     * @param {none}
-     * @return {string} Twitter Card header meta information.
-     */
-
-    global $fallback, $post;
-    $the_post = get_post($post->ID);
-    setup_postdata($the_post);
-
-    $site_meta = array(
-        'twitter:card' => 'summary',
-        'twitter:site' => $fallback['twitter'],
-        'twitter:title' => get_the_title(),
-        'twitter:description' => (is_single()) ? get_the_excerpt() : $fallback['description'],
-        'twitter:image:src' => (is_single()) ? get_thumbnail_url() : $fallback['image'],
-        'twitter:url' => get_site_url() . $_SERVER['REQUEST_URI'],
-    );
-
-    foreach ($site_meta as $key => $value) {
-        printf('<meta name="%s" content="%s">', $key, $value);
-    }
-}
-
-function open_graph_meta() {
-    /**
-     * Output Open Graph
-     * -----------------
-     * This /should/ be all of the relevant information for an Open Graph 
-     * scraper.
-     * 
-     * @param {none}
-     * @return {string} Open Graph header meta information.
-     */
-
-    global $fallback, $post;
-    $the_post = get_post($post->ID);
-    setup_postdata($the_post);
-    $thumb = get_thumbnail_url($post->ID, 'full', true);
-
-    $site_meta = array(
-        'og:title' => get_the_title(),
-        'og:site_name' => get_bloginfo('name'),
-        'og:url' => get_site_url() . $_SERVER['REQUEST_URI'],
-        'og:description' => (is_single()) ? get_the_excerpt() : $fallback['description'],
-        'og:image' => (is_single()) ? $thumb[0] : $fallback['image'],
-        'og:image:width' => $thumb[1],
-        'og:image:height' => $thumb[2],
-        'og:type' => (is_single()) ? 'article' : 'website',
-        'og:locale' => get_locale(),
-    );
-
-    if (is_single()) {
-        $category = get_the_category($post->ID);
-        $tags = get_the_tags();
-        $taglist = '';
-        $i = 0;
-
-        if (!empty($tags)) {
-            foreach ($tags as $the_tag) {
-                if ($i > 0) {
-                    $taglist .= ', ';
-                }
-
-                $taglist .= $the_tag->name;
-                $i++;
-            }
-        }
-
-        $article_meta = array(
-            'article:section' => $category[0]->cat_name,
-            'article:publisher' => $fallback['publisher'],
-            'article:tag' => $taglist,
-        );
-
-        $site_meta = array_merge($site_meta, $article_meta);
-    }
-
-    foreach ($site_meta as $key => $value) {
-        printf('<meta property="%s" content="%s">', $key, $value);
-    }
-}
-
 // Change large size to match post content width.
 update_option('large_size_w', 770);
 // Load JavaScript scripts. 
@@ -1014,14 +451,7 @@ add_filter('wp_title', 'tweak_title', 10, 2);
 // Remove read more links from excerpts.
 add_filter('the_excerpt', 'remove_read_more');
 add_filter('the_excerpt', 'replace_excerpt_breaks');
-// Add shortcode for landing.
-add_shortcode('landing', 'education_landing_shortcode');
-// Add shortcode for education banners.
-add_shortcode('banner', 'education_banner_shortcode');
+
 // Page excerpts for SEO and the education landing page. 
 add_action('init', add_post_type_support('page', 'excerpt'));
-// Filter date to return as Gaeilge.
-add_filter('get_the_date', 'translate_date_to_irish');
-add_filter('get_comment_date', 'translate_date_to_irish');
-
 ?>
