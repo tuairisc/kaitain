@@ -1,57 +1,41 @@
-<?php $category = get_the_category();
- 
-     $exclude = get_option( 'sticky_posts' );
-    $exclude[] = $post->ID;
+<?php 
+$category = get_the_category();
+$exclude = get_option('sticky_posts');
+$exclude[] = $post->ID;
 
-    $loop = new WP_Query( 
-        array( 
-            'post__not_in' => $exclude,
-            'posts_per_page' => 3,
-            'cat' => $category[0]->term_id
-            ) );
+$related_query = new WP_Query(array( 
+    'post__not_in' => $exclude,
+    'posts_per_page' => 3,
+    'cat' => $category[0]->term_id
+));
 
-    $m = 0;
-    if ( $loop->have_posts() ) :
-?>
-    <div class="related_posts">
-        <h3 class="title"><?php _e('Léigh tuilleadh sa rannóg seo','wpzoom');?></h3>
+$m = 0;
 
-        <ul>
+if ($related_query->have_posts()) : ?>
+    <h6 class="title">
+        <?php _e('Léigh tuilleadh sa rannóg seo','wpzoom');?>
+    </h6>
+    <div class="related-posts">
 
-            <?php  
-            
-            $exclude = get_option( 'sticky_posts' );
-            $exclude[] = $post->ID;
-
-            $loop = new WP_Query( 
-                array( 
-                    'post__not_in' => $exclude,
-                    'posts_per_page' => 3,
-                    'cat' => $category[0]->term_id
-                    ) );
-
-            $m = 0;
-            
-            while ( $loop->have_posts() ) : $loop->the_post(); $m++;
+        <?php while ($related_query->have_posts()) :
+            $related_query->the_post(); 
+            $m++;
             ?>
 
-            <li id="post-<?php the_ID(); ?>" class="post-grid<?php if (($m % 3) == 0) {echo ' post-last';} ?>">
+            <article id="post-<?php the_ID(); ?>" class="post-grid<?php printf('%s', ($m % 3 === 0) ? ' post-last' : ''); ?>">
 
-                <?php
-                get_the_image( array( 'size' => 'related', 'width' => 230, 'height' => 150 ) );
-                ?>
-                 
+                <?php get_the_image(array(
+                    'size' => 'related', 
+                    'width' => 260,
+                    'height' => 150
+                )); ?>
+
                 <a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title_attribute(); ?></a>
-                <span class="date"><?php echo get_the_date(); ?></span>
-                
-                 
-            </li><!-- end #post-<?php the_ID(); ?> -->
-            
-            <?php endwhile; ?>
-            
-        </ul><!-- end .posts -->
-            
-        <div class="cleaner">&nbsp;</div>
+                <span class="date"><?php printf(get_the_date()); ?></span>
+
+            </article>
+        <?php endwhile; ?>
     </div>
-<?php endif; ?>
-<?php wp_reset_query(); ?>
+<?php endif;
+
+wp_reset_query(); ?>
