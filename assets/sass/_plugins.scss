@@ -1,7 +1,7 @@
 /**
- * Gallery Plugins
- * ---------------
- * These are the rules for the top-level containers in the Tuairisc theme.
+ * Plugins
+ * -------
+ * These are rules pertaining to plugins used on the Tuairisc site.
  * 
  * @category   Stylesheet
  * @package    Tuairisc.ie Theme
@@ -62,12 +62,13 @@
 /**
  * Ninja Forms and Event Drop
  * --------------------------
+ * !important 4 lyfe. See:
+ *
+ * https://ninjaforms.com/add-custom-css-to-your-ninja-forms/
+ *
  * Ninja Forms is used for Tuairisc's event submission form. Ninja Forms would 
  * like you to either pay them $40 or use a PHP function to directly echo CSS 
  * rules into the HTML.
- * 
- * Either way is shitty, so fuck that. !important 4 lyfe. See:
- * https://ninjaforms.com/add-custom-css-to-your-ninja-forms/
  */
 
 .ninja-forms-all-fields-wrap select.ninja-forms-field {
