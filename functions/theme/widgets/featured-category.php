@@ -7,7 +7,7 @@
     class Category_Widget extends WP_Widget {
         function Category_Widget() {
             $widgetOps = array(
-                "classname"   => "wpzoom_category",
+                "classname"   => "wpzoom-category",
                 "description" => "Displays a featured block with posts from specific categories or tags.",
             );
 
@@ -66,7 +66,7 @@
             <div class="category-widget<?php if ( $dark ) echo ' dark-skin'; ?>">   
                 <?php 
                     if ($title) { 
-                        echo '<h2 class="title">';
+                        echo '<h6 class="title">';
 
                         if ($category_link) 
                             echo '<a href="'.$category_link.'">';
@@ -76,7 +76,7 @@
                         if ($category_link) 
                             echo '</a>';
                        
-                        echo '</h2>'; 
+                        echo '</h6>'; 
                     } 
                ?>
                 

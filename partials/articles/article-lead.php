@@ -5,7 +5,7 @@
                 <?php printf('<a href="%s" title="%s"></a>', get_the_permalink(), the_title_attribute('echo=0')); ?>
             </div>
         <?php endif; ?>
-        <?php printf('<h1><a href="%s" rel="bookmark" title="%s">%s</a></h1>',
+        <?php printf('<h2 class="title"><a href="%s" rel="bookmark" title="%s">%s</a></h2>',
             get_the_permalink(),
             the_title_attribute('echo=0'),
             get_the_title()

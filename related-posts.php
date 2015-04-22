@@ -12,29 +12,31 @@ $related_query = new WP_Query(array(
 $m = 0;
 
 if ($related_query->have_posts()) : ?>
-    <h6 class="title">
-        <?php _e('Léigh tuilleadh sa rannóg seo','wpzoom');?>
-    </h6>
-    <div class="related-posts">
+    <div id="related">
+        <h6 class="title">
+            <?php _e('Léigh tuilleadh sa rannóg seo','wpzoom');?>
+        </h6>
+        <div class="related-posts">
 
-        <?php while ($related_query->have_posts()) :
-            $related_query->the_post(); 
-            $m++;
-            ?>
+            <?php while ($related_query->have_posts()) :
+                $related_query->the_post(); 
+                $m++;
+                ?>
 
-            <article id="post-<?php the_ID(); ?>" class="post-grid<?php printf('%s', ($m % 3 === 0) ? ' post-last' : ''); ?>">
+                <article id="post-<?php the_ID(); ?>" class="post-grid<?php printf('%s', ($m % 3 === 0) ? ' post-last' : ''); ?>">
 
-                <?php get_the_image(array(
-                    'size' => 'related', 
-                    'width' => 260,
-                    'height' => 150
-                )); ?>
+                    <?php get_the_image(array(
+                        'size' => 'related', 
+                        'width' => 260,
+                        'height' => 150
+                    )); ?>
 
-                <a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title_attribute(); ?></a>
-                <span class="date"><?php printf(get_the_date()); ?></span>
+                    <a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title_attribute(); ?></a>
+                    <span class="date"><?php printf(get_the_date()); ?></span>
 
-            </article>
-        <?php endwhile; ?>
+                </article>
+            <?php endwhile; ?>
+        </div>
     </div>
 <?php endif;
 

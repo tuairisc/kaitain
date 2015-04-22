@@ -36,7 +36,7 @@ class Tabbed_Widget extends WP_Widget {
 
         <div class="wztw-container">
              <?php if ($title) {
-                echo '<h2>';
+                echo '<h2 class="title">';
                 
                 if ($category) {
                     echo '<a href="' . $category_link . '">';
