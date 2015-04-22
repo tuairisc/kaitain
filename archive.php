@@ -1,4 +1,5 @@
 <?php get_header(); ?> 
+<?php $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; ?>
 
 <div id="content">
     <?php 
@@ -7,7 +8,7 @@
     }
 
     if (!is_category() && !is_custom_type()) {
-        printf('<h3>');
+        printf('<h6>');
 
         if(is_tag()) {
             // Tag archive. 
@@ -34,16 +35,27 @@
             _e('Mireanna', 'wpzoom'); 
         }
 
-        printf('</h3>');
+        printf('</h6>');
     }
 
     if (!is_author()) {
         get_template_part('/partials/banner');
-    }
+    } ?>
     
-    get_template_part('loop'); 
-    ?>
+    <div id="recent-posts">
+
+        <?php while (have_posts()) {
+            the_post();
+            
+            if (is_custom_type()) {
+                get_template_part('/partials/articles/article', 'jobarchive');
+            } else {
+                get_template_part('/partials/articles/article', 'archive');
+            }
+        } ?>
+    </div>
 </div>
 
-<?php get_sidebar(); ?> 
-<?php get_footer(); ?>
+<?php get_template_part('/partials/pagination');
+get_sidebar();
+get_footer(); ?>
