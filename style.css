@@ -37,6 +37,9 @@
  * In April 2015 we decided to completely replace the rest of Gazeti's CSS in
  * order to comply with the terms of both the GPL and the developer's wish for
  * us to excise any remaining code.
+ *
+ * Update April 22: We said 'fuck it' and went for an entire rebuild because we
+ * have been steadily moving away from WPZOOM and Gazeti since day 1. 
  * 
  * /All/ of the presentation style can be found in /assets/sass/ in the form of
  * uncompiled Sass files. To stop a pointless compiled file from polluting git
