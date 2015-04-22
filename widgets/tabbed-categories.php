@@ -7,22 +7,22 @@ add_action('widgets_init', create_function('', 'return register_widget("Tabbed_W
 class Tabbed_Widget extends WP_Widget {
     function Tabbed_Widget() {
         $widgetOps = array(
-            "classname"   => "wpzoom_tabbed",
-            "description" => "An advanced widget that displays a featured block with posts in different styles.",
+            'classname'   => 'wpzoom_tabbed',
+            'description' => 'An advanced widget that displays a featured block with posts in different styles.',
         );
 
         $controlOps = array(
-            "width"   => 260,
-            "height"  => 180,
-            "id_base" => "wpzoom-tabbed-widget"
+            'width'   => 260,
+            'height'  => 180,
+            'id_base' => 'wpzoom-tabbed-widget'
         );
 
-        $this->WP_Widget("wpzoom-tabbed-widget", "Tuairisc Tabbed Categories", $widgetOps, $controlOps);
+        $this->WP_Widget('wpzoom-tabbed-widget', 'Tuairisc Tabbed Categories', $widgetOps, $controlOps);
     }
 
     function widget($args, $instance) {
         extract($args);
-        $title = apply_filters("widget_title", $instance["title"]);
+        $title = apply_filters('widget_title', $instance['title']);
         $category = $instance['category'];
         $count = $instance["count"];
         $category_link = null;
