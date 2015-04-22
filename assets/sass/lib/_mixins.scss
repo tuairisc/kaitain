@@ -57,10 +57,10 @@
 }
 
 /**
- * Font Sizes
- * ----------
- * You will see decidedly odd results from using this mixin if the font-size of
- * the <html> element isn't 100%.
+ * Font Sizes and Line Heights
+ * ---------------------------
+ * You will see decidedly odd results from using this mixin if the font-size of 
+ * the <html> element isn't set to 100%. Ware ye!
  * 
  * In http://snook.ca/archives/html_and_css/font-size-with-rem the author gives
  * the body a 65.5% font-size for rem units, but in reality most CSS reset files
@@ -71,6 +71,11 @@
 @mixin font-size($size: 1) {
     font-size: #{$size * 10}px;
     font-size: #{$size * 0.625}rem;
+}
+
+@mixin line-height($size: 1) {
+    line-height: #{$size * 10}px;
+    line-height: #{$size * 0.625}rem;
 }
 
 /**
