@@ -21,58 +21,58 @@ msgstr ""
 "X-Textdomain-Support: yes"
 
 #: 404.php:10
-#@ wpzoom
+#@ tuairisc
 msgid "Error 404 - Nothing Found"
 msgstr "Aistear amú – tada anseo"
 
 #: 404.php:12
-#@ wpzoom
+#@ tuairisc
 msgid "The page you are looking for could not be found."
 msgstr "Ní bhfuarthas an leathanach atá á lorg agat."
 
 #: archive.php:14
-#@ wpzoom
+#@ tuairisc
 msgid "Post Tagged with:"
 msgstr "Baineann le:"
 
 #: archive.php:16
 #: archive.php:18
 #: archive.php:20
-#@ wpzoom
+#@ tuairisc
 msgid "Archive for"
 msgstr ""
 
 #: archive.php:22
-#@ wpzoom
+#@ tuairisc
 msgid "Articles by: "
 msgstr "Ailt le;"
 
 #: archive.php:24
-#@ wpzoom
+#@ tuairisc
 msgid "Archives"
 msgstr "Cartlann"
 
 #: comments-old.php:3
 #: comments.php:3
-#@ wpzoom
+#@ tuairisc
 msgid "This post is password protected. Enter the password to view any comments."
 msgstr "Tá pasfhocal ag teastáil le haghaidh na postála seo. Cuir isteach an pasfhocal chun na tráchtanna a fheiceáil."
 
 #: comments-old.php:19
 #: comments.php:19
-#@ wpzoom
+#@ tuairisc
 msgid "No Comments"
 msgstr "Gan Tráchtanna"
 
 #: comments-old.php:19
 #: comments.php:19
-#@ wpzoom
+#@ tuairisc
 msgid "One Comment"
 msgstr "Trácht Amháin"
 
 #: comments-old.php:19
 #: comments.php:19
-#@ wpzoom
+#@ tuairisc
 msgid "% Comments"
 msgstr "% Nótaí Tráchta"
 
@@ -80,7 +80,7 @@ msgstr "% Nótaí Tráchta"
 #: comments-old.php:41
 #: comments.php:23
 #: comments.php:41
-#@ wpzoom
+#@ tuairisc
 msgid "<span class=\"meta-nav\">&larr;</span> Older Comments"
 msgstr ""
 
@@ -88,37 +88,37 @@ msgstr ""
 #: comments-old.php:41
 #: comments.php:23
 #: comments.php:41
-#@ wpzoom
+#@ tuairisc
 msgid "Newer Comments <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
 #: comments-old.php:53
 #: comments.php:53
-#@ wpzoom
+#@ tuairisc
 msgid "Comments are closed."
 msgstr "Tá fóram na dtráchtanna dúnta."
 
 #: comments-old.php:66
 #: comments.php:66
-#@ wpzoom
+#@ tuairisc
 msgid "Your Name"
 msgstr "D’ainm"
 
 #: comments-old.php:72
 #: comments.php:72
-#@ wpzoom
+#@ tuairisc
 msgid "Your Email"
 msgstr "Do sheoladh ríomhphoist"
 
 #: comments-old.php:77
 #: comments.php:77
-#@ wpzoom
+#@ tuairisc
 msgid "Your Website"
 msgstr "An suíomh gréasáin lena mbaineann tú"
 
 #: comments-old.php:81
 #: comments.php:81
-#@ wpzoom
+#@ tuairisc
 msgid "Comment"
 msgstr "Fág trácht"
 
@@ -131,35 +131,35 @@ msgstr ""
 
 #: comments-old.php:85
 #: comments.php:85
-#@ wpzoom
+#@ tuairisc
 msgid "Leave a Reply"
 msgstr "Fág nóta tráchta"
 
 #: comments-old.php:86
 #: comments.php:86
-#@ wpzoom
+#@ tuairisc
 msgid "Cancel"
 msgstr "Cuir ar ceal"
 
 #: comments-old.php:87
 #: comments.php:87
-#@ wpzoom
+#@ tuairisc
 msgid "Submit"
 msgstr "Seol"
 
 #: footer.php:46
-#@ wpzoom
+#@ tuairisc
 msgid "Tuairisc Bheo Teoranta"
 msgstr ""
 
 #: functions/theme/functions.php:71
-#@ wpzoom
+#@ tuairisc
 msgid "Read More"
 msgstr "LÉIGH TUILLEADH"
 
 #: functions/theme/functions.php:191
 #, php-format
-#@ wpzoom
+#@ tuairisc
 msgid "%s <span class=\"says\">says:</span>"
 msgstr ""
 
@@ -168,458 +168,458 @@ msgstr ""
 #: loop-old.php:16
 #: loop.php:20
 #, php-format
-#@ wpzoom
+#@ tuairisc
 msgid "%s at %s"
 msgstr ""
 
 #: functions/theme/functions.php:194
 #: functions/theme/functions.php:220
-#@ wpzoom
+#@ tuairisc
 msgid "(Edit)"
 msgstr ""
 
 #: functions/theme/functions.php:201
-#@ wpzoom
+#@ tuairisc
 msgid "Your comment is awaiting moderation."
 msgstr "Tá do thrácht á léamh agus á scrúdú. "
 
 #: functions/theme/functions.php:220
-#@ wpzoom
+#@ tuairisc
 msgid "Pingback:"
 msgstr ""
 
 #: functions/theme/functions.php:270
-#@ wpzoom
+#@ tuairisc
 msgid "Drag me to the Sidebar"
 msgstr ""
 
 #: functions/theme/functions.php:272
-#@ wpzoom
+#@ tuairisc
 msgid "WPZOOM: Tabs"
 msgstr ""
 
 #: functions/theme/functions.php:301
-#@ wpzoom
+#@ tuairisc
 msgid "Tabber"
 msgstr ""
 
 #: functions/theme/functions.php:306
-#@ wpzoom
+#@ tuairisc
 msgid "Place your widgets in the <strong>WPZOOM: Tabs Widget Area</strong> and have them show up here."
 msgstr ""
 
 #: functions/theme/functions.php:326
-#@ wpzoom
+#@ tuairisc
 msgid "WPZOOM: Tabs Widget Area"
 msgstr ""
 
 #: functions/theme/functions.php:328
-#@ wpzoom
+#@ tuairisc
 msgid "Build your tabbed area by placing widgets here.  !! DO NOT PLACE THE WPZOOM: TABS IN THIS AREA."
 msgstr ""
 
 #: functions/theme/widgets/carousel.php:163
 #: functions/theme/widgets/featured-category.php:164
-#@ wpzoom
+#@ tuairisc
 msgid "Posts marked by:"
 msgstr ""
 
 #: functions/theme/widgets/carousel.php:172
 #: functions/theme/widgets/featured-category.php:173
 #: functions/theme/widgets/tabbed-categories.php:210
-#@ wpzoom
+#@ tuairisc
 msgid "Category (if selected above):"
 msgstr ""
 
 #: functions/theme/widgets/carousel.php:200
 #: functions/theme/widgets/featured-category.php:201
-#@ wpzoom
+#@ tuairisc
 msgid "Tag slugs (if selected above, separated by comma \",\"):"
 msgstr ""
 
 #: functions/theme/widgets/facebook-like-box.php:117
-#@ wpzoom
+#@ tuairisc
 msgid "Show Faces"
 msgstr ""
 
 #: functions/theme/widgets/facebook-like-box.php:120
-#@ wpzoom
+#@ tuairisc
 msgid "Show Stream"
 msgstr ""
 
 #: functions/theme/widgets/facebook-like-box.php:123
-#@ wpzoom
+#@ tuairisc
 msgid "Show Header"
 msgstr ""
 
 #: functions/theme/widgets/featured-category.php:148
-#@ wpzoom
+#@ tuairisc
 msgid "Featured Category"
 msgstr ""
 
 #: functions/theme/widgets/featured-category.php:154
 #: functions/theme/widgets/popularnews.php:119
-#@ wpzoom
+#@ tuairisc
 msgid "Title:"
 msgstr ""
 
 #: functions/theme/widgets/featured-category.php:206
 #: functions/theme/widgets/tabbed-categories.php:243
-#@ wpzoom
+#@ tuairisc
 msgid "Posts to show:"
 msgstr ""
 
 #: functions/theme/widgets/featured-category.php:224
-#@ wpzoom
+#@ tuairisc
 msgid "Exclude Featured Posts from Widget"
 msgstr ""
 
 #: functions/theme/widgets/popularnews.php:84
-#@ wpzoom
+#@ tuairisc
 msgid "comments"
 msgstr ""
 
 #: functions/theme/widgets/popularnews.php:93
-#@ wpzoom
+#@ tuairisc
 msgid "Níor fágadh aon nóta tráchta fós"
 msgstr ""
 
 #: functions/theme/widgets/popularnews.php:124
-#@ wpzoom
+#@ tuairisc
 msgid "Since:"
 msgstr ""
 
 #: functions/theme/widgets/popularnews.php:126
-#@ wpzoom
+#@ tuairisc
 msgid "Forever"
 msgstr ""
 
 #: functions/theme/widgets/popularnews.php:127
-#@ wpzoom
+#@ tuairisc
 msgid "This Year"
 msgstr ""
 
 #: functions/theme/widgets/popularnews.php:128
-#@ wpzoom
+#@ tuairisc
 msgid "This Month"
 msgstr ""
 
 #: functions/theme/widgets/popularnews.php:133
-#@ wpzoom
+#@ tuairisc
 msgid "Posts To Display:"
 msgstr ""
 
 #: functions/theme/widgets/social.php:14
-#@ wpzoom
+#@ tuairisc
 msgid "Custom WPZOOM Widget that displays links to social sharing websites."
 msgstr ""
 
 #: functions/theme/widgets/social.php:20
-#@ wpzoom
+#@ tuairisc
 msgid "WPZOOM: Social Widget"
 msgstr ""
 
 #: functions/theme/widgets/social.php:89
-#@ wpzoom
+#@ tuairisc
 msgid "Widget Title:"
 msgstr ""
 
 #: functions/theme/widgets/tabbed-categories.php:203
-#@ wpzoom
+#@ tuairisc
 msgid "Posts source:"
 msgstr ""
 
 #: functions/theme/widgets/tabbed-categories.php:238
-#@ wpzoom
+#@ tuairisc
 msgid "Tag slugs (if selected above):"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:106
-#@ wpzoom
+#@ tuairisc
 msgid "Title"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:111
-#@ wpzoom
+#@ tuairisc
 msgid "Twitter Username"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:116
-#@ wpzoom
+#@ tuairisc
 msgid "Show"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:117
-#@ wpzoom
+#@ tuairisc
 msgid "tweets"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:122
-#@ wpzoom
+#@ tuairisc
 msgid "Hide Timestamp"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:127
-#@ wpzoom
+#@ tuairisc
 msgid "Hide Tweet URL"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:132
-#@ wpzoom
+#@ tuairisc
 msgid "Display Follow me button"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:137
-#@ wpzoom
+#@ tuairisc
 msgid "Hide follower count?"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:147
-#@ wpzoom
+#@ tuairisc
 msgid "Consumer key"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:152
-#@ wpzoom
+#@ tuairisc
 msgid "Consumer secret"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:157
-#@ wpzoom
+#@ tuairisc
 msgid "Access token"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:162
-#@ wpzoom
+#@ tuairisc
 msgid "Access token secret"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:221
 #, php-format
-#@ wpzoom
+#@ tuairisc
 msgid "%s ago"
 msgstr ""
 
 #: functions/theme/widgets/twitter.php:226
 #: functions/theme/widgets/twitter.php:228
 #, php-format
-#@ wpzoom
+#@ tuairisc
 msgid "%s"
 msgstr ""
 
-#: functions/wpzoom/components/admin/settings-page.php:132
-#@ wpzoom
+#: functions/tuairisc/components/admin/settings-page.php:132
+#@ tuairisc
 msgid "For more information:"
 msgstr ""
 
-#: functions/wpzoom/components/admin/settings-page.php:133
-#@ wpzoom
-msgid "<a href=\"http://www.wpzoom.com/support/documentation\" target=\"_blank\">Documentation and Tutorials</a>"
+#: functions/tuairisc/components/admin/settings-page.php:133
+#@ tuairisc
+msgid "<a href=\"http://www.tuairisc.com/support/documentation\" target=\"_blank\">Documentation and Tutorials</a>"
 msgstr ""
 
-#: functions/wpzoom/components/admin/settings-page.php:134
-#@ wpzoom
-msgid "<a href=\"http://www.wpzoom.com/forum/\" target=\"_blank\">Support Forums</a>"
+#: functions/tuairisc/components/admin/settings-page.php:134
+#@ tuairisc
+msgid "<a href=\"http://www.tuairisc.com/forum/\" target=\"_blank\">Support Forums</a>"
 msgstr ""
 
-#: functions/wpzoom/components/medialib-uploader.php:15
-#@ wpzoom
+#: functions/tuairisc/components/medialib-uploader.php:15
+#@ tuairisc
 msgid "WPZOOM Exporter"
 msgstr ""
 
-#: functions/wpzoom/components/medialib-uploader.php:38
-#@ wpzoom
+#: functions/tuairisc/components/medialib-uploader.php:38
+#@ tuairisc
 msgid "Upload"
 msgstr ""
 
-#: functions/wpzoom/components/medialib-uploader.php:40
-#@ wpzoom
+#: functions/tuairisc/components/medialib-uploader.php:40
+#@ tuairisc
 msgid "Upgrade your version of WordPress for full media support."
 msgstr ""
 
-#: functions/wpzoom/components/medialib-uploader.php:60
-#@ wpzoom
+#: functions/tuairisc/components/medialib-uploader.php:60
+#@ tuairisc
 msgid "View File"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:69
-#: functions/wpzoom/components/portfolio/portfolio.php:81
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:69
+#: functions/tuairisc/components/portfolio/portfolio.php:81
+#@ tuairisc
 msgid "Portfolio Items"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:70
-#: functions/wpzoom/components/portfolio/portfolio.php:72
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:70
+#: functions/tuairisc/components/portfolio/portfolio.php:72
+#@ tuairisc
 msgid "Portfolio Item"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:71
-#: functions/wpzoom/components/portfolio/portfolio.php:84
-#: functions/wpzoom/components/portfolio/portfolio.php:121
-#: functions/wpzoom/components/portfolio/portfolio.php:123
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:71
+#: functions/tuairisc/components/portfolio/portfolio.php:84
+#: functions/tuairisc/components/portfolio/portfolio.php:121
+#: functions/tuairisc/components/portfolio/portfolio.php:123
+#@ tuairisc
 msgid "Portfolio"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:73
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:73
+#@ tuairisc
 msgid "Add New"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:74
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:74
+#@ tuairisc
 msgid "Add New Portfolio Item"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:75
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:75
+#@ tuairisc
 msgid "Edit Portfolio Item"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:76
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:76
+#@ tuairisc
 msgid "New Portfolio Item"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:77
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:77
+#@ tuairisc
 msgid "View Portfolio Item"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:78
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:78
+#@ tuairisc
 msgid "Search Portfolio"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:79
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:79
+#@ tuairisc
 msgid "No portfolio items found"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:80
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:80
+#@ tuairisc
 msgid "No portfolio items found in trash"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:120
-#: functions/wpzoom/components/portfolio/portfolio.php:122
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:120
+#: functions/tuairisc/components/portfolio/portfolio.php:122
+#@ tuairisc
 msgid "Portfolios"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:124
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:124
+#@ tuairisc
 msgid "Search Portfolios"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:125
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:125
+#@ tuairisc
 msgid "Popular Portfolios"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:126
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:126
+#@ tuairisc
 msgid "All Portfolios"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:127
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:127
+#@ tuairisc
 msgid "Edit Portfolio"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:128
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:128
+#@ tuairisc
 msgid "View Portfolio"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:129
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:129
+#@ tuairisc
 msgid "Update Portfolio"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:130
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:130
+#@ tuairisc
 msgid "Add New Portfolio"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:131
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:131
+#@ tuairisc
 msgid "New Portfolio Name"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:132
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:132
+#@ tuairisc
 msgid "Separate portfolios with commas"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:133
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:133
+#@ tuairisc
 msgid "Add or remove portfolios"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/portfolio.php:134
-#@ wpzoom
+#: functions/tuairisc/components/portfolio/portfolio.php:134
+#@ tuairisc
 msgid "Choose from the most used portfolios"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/walker-category-filter.php:13
+#: functions/tuairisc/components/portfolio/walker-category-filter.php:13
 #, php-format
-#@ wpzoom
+#@ tuairisc
 msgid "View all posts filed under %s"
 msgstr ""
 
-#: functions/wpzoom/components/portfolio/walker-category-filter.php:29
+#: functions/tuairisc/components/portfolio/walker-category-filter.php:29
 #, php-format
-#@ wpzoom
+#@ tuairisc
 msgid "Feed for all posts filed under %s"
 msgstr ""
 
-#: functions/wpzoom/components/shortcodes/dialog.php:31
-#@ wpzoom
+#: functions/tuairisc/components/shortcodes/dialog.php:31
+#@ tuairisc
 msgid "Customize the Shortcode"
 msgstr ""
 
-#: functions/wpzoom/components/shortcodes/dialog.php:40
-#@ wpzoom
+#: functions/tuairisc/components/shortcodes/dialog.php:40
+#@ tuairisc
 msgid "Preview"
 msgstr ""
 
-#: functions/wpzoom/components/shortcodes/dialog.php:54
-#@ wpzoom
+#: functions/tuairisc/components/shortcodes/dialog.php:54
+#@ tuairisc
 msgid "Your version of theme does not yet support shortcodes."
 msgstr ""
 
-#: functions/wpzoom/components/shortcodes/shortcodes.php:565
-#: functions/wpzoom/components/shortcodes/shortcodes.php:615
-#: functions/wpzoom/components/shortcodes/shortcodes.php:631
+#: functions/tuairisc/components/shortcodes/shortcodes.php:565
+#: functions/tuairisc/components/shortcodes/shortcodes.php:615
+#: functions/tuairisc/components/shortcodes/shortcodes.php:631
 #, php-format
-#@ wpzoom
+#@ tuairisc
 msgid "My %s Profile"
 msgstr ""
 
-#: functions/wpzoom/components/shortcodes/shortcodes.php:586
-#@ wpzoom
+#: functions/tuairisc/components/shortcodes/shortcodes.php:586
+#@ tuairisc
 msgid "Subscribe to our RSS feed"
 msgstr ""
 
-#: functions/wpzoom/components/video-thumb.php:86
-#@ wpzoom
+#: functions/tuairisc/components/video-thumb.php:86
+#@ tuairisc
 msgid "<strong>NOTICE!&nbsp;&nbsp;Unable to fetch video thumbnail</strong><br/>Either an invalid embed code was provided, or there is no thumbnail available for the specified video&hellip;<br/><small id=\"wpz_autothumb_remind\"><strong>REMINDER:</strong> You can always manually upload a featured image via the WordPress Media Uploader.</small>"
 msgstr ""
 
-#: functions/wpzoom/wpzoom.php:172
-#@ wpzoom
+#: functions/tuairisc/tuairisc.php:172
+#@ tuairisc
 msgid "WPZOOM"
 msgstr ""
 
-#: functions/wpzoom/wpzoom.php:173
-#@ wpzoom
+#: functions/tuairisc/tuairisc.php:173
+#@ tuairisc
 msgid "Theme Options"
 msgstr ""
 
-#: functions/wpzoom/wpzoom.php:176
-#@ wpzoom
+#: functions/tuairisc/tuairisc.php:176
+#@ tuairisc
 msgid "Framework Update"
 msgstr ""
 
@@ -636,35 +636,35 @@ msgstr ""
 #: template-fullwidth.php:13
 #: template-sidebar-left.php:14
 #, php-format
-#@ wpzoom
+#@ tuairisc
 msgid "Permalink to %s"
 msgstr ""
 
 #: hero.php:18
 #: loop-old.php:17
 #: loop.php:21
-#@ wpzoom
+#@ tuairisc
 msgid "0 comments"
 msgstr ""
 
 #: hero.php:18
 #: loop-old.php:17
 #: loop.php:21
-#@ wpzoom
+#@ tuairisc
 msgid "1 comment"
 msgstr ""
 
 #: hero.php:18
 #: loop-old.php:17
 #: loop.php:21
-#@ wpzoom
+#@ tuairisc
 msgid "% comments"
 msgstr ""
 
 #: hero.php:18
 #: loop-old.php:17
 #: loop.php:21
-#@ wpzoom
+#@ tuairisc
 msgid "Comments are Disabled"
 msgstr ""
 
@@ -678,14 +678,14 @@ msgstr ""
 #: template-archives.php:18
 #: template-fullwidth.php:25
 #: template-sidebar-left.php:27
-#@ wpzoom
+#@ tuairisc
 msgid "Edit"
 msgstr ""
 
 #: hero.php:27
 #: loop-old.php:27
 #: loop.php:30
-#@ wpzoom
+#@ tuairisc
 msgid "Read More &#8250;"
 msgstr ""
 
@@ -695,65 +695,65 @@ msgstr ""
 #: single.php:55
 #: template-fullwidth.php:23
 #: template-sidebar-left.php:25
-#@ wpzoom
+#@ tuairisc
 msgid "Pages:"
 msgstr ""
 
 #: pagination.php:11
-#@ wpzoom
+#@ tuairisc
 msgid "Previous"
 msgstr ""
 
 #: pagination.php:12
-#@ wpzoom
+#@ tuairisc
 msgid "Next"
 msgstr ""
 
 #: related-posts-old.php:17
 #: related-posts.php:17
-#@ wpzoom
+#@ tuairisc
 msgid "More in"
 msgstr ""
 
 #: search.php:6
-#@ wpzoom
+#@ tuairisc
 msgid "Search Results for"
 msgstr ""
 
 #: searchform.php:3
-#@ wpzoom
+#@ tuairisc
 msgid "Cuardaigh"
 msgstr ""
 
 #: single-old.php:17
-#@ wpzoom
+#@ tuairisc
 msgid "by"
 msgstr ""
 
 #: single-old.php:39
 #: single.php:58
-#@ wpzoom
+#@ tuairisc
 msgid "Tags:"
 msgstr ""
 
 #: single-old.php:44
 #: single.php:63
-#@ wpzoom
+#@ tuairisc
 msgid "Share this post"
 msgstr ""
 
 #: template-archives.php:27
-#@ wpzoom
+#@ tuairisc
 msgid "By Months:"
 msgstr ""
 
 #: template-archives.php:38
-#@ wpzoom
+#@ tuairisc
 msgid "By Categories:"
 msgstr ""
 
 #: template-archives.php:49
-#@ wpzoom
+#@ tuairisc
 msgid "By Tags:"
 msgstr ""
 
