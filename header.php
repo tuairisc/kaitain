@@ -2,9 +2,6 @@
 /**
  * Site Header
  * -----------
- * Except for the files included in the head, this represents most of the PHP 
- * work on the Tuairisc site. 
- * 
  * @category   PHP Script
  * @package    Tuairisc.ie Theme
  * @author     Mark Grealish <mark@bhalash.com>
@@ -31,10 +28,9 @@
     <div id="site">
         <div id="header" role="header">
             <div id="header-logo">
-                <a href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>">
-                    <img src="<?php // printf(ui::logo()); ?>" alt="<?php bloginfo('name'); ?>">
-                </a>
+                <a href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>"></a>
             </div>
+
             <nav id="menu">
                 
                 <?php if (has_nav_menu('primary')) :
@@ -53,6 +49,7 @@
                     <li><a href="/category/sport/iomaint/">Iomáint</a></li>
                 </ul>
             </nav>
+
         </div>
         
         <?php // AdRotate group 1
