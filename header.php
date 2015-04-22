@@ -9,32 +9,27 @@
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />    
     <?php social_meta(); ?>
     <?php wp_head(); ?>
-    <?php if ((is_home()) && option::get('featured_enable') == 'on' ) { ui::js("flexslider"); } ?>
 </head>
 <body <?php body_class(); ?>>
     <div id="site">
         <div id="header" role="header">
             <div id="header-logo">
-                <?php if (!option::get('misc_logo_path')) : ?>
-                    <h1>
-                        <a href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>" alt="<?php bloginfo('name'); ?>"><?php bloginfo('name'); ?></a>
-                    </h1>
-                <?php else : ?>
-                    <a href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>" style="background-image: url(<?php printf(ui::logo()); ?>);" alt="<?php bloginfo('name'); ?>"></a>
-                <?php endif; ?>
+                <a href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>">
+                    <img src="<?php // printf(ui::logo()); ?>" alt="<?php bloginfo('name'); ?>">
+                </a>
             </div>
             <nav id="menu">
-                <?php if (has_nav_menu('primary')) {
+                <?php if (has_nav_menu('primary')) :
                     wp_nav_menu(array(
                         'menu_id' => 'primary-menu',
                         'sort_column' => 'menu_order',
                         'theme_location' => 'primary'
-                    ));
-                } else { ?>
+                    )); ?>
+                <?php else: ?>
                     <p class="dropdown notice">
                         Please set your Main navigation menu on the <strong><a href="printf('%s', get_admin_url() . 'nav-menus.php'); ?>">Appearance > Menus</a></strong> page.
                     </p>
-                <?php } ?>
+                <?php endif; ?>
                 <ul class="testing" id="secondary-menu">
                     <li><a href="/category/sport/cluichi-gaelacha/">Cluichí Gaelacha</a></li>
                     <li><a href="/category/sport/eile/">Eile</a></li>

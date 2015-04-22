@@ -1,5 +1,4 @@
-<?php get_header();
-$template = get_post_meta($post->ID, 'wpzoom_post_template', true); ?>
+<?php get_header(); ?>
 
 <div id="content">
     <?php while(have_posts()) {
@@ -8,7 +7,7 @@ $template = get_post_meta($post->ID, 'wpzoom_post_template', true); ?>
         increment_view_counter(); 
         get_template_part('/partials/articles/article', 'full'); 
 
-        if (option::get('post_related') == 'on' && !is_custom_type()) {
+        if (!is_custom_type()) {
             get_template_part('related-posts'); 
         }
 
@@ -17,5 +16,6 @@ $template = get_post_meta($post->ID, 'wpzoom_post_template', true); ?>
         }
     } ?>
 </div>
+
 <?php get_sidebar();
 get_footer(); ?>
