@@ -13,8 +13,7 @@
 .edu-heading, .edu-subheading {
     background-color: nth(map-get($education-banners, education-187), 1);
     color: #fff;
-    /* Important, or WPZOOM will override it. */
-    margin: $margin-19 0 $margin-10 0 !important;
+    margin: $margin-19 0 $margin-10 0;
 }
 
 .edu-heading {
