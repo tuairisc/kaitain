@@ -1,10 +1,10 @@
 ![The Tuairisc.ie logo](/assets/images/tuairisc.jpg?raw=true 'Tuairisc.ie')
 
 # Tuairisc.ie
-This repository is the WordPress theme for the [Tuairisc.ie](http://www.tuairisc.ie), derived from the [Gazeti](http://www.wpzoom.com/themes/gazeti/) theme by [WPZOOM](http://www.wpzoom.com/) and published in compliance with the GPL.
+This repository is the WordPress theme for the [Tuairisc.ie](http://www.tuairisc.ie). 
 
 ## Description
-This is the WordPress theme for [Tuairisc.ie](http://www.tuairisc.ie). The majority of the code in this project is derived from Gazeti. The Sass appearance framework is wholly original code. I'm not sure how much excitement you expect from a WordPress theme, but this is a responsive. It runs /okay-ish/. I like ponies. 
+This is the WordPress theme for [Tuairisc.ie](http://www.tuairisc.ie). The Sass appearance framework is wholly original code. I'm not sure how much excitement you expect from a WordPress theme, but this is a responsive. It runs /okay-ish/. I like ponies. 
 
 ## License
 All of the PHP code in the project is licensed under the GPL v3 or later, except as otherwise noted.
@@ -30,6 +30,5 @@ All of the project's PHP code and derived HTML is licensed under the GPL v3.
 * The Foras na Gaeilge brand is copyright and trademark of [Foras na Gaeilge](http://www.gaeilge.ie/) and all rights are reserved.
 
 ## Credit
-* Initial credit for the development of the Tuairisc.ie theme lies soley with the fine developers at [WPZOOM](http://www.wpzoom.com/).
 * Credit for the design and branding goes to Ćiaran O'Sullivan.
 * Credit for later alteration to the ore theme, addition of the Sass framework and addition of Tuairisc-specific function lies with me, [Mark Grealish](http://www.bhalash.com).
