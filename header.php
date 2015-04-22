@@ -12,54 +12,43 @@
     <?php if ((is_home()) && option::get('featured_enable') == 'on' ) { ui::js("flexslider"); } ?>
 </head>
 <body <?php body_class(); ?>>
-<body <?php body_class(); ?>>
     <div id="site">
+        <div id="header" role="header">
+            <div id="header-logo">
+                <?php if (!option::get('misc_logo_path')) : ?>
+                    <h1>
+                        <a href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>" alt="<?php bloginfo('name'); ?>"><?php bloginfo('name'); ?></a>
+                    </h1>
+                <?php else : ?>
+                    <a href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>" style="background-image: url(<?php printf(ui::logo()); ?>);" alt="<?php bloginfo('name'); ?>"></a>
+                <?php endif; ?>
+            </div>
+            <nav id="menu">
+                <?php if (has_nav_menu('primary')) {
+                    wp_nav_menu(array(
+                        'menu_id' => 'primary-menu',
+                        'sort_column' => 'menu_order',
+                        'theme_location' => 'primary'
+                    ));
+                } else { ?>
+                    <p class="dropdown notice">
+                        Please set your Main navigation menu on the <strong><a href="printf('%s', get_admin_url() . 'nav-menus.php'); ?>">Appearance > Menus</a></strong> page.
+                    </p>
+                <?php } ?>
+                <ul class="testing" id="secondary-menu">
+                    <li><a href="/category/sport/cluichi-gaelacha/">Cluichí Gaelacha</a></li>
+                    <li><a href="/category/sport/eile/">Eile</a></li>
+                    <li><a href="/category/sport/sacar/">Sacar</a></li>
+                    <li><a href="/category/sport/rugbai/">Rugbai</a></li>
+                    <li><a href="/category/sport/iomaint/">Iomáint</a></li>
+                </ul>
+            </nav>
+        </div>
+        
         <?php // AdRotate group 1
         if (function_exists('adrotate_group')) {
             printf('%s', adrotate_group(1));
         } ?>
 
-        <div id="header" role="header">
-            <div id="logo">
-                <?php if (!option::get('misc_logo_path')) echo "<h1>"; ?>
-                    <a href="<?php echo home_url(); ?>" title="<?php bloginfo('description'); ?>">
-                        <?php if (!option::get('misc_logo_path')) : ?>
-                            <?php bloginfo('name'); ?>
-                        <?php else : ?>
-                            <img id="site-logo" src="<?php echo ui::logo(); ?>" alt="<?php bloginfo('name'); ?>" />
-                        <?php endif; ?>
-                    </a>
-                <?php if (!option::get('misc_logo_path')) echo "</h1>"; ?>
-            </div>
-
-            <div class="share-search">
-
-                <?php if (option::get('searchform_enable') === 'on') : ?>
-                    <div class="search_form">
-                        <?php get_search_form(); ?>
-                    </div>
-                <?php endif; ?>
-
-                <ul class="sharing">
-                    <li><a class="rss" href="<?php bloginfo('rss2_url'); ?>" target="_blank" title="RSS 2.0 Feed"></a></li>
-                    <li><a class="facebook" href="https://www.facebook.com/tuairisc.ie" target="_blank" title="Facebook"></a></li>
-                    <li><a class="twitter" href="https://twitter.com/tuairiscnuacht" target="_blank" title="Twitter"></a></li>
-                    <li><a class="youtube" href="https://www.youtube.com/user/tuairiscnuacht" target="_blank" title="YouTube"></a></li>
-                </ul>
-
-            </div>
-        </div>
-        <nav id="menu">
-            <?php if (has_nav_menu('primary')) {
-                wp_nav_menu(array(
-                    'menu_id' => 'primary-menu',
-                    'sort_column' => 'menu_order',
-                    'theme_location' => 'primary'
-                ));
-            } else { ?>
-                <p class="dropdown notice">
-                    Please set your Main navigation menu on the <strong><a href="printf('%s', get_admin_url() . 'nav-menus.php'); ?>">Appearance > Menus</a></strong> page.
-                </p>
-            <?php } ?>
-        </nav>
         <div id="main" role="main">
+            <div id="main-interior">
