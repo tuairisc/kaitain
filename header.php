@@ -1,3 +1,20 @@
+<?php 
+/**
+ * Site Header
+ * -----------
+ * Except for the files included in the head, this represents most of the PHP 
+ * work on the Tuairisc site. 
+ * 
+ * @category   PHP Script
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ */ 
+?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -22,7 +39,7 @@
                 
                 <?php if (has_nav_menu('primary')) :
                     wp_nav_menu(array(
-                        'menu_id' => 'primary-menu',
+                        'menu_id' => 'header-menu',
                         'sort_column' => 'menu_order',
                         'theme_location' => 'primary'
                     )); ?>
