@@ -17,30 +17,31 @@
 /**
  * Paths to WPZOOM Theme Functions
  */
-define("FUNC_INC", get_template_directory() . "/functions");
-define("WPZOOM_INC", FUNC_INC . "/wpzoom");
-define("THEME_INC", FUNC_INC . "/theme");
+define('FUNC_INC', get_template_directory() . '/functions');
+define('WPZOOM_INC', FUNC_INC . '/wpzoom');
+define('THEME_INC', FUNC_INC . '/theme');
 
 /** WPZOOM Framework Core */
-require_once WPZOOM_INC . "/init.php";
+require_once WPZOOM_INC . '/init.php';
 
 /** WPZOOM Theme */
-require_once THEME_INC . "/functions.php";
-require_once THEME_INC . "/sidebar.php";
-require_once THEME_INC . "/post-options.php";
+require_once THEME_INC . '/functions.php';
+require_once THEME_INC . '/sidebar.php';
+require_once THEME_INC . '/post-options.php';
 
 /* Theme widgets */
-require_once THEME_INC . "/widgets/social.php";
-require_once THEME_INC . "/widgets/recentposts.php";
-require_once THEME_INC . "/widgets/recentcomments.php";
-require_once THEME_INC . "/widgets/twitter.php";
-require_once THEME_INC . "/widgets/facebook-like-box.php";
-require_once THEME_INC . "/widgets/featured-category.php";
-require_once THEME_INC . "/widgets/popularnews.php";
-require_once THEME_INC . "/widgets/tabbed-categories.php";
-require_once THEME_INC . "/widgets/carousel.php";
+require_once THEME_INC . '/widgets/social.php';
+require_once THEME_INC . '/widgets/recentposts.php';
+require_once THEME_INC . '/widgets/recentcomments.php';
+require_once THEME_INC . '/widgets/twitter.php';
+require_once THEME_INC . '/widgets/facebook-like-box.php';
+require_once THEME_INC . '/widgets/featured-category.php';
+require_once THEME_INC . '/widgets/popularnews.php';
+require_once THEME_INC . '/widgets/tabbed-categories.php';
+require_once THEME_INC . '/widgets/carousel.php';
 
-// End WPZOOM functions
+// FIXME
+require_once(FUNC_INC . '/user/tuairisc-mostviewed.php');
 
 $banners = array(
     /* Classes and the current category ID for the Greann category, which has
@@ -92,14 +93,13 @@ $index_excluded_categories = array(
 );
 
 $tuairisc_scripts = array(
-    /* All JavaScript loaded by me for the theme.
-     * Path is $theme_folder/assets/js/ */
+    // All JavaScript loaded by theme.
     'modernizr' => 'modernizr-touch.min.js',
-    'tuairisc-browser-detect' => 'browser-detect.min.js',
-    'tuairisc-adrotate-fallback' => 'adrotate.min.js',
-    'tuairisc-eventdrop' => 'eventdrop.min.js',
-    'tuairisc-functions' => 'functions.min.js',
-    'tuairis-author-report' => 'author-report.min.js'
+    'browser-detect' => 'browser-detect.min.js',
+    'adrotate-fallback' => 'adrotate.min.js',
+    'eventdrop' => 'eventdrop.min.js',
+    'general-functions' => 'functions.min.js',
+    'author-report' => 'author-report.min.js'
 );
 
 $tuairisc_styles = array(
@@ -139,7 +139,11 @@ function load_tuairisc_scripts() {
     $path = get_stylesheet_directory_uri() . '/assets/js/';
 
     foreach ($tuairisc_scripts as $key => $value) {
-        wp_enqueue_script($key, $path . $value, array(), '1.0', true);
+        if (WP_DEBUG) {
+            $value = str_replace('.min', '', $value);
+        }
+
+        wp_enqueue_script($key, $path . $value, array(), '2.0', true);
     }
 }
 
