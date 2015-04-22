@@ -19,10 +19,12 @@ ul.sharing {
         display: inline-block;
         font-size: 0;
         line-height: initial;
+
+        margin-right: 3px;
     }
 
     a {
-        border-radius: 3px;
+        // border-radius: 3px;
     }
 
     @include generate-social-links(a, $social-button-size, $social-sprites);
