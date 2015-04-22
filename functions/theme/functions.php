@@ -3,27 +3,27 @@
 /* Register Thumbnails Size 
 ================================== */
 
-if ( function_exists( 'add_image_size' ) ) {
+if (function_exists('add_image_size')) {
 
     /* Slider */
-    add_image_size( 'slider', 520, 475, true );
-    add_image_size( 'slider-full', 800, 475, true );
+    add_image_size('slider', 520, 475, true);
+    add_image_size('slider-full', 800, 475, true);
  
     /* Archive Posts */
-    add_image_size( 'loop', option::get('thumb_width'), option::get('thumb_height'), true );
+    add_image_size('loop', option::get('thumb_width'), option::get('thumb_height'), true);
 
     /* Featured Category Widget & Tabs */
-    add_image_size( 'featured-tab', 135, 135, true );
-    add_image_size( 'featured-cat', 300, 160, true );
+    add_image_size('featured-tab', 135, 135, true);
+    add_image_size('featured-cat', 300, 160, true);
  
     /* Footer Carousel */
-    add_image_size( 'carousel', 200, 130, true );
+    add_image_size('carousel', 200, 130, true);
     
     /* Related Posts */
-    add_image_size( 'related', 230, 150, true );
+    add_image_size('related', 230, 150, true);
 
      /* Recent Posts Widget */
-    add_image_size( 'recent-widget', 75, 50, true );
+    add_image_size('recent-widget', 75, 50, true);
 
 }
 
@@ -31,17 +31,17 @@ if ( function_exists( 'add_image_size' ) ) {
 ==================================== */
 
 function wpz_enqueue_tabs_js() { 
-  wp_enqueue_script( 'jquery-ui-tabs' ); 
+  wp_enqueue_script('jquery-ui-tabs'); 
 }
 
-add_action( 'wp_enqueue_scripts' , 'wpz_enqueue_tabs_js' );
+add_action('wp_enqueue_scripts' , 'wpz_enqueue_tabs_js');
 
 
 
 /* Video Post Format
 ==================================== */
 
-add_theme_support( 'post-formats', array( 'video' ) );
+add_theme_support('post-formats', array('video'));
 
 
 
@@ -66,7 +66,7 @@ add_filter('excerpt_more', 'new_excerpt_more');
 /* Add support for Custom Background 
 ==================================== */
 
-add_theme_support( 'custom-background' ); 
+// add_theme_support('custom-background'); 
 
  
 /* Custom Excerpt Length
@@ -100,9 +100,9 @@ function simple_email_check($email) {
 
 /* Maximum width for images in posts 
 =========================================== */
-if ( ! isset( $content_width ) ) $content_width = 698;
-
-
+if (!isset($content_width)) {
+    $content_width = 698;
+}
 
 /* Show all thumbnails in attachment.php
 =========================================== */
@@ -111,9 +111,9 @@ function show_all_thumbs() {
     global $post;
     
     $post = get_post($post);
-    $images =& get_children( 'post_type=attachment&post_mime_type=image&output=ARRAY_N&orderby=menu_order&order=ASC&post_parent='.$post->post_parent);
+    $images =& get_children('post_type=attachment&post_mime_type=image&output=ARRAY_N&orderby=menu_order&order=ASC&post_parent='.$post->post_parent);
     if($images){
-        foreach( $images as $imageID => $imagePost ){
+        foreach($images as $imageID => $imagePost){
             if($imageID==$post->ID){
             
             unset($the_b_img);
@@ -139,7 +139,7 @@ function show_all_thumbs() {
 /*    Usage: the_content_limit($max_charaters, $more_link)
 ===================================================== */
 
-if ( !function_exists( 'the_content_limit' ) ) { 
+if (!function_exists('the_content_limit')) { 
  
     function the_content_limit($max_char, $more_link_text = '(more...)', $stripteaser = 0, $more_file = '') {
         $content = get_the_content($more_link_text, $stripteaser, $more_file);
@@ -150,7 +150,7 @@ if ( !function_exists( 'the_content_limit' ) ) {
         $content = str_replace(']]>', ']]&gt;', $content);
         $content = strip_tags($content);
 
-       if ((strlen($content)>$max_char) && ($espacio = strpos($content, " ", $max_char ))) {
+       if ((strlen($content)>$max_char) && ($espacio = strpos($content, " ", $max_char))) {
             $content = substr($content, 0, $espacio);
             $content = $content;
              echo $content;
@@ -165,26 +165,26 @@ if ( !function_exists( 'the_content_limit' ) ) {
 /* Comments Custom Template
 ==================================== */
 
-function wpzoom_comment( $comment, $args, $depth ) {
+function wpzoom_comment($comment, $args, $depth) {
     $GLOBALS['comment'] = $comment;
-    switch ( $comment->comment_type ) :
+    switch ($comment->comment_type) :
         case '' :
     ?>
     <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
         <div id="comment-<?php comment_ID(); ?>">
         <div class="comment-author vcard">
-            <?php echo get_avatar( $comment, 60 ); ?>
-            <?php printf( __( '%s <span class="says">says:</span>', 'wpzoom' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
+            <?php echo get_avatar($comment, 60); ?>
+            <?php printf(__('%s <span class="says">says:</span>', 'wpzoom'), sprintf('<cite class="fn">%s</cite>', get_comment_author_link())); ?>
             
-            <div class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
-                <?php printf( __('%s ag %s', 'wpzoom'), get_comment_date(), get_comment_time()); ?></a><?php edit_comment_link( __( '(Edit)', 'wpzoom' ), ' ' );
+            <div class="comment-meta commentmetadata"><a href="<?php echo esc_url(get_comment_link($comment->comment_ID)); ?>">
+                <?php printf(__('%s ag %s', 'wpzoom'), get_comment_date(), get_comment_time()); ?></a><?php edit_comment_link(__('(Edit)', 'wpzoom'), ' ');
                 ?>
                 
             </div><?php // End .comment-meta .commentmetadata ?>
         
         </div> <?php // End .comment-author .vcard ?>
-        <?php if ( $comment->comment_approved == '0' ) : ?>
-            <em class="comment-awaiting-moderation"><?php _e( 'Tá do thrácht á mheas.', 'wpzoom' ); ?></em>
+        <?php if ($comment->comment_approved == '0') : ?>
+            <em class="comment-awaiting-moderation"><?php _e('Tá do thrácht á mheas.', 'wpzoom'); ?></em>
             <br />
         <?php endif; ?>
 
@@ -193,14 +193,13 @@ function wpzoom_comment( $comment, $args, $depth ) {
         <div class="comment-body"><?php comment_text(); ?></div>
 
         <div class="reply">
-            <?php comment_reply_link(array_merge(
-                $args, 
-                array( 
+            <?php comment_reply_link(array_merge(                $args, 
+                array(
                     'depth' => $depth,
                     'max_depth' => $args['max_depth'],
                     'reply_text' => 'Freagair',
-                )
-             )); ?>
+               )
+            )); ?>
         </div> <?php // End .reply ?>
     </div> <?php // End #comment-## ?>
 
@@ -210,7 +209,7 @@ function wpzoom_comment( $comment, $args, $depth ) {
         case 'trackback' :
     ?>
     <li class="post pingback">
-        <p><?php _e( 'Pingback:', 'wpzoom' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'wpzoom' ), ' ' ); ?></p>
+        <p><?php _e('Pingback:', 'wpzoom'); ?> <?php comment_author_link(); ?><?php edit_comment_link(__('(Edit)', 'wpzoom'), ' '); ?></p>
     <?php
             break;
     endswitch;
@@ -229,7 +228,7 @@ if (is_admin()) {
 
 function tabber_tabs_load_widget() {
     // Register widget.
-    register_widget( 'WPZOOM_Widget_Tabber' );
+    register_widget('WPZOOM_Widget_Tabber');
 }
 
  
@@ -245,7 +244,7 @@ function tabber_tabs_temp_hide(){
 
 // Function to check if there are widgets in the Tabber Tabs widget area
 // Thanks to Themeshaper: http://themeshaper.com/collapsing-wordpress-widget-ready-areas-sidebars/
-function is_tabber_tabs_area_active( $index ){
+function is_tabber_tabs_area_active($index){
   global $wp_registered_sidebars;
 
   $widgetcolums = wp_get_sidebars_widgets();
@@ -260,13 +259,13 @@ function is_tabber_tabs_area_active( $index ){
 class WPZOOM_Widget_Tabber extends WP_Widget {
 
     function WPZOOM_Widget_Tabber() {
-        $widget_ops = array( 'classname' => 'tabbertabs', 'description' => __('Drag me to the Sidebar', 'wpzoom') );
-        $control_ops = array( 'width' => 230, 'height' => 300, 'id_base' => 'wpzoom-tabber' );
-        $this->WP_Widget( 'wpzoom-tabber', __('WPZOOM: Tabs', 'wpzoom'), $widget_ops, $control_ops );
+        $widget_ops = array('classname' => 'tabbertabs', 'description' => __('Drag me to the Sidebar', 'wpzoom'));
+        $control_ops = array('width' => 230, 'height' => 300, 'id_base' => 'wpzoom-tabber');
+        $this->WP_Widget('wpzoom-tabber', __('WPZOOM: Tabs', 'wpzoom'), $widget_ops, $control_ops);
     }
 
-    function widget( $args, $instance ) {
-        extract( $args );
+    function widget($args, $instance) {
+        extract($args);
         
         $style = $instance['style']; // get the widget style from settings
         
@@ -274,25 +273,25 @@ class WPZOOM_Widget_Tabber extends WP_Widget {
         
         // Show the Tabs
         echo '<div class="tabber">'; // set the class with style
-            if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('tabber_tabs') )
+            if (!function_exists('dynamic_sidebar') || !dynamic_sidebar('tabber_tabs'))
         echo '</div>';        
         
         echo "\n\t\t\t" . $after_widget;
         echo '</div>';
      }
 
-    function update( $new_instance, $old_instance ) {
+    function update($new_instance, $old_instance) {
         $instance = $old_instance;
         $instance['style'] = $new_instance['style'];
         
         return $instance;
     }
 
-    function form( $instance ) {
+    function form($instance) {
 
         //Defaults
-        $defaults = array( 'title' => __('Tabber', 'wpzoom'), 'style' => 'style1' );
-        $instance = wp_parse_args( (array) $instance, $defaults ); ?>
+        $defaults = array('title' => __('Tabber', 'wpzoom'), 'style' => 'style1');
+        $instance = wp_parse_args((array) $instance, $defaults); ?>
 
         <div style="float:left;width:98%;"></div>
         <p>
@@ -311,21 +310,19 @@ tabber_tabs_plugin_init();
 function tabber_tabs_plugin_init() {
 
     // Loads and registers the new widget.
-    add_action( 'widgets_init', 'tabber_tabs_load_widget' );
+    add_action('widgets_init', 'tabber_tabs_load_widget');
     
     //Registers the new widget area.
-    register_sidebar(
-        array(
-            'name' => __('WPZOOM: Tabs Widget Area', 'wpzoom'),
+    register_sidebar(        array(            'name' => __('WPZOOM: Tabs Widget Area', 'wpzoom'),
             'id' => 'tabber_tabs',
             'description' => __('Build your tabbed area by placing widgets here.  !! DO NOT PLACE THE WPZOOM: TABS IN THIS AREA.', 'wpzoom'),
             'before_widget' => '<div id="%1$s" class="tabbertab %2$s">',
             'after_widget' => '</div>'
-         )
-    );
+        )
+   );
 
     // Hide Tabber until page load 
-    add_action( 'wp_head', 'tabber_tabs_temp_hide' );
+    add_action('wp_head', 'tabber_tabs_temp_hide');
 
 }
 
@@ -339,7 +336,7 @@ function embed_fix($video,$width,$height) {
  
   $video = preg_replace("/(width\s*=\s*[\"\'])[0-9]+([\"\'])/i", "$1 ".$width." $2", $video);
   $video = preg_replace("/(height\s*=\s*[\"\'])[0-9]+([\"\'])/i", "$1 ".$height." $2", $video);
-  if (strpos($video, "<embed src=" ) !== false) {
+  if (strpos($video, "<embed src=") !== false) {
       $video = str_replace('</param><embed', '</param><param name="wmode" value="transparent"></param><embed wmode="transparent" ', $video);
   }
   else {
