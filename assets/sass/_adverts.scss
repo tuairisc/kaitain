@@ -82,14 +82,11 @@ span[style^=font-weight] {
 
 .sidebar-adverts {
     width: 100%;
-    @include prefix-value(display, flex);
-    @include prefix(flex-direction, column);
-    @include prefix(flex-wrap, nowrap);
+    @include flex(column);
 
     @include media(portrait) {
         // Spread out each of the three boxes evenly in tablet portrait mode.
-        @include prefix(flex-direction, row);
-        @include prefix(justify-content, space-between);
+        @include flex(row, space-between);
     }
 
     @include media(smartphone) {
@@ -99,7 +96,7 @@ span[style^=font-weight] {
     > div {
         // Sidebar adverts groups: .g-2, .g-4 and .g-5
         @include prefix(flex, 1);
-        margin-bottom: 20px;
+        margin-bottom: $margin-19;
 
         @include media(portrait) {
             @include prefix(flex, 0 1 32.5%);

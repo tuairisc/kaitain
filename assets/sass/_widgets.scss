@@ -62,10 +62,8 @@ ul.feature-posts-list, ul.tuairisc-popular-list {
     li {
         padding: 6px 0;
         line-height: 1.4;
-        @include prefix-value(display, flex);
-        @include prefix(flex-direction, row);
-        @include prefix(flex-wrap, nowrap);
-
+        @include flex(row);
+        
         > a {
             @include prefix(flex, 0 1 75px);
         }
@@ -123,7 +121,7 @@ ul.feature-posts-list, ul.tuairisc-popular-list {
     background-position: center bottom, 90% 90%;
     background-size: 100% 10px, 132px auto;
     background-repeat: no-repeat;
-    // max-width: 350px;
+    max-width: 350px;
      
     a {
         box-sizing: border-box;

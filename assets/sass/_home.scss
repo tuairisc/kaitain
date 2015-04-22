@@ -30,11 +30,7 @@ $widget-size-48: 48%;
 
 .tuairisc-featured-row {
     margin-bottom: $margin;
-
-    @include prefix-value(display, flex);
-    @include prefix(flex-direction, row);
-    @include prefix(flex-wrap, wrap);
-    @include prefix(justify-content, space-between);
+    @include flex(row, space-between, wrap);
 
     @include media(smartphone) {
         @include prefix(flex-direction, column);
@@ -80,18 +76,13 @@ $widget-size-48: 48%;
     box-sizing: border-box;
     margin-bottom: $margin;
     padding: $padding;
-    // The Gazeti theme applies inline CSS which otherwise overrides this.
-    width: 100% !important;
 
     h2 {
         margin-bottom: $margin-7;
     }
 
     .tuairisc-author-list {
-        @include prefix-value(display, flex);
-        @include prefix(flex-direction, row);
-        @include prefix(flex-wrap, nowrap);
-        @include prefix(justify-content, space-between);
+        @include flex(row, space-between);
 
         @include media(smartphone) {
             @include prefix(flex-wrap, wrap);
@@ -111,7 +102,7 @@ $widget-size-48: 48%;
     .avatar {
         @extend %cover-picture;
         margin-bottom: 3px;
-        @include flex_size(100%, 1);
+        @include square-flex(100%, 1);
 
         a {
             height: inherit;

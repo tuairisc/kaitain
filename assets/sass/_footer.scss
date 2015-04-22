@@ -40,9 +40,7 @@
 
 .widget-area {
     width: 100%;
-    @include prefix_value(display, flex);
-    @include prefix(flex-direction, row);
-    @include prefix(flex-wrap, nowrap);
+    @include flex(row);
 
     @include media(smartphone) {
         @include prefix(flex-direction, column);
@@ -67,10 +65,10 @@
 .foras-attribution {
     background: center center/100% auto no-repeat url($brand-foras);
     margin: 0 auto;
-    @include flex_size(100px, 0.8);
+    @include square-flex(100px, 0.8);
     display: block;
 
     a {
-        @include flex_size(100%, 1);
+        @include square-flex(100%, 1);
     }
 }

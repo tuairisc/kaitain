@@ -26,11 +26,8 @@
 #site {
     // Top level container for site.
     box-sizing: border-box;
-    // border: 1px solid $colour-grey-light-border;
-    // border-width: 0 1px;
     margin: 0 auto;
     max-width: 1200px;
-    // padding: $padding-sections;
     width: 94%;
 
     @include media(smartphone) {
@@ -61,10 +58,8 @@
 
     #main-interior {
         padding: $padding-19;
-        @include prefix_value(display, flex);
-        @include prefix(flex-direction, row);
-        @include prefix(flex-wrap, nowrap);
-
+        @include flex(row);
+        
         @include media(max, $break-768) {
             @include prefix(flex-direction, column);
         }
