@@ -48,12 +48,6 @@ h6 {
     }
 }
 
-.caroufredsel_wrapper {
-    /* Carousel wrapper occasionally wigs out in a bad way because it goes by
-     * parent height as set by jQuery, and sometimes runs before images load. */
-    min-height: 200px;
-}
-
 #respond {
     // WordPress comment response form.
     @include media(print) {
@@ -83,19 +77,6 @@ span.date {
     }
 }
 
-#slider_nav {
-    // Gazeti's sliding navigation.
-    .item, .item.current:hover {
-        color: #000;
-        font-weight: normal;
-    }
-}
-
-.slide_content_holder {
-    // Posts slider on front page.
-    bottom: 10px;
-}
-
 /**
  * Unsure
  * ------
@@ -105,10 +86,6 @@ span.date {
 .feature-post-text {
     float: right;
     width: calc(100% - 90px);
-}
-
-#slides li {
-    @extend %clearfix;
 }
 
 #report {
