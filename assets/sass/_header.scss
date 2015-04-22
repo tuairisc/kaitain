@@ -13,13 +13,13 @@
  */
 
 #header {
-    background: center top/auto 6px no-repeat border-box url($background-rainbow-strip);
+    background-color: #fff;
+    box-shadow: 0px 10px 15px -8px rgba(0,0,0,0.1);
     box-sizing: border-box;
-    margin-bottom: $margin-26;
-    min-height: 70px;
-    padding: $padding-26 4% 0 4%;
-    position: relative;
-    width: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
 
     @include media(smartphone) {
         min-height: 0;
@@ -31,6 +31,23 @@
         background: none;
         margin-bottom: $margin;
         padding: 0;
+    }
+
+    #header-logo {
+        // background: center bottom/100% 4px no-repeat border-box url($background-rainbow-strip);
+        border-bottom: 1px solid #eee;
+        height: 73px;
+        text-align: center;
+
+        a {
+            background-size: auto 50%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            display: inline-block;
+            font-size: 0 !important;
+            height: 100%;
+            width: 300px;
+        }
     }
 
     .share-search {
@@ -58,31 +75,6 @@
 
         @include media(print) {
             display: none;
-        }
-    }
-
-    #logo {
-        bottom: 0;
-        position: absolute;
-
-        @include media(smartphone) {
-            display: inline-block;
-            position: initial;
-            margin-bottom: $margin;
-        }
-
-        a {
-            display: block;
-            font-size: 10px;
-            height: 100%;
-            line-height: initial;
-            width: 100%; 
-        }
-
-        img {
-            /* Site logo. */ 
-            max-height: 45px;
-            width: auto;
         }
     }
 
