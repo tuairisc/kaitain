@@ -18,10 +18,6 @@ ul.sharing {
         line-height: initial;
     }
 
-    a {
-        // border-radius: 3px;
-    }
-
     @include generate-social-links(a, 40px, $social-sprites);
 }
 
@@ -34,7 +30,7 @@ ul.sharing {
 }
 
 #main-interior .sharing {
-    @include prefix(flex, 0 1 40px);
+    @include flex-child(0 1 40px);
 
     li {
         display: block;

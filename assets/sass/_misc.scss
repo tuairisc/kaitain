@@ -43,7 +43,7 @@ h6 {
 
 #sidebar, .full-widget-area {
     // All otherwise-unrelated areas to hide when printing.
-    @inclupde media(print) {
+    @include media(print) {
         display: none;
     }
 }

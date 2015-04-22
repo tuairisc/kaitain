@@ -130,9 +130,7 @@
         background-size: #{$size * $columns} #{$size * $rows};
         background-repeat: no-repeat;
         display: block;
-        height: 0;
-        padding-top: $size;
-        width: $size;
+        @include square-flex($size, 1);
     }
 
     @if ($service) {
@@ -157,7 +155,7 @@
  * --------------------------
  */
 
-@mixin flex($direction: row, $justify: null, $wrap: null) {
+@mixin flex($direction: row, $justify: null, $wrap: null, $align: null) {
     @include prefix_value(display, flex);
     @include prefix(flex-direction, $direction);
 
@@ -168,9 +166,25 @@
     @if ($wrap) {
         @include prefix(flex-wrap, $wrap);
     }
+
+    @if ($align) {
+        @include prefix(align-items, $align);
+    }
 }
 
-@mixin square-flex($width, $ratio) {
+@mixin flex-child($flex: 1, $align: null, $order: null) {
+    @include prefix(flex, $flex);
+
+    @if ($align) {
+        @include prefix(align-self, $align);
+    }
+
+    @if ($order) {
+        @include prefix(order, $order);
+    }
+}
+
+@mixin square-flex($width: 100%, $ratio: 1) {
     // Ratio should be between 0 and foo.
     // See: http://stackoverflow.com/a/13625843/1433400
     // See: http://alistapart.com/article/creating-intrinsic-ratios-for-video
@@ -191,8 +205,6 @@
 }
 
 @function rgba-opposite($red: 255, $green: 255, $blue: 255, $alpha: 0) {
-    // I do not intend for this to be called directly. 
-    // This function inverts RGB colours.
     $red: 255 - $red;
     $green: 255 - $green;
     $blue: 255 - $blue;

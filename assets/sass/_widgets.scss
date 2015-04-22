@@ -65,14 +65,14 @@ ul.feature-posts-list, ul.tuairisc-popular-list {
         @include flex(row);
         
         > a {
-            @include prefix(flex, 0 1 75px);
+            @include flex-child(0 1 75px);
         }
 
         div.feature-post-text {
             box-sizing: border-box;
             float: none;
             padding-left: $padding;
-            @include prefix(flex, 1);
+            @include flex-child(1);
 
             a {
                 @include font-size(1.4);

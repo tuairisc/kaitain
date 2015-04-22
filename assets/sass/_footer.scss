@@ -51,7 +51,7 @@
         float: none;
         min-height: 1px;
         width: initial;
-        @include prefix(flex, 1);
+        @include flex-child(1);
     }
 }
 

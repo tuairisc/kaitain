@@ -38,15 +38,14 @@ $widget-size-48: 48%;
 
     article {
         margin-bottom: $margin-7;
-
-        @include prefix(flex, 0 1 $widget-size-23);
+        @include flex-child(0 1 $widget-size-23);
 
         @include media(max, $breakpoint-home) {
-            @include prefix(flex, 0 1 $widget-size-48);
+            @include flex-child(0 1 $widget-size-48);
         }
 
         @include media(smartphone) {
-            @include prefix(flex, 1);
+            @include flex-child(1);
         }
     }
 }
@@ -91,11 +90,11 @@ $widget-size-48: 48%;
 
     .tuairisc-author {
         box-sizing: border-box;
-        @include prefix(flex, 0 1 $widget-size-23);
+        @include flex-child(0 1 $widget-size-23);
 
         @include media(smartphone) {
             margin-bottom: $margin-7;
-            @include prefix(flex, 0 1 $widget-size-48);
+            @include flex-child(0 1 $widget-size-48);
         }
     }
 

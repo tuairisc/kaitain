@@ -36,7 +36,7 @@
 .modal-box {
     background: $modal-background center center/auto 70% no-repeat border-box url($education-soundwave);
     margin-bottom: 4px;
-    @include prefix(flex, 0 1 32.67%);
+    @include flex-child(0 1 32.67%);
 
     &:hover {
         background-color: $modal-background-hover;
