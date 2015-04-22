@@ -1,0 +1,120 @@
+/**
+ * Variables
+ * ---------
+ * Variables...
+ * ...are aggregatd as I found them within the theme CSS.
+ * ...are here so that I can work on later reduction.
+ * 
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ */
+
+$modal-background: #d1d2d4;
+$modal-background-hover: #5992cf;
+$modal-background-active: #5e83c4;
+
+/**
+ * Site Section Colours
+ * --------------------
+ * Keyed to category number, with single post, job posts and fallback:
+ *
+ * 154: Tuairimíocht
+ * 155: Spoirt
+ * 156: Cultúr
+ * 157: Saol
+ * 158: Greann
+ * 159: Pobal
+ * 187: Foghlaimeoirí
+ * 191: Nuacht
+ * 224: ???
+ * 225: ???
+ * 799: ???
+ * 899: ???
+ */
+
+$category_colours: (
+    154: #8eb2d3, 
+    155: #c54b54, 
+    156: #96c381, 
+    157: #e04184,
+    158: #e6192a, 
+    159: #7d5e90, 
+    187: #424045, 
+    191: #516671,
+    224: #9ac485, 
+    225: #90b5d2, 
+    799: #424045, 
+    899: "#000000",
+    fallback: #c7c009
+);
+
+/**
+ * Fonts
+ * -------
+ * There are two font stacks used in the theme.
+ */
+
+// Font-families.
+$font-family-georgia: Georgia, Times, 'Times New Roman', serif;
+$font-family-arial: Arial, 'Helvetica Neue', helvetica, sans-serif;
+$font-family-courier: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+
+/**
+ * Colours
+ * -------
+ */
+
+$colour-blue-navigation: #506572;
+$colour-grey-dark: #87888a;
+$colour-green-anchor: #95c37c;
+$colour-grey-box: #e5e5e5;
+$colour-grey-cite: #444;
+$colour-grey-dark-border: #333;
+$colour-grey-light-border: #ececec;
+$colour-grey-article-border: #f2f2f2;
+$colour-grey-light-span: #999;
+$colour-white-text: #fff;
+$colour-grey-jobarchive-span: #d2d3d5;
+
+/**
+ * Margins, Sizes and Padding
+ * --------------------------
+ */
+
+// Margins.
+$margin: 13px;
+$margin-7: $margin * 0.5;
+$margin-10: $margin * 0.75;
+$margin-19: $margin * 1.5;
+$margin-23: $margin * 1.75;
+$margin-26: $margin * 2;
+$margin-33: $margin * 2.5;
+$margin-39: $margin * 3;
+$margin-65: $margin * 5;
+
+// Padding.
+$padding: $margin;
+$padding-7: $margin-7;
+$padding-10: $margin-10;
+$padding-19: $margin-19;
+$padding-23: $margin-23;
+$padding-26: $margin-26;
+$padding-33: $margin-33;
+$padding-39: $margin-33;
+$padding-65: $margin-65;
+
+// Default side padding of main-column segments.
+$padding-sections: 0 12%;
+
+/**
+ * Breakpoints
+ * -----------
+ */
+
+$break-1200: 1200px;
+$break-768: 768px;
