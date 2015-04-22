@@ -31,18 +31,8 @@ table.tg {
     }
 }
 
-/**
- * Headline Stylings
- * -----------------
- */
-
-h2 {
-    font-size: $font-size-20;
-}
-
-h3 {
-    color: #999;
-    font-size: $font-size-16;
+h6 {
+    color: $colour-grey-light-span;
 }
 
 /**
@@ -51,9 +41,9 @@ h3 {
  * These are one-line fixes to fix quirks in the Gazeti theme.
  */
 
-.related_posts, #sidebar, .full-widget-area {
+#sidebar, .full-widget-area {
     // All otherwise-unrelated areas to hide when printing.
-    @include media(print) {
+    @inclupde media(print) {
         display: none;
     }
 }
@@ -93,20 +83,11 @@ span.date {
     }
 }
 
-.recent-meta span {    
-    // Post header meta spans. 
-    font-size: $font-size;
-}
-
 #slider_nav {
     // Gazeti's sliding navigation.
-    .item, .item.current a {
-        font-size: $font-size-16;
-
-        &:hover {
-            color: #000;
-            font-weight: normal;
-        }
+    .item, .item.current:hover {
+        color: #000;
+        font-weight: normal;
     }
 }
 

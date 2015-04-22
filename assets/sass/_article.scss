@@ -96,7 +96,7 @@ article {
     }
 }
 
-.related_posts .title {
+.title {
     color: #000;
 }
 
@@ -136,48 +136,6 @@ header {
 }
 
 /**
- * Article Content Body
- * --------------------
- */
-
-div.article-body {
-    blockquote {
-        // Ciaran asked for a meticulously-styled blockquote area.
-        background-image: 
-            url('../images/quotation_open.svg'), 
-            url('../images/quotation_close.svg');
-        background-position: 
-            -4% 4%, 
-            104% 88%;
-        background-origin: content-box;
-        background-repeat: no-repeat;
-        background-size: auto 25px;
-        border-color: 1px solid $colour-grey-article-border;
-        border-width: 1px 0;
-        font-size: $font-size-18;
-        font-style: italic;
-        padding: 15px 30px;
-
-        >:last-child {
-            margin-bottom: 0;
-        }
-    }
-
-    cite {
-        color: $colour-grey-cite;
-        display: block;
-        font-style: none;
-        font-weight: bold;
-        font-size: 80%;
-        width: 100%;
-
-        &:before {
-            content: ' -';
-        }
-    }
-}
-
-/**
  * WordPress Image Captions
  * ------------------------
  */
@@ -188,7 +146,6 @@ div.article-body {
 
 p.wp-caption-text {
     color: $colour-grey-light-span;
-    font-size: $font-size;
     padding: 0;
     text-align: left;
 }
@@ -200,7 +157,6 @@ p.wp-caption-text {
 
 article.full {
     @extend %clearfix;
-    padding: 0 4% $padding 4%;
 
     @include media(print) {
         padding: 0;
@@ -280,10 +236,6 @@ article.jobarchive {
         display: inline-block;
         margin-bottom: $margin-7;
         width: 100%;
-
-        @include media(smartphone) {
-            font-size: $font-size-16;
-        }
     }
 
     span.more {
@@ -435,5 +387,26 @@ article.lead {
 
     div.article-body p {
         margin: 0;
+    }
+}
+
+/**
+ * Related Posts Section
+ * ---------------------
+ */
+
+div.related-posts {
+    @include prefix_value(display, flex);
+    @include prefix(flex-direction, row);
+    @include prefix(flex-wrap, nowrap);
+    @include prefix(justify-content, space-between);
+
+    article {
+        box-sizing: border-box;
+        @include prefix(flex, 0 1 30%);
+
+        @include media(max, $break-768) {
+            @include prefix(flex, 0 1 32%);
+        }
     }
 }
