@@ -1,3 +1,0 @@
-[submodule "assets/sass/lib"]
-	path = assets/sass/lib
-	url = https://github.com/bhalash/scss-helpers
