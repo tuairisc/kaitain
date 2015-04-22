@@ -14,7 +14,7 @@ $m = 0;
 if ($related_query->have_posts()) : ?>
     <div id="related">
         <h6 class="title">
-            <?php _e('Léigh tuilleadh sa rannóg seo','wpzoom');?>
+            <?php _e('Léigh tuilleadh sa rannóg seo','tuairisc');?>
         </h6>
         <div class="related-posts">
 
@@ -31,7 +31,7 @@ if ($related_query->have_posts()) : ?>
                         'height' => 150
                     )); ?>
 
-                    <a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title_attribute(); ?></a>
+                    <a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'tuairisc' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title_attribute(); ?></a>
                     <span class="date"><?php printf(get_the_date()); ?></span>
 
                 </article>

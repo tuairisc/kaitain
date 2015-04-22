@@ -78,7 +78,7 @@
                 <?php
             }
         } else {
-            echo __('Níor fágadh aon nóta tráchta fós', 'wpzoom');
+            echo __('Níor fágadh aon nóta tráchta fós', 'tuairisc');
         }
 
         echo '</ul>';
@@ -117,11 +117,11 @@
             </script>
 
             <p>
-                <label for="<?php echo $this->get_field_id('widget_title'); ?>"><?php _e('Title:', 'wpzoom'); ?></label><br />
+                <label for="<?php echo $this->get_field_id('widget_title'); ?>"><?php _e('Title:', 'tuairisc'); ?></label><br />
                 <input id="<?php echo $this->get_field_id('widget_title'); ?>" name="<?php echo $this->get_field_name('widget_title'); ?>" value="<?php echo $instance['widget_title']; ?>" type="text"  class="widefat" />
             </p>
             <p>
-                <label for="<?php echo $this->get_field_id('elapsed_days'); ?>"><?php _e('Since:', 'wpzoom'); ?></label><br />
+                <label for="<?php echo $this->get_field_id('elapsed_days'); ?>"><?php _e('Since:', 'tuairisc'); ?></label><br />
                 <select id="<?php echo $this->get_field_id('elapsed_days'); ?>" name="<?php echo $this->get_field_name('elapsed_days'); ?>">
                     <option value="36500">All Time</option>
                     <option value="365">This Year</option>
@@ -137,7 +137,7 @@
                 </select>
             </p>
             <p>
-                <label for="<?php echo $this->get_field_id('max_posts'); ?>"><?php _e('Posts To Display:', 'wpzoom'); ?></label><br />
+                <label for="<?php echo $this->get_field_id('max_posts'); ?>"><?php _e('Posts To Display:', 'tuairisc'); ?></label><br />
                 <select id="<?php echo $this->get_field_id('max_posts'); ?>" name="<?php echo $this->get_field_name('max_posts'); ?>">
                     <?php for ($i = 1; $i <= 10; $i++) : ?>
                         <option value="<?php echo $i; ?>"><?php echo $i; ?></option>

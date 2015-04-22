@@ -72,12 +72,12 @@ class tuairisc_authors extends WP_Widget {
         $author_query = get_users(array('orderby' => 'nicename'));
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('widget_title'); ?>"><?php _e('Title:', 'wpzoom'); ?></label><br />
+            <label for="<?php echo $this->get_field_id('widget_title'); ?>"><?php _e('Title:', 'tuairisc'); ?></label><br />
             <input id="<?php echo $this->get_field_id('widget_title'); ?>" name="<?php echo $this->get_field_name('widget_title'); ?>" value="<?php echo $instance['widget_title']; ?>" type="text"  class="widefat" />
         </p>
         <?php for ($i = 0; $i < 4;  $i++) : ?>
             <p>
-                <label for="<?php echo $this->get_field_id('author_list'); ?>"><?php _e('Author #' . ($i + 1), 'wpzoom'); ?></label><br />
+                <label for="<?php echo $this->get_field_id('author_list'); ?>"><?php _e('Author #' . ($i + 1), 'tuairisc'); ?></label><br />
                 <select class="author-widget-admin" name="<?php echo $this->get_field_name('author_list') . '[]'; ?>">
                     <option disabled <?php echo ($author_list[$i] === '') ? 'selected' : ''; ?>>
 

@@ -37,7 +37,7 @@
 
     <div class="article-body">                     
         <header>
-            <h2 class="title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e('%s', 'wpzoom'); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+            <h2 class="title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e('%s', 'tuairisc'); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
             <div class="text">
                 <?php if (option::get('post_date') == 'on' || option::get('post_author') == 'on') {
                     if (option::get('post_author') == 'on' && !is_default_author()) { 
@@ -53,6 +53,6 @@
         </header>
         <?php the_excerpt(); ?>
         <span class="more"><a href="<?php the_permalink(); ?>">Léigh Tuilleadh</a></span>
-        <?php edit_post_link( __('Edit', 'wpzoom'), '<br /><span>', '</span>'); ?>
+        <?php edit_post_link( __('Edit', 'tuairisc'), '<br /><span>', '</span>'); ?>
     </div>
 </article>

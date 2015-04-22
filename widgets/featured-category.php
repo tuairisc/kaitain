@@ -131,11 +131,11 @@
              * Make use of the get_field_id() and get_field_name() function when creating your form elements. This handles the confusing stuff. */
 
             /* Set up some default widget settings. */
-            $defaults = array( 'title' => __('Featured Category', 'wpzoom'), 'type' => 'cat', 'dark' => '', 'category' => '', 'posts' => '3', 'exclude_featured' => '');
+            $defaults = array( 'title' => __('Featured Category', 'tuairisc'), 'type' => 'cat', 'dark' => '', 'category' => '', 'posts' => '3', 'exclude_featured' => '');
             $instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'wpzoom'); ?></label><br/>
+                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'tuairisc'); ?></label><br/>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>"  />
             </p>
             <p>
@@ -143,14 +143,14 @@
                 <label for="<?php echo $this->get_field_id( 'dark' ); ?>">Dark Style?</label>
             </p>
             <p>
-                <label for="<?php echo $this->get_field_id('type'); ?>"><?php _e('Posts marked by:', 'wpzoom'); ?></label>
+                <label for="<?php echo $this->get_field_id('type'); ?>"><?php _e('Posts marked by:', 'tuairisc'); ?></label>
                 <select id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>" style="width:90%;">
                 <option value="cat"<?php if ($instance['type'] == 'cat') { echo ' selected="selected"';} ?>>Categories</option>
                 <option value="tag"<?php if ($instance['type'] == 'tag') { echo ' selected="selected"';} ?>>Tag(s)</option>
                 </select>
             </p>
             <p>
-                <label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Category (if selected above):', 'wpzoom'); ?></label>
+                <label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Category (if selected above):', 'tuairisc'); ?></label>
                 <?php 
                     $activeoptions = $instance['category'];
 
@@ -178,11 +178,11 @@
                 </select>
             </p>
             <p>
-                <label for="<?php echo $this->get_field_id( 'slugs' ); ?>"><?php _e('Tag slugs (if selected above, separated by comma ","):', 'wpzoom'); ?></label>
+                <label for="<?php echo $this->get_field_id( 'slugs' ); ?>"><?php _e('Tag slugs (if selected above, separated by comma ","):', 'tuairisc'); ?></label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'slugs' ); ?>" name="<?php echo $this->get_field_name( 'slugs' ); ?>" value="<?php echo $instance['slugs']; ?>" />
             </p>
             <p>
-                <label for="<?php echo $this->get_field_id('posts'); ?>"><?php _e('Posts to show:', 'wpzoom'); ?></label>
+                <label for="<?php echo $this->get_field_id('posts'); ?>"><?php _e('Posts to show:', 'tuairisc'); ?></label>
                 <select id="<?php echo $this->get_field_id('posts'); ?>" name="<?php echo $this->get_field_name('posts'); ?>" style="width:90%;">
                 <?php
                     $m = 0;
@@ -203,7 +203,7 @@
             </p>
             <p>
                 <input class="checkbox" type="checkbox" id="<?php echo $this->get_field_id('exclude_featured'); ?>" name="<?php echo $this->get_field_name('exclude_featured'); ?>" <?php if ($instance['exclude_featured'] == 'on') { echo ' checked="checked"';  } ?> /> 
-                <label for="<?php echo $this->get_field_id('exclude_featured'); ?>"><?php _e('Exclude Featured Posts from Widget', 'wpzoom'); ?></label>
+                <label for="<?php echo $this->get_field_id('exclude_featured'); ?>"><?php _e('Exclude Featured Posts from Widget', 'tuairisc'); ?></label>
                 <br/>
             </p>
         <?php }

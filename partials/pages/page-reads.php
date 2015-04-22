@@ -47,7 +47,7 @@ Template Name: Most Read Posts
                         <td><?php the_author_posts_link(); ?></td>     
                         <td><?php echo get_the_date(); ?></td>     
                         <td><?php echo get_post_meta(get_the_ID(), $views_meta_key, true); ?></td>
-                        <?php edit_post_link( __('Edit', 'wpzoom'), '<td>', '</td>'); ?>
+                        <?php edit_post_link( __('Edit', 'tuairisc'), '<td>', '</td>'); ?>
                     </tr>
                 <?php endwhile; ?>
             </table>

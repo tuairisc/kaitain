@@ -13,7 +13,7 @@
     <div class="article-body">                     
         <header>
             <h2 class="title">
-                <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e('%s', 'wpzoom'); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+                <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e('%s', 'tuairisc'); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
             </h2>
             <div class="text">
                     <?php if (!is_default_author()) { 
@@ -33,6 +33,6 @@
         <div class="exerpt">
             <?php the_excerpt(); ?>
         </div>
-        <?php edit_post_link( __('Edit', 'wpzoom'), '<span>', '</span>'); ?>
+        <?php edit_post_link( __('Edit', 'tuairisc'), '<span>', '</span>'); ?>
     </div>
 </article>

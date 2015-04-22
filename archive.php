@@ -12,27 +12,27 @@
 
         if(is_tag()) {
             // Tag archive. 
-            _e('Míreanna clibeáilte le:', 'wpzoom');
+            _e('Míreanna clibeáilte le:', 'tuairisc');
             single_tag_title();
         } else if (is_day()) { 
             // Daily archive. 
-            _e('Cartlann do', 'wpzoom');
+            _e('Cartlann do', 'tuairisc');
             the_time('F jS, Y'); 
         } else if (is_month()) { 
             // Monthly archive. 
-            _e('Cartlann do', 'wpzoom');
+            _e('Cartlann do', 'tuairisc');
             the_time('F, Y'); 
         } else if (is_year()) {
             // Yearly archive. 
-            _e('Cartlann do', 'wpzoom'); 
+            _e('Cartlann do', 'tuairisc'); 
             the_time('Y'); 
         } else if (is_author()) { 
             // Author archive. 
-            _e( 'Altanna le: ', 'wpzoom' );
+            _e( 'Altanna le: ', 'tuairisc' );
             printf('<a href="%s">%s</a>', $curauth->user_url, $curauth->display_name);  
         }else if (isset($_GET['paged']) && !empty($_GET['paged'])) {
             // Paged archive. 
-            _e('Mireanna', 'wpzoom'); 
+            _e('Mireanna', 'tuairisc'); 
         }
 
         printf('</h6>');

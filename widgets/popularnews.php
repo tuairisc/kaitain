@@ -83,12 +83,12 @@ class Wpzoom_Popular_News extends WP_Widget {
                 $wrappeddate = str_replace(":","-",$wrappeddate);
                 $datearray = explode("-", $wrappeddate);
                 $wrappeddate = date("F j, Y", mktime($datearray[3], $datearray[4], $datearray[5], $datearray[1], $datearray[2], $datearray[0]));
-                echo "<li><a href='".get_permalink($r->ID)."' rel='bookmark'>".htmlspecialchars($r->post_title, ENT_QUOTES)."</a><br /><span class='comments' href='".get_permalink($r->ID)."'>".htmlspecialchars($r->comment_count, ENT_QUOTES)." ".__('comments','wpzoom')."</span>";
+                echo "<li><a href='".get_permalink($r->ID)."' rel='bookmark'>".htmlspecialchars($r->post_title, ENT_QUOTES)."</a><br /><span class='comments' href='".get_permalink($r->ID)."'>".htmlspecialchars($r->comment_count, ENT_QUOTES)." ".__('comments','tuairisc')."</span>";
                 echo"</li>\n";
                 $mcpcounter++;
             }
         } else {
-            echo "<li class='mcpitem mcpitem-0'>". __('Níor fágadh aon nóta tráchta fós', 'wpzoom') . "</li>\n";
+            echo "<li class='mcpitem mcpitem-0'>". __('Níor fágadh aon nóta tráchta fós', 'tuairisc') . "</li>\n";
         }
 
         echo "</ul>\n";
@@ -111,23 +111,23 @@ class Wpzoom_Popular_News extends WP_Widget {
         $instance = wp_parse_args( (array) $instance, $defaults ); ?>
         
         <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'wpzoom'); ?></label><br />
+            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'tuairisc'); ?></label><br />
             <input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" type="text"  class="widefat" />
         </p>
         
         <p>
-            <label for="<?php echo $this->get_field_id( 'sincewhen' ); ?>"><?php _e('Since:', 'wpzoom'); ?></label><br />
+            <label for="<?php echo $this->get_field_id( 'sincewhen' ); ?>"><?php _e('Since:', 'tuairisc'); ?></label><br />
             <select id="<?php echo $this->get_field_id( 'sincewhen' ); ?>" name="<?php echo $this->get_field_name( 'sincewhen' ); ?>">
-                <option value="forever"<?php echo $instance['sincewhen'] != 'thismonth' && $instance['sincewhen'] != 'thisyear' ? 'selected="selected"' : ''; ?>><?php _e('Forever', 'wpzoom'); ?></option>
-                <option value="thisyear"<?php echo $instance['sincewhen'] == 'thisyear' ? 'selected="selected"' : ''; ?>><?php _e('This Year', 'wpzoom'); ?></option>
-                <option value="thismonth"<?php echo $instance['sincewhen'] == 'thismonth' ? 'selected="selected"' : ''; ?>><?php _e('This Month', 'wpzoom'); ?></option>
-                <option value="thisweek"<?php echo $instance['sincewhen'] == 'thisweek' ? 'selected="selected"' : ''; ?>><?php _e('This Week', 'wpzoom'); ?></option>
-                <option value="thisday"<?php echo $instance['sincewhen'] != 'thisday' && $instance['sincewhen'] != 'thisday' ? 'selected="selected"' : ''; ?>><?php _e('Today', 'wpzoom'); ?></option>
+                <option value="forever"<?php echo $instance['sincewhen'] != 'thismonth' && $instance['sincewhen'] != 'thisyear' ? 'selected="selected"' : ''; ?>><?php _e('Forever', 'tuairisc'); ?></option>
+                <option value="thisyear"<?php echo $instance['sincewhen'] == 'thisyear' ? 'selected="selected"' : ''; ?>><?php _e('This Year', 'tuairisc'); ?></option>
+                <option value="thismonth"<?php echo $instance['sincewhen'] == 'thismonth' ? 'selected="selected"' : ''; ?>><?php _e('This Month', 'tuairisc'); ?></option>
+                <option value="thisweek"<?php echo $instance['sincewhen'] == 'thisweek' ? 'selected="selected"' : ''; ?>><?php _e('This Week', 'tuairisc'); ?></option>
+                <option value="thisday"<?php echo $instance['sincewhen'] != 'thisday' && $instance['sincewhen'] != 'thisday' ? 'selected="selected"' : ''; ?>><?php _e('Today', 'tuairisc'); ?></option>
             </select>
         </p>
 
         <p>
-            <label for="<?php echo $this->get_field_id( 'maxposts' ); ?>"><?php _e('Posts To Display:', 'wpzoom'); ?></label>
+            <label for="<?php echo $this->get_field_id( 'maxposts' ); ?>"><?php _e('Posts To Display:', 'tuairisc'); ?></label>
             <select id="<?php echo $this->get_field_id( 'maxposts' ); ?>" name="<?php echo $this->get_field_name( 'maxposts' ); ?>">
                 <?php for ($i = 1; $i < 11; $i++) {
                     echo '<option' . ($i == $instance['maxposts'] ? ' selected="selected"' : '') . '>' . $i . '</option>';

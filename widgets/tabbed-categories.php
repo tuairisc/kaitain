@@ -51,7 +51,7 @@ class Tabbed_Widget extends WP_Widget {
                 echo '</h2>'; 
             } ?>
 
-            <ul class="tabs clearfix">
+            <ul class="tabs">
                 <?php for ($i = 1; $i <= $instance["count"]; $i++) : ?>
                     <li>
                         <a href="#tab<?php echo $rnd . $i; ?>"><?php echo stripslashes($instance["tab" . $i . "-title"]); ?></a>
@@ -138,8 +138,6 @@ class Tabbed_Widget extends WP_Widget {
         <?php endfor; // End of widget function. ?>
 
         </div><!-- end of .wztw-container -->
-        <div class="clear"></div>
-        <script>jQuery(function($){ $(".wztw-container").tabs(); });</script>  
     <?php }
 
     function form($instance) {
@@ -213,14 +211,14 @@ class Tabbed_Widget extends WP_Widget {
                         <input id="<?php echo $this->get_field_id("tab" . $i . "-title"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-title"); ?>" value="<?php echo $instance["tab" . $i . "-title"]; ?>" type="text" size="27"/>
                     </p>
                     <p>
-                        <label for="<?php echo $this->get_field_id("tab" . $i . "-type"); ?>"><?php _e('Posts source:', 'wpzoom'); ?></label>
+                        <label for="<?php echo $this->get_field_id("tab" . $i . "-type"); ?>"><?php _e('Posts source:', 'tuairisc'); ?></label>
                         <select id="<?php echo $this->get_field_id("tab" . $i . "-type"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-type"); ?>" style="width:90%;">
                             <option value="cat"<?php if ($instance["tab" . $i . "-type"] == 'cat') echo ' selected="selected"'; ?>>Category(s)</option>
                             <option value="tag"<?php if ($instance["tab" . $i . "-type"] == 'tag') echo ' selected="selected"'; ?>>Tag(s)</option>
                         </select>
                     </p>
                     <p class="wpzoom_forcat">
-                        <label for="<?php echo $this->get_field_id("tab" . $i . "-category"); ?>"><?php _e('Category (if selected above):', 'wpzoom'); ?></label>
+                        <label for="<?php echo $this->get_field_id("tab" . $i . "-category"); ?>"><?php _e('Category (if selected above):', 'tuairisc'); ?></label>
                         <?php $activeoptions = $instance["tab" . $i . "-category"];
 
                         if (!$activeoptions) {
@@ -246,11 +244,11 @@ class Tabbed_Widget extends WP_Widget {
                     </select>
                 </p>
                 <p class="wpzoom_fortag">
-                    <label for="<?php echo $this->get_field_id("tab" . $i . "-slugs"); ?>"><?php _e('Tag slugs (if selected above):', 'wpzoom'); ?></label>
+                    <label for="<?php echo $this->get_field_id("tab" . $i . "-slugs"); ?>"><?php _e('Tag slugs (if selected above):', 'tuairisc'); ?></label>
                     <input type="text" size="27" id="<?php echo $this->get_field_id("tab" . $i . "-slugs"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-slugs"); ?>" value="<?php echo $instance["tab" . $i . "-slugs"]; ?>"  />
                 </p>
                 <p>
-                    <label for="<?php echo $this->get_field_id("tab" . $i . "-posts"); ?>"><?php _e('Posts to show:', 'wpzoom'); ?></label>
+                    <label for="<?php echo $this->get_field_id("tab" . $i . "-posts"); ?>"><?php _e('Posts to show:', 'tuairisc'); ?></label>
                     <select id="<?php echo $this->get_field_id("tab" . $i . "-posts"); ?>" name="<?php echo $this->get_field_name("tab" . $i . "-posts"); ?>" style="width:90%;">
                         <?php $m = 0;
 
