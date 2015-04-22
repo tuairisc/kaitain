@@ -27,11 +27,10 @@
 
                 edit_post_link( __('Edit', 'wpzoom'), '<br /><span>', '</span>'); ?>
             </div>
-            <?php get_template_part('/partials/sharing'); ?>
         </div>
     </header> 
     <div class="article-body">
-        <?php the_content(); get_template_part('/partials/sharing'); ?>
+        <?php the_content(); ?>
 
         <?php wp_link_pages(array(
             'before' => '<div class="page-link"><span>' . __('Pages:', 'wpzoom') . '</span>', 

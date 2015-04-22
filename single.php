@@ -1,23 +1,23 @@
 <?php get_header();
-$template = get_post_meta($post->ID, 'wpzoom_post_template', true);
-printf('<div id="content">');
+$template = get_post_meta($post->ID, 'wpzoom_post_template', true); ?>
 
-while(have_posts()) {
-    the_post();
+<div id="content">
+    <?php while(have_posts()) {
+        the_post();
 
-    increment_view_counter(); 
-    get_template_part('/partials/banner'); 
-    get_template_part('/partials/articles/article', 'full'); 
+        increment_view_counter(); 
+        get_template_part('/partials/articles/article', 'full'); 
 
-    if (option::get('post_related') == 'on' && !is_custom_type()) {
-        get_template_part('related-posts'); 
-    }
+        if (option::get('post_related') == 'on' && !is_custom_type()) {
+            get_template_part('related-posts'); 
+        }
 
-    if (comments_open()) {
-        comments_template(); 
-    }
-}
+        if (comments_open()) {
+            comments_template(); 
+        }
+    } ?>
+</div>
 
-printf('</div>');
+<?php get_template_part('/partials/sharing');
 get_sidebar();
 get_footer(); ?>
