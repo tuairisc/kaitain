@@ -5,6 +5,7 @@
                 <?php dynamic_sidebar('Footer (full-width)'); ?>
             </div>
         <?php endif; ?>
+        <div class="section-trim trim-bottom"></div>
     </div> <?php // End #main ?>
 
     <?php // AdRotate group 3
@@ -14,6 +15,7 @@
 </div><?php // End #site ?>
 
 <div id="footer" role="footer">
+    <div class="section-trim trim-top"></div>
     <?php if (is_active_sidebar('footer_1') || is_active_sidebar('footer_2') || is_active_sidebar('footer_3') || is_active_sidebar('footer_4')) : ?>
         <div class="widget-area">
             <?php dynamic_sidebar('Footer (column 1)'); ?>

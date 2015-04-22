@@ -51,4 +51,5 @@
         } ?>
 
         <div id="main" role="main">
+            <div class="section-trim trim-top"></div>
             <div id="main-interior">
