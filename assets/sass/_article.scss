@@ -47,45 +47,8 @@ $archive-article-thumb-height-325: 325px;
 article {
     @extend %clearfix;
     box-sizing: border-box;
-    border: 0;
-    box-shadow: none;
-    display: block;
-
-    blockquote, li, p {
-        a {
-            color: $colour-green-anchor;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
-
-    blockquote, ol, p, pre, ul {
-        color: #000;
-        font: 16px $font-family-georgia;
-        line-height: 150%;
-        margin-bottom: $margin;
-    }
-
-    a img, blockquote, ol, p, pre, ul {
-        margin-bottom: $margin;
-    }
-
-    div, img {
-        height: auto;
-        overflow: hidden;
-        max-width: 100%;
-    }
-
-    header {
-        background: none;
-        margin: 0;
-        padding: 0;
-    }
 
     div.article-body {
-        border: 0;
         box-sizing: border-box;
     }
 
@@ -96,18 +59,14 @@ article {
     }
 }
 
-.title {
-    color: #000;
-}
-
 /**
  * Article Header
  * --------------
  */
 
 header {
-    .title {
-        padding: 0;
+    .title, div.excerpt {
+        margin-bottom: $margin-7;
     }
 
     div.excerpt {
@@ -118,16 +77,12 @@ header {
 
         p {
             color: $colour-grey-light-span;
+            margin: 0;
         }
     }
 
     span, .article-author {
-        color: #000;
         text-transform: none;
-
-        a {
-            color: inherit;
-        }
     } 
 
     .article-author {
@@ -156,8 +111,6 @@ p.wp-caption-text {
  */
 
 article.full {
-    @extend %clearfix;
-
     @include media(print) {
         padding: 0;
     }
@@ -196,14 +149,6 @@ article.full {
             @extend %cover-picture;
             margin-right: 10px;
             @include flex_size(67px, 1);
-        }
-
-        h1.title {
-            margin-bottom: $margin;
-
-            @include media(print) {
-                margin-bottom: 0;
-            }
         }
     } 
 }

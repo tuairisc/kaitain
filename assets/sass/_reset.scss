@@ -12,6 +12,7 @@
 
 html {
     font: 100% $font-family-georgia;
+    @include line-height(2.4);
 }
 
 body {
@@ -52,12 +53,30 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
 }
 
-h1 { @include font-size(2.6); }
-h2 { @include font-size(2.0); }
-h3 { @include font-size(1.8); }
-h4 { @include font-size(1.6); }
-h5 { @include font-size(1.4); }
-h6 { @include font-size(1.2); }
+h1 { 
+    @include font-size(3.2);
+    @include line-height(4);
+}
+
+h2 { 
+    @include font-size(2.6); 
+}
+
+h3 { 
+    @include font-size(1.8);
+}
+
+h4 { 
+    @include font-size(1.6);
+}
+
+h5 { 
+    @include font-size(1.4);
+}
+
+h6 { 
+    @include font-size(1.2);
+}
 
 /**
  * Non-healine Items 
@@ -176,6 +195,7 @@ hr {
 
 iframe, img {
     max-width: 100%;
+    overflow: hidden;
 }
 
 li {
@@ -189,8 +209,36 @@ small {
 
 ol, ul {
     margin: 0;
+    padding: 0;
  
     li {
         margin-bottom: 0;
-    }   padding: 0;
+    } 
+}
+
+/**
+ * Article Text Styling
+ * --------------------
+ */
+
+article {
+    blockquote, ol, p, pre, ul {
+        @include font-size(1.5);
+
+        a {
+            color: $colour-green-anchor;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    a img, blockquote, ol, p, pre, ul {
+        margin-bottom: $margin;
+    }
+}
+
+.title a:hover {
+    color: $colour-green-anchor;
 }
