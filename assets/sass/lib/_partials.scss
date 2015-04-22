@@ -79,6 +79,23 @@
 }
 
 /**
+ * Flexbox and Flexible Size Rules
+ * -------------------------------
+ */
+
+.flex-row, %flex-row {
+    @include flex();    
+}
+
+.flex-col, %flex-col {
+    @include flex(column);    
+}
+
+.square-flex, %square-flex {
+    @include square-flex(100%, 1);
+}
+
+/**
  * Text Element Columns
  * --------------------
  */
