@@ -1,0 +1,104 @@
+/**
+ * Theme Containers Stylesheet
+ * ---------------------------
+ * These are the rules for the top-level containers in the Tuairisc theme.
+ * 
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.1
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * 
+ * The HTML structure is approximately this:
+ * 
+ * #site
+ *     #header
+ *         #menu
+ *     #main
+ *         #content
+ *         #sidebar
+ *         #widgets
+ *     #footer
+ */
+
+#site {
+    // Top level container for site.
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 94%;
+
+    @include media(smartphone) {
+        padding-top: $padding-39;
+    }
+}
+
+#main {
+    // Parent of #content and #sidebar.
+    // background-color: #fff;
+    // background-image:
+    //     url($background-rainbow-strip),
+    //     url($background-rainbow-strip);
+    // background-position: 
+    //     center top,
+    //     center bottom;
+    // background-repeat: no-repeat;
+    // background-size: auto 6px;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px -2px rgba(0,0,0,1);
+    box-sizing: border-box;
+    position: relative;
+
+    @include media(print) {
+        background: none;
+        padding: 0;
+    }
+
+    #main-interior {
+        padding: $padding-19;
+        @include flex(row);
+        
+        @include media(max, $break-768) {
+            @include prefix(flex-direction, column);
+        }
+    }
+}
+
+#content {
+    // The main content area of site.
+    box-sizing: border-box;
+    padding-right: $padding-10;
+    @include flex-child(1);
+} 
+
+#sidebar {
+    box-sizing: border-box;
+    padding-left: $padding-10;
+    @include flex-child(0 1 30%);
+
+    @include media(max, $break-768) {
+        @include flex-child(1);
+    }
+}
+
+#footer {
+    // background: #fff left bottom/auto 65px no-repeat url($background-rainbow-footer);
+    background-color: #fff;
+    box-shadow: 0px 0px 4px -2px rgba(0,0,0,1);
+    position: relative;
+
+    @include media(smartphone) {
+        background-image: none;
+        padding-bottom: $margin-26;
+    }
+
+    @include media(print) {
+        display: none;
+    }
+
+    a {
+        color: inherit;
+    }
+}

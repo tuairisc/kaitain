@@ -1,0 +1,157 @@
+/**
+ * Site Menu
+ * ---------
+ * This section entirely deals with the responsive layout of the site's main 
+ * nav menu.
+ * 
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ */
+
+// FIXME
+
+.testing, .menu-item-2100 {
+    background-color: #c54b54; 
+    color: #fff;
+}
+
+#main, #footer {
+    .section-trim {
+        background-color: #c54b54;
+        height: 6px;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+
+    .trim-top {
+        top: 0;
+    }
+
+    .trim-bottom {
+        bottom: 0;
+    }
+}
+
+.testing {
+    margin: 0 auto;
+    padding: $padding-sections;
+}
+
+.menu-item-2074:hover {
+    background-color: #96c381;
+}
+
+.menu-item-2079:hover {
+    background-color: #e6192a;
+}
+
+.menu-item-2087:hover {
+    background-color: #424045;
+}
+
+.menu-item-2094:hover {
+    background-color: #e04184;
+}
+
+.menu-item-2100:hover {
+    background-color: #c54b54;
+}
+
+.menu-item-2106:hover {
+    background-color: #8eb2d3;
+}
+
+.menu-item-2165:hover {
+    background-color: #516671;
+}
+
+.menu-item-2673:hover {
+    background-color: #424045;
+}
+
+nav#menu {
+    position: relative;
+
+    @include media(print) {
+        display: none;
+    }
+
+    ul {
+        list-style-type: none;
+        text-align: center;
+
+        ul {
+            display: none;
+        }
+    }
+
+    li {
+        display: inline-block;
+        position: relative;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+
+    a {
+        box-sizing: border-box;
+        display: inline-block;
+        line-height: 24px;
+        padding: $padding-5 $padding-10;
+        @include font-size(1.4);
+        // white-space: nowrap;
+    }
+}
+
+ul#primary-menu {
+    /**
+     * Main Site Navigation
+     * --------------------
+     * The navigation menu has two-and-a-half states:
+     * 
+     * 1. Horizontal list, left aligned, on desktops.
+     * 2. Horizontal list, center aligned, on tables.
+     * 3. Horizontal list, no dropdowns, fixed on top, on smartphones.
+     */
+
+    li {
+        display: inline-block;
+        position: relative;
+
+        li {
+            &:not(:last-child):after {
+                display: none;
+
+                @include media(smartphone) {
+                    @include font-size(2.5) ;
+                }
+            }
+
+            &:hover {
+                background-color: $colour-blue-navigation;
+
+            }
+
+            &:hover a {
+                color: #fff;
+                background-color: transparent;
+            }
+
+            a {
+                padding: 7px;
+                width: 100%;
+            }
+        }
+    }
+
+    @include media(portrait) {
+        padding: 0;
+    }
+}

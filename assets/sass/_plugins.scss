@@ -1,0 +1,118 @@
+/**
+ * Gallery Plugins
+ * ---------------
+ * These are the rules for the top-level containers in the Tuairisc theme.
+ * 
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ */
+
+.galleria-info-title {
+    display: none;
+}
+
+#bwg_container1_0 {
+    /* The gallery insert doesn't have a bottom margin. */
+    margin-bottom: 14px;
+}
+
+/**
+ * Modal Links
+ * -----------
+ * Aidan uses modal popup links. This is styling per Ciaran for 
+ * post-embedded Soundcloud links. I will flesh this out later for 
+ * other segments on the site. 
+ */
+
+.modal-boxes {
+    @include flex(row, space-between);
+}
+
+.modal-box {
+    background: $modal-background center center/auto 70% no-repeat border-box url($education-soundwave);
+    margin-bottom: 4px;
+    @include flex-child(0 1 32.67%);
+
+    &:hover {
+        background-color: $modal-background-hover;
+    }
+
+    &:active {
+        background-color: $modal-background-active;
+    }
+
+    a {
+        color: #000;
+        display: block;
+        font-family: $font-family-arial;
+        font-size: 175%;
+        font-weight: bold;
+        padding: 30px 0;
+        text-align: center;
+        text-decoration: none;
+        width: 100%;
+    }
+}
+
+/**
+ * Ninja Forms and Event Drop
+ * --------------------------
+ * Ninja Forms is used for Tuairisc's event submission form. Ninja Forms would 
+ * like you to either pay them $40 or use a PHP function to directly echo CSS 
+ * rules into the HTML.
+ * 
+ * Either way is shitty, so fuck that. !important 4 lyfe. See:
+ * https://ninjaforms.com/add-custom-css-to-your-ninja-forms/
+ */
+
+.ninja-forms-all-fields-wrap select.ninja-forms-field {
+    height: 30px !important;
+    width: 30% !important;
+}
+
+.event-drop {
+    border: 3px dotted #bdbdbd;
+    margin-bottom: $margin;
+    overflow: hidden;
+
+    h3 {
+        border-radius: 10px;
+        line-height: 75px;
+        text-align: center;
+    }
+}
+
+.file-drag {
+    border-style: solid;
+}
+
+textarea.event-output {
+    box-sizing: border-box;
+    min-height: 300px;
+    width: 100%;
+}
+
+div.province {
+    margin-bottom: $margin-26;
+}
+
+div.event {
+    span.contact-info {
+        &:before {
+            content: ' (';
+        }
+
+        &:after {
+            content: ')';
+        }
+    }
+
+    span.bold {
+        font-weight: bold;
+    }
+}

@@ -1,0 +1,139 @@
+/**
+ * Education Post Section Headers and Banners
+ * ------------------------------------------
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ */
+
+.edu-heading, .edu-subheading {
+    background-color: nth(map-get($education-banners, education-187), 1);
+    color: #fff;
+    /* Important, or WPZOOM will override it. */
+    margin: $margin-19 0 $margin-10 0 !important;
+}
+
+.edu-heading {
+    padding: $padding-10;
+}
+
+.edu-subheading {
+    padding: 5px 30px;
+}
+
+/**
+ * Education Landing Page
+ * ----------------------
+ * The education landing page is a series of five coloured
+ * boxes that link into the relevant sections. 
+ */
+
+.education-box {
+    background-position: 3% 35%;
+    background-size: auto 60px;
+    background-repeat: no-repeat;
+    color: #fff;
+    margin-bottom: -#{$margin-10};
+    min-height: 120px;
+
+    @include media(max, 1000) {
+        min-height: 90px;
+    }
+
+    @include media(smartphone) {
+        background-position: 7px 7px;
+    }
+
+    a {
+        box-sizing: border-box;
+        color: inherit;
+        display: block;
+        height: 100%;
+        padding: 30px 15px 15px 17%;
+        text-decoration: none;
+        width: 100%;
+
+        @include media(max, 1000) {
+            padding: $margin;
+        }
+    }
+
+    h1, p {
+        font-family: $font-family-arial;
+    }
+
+    h1 {
+        margin-bottom: $margin-23;
+    }
+
+    p {
+        line-height: 21px;
+        margin-bottom: 0;
+
+        &:nth-child(1) {
+            @include media(smartphone) {
+                margin-bottom: $margin;
+            }
+        }
+    }
+
+    span {
+        font-size: 175%;
+        text-transform: uppercase;
+
+        @include media(smartphone) {
+            font-size: 125%;
+        }
+    }
+}
+
+.education-box {
+    @include media(max, 768) {
+        padding: 20px;
+    }
+
+    &:hover {
+        @include media(max, 768) {
+            background-image: none;
+        }
+    }
+}
+
+/**
+ * Section Banners
+ * ---------------
+ */
+
+.education-0:hover { 
+    background-image: none;
+}
+
+@each $child, $list in $education-banners {
+    .#{$child} {
+        background-color: nth($list, 1);
+        background-image: url(nth($list, 2));
+    }
+}
+
+/**
+ * Download Link
+ * -------------
+ * Education section posts have a download button for PDF files. 
+*/
+
+a.download-link {
+    background: nth($education-download, 1) 90% center/auto 70% no-repeat url(nth($education-download, 2));
+    color: #000;
+    display: inline-block;
+    padding: 12px;
+    padding-right: 50px;
+ 
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+}

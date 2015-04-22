@@ -1,0 +1,99 @@
+/**
+ * Site Header Stylesheet 
+ * ----------------------
+ * These are the rules for the top-level containers in the Tuairisc theme.
+ * 
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ */
+
+#header {
+    background-color: #fff;
+    box-shadow: 0px 10px 15px -8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 3;
+
+    @include media(smartphone) {
+        min-height: 0;
+        position: initial;
+        width: auto;
+    }
+
+    @include media(print) {
+        background: none;
+        margin-bottom: $margin;
+        padding: 0;
+    }
+
+    #header-logo {
+        // background: center bottom/100% 4px no-repeat border-box url($background-rainbow-strip);
+        border-bottom: 1px solid #eee;
+        height: 70px;
+        text-align: center;
+
+        a {
+            background-size: auto 50%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            display: inline-block;
+            font-size: 0 !important;
+            height: 100%;
+            width: 300px;
+        }
+    }
+
+    .share-search {
+        bottom: 0;
+        margin-right: 4%;
+        right: 0;
+        position: absolute;
+        width: auto;
+
+        > * {
+            float: right;
+            margin-left: $margin-7;
+
+            @include media(smartphone) {
+                float: left;
+                margin-left: 0;
+                margin-bottom: $margin-7;
+            }
+        }
+
+        @include media(smartphone) {
+            float: left;
+            position: initial;
+        }
+
+        @include media(print) {
+            display: none;
+        }
+    }
+
+    .search_form {
+        /* This had godawful stock CSS. They floated the child inside the parent, 
+         * instead of floating the parent. */
+        width: 278px;
+
+        @include media(smartphone) {
+            margin-bottom: $margin;
+        }
+    }
+
+    #searchform {
+        border-radius: 0;
+        float: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+}

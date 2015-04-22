@@ -1,0 +1,362 @@
+/**
+ * Article Styling 
+ * ---------------
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * 
+ * Styles for articles and their child elements. WPZOOM is pretty disorganized 
+ * when it comes to posts. <article>, <div class="entry"> and <div class="post">
+ * are all used interchangably in different sections of the site. 
+ *
+ * WPZOOM is infected with divitis and classitis. Because the CSS is under a
+ * proprietary license, I go to a good deal of effort here to reset the single
+ * article style before I go on to add my own.
+ * 
+ * Several different article templates were in use around the site. I reduced
+ * their number to six:
+ * 
+ * 1. article.full - ordinary full-sized article for single and page posts.
+ * 2. article.archive - archive loop side-by-side post.
+ * 3. article.leadarchive - the first archive post. Bigger and with sides reversed.
+ * 4. article.lead - the lead article on the Tuairisc homepage.
+ * 5. article.featured - secondary articles on the Tuairisc homepage. 
+ * 6. article.jobarchive - job archive index post.
+ */
+
+// Archive width.
+$archive-width-25: 25%;
+$archive-width-35: 35%;
+$archive-width-65: 65%;
+$archive-width-75: 75%;
+// Archive thumbnail heights.
+$archive-article-thumb-height-170: 170px;
+$archive-article-thumb-height-325: 325px;
+
+/**
+ * Article Reset
+ * -------------
+ * The Gazeti theme does odd things with articles. All of the rules in this 
+ * section were written
+ */
+
+article {
+    // box-sizing: border-box;
+
+    div.article-body {
+        // box-sizing: border-box;
+    }
+
+    embed, iframe {
+        @include media(print) {
+            display: none;
+        }
+    }
+}
+
+/**
+ * Article Header
+ * --------------
+ */
+
+header {
+    .title, div.excerpt {
+        margin-bottom: $margin-7;
+    }
+
+    div.excerpt {
+        .more-link a {
+            /* Remove 'read more' link from excerpt/description. */
+            display: none;
+        }
+
+        p {
+            color: $colour-grey-light-span;
+            margin: 0;
+        }
+    }
+
+    span, .article-author {
+        text-transform: none;
+    } 
+
+    .article-author {
+        font-weight: bold;
+    }
+}
+
+/**
+ * WordPress Image Captions
+ * ------------------------
+ */
+
+.wp-caption img {
+    margin-bottom: $margin-10;
+}
+
+p.wp-caption-text {
+    color: $colour-grey-light-span;
+    padding: 0;
+    text-align: left;
+}
+
+/*
+ * Full Single Post Article
+ * ------------------------
+ */
+
+article.full {
+    @extend %clearfix;
+
+    @include media(print) {
+        padding: 0;
+    }
+
+    header {
+        margin-bottom: $margin-26;
+
+        @include media(print) {
+            margin-bottom: 0;
+        }
+
+        div.meta {
+            @extend %clearfix;
+            /* For legibility when its white-on-white. */
+            border: 1px solid $colour-grey-article-border;
+            border-width: 1px 0;
+            padding: 9px 0;
+        }
+
+        div.avatar, div.text {
+            float: left;
+        }
+
+        div.text {
+            float: left;
+            text-transform: initial;
+
+            @include media(max, 1050) {
+                float: none;
+                margin-bottom: $margin;
+            }
+        }
+
+        div.avatar {
+            // background-image is set in single.php
+            @extend %cover-picture;
+            margin-right: 10px;
+            @include square-flex(67px, 1);
+        }
+    } 
+
+    .article-content {
+        @include flex(row);
+
+        .article-body {
+            @include flex-child(1);
+        }
+    }
+}
+
+/**
+ * Job Archive Index Article 
+ * -------------------------
+ * The rules here are specific to job archive articles as they have a sligtly
+ * different layout. Most of their position and sizing is set below in the
+ * archives.
+ */
+
+article.jobarchive {
+    header, .text, p {
+        margin: 0;
+    }
+
+    span, h3 {
+        font-family: $font-family-arial;
+    }
+
+    span {
+        font: 12px $font-family-arial;
+        text-transform: uppercase;
+        padding: 3px 5px;
+    }
+
+    span.job-category {
+        color: #fff;
+        display: inline-block;
+        margin-bottom: $margin-7;
+        width: 100%;
+    }
+
+    span.more {
+        background: $colour-grey-jobarchive-span;
+        display: inline-block;
+        padding: 2px 5px;
+    }
+
+    div.article-body p, .more {
+        margin-top: $margin-7;
+    }
+}
+
+/**
+ * Archive Articles
+ * ----------------
+ * Archive articles have two styles:
+ * 
+ * 1. Thumbnail is 25% width and 170px height.
+ * 2. Lead article thumbnail is 65% width and 325px height. This excludes job
+ *    articles.
+ */
+
+.article-thumb {
+    @extend %cover-picture;
+
+    @include media(smartphone) {
+        margin-bottom: $margin-7;
+    }
+
+    a {
+        display: block;
+        height: inherit;
+        width: 100%;
+
+        @include media(print) {
+            page-break-inside: avoid;
+        }
+    }
+}
+
+#recent-posts article {
+    padding-bottom: $margin-26;
+    @include flex(row);
+    
+    @include media(smartphone) {
+        @include prefix-value(display, block);
+    }
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $colour-grey-light-span;
+        margin-bottom: $margin-26;
+    }
+
+    header {
+        margin-bottom: $margin;        
+    }
+}
+
+#recent-posts article:nth-child(1):not(.jobarchive) {
+    /* Lead article has a reversed layout. This does not apply to a job article.
+     * Job articles do not reverse. */
+    @include prefix(flex-direction, row-reverse);
+
+    >:first-child {
+        @include flex-child(0 1 $archive-width-65);
+
+        @include media(print) {
+            margin-top: $margin;
+        }
+    }
+
+    >:last-child {
+        // Explicit, to remove padding set in other block.
+        padding: 0 $padding $padding 0;
+
+        @include media(smartphone) {
+            padding: 0;
+        }
+    }
+
+    .article-thumb {
+        height: $archive-article-thumb-height-325;
+    }
+}
+
+#recent-posts article {
+    // Non-first-child articles.
+    >:first-child {
+        @include flex-child(0 1 $archive-width-25);
+    }
+
+    >:last-child {
+        padding-left: $padding;
+        @include flex-child(1);
+
+        @include media(smartphone) {
+            padding: 0;
+        }
+    } 
+
+    .article-thumb {
+        height: $archive-article-thumb-height-170;
+    }
+}
+
+/**
+ * Homepage Lead Article 
+ * ---------------------
+ * This is the hero article on the site, the first one that you see when the 
+ * page loads. 
+ */
+
+article.lead {
+    border-bottom: 1px solid $colour-grey-dark-border;
+    margin-bottom: $margin-26;
+    padding-bottom: $margin-26;
+
+    h1 {
+        margin: 0;
+    }
+
+    h3 {
+        display: inline-block;
+
+        &:after {
+            content: ', ';
+            padding-right: 5px;
+
+            @include media(smartphone) {
+                display: none;
+            }
+        }
+
+        @include media(smartphone) {
+            display: block;
+        }
+    }
+
+    div.article-thumb {
+        margin-bottom: $margin; 
+        @include square-flex(100%, 0.5);
+
+        a {
+            @include square-flex(100%, 0.5);
+        }
+    }
+
+    div.article-body p {
+        margin: 0;
+    }
+}
+
+/**
+ * Related Posts Section
+ * ---------------------
+ */
+
+div.related-posts {
+    @include flex(row, space-between);
+
+    article {
+        box-sizing: border-box;
+        @include flex-child(0 1 30%);
+
+        @include media(max, $break-768) {
+            @include flex-child(0 1 32%);
+        }
+    }
+}
