@@ -42,6 +42,7 @@ require_once THEME_INC . '/widgets/carousel.php';
 
 // FIXME
 require_once(FUNC_INC . '/user/tuairisc-mostviewed.php');
+require_once(FUNC_INC . '/user/tuairisc-authors.php');
 
 $banners = array(
     /* Classes and the current category ID for the Greann category, which has
