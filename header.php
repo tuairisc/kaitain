@@ -19,17 +19,15 @@
                 </a>
             </div>
             <nav id="menu">
+                
                 <?php if (has_nav_menu('primary')) :
                     wp_nav_menu(array(
                         'menu_id' => 'primary-menu',
                         'sort_column' => 'menu_order',
                         'theme_location' => 'primary'
                     )); ?>
-                <?php else: ?>
-                    <p class="dropdown notice">
-                        Please set your Main navigation menu on the <strong><a href="printf('%s', get_admin_url() . 'nav-menus.php'); ?>">Appearance > Menus</a></strong> page.
-                    </p>
                 <?php endif; ?>
+
                 <ul class="testing" id="secondary-menu">
                     <li><a href="/category/sport/cluichi-gaelacha/">Cluichí Gaelacha</a></li>
                     <li><a href="/category/sport/eile/">Eile</a></li>

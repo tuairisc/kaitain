@@ -15,7 +15,7 @@
                  "id_base" => "wpzoom-category-widget"
             );
 
-            $this->WP_Widget("wpzoom-category-widget", "WPZOOM: Featured Category", $widgetOps, $controlOps);
+            $this->WP_Widget("wpzoom-category-widget", "Tuairisc Featured Category", $widgetOps, $controlOps);
         }
 
         function widget($args, $instance) {

@@ -1,7 +1,7 @@
 <?php
 
 /*------------------------------------------*/
-/* WPZOOM: Recent Posts           */
+/* Tuairisc Recent Posts           */
 /*------------------------------------------*/
  
 class Wpzoom_Feature_Posts extends WP_Widget { 
@@ -13,7 +13,7 @@ class Wpzoom_Feature_Posts extends WP_Widget {
         $control_ops = array( 'id_base' => 'wpzoom-feature-posts' );
 
         /* Create the widget. */
-        $this->WP_Widget( 'wpzoom-feature-posts', 'WPZOOM: Recent Posts', $widget_ops, $control_ops );
+        $this->WP_Widget( 'wpzoom-feature-posts', 'Tuairisc Recent Posts', $widget_ops, $control_ops );
     }
     
     function widget( $args, $instance ) { 

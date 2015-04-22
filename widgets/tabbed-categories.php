@@ -17,7 +17,7 @@ class Tabbed_Widget extends WP_Widget {
             "id_base" => "wpzoom-tabbed-widget"
         );
 
-        $this->WP_Widget("wpzoom-tabbed-widget", "WPZOOM: Tabbed Categories", $widgetOps, $controlOps);
+        $this->WP_Widget("wpzoom-tabbed-widget", "Tuairisc Tabbed Categories", $widgetOps, $controlOps);
     }
 
     function widget($args, $instance) {

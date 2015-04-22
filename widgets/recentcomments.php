@@ -1,7 +1,7 @@
 <?php
 
 /*------------------------------------------*/
-/* WPZOOM: Recent Comments (with gravatar)    */
+/* Tuairisc Recent Comments (with gravatar)    */
 /*------------------------------------------*/
  
 class Wpzoom_Recent_Comments extends WP_Widget {
@@ -14,7 +14,7 @@ class Wpzoom_Recent_Comments extends WP_Widget {
         $control_ops = array( 'id_base' => 'wpzoom-recent-comments' );
 
         /* Create the widget. */
-        $this->WP_Widget( 'wpzoom-recent-comments', 'WPZOOM: Recent Comments', $widget_ops, $control_ops );
+        $this->WP_Widget( 'wpzoom-recent-comments', 'Tuairisc Recent Comments', $widget_ops, $control_ops );
     }
     
      function widget( $args, $instance ) {

@@ -1,7 +1,7 @@
 <?php
 
 /*------------------------------------------*/
-/* WPZOOM: Popular News */
+/* Tuairisc Popular News */
 /*------------------------------------------*/
 
 class Wpzoom_Popular_News extends WP_Widget {
@@ -13,7 +13,7 @@ class Wpzoom_Popular_News extends WP_Widget {
         $control_ops = array('id_base' => 'wpzoom-popular-news');
 
         /* Create the widget. */
-        $this->WP_Widget('wpzoom-popular-news', 'WPZOOM: Popular Posts', $widget_ops, $control_ops);
+        $this->WP_Widget('wpzoom-popular-news', 'Tuairisc Popular Posts', $widget_ops, $control_ops);
     }
 
     function widget($args, $instance) {
