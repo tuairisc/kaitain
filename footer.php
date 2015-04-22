@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Site Footer
  * -----------
@@ -34,7 +34,7 @@
         </div>
     <?php endif; ?>
     <div class="copyright">
-        <p><?php _e('', 'tuairisc'); ?> &copy; <?php printf(date("Y", time())); ?> <?php _e('Tuairisc Bheo Teoranta', 'tuairisc'); ?>.</p>
+        <p>&copy; <?php printf(date("Y", time())); ?> <?php _e('Tuairisc Bheo Teoranta', 'tuairisc'); ?>.</p>
     </div>
 </div>
 <?php wp_footer(); ?>
