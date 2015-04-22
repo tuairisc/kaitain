@@ -10,34 +10,34 @@
  * @link       https://github.com/bhalash/tuairisc.ie
  */
 
-$social-button-size: $margin-33;
-
 ul.sharing {
     list-style-type: none;
 
     li {
-        display: inline-block;
         font-size: 0;
         line-height: initial;
-
-        margin-right: 3px;
     }
 
     a {
         // border-radius: 3px;
     }
 
-    @include generate-social-links(a, $social-button-size, $social-sprites);
+    @include generate-social-links(a, 40px, $social-sprites);
 }
 
-article ul.sharing {
-    float: right;
+#header .sharing {
+    display: inline-block;
 
-    @include media(max, 1050) {
-        float: left;
+    li {
+        margin-right: 3px;
     }
+}
 
-    @include media(print) {
-        display: none;
+#main-interior .sharing {
+    @include prefix(flex, 0 1 40px);
+
+    li {
+        display: block;
+        margin-bottom: 3px;
     }
 }
