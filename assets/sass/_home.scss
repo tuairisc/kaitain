@@ -11,7 +11,7 @@
  */
 
 // Homepage responsive break.
-$breakpoint-home: 950;
+$breakpoint-home: 950px;
 // Widget width of parent.
 $widget-size-23: 23%;
 $widget-size-48: 48%;
@@ -37,6 +37,7 @@ $widget-size-48: 48%;
     }
 
     article {
+        // Quarter size, then half and finally full width on smartphones.
         margin-bottom: $margin-7;
         @include flex-child(0 1 $widget-size-23);
 
