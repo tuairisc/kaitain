@@ -27,6 +27,7 @@ require_once(TUAIRISC_FUNCTIONS . 'menus.php');
 
 // Used internally.
 require_once(TUAIRISC_FUNCTIONS . 'tuairisc/tuairisc-mostviewed.php');
+require_once(TUAIRISC_FUNCTIONS . 'tuairisc/tuairisc-jobs.php');
 
 require_once(TUAIRISC_WIDGETS . 'recentposts.php');
 require_once(TUAIRISC_WIDGETS . 'featured-category.php');
