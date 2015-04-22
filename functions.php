@@ -21,8 +21,9 @@ define('TUAIRISC_INCLUDES', get_template_directory() . '/includes/');
 require_once(TUAIRISC_FUNCTIONS . 'irish-dates.php');
 require_once(TUAIRISC_FUNCTIONS . 'sharing-links.php');
 require_once(TUAIRISC_FUNCTIONS . 'section-banners.php');
-require_once(TUAIRISC_FUNCTIONS . 'sidebar.php');
+require_once(TUAIRISC_FUNCTIONS . 'widget-areas.php');
 require_once(TUAIRISC_FUNCTIONS . 'social-meta.php');
+require_once(TUAIRISC_FUNCTIONS . 'menus.php');
 
 // Used internally.
 require_once(TUAIRISC_FUNCTIONS . 'tuairisc/tuairisc-mostviewed.php');
@@ -83,6 +84,7 @@ function load_tuairisc_scripts() {
 
     foreach ($tuairisc_javascript as $key => $value) {
         if (WP_DEBUG) {
+            // Load unminified versions while debugging.
             $value = str_replace('.min', '', $value);
         }
 
@@ -106,6 +108,10 @@ function load_tuairisc_styles() {
         wp_enqueue_style($key, $value);
     }
 }
+
+// Load JavaScript scripts. 
+add_action('wp_enqueue_scripts', 'load_tuairisc_scripts');
+add_action('wp_enqueue_scripts', 'load_tuairisc_styles');
 
 function get_thumbnail_url($post_id = null, $thumb_size = 'large', $return_arr = false) {
     /** 
@@ -443,9 +449,6 @@ function is_custom_type_singular() {
 
 // Change large size to match post content width.
 update_option('large_size_w', 770);
-// Load JavaScript scripts. 
-add_action('wp_enqueue_scripts', 'load_tuairisc_scripts');
-add_action('wp_enqueue_scripts', 'load_tuairisc_styles');
 // Rearrange title.
 add_filter('wp_title', 'tweak_title', 10, 2);
 // Remove read more links from excerpts.
