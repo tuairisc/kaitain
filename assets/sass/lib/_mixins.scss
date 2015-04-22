@@ -37,23 +37,19 @@
  */
 
 @mixin prefix($property, $value, $prefixes: webkit) {
-    @if ($prefixes) {
-        @each $prefix in $prefixes {
-            #{'-' + $prefix + '-' + $property}: $value;
-        }
+    @each $prefix in $prefixes {
+        #{'-' + $prefix + '-' + $property}: $value;
     }
 
-    $property: $value;
+    #{$property}: #{$value};
 }
 
 @mixin prefix-value($property, $value, $prefixes: webkit) {
-    @if ($prefixes) {
-        @each $prefix in $prefixes {
-            #{$property}: #{'-' + $prefix + '-' + $value};
-        }
+    @each $prefix in $prefixes {
+        #{$property}: #{'-' + $prefix + '-' + $value};
     }
 
-    #{$property}: $value;
+    #{$property}: #{$value};
 }
 
 /**
@@ -157,11 +153,24 @@
 }
 
 /**
- * Miscellaneous Mixins
- * --------------------
+ * Flexbox and Flexible Sizes
+ * --------------------------
  */
 
-@mixin flex-size($width, $ratio) {
+@mixin flex($direction: row, $justify: null, $wrap: null) {
+    @include prefix_value(display, flex);
+    @include prefix(flex-direction, $direction);
+
+    @if ($justify) {
+        @include prefix(justify-content, $justify);
+    }
+
+    @if ($wrap) {
+        @include prefix(flex-wrap, $wrap);
+    }
+}
+
+@mixin square-flex($width, $ratio) {
     // Ratio should be between 0 and foo.
     // See: http://stackoverflow.com/a/13625843/1433400
     // See: http://alistapart.com/article/creating-intrinsic-ratios-for-video
@@ -170,6 +179,11 @@
     width: $width;
 }
  
+/**
+ * Miscellaneous Mixins
+ * --------------------
+ */
+
 @mixin vertical-center($amount) {
     // Useful for vertically centering elements.
     padding-bottom: $amount;
