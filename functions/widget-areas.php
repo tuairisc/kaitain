@@ -1,12 +1,9 @@
 <?php 
-/*-----------------------------------------------------------------------------------*/
-/* Initializing Widgetized Areas (Sidebars)                                             */
-/*-----------------------------------------------------------------------------------*/
- 
- 
-/*----------------------------------*/
-/* Sidebar                            */
-/*----------------------------------*/
+
+/**
+ * Sidebar
+ * -------
+ */ 
  
 register_sidebar(array(
     'name'=>'Sidebar',
@@ -20,22 +17,22 @@ register_sidebar(array(
 register_sidebar(array(
     'name'=>'Header Social Icons',
     'id' => 'header',
-    'description' => 'Place here WPZOOM: Social Widget',
+    'description' => 'Place here Tuairisc Social Widget',
     'before_widget' => '<div id="%1$s" class="widget %2$s">',
     'after_widget' => '<div class="clear"></div></div>',
     'before_title' => '<h6 class="title">',
     'after_title' => '</h6>',
 ));
 
-/*----------------------------------*/
-/* Homepage                            */
-/*----------------------------------*/
- 
+/**
+ * Homepage
+ * --------
+ */ 
 
 register_sidebar(array(
     'name'=>'Homepage (full-width)',
     'id' => 'home-main',
-    'description' => 'Widget area for: "WPZOOM: Tabbed Categories"',
+    'description' => 'Widget area for: "Tuairisc Tabbed Categories"',
     'before_widget' => '<div class="widget %2$s" id="%1$s">',
     'after_widget' => '<div class="clear">&nbsp;</div></div>',
     'before_title' => '<h6 class="title">',
@@ -45,24 +42,22 @@ register_sidebar(array(
 register_sidebar(array(
     'name'=>'Homepage (3 columns)',
     'id' => 'home-columns',
-    'description' => 'Widget area for: "WPZOOM: Featured Category" widgets.',
+    'description' => 'Widget area for: "Tuairisc Featured Category" widgets.',
     'before_widget' => '<div class="widget %2$s" id="%1$s">',
     'after_widget' => '<div class="clear">&nbsp;</div></div>',
     'before_title' => '<h6 class="title">',
     'after_title' => '</h6>',
 ));
 
-
- 
-
-/*----------------------------------*/
-/* Footer widgetized areas            */
-/*----------------------------------*/
+/**
+ * Footer
+ * ------
+ */ 
 
 register_sidebar(array(
     'name'=>'Footer (full-width)',
     'id' => 'footer-full',
-    'description' => 'Widget area for: "WPZOOM: Carousel" widget.',
+    'description' => 'Widget area for: "Tuairisc Carousel" widget.',
     'before_widget' => '<div class="widget %2$s" id="%1$s">',
     'after_widget' => '<div class="clear">&nbsp;</div></div>',
     'before_title' => '<h6 class="title">',
@@ -105,6 +100,5 @@ register_sidebar(array(
     'before_title' => '<h6 class="title">',
     'after_title' => '</h6>',
 ));
- 
- 
+
 ?>
