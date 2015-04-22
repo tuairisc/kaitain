@@ -56,14 +56,11 @@ jQuery(function($) {
     $('#site').css('padding-top', $('#header').outerHeight());
 
     var shrinkHeader = function() {
-        var a = $('#header-logo').height();
+        var a = $('#header-logo').outerHeight();
         var b = $(window).scrollTop();
 
         b = (b > a) ? a : b;
-        // b = (b > a) ? a : b; 
-
         $('#header').css('top', -b);
-        // console.log(a, ':', b, ':', c);
     };
 
     $(window).on('scroll', shrinkHeader);
