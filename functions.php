@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Glorious Tuairisc Functions
  * -------------------------------
@@ -14,20 +15,52 @@
  * @link       https://github.com/bhalash/tuairisc.ie
  */
 
+/**
+ * File Paths
+ * ----------
+ */
+
 define('TUAIRISC_WIDGETS', get_template_directory() . '/widgets/');
 define('TUAIRISC_FUNCTIONS', get_template_directory() . '/functions/');
 define('TUAIRISC_INCLUDES', get_template_directory() . '/includes/');
 
+/**
+ * Includes
+ * --------
+ */
+
+// Generate thumbnail images.
+require_once(TUAIRISC_INCLUDES . 'get-the-image/get-the-image.php');
+// Easily create and structure custom post types.
+require_once(TUAIRISC_INCLUDES . 'wp-custom-post-type-class/src/CPT.php');
+
+/**
+ * PHP Scripts
+ * -----------
+ */
+
+// Translate English dates to Irish as the server does not support ga_IE
 require_once(TUAIRISC_FUNCTIONS . 'irish-dates.php');
+// Generate social sharing links on demand.
 require_once(TUAIRISC_FUNCTIONS . 'sharing-links.php');
+// Generate banners for sections and subsections.
 require_once(TUAIRISC_FUNCTIONS . 'section-banners.php');
+// Declare widget areas.
 require_once(TUAIRISC_FUNCTIONS . 'widget-areas.php');
-require_once(TUAIRISC_FUNCTIONS . 'social-meta.php');
+// Declare theme menus.
 require_once(TUAIRISC_FUNCTIONS . 'menus.php');
+// Generate head tag Open Graph and Twitter Card information.
+require_once(TUAIRISC_FUNCTIONS . 'social-meta.php');
+// Create 'jobs' custom post type.
+require_once(TUAIRISC_FUNCTIONS . 'tuairisc/tuairisc-jobs.php');
 
 // Used internally.
 require_once(TUAIRISC_FUNCTIONS . 'tuairisc/tuairisc-mostviewed.php');
-require_once(TUAIRISC_FUNCTIONS . 'tuairisc/tuairisc-jobs.php');
+
+/**
+ * Theme Widgets
+ * -------------
+ */
 
 require_once(TUAIRISC_WIDGETS . 'recentposts.php');
 require_once(TUAIRISC_WIDGETS . 'featured-category.php');
@@ -35,7 +68,10 @@ require_once(TUAIRISC_WIDGETS . 'popularnews.php');
 require_once(TUAIRISC_WIDGETS . 'tabbed-categories.php');
 require_once(TUAIRISC_WIDGETS . 'tuairisc-authors.php');
 
-require_once(TUAIRISC_INCLUDES . '/get-the-image/get-the-image.php');
+/**
+ * Theme Variables
+ * ---------------
+ */
 
 /* This is the author account used for small or generic posts on the Tuairisc 
  * site. By default Sean does not want any attribution to appear for them. */
@@ -69,6 +105,11 @@ $tuairisc_javascript = array(
 $tuairisc_css = array(
     'tuairisc' => get_template_directory_uri() . '/assets/sass/tuairisc.css'
 );
+
+/**
+ * Theme Functions
+ * ---------------
+ */
 
 function load_tuairisc_scripts() {
     /** 
@@ -458,4 +499,5 @@ add_filter('the_excerpt', 'replace_excerpt_breaks');
 
 // Page excerpts for SEO and the education landing page. 
 add_action('init', add_post_type_support('page', 'excerpt'));
+
 ?>
