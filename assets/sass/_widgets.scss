@@ -85,8 +85,8 @@ ul.feature-posts-list, ul.tuairisc-popular-list {
 
         small {
             color: $colour-grey-light-span;
-            font-size: $font-size-12;
             margin: 2px 0;
+            @include font-size(1.2);
         }
     }
 }

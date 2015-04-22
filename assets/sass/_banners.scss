@@ -26,31 +26,30 @@
 
     a {
         color: #fff;
-        font-family: $font-family-georgia;
         letter-spacing: 1px;
         text-transform: uppercase;
 
         &:nth-child(1) {
             // Parent category in breadcrumb.
-            font-size: $font-size-18;
+            @include font-size(1.8);
             margin-left: $margin;
         }
 
         &:nth-child(2):before {
             // Separation chevron.
             content: '» ';
-            font-size: $font-size-22;
+            @include font-size(1.8);
         }
 
         &:nth-child(3) {
             // Child category in breadcrumb.
-            font-size: $font-size-10;
+            @include font-size(2);
         }
     }
 }
 
 @each $item, $list in $category_colours {
-    .category-#{$item} {
+    div.category-#{$item} {
         background-color: nth($list, 1);
     }
 }
@@ -81,7 +80,6 @@
         display: inline-block;
         float: right;
         font-family: $font-family-arial;
-        font-size: $font-size;
         margin: $margin-10 $margin 0 0;
         text-align: right;
 
