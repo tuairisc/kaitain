@@ -125,16 +125,6 @@ ul#primary-menu {
         display: inline-block;
         position: relative;
 
-        // &:hover > a {
-        //     background-color: $colour-blue-navigation;
-        //     color: #fff;
-        // }
-
-        &:nth-child(3) ul {
-            // DEBUG
-            // display: inline-block;
-        }
-
         li {
             &:not(:last-child):after {
                 display: none;
