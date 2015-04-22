@@ -20,6 +20,7 @@
     left: 0;
     right: 0;
     top: 0;
+    z-index: 3;
 
     @include media(smartphone) {
         min-height: 0;
@@ -36,7 +37,7 @@
     #header-logo {
         // background: center bottom/100% 4px no-repeat border-box url($background-rainbow-strip);
         border-bottom: 1px solid #eee;
-        height: 73px;
+        height: 70px;
         text-align: center;
 
         a {

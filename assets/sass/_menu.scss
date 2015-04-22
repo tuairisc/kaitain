@@ -20,6 +20,24 @@
     color: #fff;
 }
 
+#main, #footer {
+    .section-trim {
+        background-color: #c54b54;
+        height: 6px;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+
+    .trim-top {
+        top: 0;
+    }
+
+    .trim-bottom {
+        bottom: 0;
+    }
+}
+
 .testing {
     margin: 0 auto;
     padding: $padding-sections;
@@ -86,7 +104,8 @@ nav#menu {
         box-sizing: border-box;
         display: inline-block;
         line-height: 24px;
-        padding: $padding-10;
+        padding: $padding-5 $padding-10;
+        @include font-size(1.4);
         // white-space: nowrap;
     }
 }

@@ -29,7 +29,9 @@
     // border: 1px solid $colour-grey-light-border;
     // border-width: 0 1px;
     margin: 0 auto;
-    padding: $padding-sections;
+    max-width: 1200px;
+    // padding: $padding-sections;
+    width: 94%;
 
     @include media(smartphone) {
         padding-top: $padding-39;
@@ -38,17 +40,19 @@
 
 #main {
     // Parent of #content and #sidebar.
+    // background-color: #fff;
+    // background-image:
+    //     url($background-rainbow-strip),
+    //     url($background-rainbow-strip);
+    // background-position: 
+    //     center top,
+    //     center bottom;
+    // background-repeat: no-repeat;
+    // background-size: auto 6px;
     background-color: #fff;
-    background-image:
-        url($background-rainbow-strip),
-        url($background-rainbow-strip);
-    background-position: 
-        center top,
-        center bottom;
-    background-repeat: no-repeat;
-    background-size: auto 6px;
     box-shadow: 0px 0px 4px -2px rgba(0,0,0,1);
     box-sizing: border-box;
+    position: relative;
 
     @include media(print) {
         background: none;
@@ -56,6 +60,7 @@
     }
 
     #main-interior {
+        padding: $padding-19;
         @include prefix_value(display, flex);
         @include prefix(flex-direction, row);
         @include prefix(flex-wrap, nowrap);
@@ -69,14 +74,12 @@
 #content {
     // The main content area of site.
     box-sizing: border-box;
-    padding: $padding-19;
     padding-right: $padding-10;
     @include prefix(flex, 1);
 } 
 
 #sidebar {
     box-sizing: border-box;
-    padding: $padding-19;
     padding-left: $padding-10;
     @include prefix(flex, 0 1 30%);
 
@@ -89,6 +92,7 @@
     // background: #fff left bottom/auto 65px no-repeat url($background-rainbow-footer);
     background-color: #fff;
     box-shadow: 0px 0px 7px -2px rgba(0,0,0,2);
+    position: relative;
 
     @include media(smartphone) {
         background-image: none;
