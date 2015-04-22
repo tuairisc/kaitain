@@ -22,35 +22,20 @@ $modal-background-active: #5e83c4;
  * Site Section Colours
  * --------------------
  * Keyed to category number, with single post, job posts and fallback:
- *
- * 154: Tuairimíocht
- * 155: Spoirt
- * 156: Cultúr
- * 157: Saol
- * 158: Greann
- * 159: Pobal
- * 187: Foghlaimeoirí
- * 191: Nuacht
- * 224: ???
- * 225: ???
- * 799: ???
- * 899: ???
  */
-
+ 
 $category_colours: (
-    154: #8eb2d3, 
-    155: #c54b54, 
-    156: #96c381, 
-    157: #e04184,
-    158: #e6192a, 
-    159: #7d5e90, 
-    187: #424045, 
-    191: #516671,
-    224: #9ac485, 
-    225: #90b5d2, 
-    799: #424045, 
-    899: "#000000",
-    fallback: #c7c009
+    154: ('tuairimiocht', #8eb2d3), 
+    155: ('spoirt', #c54b54), 
+    156: ('cultur', #96c381), 
+    157: ('saol', #e04184),
+    158: ('greann', #e6192a), 
+    159: ('pobal', #7d5e90), 
+    187: ('foghlaimeoiri', #424045), 
+    191: ('nuacht', #516671),
+    799: ('foluntais', #424045), 
+    899: ('single', #000),
+    fallback: ('fallback', #c7c009)
 );
 
 /**

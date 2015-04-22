@@ -49,8 +49,8 @@
 }
 
 @each $item, $list in $category_colours {
-    div.category-#{$item} {
-        background-color: nth($list, 1);
+    div.category-#{$item}, .category-#{nth($list, 1)}:hover {
+        background-color: nth($list, 2);
     }
 }
 
