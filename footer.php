@@ -1,35 +1,35 @@
-        </div> <?php // End #main ?>
-    <?php if (is_active_sidebar('footer-full')) : ?>
-        <div id="widgets">
-            <?php dynamic_sidebar('Footer (full-width)'); ?>
-        </div>
-    <?php endif; ?>
+
+            </div> <?php // End #main-interior ?>
+        <?php if (is_active_sidebar('footer-full')) : ?>
+            <div id="widgets">
+                <?php dynamic_sidebar('Footer (full-width)'); ?>
+            </div>
+        <?php endif; ?>
+    </div> <?php // End #main ?>
 
     <?php // AdRotate group 3
     if (function_exists('adrotate_group')) {
         printf('%s', adrotate_group(2));
     } ?>
-
-    <div id="footer" role="footer">
-        <div class="interior">
-            <?php if (is_active_sidebar('footer_1') || is_active_sidebar('footer_2') || is_active_sidebar('footer_3') || is_active_sidebar('footer_4')) : ?>
-                <div class="widget-area">
-                    <?php dynamic_sidebar('Footer (column 1)'); ?>
-                    <?php dynamic_sidebar('Footer (column 2)'); ?>
-                    <?php dynamic_sidebar('Footer (column 3)'); ?>
-                    <?php dynamic_sidebar('Footer (column 4)'); ?>
-                </div>
-            <?php endif; ?>
-            <div class="copyright">
-                <p><?php _e('', 'wpzoom'); ?> &copy; <?php printf(date("Y",time())); ?> <?php _e('Tuairisc Bheo Teoranta', 'wpzoom'); ?>.</p>
-            </div>
-        </div>
-    </div>
 </div><?php // End #site ?>
+
+<div id="footer" role="footer">
+    <?php if (is_active_sidebar('footer_1') || is_active_sidebar('footer_2') || is_active_sidebar('footer_3') || is_active_sidebar('footer_4')) : ?>
+        <div class="widget-area">
+            <?php dynamic_sidebar('Footer (column 1)'); ?>
+            <?php dynamic_sidebar('Footer (column 2)'); ?>
+            <?php dynamic_sidebar('Footer (column 3)'); ?>
+            <?php dynamic_sidebar('Footer (column 4)'); ?>
+        </div>
+    <?php endif; ?>
+    <div class="copyright">
+        <p><?php _e('', 'wpzoom'); ?> &copy; <?php printf(date("Y",time())); ?> <?php _e('Tuairisc Bheo Teoranta', 'wpzoom'); ?>.</p>
+    </div>
+</div>
 
 <?php if ($paged < 2 && is_home()) : ?>
     <script type="text/javascript">
-        <?php if (option::get('featured_enable') == 'on' ) :  /* Main Slider */ ?>
+        <?php if (option::get('featured_enable') === 'on' ) :  /* Main Slider */ ?>
             jQuery(document).ready(function() {
                 if (jQuery('.slides li').length > 0) {
                     jQuery('#slides').flexslider({
