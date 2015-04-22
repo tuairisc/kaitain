@@ -45,11 +45,10 @@ $archive-article-thumb-height-325: 325px;
  */
 
 article {
-    @extend %clearfix;
-    box-sizing: border-box;
+    // box-sizing: border-box;
 
     div.article-body {
-        box-sizing: border-box;
+        // box-sizing: border-box;
     }
 
     embed, iframe {
@@ -111,6 +110,8 @@ p.wp-caption-text {
  */
 
 article.full {
+    @extend %clearfix;
+    
     @include media(print) {
         padding: 0;
     }
@@ -148,7 +149,7 @@ article.full {
             // background-image is set in single.php
             @extend %cover-picture;
             margin-right: 10px;
-            @include flex_size(67px, 1);
+            @include square-flex(67px, 1);
         }
     } 
 }
@@ -224,9 +225,8 @@ article.jobarchive {
 
 #recent-posts article {
     padding-bottom: $margin-26;
-    @include prefix-value(display, flex);
-    @include prefix(flex-direction, row);
-
+    @include flex(row);
+    
     @include media(smartphone) {
         @include prefix-value(display, block);
     }
@@ -323,10 +323,10 @@ article.lead {
 
     div.article-thumb {
         margin-bottom: $margin; 
-        @include flex_size(100%, 0.5);
+        @include square-flex(100%, 0.5);
 
         a {
-            @include flex_size(100%, 0.5);
+            @include square-flex(100%, 0.5);
         }
     }
 
@@ -341,10 +341,7 @@ article.lead {
  */
 
 div.related-posts {
-    @include prefix_value(display, flex);
-    @include prefix(flex-direction, row);
-    @include prefix(flex-wrap, nowrap);
-    @include prefix(justify-content, space-between);
+    @include flex(row, space-between);
 
     article {
         box-sizing: border-box;
