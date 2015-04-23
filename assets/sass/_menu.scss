@@ -22,7 +22,8 @@
 
 #main, #footer {
     .section-trim {
-        background-color: #c54b54;
+        // background-color: #c54b54;
+        background: left top/100% auto repeat-y url($background-stripe);
         height: 6px;
         position: absolute;
         left: 0;
