@@ -23,6 +23,11 @@
 define('TUAIRISC_WIDGETS', get_template_directory() . '/widgets/');
 define('TUAIRISC_FUNCTIONS', get_template_directory() . '/functions/');
 define('TUAIRISC_INCLUDES', get_template_directory() . '/includes/');
+define('TUAIRISC_ASSETS', get_template_directory_uri() . '/assets/');
+define('TUAIRISC_JS', TUAIRISC_ASSETS . 'js/');
+define('TUAIRISC_CSS', TUAIRISC_ASSETS . 'sass/');
+define('TUAIRISC_IMAGES', TUAIRISC_ASSETS . 'images/');
+define('TUAIRISC_LOGO', TUAIRISC_IMAGES . 'branding/brand-tuairisc.svg');
 
 /**
  * Includes
@@ -92,18 +97,19 @@ $index_excluded_categories = array(
     216, 182
 );
 
-$tuairisc_javascript = array(
+$theme_javascript = array(
     // All JavaScript loaded by theme.
     'modernizr' => 'modernizr-touch.min.js',
     'browser-detect' => 'browser-detect.min.js',
     'adrotate-fallback' => 'adrotate.min.js',
     'eventdrop' => 'eventdrop.min.js',
     'general-functions' => 'functions.min.js',
-    'author-report' => 'author-report.min.js'
+    'author-report' => 'author-report.min.js',
+    'analytics' => 'google-analytics.min.js'
 );
 
-$tuairisc_css = array(
-    'tuairisc' => get_template_directory_uri() . '/assets/sass/tuairisc.css'
+$theme_styles = array(
+    'nuacht' => 'tuairisc.css'
 );
 
 /**
@@ -111,7 +117,7 @@ $tuairisc_css = array(
  * ---------------
  */
 
-function load_tuairisc_scripts() {
+function load_theme_scripts() {
     /** 
      * Load Tuairisc JavaScript
      * ------------------------
@@ -121,20 +127,19 @@ function load_tuairisc_scripts() {
      * @return {none}
      */
 
-    global $tuairisc_javascript;
-    $path = get_stylesheet_directory_uri() . '/assets/js/';
+    global $theme_javascript;
 
-    foreach ($tuairisc_javascript as $key => $value) {
+    foreach ($theme_javascript as $name => $script) {
         if (WP_DEBUG) {
             // Load unminified versions while debugging.
-            $value = str_replace('.min', '', $value);
+            $value = str_replace('.min', '', $script);
         }
 
-        wp_enqueue_script($key, $path . $value, array(), '2.0', true);
+        wp_enqueue_script($name, TUAIRISC_JS . $script, array(), '2.0', true);
     }
 }
 
-function load_tuairisc_styles() {
+function load_theme_styles() {
     /**
      * Load Tuairisc Custom Styles
      * ---------------------------
@@ -144,16 +149,16 @@ function load_tuairisc_styles() {
      * @return {none}
      */
 
-    global $tuairisc_css;
+    global $theme_styles;
 
-    foreach ($tuairisc_css as $key => $value) {
-        wp_enqueue_style($key, $value);
+    foreach ($theme_styles as $name => $style) {
+        wp_enqueue_style('tuairisc', TUAIRISC_CSS . $style);
     }
 }
 
 // Load JavaScript scripts. 
-add_action('wp_enqueue_scripts', 'load_tuairisc_scripts');
-add_action('wp_enqueue_scripts', 'load_tuairisc_styles');
+add_action('wp_enqueue_scripts', 'load_theme_scripts');
+add_action('wp_enqueue_scripts', 'load_theme_styles');
 
 function get_thumbnail_url($post_id = null, $thumb_size = 'large', $return_arr = false) {
     /** 
@@ -377,7 +382,7 @@ function is_excluded_category() {
         }
     }
 
-    return false;;
+    return false;
 }
 
 function get_view_count($post_id = null) {
@@ -388,13 +393,13 @@ function get_view_count($post_id = null) {
      * @return {int} $count Post view count.
      */
 
-    global $custom_post_fields;
-
     if (is_null($post_id)) {
         return;
     }
 
-    $key = $custom_post_fields[0];
+    global $custom_post_fields;
+    $key = 'tuairisc_view_counter';
+
     $count = (int) get_post_meta($post_id, $key, true);
 
     if (!is_integer($count)) {
@@ -416,14 +421,14 @@ function increment_view_counter($post_id = null) {
      * @return {none}
      */
 
-    global $custom_post_fields;
-
     if (is_null($post_id)) {
         $post_id = get_the_ID();
     }
 
+    global $custom_post_fields;
+    $key = 'tuairisc_view_counter';
+
     if (!is_custom_type() && !is_user_logged_in()) {
-        $key = $custom_post_fields[0];
         $count = (int) get_post_meta($post_id, $key, true);
         $count++;
         update_post_meta($post_id, $key, $count);
