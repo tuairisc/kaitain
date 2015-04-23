@@ -28,26 +28,12 @@
     <div id="site">
         <div id="header" role="header">
             <div id="header-logo">
-                <a href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>"></a>
+                <a href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>">
+                    <img src="<?php printf(TUAIRISC_LOGO); ?>" alt="" />
+                </a>
             </div>
 
             <nav id="menu">
-                
-                <?php if (has_nav_menu('primary')) :
-                    wp_nav_menu(array(
-                        'menu_id' => 'header-menu',
-                        'sort_column' => 'menu_order',
-                        'theme_location' => 'primary'
-                    )); ?>
-                <?php endif; ?>
-
-                <ul class="testing" id="secondary-menu">
-                    <li><a href="/category/sport/cluichi-gaelacha/">Cluichí Gaelacha</a></li>
-                    <li><a href="/category/sport/eile/">Eile</a></li>
-                    <li><a href="/category/sport/sacar/">Sacar</a></li>
-                    <li><a href="/category/sport/rugbai/">Rugbai</a></li>
-                    <li><a href="/category/sport/iomaint/">Iomáint</a></li>
-                </ul>
             </nav>
 
         </div>
