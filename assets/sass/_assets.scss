@@ -10,52 +10,53 @@
  * @link       https://github.com/bhalash/tuairisc.ie
  */
 
-$assets: '../images';
-$assets-social: $assets + '/social';
-$assets-education: $assets + '/education';
-$assets-branding: $assets + '/branding';
+$assets: '../images/';
+$assets-article: $assets + 'article/';
+$assets-background: $assets + 'background/';
+$assets-branding: $assets + 'branding/';
+$assets-education: $assets + 'education/';
+$assets-social: $assets + 'social/';
 
 /**
  * Sitewide Background Images
  * --------------------------
  */
 
-$background-rainbow-footer: $assets + '/strip-footer.svg';
-$background-rainbow-strip: $assets + '/strip.svg';
-$background-rainbow-strip-alt: $assets + '/strip-alt.svg';
+$background-stripe-big: $assets-background + 'stripe-footer.svg';
+$background-stripe: $assets-background + 'stripe.svg';
 
 /**
  * Branding Images
  * ---------------
  */
 
-$brand-foras: $assets-branding + '/brand-foras.svg';
-$brand-tuairisc: $assets-branding + '/brand-tuairisc.svg';
-$brand-tuairisc-alt: $assets-branding + '/brand-tuairisc-alt.svg';
-$brand-greann: $assets-branding + '/brand-asnc.svg';
+$brand-foras: $assets-branding + 'brand-foras.svg';
+$brand-greann: $assets-branding + 'brand-asnc.svg';
+$brand-tuairisc: $assets-branding + 'brand-tuairisc.svg';
+$brand-tuairisc-alt: $assets-branding + 'brand-tuairisc-white.svg';
 
 /**
  * Social Buttons
  * --------------
  */
  
-$social-sprites: $assets-social + '/social-sprites.svg';
+$social-sprites: $assets-social + 'social-sprites.svg';
 
 /**
  * Education Section
  * -----------------
  */
 
-$education-download: (#d2d3d5, $assets-education + '/download.svg');
-$education-soundwave: $assets-education + '/soundwave.svg';
+$education-download: (#d2d3d5, $assets-education + 'download.svg');
+$education-soundwave: $assets-education + 'soundwave.svg';
 
 $education-banners: (
     education-187: (#e3393c, ''),
-    education-202: (#c44b54, $assets-education + '/section-picture.svg'),
-    education-203: (#7c5c91, $assets-education + '/section-book.svg'),
-    education-204: (#c9ab5f, $assets-education + '/section-video.svg'),
-    education-205: (#89b0d4, $assets-education + '/section-reading.svg'),
-    education-206: (#e34284, $assets-education + '/section-crossword.svg')
+    education-202: (#c44b54, $assets-education + 'section-picture.svg'),
+    education-203: (#7c5c91, $assets-education + 'section-book.svg'),
+    education-204: (#c9ab5f, $assets-education + 'section-video.svg'),
+    education-205: (#89b0d4, $assets-education + 'section-reading.svg'),
+    education-206: (#e34284, $assets-education + 'section-crossword.svg')
 );
 
 /**
@@ -63,5 +64,5 @@ $education-banners: (
  * --------------------------
  */
 
-$blockquote-open: $assets + '/quotation_open.svg';
-$blockquote-close: $assets + '/quotation_close.svg';
+$blockquote-close: $assets-article + 'quotation_close.svg';
+$blockquote-open: $assets-article + 'quotation_open.svg';
