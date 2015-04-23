@@ -28,7 +28,7 @@
             the_time('Y'); 
         } else if (is_author()) { 
             // Author archive. 
-            _e( 'Altanna le: ', 'tuairisc' );
+            _e('Altanna le: ', 'tuairisc');
             printf('<a href="%s">%s</a>', $curauth->user_url, $curauth->display_name);  
         }else if (isset($_GET['paged']) && !empty($_GET['paged'])) {
             // Paged archive. 
@@ -36,10 +36,6 @@
         }
 
         printf('</h6>');
-    }
-
-    if (!is_author()) {
-        get_template_part('/partials/banner');
     } ?>
     
     <div id="recent-posts">
