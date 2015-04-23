@@ -56,10 +56,10 @@ require_once(TUAIRISC_FUNCTIONS . 'widget-areas.php');
 require_once(TUAIRISC_FUNCTIONS . 'menus.php');
 // Generate head tag Open Graph and Twitter Card information.
 require_once(TUAIRISC_FUNCTIONS . 'social-meta.php');
-// Create 'jobs' custom post type.
-require_once(TUAIRISC_FUNCTIONS . 'tuairisc/tuairisc-jobs.php');
+// All theme custom post types.
+require_once(TUAIRISC_FUNCTIONS . 'custom-post-types.php');
 
-// Used internally.
+// Used internally for reporting.
 require_once(TUAIRISC_FUNCTIONS . 'tuairisc/tuairisc-mostviewed.php');
 
 /**
@@ -81,11 +81,6 @@ require_once(TUAIRISC_WIDGETS . 'tuairisc-authors.php');
 /* This is the author account used for small or generic posts on the Tuairisc 
  * site. By default Sean does not want any attribution to appear for them. */
 $default_author_id = 37;
-
-$custom_post_types = array(
-    // All custom post types declared and used in this theme.
-    'foluntais'
-);
 
 $custom_post_fields = array(
     // All important custom fields.
@@ -132,7 +127,7 @@ function load_theme_scripts() {
     foreach ($theme_javascript as $name => $script) {
         if (WP_DEBUG) {
             // Load unminified versions while debugging.
-            $value = str_replace('.min', '', $script);
+            $script = str_replace('.min', '', $script);
         }
 
         wp_enqueue_script($name, TUAIRISC_JS . $script, array(), '2.0', true);
@@ -462,36 +457,6 @@ function list_post_types() {
     foreach ($post_types as $post_type) {
         printf('<script>console.log("%s");</script>', $post_type);
     }
-}
-
-function is_custom_type() {
-    /**
-     * Evaluate Post Type 
-     * ------------------
-     * Evaluate whether the post/archive/whatever is part of any custom Tuairisc
-     * type.
-     * 
-     * @param {none}
-     * @return {bool} Whether the post is of a custom type true/false.
-     */
-
-    global $custom_post_types;
-    return (in_array(get_post_type(), $custom_post_types));
-}
-
-function is_custom_type_singular() {
-    /**
-     * Evaluate Post Type 
-     * ------------------
-     * Evaluate whether the post/archive/whatever is part of any custom Tuairisc
-     * type.
-     * 
-     * @param {none}
-     * @return {bool} Whether the post is of a custom type true/false.
-     */
-
-    global $custom_post_types;
-    return (in_array(get_post_type(), $custom_post_types) && is_singular($custom_post_types));
 }
 
 // Change large size to match post content width.
