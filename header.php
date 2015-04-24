@@ -28,9 +28,7 @@
     <div id="site">
         <div id="header" role="header">
             <div id="header-logo">
-                <a href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>">
-                    <img src="<?php printf(TUAIRISC_LOGO); ?>" alt="" />
-                </a>
+                <a href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>"></a>
             </div>
 
             <nav id="menu">
