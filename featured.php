@@ -6,12 +6,12 @@
  * This script generates the code for the top/featured articles on the Tuairisc
  * home page.
  * 
- * @category   WordPress File
- * @package    Tuairisc.ie Gazeti Theme
  * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  2015 Mark Grealish
+ * @link       http://www.bhalash.com
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
- * @version    1.0
+ * @version    1.2
+ * @link       http://www.tuairisc.ie
  * @link       https://github.com/bhalash/tuairisc.ie
  */
 

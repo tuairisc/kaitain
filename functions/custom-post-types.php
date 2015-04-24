@@ -10,12 +10,12 @@
  * It made sense to create a custom post type as they can fulfil all of these 
  * criteria.
  *  
- * @category   PHP Script
- * @package    Tuairisc.ie Theme
  * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  2015 Mark Grealish
+ * @link       http://www.bhalash.com
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
  * @version    1.2
+ * @link       http://www.tuairisc.ie
  * @link       https://github.com/bhalash/tuairisc.ie
  */
 
@@ -24,7 +24,7 @@ $custom_post_types = array(
     'foluntais'
 );
 
-$foluntais = new CPT($custom_post_types[0], array(
+$Foluntais = new CPT($custom_post_types[0], array(
     'post_type_name' => $custom_post_types[0],
     'description' => __('Tuairisc.ie job listings'),
     'singular' => __('Job'),
@@ -53,34 +53,37 @@ $foluntais = new CPT($custom_post_types[0], array(
     ),
 ));
 
-function is_custom_type() {
-    /**
-     * Evaluate Post Type 
-     * ------------------
-     * Evaluate whether the post/archive/whatever is part of any custom Tuairisc
-     * type.
-     * 
-     * @param {none}
-     * @return {bool} Whether the post is of a custom type true/false.
-     */
+/**
+ * Evaluate Post Type 
+ * ------------------
+ * Evaluate whether the post/archive/whatever is part of any custom Tuairisc
+ * type.
+ * 
+ * @return  bool    Whether the post is of a custom type true/false.
+ */
 
+function is_custom_type() {
     global $custom_post_types;
     return (in_array(get_post_type(), $custom_post_types));
 }
 
-function is_custom_type_singular() {
-    /**
-     * Evaluate Post Type 
-     * ------------------
-     * Evaluate whether the post/archive/whatever is part of any custom Tuairisc
-     * type.
-     * 
-     * @param {none}
-     * @return {bool} Whether the post is of a custom type true/false.
-     */
+/**
+ * Evaluate Post Type 
+ * ------------------
+ * Evaluate whether the post/archive/whatever is part of any custom Tuairisc
+ * type.
+ * 
+ * @param   int     $post_id
+ * @return  bool    Whether the post is of a custom type true/false.
+ */
+
+function is_custom_type_singular($post_id = null) {
+    if (is_null($post_id)) {
+        $post_id = get_the_id();
+    }
 
     global $custom_post_types;
-    return (in_array(get_post_type(), $custom_post_types) && is_singular($custom_post_types));
+    return (in_array(get_post_type($post_id), $custom_post_types) && is_singular($custom_post_types));
 }
 
 // function generate_job_breadcrumbs() {
@@ -94,8 +97,7 @@ function is_custom_type_singular() {
 //      * I build a breadcrumb back to the type archive and then append a link
 //      * to the first category attached to the custom type post.
 //      * 
-//      * @param {none}
-//      * @return {string} $foluntais_link The generated breadcrumb trail.
+//      * @return string $foluntais_link The generated breadcrumb trail.
 //      */
 
 //     global $custom_post_types;
