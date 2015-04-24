@@ -33,16 +33,16 @@ ul.feature-posts-list, ul.tuairisc-popular-list {
     li {
         padding: 6px 0;
         line-height: 1.4;
-        @include flex(row);
+        @include flex-p(row);
         
         > a {
-            @include flex-child(0 1 75px);
+            @include flex-c(0 1 75px);
         }
 
         div.feature-post-text {
             box-sizing: border-box;
             padding-left: $padding;
-            @include flex-child(1);
+            @include flex-c(1);
 
             a {
                 @include font-size(1.4);

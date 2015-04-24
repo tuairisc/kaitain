@@ -30,7 +30,7 @@ $widget-size-48: 48%;
 
 .tuairisc-featured-row {
     margin-bottom: $margin;
-    @include flex(row, space-between, wrap);
+    @include flex-p(row, space-between, wrap);
 
     @include media(smartphone) {
         @include prefix(flex-direction, column);
@@ -39,14 +39,14 @@ $widget-size-48: 48%;
     article {
         // Quarter size, then half and finally full width on smartphones.
         margin-bottom: $margin-7;
-        @include flex-child(0 1 $widget-size-23);
+        @include flex-c(0 1 $widget-size-23);
 
         @include media(max, $breakpoint-home) {
-            @include flex-child(0 1 $widget-size-48);
+            @include flex-c(0 1 $widget-size-48);
         }
 
         @include media(smartphone) {
-            @include flex-child(1);
+            @include flex-c(1);
         }
     }
 }
@@ -82,7 +82,7 @@ $widget-size-48: 48%;
     }
 
     .tuairisc-author-list {
-        @include flex(row, space-between);
+        @include flex-p(row, space-between);
 
         @include media(smartphone) {
             @include prefix(flex-wrap, wrap);
@@ -91,11 +91,11 @@ $widget-size-48: 48%;
 
     .tuairisc-author {
         box-sizing: border-box;
-        @include flex-child(0 1 $widget-size-23);
+        @include flex-c(0 1 $widget-size-23);
 
         @include media(smartphone) {
             margin-bottom: $margin-7;
-            @include flex-child(0 1 $widget-size-48);
+            @include flex-c(0 1 $widget-size-48);
         }
     }
 

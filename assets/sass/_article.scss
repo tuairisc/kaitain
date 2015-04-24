@@ -154,10 +154,10 @@ article.full {
     } 
 
     .article-content {
-        @include flex(row);
+        @include flex-p(row);
 
         .article-body {
-            @include flex-child(1);
+            @include flex-c(1);
         }
     }
 }
@@ -233,7 +233,7 @@ article.jobarchive {
 
 #recent-posts article {
     padding-bottom: $margin-26;
-    @include flex(row);
+    @include flex-p(row);
     
     @include media(smartphone) {
         @include prefix-value(display, block);
@@ -255,7 +255,7 @@ article.jobarchive {
     @include prefix(flex-direction, row-reverse);
 
     >:first-child {
-        @include flex-child(0 1 $archive-width-65);
+        @include flex-c(0 1 $archive-width-65);
 
         @include media(print) {
             margin-top: $margin;
@@ -279,12 +279,12 @@ article.jobarchive {
 #recent-posts article {
     // Non-first-child articles.
     >:first-child {
-        @include flex-child(0 1 $archive-width-25);
+        @include flex-c(0 1 $archive-width-25);
     }
 
     >:last-child {
         padding-left: $padding;
-        @include flex-child(1);
+        @include flex-c(1);
 
         @include media(smartphone) {
             padding: 0;
@@ -349,14 +349,14 @@ article.lead {
  */
 
 div.related-posts {
-    @include flex(row, space-between);
+    @include flex-p(row, space-between);
 
     article {
         box-sizing: border-box;
-        @include flex-child(0 1 30%);
+        @include flex-c(0 1 30%);
 
         @include media(max, $break-768) {
-            @include flex-child(0 1 32%);
+            @include flex-c(0 1 32%);
         }
     }
 }

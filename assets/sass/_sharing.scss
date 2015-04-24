@@ -30,7 +30,7 @@ ul.sharing {
 }
 
 #main-interior .sharing {
-    @include flex-child(0 1 40px);
+    @include flex-c(0 1 40px);
 
     li {
         display: block;

@@ -40,7 +40,7 @@
 
 .widget-area {
     width: 100%;
-    @include flex(row);
+    @include flex-p(row);
 
     @include media(smartphone) {
         @include prefix(flex-direction, column);
@@ -51,7 +51,7 @@
         float: none;
         min-height: 1px;
         width: initial;
-        @include flex-child(1);
+        @include flex-c(1);
     }
 }
 
