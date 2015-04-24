@@ -1,5 +1,5 @@
 [submodule "assets/sass/lib"]
-	path = assets/sass/lib
+	path = assets/sass/scss-helpers
 	url = git@github.com:bhalash/scss-helpers.git
 [submodule "includes/get-the-image"]
 	path = includes/get-the-image
