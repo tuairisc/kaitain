@@ -6,12 +6,12 @@
  * Except for the files included in the head, this represents most of the PHP 
  * work on the Tuairisc site. 
  * 
- * @category   PHP Script
- * @package    Tuairisc.ie Theme
  * @author     Mark Grealish <mark@bhalash.com>
+ * @link       http://www.bhalash.com
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
- * @version    2.0
+ * @version    1.2
+ * @link       http://www.tuairisc.ie
  * @link       https://github.com/bhalash/tuairisc.ie
  */
 
@@ -58,6 +58,9 @@ require_once(TUAIRISC_FUNCTIONS . 'menus.php');
 require_once(TUAIRISC_FUNCTIONS . 'social-meta.php');
 // All theme custom post types.
 require_once(TUAIRISC_FUNCTIONS . 'custom-post-types.php');
+
+// All theme custom post types.
+require_once(TUAIRISC_FUNCTIONS . 'sections.php');
 
 // Used internally for reporting.
 require_once(TUAIRISC_FUNCTIONS . 'tuairisc/tuairisc-mostviewed.php');
@@ -112,16 +115,13 @@ $theme_styles = array(
  * ---------------
  */
 
-function load_theme_scripts() {
-    /** 
-     * Load Tuairisc JavaScript
-     * ------------------------
-     * Load all theme JavaScript.
-     * 
-     * @param {none}
-     * @return {none}
-     */
+/** 
+ * Load Tuairisc JavaScript
+ * ------------------------
+ * Load all theme JavaScript.
+ */
 
+function load_theme_scripts() {
     global $theme_javascript;
 
     foreach ($theme_javascript as $name => $script) {
@@ -134,16 +134,13 @@ function load_theme_scripts() {
     }
 }
 
-function load_theme_styles() {
-    /**
-     * Load Tuairisc Custom Styles
-     * ---------------------------
-     * Load all theme CSS.
-     * 
-     * @param {none}
-     * @return {none}
-     */
+/**
+ * Load Tuairisc Custom Styles
+ * ---------------------------
+ * Load all theme CSS.
+ */
 
+function load_theme_styles() {
     global $theme_styles;
 
     foreach ($theme_styles as $name => $style) {
@@ -155,22 +152,23 @@ function load_theme_styles() {
 add_action('wp_enqueue_scripts', 'load_theme_scripts');
 add_action('wp_enqueue_scripts', 'load_theme_styles');
 
+/** 
+ * Return Thumbnail Image URL
+ * --------------------------
+ * Taken from: http://goo.gl/NhcEU6
+ * 
+ * WordPress, by default, only has a handy function to return a glob of HTML
+ * -an image inside an anchor-for a post thumbnail. This wrapper extracts
+ * and returns only the URL.
+ * 
+ * @param   int     $post_id        The ID of the post.
+ * @param   int     $thumb_size     The requested size of the thumbnail.
+ * @param   bool    $return_arr     Return either the entire thumbnail object or just the URL.
+ * @return  string  $thumb_url[0]   URL of the thumbnail.
+ * @return  array   $thumb_url      All information on the attachment.
+ */
+
 function get_thumbnail_url($post_id = null, $thumb_size = 'large', $return_arr = false) {
-    /** 
-     * Return Thumbnail Image URL
-     * --------------------------
-     * Taken from: http://goo.gl/NhcEU6
-     * 
-     * WordPress, by default, only has a handy function to return a glob of HTML
-     * -an image inside an anchor-for a post thumbnail. This wrapper extracts
-     * and returns only the URL.
-     * 
-     * @param {int} $post_id The ID of the post.
-     * @param {int} $thumb_size The requested size of the thumbnail.
-     * @param {bool} $return_arr Return either the entire thumbnail object or just the URL.
-     * @return {string} $thumb_url[0] URL of the thumbnail.
-     * @return {array} $thumb_url All information on the attachment.
-     */
 
     if (is_null($post_id)) {
         $post_id = get_the_ID();
@@ -181,43 +179,43 @@ function get_thumbnail_url($post_id = null, $thumb_size = 'large', $return_arr =
     return ($return_arr) ? $thumb_url : $thumb_url[0];
 }
 
-function remove_read_more($excerpt) {
-    /** 
-     * Remove Excerpt Read More Link
-     * -----------------------------
-     * @param {string} $excerpt The post excerpt.
-     * @return {string} $excerpt THe post excerpt sans the read more link.
-     */
+/** 
+ * Remove Excerpt Read More Link
+ * -----------------------------
+ * @param   string  $excerpt    The post excerpt.
+ * @return  string  $excerpt    The post excerpt sans the read more link.
+ */
 
+function remove_read_more($excerpt) {
     return preg_replace('/(<a class="more.*<\/a>)/', '', $excerpt);
 }
 
-function replace_excerpt_breaks($excerpt) {
-    /** 
-     * Replace Excerpt Break Tags
-     * --------------------------
-     * Replace break tags in an excerpt with a paragaraph tag. The excerpt will
-     * already have an opening and closing <p></p> tags.
-     * 
-     * @param {string} $excerpt The post excerpt.
-     * @return {string} $excerpt The post excerpt.
-     */
+/** 
+ * Replace Excerpt Break Tags
+ * --------------------------
+ * Replace break tags in an excerpt with a paragaraph tag. The excerpt will
+ * already have an opening and closing <p></p> tags.
+ * 
+ * @param   string  $excerpt    The post excerpt.
+ * @return  string  $excerpt    The post excerpt.
+ */
 
+function replace_excerpt_breaks($excerpt) {
     return str_replace('<br />', '</p><p>', $excerpt);
 }
 
-function get_avatar_url($user_id = null, $avatar_size = null) {
-    /**
-     * Return URL of User Avatar 
-     * -------------------------
-     * WordPress does not provide an easy way to access only the URL of the 
-     * user's avatar, hence this.
-     * 
-     * @param {int} $user_id The ID of the user.
-     * @param {int} $avatar_size Size of the avatar to be returned.
-     * @return {string} $avatar_url The URL of the avatar. 
-     */
+/**
+ * Return URL of User Avatar 
+ * -------------------------
+ * WordPress does not provide an easy way to access only the URL of the 
+ * user's avatar, hence this.
+ * 
+ * @param   int     $user_id        The ID of the user.
+ * @param   int     $avatar_size    Size of the avatar to be returned.
+ * @return  string  $avatar_url     The URL of the avatar. 
+ */
 
+function get_avatar_url($user_id = null, $avatar_size = null) {
     if (is_null($user_id)) {
         $user_id = get_the_author_meta('ID');
     }
@@ -231,20 +229,20 @@ function get_avatar_url($user_id = null, $avatar_size = null) {
     return $avatar_url;
 }
 
-function has_local_avatar($user_id = null) {
-    /**
-     * Check Avatar Source
-     * -------------------
-     * WordPress fetches avatars by sending the user's email to Gravatar. The 
-     * plugin 'WP User Avatar' allows you to upload and serve avatars locally.
-     * 
-     * Gravatar is treated as a fallback from this. The preference from Sean is
-     * that /only/ local avatars should be shown.
-     * 
-     * @param {int} $user_id
-     * @return {bool} $avatar_is_local
-     */
+/**
+ * Check Avatar Source
+ * -------------------
+ * WordPress fetches avatars by sending the user's email to Gravatar. The 
+ * plugin 'WP User Avatar' allows you to upload and serve avatars locally.
+ * 
+ * Gravatar is treated as a fallback from this. The preference from Sean is
+ * that /only/ local avatars should be shown.
+ * 
+ * @param   int     $user_id
+ * @return  bool    $avatar_is_local
+ */
 
+function has_local_avatar($user_id = null) {
     if (is_null($user_id)) {
         $user_id = get_the_author_meta('ID');
     }
@@ -254,21 +252,21 @@ function has_local_avatar($user_id = null) {
     return $avatar_is_local;
 }
 
-function is_default_author($author_id = null) {
-    /**
-     * Identify Site Default Author
-     * ----------------------------
-     * Certain articles are written on behalf of the site without attribution to
-     * a specific author-recycled articles and press releases are typical of 
-     * such posts.
-     * 
-     * Sean does not want any attribution for this account to appear at or above
-     * these articles.
-     * 
-     * @param {int} $author_id
-     * @return {bool} $is_default_account
-     */
+/**
+ * Identify Site Default Author
+ * ----------------------------
+ * Certain articles are written on behalf of the site without attribution to
+ * a specific author-recycled articles and press releases are typical of 
+ * such posts.
+ * 
+ * Sean does not want any attribution for this account to appear at or above
+ * these articles.
+ * 
+ * @param   int     $author_id
+ * @return  bool    $is_default_account
+ */
 
+function is_default_author($author_id = null) {
     global $default_author_id;
 
     if (is_null($author_id)) {
@@ -279,17 +277,17 @@ function is_default_author($author_id = null) {
     return $is_default_account;
 }
 
-function author_is_columnist($author_id = null) {
-    /**
-     * Parse User Role
-     * ---------------
-     * Sean wished to flag certain users are site columnists. This flag is set
-     * as a 'yes' through extra user fields.
-     * 
-     * @param {int} $author_id ID of the author.
-     * @return {bool} $is_columnist Is user a columnist true/false.
-      */
+/**
+ * Parse User Role
+ * ---------------
+ * Sean wished to flag certain users are site columnists. This flag is set
+ * as a 'yes' through extra user fields.
+ * 
+ * @param   int     $author_id      ID of the author.
+ * @return  bool    $is_columnist   Is user a columnist true/false.
+ */
 
+function author_is_columnist($author_id = null) {
     if (is_null($author_id)) {
        $author_id = get_the_author_meta('id');
     }
@@ -306,17 +304,16 @@ function author_is_columnist($author_id = null) {
     return $is_columnist;
 }
 
-function is_columnist_article() {
-    /**
-     * Article-is-Column
-     * -----------------
-     * Identiy whether an article is part of an ongoing column, as set through
-     * post custom fields.
-     * 
-     * @param {none}
-     * @return {bool} $is_column Is article a column piece true/false.
-     */
+/**
+ * Article-is-Column
+ * -----------------
+ * Identiy whether an article is part of an ongoing column, as set through
+ * post custom fields.
+ * 
+ * @return  bool    $is_column      Is article a column piece true/false.
+ */
 
+function is_columnist_article() {
     $col_article = get_post_meta(get_the_ID(), 'is_column', true);
     $col_article = strtolower($col_article);
     $col_article = strip_tags($col_article);
@@ -325,18 +322,18 @@ function is_columnist_article() {
     return $is_column;
 }
 
-function tweak_title($title, $sep) {
-    /**
-     * Title Tweak
-     * -------------
-     * Customize the title format so it looks like:
-     *  site_title | section_title 
-     * 
-     * @param {string} $title Item title.
-     * @param {string} $sep Separator between title words.
-     * @return {string} $title
-     */
+/**
+ * Title Tweak
+ * -------------
+ * Customize the title format so it looks like:
+ *  site_title | section_title 
+ * 
+ * @param   string  $title      Item title.
+ * @param   string  $sep        Separator between title words.
+ * @return  string  $title
+ */
 
+function tweak_title($title, $sep) {
     $title = str_replace($sep, '', $title); 
 
     if (!is_home()) {
@@ -347,26 +344,25 @@ function tweak_title($title, $sep) {
     return $title;
 }
 
-function is_excluded_category() {
-    /** 
-     * Index Category Exclusion
-     * ------------------------
-     * Global exclusion and different treatment of the job categories were 
-     * requested by Ciaran and Sean. The currently excluded categories are: 
-     * 
-     * # Category Name               Category ID
-     * -----------------------------------------
-     * 1 Imeachtaí                   182  
-     * 2 Fógraí Poiblí/Folúntais     216   
-     * 
-     * I can exclude categories from post display with WP_Query, but these
-     * exclusions are more nuanced, in that we want to both change how the 
-     * categories are styled in the loop or exclude it entirely.
-     * 
-     * @param {none}
-     * @return {bool} Article is in excluded category true/false.
-     */
+/** 
+ * Index Category Exclusion
+ * ------------------------
+ * Global exclusion and different treatment of the job categories were 
+ * requested by Ciaran and Sean. The currently excluded categories are: 
+ * 
+ * # Category Name               Category ID
+ * -----------------------------------------
+ * 1 Imeachtaí                   182  
+ * 2 Fógraí Poiblí/Folúntais     216   
+ * 
+ * I can exclude categories from post display with WP_Query, but these
+ * exclusions are more nuanced, in that we want to both change how the 
+ * categories are styled in the loop or exclude it entirely.
+ * 
+ * @return  bool    Article is in excluded category true/false.
+ */
 
+function is_excluded_category() {
     global $index_excluded_categories;
 
     foreach(get_the_category() as $c) {
@@ -380,14 +376,14 @@ function is_excluded_category() {
     return false;
 }
 
-function get_view_count($post_id = null) {
-    /**
-     * Fetch Article View Count
-     * ------------------------
-     * @param {int} $post_id
-     * @return {int} $count Post view count.
-     */
+/**
+ * Fetch Article View Count
+ * ------------------------
+ * @param   int     $post_id
+ * @return  int     $count      Post view count.
+ */
 
+function get_view_count($post_id = null) {
     if (is_null($post_id)) {
         return;
     }
@@ -405,17 +401,15 @@ function get_view_count($post_id = null) {
     return $count;
 }
 
-function increment_view_counter($post_id = null) {
-    /**
-     * Increment Post View Count
-     * -------------------------
-     * Requested by Sean. If post is not of custom type and viewer is not logged
-     * in, then increment counter by +1.
-     *  
-     * @param {int} $post_id
-     * @return {none}
-     */
+/**
+ * Increment Post View Count
+ * -------------------------
+ * Requested by Sean. If post is not of custom type and viewer is not logged
+ * in, then increment counter by +1.
+ * @param   int     $post_id
+ */
 
+function increment_view_counter($post_id = null) {
     if (is_null($post_id)) {
         $post_id = get_the_ID();
     }
@@ -430,21 +424,13 @@ function increment_view_counter($post_id = null) {
     }
 }
 
-/*
- * Debug and Helpers
- * -----------------
+/**
+ * Dump Post Types to JavaScript Console
+ * -------------------------------------
+ * Useful for debug on occasion. 
  */
 
 function list_post_types() {
-    /**
-     * Dump Post Types to JavaScript Console
-     * -------------------------------------
-     * Useful for debug on occasion. 
-     * 
-     * @param {none}
-     * @return {none}
-     */
-    
     $type_args = array(
         'public' => true,
         '_builtin' => false
