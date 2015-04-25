@@ -35,6 +35,8 @@
             </nav>
 
         </div>
+
+        <pre style="background-color: #000 !important; color: #fff !important;"><?php print_r(yolo_swag()); ?></pre>
         
         <?php // AdRotate group 1
         if (function_exists('adrotate_group')) {
