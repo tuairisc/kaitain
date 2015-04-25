@@ -17,7 +17,7 @@
 
 /**
  * File Paths
- * ----------
+ * -----------------------------------------------------------------------------
  */
 
 define('TUAIRISC_WIDGETS', get_template_directory() . '/widgets/');
@@ -30,8 +30,8 @@ define('TUAIRISC_IMAGES', TUAIRISC_ASSETS . 'images/');
 define('TUAIRISC_LOGO', TUAIRISC_IMAGES . 'branding/brand-tuairisc.svg');
 
 /**
- * Includes
- * --------
+ * Included Libraries
+ * -----------------------------------------------------------------------------
  */
 
 // Generate thumbnail images.
@@ -41,7 +41,7 @@ require_once(TUAIRISC_INCLUDES . 'wp-custom-post-type-class/src/CPT.php');
 
 /**
  * PHP Scripts
- * -----------
+ * -----------------------------------------------------------------------------
  */
 
 // Translate English dates to Irish as the server does not support ga_IE
@@ -67,7 +67,7 @@ require_once(TUAIRISC_FUNCTIONS . 'tuairisc/tuairisc-mostviewed.php');
 
 /**
  * Theme Widgets
- * -------------
+ * -----------------------------------------------------------------------------
  */
 
 require_once(TUAIRISC_WIDGETS . 'recentposts.php');
@@ -78,7 +78,7 @@ require_once(TUAIRISC_WIDGETS . 'tuairisc-authors.php');
 
 /**
  * Theme Variables
- * ---------------
+ * -----------------------------------------------------------------------------
  */
 
 /* This is the author account used for small or generic posts on the Tuairisc 
@@ -110,9 +110,18 @@ $theme_styles = array(
     'nuacht' => 'tuairisc.css'
 );
 
+$google_fonts = array(
+    /* Zero-indexed array of all Google Fonts fonts to be loaded. Use this 
+     * format for typefaces:
+     * 
+     * 'Open Sans Condensed 300',
+     * 
+     * */
+);
+
 /**
  * Theme Functions
- * ---------------
+ * -----------------------------------------------------------------------------
  */
 
 /** 
@@ -135,16 +144,42 @@ function load_theme_scripts() {
 }
 
 /**
+ * Parse Google Fonts from Array
+ * -----------------------------
+ * @param   array   $fonts          Array of fonts to be used.
+ * @return  string  $google_url     Parsed URL of fonts to be enqueued.
+ */
+
+function google_font_url($fonts) {
+    $google_url = array('//fonts.googleapis.com/css?family=');
+
+    foreach ($fonts as $key => $value) {
+        $google_url[] = str_replace(' ', '+', $value);
+
+        if ($key < sizeof($google_fonts) - 1) {
+            $google_url[] = '|';
+        }
+    }
+
+    return implode('', $google_url);
+}
+
+/**
  * Load Tuairisc Custom Styles
  * ---------------------------
  * Load all theme CSS.
  */
 
 function load_theme_styles() {
-    global $theme_styles;
+    global $theme_styles, $google_fonts;
 
     foreach ($theme_styles as $name => $style) {
         wp_enqueue_style('tuairisc', TUAIRISC_CSS . $style);
+    }
+
+    if (!empty($google_fonts)) {
+        wp_register_style('google-fonts', google_font_url($google_fonts));
+        wp_enqueue_style('google-fonts');
     }
 }
 
@@ -205,6 +240,20 @@ function replace_excerpt_breaks($excerpt) {
 }
 
 /**
+ * Rewrite Search URL Cleanly
+ * --------------------------
+ * Cleanly rewrite search URL from ?s=topic to /search/topic
+ * See: http://wpengineer.com/2258/change-the-search-url-of-wordpress/
+ */
+
+function clean_search_url() {
+    if (is_search() && !empty($_GET['s'])) {
+        wp_redirect(home_url('/search/') . urlencode(get_query_var('s')));
+        exit();
+    }
+}
+
+/**
  * Return URL of User Avatar 
  * -------------------------
  * WordPress does not provide an easy way to access only the URL of the 
@@ -215,19 +264,19 @@ function replace_excerpt_breaks($excerpt) {
  * @return  string  $avatar_url     The URL of the avatar. 
  */
 
-function get_avatar_url($user_id = null, $avatar_size = null) {
-    if (is_null($user_id)) {
-        $user_id = get_the_author_meta('ID');
-    }
+// function get_avatar_url($user_id = null, $avatar_size = null) {
+//     if (is_null($user_id)) {
+//         $user_id = get_the_author_meta('ID');
+//     }
 
-    if (is_null($avatar_size)) {
-        $avatar_size = 100;
-    }
+//     if (is_null($avatar_size)) {
+//         $avatar_size = 100;
+//     }
 
-    $avatar_url = get_avatar($user_id, $avatar_size);
-    $avatar_url = preg_replace('/(^.*src="|".*$)/', '', $avatar_url);
-    return $avatar_url;
-}
+//     $avatar_url = get_avatar($user_id, $avatar_size);
+//     $avatar_url = preg_replace('/(^.*src="|".*$)/', '', $avatar_url);
+//     return $avatar_url;
+// }
 
 /**
  * Check Avatar Source
@@ -445,6 +494,13 @@ function list_post_types() {
     }
 }
 
+/**
+ * Filters, Options and Actions
+ * -----------------------------------------------------------------------------
+ */
+
+// Clean search URL rewrite.
+add_action('template_redirect', 'clean_search_url');
 // Change large size to match post content width.
 update_option('large_size_w', 770);
 // Rearrange title.
@@ -452,7 +508,6 @@ add_filter('wp_title', 'tweak_title', 10, 2);
 // Remove read more links from excerpts.
 add_filter('the_excerpt', 'remove_read_more');
 add_filter('the_excerpt', 'replace_excerpt_breaks');
-
 // Page excerpts for SEO and the education landing page. 
 add_action('init', add_post_type_support('page', 'excerpt'));
 
