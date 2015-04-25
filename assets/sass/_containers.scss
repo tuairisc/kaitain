@@ -58,7 +58,7 @@
 
     #main-interior {
         padding: $padding-19;
-        @include flex-p(row);
+        @include flex-parent(row);
         
         @include media(max, $break-768) {
             @include prefix(flex-direction, column);
@@ -70,16 +70,16 @@
     // The main content area of site.
     box-sizing: border-box;
     padding-right: $padding-10;
-    @include flex-c(1);
+    @include flex-child(1);
 } 
 
 #sidebar {
     box-sizing: border-box;
     padding-left: $padding-10;
-    @include flex-c(0 1 30%);
+    @include flex-child(0 1 30%);
 
     @include media(max, $break-768) {
-        @include flex-c(1);
+        @include flex-child(1);
     }
 }
 

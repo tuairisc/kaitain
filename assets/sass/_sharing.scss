@@ -18,7 +18,7 @@ ul.sharing {
         line-height: initial;
     }
 
-    @include generate-social-links(a, 40px, $social-sprites);
+    @include generate-social-links(a, 40px);
 }
 
 #header .sharing {
@@ -30,7 +30,7 @@ ul.sharing {
 }
 
 #main-interior .sharing {
-    @include flex-c(0 1 40px);
+    @include flex-child(0 1 40px);
 
     li {
         display: block;
