@@ -13,16 +13,8 @@
  * @link       https://github.com/bhalash/tuairisc.ie
  */
 
-// FIXME
-
-.testing, .menu-item-2100 {
-    background-color: #c54b54; 
-    color: #fff;
-}
-
 #main, #footer {
     .section-trim {
-        // background-color: #c54b54;
         background: left top/100% auto repeat-y url($background-stripe);
         height: 6px;
         position: absolute;
@@ -70,11 +62,10 @@ nav#menu {
         line-height: 24px;
         padding: $padding-5 $padding-10;
         @include font-size(1.4);
-        // white-space: nowrap;
     }
 }
 
-ul#primary-menu {
+nav#menu ul {
     /**
      * Main Site Navigation
      * --------------------
