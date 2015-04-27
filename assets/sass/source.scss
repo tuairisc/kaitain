@@ -1,8 +1,6 @@
 /**
  * Sass Root Source File
  * ---------------------
- * O you who know what we suffer here, do not forget us in your prayers.
- * 
  * @category   Stylesheet
  * @package    Tuairisc.ie Theme
  * @author     Mark Grealish <mark@bhalash.com>
@@ -10,6 +8,8 @@
  * @license    All rights reserved
  * @version    2.0
  * @link       https://github.com/bhalash/tuairisc.ie
+ *
+ * O you who know what we suffer here, do not forget us in your prayers.
  */
 
 /**
@@ -41,8 +41,8 @@
 @import 'menu';
 // AdRotate adverts.
 @import 'adverts';
-// Banenrs for single posts and archives. 
-@import 'banners';
+// Website sections. 
+@import 'sections';
 // Education category articles.
 @import 'education';
 // Website home page.

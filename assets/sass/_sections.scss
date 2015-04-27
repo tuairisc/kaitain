@@ -1,0 +1,64 @@
+/**
+ * Category Header Banners
+ * ------------------------
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ *
+ * Each category has a custom #header bannner. Children have the same colour as
+ * the parent. Colours are set via PHP. 
+ * 
+ * Eight classes are herein defined, four for background colour and four for
+ * text colour:
+ * 
+ * 1.   .section-FOO .section-trim-{background, text}
+ *      ---------------------------------------------
+ *      The background or text colour for children when the main section is FOO.
+ *
+ * 2.   .section-FOO .section-trim-{background, text}-hover:hover
+ *      ---------------------------------------------------------
+ *      The background or text colour for hovering over children when the main
+ *      section is FOO. 
+ * 
+ * -----------------------------------------------------------------------------
+ *
+ * 3.   .section-FOO-{background, text}
+ *      -------------------------------
+ *      Essentially the off-section colours, that are always generated. The 
+ *      background or text colour for a given section regardless of what the 
+ *      main section is.
+ * 
+ * 4.   .section-FOO-{background, text}-hover:hover
+ *      -------------------------------------------
+ *      The off-section colours. The background or text colour for hovering over
+ *      a given section regardless of what the main section is.
+ */
+
+@each $list in $category_colours {
+    .section-#{nth($list, 1)} {
+        // Set trims for the main sections.
+        .section-trim-background, .section-trim-background-hover:hover {
+            background-color: nth($list, 2);
+            color: #fff;
+        }
+
+        .section-trim-text, .section-trim-text-hover:hover {
+            color: nth($list, 2);
+        }
+    }
+
+    // Set trims for the all given sections regardless of main.
+
+    .section-#{nth($list, 1)}-background, .section-#{nth($list, 1)}-background-hover:hover {
+        background-color: nth($list, 2);
+        color: #fff;
+    }
+
+    .section-#{nth($list, 1)}-text, .section-#{nth($list, 1)}-text-hover:hover {
+        color: nth($list, 2);
+    } 
+}
