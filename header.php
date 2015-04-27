@@ -21,6 +21,7 @@
     <title><?php wp_title('|', true, 'right'); ?></title>
     <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" media="screen" />
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />    
+    <?php setup_sections(); ?>
     <?php social_meta(); ?>
     <?php wp_head(); ?>
 </head>
@@ -32,11 +33,14 @@
             </div>
 
             <nav id="menu">
+                <ul id="section-primary">
+                    <?php primary_section_menu(); ?>
+                </ul>
+                <ul class="<?php printf(SECTION_TRIM_BACKGROUND); ?>" id="section-secondary">
+                    <?php secondary_section_menu(); ?>
+                </ul>
             </nav>
-
         </div>
-
-        <pre style="background-color: #000 !important; color: #fff !important;"><?php print_r(yolo_swag()); ?></pre>
         
         <?php // AdRotate group 1
         if (function_exists('adrotate_group')) {
