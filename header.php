@@ -33,12 +33,8 @@
             </div>
 
             <nav id="menu">
-                <ul id="section-primary">
-                    <?php primary_section_menu(); ?>
-                </ul>
-                <ul class="<?php printf(SECTION_TRIM_BACKGROUND); ?>" id="section-secondary">
-                    <?php secondary_section_menu(); ?>
-                </ul>
+                <ul id="section-primary"><?php primary_section_menu(); ?></ul>
+                <ul class="<?php printf(SECTION_TRIM_BACKGROUND); ?>" id="section-secondary"><?php secondary_section_menu(); ?></ul>
             </nav>
         </div>
         
