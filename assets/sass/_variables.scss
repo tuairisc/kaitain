@@ -1,10 +1,6 @@
 /**
  * Variables
  * ---------
- * Variables...
- * ...are aggregatd as I found them within the theme CSS.
- * ...are here so that I can work on later reduction.
- * 
  * @category   Stylesheet
  * @package    Tuairisc.ie Theme
  * @author     Mark Grealish <mark@bhalash.com>
@@ -12,6 +8,10 @@
  * @license    All rights reserved
  * @version    2.0
  * @link       https://github.com/bhalash/tuairisc.ie
+ *
+ * Variables...
+ * ...are aggregatd as I found them within the theme CSS.
+ * ...are here so that I can work on later reduction.
  */
 
 $modal-background: #d1d2d4;
@@ -25,17 +25,15 @@ $modal-background-active: #5e83c4;
  */
  
 $category_colours: (
-    154: ('tuairimiocht', #8eb2d3), 
-    155: ('spoirt', #c54b54), 
-    156: ('cultur', #96c381), 
-    157: ('saol', #e04184),
-    158: ('greann', #e6192a), 
-    159: ('pobal', #7d5e90), 
-    187: ('foghlaimeoiri', #424045), 
-    191: ('nuacht', #516671),
-    799: ('foluntais', #424045), 
-    899: ('single', #000),
-    fallback: ('fallback', #c7c009)
+    ('tuairimiocht', #8eb2d3), 
+    ('sport', #c54b54), 
+    ('cultur', #96c381), 
+    ('saol', #e04184),
+    ('greann', #e6192a), 
+    ('pobal', #7d5e90), 
+    ('foghlaimeoiri', #424045), 
+    ('nuacht', #516671),
+    ('fallback', #caab60)
 );
 
 /**
