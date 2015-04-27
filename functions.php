@@ -254,31 +254,6 @@ function clean_search_url() {
 }
 
 /**
- * Return URL of User Avatar 
- * -------------------------
- * WordPress does not provide an easy way to access only the URL of the 
- * user's avatar, hence this.
- * 
- * @param   int     $user_id        The ID of the user.
- * @param   int     $avatar_size    Size of the avatar to be returned.
- * @return  string  $avatar_url     The URL of the avatar. 
- */
-
-// function get_avatar_url($user_id = null, $avatar_size = null) {
-//     if (is_null($user_id)) {
-//         $user_id = get_the_author_meta('ID');
-//     }
-
-//     if (is_null($avatar_size)) {
-//         $avatar_size = 100;
-//     }
-
-//     $avatar_url = get_avatar($user_id, $avatar_size);
-//     $avatar_url = preg_replace('/(^.*src="|".*$)/', '', $avatar_url);
-//     return $avatar_url;
-// }
-
-/**
  * Check Avatar Source
  * -------------------
  * WordPress fetches avatars by sending the user's email to Gravatar. The 
