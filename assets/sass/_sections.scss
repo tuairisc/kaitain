@@ -39,8 +39,10 @@
  */
 
 @each $list in $category_colours {
+
+    // 1. Set trims for the main sections.
+
     .section-#{nth($list, 1)} {
-        // Set trims for the main sections.
         .section-trim-background, .section-trim-background-hover:hover {
             background-color: nth($list, 2);
             color: #fff;
@@ -51,7 +53,7 @@
         }
     }
 
-    // Set trims for the all given sections regardless of main.
+    // 2. Set trims for the all given sections regardless of main.
 
     .section-#{nth($list, 1)}-background, .section-#{nth($list, 1)}-background-hover:hover {
         background-color: nth($list, 2);
