@@ -76,6 +76,8 @@ nav#menu ul {
      * 3. Horizontal list, no dropdowns, fixed on top, on smartphones.
      */
 
+    min-height: 34px;
+
     li {
         display: inline-block;
         position: relative;
