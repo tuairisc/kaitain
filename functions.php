@@ -136,7 +136,7 @@ $google_fonts = array(
 
 /** 
  * Load Tuairisc JavaScript
- * ------------------------
+ * -----------------------------------------------------------------------------
  * Load all theme JavaScript.
  */
 
@@ -155,7 +155,7 @@ function load_theme_scripts() {
 
 /**
  * Parse Google Fonts from Array
- * -----------------------------
+ * -----------------------------------------------------------------------------
  * @param   array   $fonts          Array of fonts to be used.
  * @return  string  $google_url     Parsed URL of fonts to be enqueued.
  */
@@ -176,7 +176,7 @@ function google_font_url($fonts) {
 
 /**
  * Load Tuairisc Custom Styles
- * ---------------------------
+ * -----------------------------------------------------------------------------
  * Load all theme CSS.
  */
 
@@ -199,7 +199,7 @@ add_action('wp_enqueue_scripts', 'load_theme_styles');
 
 /** 
  * Return Thumbnail Image URL
- * --------------------------
+ * -----------------------------------------------------------------------------
  * Taken from: http://goo.gl/NhcEU6
  * 
  * WordPress, by default, only has a handy function to return a glob of HTML
@@ -226,7 +226,7 @@ function get_thumbnail_url($post_id = null, $thumb_size = 'large', $return_arr =
 
 /** 
  * Remove Excerpt Read More Link
- * -----------------------------
+ * -----------------------------------------------------------------------------
  * @param   string  $excerpt    The post excerpt.
  * @return  string  $excerpt    The post excerpt sans the read more link.
  */
@@ -237,7 +237,7 @@ function remove_read_more($excerpt) {
 
 /** 
  * Replace Excerpt Break Tags
- * --------------------------
+ * -----------------------------------------------------------------------------
  * Replace break tags in an excerpt with a paragaraph tag. The excerpt will
  * already have an opening and closing <p></p> tags.
  * 
@@ -251,7 +251,7 @@ function replace_excerpt_breaks($excerpt) {
 
 /**
  * Rewrite Search URL Cleanly
- * --------------------------
+ * -----------------------------------------------------------------------------
  * Cleanly rewrite search URL from ?s=topic to /search/topic
  * See: http://wpengineer.com/2258/change-the-search-url-of-wordpress/
  */
@@ -264,14 +264,40 @@ function clean_search_url() {
 }
 
 /**
+ * Get Avatar URL (Filter)
+ * -----------------------------------------------------------------------------
+ * Wrapper for get_avatar that only returns the URL. Yes, WordPress added a 
+ * get_avatar_url() function in version 4.2. The Tuairisc site, however, uses 
+ * a plugin named WP User Avatar (https://wordpress.org/plugins/wp-user-avatar/)
+ * to upload and serve avatars from a local source.
+ * 
+ * 1. WP User Avatar hooks into get_avatar()
+ * 2. As of April 29 2015 the plugin does not support the new get_avatar_data()
+ *    and get_avatar_url() functions. 
+ * 
+ * That is to say both new functions will stil only serve from Gravatar without 
+ * consideration of locally-uploaded avatars.
+ * 
+ * @param   string  $id_or_email    Either user ID or email address.
+ * @param   int     $size           Avatar size.
+ * @param   string  $default        URL for fallback avatar.
+ * @param   string  $alt            Alt text for image.
+ * @param   string  $avar           Avatar URL only.
+ */
+
+function get_avatar_url_only($id_or_email, $size, $default, $alt) {
+   $avatar = get_avatar($id_or_email, $size, $default, $alt); 
+   return preg_replace('/(^.*src="|"\s.*$)/', '', $avatar); 
+}
+
+/**
  * Check Avatar Source
- * -------------------
- * WordPress fetches avatars by sending the user's email to Gravatar. The 
- * plugin 'WP User Avatar' allows you to upload and serve avatars locally.
+ * -----------------------------------------------------------------------------
+ * See the description for get_avatar_url_only() directly above this. Check that
  * 
- * Gravatar is treated as a fallback from this. The preference from Sean is
- * that /only/ local avatars should be shown.
- * 
+ * 1. Avatar is not a Gravatar fallback.
+ * 2. Avatar is not a WP USer Avatar fallback.
+ *
  * @param   int     $user_id
  * @return  bool    $avatar_is_local
  */
@@ -281,14 +307,13 @@ function has_local_avatar($user_id = null) {
         $user_id = get_the_author_meta('ID');
     }
 
-    $avatar_is_local = (strpos(get_avatar_url($user_id), 'gravatar') === false);
-
-    return $avatar_is_local;
+    $avatar = get_avatar_url_only($user_id);
+    return (!strpos($avatar, 'gravatar') && !strpos($avatar, 'wp-user-avatar'));
 }
 
 /**
  * Identify Site Default Author
- * ----------------------------
+ * -----------------------------------------------------------------------------
  * Certain articles are written on behalf of the site without attribution to
  * a specific author-recycled articles and press releases are typical of 
  * such posts.
@@ -313,7 +338,7 @@ function is_default_author($author_id = null) {
 
 /**
  * Parse User Role
- * ---------------
+ * -----------------------------------------------------------------------------
  * Sean wished to flag certain users are site columnists. This flag is set
  * as a 'yes' through extra user fields.
  * 
@@ -340,7 +365,7 @@ function author_is_columnist($author_id = null) {
 
 /**
  * Article-is-Column
- * -----------------
+ * -----------------------------------------------------------------------------
  * Identiy whether an article is part of an ongoing column, as set through
  * post custom fields.
  * 
@@ -358,7 +383,7 @@ function is_columnist_article() {
 
 /**
  * Title Tweak
- * -------------
+ * -----------------------------------------------------------------------------
  * Customize the title format so it looks like:
  *  site_title | section_title 
  * 
@@ -380,12 +405,12 @@ function tweak_title($title, $sep) {
 
 /** 
  * Index Category Exclusion
- * ------------------------
+ * -----------------------------------------------------------------------------
  * Global exclusion and different treatment of the job categories were 
  * requested by Ciaran and Sean. The currently excluded categories are: 
  * 
  * # Category Name               Category ID
- * -----------------------------------------
+ * -----------------------------------------------------------------------------
  * 1 Imeachtaí                   182  
  * 2 Fógraí Poiblí/Folúntais     216   
  * 
@@ -412,7 +437,7 @@ function is_excluded_category() {
 
 /**
  * Fetch Article View Count
- * ------------------------
+ * -----------------------------------------------------------------------------
  * @param   int     $post_id
  * @return  int     $count      Post view count.
  */
@@ -437,7 +462,7 @@ function get_view_count($post_id = null) {
 
 /**
  * Increment Post View Count
- * -------------------------
+ * -----------------------------------------------------------------------------
  * Requested by Sean. If post is not of custom type and viewer is not logged
  * in, then increment counter by +1.
  * @param   int     $post_id
@@ -460,7 +485,7 @@ function increment_view_counter($post_id = null) {
 
 /**
  * Dump Post Types to JavaScript Console
- * -------------------------------------
+ * -----------------------------------------------------------------------------
  * Useful for debug on occasion. 
  */
 
