@@ -34,7 +34,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php wp_title('|', true, 'right'); ?></title>
     <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" media="screen" />
-    <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />    
+    <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" /> 
     <?php setup_sections(); ?>
     <?php social_meta(); ?>
     <?php wp_head(); ?>
@@ -56,6 +56,8 @@
         if (function_exists('adrotate_group')) {
             printf('%s', adrotate_group(1));
         } ?>
+
+        <pre class="debug"><?php printf(has_local_avatar(311) ? 'true' : 'false'); ?></pre>
 
         <div id="main" role="main">
             <div class="section-trim trim-top"></div>

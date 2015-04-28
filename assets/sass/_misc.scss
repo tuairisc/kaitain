@@ -10,6 +10,12 @@
  * @link       https://github.com/bhalash/tuairisc.ie
  */
 
+pre.debug {
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+}
+
 body {
     @include media(print) {
         margin: 0;
