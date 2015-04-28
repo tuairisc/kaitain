@@ -38,7 +38,7 @@ $section_category_ids = array(
 
 /**
  * CSS Classes 
- * -----------
+ * -----------------------------------------------------------------------------
  * These are used throughout the entire theme 
  */
 
@@ -62,7 +62,7 @@ define('SECTION_FALLBACK_SUFFIX', 'fallback');
 
 /**
  * Sectioneer
- * ----------
+ * -----------------------------------------------------------------------------
  * Manage the sections of the site. As of April 27 2015, it is crude in 
  * function and in need of expansion.
  */
@@ -123,7 +123,7 @@ if (!is_admin()) {
 
 /**
  * Set Site Section
- * ----------------
+ * -----------------------------------------------------------------------------
  */
 
 function setup_sections() {
@@ -185,7 +185,7 @@ function add_section_class_to_body($classes) {
 
 /**
  * Generate Primary Section Menu
- * -----------------------------
+ * -----------------------------------------------------------------------------
  * Add the primary section menu, based on 
  */
 
@@ -206,7 +206,7 @@ function primary_section_menu() {
 
 /**
  * Generate Secondary Section Menu
- * -------------------------------
+ * -----------------------------------------------------------------------------
  */
 
 function secondary_section_menu() {
@@ -238,7 +238,7 @@ function category_children_ids($cat_id) {
 
 /**
  * Determine Loop Type
- * -------------------
+ * -----------------------------------------------------------------------------
  * I was surprised to find WordPress didn't already have just this.
  * 
  * @return  bool    $loop_type      The type of WordPress loop.
@@ -283,7 +283,7 @@ function find_loop_type() {
 
 /**
  * Get Object Link
- * ---------------
+ * -----------------------------------------------------------------------------
  * Return the permalink for several WordPress objects from its type and ID.
  * 
  * @param   string  $object_type        Type of object-post, page, etc.
@@ -315,7 +315,7 @@ function get_object_permalink($object_type = null, $object_id = null) {
 
 /**
  * Get Object Name
- * ---------------
+ * -----------------------------------------------------------------------------
  * Return the name/label of several WordPress objects, from its type and ID.
  * 
  * @param   string  $object_type        Type of object-post, page, etc.
@@ -345,7 +345,7 @@ function get_object_name($object_type = null, $object_id = null) {
 
 /**
  * Generate HTML Link for Item
- * ---------------------------
+ * -----------------------------------------------------------------------------
  * @param   string  $object_type    Type of object.
  * @param   int     $object_id      ID of object.
  * @param   array   $classes        Option classes to append to hyperlink.
@@ -410,7 +410,7 @@ function generate_menu_link($object_type = null, $object_id = null, $classes = a
 
 /**
  * Get ID of Category's Ultimate Parent
- * ------------------------------------
+ * -----------------------------------------------------------------------------
  * The site is sectioned into several parent categories with children and 
  * grandchildren beneath. Recursively ascend through parent categories until you
  * hit the top.
