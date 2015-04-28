@@ -184,7 +184,7 @@ function load_theme_styles() {
     global $theme_styles, $google_fonts;
 
     foreach ($theme_styles as $name => $style) {
-        wp_enqueue_style('tuairisc', TUAIRISC_CSS . $style);
+        wp_enqueue_style($name, TUAIRISC_CSS . $style);
     }
 
     if (!empty($google_fonts)) {
@@ -463,8 +463,6 @@ function get_view_count($post_id = null) {
 /**
  * Increment Post View Count
  * -----------------------------------------------------------------------------
- * Requested by Sean. If post is not of custom type and viewer is not logged
- * in, then increment counter by +1.
  * @param   int     $post_id
  */
 
