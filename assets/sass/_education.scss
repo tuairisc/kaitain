@@ -26,7 +26,7 @@
 
 /**
  * Education Landing Page
- * ----------------------
+ * -----------------------------------------------------------------------------
  * The education landing page is a series of five coloured
  * boxes that link into the relevant sections. 
  */
@@ -59,10 +59,6 @@
         @include media(max, 1000) {
             padding: $margin;
         }
-    }
-
-    h1, p {
-        font-family: $font-family-arial;
     }
 
     h1 {
@@ -104,7 +100,7 @@
 
 /**
  * Section Banners
- * ---------------
+ * -----------------------------------------------------------------------------
  */
 
 .education-0:hover { 
@@ -120,7 +116,7 @@
 
 /**
  * Download Link
- * -------------
+ * -----------------------------------------------------------------------------
  * Education section posts have a download button for PDF files. 
 */
 
