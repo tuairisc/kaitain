@@ -57,8 +57,10 @@
             printf('%s', adrotate_group(1));
         } ?>
 
-        <pre class="debug"><?php printf(has_local_avatar(311) ? 'true' : 'false'); ?></pre>
+        <?php if (WP_DEBUG && is_user_logged_in()) : ?>
+            <pre class="debug"><?php printf(has_local_avatar(311) ? 'true' : 'false'); ?></pre>
+        <?php endif; ?>
 
         <div id="main" role="main">
-            <div class="section-trim trim-top"></div>
+            <div class="trim section-trim-background trim-top"></div>
             <div id="main-interior">
