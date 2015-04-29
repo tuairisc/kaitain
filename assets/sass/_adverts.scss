@@ -12,7 +12,7 @@
  * AdRotate's groups are numeric classes from .g-1 to .g-∞
  * 
  * Group   Location
- * ------------------
+ * -----------------------------------------------------------------------------
  * .g-1    Header
  * .g-2    Footer
  * .g-3    Sidebar #1
@@ -22,13 +22,10 @@
 
 /**
  * General Advert Styles 
- * ---------------------
+ * -----------------------------------------------------------------------------
  */
 
 .g {
-    margin: 0;
-    padding: 0;
-
     @include media(print) {
         display: none;
     }
@@ -41,16 +38,39 @@ span[style^=font-weight] {
     } 
 }
 
+.g-single, .g-dyn {
+    // To ensure banners are centered.
+    line-height: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.g-dyn {
+    /* Dynamic adverts on rotation. AdRotate will toggle each g-dyn block in 
+     * sequence, but they initially all need to be hidden on or rare occasions
+     * the advert will "jump". */
+    display: none;
+}
+
+a.tuairisc-advert {
+    display: inline-block;
+    height: 100%;  
+
+    img {
+        max-width: 100%;
+    }
+}
+
 /**
- * Banner Advertisements
- * ---------------------
+ * Banner Advertisement Groups
+ * -----------------------------------------------------------------------------
  * Banner advertismeents have two images, .mobile and .desktop, and which 
  * are swapped here.
  * Sidebar advertisements have neither class and just display.
  */
 
 .g-1, .g-2 {
-    padding: $padding-19 4%;
+    padding: $padding-19 0;
 
     img.square {
         display: none;
@@ -76,8 +96,8 @@ span[style^=font-weight] {
 }
 
 /**
- * Sidebar Advertisements
- * ----------------------
+ * Sidebar Advertisement Groups
+ * -----------------------------------------------------------------------------
  */
 
 .sidebar-adverts {
@@ -107,31 +127,5 @@ span[style^=font-weight] {
              * collapses to 0 if flex is set to anything but 1. */
             @include flex-child(1);
         }
-    }
-}
-
-.g-single, .g-dyn {
-    // To ensure banners are centered.
-    margin: 0 auto;
-    text-align: center;
-}
-
-.g-dyn {
-    /* Dynamic adverts on rotation. AdRotate will toggle each g-dyn block in 
-     * sequence, but they initially all need to be hidden on or rare occasions
-     * the advert will "jump". */
-    display: none;
-}
-
-/**
- * Tuairisc Advertisement
- * ----------------------
- * Not a whole lot of rules are required: This is an image inside an anchor.
- */
-
-a.tuairisc-advert {
-
-    img {
-        max-width: 100%;
     }
 }
