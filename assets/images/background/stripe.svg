@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Stripe_1_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 850.4 14.2" enable-background="new 0 0 850.4 14.2" xml:space="preserve">
+	 viewBox="-500 3000 1000 84" enable-background="new -500 3000 1000 84" xml:space="preserve">
 <g id="Stripe">
-	<rect x="0" y="0" fill="#506572" width="85" height="14.2"/>
-	<rect x="85" y="0" fill="#F3DB78" width="85" height="14.2"/>
-	<rect x="170.1" y="0" fill="#94C27C" width="85" height="14.2"/>
-	<rect x="255.1" y="0" fill="#89B1D4" width="85" height="14.2"/>
-	<rect x="340.2" y="0" fill="#C94C51" width="85" height="14.2"/>
-	<rect x="425.2" y="0" fill="#434044" width="85" height="14.2"/>
-	<rect x="510.2" y="0" fill="#E44284" width="85" height="14.2"/>
-	<rect x="595.3" y="0" fill="#3E5371" width="85" height="14.2"/>
-	<rect x="680.3" y="0" fill="#CAAB60" width="85" height="14.2"/>
-	<rect x="765.4" y="0" fill="#7E5C91" width="85" height="14.2"/>
+	<rect x="-500" y="3000" fill="#506572" width="100" height="84"/>
+	<rect x="-400" y="3000" fill="#F3DB78" width="100" height="84"/>
+	<rect x="-300" y="3000" fill="#94C27C" width="100" height="84"/>
+	<rect x="-200" y="3000" fill="#89B1D4" width="100" height="84"/>
+	<rect x="-100" y="3000" fill="#C94C51" width="100" height="84"/>
+	<rect x="0" y="3000" fill="#434044" width="100" height="84"/>
+	<rect x="100" y="3000" fill="#E44284" width="100" height="84"/>
+	<rect x="200" y="3000" fill="#3E5371" width="100" height="84"/>
+	<rect x="300" y="3000" fill="#CAAB60" width="100" height="84"/>
+	<rect x="400" y="3000" fill="#7E5C91" width="100" height="84"/>
 </g>
 </svg>

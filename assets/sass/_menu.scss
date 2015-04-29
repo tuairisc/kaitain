@@ -13,24 +13,6 @@
  * nav menu.
  */
 
-#main, #footer {
-    .section-trim {
-        background: left top/100% auto repeat-y url($background-stripe);
-        height: 6px;
-        position: absolute;
-        left: 0;
-        right: 0;
-    }
-
-    .trim-top {
-        top: 0;
-    }
-
-    .trim-bottom {
-        bottom: 0;
-    }
-}
-
 nav#menu {
     position: relative;
 

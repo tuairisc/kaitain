@@ -39,10 +39,8 @@
  */
 
 @each $list in $category_colours {
-
-    // 1. Set trims for the main sections.
-
     .section-#{nth($list, 1)} {
+        // 1. Set trims for the main sections.
         .section-trim-background, .section-trim-background-hover:hover {
             background-color: nth($list, 2);
             color: #fff;
@@ -53,14 +51,44 @@
         }
     }
 
-    // 2. Set trims for the all given sections regardless of main.
-
     .section-#{nth($list, 1)}-background, .section-#{nth($list, 1)}-background-hover:hover {
+        // 2. Set background trim for the all given sections regardless of main.
         background-color: nth($list, 2);
         color: #fff;
     }
 
     .section-#{nth($list, 1)}-text, .section-#{nth($list, 1)}-text-hover:hover {
+        // 3. Set text trim for the all given sections regardless of main.
         color: nth($list, 2);
     } 
+}
+
+/**
+ * Main Content Background Trim
+ * -----------------------------------------------------------------------------
+ * I had a reproducible problem with the background image across all browsers:
+ * Depending on the precise width of the window, the background image strip 
+ * would not properly fill up the entire container. Therefore I make the
+ * trim container spill out slightly and hide the overflow at the level of the
+ * parent.
+ */
+
+#main, #footer {
+    overflow-x: hidden;
+
+    .section-trim {
+        background: left top/cover repeat-y url($background-stripe);
+        height: 6px;
+        position: absolute;
+        left: -3px;
+        right: -3px;
+    }
+
+    .trim-top {
+        top: 0;
+    }
+
+    .trim-bottom {
+        bottom: 0;
+    }
 }
