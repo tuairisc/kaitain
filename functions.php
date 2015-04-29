@@ -264,6 +264,18 @@ function clean_search_url() {
 }
 
 /**
+ * Add SVG Mimetype
+ * -----------------------------------------------------------------------------
+ */
+
+function add_svg_mimetype($mime) {
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+}
+
+add_filter('upload_mimes', 'add_svg_mimetype');
+
+/**
  * Get Avatar URL
  * -----------------------------------------------------------------------------
  * Wrapper for get_avatar that only returns the URL. Yes, WordPress added a 
