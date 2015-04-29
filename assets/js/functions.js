@@ -1,94 +1,92 @@
-'use strict';
+/**
+ * The Glorious Tuairisc JavaScript Functions
+ * -----------------------------------------------------------------------------
+ * @category   JavaScript File
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ *
+ * This file is part of Nuacht.
+ * 
+ * Nuacht is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software 
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ * 
+ * Nuacht is distributed in the hope that it will be useful, but WITHOUT ANY 
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along with 
+ * Nuacht. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-jQuery(function($) {
-    /**
-     * Site Navigation Menu
-     * --------------------
-     */
+ /* global jQuery:false */
 
-    $('#menu a').each(function() {
-        if ($(this).siblings('ul').length > 0) {
-            $(this).addClass('submenu-indicator');
-        }
-    });
+/**
+ * Variables
+ * -----------------------------------------------------------------------------
+ */
 
-    if (Modernizr.touch) {
-        /* As well as containing a dropdown menu, the anchoring nav item might
-         * itself contain a link to somewhere on the site. If the device is 
-         * touch-capable, the first click will open the menu and the second follow
-         * the hyperlink. */
-        $('#menu a').click(function() {
-            if (!$(this).hasClass('firstclick') && $(this).siblings('ul').length > 0 && $(this).siblings('ul').is(':visible')) {
-                $(this).addClass('firstclick');
-                return false;
-            }
-        });
-
-        $('#menu li').mouseout(function() {
-            $(this).find('a').removeClass('firstclick');
-        });
+var sharing = {
+    link: 'a.sharing-link',
+    popouts : {
+        facebook: 'width=450,height=257',
+        google: 'width=500,height=300',
+        twitter: 'width=470,height=260',
+        pinterest: 'width=756,height=320',
+        tumblr: 'width=470,height=470',
+        newsletter: 'width=400,height=630'
     }
+};
 
-    var sizes = [
-        // Email
-        '',
-        // Facebook
-        'width=450,height=257',
-        // Google
-        'width=500,height=300',
-        // Twitter
-        'width=470,height=260',
-        // Pinterest
-        'width=756,height=320',
-        // Reddit
-        '',
-        // Tumblr
-        'width=470,height=470',
-    ]; 
+var header = {
+    container: '#header',
+    logo: '#header-logo'
+};
 
-    /**
-     * Header Size
-     * -----------
-     * Temporary / TODO / FIXME
-     */
+/**
+ * Functions
+ * -----------------------------------------------------------------------------
+ */
 
-    // $('#site').css('padding-top', 115);
-    $('#site').css('padding-top', $('#header').outerHeight());
+var scrollHeader = function() {
+    var headerHeight = jQuery(header.logo).outerHeight();
+    var scrollTop = jQuery(window).scrollTop();
 
-    var shrinkHeader = function() {
-        var a = $('#header-logo').outerHeight();
-        var b = $(window).scrollTop();
+    scrollTop = (scrollTop > headerHeight) ? headerHeight : scrollTop;
+    jQuery(header.container).css('top', -scrollTop);
+};
 
-        b = (b > a) ? a : b;
-        $('#header').css('top', -b);
-    };
+function popoutSharer(object, clickEvent) {
+    var type = jQuery(object).data('type');
 
-    $(window).on('scroll', shrinkHeader);
-
-    /**
-     * Social Sharing Popouts
-     * ----------------------
-     */
-
-    $('article .sharing a').click(function(click) {
-        // .sharing sharing links.
-        var rel = parseInt($(this).data('rel'));
-
-        if (sizes[rel] != '' && rel > 0) {
-            var href = $(this).attr('href');
-            var name = 'target="_blank';
-            var size = sizes[rel];
-
-            window.open(href, name, size);
-            click.preventDefault();
-        }
-    });
-
-    $('.newsletter a').click(function(click) {
-        // Signup for the Tuairisc mailing list.
-        var href = $(this).attr('href');
+    if (sharing.popouts.hasOwnProperty(type)) {
+        var href = jQuery(object).attr('href');
         var name = 'target="_blank';
-        window.open(href,name,'width=400,height=630');
-        click.preventDefault();
-    });
+        var size = sharing.popouts[type];
+        
+        window.open(href, name, size);
+        clickEvent.preventDefault();
+    }
+}
+
+/**
+ * Site Navigation Menu
+ * -----------------------------------------------------------------------------
+ */
+
+jQuery('#site').css('padding-top', jQuery(header.container).outerHeight());
+jQuery(window).on('scroll', scrollHeader);
+
+/**
+ * Social Sharing Popouts
+ * -----------------------------------------------------------------------------
+ */
+
+jQuery(sharing.link).click(function(click) {
+    popoutSharer(this, click);
 });
