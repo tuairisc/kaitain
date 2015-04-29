@@ -25,70 +25,64 @@
  * Nuacht. If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-function social_link_code($service = 'facebook', $is_list_item = false) {
-    /**
-     * Generate Social Network Link Code
-     * ---------------------------------
-     * Return the sharing link for the provided network, with an optional 
-     * <li></li> wrapper. Currently supported:
-     * 
-     * facebook, twitter, google, reddit, email, discussion, printing
-     * 
-     * @param {string} $service The social service/sharing action.
-     * @param {bool} $is_list_item Optionally wrap link in <li>
-     * @return {string} $service_link The generated link to the network.
-     */
+/**
+ * Generate Social Network Link Code
+ * -----------------------------------------------------------------------------
+ * Return the sharing link for the provided network, with an optional 
+ * <li></li> wrapper. Currently supported:
+ * 
+ * facebook, twitter, google, reddit, email, discussion, printing
+ * 
+ * @param   string  $service        The social service/sharing action.
+ * @param   bool    $is_list_item   Optionally wrap link in <li>
+ * @return  string  $service_link   The generated link to the network.
+ */
 
+function social_link_code($service = 'facebook', $is_list_item = false) {
     global $post; 
 
     $share_meta = array(
-        'blog'  => urlencode(get_bloginfo('name')),
-        'url'   => urlencode(get_permalink($post->ID)),
+        'blog' => urlencode(get_bloginfo('name')),
+        'url' => urlencode(get_permalink($post->ID)),
         'title' => urlencode($post->post_title),
         'tuser' => 'tuairiscnuacht',
+        'class' => 'sharing-link',
         'title_attr' => the_title_attribute('echo=0')
     );
 
     $networks = array(
         'print' => array(
             'href' => 'javascript:window.print()', 
-            'rel' => -1, 
             'target' => '', 
             'title' => 'Print ' . $share_meta['title_attr']
         ),
         'facebook' => array(
             'href' => '//facebook.com/share.php?u=' . $share_meta['url'],
-            'rel' => 1,
             'target' => '_blank', 
             'title' => 'Share ' . $share_meta['title_attr'] . ' on Facebook'
         ),
         'twitter' => array(
             'href' => '//twitter.com/share?via='. $share_meta['tuser'] . '&text=' . $share_meta['title'] . '&url=' . $share_meta['url'] . '&related=@' . $share_meta['tuser'], 
-            'rel' => 3, 
             'target' => '_blank', 
             'title' => 'Tweet about ' . $share_meta['title_attr']
         ),
         'google' => array(
             'href' => '//plus.google.com/share?url=' . $share_meta['url'],
-            'rel' => 2, 
             'target' => '_blank', 
             'title' => '+1 ' . $share_meta['title_attr']
         ),
         'email' => array(
             'href' => 'mailto:?subject=' . $share_meta['title'] . '&amp;body=' . $share_meta['url'], 
-            'rel' => 0, 
             'target' => '_blank', 
             'title' => 'Email ' . $share_meta['title_attr']
         ),
         'reddit' => array(
             'href' => '//reddit.com/submit?url=' . $share_meta['url'] . '&title=' . $share_meta['title'], 
-            'rel' => 5, 
             'target' => '_blank',
             'title' => 'Upvote ' . $share_meta['title_attr'] . ' on Reddit'
         ),
         'discuss' => array(
             'href' => '#comments',
-            'rel' => '-1',
             'target' => '',
             'title' => 'Read comments on ' . $share_meta['title_attr'] 
         )
@@ -101,9 +95,9 @@ function social_link_code($service = 'facebook', $is_list_item = false) {
     }
 
     $service_link[] = '<a ';
-    $service_link[] = 'class="' . $service . '" ';
+    $service_link[] = 'class="' . $service . ' ' . $share_meta['class'] . '" ';
     $service_link[] = 'href="' . $networks[$service]['href'] . '" ';
-    $service_link[] = 'data-rel="' . $networks[$service]['rel'] . '" ';
+    $service_link[] = 'data-type="' . $service . '" ';
     $service_link[] = 'title="' . $networks[$service]['title'] . '"';
     $service_link[] = '></a>';
 
@@ -114,20 +108,20 @@ function social_link_code($service = 'facebook', $is_list_item = false) {
     return implode('', $service_link);
 }
 
-function get_sharing_links($services = null, $is_list_item = false) {
-    /**
-     * Get Sharing Links Array
-     * -----------------------
-     * Return the sharing link for the provided network, with an optional 
-     * <li></li> wrapper. Currently supported:
-     * 
-     * facebook, twitter, google, reddit, email, discussion, printing
-     * 
-     * @param {string} $service The social service/sharing action.
-     * @param {bool} $is_list_item Optionally wrap link in <li>
-     * @return {array} $service_links Array of social links.
-     */
+/**
+ * Get Sharing Links Array
+ * -----------------------------------------------------------------------------
+ * @param   string  $service        The social service/sharing action.
+ * @param   bool    $is_list_item   Optionally wrap link in <li>
+ * @return  array   $service_links  Array of social links.
+ *
+ * Return the sharing link for the provided network, with an optional 
+ * <li></li> wrapper. Currently supported:
+ * 
+ * facebook, twitter, google, reddit, email, discussion, printing
+ */
 
+function get_sharing_links($services = null, $is_list_item = false) {
     $services_links = array();
 
     if (is_null($services)) {
@@ -146,17 +140,16 @@ function get_sharing_links($services = null, $is_list_item = false) {
     return $services_links;
 }
 
+/**
+ * Print Sharing Links Array
+ * -----------------------------------------------------------------------------
+ * @param   array   $services
+ * @param   bool    $is_list_item
+ * 
+ * Fetch, collapse and print array of social links.
+ */
+
 function sharing_links($services = null, $is_list_item = false) {
-    /**
-     * Print Sharing Links Array
-     * -------------------------
-     * Fetch, collapse and print array of social links.
-     * 
-     * @param {array} $services
-     * @param {bool} $is_list_item
-     * @return {none}
-     */
-    
     $sharing_links = get_sharing_links($services, $is_list_item);
     printf('%s', implode('', $sharing_links));
 }
