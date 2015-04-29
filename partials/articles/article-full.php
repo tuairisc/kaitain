@@ -8,7 +8,7 @@
         </div>
         <div class="meta">
             <?php if (has_local_avatar()) : ?>
-                <div class="avatar" style="background-image: url('<?php echo get_avatar_url(); ?>');"></div>
+                <div class="avatar" style="background-image: url('<?php printf(get_avatar_url(get_the_author_meta('ID'))); ?>');"></div>
             <?php endif; ?>
 
             <div class="text<?php printf('%s', (is_custom_type()) ? ' jobtext' : ''); ?>">
