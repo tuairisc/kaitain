@@ -264,7 +264,7 @@ function clean_search_url() {
 }
 
 /**
- * Get Avatar URL (Filter)
+ * Get Avatar URL
  * -----------------------------------------------------------------------------
  * Wrapper for get_avatar that only returns the URL. Yes, WordPress added a 
  * get_avatar_url() function in version 4.2. The Tuairisc site, however, uses 
@@ -308,7 +308,7 @@ function has_local_avatar($user_id = null) {
     }
 
     $avatar = get_avatar_url_only($user_id);
-    return (!strpos($avatar, 'gravatar') && !strpos($avatar, 'wp-user-avatar'));
+    return (!strpos($avatar, 'gravatar') && !strpos($avatar, 'fallback-avatar'));
 }
 
 /**
@@ -322,18 +322,18 @@ function has_local_avatar($user_id = null) {
  * these articles.
  * 
  * @param   int     $author_id
- * @return  bool    $is_default_account
+ * @return  bool    
  */
 
 function is_default_author($author_id = null) {
     global $default_author_id;
+    $author_id = 0;
 
     if (is_null($author_id)) {
         $author_id = get_the_author_meta('ID');
     }
 
-    $is_default_account = ($author_id === $default_author_id);
-    return $is_default_account;
+    return ($author_id === $default_author_id);
 }
 
 /**
@@ -375,10 +375,8 @@ function author_is_columnist($author_id = null) {
 function is_columnist_article() {
     $col_article = get_post_meta(get_the_ID(), 'is_column', true);
     $col_article = strtolower($col_article);
-    $col_article = strip_tags($col_article);
-    $is_column = ($col_article === '1');
-
-    return $is_column;
+    $col_article = (int) strip_tags($col_article);
+    return ($col_article === 1);
 }
 
 /**
@@ -418,21 +416,23 @@ function tweak_title($title, $sep) {
  * exclusions are more nuanced, in that we want to both change how the 
  * categories are styled in the loop or exclude it entirely.
  * 
- * @return  bool    Article is in excluded category true/false.
+ * @return  bool    $is_excluded    Article is in excluded category true/false.
  */
 
 function is_excluded_category() {
     global $index_excluded_categories;
+    $is_excluded = false;
 
     foreach(get_the_category() as $c) {
         $cat_id = get_cat_id($c->cat_name);
 
         if (in_array($cat_id, $index_excluded_categories)) {
-            return true;
+            $is_excluded = true;
+            break;
         }
     }
 
-    return false;
+    return $is_excluded;
 }
 
 /**
