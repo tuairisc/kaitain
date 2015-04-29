@@ -10,49 +10,11 @@
  * @link       https://github.com/bhalash/tuairisc.ie
  */
 
-pre.debug {
-    background-color: #000;
-    color: #fff;
-    font-weight: bold;
-}
-
-body {
-    @include media(print) {
-        margin: 0;
-    }
-}
-
-/** 
- * Tables
- * ------
- * Needed for tables to display correctly. 
- */
-
-table.tg {
-    margin-bottom: $margin;
-    width: 100%;
-
-    a {
-        text-decoration: none;
-    }
-}
-
-h6 {
-    color: $colour-grey-light-span;
-}
-
 /**
  * Miscellaneous Rules
  * -------------------
  * These are one-line fixes to fix quirks in the Gazeti theme.
  */
-
-#sidebar, .full-widget-area {
-    // All otherwise-unrelated areas to hide when printing.
-    @include media(print) {
-        display: none;
-    }
-}
 
 #respond {
     // WordPress comment response form.
@@ -67,19 +29,6 @@ h6 {
 
     textarea {
         width: 98%
-    }
-}
-
-span.date {
-    /* Gazeti transforms hyperlinks to uppercase by default, which can render
-     * an Irish name to be nonsensical. */
-    text-transform: none;
-}
-
-.navigation {
-    // Page/index bottom pagination.
-    @include media(print) {
-        display: none;
     }
 }
 
