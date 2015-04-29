@@ -17,13 +17,25 @@ html {
 
 body {
     background-color: $colour-grey-article-border;
+
+    @include media(print) {
+        margin: 0;
+    }
+}
+
+/*
+ * Remove Margins and Padding
+ * -----------------------------------------------------------------------------
+ */
+
+body, h1, h2, h3, h4, h5, h6, ol, p, pre, ul {
     margin: 0;
     padding: 0;
 }
 
 /**
  * Forms
- * -----
+ * -----------------------------------------------------------------------------
  */
 
 input, button, textarea {
@@ -42,15 +54,28 @@ input, button, textarea {
     }
 }
 
+/** 
+ * Tables
+ * -----------------------------------------------------------------------------
+ * Needed for tables to display correctly. 
+ */
+
+table.tg {
+    margin-bottom: $margin;
+    width: 100%;
+
+    a {
+        text-decoration: none;
+    }
+}
+
 /**
  * Headline Items
- * --------------
+ * -----------------------------------------------------------------------------
  */
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
-    margin: 0;
-    padding: 0;
 }
 
 h1 { 
@@ -75,12 +100,13 @@ h5 {
 }
 
 h6 { 
+    color: $colour-grey-light-span;
     @include font-size(1.2);
 }
 
 /**
  * Non-healine Items 
- * -----------------
+ * -----------------------------------------------------------------------------
  */
 
 a, abbr, acronym, big, cite, code, del, em, ins, small, span, strike, strong, 
@@ -90,7 +116,7 @@ sub, sup {
 
 /**
  * Big Text
- * --------
+ * -----------------------------------------------------------------------------
  * Normal text is ~1.6
  */
 
@@ -100,7 +126,7 @@ big, dt {
 
 /**
  * Small Text
- * ----------
+ * -----------------------------------------------------------------------------
  * Normal text is ~1.6
  */
 
@@ -109,17 +135,8 @@ cite, ins, q, small, sup, sub {
 }
 
 /**
- * Bold Text
- * ---------
- */
-
-dt, strong {
-    font-weight: bold;
-}
-
-/**
  * Code Blocks
- * -----------
+ * -----------------------------------------------------------------------------
  */
 
 code, kbd, pre, pre span, tt, var {
@@ -130,15 +147,18 @@ code, kbd, pre, pre span, tt, var {
 }
 
 pre {
-    background-color: $colour-grey-box;
+    background-color: #000;
     color: #fff;
+    font-weight: bold;
     line-height: 1.2em;
+    margin-bottom: $margin;
+    padding: $padding-19;
     overflow: auto;
 }
 
 /**
  * Blockquote and Cite
- * -------------------
+ * -----------------------------------------------------------------------------
  */
  
 blockquote {
@@ -177,8 +197,8 @@ cite {
 }
 
 /**
- * Miscellaneous Inline Elements
- * -----------------------------
+ * Miscellaneous Elements
+ * -----------------------------------------------------------------------------
  */
 
 a {
@@ -198,27 +218,19 @@ iframe, img {
     overflow: hidden;
 }
 
-li {
-    line-height: 1em;
-}
-
 small {
     letter-spacing: 0;
     line-height: normal;
 }
 
-ol, ul {
-    margin: 0;
-    padding: 0;
- 
-    li {
-        margin-bottom: 0;
-    } 
-}
+li {
+    line-height: 1em;
+    margin-bottom: 0;
+} 
 
 /**
  * Article Text Styling
- * --------------------
+ * -----------------------------------------------------------------------------
  */
 
 article {
