@@ -38,7 +38,7 @@
  *      a given section regardless of what the main section is.
  */
 
-@each $list in $category_colours {
+@each $list in $section_colours {
     .section-#{nth($list, 1)} {
         // 1. Set trims for the main sections.
         .section-trim-background, .section-trim-background-hover:hover {
@@ -64,7 +64,7 @@
 }
 
 /**
- * Main Content Background Trim
+ * Tuairisc Trim Colours
  * -----------------------------------------------------------------------------
  * I had a reproducible problem with the background image across all browsers:
  * Depending on the precise width of the window, the background image strip 
@@ -73,22 +73,21 @@
  * parent.
  */
 
-#main, #footer {
-    overflow-x: hidden;
+.tuairisc-trim {
+    background: left top/cover repeat-y url($background-stripe);
+    position: absolute;
+    left: -3%;
+    right: -3%;
+}
 
-    .section-trim {
-        background: left top/cover repeat-y url($background-stripe);
-        height: 6px;
-        position: absolute;
-        left: -3%;
-        right: -3%;
-    }
+.trim {
+    height: 6px;
+}
 
-    .trim-top {
-        top: 0;
-    }
+.trim-top {
+    top: 0;
+}
 
-    .trim-bottom {
-        bottom: 0;
-    }
+.trim-bottom {
+    bottom: 0;
 }
