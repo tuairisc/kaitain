@@ -20,11 +20,11 @@ $modal-background-active: #5e83c4;
 
 /**
  * Site Section Colours
- * --------------------
+ * -----------------------------------------------------------------------------
  * Keyed to category number, with single post, job posts and fallback:
  */
  
-$category_colours: (
+$section_colours: (
     ('tuairimiocht', #8eb2d3), 
     ('sport', #c54b54), 
     ('cultur', #96c381), 
@@ -38,8 +38,7 @@ $category_colours: (
 
 /**
  * Fonts
- * -------
- * There are two font stacks used in the theme.
+ * -----------------------------------------------------------------------------
  */
 
 // Font-families.
@@ -49,7 +48,7 @@ $font-family-courier: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida 
 
 /**
  * Colours
- * -------
+ * -----------------------------------------------------------------------------
  */
 
 $colour-blue-navigation: #506572;
@@ -66,39 +65,28 @@ $colour-grey-jobarchive-span: #d2d3d5;
 
 /**
  * Margins, Sizes and Padding
- * --------------------------
+ * -----------------------------------------------------------------------------
  */
 
-// Margins.
+$main-content-max-width: 1200px; 
+
 $margin: 13px;
-$margin-5: $margin * 0.4; 
 $margin-7: $margin * 0.5;
 $margin-10: $margin * 0.75;
 $margin-19: $margin * 1.5;
 $margin-23: $margin * 1.75;
 $margin-26: $margin * 2;
-$margin-33: $margin * 2.5;
-$margin-39: $margin * 3;
-$margin-65: $margin * 5;
 
 // Padding.
 $padding: 13px;
 $padding-5: $padding * 0.4; 
-$padding-7: $padding * 0.5;
 $padding-10: $padding * 0.75;
 $padding-19: $padding * 1.5;
-$padding-23: $padding * 1.75;
-$padding-26: $padding * 2;
-$padding-33: $padding * 2.5;
 $padding-39: $padding * 3;
-$padding-65: $padding * 5;
-
-// Default side padding of main-column segments.
-$padding-sections: 0 12%;
 
 /**
  * Breakpoints
- * -----------
+ * -----------------------------------------------------------------------------
  */
 
 $break-1200: 1200px;
