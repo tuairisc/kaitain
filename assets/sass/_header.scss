@@ -67,6 +67,7 @@ nav#menu {
         box-sizing: border-box;
         display: inline-block;
         padding: $padding-5 $padding-10;
+        transition: color .3s, background-color .3s;
         @include font-size(1.4);
     }
 }
