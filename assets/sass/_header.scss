@@ -1,5 +1,5 @@
 /**
- * Site Header Stylesheet 
+ * Site Header and Site Menu 
  * -----------------------------------------------------------------------------
  * These are the rules for the top-level containers in the Tuairisc theme.
  * 
@@ -35,65 +35,116 @@ $header-logo-height: 70px;
         margin-bottom: $margin;
         padding: 0;
     }
+}
 
-    #header-logo {
-        background-color: #fff;
-        border-bottom: 1px solid #eee;
-        height: $header-logo-height;
-        text-align: center;
+#header-logo {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    height: $header-logo-height;
+    text-align: center;
 
-        a {
-            background: center/auto 50% no-repeat url($brand-tuairisc);
-            display: inline-block;
-            font-size: 0 !important;
-            height: 100%;
-            width: 225px;
-        }
+    a {
+        background: center/auto 50% no-repeat url($brand-tuairisc);
+        display: inline-block;
+        font-size: 0 !important;
+        height: 100%;
+        width: 225px;
+    }
+}
+
+/**
+ * Site Menu
+ * -----------------------------------------------------------------------------
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * 
+ * This section entirely deals with the responsive layout of the site's main 
+ * nav menu.
+ */
+
+nav#menu {
+    position: relative;
+
+    @include media(print) {
+        display: none;
     }
 
-    .share-search {
-        bottom: 0;
-        margin-right: 4%;
-        right: 0;
-        position: absolute;
-        width: auto;
+    ul {
+        list-style-type: none;
+        text-align: center;
 
-        > * {
-            float: right;
-            margin-left: $margin-7;
-
-            @include media(smartphone) {
-                float: left;
-                margin-left: 0;
-                margin-bottom: $margin-7;
-            }
-        }
-
-        @include media(smartphone) {
-            float: left;
-            position: initial;
-        }
-
-        @include media(print) {
+        ul {
             display: none;
         }
     }
 
-    .search_form {
-        /* This had godawful stock CSS. They floated the child inside the parent, 
-         * instead of floating the parent. */
-        width: 278px;
+    li {
+        display: inline-block;
+        position: relative;
 
-        @include media(smartphone) {
-            margin-bottom: $margin;
+        &:hover {
+            color: #fff;
         }
     }
 
-    #searchform {
-        border-radius: 0;
-        float: none;
-        margin: 0;
+    a {
+        box-sizing: border-box;
+        display: inline-block;
+        line-height: 24px;
+        padding: $padding-5 $padding-10;
+        @include font-size(1.4);
+    }
+}
+
+nav#menu ul {
+    /**
+     * Main Site Navigation
+     * --------------------
+     * The navigation menu has two-and-a-half states:
+     * 
+     * 1. Horizontal list, left aligned, on desktops.
+     * 2. Horizontal list, center aligned, on tables.
+     * 3. Horizontal list, no dropdowns, fixed on top, on smartphones.
+     */
+
+    min-height: 34px;
+
+    li {
+        display: inline-block;
+        position: relative;
+
+        li {
+            &:not(:last-child):after {
+                display: none;
+
+                @include media(smartphone) {
+                    @include font-size(2.5) ;
+                }
+            }
+
+            &:hover {
+                background-color: $colour-blue-navigation;
+
+            }
+
+            &:hover a {
+                color: #fff;
+                background-color: transparent;
+            }
+
+            a {
+                padding: 7px;
+                width: 100%;
+            }
+        }
+    }
+
+    @include media(portrait) {
         padding: 0;
-        width: 100%;
     }
 }
