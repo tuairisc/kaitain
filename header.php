@@ -42,13 +42,14 @@
 <body <?php body_class(); ?>>
     <div id="site">
         <div id="header" role="header">
-            <div id="header-logo">
-                <a href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>"></a>
+            <div class="<?php printf(SECTION_TRIM_BACKGROUND); ?>" id="header-logo">
+                <a class="brand" href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>"></a>
+                <a class="header-button" id="header-menu-button" href="javascript:void(0)" role="buton"></a>
+                <a class="header-button" id="header-search-button" href="javascript:void(0)" role="buton"></a>
+                <a class="header-button" id="header-social-button" href="javascript:void(0)" role="buton"></a>
             </div>
-
             <nav id="menu">
                 <ul id="section-primary"><?php primary_section_menu(); ?></ul>
-                <ul class="<?php printf(SECTION_TRIM_BACKGROUND); ?>" id="section-secondary"><?php secondary_section_menu(); ?></ul>
             </nav>
         </div>
         
@@ -57,10 +58,10 @@
             printf('%s', adrotate_group(1));
         } ?>
 
-        <?php if (WP_DEBUG && is_user_logged_in()) : ?>
+        <?php if (WP_DEBUG && is_user_logged_in() && 2 < 1) : ?>
             <pre class="debug"><?php printf(has_local_avatar(311) ? 'true' : 'false'); ?></pre>
         <?php endif; ?>
 
         <div id="main" role="main">
-            <div class="trim section-trim-background trim-top"></div>
+            <div class="trim trim-absolute <?php printf(SECTION_TRIM_BACKGROUND); ?> trim-top"></div>
             <div id="main-interior">
