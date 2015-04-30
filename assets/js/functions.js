@@ -80,7 +80,8 @@ function popoutSharer(object, clickEvent) {
  */
 
 jQuery('#site').css('padding-top', jQuery(header.container).outerHeight());
-jQuery(window).on('scroll', scrollHeader);
+
+    jQuery(window).on('load scroll', scrollHeader);
 
 /**
  * Social Sharing Popouts
