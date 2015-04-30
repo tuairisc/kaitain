@@ -65,10 +65,10 @@
 .foras-attribution {
     background: center center/100% auto no-repeat url($brand-foras);
     margin: 0 auto;
-    @include square-flex(100px, 0.8);
+    @include square-flex(100px 0.8);
     display: block;
 
     a {
-        @include square-flex(100%, 1);
+        @include square-flex(100% 1);
     }
 }

@@ -102,7 +102,7 @@ $widget-size-48: 48%;
     .avatar {
         @extend %cover-picture;
         margin-bottom: 3px;
-        @include square-flex(100%, 1);
+        @include square-flex(100% 1);
 
         a {
             height: inherit;

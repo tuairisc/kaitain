@@ -149,7 +149,7 @@ article.full {
             // background-image is set in single.php
             @extend %cover-picture;
             margin-right: 10px;
-            @include square-flex(67px, 1);
+            @include square-flex(67px 1);
         }
     } 
 
@@ -331,10 +331,10 @@ article.lead {
 
     div.article-thumb {
         margin-bottom: $margin; 
-        @include square-flex(100%, 0.5);
+        @include square-flex(100% 0.5);
 
         a {
-            @include square-flex(100%, 0.5);
+            @include square-flex(100% 0.5);
         }
     }
 
