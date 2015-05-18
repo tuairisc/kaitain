@@ -44,6 +44,7 @@ $section_category_ids = array(
 
 // Prefix for all sections, either main or specific.
 define('SECTION_PREFIX', 'section-');
+define('HAS_SECTION_CLASS', 'website-section');
 // Sitewide text and background colour classes to use the current section's trim.
 define('SECTION_TRIM_TEXT', 'section-trim-text');
 define('SECTION_TRIM_TEXT_HOVER', 'section-trim-text-hover');
@@ -78,9 +79,7 @@ class Sectioneer {
     public function __construct($size = 8) {
         $this->categories = array();
         $this->size = $size;
-
         $this->current_set = false;
-
         $this->current_id = 0;
         $this->current_slug = '';
         $this->current_class = '';
@@ -137,6 +136,7 @@ function setup_sections() {
     $cat_id = 0;
     $slug = SECTION_FALLBACK_SUFFIX;
     $class = '';
+    $is_section = true;
 
     foreach($section_category_ids as $id) {
         $category = get_category($id);
@@ -157,29 +157,31 @@ function setup_sections() {
                 // Fetch category parent ID.
                 $cat_id = find_category_parent_id(get_query_var('cat'));
                 break;
-            case 'home':
-                // FIXME-find better way to set home category.
-                $cat_id = $section_category_ids[0];
-                break;
             default: 
                 // Everything-*everything*-else is grouped under 'other'. 
+                $is_section = false;
                 break;
         }
 
-        if (in_array($cat_id, $section_category_ids)) {
+        if (in_array($cat_id, $section_category_ids) && $is_section) {
             // Set section to whatever is in the sections array.
             $category = get_category($cat_id);
             $slug = $category->slug;
             $class = SECTION_PREFIX . $slug;
-        }
 
-        $Sections->set_current($cat_id);
+            $Sections->set_current($cat_id);
+        }
     }
 }
 
 function add_section_class_to_body($classes) {
     global $Sections;
-    $classes[] = $Sections->current_class;
+
+    if ($Sections->current_set) {
+        $classes[] = $Sections->current_class;
+        $classes[] = HAS_SECTION_CLASS;
+    }
+    
     return $classes;
 }
 
@@ -193,14 +195,13 @@ function primary_section_menu() {
     global $Sections;
 
     foreach ($Sections->categories as $category) {
-        printf('%s', generate_menu_link(
-            'category', 
-            $category['id'], 
-            array(
-                $category['class'] . SECTION_SUFFIX_BACKGROUND_HOVER,
-                ($category['id'] === $Sections->current_id) ? SECTION_TRIM_BACKGROUND : null
-            )
-        ));
+        printf(
+            '<li class="%s%s%s">%s</li>', 
+            ($category['id'] === $Sections->current_id) ? SECTION_TRIM_BACKGROUND : '',
+            ($category['id'] === $Sections->current_id) ? ' ' : '',
+            $category['class'] . SECTION_SUFFIX_BACKGROUND_HOVER,
+            generate_menu_link('category', $category['id'])
+        );
     }
 }
 
@@ -215,7 +216,7 @@ function secondary_section_menu() {
 
     if (count($children) > 0) {
         foreach ($children as $child) {
-            printf(generate_menu_link('category', $child));
+            printf('<li>%s</li>', generate_menu_link('category', $child));
         }
     }
 }
@@ -306,8 +307,8 @@ function get_object_permalink($object_type = null, $object_id = null) {
             $object_permalink = get_permalink($object_id); break;
         case 'tag': 
             $object_permalink = get_tag_link($object_id); break;
-        default: 
-            $object_permalink = get_home_url(); break;            
+        // default: 
+        //     $object_permalink = get_home_url(); break;            
     }
 
     return $object_permalink;
@@ -353,54 +354,13 @@ function get_object_name($object_type = null, $object_id = null) {
  * @return  string  $hyperlink      The generated hyperlink to the object.
  */
 
-function generate_menu_link($object_type = null, $object_id = null, $classes = array(), $ids = array()) {
+function generate_menu_link($object_type = null, $object_id = null) {
     if (is_null($object_type) || is_null($object_id)) {
         // throw error
     }
 
-    if (!empty($classes)) {
-        if (is_string($classes)) {
-            $classes = explode(',', $classes);
-        } else if (is_integer($classes)) {
-            $classes = array($classes);
-        }
-    }
-
-    if (!empty($ids)) {
-        if (is_string($ids)) {
-            $ids = explode(',', $ids);
-        } else if (is_integer($ids)) {
-            $ids = array($ids);
-        }
-    }
-
     $hyperlink = array('<a href="');
     $hyperlink[] = get_object_permalink($object_type, $object_id) . '"';
-    
-    if (!empty($classes)) {
-        $hyperlink[] = ' class="';
-
-        foreach ($classes as $class) {
-            if (!empty($class)) {
-                $hyperlink[] = ' '; 
-            }
-
-            $hyperlink[] = $class;
-        }
-
-        $hyperlink[] = '"';
-    }
-
-    if (!empty($ids)) {
-        $hyperlink[] = ' id="';
-
-        foreach ($ids as $id) {
-            $hyperlink[] = ' ' . $id;
-        }
-
-        $hyperlink[] = '"';
-    }
-
     $hyperlink[] = '>';
     $hyperlink[] = get_object_name($object_type, $object_id); 
     $hyperlink[] = '</a>';
