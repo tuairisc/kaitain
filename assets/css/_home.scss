@@ -11,26 +11,25 @@
  */
 
 // Homepage responsive break.
-$breakpoint-home: 950px;
 // Widget width of parent.
-$widget-size-23: 23%;
-$widget-size-48: 48%;
+$widget-23: 23%;
+$widget-48: 48%;
 
 .featured-main {
-    @include media(max, $breakpoint-home) {
+    @include media($b-960) {
         padding-bottom: 0;
     }
 }
 
 .featured-main .hero-image, .featured-main .post-content {
-    @include media(max, $breakpoint-home) {
+    @include media($b-960) {
         width: 100%;
     }
 }
 
 .tuairisc-featured-row {
-    margin-bottom: $margin;
     @include flex-parent(row, space-between, wrap);
+    @include margin(1, bottom);
 
     @include media(smartphone) {
         @include prefix(flex-direction, column);
@@ -38,11 +37,11 @@ $widget-size-48: 48%;
 
     article {
         // Quarter size, then half and finally full width on smartphones.
-        margin-bottom: $margin-7;
-        @include flex-child(0 1 $widget-size-23);
+        @include flex-child(0 1 $widget-23);
+        @include margin(0.5, bottom);
 
-        @include media(max, $breakpoint-home) {
-            @include flex-child(0 1 $widget-size-48);
+        @include media($b-960) {
+            @include flex-child(0 1 $widget-48);
         }
 
         @include media(smartphone) {
@@ -72,13 +71,13 @@ $widget-size-48: 48%;
  */
 
 .widget_tuairisc_authors {
-    background-color: $colour-grey-box;
+    background-color: palette(gray, light);
     box-sizing: border-box;
-    margin-bottom: $margin;
-    padding: $padding;
+    @include margin(1, bottom);
+    @include padding(1);
 
     h2 {
-        margin-bottom: $margin-7;
+        @include margin(0.5, bottom);
     }
 
     .tuairisc-author-list {
@@ -91,17 +90,17 @@ $widget-size-48: 48%;
 
     .tuairisc-author {
         box-sizing: border-box;
-        @include flex-child(0 1 $widget-size-23);
+        @include flex-child(0 1 $widget-23);
 
         @include media(smartphone) {
-            margin-bottom: $margin-7;
-            @include flex-child(0 1 $widget-size-48);
+            @include flex-child(0 1 $widget-48);
+            @include margin(0.5, bottom);
         }
     }
 
     .avatar {
         @extend %cover-picture;
-        margin-bottom: 3px;
+        @include margin(0.25, bottom);
         @include square-flex(100% 1);
 
         a {

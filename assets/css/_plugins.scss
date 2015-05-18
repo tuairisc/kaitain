@@ -21,7 +21,7 @@
 
 /**
  * Modal Links
- * -----------
+ * -----------------------------------------------------------------------------
  * Aidan uses modal popup links. This is styling per Ciaran for 
  * post-embedded Soundcloud links. I will flesh this out later for 
  * other segments on the site. 
@@ -50,16 +50,15 @@
         font-family: $font-family-arial;
         font-size: 175%;
         font-weight: bold;
-        padding: 30px 0;
         text-align: center;
         text-decoration: none;
-        width: 100%;
+        @include padding(2, 0);
     }
 }
 
 /**
  * Ninja Forms and Event Drop
- * --------------------------
+ * -----------------------------------------------------------------------------
  * !important 4 lyfe. See:
  *
  * https://ninjaforms.com/add-custom-css-to-your-ninja-forms/
@@ -76,13 +75,13 @@
 
 .event-drop {
     border: 3px dotted #bdbdbd;
-    margin-bottom: $margin;
     overflow: hidden;
+    @include margin(1, bottom);
 
     h3 {
         border-radius: 10px;
-        line-height: 75px;
         text-align: center;
+        @include line-height(4.5);
     }
 }
 
@@ -97,7 +96,7 @@ textarea.event-output {
 }
 
 div.province {
-    margin-bottom: $margin-26;
+    @include margin(2, bottom);
 }
 
 div.event {

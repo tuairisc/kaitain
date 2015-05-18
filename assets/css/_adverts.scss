@@ -70,7 +70,7 @@ a.tuairisc-advert {
  */
 
 .g-1, .g-2 {
-    padding: $padding-19 0;
+    @include padding(1.5 0);
 
     img.square {
         display: none;
@@ -116,7 +116,7 @@ a.tuairisc-advert {
     > div {
         // Sidebar adverts groups: .g-2, .g-4 and .g-5
         @include flex-child(1);
-        margin-bottom: $margin-19;
+        @include margin(1.5, bottom);
 
         @include media(portrait) {
             @include flex-child(0 1 32.5%);

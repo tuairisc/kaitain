@@ -14,12 +14,14 @@ $assets: '../images/';
 $assets-article: $assets + 'article/';
 $assets-background: $assets + 'background/';
 $assets-branding: $assets + 'branding/';
+$assets-buttons: $assets + 'buttons/';
 $assets-education: $assets + 'education/';
 $assets-social: $assets + 'social/';
 
+
 /**
  * Sitewide Background Images
- * --------------------------
+ * -----------------------------------------------------------------------------
  */
 
 $background-stripe-big: $assets-background + 'stripe-footer.svg';
@@ -27,7 +29,7 @@ $background-stripe: $assets-background + 'stripe.svg';
 
 /**
  * Branding Images
- * ---------------
+ * -----------------------------------------------------------------------------
  */
 
 $brand-foras: $assets-branding + 'brand-foras.svg';
@@ -36,15 +38,18 @@ $brand-tuairisc: $assets-branding + 'brand-tuairisc.svg';
 $brand-tuairisc-alt: $assets-branding + 'brand-tuairisc-white.svg';
 
 /**
- * Social Buttons
- * --------------
+ * Buttons
+ * -----------------------------------------------------------------------------
  */
  
 $social-sprites: $assets-social + 'social-sprites.svg';
 
+$menu-button-white: $assets-buttons + 'light/menu.svg';
+$menu-button-black: $assets-buttons + 'dark/menu.svg';
+
 /**
  * Education Section
- * -----------------
+ * -----------------------------------------------------------------------------
  */
 
 $education-download: (#d2d3d5, $assets-education + 'download.svg');

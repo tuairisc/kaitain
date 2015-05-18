@@ -1,0 +1,158 @@
+/**
+ * Site Header and Site Menu 
+ * -----------------------------------------------------------------------------
+ * These are the rules for the top-level containers in the Tuairisc theme.
+ * 
+ * @category   Stylesheet
+ * @package    Tuairisc.ie Theme
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    All rights reserved
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ */
+
+$header-height: 7;
+$header-height-greann: 12.5;
+$header-submenu-height: 3.4;
+$header-brand-width: 22.5;
+
+#header-logo {
+    border-bottom: 1px solid palette(gray, light);
+    line-height: 0;
+    position: relative;
+    text-align: center;
+
+    a#brand {
+        background: center/auto 50% no-repeat url($brand-tuairisc);
+        display: inline-block;
+        transition: height .1s ease-in;
+        @include rem(height, $header-height);
+        @include rem(width, $header-brand-width);
+    }
+
+    a#brand.shrink {
+        @include rem(height, $header-height * 0.75);
+    }
+}
+
+.website-section #header-logo, .section-greann #header-logo {
+    border: 0;
+}
+
+.website-section #header-logo a#brand {
+    background-image: url($brand-tuairisc-alt);
+}
+
+.section-greann #header-logo a#brand {
+    background-image: url($brand-greann);
+    background-size: auto 85%;
+}
+
+/**
+ * Search Placeholder Button
+ * -----------------------------------------------------------------------------
+ *
+ */
+
+// a.header-button {
+//     display: block;
+//     position: absolute;
+//     top: 50%;
+//     transform: translateY(-50%);
+//     @include square-flex(35px 1);
+// }
+
+#header-menu-button {
+    // background: center center/auto 90% no-repeat url($menu-button-black);
+    // @include margin(1, left);
+    @include generate-social-link(a, 100% 1, menu, $bhal-spritesheet-black);
+}
+
+.website-section #header-menu-button a {
+    background-image: url(nth(map-get($bhal-spritesheet-white, sprites), 1));
+}
+
+// .website-section #header-menu-button {
+//     background: center center/auto 90% no-repeat url($menu-button-white);
+// }
+
+// #header-search-button {
+//     // right: margin(1);
+// }
+
+// #header-social-button {
+//     // right: (margin(2)) + 35px;
+// }
+
+/**
+ * Site Menu Container
+ * -----------------------------------------------------------------------------
+ * This section entirely deals with the responsive layout of the site's main 
+ * nav menu.
+ */
+
+nav#menu {
+    position: relative;
+    transition: height 1s ease-in;
+
+    @include media($b-768) {
+        // display: none;
+        height: 0;
+        overflow: hidden;
+    }
+
+    @include media(print) {
+        display: none;
+    }
+
+    ul {
+        box-sizing: border-box;
+        list-style-type: none;
+        margin: 0 auto;
+        max-width: $main-content-max-width;
+        text-align: center;
+
+        @include media($b-960) {
+            @include flex-parent(row);
+        }
+    }
+
+    li {
+        display: inline-block;
+
+        @include media($b-960) {
+            @include flex-child(1);
+        }
+    }
+
+    a {
+        box-sizing: border-box;
+        @include padding(0.5 1.3);
+        @include font-size(1.4);
+    }
+}
+
+ul#section-primary {
+    li {
+        transition: color .1s, background-color $transition-speed;
+        @include flex-child(1);
+    }
+
+    a {
+        display: block;
+        height: 100%;
+    }
+}
+
+ul#section-secondary {
+    @include rem(min-height, $header-submenu-height);
+
+    &:empty {
+        display: none;
+    }
+
+    li {
+        @include flex-child(0 1 auto);
+    }
+}

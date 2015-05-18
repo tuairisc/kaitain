@@ -34,26 +34,15 @@
  */
 
 @import 'reset';
-@import 'containers';
-// Website header. 
 @import 'header';
-// AdRotate adverts.
-@import 'adverts';
-// Website sections. 
+@import 'containers';
 @import 'sections';
-// Education category articles.
-@import 'education';
-// Website home page.
 @import 'home';
-// Social sharing links.
-@import 'sharing';
-// Articles.
-@import 'article';
-// Website footer. 
-@import 'footer';
-// Tweaks for plugins that Tuairisc use.
-@import 'plugins';
-// WPZOOM and Tuairisc widgets.
-@import 'widgets';
-// Miscellaneous styling rules.
-@import 'misc';
+@import 'adverts';
+// @import 'education';
+// @import 'sharing';
+// @import 'article';
+// @import 'footer';
+// @import 'plugins';
+// @import 'widgets';
+// @import 'misc';

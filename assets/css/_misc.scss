@@ -28,7 +28,7 @@
     } 
 
     textarea {
-        width: 98%
+        width: 98%;
     }
 }
 
@@ -44,5 +44,5 @@
 }
 
 #report {
-    margin-bottom: $margin;
+    @include margin(1, bottom);
 }

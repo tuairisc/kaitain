@@ -24,7 +24,7 @@ $modal-background-active: #5e83c4;
  * Keyed to category number, with single post, job posts and fallback:
  */
  
-$section_colours: (
+$section-colours: (
     ('tuairimiocht', #8eb2d3), 
     ('sport', #c54b54), 
     ('cultur', #96c381), 
@@ -35,6 +35,13 @@ $section_colours: (
     ('nuacht', #516671),
     ('fallback', #caab60)
 );
+
+/**
+ * Global Animation Speec
+ * -----------------------------------------------------------------------------
+ */
+
+$transition-speed: .2s;
 
 /**
  * Fonts
@@ -51,17 +58,32 @@ $font-family-courier: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida 
  * -----------------------------------------------------------------------------
  */
 
-$colour-blue-navigation: #506572;
-$colour-grey-dark: #87888a;
-$colour-green-anchor: #95c37c;
-$colour-grey-box: #e5e5e5;
-$colour-grey-cite: #444;
-$colour-grey-dark-border: #333;
-$colour-grey-light-border: #ececec;
-$colour-grey-article-border: #f2f2f2;
-$colour-grey-light-span: #999;
-$colour-white-text: #fff;
-$colour-grey-jobarchive-span: #d2d3d5;
+$default-colors: (
+    blue: (
+        base: #506572
+    ),
+    green: (
+        base: #95c37c
+    ),
+    white: (
+        base: #fff
+    ),
+    black: (
+        base: #000
+    ),
+    pink: (
+        base: #e44284
+    ),
+    gray: (
+        x-dark: rgb(39,39,39),
+        dark: rgb(68,68,68),
+        mid-dark: rgb(111,111,111),
+        base: rgb(153,153,153),
+        mid-light: rgb(210,210,210),
+        light: rgb(229,229,229),
+        x-light: rgb(242,242,242),
+    )
+);
 
 /**
  * Margins, Sizes and Padding
@@ -70,24 +92,15 @@ $colour-grey-jobarchive-span: #d2d3d5;
 
 $main-content-max-width: 1200px; 
 
-$margin: 13px;
-$margin-7: $margin * 0.5;
-$margin-10: $margin * 0.75;
-$margin-19: $margin * 1.5;
-$margin-23: $margin * 1.75;
-$margin-26: $margin * 2;
-
-// Padding.
-$padding: 13px;
-$padding-5: $padding * 0.4; 
-$padding-10: $padding * 0.75;
-$padding-19: $padding * 1.5;
-$padding-39: $padding * 3;
+$default-margin: 13px;
+$default-padding: $default-margin;
 
 /**
  * Breakpoints
  * -----------------------------------------------------------------------------
  */
 
-$break-1200: 1200px;
-$break-768: 768px;
+$b-1280: max 1280px;
+$b-1024: max 1028px;
+$b-960:  max 960px;
+$b-768:  max 768px;

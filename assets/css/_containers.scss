@@ -29,8 +29,16 @@
     width: 94%;
 
     @include media(smartphone) {
-        padding-top: $padding-39;
+        @include padding(2, top);
     }
+}
+
+#header {
+    background-color: #fff;
+    box-shadow: 0px 10px 15px -8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    z-index: 3;
+    @include fixed(0 0 0, top right left);
 }
 
 #main {
@@ -46,10 +54,10 @@
     }
 
     #main-interior {
-        padding: $padding-19;
         @include flex-parent(row);
+        @include padding(1.3);
         
-        @include media(max, $break-768) {
+        @include media($b-768) {
             @include prefix(flex-direction, column);
         }
     }
@@ -58,16 +66,16 @@
 #content {
     // The main content area of site.
     box-sizing: border-box;
-    padding-right: $padding-10;
+    padding-right: padding(1);
     @include flex-child(1);
 } 
 
 #sidebar {
     box-sizing: border-box;
-    padding-left: $padding-10;
     @include flex-child(0 1 30%);
+    @include padding(1, left);
 
-    @include media(max, $break-768) {
+    @include media($b-768) {
         @include flex-child(1);
     }
     
@@ -85,7 +93,7 @@
 
     @include media(smartphone) {
         background-image: none;
-        padding-bottom: $margin-26;
+        @include padding(1.5, bottom);
     }
 
     @include media(print) {

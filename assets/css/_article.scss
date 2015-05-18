@@ -38,34 +38,13 @@ $archive-article-thumb-height-170: 170px;
 $archive-article-thumb-height-325: 325px;
 
 /**
- * Article Reset
- * -------------
- * The Gazeti theme does odd things with articles. All of the rules in this 
- * section were written
- */
-
-article {
-    // box-sizing: border-box;
-
-    div.article-body {
-        // box-sizing: border-box;
-    }
-
-    embed, iframe {
-        @include media(print) {
-            display: none;
-        }
-    }
-}
-
-/**
  * Article Header
- * --------------
+ * -----------------------------------------------------------------------------
  */
 
 header {
     .title, div.excerpt {
-        margin-bottom: $margin-7;
+        @include margin(0.5, bottom);
     }
 
     div.excerpt {
@@ -75,7 +54,7 @@ header {
         }
 
         p {
-            color: $colour-grey-light-span;
+            color: palette(gray, light);
             margin: 0;
         }
     }
@@ -91,22 +70,22 @@ header {
 
 /**
  * WordPress Image Captions
- * ------------------------
+ * -----------------------------------------------------------------------------
  */
 
 .wp-caption img {
-    margin-bottom: $margin-10;
+    @include margin(0.75, bottom);
 }
 
 p.wp-caption-text {
-    color: $colour-grey-light-span;
+    color: palette(gray, light);
     padding: 0;
     text-align: left;
 }
 
 /*
  * Full Single Post Article
- * ------------------------
+ * -----------------------------------------------------------------------------
  */
 
 article.full {
@@ -117,7 +96,7 @@ article.full {
     }
 
     header {
-        margin-bottom: $margin-26;
+        @include margin(2, bottom);
 
         @include media(print) {
             margin-bottom: 0;
@@ -125,10 +104,10 @@ article.full {
 
         div.meta {
             @extend %clearfix;
-            /* For legibility when its white-on-white. */
-            border: 1px solid $colour-grey-article-border;
+            /* For legibility when it is white-on-white. */
+            border: 1px solid palette(gray, x-light);
             border-width: 1px 0;
-            padding: 9px 0;
+            @include padding(0.75 0);
         }
 
         div.avatar, div.text {
@@ -139,17 +118,17 @@ article.full {
             float: left;
             text-transform: initial;
 
-            @include media(max, 1050) {
+            @include media($b-1024) {
                 float: none;
-                margin-bottom: $margin;
+                @include margin(1, bottom);
             }
         }
 
         div.avatar {
             // background-image is set in single.php
             @extend %cover-picture;
-            margin-right: 10px;
             @include square-flex(67px 1);
+            @include margin(0.75, right);
         }
     } 
 
@@ -164,7 +143,7 @@ article.full {
 
 /**
  * Job Archive Index Article 
- * -------------------------
+ * -----------------------------------------------------------------------------
  * The rules here are specific to job archive articles as they have a sligtly
  * different layout. Most of their position and sizing is set below in the
  * archives.
@@ -182,24 +161,24 @@ article.jobarchive {
     span {
         font: 12px $font-family-arial;
         text-transform: uppercase;
-        padding: 3px 5px;
+        @include padding(0.25 0.5);
     }
 
     span.job-category {
         color: #fff;
         display: inline-block;
-        margin-bottom: $margin-7;
+        @include margin(0.5, bottom);
         width: 100%;
     }
 
     span.more {
-        background: $colour-grey-jobarchive-span;
+        background: palette(gray, mid-light);
         display: inline-block;
-        padding: 2px 5px;
+        @include padding(0.25 0.5);
     }
 
     div.article-body p, .more {
-        margin-top: $margin-7;
+        @include margin(0.5, top);
     }
 }
 
@@ -217,7 +196,7 @@ article.jobarchive {
     @extend %cover-picture;
 
     @include media(smartphone) {
-        margin-bottom: $margin-7;
+        @include margin(0.5, bottom);
     }
 
     a {
@@ -232,20 +211,20 @@ article.jobarchive {
 }
 
 #recent-posts article {
-    padding-bottom: $margin-26;
     @include flex-parent(row);
+    @include padding(1.75, bottom);
     
     @include media(smartphone) {
         @include prefix-value(display, block);
     }
 
     &:not(:last-child) {
-        border-bottom: 1px solid $colour-grey-light-span;
-        margin-bottom: $margin-26;
+        border-bottom: 1px solid palette(gray);
+        @include margin(1.5, bottom);
     }
 
     header {
-        margin-bottom: $margin;        
+        @include margin(1, bottom);
     }
 }
 
@@ -258,13 +237,13 @@ article.jobarchive {
         @include flex-child(0 1 $archive-width-65);
 
         @include media(print) {
-            margin-top: $margin;
+            @include margin(1, top);
         }
     }
 
     >:last-child {
         // Explicit, to remove padding set in other block.
-        padding: 0 $padding $padding 0;
+        @include padding(0 1 1 0);
 
         @include media(smartphone) {
             padding: 0;
@@ -283,8 +262,8 @@ article.jobarchive {
     }
 
     >:last-child {
-        padding-left: $padding;
         @include flex-child(1);
+        @include padding(1, left);
 
         @include media(smartphone) {
             padding: 0;
@@ -298,15 +277,16 @@ article.jobarchive {
 
 /**
  * Homepage Lead Article 
- * ---------------------
+ * -----------------------------------------------------------------------------
  * This is the hero article on the site, the first one that you see when the 
  * page loads. 
  */
 
 article.lead {
-    border-bottom: 1px solid $colour-grey-dark-border;
-    margin-bottom: $margin-26;
-    padding-bottom: $margin-26;
+    border-bottom: 1px solid palette(gray, dark);
+
+    @include margin(1.5, bottom);
+    @include padding(1.5, bottom);
 
     h1 {
         margin: 0;
@@ -317,7 +297,7 @@ article.lead {
 
         &:after {
             content: ', ';
-            padding-right: 5px;
+            @include padding(0.5, right);
 
             @include media(smartphone) {
                 display: none;
@@ -330,7 +310,7 @@ article.lead {
     }
 
     div.article-thumb {
-        margin-bottom: $margin; 
+        @include margin(1, bottom);
         @include square-flex(100% 0.5);
 
         a {
@@ -345,7 +325,7 @@ article.lead {
 
 /**
  * Related Posts Section
- * ---------------------
+ * -----------------------------------------------------------------------------
  */
 
 div.related-posts {
@@ -355,7 +335,7 @@ div.related-posts {
         box-sizing: border-box;
         @include flex-child(0 1 30%);
 
-        @include media(max, $break-768) {
+        @include media($b-768) {
             @include flex-child(0 1 32%);
         }
     }

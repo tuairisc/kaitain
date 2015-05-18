@@ -16,7 +16,7 @@ html {
 }
 
 body {
-    background-color: $colour-grey-article-border;
+    background-color: palette(gray, x-light);
 
     @include media(print) {
         margin: 0;
@@ -41,7 +41,9 @@ body, h1, h2, h3, h4, h5, h6, ol, p, pre, ul {
 input, button, textarea {
     // Remove all default appearance and focus appearance styling. 
     -webkit-appearance: none;
+    border: 0;
     box-sizing: border-box;
+    outline: 0;
     @include prefix(border-radius, 0);
 
     &:focus {
@@ -61,7 +63,7 @@ input, button, textarea {
  */
 
 table.tg {
-    margin-bottom: $margin;
+    @include margin(1, bottom);
     width: 100%;
 
     a {
@@ -100,7 +102,7 @@ h5 {
 }
 
 h6 { 
-    color: $colour-grey-light-span;
+    color: palette(gray, light);
     @include font-size(1.2);
 }
 
@@ -147,12 +149,12 @@ code, kbd, pre, pre span, tt, var {
 }
 
 pre {
-    background-color: #000;
-    color: #fff;
+    background-color: palette(black);
+    color: palette(white);
     font-weight: bold;
     line-height: 1.2em;
-    margin-bottom: $margin;
-    padding: $padding-19;
+    margin-bottom: margin(1);
+    padding: padding(1.5);
     overflow: auto;
 }
 
@@ -163,20 +165,16 @@ pre {
  
 blockquote {
     // Ciaran asked for a meticulously-styled blockquote area.
-    background-image: 
-        url($blockquote-open),
-        url($blockquote-close);
-    background-position: 
-        -4% 4%, 
-        104% 88%;
+    background-image: url($blockquote-open), url($blockquote-close);
+    background-position: -4% 4%, 104% 88%;
     background-origin: content-box;
     background-repeat: no-repeat;
     background-size: auto 25px;
-    border-color: 1px solid $colour-grey-article-border;
+    border-color: 1px solid color(gray, x-light);
     border-width: 1px 0;
     font-style: italic;
-    padding: 15px 30px;
     @include font-size(1.4);
+    @include padding(1 2);
 
     >:last-child {
         margin-bottom: 0;
@@ -184,7 +182,7 @@ blockquote {
 }
 
 cite {
-    color: $colour-grey-cite;
+    color: palette(gray, dark);
     display: block;
     font-style: none;
     font-weight: bold;
@@ -224,12 +222,11 @@ small {
 }
 
 li {
-    line-height: 1em;
     margin-bottom: 0;
 } 
 
 /**
- * Article Text Styling
+ * Article Rset
  * -----------------------------------------------------------------------------
  */
 
@@ -238,7 +235,7 @@ article {
         @include font-size(1.5);
 
         a {
-            color: $colour-green-anchor;
+            color: palette(green);
 
             &:hover {
                 text-decoration: underline;
@@ -247,10 +244,17 @@ article {
     }
 
     a img, blockquote, ol, p, pre, ul {
-        margin-bottom: $margin;
+        @include margin(1, bottom);
+    }
+
+    embed, iframe {
+        // Embedded and iframe content looks weird when printed.
+        @include media(print) {
+            display: none;
+        }
     }
 }
 
 .title a:hover {
-    color: $colour-green-anchor;
+    color: palette(green);
 }

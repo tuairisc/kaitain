@@ -38,7 +38,10 @@
  *      a given section regardless of what the main section is.
  */
 
-@each $list in $section_colours {
+$section-trim-height: 4px;
+$section-trim-offset: -3%;
+
+@each $list in $section-colours {
     .section-#{nth($list, 1)} {
         // 1. Set trims for the main sections.
         .section-trim-background, .section-trim-background-hover:hover {
@@ -73,15 +76,18 @@
  * parent.
  */
 
-.tuairisc-trim {
+.tuairisc-strip {
     background: left top/cover repeat-y url($background-stripe);
-    position: absolute;
-    left: -3%;
-    right: -3%;
 }
 
 .trim {
-    height: 6px;
+    height: $section-trim-height;
+}
+
+.trim-absolute {
+    position: absolute;
+    left: $section-trim-offset;
+    right: $section-trim-offset;
 }
 
 .trim-top {

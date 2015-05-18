@@ -18,7 +18,7 @@ ul.sharing {
         line-height: initial;
     }
 
-    @include generate-social-links(a);
+    @include generate-social-link(a);
 }
 
 #header .sharing {
