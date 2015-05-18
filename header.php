@@ -43,7 +43,7 @@
     <div id="site">
         <div id="header" role="header">
             <div class="<?php printf(SECTION_TRIM_BACKGROUND); ?>" id="header-logo">
-                <a class="brand" href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>"></a>
+                <a id="brand" href="<?php printf(home_url()); ?>" title="<?php bloginfo('description'); ?>"></a>
                 <a class="header-button" id="header-menu-button" href="javascript:void(0)" role="buton"></a>
                 <a class="header-button" id="header-search-button" href="javascript:void(0)" role="buton"></a>
                 <a class="header-button" id="header-social-button" href="javascript:void(0)" role="buton"></a>
