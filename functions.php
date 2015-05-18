@@ -25,6 +25,8 @@
  * Nuacht. If not, see <http://www.gnu.org/licenses/>.
  */
 
+define('THEME_VERSION', 1.0);
+
 /**
  * File Paths
  * -----------------------------------------------------------------------------
@@ -107,17 +109,18 @@ $index_excluded_categories = array(
 
 $theme_javascript = array(
     // All JavaScript loaded by theme.
-    'modernizr' => 'modernizr-touch.min.js',
-    'browser-detect' => 'browser-detect.min.js',
-    'adrotate-fallback' => 'adrotate.min.js',
-    'eventdrop' => 'eventdrop.min.js',
-    'general-functions' => 'functions.min.js',
-    'author-report' => 'author-report.min.js',
-    'analytics' => 'google-analytics.min.js'
+    'modernizr' => TUAIRISC_JS . 'modernizr-touch.min.js',
+    'browser-detect' => TUAIRISC_JS . 'browser-detect.min.js',
+    'adrotate-fallback' => TUAIRISC_JS . 'adrotate.min.js',
+    'eventdrop' => TUAIRISC_JS . 'eventdrop.min.js',
+    'general-functions' => TUAIRISC_JS . 'functions.min.js',
+    'author-report' => TUAIRISC_JS . 'author-report.min.js',
+    'analytics' => TUAIRISC_JS . 'google-analytics.min.js',
+    'sharing' => TUAIRISC_JS . 'sharing.js'
 );
 
 $theme_styles = array(
-    'nuacht' => 'tuairisc.css'
+    'nuacht' => TUAIRISC_CSS . 'tuairisc.css'
 );
 
 $google_fonts = array(
@@ -128,11 +131,6 @@ $google_fonts = array(
      * 
      * */
 );
-
-/**
- * Theme Functions
- * -----------------------------------------------------------------------------
- */
 
 /** 
  * Load Tuairisc JavaScript
@@ -149,7 +147,7 @@ function load_theme_scripts() {
             $script = str_replace('.min', '', $script);
         }
 
-        wp_enqueue_script($name, TUAIRISC_JS . $script, array(), '2.0', true);
+        wp_enqueue_script($name, $script, array('jquery'), THEME_VERSION, true);
     }
 }
 
@@ -184,7 +182,7 @@ function load_theme_styles() {
     global $theme_styles, $google_fonts;
 
     foreach ($theme_styles as $name => $style) {
-        wp_enqueue_style($name, TUAIRISC_CSS . $style);
+        wp_enqueue_style($name, $style, array(), THEME_VERSION);
     }
 
     if (!empty($google_fonts)) {
@@ -282,7 +280,7 @@ function clean_search_url() {
  * @param   int     $size           Avatar size.
  * @param   string  $default        URL for fallback avatar.
  * @param   string  $alt            Alt text for image.
- * @param   string  $avar           Avatar URL only.
+ * @param   string                  The avatar's URL.
  */
 
 function get_avatar_url_only($id_or_email, $size, $default, $alt) {
@@ -372,8 +370,12 @@ function author_is_columnist($author_id = null) {
  * @return  bool    $is_column      Is article a column piece true/false.
  */
 
-function is_columnist_article() {
-    $col_article = get_post_meta(get_the_ID(), 'is_column', true);
+function is_columnist_article($post_id = null) {
+    if (is_null($post_id)) {
+        $post_id = get_the_ID();
+    }
+
+    $col_article = get_post_meta($post_id, 'is_column', true);
     $col_article = strtolower($col_article);
     $col_article = (int) strip_tags($col_article);
     return ($col_article === 1);
@@ -436,6 +438,27 @@ function is_excluded_category() {
 }
 
 /**
+ * Increment Post View Count
+ * -----------------------------------------------------------------------------
+ * @param   int     $post_id
+ */
+
+function increment_view_counter($post_id = null) {
+    if (is_null($post_id)) {
+        $post_id = get_the_ID();
+    }
+
+    global $custom_post_fields;
+    $key = $custom_post_fields[0];
+
+    if (!is_custom_type() && !is_user_logged_in()) {
+        $count = (int) get_post_meta($post_id, $key, true);
+        $count++;
+        update_post_meta($post_id, $key, $count);
+    }
+}
+
+/**
  * Fetch Article View Count
  * -----------------------------------------------------------------------------
  * @param   int     $post_id
@@ -448,7 +471,7 @@ function get_view_count($post_id = null) {
     }
 
     global $custom_post_fields;
-    $key = 'tuairisc_view_counter';
+    $key = $custom_post_fields[0];
 
     $count = (int) get_post_meta($post_id, $key, true);
 
@@ -461,30 +484,8 @@ function get_view_count($post_id = null) {
 }
 
 /**
- * Increment Post View Count
- * -----------------------------------------------------------------------------
- * @param   int     $post_id
- */
-
-function increment_view_counter($post_id = null) {
-    if (is_null($post_id)) {
-        $post_id = get_the_ID();
-    }
-
-    global $custom_post_fields;
-    $key = 'tuairisc_view_counter';
-
-    if (!is_custom_type() && !is_user_logged_in()) {
-        $count = (int) get_post_meta($post_id, $key, true);
-        $count++;
-        update_post_meta($post_id, $key, $count);
-    }
-}
-
-/**
  * Dump Post Types to JavaScript Console
  * -----------------------------------------------------------------------------
- * Useful for debug on occasion. 
  */
 
 function list_post_types() {
