@@ -26,8 +26,8 @@
  */
 ?>
 
-            </div> <?php // End #main-interior ?>
-        <div class="trim section-trim-background trim-bottom"></div>
+        </div> <?php // End #main-interior ?>
+        <div class="trim trim-absolute section-trim-background trim-bottom"></div>
     </div> <?php // End #main ?>
 
     <?php // AdRotate group 3
