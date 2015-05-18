@@ -37,7 +37,7 @@ define('TUAIRISC_FUNCTIONS', get_template_directory() . '/functions/');
 define('TUAIRISC_INCLUDES', get_template_directory() . '/includes/');
 define('TUAIRISC_ASSETS', get_template_directory_uri() . '/assets/');
 define('TUAIRISC_JS', TUAIRISC_ASSETS . 'js/');
-define('TUAIRISC_CSS', TUAIRISC_ASSETS . 'sass/');
+define('TUAIRISC_CSS', TUAIRISC_ASSETS . 'css/');
 define('TUAIRISC_IMAGES', TUAIRISC_ASSETS . 'images/');
 define('TUAIRISC_LOGO', TUAIRISC_IMAGES . 'branding/brand-tuairisc.svg');
 
