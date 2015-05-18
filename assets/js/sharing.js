@@ -1,5 +1,5 @@
 /**
- * The Glorious Tuairisc JavaScript Functions
+ * Sharing Popouts
  * -----------------------------------------------------------------------------
  * @category   JavaScript File
  * @package    Tuairisc.ie Theme
@@ -27,8 +27,11 @@
  /* global jQuery:false */
 
 /**
- * Variables
+ * Social Sharing Popouts
  * -----------------------------------------------------------------------------
+ * Manage and size popout windows for included social sharing links.
+ *
+ * @param   event   click           Click event.
  */
 
 var sharing = {
@@ -43,51 +46,15 @@ var sharing = {
     }
 };
 
-var header = {
-    container: '#header',
-    logo: '#header-logo'
-};
-
-/**
- * Functions
- * -----------------------------------------------------------------------------
- */
-
-var scrollHeader = function() {
-    var headerHeight = jQuery(header.logo).outerHeight();
-    var scrollTop = jQuery(window).scrollTop();
-
-    scrollTop = (scrollTop > headerHeight) ? headerHeight : scrollTop;
-    jQuery(header.container).css('top', -scrollTop);
-};
-
-function popoutSharer(object, clickEvent) {
-    var type = jQuery(object).data('type');
+jQuery(sharing.link).click(function(click) {
+    var type = jQuery(this).data('type');
 
     if (sharing.popouts.hasOwnProperty(type)) {
-        var href = jQuery(object).attr('href');
+        var href = jQuery(this).attr('href');
         var name = 'target="_blank';
         var size = sharing.popouts[type];
         
         window.open(href, name, size);
-        clickEvent.preventDefault();
+        click.preventDefault();
     }
-}
-
-/**
- * Site Navigation Menu
- * -----------------------------------------------------------------------------
- */
-
-jQuery('#site').css('padding-top', jQuery(header.container).outerHeight());
-
-    jQuery(window).on('load scroll', scrollHeader);
-
-/**
- * Social Sharing Popouts
- * -----------------------------------------------------------------------------
- */
-
-jQuery(sharing.link).click(function(click) {
-    popoutSharer(this, click);
 });
