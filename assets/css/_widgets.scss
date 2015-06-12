@@ -55,7 +55,7 @@ ul.feature-posts-list, ul.tuairisc-popular-list {
         }
 
         small {
-            color: color(gray);
+            color: color(white, x-dark);
             @include margin(0.25 0);
             @include font-size(1.2);
         }
