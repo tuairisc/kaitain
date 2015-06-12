@@ -1,10 +1,10 @@
 ![The Tuairisc.ie logo](/assets/images/tuairisc.jpg?raw=true 'Tuairisc.ie')
 
 # Tuairisc.ie
-This repository is the WordPress theme for the [Tuairisc.ie](http://www.tuairisc.ie). 
+This repository is the WordPress theme for the [Tuairisc.ie](http://www.tuairisc.ie) rebuild. **THIS THEME IS UNDER ACTIVE DEVELOPMENT AS OF MAY 25 2015.** 
 
 ## Description
-This is the WordPress theme for [Tuairisc.ie](http://www.tuairisc.ie). The Sass appearance framework is wholly original code. I'm not sure how much excitement you expect from a WordPress theme, but this is a responsive. It runs /okay-ish/. I like ponies. 
+This is the WordPress theme for [Tuairisc.ie](http://www.tuairisc.ie). The Sass appearance framework is wholly original code. I'm not sure how much excitement you expect from a WordPress theme, but this is a responsive, modern theme. It runs /okay-ish/. I like ponies. 
 
 ## License
 All of the PHP code in the project is licensed under the GPL v3 or later, except as otherwise noted.
@@ -21,14 +21,14 @@ A copy of the license is included in the root of the plugin’s directory. The f
 #### PHP
 All of the project's PHP code and derived HTML is licensed under the GPL v3.
 
-#### CSS
-* The CSS theme is copyright of [Tuairisc Bheo Teo](http://www.tuairisc.ie/). All rights are reserved.
-* The files [_media.scss](/assets/sass/_media.scss), [_partials.scs](/assets/sass/_partials.scss) and [_mixins.scss](/assets/sass/_mixins.scss) are included from a separate project under the GPL v3.
+#### Non-PHP Assets
+The CSS theme, JavaScript and other assets are copyright of [Tuairisc Bheo Teo](http://www.tuairisc.ie/). All rights are reserved.
+
+### Includes and Libraries
+* The [scss-helpers](https://github.com/bhalash/scss-helpers) library is copyright of [Mark Grealish](http://www.bhalash.com/) and is included under the MIT License.
+* The [get-the-image](https://github.com/justintadlock/get-the-image) library is copyright of [Justin Tadlock](https://github.com/justintadlock) and included under the GPL v2.
+* The [wp-custom-post-type-class](https://github.com/jjgrainger/wp-custom-post-type-class) library is copyright of [Joe Grainger](https://twitter.com/jjgrainger) and included under the MIT License.
 
 ### Media
 * The Tuairisc.ie and Ar Son na Cúise brands are copyright and trademark of [Tuairisc.ie](http://tuairisc.ie/) and all rights are reserved.
 * The Foras na Gaeilge brand is copyright and trademark of [Foras na Gaeilge](http://www.gaeilge.ie/) and all rights are reserved.
-
-## Credit
-* Credit for the design and branding goes to Ćiaran O'Sullivan.
-* Credit for later alteration to the ore theme, addition of the Sass framework and addition of Tuairisc-specific function lies with me, [Mark Grealish](http://www.bhalash.com).
