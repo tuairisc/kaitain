@@ -25,112 +25,178 @@
  * Nuacht. If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('THEME_VERSION', 1.0);
+define('THEME_VERSION', 0.1);
 
 /**
- * File Paths
+ * Theme Text Domain
  * -----------------------------------------------------------------------------
  */
 
-define('TUAIRISC_WIDGETS', get_template_directory() . '/widgets/');
-define('TUAIRISC_FUNCTIONS', get_template_directory() . '/functions/');
-define('TUAIRISC_INCLUDES', get_template_directory() . '/includes/');
-define('TUAIRISC_ASSETS', get_template_directory_uri() . '/assets/');
-define('TUAIRISC_JS', TUAIRISC_ASSETS . 'js/');
-define('TUAIRISC_CSS', TUAIRISC_ASSETS . 'css/');
-define('TUAIRISC_IMAGES', TUAIRISC_ASSETS . 'images/');
-define('TUAIRISC_LOGO', TUAIRISC_IMAGES . 'branding/brand-tuairisc.svg');
+define('TTD', 'tuairisc');
+
+/**
+ * Theme File Paths
+ * -----------------------------------------------------------------------------
+ */
+
+define('THEME_PATH', get_template_directory());
+define('THEME_URL', get_template_directory_uri());
+
+/**
+ * Theme Asset Paths
+ * -----------------------------------------------------------------------------
+ */
+
+define('ASSETS_PATH', THEME_PATH . '/assets/');
+define('ASSETS_URL', THEME_URL . '/assets/');
+
+/**
+ * Theme Includes and Partials Paths
+ * -----------------------------------------------------------------------------
+ * File paths are inconsistent between get_template_part() and include() or
+ * require(). 
+ * 
+ * 1. With include(), / is the ultimate root on the filesystem, as provided by 
+ *    get_template_directory();
+ * 2. With get_template_parth(), / is the WordPress theme folder. 
+ * 
+ * Included files are entire standalone scripts, and partials are partials 
+ * templates.
+ */
+
+define('THEME_FUNCTIONS',  THEME_PATH . '/functions/');
+define('THEME_INCLUDES',  THEME_PATH . '/includes/');
+define('THEME_WIDGETS', THEME_PATH . '/widgets/');
+define('THEME_PARTIALS',  '/partials/');
+
+/**
+ * Image, CSS and JavaScript Assets
+ * -----------------------------------------------------------------------------
+ */
+
+define('THEME_JS', ASSETS_URL . 'js/');
+define('THEME_IMAGES', ASSETS_URL . 'images/');
+define('THEME_CSS', ASSETS_URL . 'css/');
 
 /**
  * Included Libraries
  * -----------------------------------------------------------------------------
  */
 
-// Generate thumbnail images.
-require_once(TUAIRISC_INCLUDES . 'get-the-image/get-the-image.php');
-// Easily create and structure custom post types.
-require_once(TUAIRISC_INCLUDES . 'wp-custom-post-type-class/src/CPT.php');
+$theme_includes = array(
+    // Retrive arbitrary image sizes from the WordPress media library.
+    'get-the-image/get-the-image.php',
+    // Easily create and structure custom post types.
+    'wp-custom-post-type-class/src/CPT.php'
+);
+
+foreach ($theme_includes as $include) {
+    require_once(THEME_INCLUDES . $include);
+}
 
 /**
  * PHP Scripts
  * -----------------------------------------------------------------------------
  */
 
-// Translate English dates to Irish as the server does not support ga_IE
-require_once(TUAIRISC_FUNCTIONS . 'irish-dates.php');
-// Generate social sharing links on demand.
-require_once(TUAIRISC_FUNCTIONS . 'sharing-links.php');
-// Generate banners for sections and subsections.
-require_once(TUAIRISC_FUNCTIONS . 'section-banners.php');
-// Declare widget areas.
-require_once(TUAIRISC_FUNCTIONS . 'widget-areas.php');
-// Declare theme menus.
-require_once(TUAIRISC_FUNCTIONS . 'menus.php');
-// Generate head tag Open Graph and Twitter Card information.
-require_once(TUAIRISC_FUNCTIONS . 'social-meta.php');
-// All theme custom post types.
-require_once(TUAIRISC_FUNCTIONS . 'custom-post-types.php');
+$theme_functions = array(
+    // Translate English dates to Irish as the server does not support ga_IE
+   'irish-dates.php', 
+    // Generate social sharing links on demand.
+   'sharing-links.php',
+    // Generate banners for sections and subsections.
+   'section-banners.php',
+    // Declare widget areas.
+   'widget-areas.php',
+    // Declare theme menus.
+   'menus.php',
+    // All theme custom post types.
+   'custom-post-types.php',
+    // All theme custom post types.
+   'sections.php',
+    // Used internally for reporting.
+   'tuairisc/tuairisc-mostviewed.php'
+);
 
-// All theme custom post types.
-require_once(TUAIRISC_FUNCTIONS . 'sections.php');
-
-// Used internally for reporting.
-require_once(TUAIRISC_FUNCTIONS . 'tuairisc/tuairisc-mostviewed.php');
+foreach ($theme_functions as $script) {
+    require_once(THEME_FUNCTIONS . $script);
+}
 
 /**
  * Theme Widgets
  * -----------------------------------------------------------------------------
  */
 
-require_once(TUAIRISC_WIDGETS . 'recentposts.php');
-require_once(TUAIRISC_WIDGETS . 'featured-category.php');
-require_once(TUAIRISC_WIDGETS . 'popularnews.php');
-require_once(TUAIRISC_WIDGETS . 'tabbed-categories.php');
-require_once(TUAIRISC_WIDGETS . 'tuairisc-authors.php');
+$theme_widgets = array(
+    'recentposts.php',
+    'featured-category.php',
+    'popularnews.php',
+    'tabbed-categories.php',
+    'tuairisc-authors.php'
+);
+
+foreach ($theme_widgets as $widget) {
+    require_once(THEME_WIDGETS . $widget);
+}
 
 /**
- * Theme Variables
+ * Theme JavaScript
  * -----------------------------------------------------------------------------
  */
+
+$theme_javascript = array(
+    // All JavaScript loaded by theme.
+    'modernizr' => THEME_JS . 'modernizr-touch.min.js',
+    'adrotate-fallback' => THEME_JS . 'adrotate.min.js',
+    'eventdrop' => THEME_JS . 'eventdrop.min.js',
+    'general-functions' => THEME_JS . 'functions.min.js',
+    'author-report' => THEME_JS . 'author-report.min.js',
+    'analytics' => THEME_JS . 'google-analytics.min.js',
+    'sharing' => THEME_JS . 'sharing.js',
+);
+
+/**
+ * Google Fonts
+ * -----------------------------------------------------------------------------
+ * Zero-indexed array of all Google Fonts fonts to be loaded. Use this 
+ * format for typefaces:
+ * 
+ * 'Open Sans Condensed',
+ * 'Open Sans:300,400,700,800',
+ */
+
+$google_fonts = array();
+
+/**
+ * Theme CSS Stylesheets
+ * -----------------------------------------------------------------------------
+ */
+
+$theme_styles = array(
+    'nuacht' => THEME_CSS . 'tuairisc.css'
+);
+
+/**
+ * Miscellaneous Variables
+ * -----------------------------------------------------------------------------
+ */
+
+// Media prefetch domain: If null or empty, defaults to site domain.
+$prefetch_domains = array(
+    preg_replace('/^www\./','', $_SERVER['SERVER_NAME'])
+);
 
 /* This is the author account used for small or generic posts on the Tuairisc 
  * site. By default Sean does not want any attribution to appear for them. */
 $default_author_id = 37;
 
-$custom_post_fields = array(
-    // All important custom fields.
-    'tuairisc_view_counter'
-);
+// All important custom fields.
+$custom_post_fields = array('tuairisc_view_counter');
 
-$index_excluded_categories = array(
-    // Categories specified for exclusion from index loop display.
-    216, 182
-);
+// Categories specified for exclusion from index loop display.
+$index_excluded_categories = array(216, 182);
 
-$theme_javascript = array(
-    // All JavaScript loaded by theme.
-    'modernizr' => TUAIRISC_JS . 'modernizr-touch.min.js',
-    'browser-detect' => TUAIRISC_JS . 'browser-detect.min.js',
-    'adrotate-fallback' => TUAIRISC_JS . 'adrotate.min.js',
-    'eventdrop' => TUAIRISC_JS . 'eventdrop.min.js',
-    'general-functions' => TUAIRISC_JS . 'functions.min.js',
-    'author-report' => TUAIRISC_JS . 'author-report.min.js',
-    'analytics' => TUAIRISC_JS . 'google-analytics.min.js',
-    'sharing' => TUAIRISC_JS . 'sharing.js'
-);
-
-$theme_styles = array(
-    'nuacht' => TUAIRISC_CSS . 'tuairisc.css'
-);
-
-$google_fonts = array(
-    /* Zero-indexed array of all Google Fonts fonts to be loaded. Use this 
-     * format for typefaces:
-     * 
-     * 'Open Sans Condensed 300',
-     * 
-     * */
-);
+$social_twitter = '@tuairiscnuacht';
 
 /** 
  * Load Tuairisc JavaScript
@@ -141,13 +207,21 @@ $google_fonts = array(
 function load_theme_scripts() {
     global $theme_javascript;
 
+    if (!is_admin()) {
+        /* Load jQuery into the footer instead of the header.
+         * See: http://biostall.com/how-to-load-jquery-in-the-footer-of-a-wordpress-website */
+        wp_deregister_script('jquery');
+        wp_register_script('jquery-argh', '/wp-includes/js/jquery/jquery.js', false, '1.11.1', true);
+        wp_enqueue_script('jquery-argh');
+    }
+
     foreach ($theme_javascript as $name => $script) {
         if (WP_DEBUG) {
             // Load unminified versions while debugging.
             $script = str_replace('.min', '', $script);
         }
 
-        wp_enqueue_script($name, $script, array('jquery'), THEME_VERSION, true);
+        wp_enqueue_script($name, $script, array('jquery-argh'), THEME_VERSION, true);
     }
 }
 
@@ -189,37 +263,6 @@ function load_theme_styles() {
         wp_register_style('google-fonts', google_font_url($google_fonts));
         wp_enqueue_style('google-fonts');
     }
-}
-
-// Load JavaScript scripts. 
-add_action('wp_enqueue_scripts', 'load_theme_scripts');
-add_action('wp_enqueue_scripts', 'load_theme_styles');
-
-/** 
- * Return Thumbnail Image URL
- * -----------------------------------------------------------------------------
- * Taken from: http://goo.gl/NhcEU6
- * 
- * WordPress, by default, only has a handy function to return a glob of HTML
- * -an image inside an anchor-for a post thumbnail. This wrapper extracts
- * and returns only the URL.
- * 
- * @param   int     $post_id        The ID of the post.
- * @param   int     $thumb_size     The requested size of the thumbnail.
- * @param   bool    $return_arr     Return either the entire thumbnail object or just the URL.
- * @return  string  $thumb_url[0]   URL of the thumbnail.
- * @return  array   $thumb_url      All information on the attachment.
- */
-
-function get_thumbnail_url($post_id = null, $thumb_size = 'large', $return_arr = false) {
-
-    if (is_null($post_id)) {
-        $post_id = get_the_ID();
-    }
-
-    $thumb_id = get_post_thumbnail_id($post_id);
-    $thumb_url = wp_get_attachment_image_src($thumb_id, $thumb_size, true);
-    return ($return_arr) ? $thumb_url : $thumb_url[0];
 }
 
 /** 
@@ -403,6 +446,36 @@ function tweak_title($title, $sep) {
     return $title;
 }
 
+/**
+ * Blog Title
+ * -----------------------------------------------------------------------------
+ * Shamelessly stolen from Twenty Twelve. 
+ * 
+ * @param   string      $title          Title of whatever.
+ * @param   string      $sep            Title separator.
+ */
+
+function tuairisc_title($title, $sep) {
+    global $paged, $page;
+
+    if (is_feed()) {
+        return $title;
+    }
+
+    $title .= get_bloginfo('name');
+    $site_description = get_bloginfo('description', 'display');
+
+    if ($site_description && (is_home() || is_front_page())) {
+        $title = "$title $sep $site_description";
+    }
+
+    if ($paged >= 2 || $page >= 2) {
+        $title = "$title $sep " . sprintf(__('Page %s', TTD), max($paged, $page));
+    }
+
+    return $title;
+}
+
 /** 
  * Index Category Exclusion
  * -----------------------------------------------------------------------------
@@ -459,6 +532,20 @@ function increment_view_counter($post_id = null) {
 }
 
 /**
+ * Media Prefetch
+ * -----------------------------------------------------------------------------
+ * Set prefetch for a given media domain. Useful if your site is image heavy.
+ */
+
+function dns_prefetch() {
+    global $prefetch_domains;
+
+    foreach ($prefetch_domains as $domain) {
+        printf('<link rel="dns-prefetch" href="//%s">', $domain);
+    }
+}
+
+/**
  * Fetch Article View Count
  * -----------------------------------------------------------------------------
  * @param   int     $post_id
@@ -484,40 +571,61 @@ function get_view_count($post_id = null) {
 }
 
 /**
- * Dump Post Types to JavaScript Console
+ * Options and Actions
  * -----------------------------------------------------------------------------
  */
 
-function list_post_types() {
-    $type_args = array(
-        'public' => true,
-        '_builtin' => false
-    );
+// Enqueue JavaScript and CSS. 
+add_action('wp_enqueue_scripts', 'load_theme_scripts', 0);
+add_action('wp_enqueue_scripts', 'load_theme_styles', 0);
 
-    $output = 'names';
-    $operator = 'and';
-    $post_types = get_post_types($type_args, $output, $operator); 
+// Set prefetch domain for media.
+add_action('wp_head', 'dns_prefetch');
 
-    foreach ($post_types as $post_type) {
-        printf('<script>console.log("%s");</script>', $post_type);
-    }
-}
-
-/**
- * Filters, Options and Actions
- * -----------------------------------------------------------------------------
- */
+// Remove WordPress version from header.
+remove_action('wp_head', 'wp_generator');
 
 // Clean search URL rewrite.
 add_action('template_redirect', 'clean_search_url');
+
 // Change large size to match post content width.
 update_option('large_size_w', 770);
-// Rearrange title.
-add_filter('wp_title', 'tweak_title', 10, 2);
+
+/**
+ * Filters
+ * -----------------------------------------------------------------------------
+ */
+
+// Wordpress repeatedly inserted emoticons. No more, ever.
+remove_filter('the_content', 'convert_smilies');
+remove_filter('the_excerpt', 'convert_smilies');
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+
 // Remove read more links from excerpts.
 add_filter('the_excerpt', 'remove_read_more');
 add_filter('the_excerpt', 'replace_excerpt_breaks');
+
 // Page excerpts for SEO and the education landing page. 
 add_action('init', add_post_type_support('page', 'excerpt'));
+
+// Title function.
+add_filter('wp_title', 'tuairisc_title', 10, 2);
+// add_filter('wp_title', 'tweak_title', 10, 2);
+
+/**
+ * Theme Support
+ * -----------------------------------------------------------------------------
+ */
+
+// HTML5 support in theme.
+current_theme_supports('html5');
+current_theme_supports('menus');
+
+add_theme_support('post-thumbnails');
+
+add_theme_support('html5', array(
+    'comment-list', 'comment-form', 'search-form', 'gallery', 'caption'
+));
 
 ?>
