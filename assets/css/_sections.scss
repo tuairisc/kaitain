@@ -41,7 +41,7 @@
 $section-trim-height: 4px;
 $section-trim-offset: -3%;
 
-@each $list in $section-colours {
+@each $list in $sections {
     .section-#{nth($list, 1)} {
         // 1. Set trims for the main sections.
         .section-trim-background, .section-trim-background-hover:hover {
@@ -96,4 +96,45 @@ $section-trim-offset: -3%;
 
 .trim-bottom {
     bottom: 0;
+}
+
+/**
+ * Unsectioned Site Styles
+ * -----------------------------------------------------------------------------
+ *
+ */
+
+body:not(.website-section) {
+    a#brand {
+        // Dark logo to match white background.
+        background-image: url($brand-tuairisc-white);
+    } 
+}
+
+/**
+ * Sectioned Site Styles
+ * -----------------------------------------------------------------------------
+ */
+
+body.website-section {
+    #header-logo {
+        border: 0;
+    }
+
+    a#brand {
+        background-image: url($brand-tuairisc-black);
+    }
+}
+
+/**
+ * Greann Section Styles
+ * -----------------------------------------------------------------------------
+ */
+
+.section-greann { 
+    a#brand {
+        // Change background and increase size to give prominence.
+        background-image: url($brand-greann);
+        background-size: auto 85%;
+    }
 }
