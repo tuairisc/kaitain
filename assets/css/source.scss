@@ -14,31 +14,87 @@
 
 /**
  * Partials and Mixins 
- * -------------------
- * Helper libraries, MIT licensed \o/
+ * -----------------------------------------------------------------------------
+ * Helper libraries.
  */
 
 @import 'scss-helpers/bhalash-helpers';
 
 /**
- * Assets and Variables
- * --------------------
+ * Template Variables
+ * -----------------------------------------------------------------------------
  */
 
 @import 'variables';
+
+/**
+ * Template Assets
+ * -----------------------------------------------------------------------------
+ * All images and vectors used throughout the site.
+ */
+
 @import 'assets';
 
 /**
- * Imports
- * ------- 
+ * CSS Normalize
+ * -----------------------------------------------------------------------------
+ * Normalize.css.
+ * See: https://github.com/necolas/normalize.css 
+ */
+
+@import 'normalize';
+
+/**
+ * Template Defaults
+ * ----------------------------------------------------------------------------- 
  */
 
 @import 'reset';
-@import 'header';
+
+/**
+ * Containers
+ * -----------------------------------------------------------------------------
+ * Top-level containers in the theme: Site container, header and content 
+ * containers.
+ */
+
 @import 'containers';
+
+/**
+ * Theme Header 
+ * ----------------------------------------------------------------------------- 
+ */
+
+@import 'header';
+
+/**
+ * Section Trim
+ * ----------------------------------------------------------------------------- 
+ * The site is segregated into sections dervied from parent category. This 
+ * stylesheet iteratively generates all rules for styling.
+ */
+
 @import 'sections';
+
+/**
+ * Website Homepage
+ * -----------------------------------------------------------------------------
+ */
+
 @import 'home';
+
+/**
+ * AdRotate Advertisements
+ * -----------------------------------------------------------------------------
+ */
+
 @import 'adverts';
+
+/**
+ * TODO
+ * -----------------------------------------------------------------------------
+ */
+
 // @import 'education';
 // @import 'sharing';
 // @import 'article';
