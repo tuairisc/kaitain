@@ -398,6 +398,7 @@ function find_category_parent_id($cat_id = null) {
  * -----------------------------------------------------------------------------
  */
 
+add_action('wp_head', 'setup_sections');
 add_filter('body_class', 'add_section_class_to_body');
 
 ?>
