@@ -38,6 +38,57 @@ $archive-article-thumb-height-170: 170px;
 $archive-article-thumb-height-325: 325px;
 
 /**
+ * Article Text Defaults
+ * -----------------------------------------------------------------------------
+ */
+
+article {
+    a {
+        color: palette(green);
+    }
+}
+
+.title a:hover {
+    color: palette(green);
+}
+
+/**
+ * Blockquote and Cite
+ * -----------------------------------------------------------------------------
+ */
+ 
+blockquote {
+    // Ciaran asked for a meticulously-styled blockquote area.
+    background-image: url($blockquote-open), url($blockquote-close);
+    background-position: -4% 4%, 104% 88%;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-size: auto 25px;
+    border-color: 1px solid color(white, light);
+    border-width: 1px 0;
+    font-style: italic;
+    @include font-size(1.4);
+    @include padding(1 2);
+
+    >:last-child {
+        margin-bottom: 0;
+    }
+}
+
+cite {
+    color: palette(black, mid-light);
+    display: block;
+    font-style: none;
+    font-weight: bold;
+    width: 100%;
+    @include font-size(1.4);
+
+    &:before {
+        content: ' -';
+    }
+}
+
+/**
  * Article Header
  * -----------------------------------------------------------------------------
  */
@@ -54,7 +105,7 @@ header {
         }
 
         p {
-            color: palette(gray, light);
+            color: palette(white, mid-light);
             margin: 0;
         }
     }
@@ -78,7 +129,7 @@ header {
 }
 
 p.wp-caption-text {
-    color: palette(gray, light);
+    color: palette(white, mid-light);
     padding: 0;
     text-align: left;
 }
@@ -105,7 +156,7 @@ article.full {
         div.meta {
             @extend %clearfix;
             /* For legibility when it is white-on-white. */
-            border: 1px solid palette(gray, x-light);
+            border: 1px solid palette(white, light);
             border-width: 1px 0;
             @include padding(0.75 0);
         }
@@ -172,7 +223,7 @@ article.jobarchive {
     }
 
     span.more {
-        background: palette(gray, mid-light);
+        background: palette(white, base);
         display: inline-block;
         @include padding(0.25 0.5);
     }
@@ -219,7 +270,7 @@ article.jobarchive {
     }
 
     &:not(:last-child) {
-        border-bottom: 1px solid palette(gray);
+        border-bottom: 1px solid palette(white, x-dark);
         @include margin(1.5, bottom);
     }
 
@@ -283,7 +334,7 @@ article.jobarchive {
  */
 
 article.lead {
-    border-bottom: 1px solid palette(gray, dark);
+    border-bottom: 1px solid palette(black, mid-light);
 
     @include margin(1.5, bottom);
     @include padding(1.5, bottom);
