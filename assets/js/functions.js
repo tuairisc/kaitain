@@ -26,3 +26,4 @@
 
  /* global jQuery:false */
  
+ console.log(jQuery(window).width());
