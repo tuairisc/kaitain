@@ -35,8 +35,6 @@
     <title><?php wp_title('|', true, 'right'); ?></title>
     <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" media="screen" />
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" /> 
-    <?php setup_sections(); ?>
-    <?php social_meta(); ?>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -48,8 +46,11 @@
                 <a class="header-button" id="header-search-button" href="javascript:void(0)" role="buton"></a>
                 <a class="header-button" id="header-social-button" href="javascript:void(0)" role="buton"></a>
             </div>
-            <nav id="menu">
-                <ul id="section-primary"><?php primary_section_menu(); ?></ul>
+            <nav id="section-primary-menu">
+                <ul><?php primary_section_menu(); ?></ul>
+            </nav>
+            <nav id="section-primary-menu">
+                <ul><?php // primary_section_menu(); ?></ul>
             </nav>
         </div>
         
