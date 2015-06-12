@@ -7,3 +7,6 @@
 [submodule "includes/wp-custom-post-type-class"]
 	path = includes/wp-custom-post-type-class
 	url = git@github.com:jjgrainger/wp-custom-post-type-class.git
+[submodule "assets/css/scss-helpers"]
+	path = assets/css/scss-helpers
+	url = git@github.com:bhalash/scss-helpers.git
