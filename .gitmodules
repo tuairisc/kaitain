@@ -1,6 +1,7 @@
 [submodule "includes/social-meta"]
 	path = includes/social-meta
 	url = git@github.com:bhalash/social-meta.git
+    ignore = dirty
 [submodule "includes/wp-custom-post-type-class"]
 	path = includes/wp-custom-post-type-class
 	url = git@github.com:jjgrainger/wp-custom-post-type-class.git
@@ -10,3 +11,4 @@
 [submodule "assets/css"]
 	path = assets/css
 	url = git@github.com:bhalash/tuairisc-css.git
+    ignore = dirty
