@@ -6,4 +6,7 @@
 	url = git@github.com:jjgrainger/wp-custom-post-type-class.git
 [submodule "includes/get-the-image"]
     path = includes/get-the-image
-        url = git@github.com:justintadlock/get-the-image.git
+    url = git@github.com:justintadlock/get-the-image.git
+[submodule "assets/css"]
+	path = assets/css
+	url = git@github.com:bhalash/tuairisc-css.git
