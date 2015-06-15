@@ -8,8 +8,8 @@ sftp-config.json
 # Sass and CSS
 .sass-cache/
 sass/.sass-cache/
-custom.css
-custom.css.map
+main.css
+main.css.map
 
 #################
 ## jQuery Library
