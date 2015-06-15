@@ -5,5 +5,5 @@
 	path = includes/wp-custom-post-type-class
 	url = git@github.com:jjgrainger/wp-custom-post-type-class.git
 [submodule "includes/get-the-image"]
-	path = includes/get-the-image
-	url = git@github.com:justintadlock/get-the-image.git
+    path = includes/get-the-image
+        url = git@github.com:justintadlock/get-the-image.git
