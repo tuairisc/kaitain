@@ -28,6 +28,5 @@
  */
 
 get_header();
-printf('<h1>Hello, mum!');
 get_footer();
 ?>
