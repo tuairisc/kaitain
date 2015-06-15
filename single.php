@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Main Index
+ * Single Article
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Tuairisc.ie
@@ -26,7 +26,4 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
-get_header();
-printf('<h1>Hello, mum!');
-get_footer();
 ?>
