@@ -1,7 +1,7 @@
-<? 
+<?php
 
 /**
- * Site Footer
+ * Archive Template
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Tuairisc.ie
@@ -28,6 +28,3 @@
  */
 
 ?>
-
-</body>
-</html>
