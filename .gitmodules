@@ -10,3 +10,6 @@
 [submodule "assets/css"]
 	path = assets/css
 	url = git@github.com:bhalash/tuairisc-css.git
+[submodule "assets/normalize.css"]
+	path = assets/normalize.css
+	url = git@github.com:necolas/normalize.css.git
