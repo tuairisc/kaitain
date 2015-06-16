@@ -29,6 +29,9 @@
 
 ?>
 
+        </div><?php // End #content ?>
+        <?php get_sidebar(); ?>
+    </div><?php // End #main ?>
     <?php wp_footer(); ?>
 </body>
 </html>
