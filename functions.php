@@ -104,6 +104,23 @@ $prefetch_domains = array(
     preg_replace('/^www\./','', $_SERVER['SERVER_NAME'])
 );
 
+// Website favicon assets.
+$favicons = array(
+    'favicon' => array(
+        'path' => THEME_IMAGES . 'icons/favicon.ico',
+        'sizes' => array(16, 24, 32, 48, 64),
+    ),
+    'windows' => array(
+        'name' => get_bloginfo('name'),
+        'colour' => '#475967',
+        'path' => THEME_IMAGES . 'icons/icon-windows.png',
+    ),
+    'apple' => array(
+        'path' => THEME_IMAGES . 'icons/icon-apple.png',
+        'sizes' => array(152),
+    )
+);
+
 /**
  * Theme Includes
  * -----------------------------------------------------------------------------
@@ -252,22 +269,6 @@ function dns_prefetch() {
  * -----------------------------------------------------------------------------
  * Every different browser has their own special snowflake favicon format. 
  */
-
-$favicons = array(
-    'favicon' => array(
-        'path' => THEME_IMAGES . 'icons/favicon.ico',
-        'sizes' => array(16, 24, 32, 48, 64),
-    ),
-    'windows' => array(
-        'name' => get_bloginfo('name'),
-        'colour' => '#475967',
-        'path' => THEME_IMAGES . 'icons/icon-windows.png',
-    ),
-    'apple' => array(
-        'path' => THEME_IMAGES . 'icons/icon-apple.png',
-        'sizes' => array(152),
-    )
-);
 
 /**
  * Reduce Favicon Sizes
