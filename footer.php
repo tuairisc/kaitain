@@ -32,6 +32,15 @@
         </div><?php // End #content ?>
         <?php get_sidebar(); ?>
     </div><?php // End #main ?>
+    <div id="footer">
+        <?php for ($i = 1; $i <= 4; $i++) {
+           if (is_active_sidebar('widgets-footer-' . $i)) {
+                 dynamic_footer('widgets-footer-' . $i);
+             } else {
+                 printf('<h3>%s</h3>', __("Add widgets to footer #$i FFS!", TTD));
+             }
+         } ?>
+    </div>
     <?php wp_footer(); ?>
 </body>
 </html>

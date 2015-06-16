@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Front Page Template
+ * Sidebar
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Tuairisc.ie
@@ -27,26 +27,21 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
-get_header();
-
-/* 1. Big Lead Article.
- * 2. Second and third rows of articles.
- * 3. List of columnists.
- * 4. Category widgets.
- * Nuacht, Tuairmiocht, Sport, Cultur 
- * 5. Side-by-side category widgets for Saol, Greann, Pobal */
-
-if (is_active_sidebar('widgets-front-page-main')) {
-    dynamic_sidebar('widgets-front-page-main');
-} else {
-    printf('<h3>%s</h3>', __('Add your main front page widgets FFS!', TTD));
-}
-
-if (is_active_sidebar('widgets-front-page-footer')) {
-    dynamic_sidebar('widgets-front-page-footer');
-} else {
-    printf('<h3>%s</h3>', __('Add your front page footer widgets FFS!', TTD));
-}
-
-get_footer();
 ?>
+
+<div id="sidebar">
+    <?php if (is_active_sidebar('widgets-sidebar')) {
+        dynamic_sidebar('widgets-sidebar');
+    } else {
+        printf('<h3>%s</h3>', __('Add your sidebar widgets FFS!', TTD));
+    }
+    
+    // AdRotate groups 3, 4 and 5
+    if (function_exists('adrotate_group')) {
+        printf('<div class="sidebar-adverts">');
+        printf('%s', adrotate_group(3));
+        printf('%s', adrotate_group(4));
+        printf('%s', adrotate_group(5));
+        printf('</div>');
+    } ?>
+</div>
