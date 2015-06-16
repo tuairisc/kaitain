@@ -104,6 +104,9 @@ $prefetch_domains = array(
     preg_replace('/^www\./','', $_SERVER['SERVER_NAME'])
 );
 
+// Theme Favicons 
+$favicon_path = THEME_IMAGES . 'favicon.png';
+
 /**
  * Theme Includes
  * -----------------------------------------------------------------------------
@@ -371,6 +374,16 @@ remove_action('wp_head', 'wp_generator');
 // Stop WordPress loading JavaScript that helps render emoji correctly.
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
+
+// Set site favicon.
+add_action('wp_head', 'set_favicon');
+
+// Set prefetch domain for media.
+add_action('wp_head', 'dns_prefetch');
+
+// Wrap comment form fields in <div></div> tags.
+add_action('comment_form_before_fields', 'wrap_comment_fields_before');
+add_action('comment_form_after_fields', 'wrap_comment_fields_after');
 
 /**
  * Filters 
