@@ -39,16 +39,16 @@ define('TTD', 'tuairisc');
  * -----------------------------------------------------------------------------
  */
 
-define('PHP_PATH', get_template_directory());
-define('PHP_URL', get_template_directory_uri());
+define('THEME_PATH', get_template_directory());
+define('THEME_URL', get_template_directory_uri());
 
 /**
  * Theme Asset File and URL Paths
  * -----------------------------------------------------------------------------
  */
 
-define('ASSETS_PATH', PHP_PATH . '/assets/');
-define('ASSETS_URL', PHP_URL . '/assets/');
+define('ASSETS_PATH', THEME_PATH . '/assets/');
+define('ASSETS_URL', THEME_URL . '/assets/');
 
 /**
  * Theme Includes and Partials Paths
@@ -64,7 +64,7 @@ define('ASSETS_URL', PHP_URL . '/assets/');
  * templates.
  */
 
-define('THEME_INCLUDES',  PHP_PATH . '/includes/');
+define('THEME_INCLUDES',  THEME_PATH . '/includes/');
 define('THEME_PARTIALS',  '/partials/');
 
 /**
@@ -90,8 +90,8 @@ $social_facebook = 'tuairisc.ie';
  */
 
 $fallback_image = array(
-    'url' => PHP_URL . '/assets/images/tuairisc.jpg',
-    'path' => PHP_PATH . '/assets/images/tuairisc.jpg'
+    'url' => THEME_URL . '/assets/images/tuairisc.jpg',
+    'path' => THEME_PATH . '/assets/images/tuairisc.jpg'
 );
 
 /**
@@ -245,6 +245,8 @@ if (!isset($content_width)) {
 // Enqueue all scripts and stylesheets.
 add_action('wp_enqueue_scripts', 'load_theme_styles');
 add_action('wp_enqueue_scripts', 'load_theme_scripts');
+
+remove_action('wp_head', 'wp_generator');
 
 /**
  * Filters 
