@@ -151,6 +151,56 @@ $theme_styles = array(
     'wordpress-style' => THEME_URL . '/style.css',
 );
 
+/** 
+ * Widget Areas and Widget Defaults
+ * -----------------------------------------------------------------------------
+ */
+
+$widget_defaults = array(
+    'before_widget' => '<div id="%1$s" class="%2$s">',
+    'after_widget' => '</div>',
+    'before_title' => '<h3>',
+    'after_title' => '</h3>'
+);
+
+$widget_areas = array(
+    array(
+        'name' => __('Front Page Main', TTD),
+        'description' => __('Front page widget area.', TTD),
+        'id' => 'widgets-front-page-main'
+    ),
+    array(
+        'name' => __('Front Page Footer', TTD),
+        'description' => __('Front page footer widget area.', TTD),
+        'id' => 'widgets-front-page-footer'
+    ),
+    array(
+        'name' => __('Sidebar', TTD),
+        'description' => __('Sidebar widget area.', TTD),
+        'id' => 'widgets-sidebar'
+    ),
+    array(
+        'name' => __('Footer #1', TTD),
+        'description' => __('Footer widget area #1.', TTD),
+        'id' => 'widgets-footer-1'
+    ),
+    array(
+        'name' => __('Footer #2', TTD),
+        'description' => __('Footer widget area #2.', TTD),
+        'id' => 'widgets-footer-2'
+    ),
+    array(
+        'name' => __('Footer #3', TTD),
+        'description' => __('Footer widget area #3.', TTD),
+        'id' => 'widgets-footer-3'
+    ),
+    array(
+        'name' => __('Footer #4', TTD),
+        'description' => __('Footer widget area #4.', TTD),
+        'id' => 'widgets-footer-4'
+    ),
+);
+
 /**
  * Parse Google Fonts from Array
  * -----------------------------------------------------------------------------
@@ -216,6 +266,23 @@ function load_theme_styles() {
     if (!empty($google_fonts)) {
         wp_register_style('google-fonts', google_font_url($google_fonts));
         wp_enqueue_style('google-fonts');
+    }
+}
+
+/**
+ * Register Widget Areas
+ * -----------------------------------------------------------------------------
+ * register_sidebars() doesn't give me enough options to name and identify 
+ * several unique widget areas, but either do I want a half dozen 
+ * register_sidebar() calls littering the function. They all share the same
+ * defaults, so...
+ */
+
+function register_widget_areas() {
+    global $widget_areas, $widget_defaults;
+
+    foreach ($widget_areas as $widget) {
+        register_sidebar(array_merge($widget, $widget_defaults));
     }
 }
 
@@ -478,6 +545,9 @@ add_action('wp_head', 'dns_prefetch');
 // Wrap comment form fields in <div></div> tags.
 add_action('comment_form_before_fields', 'wrap_comment_fields_before');
 add_action('comment_form_after_fields', 'wrap_comment_fields_after');
+
+// Register widget areas.
+add_action('widgets_init', 'register_widget_areas');
 
 /**
  * Filters 
