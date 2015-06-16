@@ -234,6 +234,125 @@ function theme_title($title, $sep) {
 }
 
 /**
+ * Media Prefetch
+ * -----------------------------------------------------------------------------
+ * Set prefetch for a given media domain. Useful if your site is image heavy.
+ */
+
+function dns_prefetch() {
+    global $prefetch_domains;
+
+    foreach ($prefetch_domains as $domain) {
+        printf('<link rel="dns-prefetch" href="//%s">', $domain);
+    }
+}
+
+/**
+ * Load Favicon
+ * -----------------------------------------------------------------------------
+ */
+
+function set_favicon() {
+    global $favicon_path;
+    printf('<link rel="icon" type="image/png" href="%s" />', $favicon_path);
+}
+
+/**
+ * Get Avatar URL
+ * -----------------------------------------------------------------------------
+ * Wrapper for get_avatar that only returns the URL. Yes, WordPress added a
+ * get_avatar_url() function in version 4.2. The Tuairisc site, however, uses
+ * a plugin named WP User Avatar (https://wordpress.org/plugins/wp-user-avatar/)
+ * to upload and serve avatars from a local source.
+ *
+ * 1. WP User Avatar hooks into get_avatar()
+ * 2. As of April 29 2015 the plugin does not support the new get_avatar_data()
+ *    and get_avatar_url() functions.
+ *
+ * That is to say both new functions will stil only serve from Gravatar without
+ * consideration of locally-uploaded avatars.
+ *
+ * @param   string  $id_or_email    Either user ID or email address.
+ * @param   int     $size           Avatar size.
+ * @param   string  $default        URL for fallback avatar.
+ * @param   string  $alt            Alt text for image.
+ * @return  string                  The avatar's URL.
+ */
+
+function get_avatar_url_only($id_or_email, $size, $default, $alt) {
+   $avatar = get_avatar($id_or_email, $size, $default, $alt);
+   return preg_replace('/(^.*src="|"\s.*$)/', '', $avatar);
+}
+
+/**
+ * Rewrite Search URL Cleanly
+ * -----------------------------------------------------------------------------
+ * Cleanly rewrite search URL from ?s=topic to /search/topic
+ *
+ * @link    http://wpengineer.com/2258/change-the-search-url-of-wordpress/
+ */
+
+function clean_search_url() {
+    if (is_search() && ! empty($_GET['s'])) {
+        wp_redirect(home_url('/search/') . urlencode(get_query_var('s')));
+        exit();
+    }
+}
+
+/**
+ * Custom Comment and Comment Form Output
+ * -----------------------------------------------------------------------------
+ * @param   string  $comment    The comment.
+ * @param   array   $args       Array argument
+ * @param   int     $depth      Depth of the comments thread.
+ */
+
+function rmwb_comments($comment, $args, $depth) {
+    $GLOBALS['comment'] = $comment; ?>
+
+    <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
+        <div class="avatar-wrapper">
+            <?php echo get_avatar($comment, 75); ?>
+        </div>
+        <div class="comment-interior">
+            <header>
+                <p class="author"><?php comment_author_link(); ?></p>
+                <p class="date"><small><?php printf(__('%1$s at %2$s', TTD), get_comment_date(), get_comment_time()); ?></small></p>
+            </header>
+
+            <?php if ($comment->comment_approved === '0') {
+                printf('<p>%s</p>', _e('Your comment has been held for moderation.', TTD));
+            } ?>
+
+            <div class="comment-body">
+                <?php comment_text(); ?>
+            </div>
+            <?php if (is_user_logged_in()) : ?>
+                <footer>
+                    <p><small>
+                        <?php edit_comment_link(__('edit', TTD),'  ',''); ?>
+                    </small></p>
+                </footer>
+            <?php endif; ?>
+        </div>
+    </li><?php
+}
+
+/**
+ * Wrap Comment Fields in Elements
+ * -----------------------------------------------------------------------------
+ * @link    https://wordpress.stackexchange.com/questions/172052/how-to-wrap-comment-form-fields-in-one-div
+ */
+
+function wrap_comment_fields_before() {
+    printf('<div class="commentform-inputs">');
+}
+
+function wrap_comment_fields_after() {
+    printf('</div>');
+}
+
+/**
  * Filters, Options and Actions
  * -----------------------------------------------------------------------------
  */
@@ -246,7 +365,12 @@ if (!isset($content_width)) {
 add_action('wp_enqueue_scripts', 'load_theme_styles');
 add_action('wp_enqueue_scripts', 'load_theme_scripts');
 
+// Remove the "Generate by WordPress x.y.x" tag from the header.
 remove_action('wp_head', 'wp_generator');
+
+// Stop WordPress loading JavaScript that helps render emoji correctly.
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
 
 /**
  * Filters 
@@ -256,22 +380,22 @@ remove_action('wp_head', 'wp_generator');
 // Wordpress repeatedly inserted emoticons. No more, ever.
 remove_filter('the_content', 'convert_smilies');
 remove_filter('the_excerpt', 'convert_smilies');
-remove_action('wp_head', 'print_emoji_detection_script', 7);
-remove_action('wp_print_styles', 'print_emoji_styles');
 
 // Title function.
 add_filter('wp_title', 'theme_title', 10, 2);
 
 /**
- * Theme Support
+ * Theme Supports
  * -----------------------------------------------------------------------------
  */
+
+/* Critical part of the theme; every post has a crafted exerpt and thumbnail
+ * image. */
+add_theme_support('post-thumbnails');
 
 // HTML5 support in theme.
 current_theme_supports('html5');
 current_theme_supports('menus');
-
-add_theme_support('post-thumbnails');
 
 add_theme_support('html5', array(
     'comment-list', 'comment-form', 'search-form', 'gallery', 'caption'
