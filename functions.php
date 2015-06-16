@@ -294,8 +294,9 @@ function reduce_sizes($sizes) {
 
 function favicon_ico($icon) {
     $favicon = array();
-    $sizes = reduce_sizes($icon['sizes']);
+    $sizes = '';
 
+    $sizes = reduce_sizes($icon['sizes']);
     $favicon[] = sprintf('<link rel="shortcut icon" sizes="%s" type="image/x-icon" href="%s">', $sizes, $icon['path']);
 
     return implode('', $favicon);
