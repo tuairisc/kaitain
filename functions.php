@@ -13,7 +13,7 @@
  *
  * This file is part of Tuairisc.ie.
  * 
- * Tuairisc.ie is free software: you can redistribute it and/or modify it under the
+ * Tuairisc.ie is free ooftware: you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software 
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
@@ -332,12 +332,6 @@ function dns_prefetch() {
 }
 
 /**
- * Load Favicon
- * -----------------------------------------------------------------------------
- * Every different browser has their own special snowflake favicon format. 
- */
-
-/**
  * Reduce Favicon Sizes
  * -----------------------------------------------------------------------------
  * @param   array       $sizes      Array of icon sizes (32, 48, etc.).
@@ -404,9 +398,9 @@ function favicon_windows($icon) {
 }
 
 /**
- * Generate All Favicon Meta Tags
+ * Load Favicon
  * -----------------------------------------------------------------------------
- * Generate favicon and icon meta tags.
+ * Every different browser has their own special snowflake favicon format. 
  */
 
 function set_favicon() {
