@@ -43,5 +43,4 @@
     <div id="site">
         <div id="header"></div>
         <div id="main">
-            <?php // Test ?>
             <div id="content">
