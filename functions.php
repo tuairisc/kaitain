@@ -65,6 +65,7 @@ define('ASSETS_URL', THEME_URL . '/assets/');
  */
 
 define('THEME_INCLUDES',  THEME_PATH . '/includes/');
+define('THEME_WIDGETS',  THEME_PATH . '/widgets/');
 define('THEME_PARTIALS',  '/partials/');
 
 /**
@@ -98,6 +99,9 @@ $fallback_image = array(
  *  Other Variables
  * -----------------------------------------------------------------------------
  */
+
+// Ghetto view counter meta key.
+$ghetto_counter_key = 'tuairisc_view_counter';
 
 // Media prefetch domains.
 $prefetch_domains = array(
@@ -136,7 +140,10 @@ include(THEME_INCLUDES . 'wp-custom-post-type-class/src/CPT.php');
  */
 
 $google_fonts = array(
-    // All Google Fonts to be loaded.
+    /* All Google Fonts to be loaded.
+     * Use format 'Open Sans:300', 'Droid Sans:400'
+     * etc.
+     */
 );
 
 $theme_javascript = array(
@@ -152,7 +159,7 @@ $theme_styles = array(
 );
 
 /** 
- * Widget Areas and Widget Defaults
+ * Widgets
  * -----------------------------------------------------------------------------
  */
 
@@ -416,6 +423,74 @@ function set_favicon() {
 }
 
 /**
+ * Increment Ghetto View Counter
+ * -----------------------------------------------------------------------------
+ * This was requested by the client for internal use. I do not consider this to
+ * be an objectively reliable means to tally view counters for buisness use, but
+ * it is Good Enough for information interior use.
+ *
+ * @param   int     $post_id        ID of the post.
+ */
+
+function set_view_count($post_id = null) {
+    if (!is_custom_type() && !is_user_logged_in()) {
+        global $ghetto_counter_key;
+
+        if (is_null($post_id)) {
+            global $id;
+            $post_id = $id;
+        }
+
+        $count = (int) get_post_meta($post_id, $ghetto_counter_key, true);
+        $count++;
+        update_post_meta($post_id, $ghetto_counter_key, $count);
+    }
+}
+
+/*
+ * Fetch Ghetto View Counter
+ * -----------------------------------------------------------------------------
+ * @param   int     $post_id        ID of the post.
+ * @return  int     $count          View count of the post.
+ */
+
+function get_view_count($post_id = null) {
+    if (is_null($post_id)) {
+        return false;
+    }
+
+    global $ghetto_counter_key;
+
+    if (is_null($post_id)) {
+        return;
+    }
+
+    $count = (int) get_post_meta($post_id, $ghetto_counter_key, true);
+
+    if (!is_integer($count)) {
+        update_post_meta($post_id, $ghetto_counter_key, 0);
+        return 0;
+    }
+
+    return $count;
+}
+
+/*
+ * Increment Counter within Post
+ * -----------------------------------------------------------------------------
+ * The only part of the theme that calls the full post content are single
+ * articles. This is /good enough/ for me. 
+ * 
+ * @param   string      $content        Post content.
+ * @return  string      $content        Post content.
+ */
+
+function increment_view_counter($content) {
+    set_view_count(get_the_ID());
+    return $content;
+}
+
+/**
  * Get Avatar URL
  * -----------------------------------------------------------------------------
  * Wrapper for get_avatar that only returns the URL. Yes, WordPress added a
@@ -554,6 +629,10 @@ remove_filter('the_excerpt', 'convert_smilies');
 
 // Title function.
 add_filter('wp_title', 'theme_title', 10, 2);
+
+/* This theme only calls content on the load of a full page article. It's a good
+ * point at which to insert the post count increment. */
+add_filter('the_content', 'increment_view_counter');
 
 /**
  * Theme Supports
