@@ -65,6 +65,7 @@ define('ASSETS_URL', THEME_URL . '/assets/');
  */
 
 define('THEME_INCLUDES',  THEME_PATH . '/includes/');
+define('THEME_FUNCTIONS',  THEME_PATH . '/functions/');
 define('THEME_WIDGETS',  THEME_PATH . '/widgets/');
 define('THEME_PARTIALS',  '/partials/');
 
@@ -124,6 +125,14 @@ $favicons = array(
         'sizes' => array(152),
     )
 );
+
+
+/*
+ * Other Theme functions
+ * -----------------------------------------------------------------------------
+ */
+
+include(THEME_FUNCTIONS . 'dates.php');
 
 /**
  * Theme Includes
