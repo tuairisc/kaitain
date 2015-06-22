@@ -3,22 +3,18 @@
 /**
  * Popular Posts by View Counter
  * -----------------------------------------------------------------------------
- * This widget uses the tuairisc_view_counter meta key of posts. The view 
- * counter was a requested way to quickly and non-canonically determine the
- * most popular posts on the site. The stock widget directly accessed
- * the database, and a good deal of the code was tied to parsing this. 
- *
  * @category   PHP Script
  * @package    Tuairisc.ie
  * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  Copyright (c) 2015 Mark Grealish
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
- * @version    3.0
- * @link       https://github.com/bhalash/sheepie
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       http://www.tuairisc.ie
  *
  * This file is part of Tuairisc.ie.
  *
- * Tuairisc.ie is free ooftware: you can redistribute it and/or modify it under the
+ * Tuairisc.ie is free software: you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
