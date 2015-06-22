@@ -6,23 +6,24 @@
  * @category   PHP Script
  * @package    Tuairisc.ie
  * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  Copyright (c) 2015 Mark Grealish
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
- * @version    3.0
- * @link       https://github.com/bhalash/sheepie
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       http://www.tuairisc.ie
  *
  * This file is part of Tuairisc.ie.
- * 
- * Tuairisc.ie is free ooftware: you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software 
+ *
+ * Tuairisc.ie is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
- * Tuairisc.ie is distributed in the hope that it will be useful, but WITHOUT ANY 
+ *
+ * Tuairisc.ie is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License along with 
+ *
+ * You should have received a copy of the GNU General Public License along with
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
@@ -65,9 +66,17 @@ define('ASSETS_URL', THEME_URL . '/assets/');
  */
 
 define('THEME_INCLUDES',  THEME_PATH . '/includes/');
-define('THEME_FUNCTIONS',  THEME_PATH . '/functions/');
 define('THEME_WIDGETS',  THEME_PATH . '/widgets/');
 define('THEME_PARTIALS',  '/partials/');
+
+/**
+ * Theme Partial Templates
+ * -----------------------------------------------------------------------------
+ */
+
+define('PARTIAL_ARTICLES', THEME_PARTIALS . 'articles/article');
+define('PARTIAL_ARCHIVES', THEME_PARTIALS . 'archives/archive');
+define('PARTIAL_PAGES',    THEME_PARTIALS . 'pages/');
 
 /**
  * Image, CSS and JavaScript Assets
@@ -94,6 +103,36 @@ $social_facebook = 'tuairisc.ie';
 $fallback_image = array(
     'url' => THEME_URL . '/assets/images/tuairisc.jpg',
     'path' => THEME_PATH . '/assets/images/tuairisc.jpg'
+);
+
+/**
+ * Irish Dates
+ * -----------------------------------------------------------------------------
+ */
+
+$irish_days = array(
+    'Monday' => 'Dé Luain',
+    'Tuesday' => 'Dé Máirt',
+    'Wednesday' => 'Dé Céadaoin',
+    'Thursday' => 'Déardaoin',
+    'Friday' => 'Dé hAoine',
+    'Saturday' => 'Dé Sathairn',
+    'Sunday' => 'Dé Domhnaigh'
+);
+
+$irish_months = array(
+    'January' => 'Eanáir',
+    'February' => 'Feabhra',
+    'March' => 'Márta',
+    'April' => 'Aibreán',
+    'May' => 'Bealtaine',
+    'June' => 'Meitheamh',
+    'July' => 'Iúil',
+    'August' => 'Lúnasa',
+    'September' => 'Meán Fómhair',
+    'October' => 'Deireadh Fómhair',
+    'November' => 'Samhain',
+    'December' => 'Nollaig'
 );
 
 /**
@@ -125,14 +164,6 @@ $favicons = array(
         'sizes' => array(152),
     )
 );
-
-
-/*
- * Other Theme functions
- * -----------------------------------------------------------------------------
- */
-
-include(THEME_FUNCTIONS . 'dates.php');
 
 /**
  * Theme Includes
@@ -442,7 +473,7 @@ function set_favicon() {
  */
 
 function set_view_count($post_id = null) {
-    if (!is_custom_type() && !is_user_logged_in()) {
+    if (is_singular('post') && !is_user_logged_in()) {
         global $ghetto_counter_key;
 
         if (is_null($post_id)) {
@@ -527,6 +558,65 @@ function get_avatar_url_only($id_or_email, $size, $default, $alt) {
 }
 
 /**
+ * Translate Day to Irish
+ * -----------------------------------------------------------------------------
+ * The language of the date is set by the localization of the server. Catch
+ * the date based on Tuairisc's preferred format and translate it to Irish.
+ *
+ * @param   string      $day        The day in English.
+ * @return  string                  The day in Irish.
+ */
+
+function day_to_irish($day) {
+    global $irish_days;
+    return $irish_days[$day];
+}
+
+/**
+ * Translate Month to Irish
+ * -----------------------------------------------------------------------------
+ * The language of the date is set by the localization of the server. Catch
+ * the date based on Tuairisc's preferred format and translate it to Irish.
+ *
+ * @param   string      $month      The month in English.
+ * @return  string                  The month in Irish.
+ */
+
+function month_to_irish($month) {
+    global $irish_months;
+    return $irish_months[$month];
+}
+
+/*
+ * Translate Date to Irish
+ * -----------------------------------------------------------------------------
+ * The language of the date is set by the localization of the server. Catch
+ * the date based on Tuairisc's preferred format and translate it to Irish.
+ *
+ * @param   string      $the_date   The date in English.
+ * @return  string      $the_date   The date in Irish.
+ */
+
+function date_to_irish($the_date) {
+    $english_month = '';
+    $english_day = '';
+    $irish_day = '';
+    $irish_month = '';
+
+    $day_regex = '/(,.*)/';
+    $month_regex = '/(^.*, | [0-9].*$)/';
+
+    return $the_date;
+
+    $english_month = preg_replace($month_regex, '', $the_date);
+    $english_day = preg_replace($day_regex, '', $the_date);
+
+    $the_date = str_replace($english_day, day_to_irish($english_day), $the_date);
+    $the_date = str_replace($english_month, month_to_irish($english_month), $the_date);
+    return $the_date;
+}
+
+/**
  * Rewrite Search URL Cleanly
  * -----------------------------------------------------------------------------
  * Cleanly rewrite search URL from ?s=topic to /search/topic
@@ -549,7 +639,7 @@ function clean_search_url() {
  * @param   int     $depth      Depth of the comments thread.
  */
 
-function rmwb_comments($comment, $args, $depth) {
+function theme_comments($comment, $args, $depth) {
     $GLOBALS['comment'] = $comment; ?>
 
     <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
@@ -635,6 +725,11 @@ add_action('widgets_init', 'register_widget_areas');
 // Wordpress repeatedly inserted emoticons. No more, ever.
 remove_filter('the_content', 'convert_smilies');
 remove_filter('the_excerpt', 'convert_smilies');
+
+// Return date in Irish.
+add_filter('get_comment_date', 'date_to_irish');
+add_filter('get_the_date', 'date_to_irish');
+add_filter('the_date', 'date_to_irish');
 
 // Title function.
 add_filter('wp_title', 'theme_title', 10, 2);
