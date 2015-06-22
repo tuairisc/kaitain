@@ -27,4 +27,19 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
+get_header();
+
+if (have_posts()) {
+    while (have_posts()) {
+        the_post();
+        get_template_part(PARTIAL_ARTICLES, 'full');
+        include_once(THEME_INCLUDES . 'related.php');
+        comments_template();
+    }
+} else {
+    get_template_part(PARTIAL_ARTICLES, 'missing');
+}
+
+get_footer();
+
 ?>
