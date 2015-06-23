@@ -29,6 +29,43 @@
 
 get_header();
 
+$fallback_i18n = 'ga_IE';
+$test_format = '%A, %B, %e %Y';
+
+function get_the_date_i18n($format = '%A, %B %e %Y', $post_id = null, $locale = null) {
+    if (is_null($format)) {
+        return;
+    }
+
+    if (is_null($locale)) {
+        global $fallback_i18n;
+        $locale = $fallback_i18n;
+    }
+
+    if (is_null($post_id)) {
+        global $id;
+        $post_id = $id;
+    }
+
+    $locale = array(
+        // Try to match common variants of the locale.
+        $locale,
+        $locale . '.utf8',
+        $locale . '@euro',
+        $locale . '@euro.utf8'
+    );
+
+    $time = get_the_date('U', $post_id);
+
+    // @link http://stackoverflow.com/a/19351555/1433400
+    setlocale(LC_ALL, '');
+    setlocale(LC_ALL, $locale[0], $locale[1], $locale[2], $locale[3]);
+
+    return strftime($format, $time);
+}
+
+printf('%s', get_the_date_i18n($test_format, 20671));
+
 /* 1. Big Lead Article.
  * 2. Second and third rows of articles.
  * 3. List of columnists.
