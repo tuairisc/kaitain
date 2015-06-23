@@ -106,36 +106,6 @@ $fallback_image = array(
 );
 
 /**
- * Irish Dates
- * -----------------------------------------------------------------------------
- */
-
-$irish_days = array(
-    'Monday' => 'Dé Luain',
-    'Tuesday' => 'Dé Máirt',
-    'Wednesday' => 'Dé Céadaoin',
-    'Thursday' => 'Déardaoin',
-    'Friday' => 'Dé hAoine',
-    'Saturday' => 'Dé Sathairn',
-    'Sunday' => 'Dé Domhnaigh'
-);
-
-$irish_months = array(
-    'January' => 'Eanáir',
-    'February' => 'Feabhra',
-    'March' => 'Márta',
-    'April' => 'Aibreán',
-    'May' => 'Bealtaine',
-    'June' => 'Meitheamh',
-    'July' => 'Iúil',
-    'August' => 'Lúnasa',
-    'September' => 'Meán Fómhair',
-    'October' => 'Deireadh Fómhair',
-    'November' => 'Samhain',
-    'December' => 'Nollaig'
-);
-
-/**
  *  Other Variables
  * -----------------------------------------------------------------------------
  */
@@ -557,36 +527,6 @@ function get_avatar_url_only($id_or_email, $size, $default, $alt) {
    return preg_replace('/(^.*src="|"\s.*$)/', '', $avatar);
 }
 
-/**
- * Translate Day to Irish
- * -----------------------------------------------------------------------------
- * The language of the date is set by the localization of the server. Catch
- * the date based on Tuairisc's preferred format and translate it to Irish.
- *
- * @param   string      $day        The day in English.
- * @return  string                  The day in Irish.
- */
-
-function day_to_irish($day) {
-    global $irish_days;
-    return $irish_days[$day];
-}
-
-/**
- * Translate Month to Irish
- * -----------------------------------------------------------------------------
- * The language of the date is set by the localization of the server. Catch
- * the date based on Tuairisc's preferred format and translate it to Irish.
- *
- * @param   string      $month      The month in English.
- * @return  string                  The month in Irish.
- */
-
-function month_to_irish($month) {
-    global $irish_months;
-    return $irish_months[$month];
-}
-
 /*
  * Translate Date to Irish
  * -----------------------------------------------------------------------------
@@ -598,21 +538,43 @@ function month_to_irish($month) {
  */
 
 function date_to_irish($the_date) {
-    $english_month = '';
-    $english_day = '';
-    $irish_day = '';
-    $irish_month = '';
+    $irish_dates = array(
+        'days' => array(
+            'Monday' => 'Dé Luain',
+            'Tuesday' => 'Dé Máirt',
+            'Wednesday' => 'Dé Céadaoin',
+            'Thursday' => 'Déardaoin',
+            'Friday' => 'Dé hAoine',
+            'Saturday' => 'Dé Sathairn',
+            'Sunday' => 'Dé Domhnaigh'
+        ),
+        'months' => array(
+            'January' => 'Eanáir',
+            'February' => 'Feabhra',
+            'March' => 'Márta',
+            'April' => 'Aibreán',
+            'May' => 'Bealtaine',
+            'June' => 'Meitheamh',
+            'July' => 'Iúil',
+            'August' => 'Lúnasa',
+            'September' => 'Meán Fómhair',
+            'October' => 'Deireadh Fómhair',
+            'November' => 'Samhain',
+            'December' => 'Nollaig'
+        )
+    );
 
-    $day_regex = '/(,.*)/';
-    $month_regex = '/(^.*, | [0-9].*$)/';
+    # $english_month = '';
+    # $english_day = '';
+    # $irish_day = '';
+    # $irish_month = '';
 
-    return $the_date;
+    # $month = preg_replace('/(,.*)/', '', $the_date);
+    # $day = preg_replace('/(^.*, | [0-9].*$)/', '', $the_date);
 
-    $english_month = preg_replace($month_regex, '', $the_date);
-    $english_day = preg_replace($day_regex, '', $the_date);
+    # $the_date = str_replace($english_day, day_to_irish($english_day), $the_date);
+    # $the_date = str_replace($english_month, month_to_irish($english_month), $the_date);
 
-    $the_date = str_replace($english_day, day_to_irish($english_day), $the_date);
-    $the_date = str_replace($english_month, month_to_irish($english_month), $the_date);
     return $the_date;
 }
 
