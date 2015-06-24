@@ -400,6 +400,25 @@ function get_the_date_strftime($format = null, $post = null, $locale = null) {
     return strftime($format, $time);
 }
 
+/*
+ * Print Date using System Locale
+ * -----------------------------------------------------------------------------
+ * @param   string      $format      Format to use for the date.
+ * @param   int         $post        ID of post whose date is needed.
+ * @param   string      $locale      Locale to be used. Must be present on system!
+ * @param   bool        $echo        Print the date, if true.
+ */
+
+function the_date_strftime($format = null, $post = null, $locale = null, $echo = true) {
+    $date = get_the_date_strftime($format, $post, $locale); 
+
+    if ($echo) {
+        printf($date);
+    } else {
+        return $date;
+    }
+}
+
 /**
  * Reduce Favicon Sizes
  * -----------------------------------------------------------------------------
