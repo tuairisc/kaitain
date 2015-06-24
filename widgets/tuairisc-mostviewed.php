@@ -39,23 +39,19 @@ class tuairisc_popular extends WP_Widget {
     }
 
     public function widget($args, $instance) {
-        global $ghetto_counter_key;
         extract($args);
-
+        $key = get_option('tuairisc_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
         $start_date = new DateTime();
         $start_date = $start_date->sub(new DateInterval('P' . $instance['elapsed_days'] . 'D'));
 
         $popular_query = new WP_Query(array(
-            // Exclude the Greann category.
-            'cat' => -184,
             'post_type' => 'post',
-            'meta_key' => $ghetto_counter_key, 
+            'meta_key' => $key, 
             'posts_per_page' => $instance['max_posts'],
             'orderby' => 'meta_value_num',
             'order' => 'DESC',
             'date_query' => array(
-                 /* Search inclusively through the date range. */
                 'after' => array(
                     'year' => $start_date->format('Y'),
                     'month' => $start_date->format('m'),
@@ -79,10 +75,8 @@ class tuairisc_popular extends WP_Widget {
         printf('<ul class="tuairisc-popular-list">');
 
         if ($popular_query->have_posts()) {
-            while ($popular_query->have_posts()) {
-                $popular_query->the_post();
-
-                ?>
+            while ($popular_query->have_posts()) :
+                $popular_query->the_post(); ?>
                 <li>
                     <?php if (has_post_thumbnail()) : ?>
                         <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
@@ -95,8 +89,7 @@ class tuairisc_popular extends WP_Widget {
                         </div>
                     <?php endif; ?>
                 </li>
-                <?php
-            }
+            <?php endwhile;
         } else {
             _e('Níor fágadh aon nóta tráchta fós', TTD);
         }
@@ -115,6 +108,20 @@ class tuairisc_popular extends WP_Widget {
 
     public function form($instance) {
         $instance = wp_parse_args($instance, $defaults);
+
+        $options = array(
+            '36500' => 'All Time',
+            '365' => 'This Year',
+            '28' => 'This Month',
+            '14' => 'Two Weeks',
+            '7' => 'Seven Days',
+            '6' => 'Six Days',
+            '5' => 'Five Days',
+            '4' => 'Four Days',
+            '3' => 'Three Days',
+            '2' => 'Two Days',
+            '1' => 'Today',
+        );
 
         $defaults = array(
             'widget_title' => __('Most Viewed', TTD),
@@ -136,23 +143,15 @@ class tuairisc_popular extends WP_Widget {
             <input id="<?php printf($this->get_field_id('widget_title')); ?>" name="<?php printf($this->get_field_name('widget_title')); ?>" value="<?php printf($instance['widget_title']); ?>" type="text" class="widefat" />
         </p>
         <p>
-            <label for="<?php printf($this->get_field_id('elapsed_days')); ?>"><?php _e('Since:', TTD)); ?></label><br />
+            <label for="<?php printf($this->get_field_id('elapsed_days')); ?>"><?php _e('Since:', TTD); ?></label><br />
             <select id="<?php printf($this->get_field_id('elapsed_days')); ?>" name="<?php printf($this->get_field_name('elapsed_days')); ?>">
-                <option value="36500">All Time</option>
-                <option value="365">This Year</option>
-                <option value="28">This Month</option>
-                <option value="14">Two Weeks</option>
-                <option value="7">Seven Days</option>
-                <option value="6">Six Days</option>
-                <option value="5">Five Days</option>
-                <option value="4">Four Days</option>
-                <option value="3">Three Days</option>
-                <option value="2">Two Days</option>
-                <option value="1">Today</option>
+                <?php foreach ($options as $key => $value) {
+                    printf('<option value="%s">%s</option>', $key, $value);
+                }  ?>
             </select>
         </p>
         <p>
-            <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Posts To Display:', TTD)); ?></label><br />
+            <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Posts To Display:', TTD); ?></label><br />
             <select id="<?php printf($this->get_field_id('max_posts')); ?>" name="<?php printf($this->get_field_name('max_posts')); ?>">
                 <?php for ($i = 1; $i <= 10; $i++) : ?>
                     <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
