@@ -36,10 +36,10 @@ if (comments_open()) {
     }
 
     if (have_comments()) {
-        $s = (get_comments_number() === 1) ? '' : 's';
+        $plural = (get_comments_number() === 1) ? '' : 's';
 
         printf('<hr>');
-        printf(__('<h5 class="reply-title">%d comment%s on \'%s\':</h5>', TTD), get_comments_number(), $s, get_the_title());
+        printf(__('<h5 class="reply-title">%d comment%s on \'%s\':</h5>', TTD), get_comments_number(), $plural, get_the_title());
         printf('<ul>');
 
         wp_list_comments(array(
@@ -59,13 +59,13 @@ if (comments_open()) {
         'id_form' => 'commentform',
         'id_submit' => 'submit',
         'title_reply' => __('Have your say:', TTD),
-        'comment_field' => '<p id="textarea"><textarea autocomplete="off" class="comment-form-comment" id="comment" name="comment" required></textarea></p>',
-        'comment_form_before_fields' => '<div class="argh">',
+        'comment_field' => '<p id="textarea"><textarea autocomplete="off" class="comment-form-comment" id="comment" name="comment" required="required"></textarea></p>',
+        'comment_form_before_fields' => '<div class="comment-form">',
         'comment_form_after_fields' =>'</div>',
         'fields' => array(
-            'author' => '<input class="author-name" id="comment-author" name="author" placeholder="' . __('Name*', TTD) . '" type="text" required>',
-            'email' => '<input class="author-email" id="comment-email" name="email" placeholder="' . __('Email*', TTD) . '" type="text" required>',
-            'url' => '<input class="author-url" id="comment-url" name="url" placeholder="' . __('Website', TTD) . '" type="text">'
+            'author' => '<input class="author-name" id="author" name="author" placeholder="' . __('Name*', TTD) . '" type="text" required="required">',
+            'email' => '<input class="author-email" id="email" name="email" placeholder="' . __('Email*', TTD) . '" type="text" required="required">',
+            'url' => '<input class="author-url" id="url" name="url" placeholder="' . __('Website', TTD) . '" type="text">'
         )
     ));
 
