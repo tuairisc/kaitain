@@ -92,34 +92,38 @@ define('THEME_CSS', ASSETS_URL . 'css/');
  * -----------------------------------------------------------------------------
  */
 
-$social_twitter = '@tuairiscnuacht';
-$social_facebook = 'tuairisc.ie';
+update_option('social_m_twitter', '@tuairiscnuacht');
+update_option('social_m_facebook', 'tuairisc.ie');
 
 /**
  * Sitewide Fallback Image File
  * -----------------------------------------------------------------------------
  */
 
-$fallback_image = array(
+update_option('article_i_image', array(
     'url' => THEME_URL . '/assets/images/tuairisc.jpg',
     'path' => THEME_PATH . '/assets/images/tuairisc.jpg'
-);
+));
 
 /**
  *  Other Variables
  * -----------------------------------------------------------------------------
  */
 
-// Ghetto view counter meta key.
-$ghetto_counter_key = 'tuairisc_view_counter';
+update_option('tuairisc_fallback_locale', 'ga_IE');
+update_option('tuairisc_strftime_date_format', '%A, %B, %e %Y');
 
-// Media prefetch domains.
-$prefetch_domains = array(
-    preg_replace('/^www\./','', $_SERVER['SERVER_NAME'])
-);
+// Ghetto view counter meta key.
+update_option('tuairisc_view_counter_key', 'tuairic_view_counter');
+
+update_option('tuairisc_prefetch_domains', array(
+    // Media prefetch domains.
+    preg_replace('/^www\./','',
+    $_SERVER['SERVER_NAME'])
+));
 
 // Website favicon assets.
-$favicons = array(
+update_option('tuairisc_favicons', array(
     'favicon' => array(
         'path' => THEME_IMAGES . 'icons/favicon.ico',
         'sizes' => array(16, 24, 32, 48, 64),
@@ -133,7 +137,7 @@ $favicons = array(
         'path' => THEME_IMAGES . 'icons/icon-apple.png',
         'sizes' => array(152),
     )
-);
+));
 
 /**
  * Theme Includes
@@ -152,8 +156,7 @@ include(THEME_INCLUDES . 'wp-custom-post-type-class/src/CPT.php');
 $google_fonts = array(
     /* All Google Fonts to be loaded.
      * Use format 'Open Sans:300', 'Droid Sans:400'
-     * etc.
-     */
+     * etc. */
 );
 
 $theme_javascript = array(
@@ -341,11 +344,60 @@ function theme_title($title, $sep) {
  */
 
 function dns_prefetch() {
-    global $prefetch_domains;
-
-    foreach ($prefetch_domains as $domain) {
-        printf('<link rel="dns-prefetch" href="//%s">', $domain);
+    $domains = get_option('tuairisc_prefetch_domains');
+    
+    if (!empty($domains)) {
+        foreach ($domains as $domain) {
+            printf('<link rel="dns-prefetch" href="//%s">', $domain);
+        }
     }
+}
+
+/**
+ * Get Date Using System Locale Files
+ * -----------------------------------------------------------------------------
+ * This function mirrors get_the_date(), except it uses strftiime(), and any 
+ * localization supported by your system.
+ * 
+ * @param   string      $format      Format to use for the date.
+ * @param   int         $post        ID of post whose date is needed.
+ * @param   string      $locale      Locale to be used. Must be present on system!
+ * @return  string                   Date in desired locale, with fallback to default locale.
+ * 
+ * @link https://secure.php.net/manual/en/function.strftime.php
+ * @link http://www.bhalash.com/archives/13544804637  
+ */
+
+function get_the_date_strftime($format = null, $post = null, $locale = null) {
+    $post = get_post($post);
+
+    if (!$post) {
+       return $false;
+    } else {
+        $time = mysql2date('U', $post->post_date);
+    }
+
+    if (!$locale) {
+        $locale = get_option('tuairisc_fallback_locale');
+    }
+
+    if (!$format) {
+        $format = get_option('tuairisc_strftime_date_format');
+    }
+
+    $locale = array(
+        // Try to match common variants of the locale.
+        $locale,
+        $locale . '.utf8',
+        $locale . '@euro',
+        $locale . '@euro.utf8'
+    );
+
+    // @link http://stackoverflow.com/a/19351555/1433400
+    setlocale(LC_ALL, '');
+    setlocale(LC_ALL, $locale[0], $locale[1], $locale[2], $locale[3]);
+
+    return strftime($format, $time);
 }
 
 /**
@@ -421,8 +473,7 @@ function favicon_windows($icon) {
  */
 
 function set_favicon() {
-    global $favicons;
-    
+    $favicons = get_option('tuairisc_favicons'); 
     $meta_tags = array();
 
     $meta_tags[] = favicon_ico($favicons['favicon']);
@@ -444,16 +495,16 @@ function set_favicon() {
 
 function set_view_count($post_id = null) {
     if (is_singular('post') && !is_user_logged_in()) {
-        global $ghetto_counter_key;
+        $post = get_post($post);
 
-        if (is_null($post_id)) {
-            global $id;
-            $post_id = $id;
+        if (!$post) {
+            return false;
         }
-
-        $count = (int) get_post_meta($post_id, $ghetto_counter_key, true);
+        
+        $key = get_option('tuairisc_view_counter_key');
+        $count = (int) get_post_meta($post->ID, $key, true);
         $count++;
-        update_post_meta($post_id, $ghetto_counter_key, $count);
+        update_post_meta($post_id, $key, $count);
     }
 }
 
@@ -464,21 +515,18 @@ function set_view_count($post_id = null) {
  * @return  int     $count          View count of the post.
  */
 
-function get_view_count($post_id = null) {
-    if (is_null($post_id)) {
+function get_view_count($post = null) {
+    $post = get_post($post);
+    
+    if (!$post) {
         return false;
     }
 
-    global $ghetto_counter_key;
-
-    if (is_null($post_id)) {
-        return;
-    }
-
-    $count = (int) get_post_meta($post_id, $ghetto_counter_key, true);
+    $key = get_option('tuairisc_view_counter_key');
+    $count = (int) get_post_meta($post->ID, $key, true);
 
     if (!is_integer($count)) {
-        update_post_meta($post_id, $ghetto_counter_key, 0);
+        update_post_meta($post->ID, $key, 0);
         return 0;
     }
 
