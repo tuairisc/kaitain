@@ -41,6 +41,6 @@
 </head>
 <body>
     <div id="site">
-        <div id="header"></div>
-        <div id="main">
+        <div id="header" role="header"></div>
+        <div id="main" role="main">
             <div id="content">
