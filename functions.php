@@ -148,6 +148,13 @@ include(THEME_INCLUDES . 'social-meta/social-meta.php');
 include(THEME_INCLUDES . 'get-the-image/get-the-image.php');
 include(THEME_INCLUDES . 'wp-custom-post-type-class/src/CPT.php');
 
+/**
+ * Theme Widgets
+ * -----------------------------------------------------------------------------
+ */
+
+include(THEME_WIDGETS . 'tuairisc-mostviewed.php');
+
 /** 
  * Fonts, Styles and Scripts
  * -----------------------------------------------------------------------------
