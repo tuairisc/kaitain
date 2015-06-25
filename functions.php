@@ -83,9 +83,9 @@ define('PARTIAL_PAGES',    THEME_PARTIALS . 'pages/');
  * -----------------------------------------------------------------------------
  */
 
-define('THEME_JS', ASSETS_URL . 'js/','', true);
-define('THEME_IMAGES', ASSETS_URL . 'images/','', true);
-define('THEME_CSS', ASSETS_URL . 'css/','', true);
+define('THEME_JS', ASSETS_URL . 'js/');
+define('THEME_IMAGES', ASSETS_URL . 'images/');
+define('THEME_CSS', ASSETS_URL . 'css/');
 
 /** 
  * Social Media Accounts
@@ -404,10 +404,7 @@ function get_the_date_strftime($format = null, $post = null, $locale = null) {
     setlocale(LC_ALL, '');
     setlocale(LC_ALL, $locale[0], $locale[1], $locale[2], $locale[3]);
 
-    var_dump($time, $locale, $format);    
-    $time = strftime($format, $time);
-
-    return $time;
+    return strftime($format, $time);
 }
 
 /*
