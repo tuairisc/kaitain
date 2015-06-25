@@ -83,47 +83,47 @@ define('PARTIAL_PAGES',    THEME_PARTIALS . 'pages/');
  * -----------------------------------------------------------------------------
  */
 
-define('THEME_JS', ASSETS_URL . 'js/');
-define('THEME_IMAGES', ASSETS_URL . 'images/');
-define('THEME_CSS', ASSETS_URL . 'css/');
+define('THEME_JS', ASSETS_URL . 'js/','', true);
+define('THEME_IMAGES', ASSETS_URL . 'images/','', true);
+define('THEME_CSS', ASSETS_URL . 'css/','', true);
 
 /** 
  * Social Media Accounts
  * -----------------------------------------------------------------------------
  */
 
-update_option('social_m_twitter', '@tuairiscnuacht');
-update_option('social_m_facebook', 'tuairisc.ie');
+add_option('social_m_twitter', '@tuairiscnuacht','', true);
+add_option('social_m_facebook', 'tuairisc.ie','', true);
 
 /**
  * Sitewide Fallback Image File
  * -----------------------------------------------------------------------------
  */
 
-update_option('article_i_image', array(
+add_option('article_i_image', array(
     'url' => THEME_URL . '/assets/images/tuairisc.jpg',
     'path' => THEME_PATH . '/assets/images/tuairisc.jpg'
-));
+),'', true);
 
 /**
  *  Other Variables
  * -----------------------------------------------------------------------------
  */
 
-update_option('tuairisc_fallback_locale', 'ga_IE');
-update_option('tuairisc_strftime_date_format', '%A, %B, %e %Y');
+add_option('tuairisc_fallback_locale', 'ga_IE','', true);
+add_option('tuairisc_strftime_date_format', '%A, %B, %e %Y','', true);
 
 // Ghetto view counter meta key.
-update_option('tuairisc_view_counter_key', 'tuairic_view_counter');
+add_option('tuairisc_view_counter_key', 'tuairic_view_counter','', true);
 
-update_option('tuairisc_prefetch_domains', array(
+add_option('tuairisc_prefetch_domains', array(
     // Media prefetch domains.
     preg_replace('/^www\./','',
     $_SERVER['SERVER_NAME'])
-));
+),'', true);
 
 // Website favicon assets.
-update_option('tuairisc_favicons', array(
+add_option('tuairisc_favicons', array(
     'favicon' => array(
         'path' => THEME_IMAGES . 'icons/favicon.ico',
         'sizes' => array(16, 24, 32, 48, 64),
@@ -137,7 +137,7 @@ update_option('tuairisc_favicons', array(
         'path' => THEME_IMAGES . 'icons/icon-apple.png',
         'sizes' => array(152),
     )
-));
+),'', true);
 
 /**
  * Theme Includes
@@ -404,7 +404,10 @@ function get_the_date_strftime($format = null, $post = null, $locale = null) {
     setlocale(LC_ALL, '');
     setlocale(LC_ALL, $locale[0], $locale[1], $locale[2], $locale[3]);
 
-    return strftime($format, $time);
+    var_dump($time, $locale, $format);    
+    $time = strftime($format, $time);
+
+    return $time;
 }
 
 /*
