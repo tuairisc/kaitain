@@ -126,68 +126,48 @@ class tuairisc_popular extends WP_Widget {
     /**
      * Widget Public Display
      * -------------------------------------------------------------------------
-     * @param array     $args             Widget Arguments. 
-     * @param 
+     * @param array     $defaults         Widget default values. 
+     * @param array     $instance         Widget instance arguments.
      */
 
-    public function widget($args, $instance) {
-        extract($args);
+    public function widget($defaults, $instance) {
         $key = get_option('tuairisc_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
         $start_date = new DateTime();
         $start_date = $start_date->sub(new DateInterval('P' . $instance['elapsed_days'] . 'D'));
 
-        $popular_query = new WP_Query(array(
+        $popular_posts = get_posts(array(
             'post_type' => 'post',
             'meta_key' => $key, 
-            'posts_per_page' => $instance['max_posts'],
             'orderby' => 'meta_value_num',
-            'order' => 'DESC',
+            'posts_per_page' => $instance['max_posts'],
+            'order' => 'ASC',
             'date_query' => array(
-                'after' => array(
-                    'year' => $start_date->format('Y'),
-                    'month' => $start_date->format('m'),
-                    'day' => $start_date->format('d'),
-                ),
-                'before' => array(
-                    'year' => date('Y'),
-                    'month' => date('m'),
-                    'day' => date('d')                        
-                ),
+                'after' => $start_date->format('Y-m-d'),
+                'before' => date('Y-m-d'),
                 'inclusive' => true
             )
         ));
 
-        if (!empty($args['before_widget'])) {
-            // Widget container open and title.
-            printf($before_widget);
-            printf($before_title . apply_filters('widget_title', $instance['widget_title']) . $after_title);
+        if (!empty($defaults['before_widget'])) {
+            printf($defaults['before_widget']);
+            printf($defaults['before_title'] . apply_filters('widget_title', $instance['widget_title']) . $defaults['after_title']);
         }
 
-        printf('<ul class="tuairisc-popular-list">');
+        printf('<div class="popular-widget">');
 
-        if ($popular_query->have_posts()) {
-            while ($popular_query->have_posts()) :
-                $popular_query->the_post(); ?>
-                <li>
-                    <?php if (has_post_thumbnail()) : ?>
-                        <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-                            <img src="<?php printf(get_thumbnail_url(get_the_id(), array(75, 50))); ?>" alt="" />
-                        </a>
-                        <div class="feature-post-text">
-                            <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
-                            <br />
-                            <small><?php the_date(); ?></small>
-                        </div>
-                    <?php endif; ?>
-                </li>
-            <?php endwhile;
-        } else {
-            _e('Níor fágadh aon nóta tráchta fós', TTD);
+        foreach ($popular_posts as $popular) {
+            printf('<ul>');
+            printf('<li>%s</li>', $popular->post_title);
+            printf('<li>%s</li>', get_post_image($popular->ID));
+            printf('<li>%s</li>', get_the_date_strftime(get_option('tuairisc_strftime_date_format'), $popular->ID));
+            printf('<li>%s</li>', get_post_meta($popular->ID, $key, true));
+            printf('</ul>');
         }
 
-        printf('</ul>');
-        printf($after_widget);
+        printf('</div>');
+        printf($defaults['after_widget']);
+        wp_reset_postdata();
     }
 }
 
