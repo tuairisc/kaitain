@@ -110,11 +110,12 @@ add_option('article_i_image', array(
  * -----------------------------------------------------------------------------
  */
 
+// strftime date and locale.
 add_option('tuairisc_fallback_locale', 'ga_IE','', true);
-add_option('tuairisc_strftime_date_format', '%A, %B, %e %Y','', true);
+add_option('tuairisc_strftime_date_format', '%A, %B %e %Y','', true);
 
 // Ghetto view counter meta key.
-add_option('tuairisc_view_counter_key', 'tuairic_view_counter','', true);
+add_option('tuairisc_view_counter_key', 'tuairisc_view_counter','', true);
 
 add_option('tuairisc_prefetch_domains', array(
     // Media prefetch domains.
@@ -122,8 +123,8 @@ add_option('tuairisc_prefetch_domains', array(
     $_SERVER['SERVER_NAME'])
 ),'', true);
 
-// Website favicon assets.
 add_option('tuairisc_favicons', array(
+    // Website favicon assets.
     'favicon' => array(
         'path' => THEME_IMAGES . 'icons/favicon.ico',
         'sizes' => array(16, 24, 32, 48, 64),
@@ -153,7 +154,8 @@ include(THEME_INCLUDES . 'wp-custom-post-type-class/src/CPT.php');
  * -----------------------------------------------------------------------------
  */
 
-include(THEME_WIDGETS . 'tuairisc-mostviewed.php');
+include(THEME_WIDGETS . 'popular-viewcount.php');
+include(THEME_WIDGETS . 'recent-posts.php');
 
 /** 
  * Fonts, Styles and Scripts
@@ -294,6 +296,22 @@ function load_theme_styles() {
         wp_register_style('google-fonts', google_font_url($google_fonts));
         wp_enqueue_style('google-fonts');
     }
+}
+
+/*
+ * Load Administration Stylesheet
+ * -----------------------------------------------------------------------------
+ * Custom styling for theme elements on the admin side.
+ * 
+ * @param   string      $hook       The current admin page.
+ */
+
+function admin_styles($hook) { 
+    if ($hook !== 'widgets.php') {
+        return false;
+    }
+
+    wp_enqueue_style('tuairisc-admin', THEME_CSS . 'admin.css');
 }
 
 /**
@@ -732,6 +750,7 @@ if (!isset($content_width)) {
 // Enqueue all scripts and stylesheets.
 add_action('wp_enqueue_scripts', 'load_theme_styles');
 add_action('wp_enqueue_scripts', 'load_theme_scripts');
+add_action('admin_enqueue_scripts', 'admin_styles');
 
 // Remove the "Generate by WordPress x.y.x" tag from the header.
 remove_action('wp_head', 'wp_generator');
