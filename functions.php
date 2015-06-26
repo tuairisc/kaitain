@@ -619,57 +619,6 @@ function get_avatar_url_only($id_or_email, $size, $default, $alt) {
    return preg_replace('/(^.*src="|"\s.*$)/', '', $avatar);
 }
 
-/*
- * Translate Date to Irish
- * -----------------------------------------------------------------------------
- * The language of the date is set by the localization of the server. Catch
- * the date based on Tuairisc's preferred format and translate it to Irish.
- *
- * @param   string      $the_date   The date in English.
- * @return  string      $the_date   The date in Irish.
- */
-
-function date_to_irish($the_date) {
-    $irish_dates = array(
-        'days' => array(
-            'Monday' => 'Dé Luain',
-            'Tuesday' => 'Dé Máirt',
-            'Wednesday' => 'Dé Céadaoin',
-            'Thursday' => 'Déardaoin',
-            'Friday' => 'Dé hAoine',
-            'Saturday' => 'Dé Sathairn',
-            'Sunday' => 'Dé Domhnaigh'
-        ),
-        'months' => array(
-            'January' => 'Eanáir',
-            'February' => 'Feabhra',
-            'March' => 'Márta',
-            'April' => 'Aibreán',
-            'May' => 'Bealtaine',
-            'June' => 'Meitheamh',
-            'July' => 'Iúil',
-            'August' => 'Lúnasa',
-            'September' => 'Meán Fómhair',
-            'October' => 'Deireadh Fómhair',
-            'November' => 'Samhain',
-            'December' => 'Nollaig'
-        )
-    );
-
-    # $english_month = '';
-    # $english_day = '';
-    # $irish_day = '';
-    # $irish_month = '';
-
-    # $month = preg_replace('/(,.*)/', '', $the_date);
-    # $day = preg_replace('/(^.*, | [0-9].*$)/', '', $the_date);
-
-    # $the_date = str_replace($english_day, day_to_irish($english_day), $the_date);
-    # $the_date = str_replace($english_month, month_to_irish($english_month), $the_date);
-
-    return $the_date;
-}
-
 /**
  * Rewrite Search URL Cleanly
  * -----------------------------------------------------------------------------
