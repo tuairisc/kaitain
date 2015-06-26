@@ -36,7 +36,7 @@ class tuairisc_popular extends WP_Widget {
     public function __construct() {
         parent::__construct(
             __('tuairisc_popular', TTD),
-            __('Tuairisc\'s Popular Posts', TTD),
+            __('Tuairisc: Popular Posts', TTD),
             array(
                 'description' => __('An ordered list of popular Tuairisc posts sorted by view count.', TTD),
             )
@@ -53,7 +53,7 @@ class tuairisc_popular extends WP_Widget {
         $instance = wp_parse_args($instance, $defaults);
 
         $options = array(
-            // Post duration options.
+            // Post duration options. Range (days) and label.
             '36500' => 'All Time',
             '365' => 'This Year',
             '28' => 'This Month',
@@ -85,23 +85,23 @@ class tuairisc_popular extends WP_Widget {
         </script>
         
         <p>
-            <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Title:', TTD); ?></label><br />
+            <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', TTD); ?></label><br />
             <input id="<?php printf($this->get_field_id('widget_title')); ?>" name="<?php printf($this->get_field_name('widget_title')); ?>" value="<?php printf($instance['widget_title']); ?>" type="text" class="widefat" />
         </p>
         <p>
-            <label for="<?php printf($this->get_field_id('elapsed_days')); ?>"><?php _e('Since:', TTD); ?></label><br />
+            <label for="<?php printf($this->get_field_id('elapsed_days')); ?>"><?php _e('Show most viewed posts for:', TTD); ?></label><br />
             <select id="<?php printf($this->get_field_id('elapsed_days')); ?>" name="<?php printf($this->get_field_name('elapsed_days')); ?>">
                 <?php foreach ($options as $key => $value) {
-                    printf('<option value="%s">%s</option>', $key, $value);
+                    printf('<option value="%d">%s</option>', $key, $value);
                 }  ?>
             </select>
         </p>
         <p>
-            <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Posts To Display:', TTD); ?></label><br />
+            <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', TTD); ?></label><br />
             <select id="<?php printf($this->get_field_id('max_posts')); ?>" name="<?php printf($this->get_field_name('max_posts')); ?>">
-                <?php for ($i = 1; $i <= 10; $i++) : ?>
-                    <option value="<?php printf($i); ?>"><?php printf($i); ?></option>
-                <?php endfor; ?>
+                <?php for ($i = 1; $i <= $defaults['max_posts']; $i++) {
+                    printf('<option value="%d">%d</option>', $i, $i);
+                } ?>
             </select>
         </p>
         <?php
@@ -140,8 +140,8 @@ class tuairisc_popular extends WP_Widget {
             'post_type' => 'post',
             'meta_key' => $key, 
             'orderby' => 'meta_value_num',
-            'posts_per_page' => $instance['max_posts'],
-            'order' => 'ASC',
+            'numberposts' => $instance['max_posts'],
+            'order' => 'DESC',
             'date_query' => array(
                 'after' => $start_date->format('Y-m-d'),
                 'before' => date('Y-m-d'),
@@ -154,9 +154,10 @@ class tuairisc_popular extends WP_Widget {
             printf($defaults['before_title'] . apply_filters('widget_title', $instance['widget_title']) . $defaults['after_title']);
         }
 
-        printf('<div class="popular-widget">');
+        printf('<div class="popular-widget tuairisc-post-widget">');
 
         foreach ($popular_posts as $popular) {
+            printf('<hr>');
             printf('<ul>');
             printf('<li>%s</li>', $popular->post_title);
             printf('<li>%s</li>', get_post_image($popular->ID));
