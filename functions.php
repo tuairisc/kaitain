@@ -170,7 +170,7 @@ $google_fonts = array(
 
 $theme_javascript = array(
     'google-analytics' => THEME_JS . 'analytics.js',
-    'functions' => THEME_JS . 'functions.min.js'
+    'functions' => THEME_JS . 'functions.js'
 );
 
 $theme_styles = array(
@@ -255,24 +255,16 @@ function google_font_url($fonts) {
 /** 
  * Load Theme JavaScript
  * -----------------------------------------------------------------------------
- * Load all theme JavaScript. It will jQuery into the footer instead of the header.
- * 
- * @link    http://biostall.com/how-to-load-jquery-in-the-footer-of-a-wordpress-website 
  */
 
-function load_theme_scripts() {
+function tuairisc_scripts() {
     global $theme_javascript;
 
-    if (!is_admin()) {
-        wp_deregister_script('jquery');
-        wp_register_script('jquery', '/wp-includes/js/jquery/jquery.js', false, '1.11.1', true);
-        wp_enqueue_script('jquery');
-    }
-
     foreach ($theme_javascript as $name => $script) {
-        if (WP_DEBUG) {
-            // Load unminified versions while debugging.
-            $script = str_replace('.min', '', $script);
+        if (!WP_DEBUG) {
+            // Instead load minified version if you aren't debugging.
+            $script = str_replace(THEME_JS, THEME_JS . 'min/', $script);
+            $script = str_replace('.js', '.min.js', $script);
         }
 
         wp_enqueue_script($name, $script, array('jquery'), THEME_VERSION, true);
@@ -285,7 +277,7 @@ function load_theme_scripts() {
  * Load all theme CSS.
  */
 
-function load_theme_styles() {
+function tuairisc_styles() {
     global $theme_styles, $google_fonts;
 
     foreach ($theme_styles as $name => $style) {
@@ -296,6 +288,18 @@ function load_theme_styles() {
         wp_register_style('google-fonts', google_font_url($google_fonts));
         wp_enqueue_style('google-fonts');
     }
+}
+
+/*
+ * Load Site JS in Footer
+ * -----------------------------------------------------------------------------
+ * @link http://www.kevinleary.net/move-javascript-bottom-wordpress/
+ */
+
+function clean_header() {
+    remove_action('wp_head', 'wp_print_scripts');
+    remove_action('wp_head', 'wp_print_head_scripts', 9);
+    remove_action('wp_head', 'wp_enqueue_scripts', 1);
 }
 
 /*
@@ -697,9 +701,9 @@ if (!isset($content_width)) {
 }
 
 // Enqueue all scripts and stylesheets.
-add_action('wp_enqueue_scripts', 'load_theme_styles');
-add_action('wp_enqueue_scripts', 'load_theme_scripts');
-add_action('admin_enqueue_scripts', 'admin_styles');
+add_action('wp_enqueue_scripts', 'tuairisc_styles');
+add_action('wp_enqueue_scripts', 'tuairisc_scripts');
+// add_action('admin_enqueue_scripts', 'admin_styles');
 
 // Remove the "Generate by WordPress x.y.x" tag from the header.
 remove_action('wp_head', 'wp_generator');
@@ -720,6 +724,9 @@ add_action('comment_form_after_fields', 'wrap_comment_fields_after');
 
 // Register widget areas.
 add_action('widgets_init', 'register_widget_areas');
+
+// Load all site JS in footer.
+add_action('wp_enqueue_scripts', 'clean_header');
 
 /**
  * Filters 
