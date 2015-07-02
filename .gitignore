@@ -2,14 +2,22 @@
 # Sublime Text config files
 #################
 
-# STFP and other plugins
 sftp-config.json
 
+#################
 # Sass and CSS
+#################
+
 .sass-cache/
 sass/.sass-cache/
 main.css
 main.css.map
+
+#################
+## JavaScript
+#################
+
+*.min.js
 
 #################
 ## jQuery Library
