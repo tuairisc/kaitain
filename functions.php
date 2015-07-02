@@ -106,6 +106,14 @@ add_option('article_i_image', array(
 ),'', true);
 
 /**
+ * Featured and Sticky Post Keys
+ * -----------------------------------------------------------------------------
+ */
+
+add_option('tuairisc_sticky_post_id', 0);
+add_option('tuairisc_feature_post_key', 'tuairisc_is_featured_post');
+
+/**
  *  Other Variables
  * -----------------------------------------------------------------------------
  */
@@ -148,6 +156,7 @@ add_option('tuairisc_favicons', array(
 include(THEME_INCLUDES . 'social-meta/social-meta.php');
 include(THEME_INCLUDES . 'get-the-image/get-the-image.php');
 include(THEME_INCLUDES . 'wp-custom-post-type-class/src/CPT.php');
+include(THEME_INCLUDES . 'post-meta-box.php');
 
 /**
  * Theme Widgets
@@ -280,7 +289,7 @@ function tuairisc_scripts() {
     foreach ($conditional_scripts as $name => $script) {
         $path = $script[0];
         $condition = $script[1];
-    
+
         wp_enqueue_script($name, $path, array(), THEME_VERSION, false);
         wp_script_add_data($name, 'conditional', $condition);
     }
