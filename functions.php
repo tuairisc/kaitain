@@ -110,8 +110,13 @@ add_option('article_i_image', array(
  * -----------------------------------------------------------------------------
  */
 
-add_option('tuairisc_sticky_post_id', 0);
+add_option('tuairisc_sticky_post', array(
+    'id' => 0,
+    'expires' => 0
+), '', true);
+
 add_option('tuairisc_feature_post_key', 'tuairisc_is_featured_post');
+delete_option('tuairisc_sticky_post_id');
 
 /**
  *  Other Variables
@@ -335,10 +340,6 @@ function clean_header() {
  */
 
 function admin_styles($hook) { 
-    if ($hook !== 'widgets.php') {
-        return false;
-    }
-
     wp_enqueue_style('tuairisc-admin', THEME_CSS . 'admin.css');
 }
 
@@ -727,7 +728,7 @@ if (!isset($content_width)) {
 // Enqueue all scripts and stylesheets.
 add_action('wp_enqueue_scripts', 'tuairisc_styles');
 add_action('wp_enqueue_scripts', 'tuairisc_scripts');
-// add_action('admin_enqueue_scripts', 'admin_styles');
+add_action('admin_enqueue_scripts', 'admin_styles');
 
 // Remove the "Generate by WordPress x.y.x" tag from the header.
 remove_action('wp_head', 'wp_generator');
