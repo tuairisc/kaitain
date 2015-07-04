@@ -55,25 +55,147 @@ function tuairisc_meta_box() {
 function meta_box_content($post) {
     global $nonce;
     wp_nonce_field($nonce['action'], $nonce['name']);
+        
+    $is_sticky = '';
+    $sticky_duration = '';
 
-    $meta_key = get_option('tuairisc_feature_post_key');
-    $is_sticky = (get_option('tuairisc_sticky_post_id') === $post->ID) ? 'checked' : '';
-    $is_featured = (get_post_meta($post->ID, $meta_key, true)) ? 'checked' : '';
+    $is_featured = (get_post_meta($post->ID, $post_meta, true)) ? 'checked' : '';
+
+    $is_feautred = get_post_meta($post->ID, get_option('tuairisc_feature_post_key'), true);
+    $sticky_option = get_option('tuairisc_sticky_post');
+
+    if ($sticky_option['id'] === $post->ID) {
+        $is_sticky = 'checked';
+        $sticky_duration = $sticky_option['duration'];
+    }
+
+    if ($is_fetured) {
+        $is_featured = 'checkced';
+    }
+
     ?>
+    <p>
+        <?php _e('Featured posts are displayed on the website\'s homepage in the lead articles widget', TTD); ?>
+    </p>
 
     <ul>
         <li>
-            <input id="tuairisc-featured-check" name="featured" type="checkbox" <?php printf($is_featured); ?>>
-            <label for="tuairic-featured-check"><?php _e('Feature Post', TTD); ?></label>
+            <input id="meta-tuairisc-featured" name="featured" type="checkbox" <?php printf($is_featured); ?>>
+            <label for="meta-tuairisc-featured"><?php _e('Feature Post', TTD); ?></label>
         </li>
-        <li>
-            <input id="tuairisc-sticky-check" name="sticky" type="checkbox" <?php printf($is_sticky); ?>>
-            <label for="tuairisc-sticky-check"><?php _e('Sticky Post', TTD); ?></label>
+        <li class="stickycheck">
+            <input id="meta-tuairisc-sticky" name="sticky" type="checkbox" <?php printf($is_sticky); ?>>
+            <label for="meta-tuairis-sticky"><?php _e('Sticky Post', TTD); ?></label>
+        </li>
+        <li class="stickyinfo">
+            <label for="meta-tuairis-sticky-duration"><?php _e('Until', TTD); ?></label>
+            <input id="expiry-hour" name="hour" type="text" min="00" max="23" minlength="2" maxlength="2" size="2" value="00"> :
+            <input id="expiry-minute" type="text" min="00" max="59" minlength="2" maxlength="2" size="2" value="00">
+        </li>
+        <li class="stickyinfo">
+            on <select id="expiry-day" name="day"></select> / <select id="expiry-month" name="month"></select> / <select id="expiry-year" name="year"></select>
         </li>
     </ul>
-    <p>
-        <?php _e('A sticky post will remain in the top position on the front page until another post is set to replace it.', TTD); ?>
+    <p class="stickyinfo" id="meta-tuairisc-sticky-info">
+        <em><?php _e('A sticky post will remain in the top position on the front page until either the set time passes, or another post is set to replace it.', TTD); ?></em>
     </p>
+    <script>
+        var inputs = {
+            featured: {
+                check: '#meta-tuairisc-featured',
+                type: '.stickycheck'
+            },
+            sticky: {
+                check: '#meta-tuairisc-sticky',
+                type: '.stickyinfo'
+            },
+            time: {
+                hour: '#expiry-hour',
+                minute: '#expiry-minute'
+            },
+            date: {
+                day: '#expiry-day',
+                month: '#expiry-month',
+                year: '#expiry-year'
+            }
+        }
+
+        /*
+         * Toggle Element if Box Checked
+         * ---------------------------------------------------------------------
+         * @param   object      element         Target element.
+         * @param   object      checkbox        Checkbox.
+         */
+
+        var toggle = function(element, checkbox) {
+            if (jQuery(checkbox).is(':checked')) {
+                jQuery(element).show(); 
+            } else {
+                jQuery(element).hide();
+            }
+        }
+
+        /*
+         * Days in Months
+         * ---------------------------------------------------------------------
+         * @param   int     year
+         * @param   int     month
+         * @return  int                         Days in month.
+         */
+
+        function daysInMonth(year, month) {
+            return new Date(year, month, 0).getDate();
+        }
+
+        function selectDays(element, count) {
+            
+        }
+
+        function addOption(element, value, text) {
+            jQuery(element).append('<option value="' + value + '">' + text + '</option>');    
+        }
+
+        function selectMonths(element) {
+            var months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+
+            jQuery(element).empty();
+            
+            jQuery.each(months, function(i, v) {
+                addOption(this, i, v);
+            });
+        }
+
+        function selectYears(element, year, padding) {
+            jQuery(element).empty() 
+        }
+
+        selectMonths(inputs.date.month);
+
+        /*
+         * Toggle Shit
+         * ---------------------------------------------------------------------
+         */
+
+        jQuery(function() {
+            toggle(inputs.sticky.type, inputs.sticky.check); 
+            toggle(inputs.featured.type, inputs.featured.check); 
+        });
+        
+        jQuery(inputs.sticky.check).on('click load', function() {
+            toggle(inputs.sticky.type, this); 
+        });
+
+        jQuery(inputs.featured.check).on('click load', function() {
+            toggle(inputs.featured.type, this); 
+        });
+
+        jQuery(inputs.date.month).add(inputs.date.year).on('change load', function() {
+            console.log('I TUCK FITTIES');
+        });
+    </script>
 
     <?php
 }
@@ -88,7 +210,7 @@ function meta_box_content($post) {
 
 function update_meta_box($post_id) {
     global $nonce;
-    $meta_key = get_option('tuairisc_feature_post_key');
+    $post_meta = get_option('tuairisc_feature_post_key');
     
     if (!ctype_alnum($_POST[$nonce['name']]) || !isset($_POST[$nonce['name']])) {
         return;
@@ -106,11 +228,7 @@ function update_meta_box($post_id) {
         return;
     }
 
-    if (isset($_POST['sticky'])) {
-        update_option('tuairisc_sticky_post_id', $post_id);
-    }
-
-    update_post_meta($post_id, $meta_key, $_POST['featured']);
+    update_post_meta($post_id, $post_meta, $_POST['featured']);
 }
 
 /*
