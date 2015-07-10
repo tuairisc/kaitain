@@ -187,6 +187,10 @@ $theme_javascript = array(
     'functions' => THEME_JS . 'functions.js'
 );
 
+$theme_admin_javascript = array(
+    'post-meta-box' => array('post.php', THEME_JS . 'meta-box.js')
+);
+
 $conditional_scripts = array(
     'html5-shiv' => array(
         THEME_URL . '/node_modules/html5shiv/dist/html5shiv.min.js',
@@ -319,19 +323,21 @@ function tuairisc_styles() {
     }
 }
 
-/*
+/**
  * Load Site JS in Footer
  * -----------------------------------------------------------------------------
  * @link http://www.kevinleary.net/move-javascript-bottom-wordpress/
  */
 
 function clean_header() {
+    if (!is_admin()) {
     remove_action('wp_head', 'wp_print_scripts');
     remove_action('wp_head', 'wp_print_head_scripts', 9);
     remove_action('wp_head', 'wp_enqueue_scripts', 1);
+    }
 }
 
-/*
+/**
  * Load Administration Stylesheet
  * -----------------------------------------------------------------------------
  * Custom styling for theme elements on the admin side.
@@ -341,6 +347,26 @@ function clean_header() {
 
 function admin_styles($hook) { 
     wp_enqueue_style('tuairisc-admin', THEME_CSS . 'admin.css');
+}
+
+/**
+ * Load Administration Scripts
+ * -----------------------------------------------------------------------------
+ * Custom styling for theme elements on the admin side.
+ * 
+ * @param   string      $hook       The current admin page.
+ */
+
+function admin_scripts($hook) { 
+    global $theme_admin_javascript;
+
+    foreach ($theme_admin_javascript as $name => $script) {
+        if ($script[0] && $hook !== $script[0]) {
+            continue;
+        }
+        
+        wp_enqueue_script($name, $script[1], array('jquery'), THEME_VERSION, true);
+    }
 }
 
 /**
@@ -729,6 +755,7 @@ if (!isset($content_width)) {
 add_action('wp_enqueue_scripts', 'tuairisc_styles');
 add_action('wp_enqueue_scripts', 'tuairisc_scripts');
 add_action('admin_enqueue_scripts', 'admin_styles');
+add_action('admin_enqueue_scripts', 'admin_scripts');
 
 // Remove the "Generate by WordPress x.y.x" tag from the header.
 remove_action('wp_head', 'wp_generator');
