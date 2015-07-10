@@ -32,7 +32,7 @@ $nonce = array(
     'name' => 'tuairisc_meta_box_nonce'
 );
 
-/*
+/**
  * Add Post Editor Meta Box
  * -----------------------------------------------------------------------------
  */
@@ -46,7 +46,7 @@ function tuairisc_meta_box() {
     );
 }
 
-/*
+/**
  * Add Post Editor Meta Box
  * -----------------------------------------------------------------------------
  * @param   object      $post           Post object.
@@ -93,114 +93,17 @@ function meta_box_content($post) {
             <input id="expiry-minute" type="text" min="00" max="59" minlength="2" maxlength="2" size="2" value="00">
         </li>
         <li class="stickyinfo">
-            on <select id="expiry-day" name="day"></select> / <select id="expiry-month" name="month"></select> / <select id="expiry-year" name="year"></select>
+            on <select id="expiry-day" name="day"></select><select id="expiry-month" name="month"></select><select id="expiry-year" name="year"></select>
         </li>
     </ul>
     <p class="stickyinfo" id="meta-tuairisc-sticky-info">
         <em><?php _e('A sticky post will remain in the top position on the front page until either the set time passes, or another post is set to replace it.', TTD); ?></em>
-    </p>
-    <script>
-        var inputs = {
-            featured: {
-                check: '#meta-tuairisc-featured',
-                type: '.stickycheck'
-            },
-            sticky: {
-                check: '#meta-tuairisc-sticky',
-                type: '.stickyinfo'
-            },
-            time: {
-                hour: '#expiry-hour',
-                minute: '#expiry-minute'
-            },
-            date: {
-                day: '#expiry-day',
-                month: '#expiry-month',
-                year: '#expiry-year'
-            }
-        }
-
-        /*
-         * Toggle Element if Box Checked
-         * ---------------------------------------------------------------------
-         * @param   object      element         Target element.
-         * @param   object      checkbox        Checkbox.
-         */
-
-        var toggle = function(element, checkbox) {
-            if (jQuery(checkbox).is(':checked')) {
-                jQuery(element).show(); 
-            } else {
-                jQuery(element).hide();
-            }
-        }
-
-        /*
-         * Days in Months
-         * ---------------------------------------------------------------------
-         * @param   int     year
-         * @param   int     month
-         * @return  int                         Days in month.
-         */
-
-        function daysInMonth(year, month) {
-            return new Date(year, month, 0).getDate();
-        }
-
-        function selectDays(element, count) {
-            
-        }
-
-        function addOption(element, value, text) {
-            jQuery(element).append('<option value="' + value + '">' + text + '</option>');    
-        }
-
-        function selectMonths(element) {
-            var months = [
-                'January', 'February', 'March', 'April', 'May', 'June',
-                'July', 'August', 'September', 'October', 'November', 'December'
-            ];
-
-            jQuery(element).empty();
-            
-            jQuery.each(months, function(i, v) {
-                addOption(this, i, v);
-            });
-        }
-
-        function selectYears(element, year, padding) {
-            jQuery(element).empty() 
-        }
-
-        selectMonths(inputs.date.month);
-
-        /*
-         * Toggle Shit
-         * ---------------------------------------------------------------------
-         */
-
-        jQuery(function() {
-            toggle(inputs.sticky.type, inputs.sticky.check); 
-            toggle(inputs.featured.type, inputs.featured.check); 
-        });
-        
-        jQuery(inputs.sticky.check).on('click load', function() {
-            toggle(inputs.sticky.type, this); 
-        });
-
-        jQuery(inputs.featured.check).on('click load', function() {
-            toggle(inputs.featured.type, this); 
-        });
-
-        jQuery(inputs.date.month).add(inputs.date.year).on('change load', function() {
-            console.log('I TUCK FITTIES');
-        });
-    </script>
+   </p>
 
     <?php
 }
 
-/*
+/**
  * Update Featured Post Meta
  * -----------------------------------------------------------------------------
  * Validate /ALL/ the things!
@@ -231,7 +134,7 @@ function update_meta_box($post_id) {
     update_post_meta($post_id, $post_meta, $_POST['featured']);
 }
 
-/*
+/**
  * Update Post Meta Box
  * -----------------------------------------------------------------------------
  */
