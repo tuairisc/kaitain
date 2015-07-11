@@ -73,6 +73,11 @@ var inputs = {
 /**
  * Toggle Element if Box Checked
  * ---------------------------------------------------------------------
+ * There are two levels of toggle:
+ * 
+ * 1. Post is featured, yes/no.
+ * 2. Post is sticky too, yes/no.
+ *
  * @param   object      element         Target element.
  * @param   object      checkbox        Checkbox.
  */
@@ -101,13 +106,22 @@ function daysInMonth(year, month) {
  * Add Option to Select
  * ---------------------------------------------------------------------
  * @param   object      element         DOM select element. 
- * @param   string      value           Element for the option.
+ * @param   string      value           Value for a given option.
  * @param   string      text            Text for the option.       
  */
 
 function addOption(element, value, text) {
     jQuery(element).append('<option value="' + value + '">' + text + '</option>');    
 }
+
+/**
+ * Add Option to Select
+ * ---------------------------------------------------------------------
+ * Re-set old value of option/select after the number of selects was changed.
+ * 
+ * @param   object      element         DOM select element. 
+ * @param   string      value           Value for a given option.
+ */
 
 function resetValue(element, value) {
     if (value && jQuery(element).children('option[value=' + value + ']').length > 0) {
@@ -119,7 +133,7 @@ function resetValue(element, value) {
  * Populate Days Select
  * ---------------------------------------------------------------------
  * @param   int         year            Current or target year.
- * @param   int         month           Current or target month.
+ * @param   int/string  month           Current or target month.
  */
 
 var daysSelect = function(year, month) {
@@ -133,12 +147,15 @@ var daysSelect = function(year, month) {
     year = parseInt(year) || dates.year;
 
     if (month && typeof month === 'string') {
+        /* Month can come in as string. If string, get the number of the
+         * month from the indexes in months. */
         month = months.indexOf(month);
     } else {
         month = dates.month;
     }
 
     if (year == dates.year && month == dates.month) {
+        // If month and year are current, use current day of month.
         days.start = dates.day;
     }
 
@@ -165,6 +182,7 @@ var monthsSelect = function(year) {
     year = parseInt(year) || dates.year;
 
     if (year === dates.year) {
+        // If current year, eliminate months past.
         sMonths = sMonths.filter(function(v, i) {
             if (i >= dates.month) {
                 return v;
