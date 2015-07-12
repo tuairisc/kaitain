@@ -25,97 +25,115 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
-'use strict';
-
-/*
+/**
  * Dates
  * -----------------------------------------------------------------------------
+ * Current year, month, day and calendar year as Bearla.
  */
 
+// Widget date will be set by WordPress.
 var date = new Date();
+var expiry;
 
-var dates = {
+date = {
     year: date.getFullYear(),
     month: date.getMonth(),
-    day: date.getDate()
+    day: date.getDate(),
+    hour: date.getHours(),
+    minute: date.getMinutes(),
+    calendar: [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ],
+    daysInMonth: function(year, month) {
+        // Return days in given month.
+        return new Date(year, month, 0).getDate();
+    }
 };
 
-var months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-];
+if (tuairiscMetaInfo.sticky) {
+    var expiry = new Date(tuairiscMetaInfo.expiry * 1000);
 
-/*
+    console.log(expiry);
+
+    expiry = {
+        year: expiry.getFullYear(),
+        month: expiry.getMonth(),
+        day: expiry.getDate(),
+        hour: expiry.getHours(),
+        minute: expiry.getMinutes(),
+    };
+} else {
+    expiry = date;
+}
+
+/**
  * Inputs
  * -----------------------------------------------------------------------------
+ * Checkbox inputs for featured post and whether to sticky it too.
+ * Options for expiry: minute, hour, day, month and year.
+ * Classes for the sticky checkbox, and sticky expiry information.
  */
 
-var inputs = {
-    featured: {
-        check: '#meta-tuairisc-featured',
-        type: '.stickycheck'
+var input = {
+    checkbox: {
+        featured: '#meta-tuairisc-featured',
+        sticky: '#meta-tuairisc-sticky'
     },
-    sticky: {
-        check: '#meta-tuairisc-sticky',
-        type: '.stickyinfo'
-    },
-    time: {
+    select: {
+        day: '#expiry-day',
+        month: '#expiry-month',
+        year: '#expiry-year',
         hour: '#expiry-hour',
         minute: '#expiry-minute'
     },
-    date: {
-        day: '#expiry-day',
-        month: '#expiry-month',
-        year: '#expiry-year'
+    info: {
+        check: '.stickycheck',
+        expiry: '.expiryinfo'
     }
 };
+
+/**
+ * Setup Checkboxes
+ * -----------------------------------------------------------------------------
+ */
+
+jQuery(input.checkbox.featured).prop('checked', tuairiscMetaInfo.featured);
+jQuery(input.checkbox.sticky).prop('checked', tuairiscMetaInfo.sticky);
 
 /**
  * Toggle Element if Box Checked
  * ---------------------------------------------------------------------
- * There are two levels of toggle:
- * 
- * 1. Post is featured, yes/no.
- * 2. Post is sticky too, yes/no.
- *
  * @param   object      element         Target element.
  * @param   object      checkbox        Checkbox.
  */
 
-var toggle = function(element, checkbox) {
-    if (jQuery(checkbox).is(':checked')) {
-        jQuery(element).show(); 
+jQuery.fn.stickyCheckToggle = function() {
+    var allBoxesChecked = [].every.call(arguments, function(v) {
+        return (jQuery(v).is('input') && jQuery(v).prop('checked'));
+    });
+
+    if (allBoxesChecked) {
+        jQuery(this).show();
     } else {
-        jQuery(element).hide();
+        jQuery(this).hide();
     }
-}
+};
 
 /**
- * Days in Months
- * ---------------------------------------------------------------------
- * @param   int     year
- * @param   int     month
- * @return  int                         Days in month.
- */
-
-function daysInMonth(year, month) {
-    return new Date(year, month, 0).getDate();
-}
-
-/**
- * Add Option to Select
+ * Generate Option HTML
  * ---------------------------------------------------------------------
  * @param   object      element         DOM select element. 
  * @param   string      value           Value for a given option.
  * @param   string      text            Text for the option.       
  */
 
-function addOption(element, value, text) {
-    jQuery(element).append('<option value="' + value + '">' + text + '</option>');    
+Array.prototype.addOptionHtml = function(value, text) {
+    this.push('<option value="' + value + '">' + text + '</option>');    
 }
 
 /**
- * Add Option to Select
+ * Reset Select Selected Option
  * ---------------------------------------------------------------------
  * Re-set old value of option/select after the number of selects was changed.
  * 
@@ -123,102 +141,163 @@ function addOption(element, value, text) {
  * @param   string      value           Value for a given option.
  */
 
-function resetValue(element, value) {
-    if (value && jQuery(element).children('option[value=' + value + ']').length > 0) {
-        jQuery(element).val(value);
+jQuery.fn.setSelectedOption = function(value) {
+    if (value && this.children('option[value=' + value + ']').length > 0) {
+        this.val(value);
+    }
+}
+    
+/*
+ * Reset Select
+ * -----------------------------------------------------------------------------
+ * Empty it, append text, and set selected value.
+ */
+
+jQuery.fn.reset = function(options, value) {
+    this.empty().append(options);
+
+    if (value) {
+        // Yearly input doesn't care about old value.
+        this.setSelectedOption(value);
     }
 }
 
 /**
- * Populate Days Select
+ * Option Update Wrapper
+ * ---------------------------------------------------------------------
+ * Generic wrapper for option update. Case the supplied time period
+ * and pass arguments along to the correct function.
+ */
+
+jQuery.fn.update = function() {
+    var type = arguments[0];
+    [].shift.apply(arguments);
+
+    switch (type) {
+        case 'year': yearOptionUpdate.apply(this, arguments); break;
+        case 'month': monthOptionUpdate.apply(this, arguments); break;
+        case 'day': dayOptionUpdate.apply(this, arguments); break;
+        case 'hour': hourOptionUpdate.apply(this, arguments); break;
+        case 'minute': minuteOptionUpdate.apply(this, arguments); break;
+        default: break;
+    }
+}
+
+/**
+ * Populate Yearly Select Options
+ * ---------------------------------------------------------------------
+ * @param   int     padding         Years to pad forward from this one.
+ * @param   object  element         DOM element.
+ */
+
+function yearOptionUpdate(padding, year) {
+    padding = padding || 5;
+    year = parseInt(year) || date.year;
+
+    var options = [];
+    var value = jQuery(this).val() || year;
+
+    var years = {
+        start: year,
+        end: year + padding
+    }
+
+    if (years.start > date.year) {
+        years.start -= (year - date.year);
+    }
+
+    for (var i = years.start; i <= years.end; i++) {
+        options.addOptionHtml(i, i); 
+    }
+
+    this.reset(options, value);
+}
+
+/**
+ * Populate Monthly Select Options
+ * ---------------------------------------------------------------------
+ * @param   int         year            Current or target year.
+ */
+
+function monthOptionUpdate(year, month) {
+    year = parseInt(year) || date.year;
+    month = parseInt(month) || date.month;
+
+    var options = [];
+    var value = jQuery(this).val() || month;
+    
+    jQuery.each(date.calendar, function(i, v) {
+        if (year === date.year && i < date.month) {
+            return true;
+        }
+            
+        options.addOptionHtml(i, v);
+    });
+
+    this.reset(options, value);
+}
+
+/**
+ * Populate Daily Select Options
  * ---------------------------------------------------------------------
  * @param   int         year            Current or target year.
  * @param   int/string  month           Current or target month.
  */
 
-var daysSelect = function(year, month) {
-    var value = jQuery(inputs.date.day).val();
+function dayOptionUpdate(year, month, day) {
+    year = parseInt(year) || date.year;
+    month = parseInt(month) || date.month;
+    day = parseInt(day) || date.day;
+
+    var value = jQuery(this).val() || day;
+    var options = [];
 
     var days = {
         start: 1,
         end: 0
     };
-    
-    year = parseInt(year) || dates.year;
 
-    if (month && typeof month === 'string') {
-        /* Month can come in as string. If string, get the number of the
-         * month from the indexes in months. */
-        month = months.indexOf(month);
-    } else {
-        month = dates.month;
-    }
-
-    if (year == dates.year && month == dates.month) {
+    if (year == date.year && month == date.month) {
         // If month and year are current, use current day of month.
-        days.start = dates.day;
+        days.start = date.day;
     }
 
-    days.end = daysInMonth(year, ++month);
-    jQuery(inputs.date.day).empty();
+    /* Month returned is 0, 1, 2, ... 
+     * Month needed is 1, 2, 3, ... */
+    month++;
+
+    days.end = date.daysInMonth(year, month);
 
     for (var i = days.start; i <= days.end; i++) {
-        addOption(inputs.date.day, i, i);
+        options.addOptionHtml(i, i);
     }
 
-    resetValue(inputs.date.day, value);
+    this.reset(options, value);
+}
+
+
+/**
+ * Populate Hourly Select Options
+ * ---------------------------------------------------------------------
+ * @param   int         hour            Current or target hour.
+ */
+
+function hourOptionUpdate(hour) {
+    hour = hour || date.hour;
+    hour = (hour < 10) ? '0' + hour : hour;
+    this.val(hour);
 }
 
 /**
- * Populate Months Select
+ * Populate Minute Select Options
  * ---------------------------------------------------------------------
- * @param   int         year            Current or target year.
+ * @param   int         minute            Current or target minute.
  */
 
-var monthsSelect = function(year) {
-    var value = jQuery(inputs.date.month).val();
-    var sMonths = months;
-
-    year = parseInt(year) || dates.year;
-
-    if (year === dates.year) {
-        // If current year, eliminate months past.
-        sMonths = sMonths.filter(function(v, i) {
-            if (i >= dates.month) {
-                return v;
-            }
-        });
-    }
-
-    jQuery(inputs.date.month).empty();
-    
-    jQuery.each(sMonths, function(i, v) {
-        addOption(inputs.date.month, v, v);
-    });
-
-    resetValue(inputs.date.month, value);
-    daysSelect(year, jQuery(inputs.date.month).val());
-}
-
-/**
- * Populate Years Select
- * ---------------------------------------------------------------------
- * @param   int     padding         Years to pad forward from this one.
- */
-
-var yearsSelect = function(padding) {
-    padding = padding || 5;
-
-    var years = {
-        start: date.getFullYear(),
-        end: date.getFullYear() + padding
-    }
-
-    jQuery(inputs.date.year).empty();
-    
-    for (var i = years.start; i <= years.end; i++) {
-        addOption(inputs.date.year, i, i); 
-    }
+function minuteOptionUpdate(minute) {
+    minute = minute || date.minute;
+    minute = (minute < 10) ? '0' + minute : minute;
+    this.val(minute);
 }
 
 /**
@@ -226,26 +305,44 @@ var yearsSelect = function(padding) {
  * ---------------------------------------------------------------------
  */
 
-jQuery(function() {
-    toggle(inputs.sticky.type, inputs.sticky.check); 
-    toggle(inputs.featured.type, inputs.featured.check); 
+// Setup input fields.
+jQuery(input.select.year).update('year', 5, expiry.year);
+jQuery(input.select.month).update('month', expiry.year, expiry.month);
+jQuery(input.select.day).update('day', expiry.year, expiry.month, expiry.day);
+jQuery(input.select.hour).update('hour', expiry.hour);
+jQuery(input.select.minute).update('minute', expiry.minute);
 
-    yearsSelect(5);
-    monthsSelect(jQuery(inputs.date.year).val());
+// Setup checkboxes.
+jQuery(input.info.check).stickyCheckToggle(input.checkbox.featured);
+jQuery(input.info.expiry).stickyCheckToggle(input.checkbox.featured, input.checkbox.sticky);
+
+// Input field change handlers.
+jQuery(input.select.year).on('change', function() {
+    var year = jQuery(this).val();
+    var month = jQuery(input.select.month).val();
+    
+    jQuery(input.select.month).update('month', year);
+    jQuery(input.select.day).update('day', year, month);
 });
 
-jQuery(inputs.sticky.check).on('click', function() {
-    toggle(inputs.sticky.type, this); 
+jQuery(input.select.month).on('change', function() {
+    var year = jQuery(input.select.year).val();
+    var month = jQuery(this).val();
+
+    jQuery(input.select.day).update('day', year, month);
 });
 
-jQuery(inputs.featured.check).on('click', function() {
-    toggle(inputs.featured.type, this); 
+// Checkbox state change handlers.
+jQuery(input.checkbox.featured).on('change', function() {
+    // Uncheck "sticky" if post isn't featured.
+    if (!jQuery(this).prop('checked')) {
+        jQuery(input.checkbox.sticky).prop('checked', false);
+        jQuery(input.info.expiry).stickyCheckToggle(this, input.checkbox.sticky);
+    }
+
+    jQuery(input.info.check).stickyCheckToggle(this);
 });
 
-jQuery(inputs.date.year).on('change', function() {
-    monthsSelect(jQuery(inputs.date.year).val());
-});
-
-jQuery(inputs.date.month).on('change', function() {
-    monthsSelect(jQuery(inputs.date.year).val());
+jQuery(input.checkbox.sticky).on('change', function() { 
+    jQuery(input.info.expiry).stickyCheckToggle(this, input.checkbox.featured);
 });
