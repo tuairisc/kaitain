@@ -116,7 +116,6 @@ add_option('tuairisc_sticky_post', array(
 ), '', true);
 
 add_option('tuairisc_feature_post_key', 'tuairisc_is_featured_post');
-delete_option('tuairisc_sticky_post_id');
 
 /**
  *  Other Variables
