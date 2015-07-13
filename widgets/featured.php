@@ -183,7 +183,10 @@ class tuairisc_featured extends WP_Widget {
 
         <?php
 
-        printf($defaults['after_widget']);
+        if (!empty($defaults['after_widget'])) {
+            printf($defaults['after_widget']);
+        }
+
         wp_reset_postdata();
     }
 }
