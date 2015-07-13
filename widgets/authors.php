@@ -104,18 +104,18 @@ class tuairisc_authors extends WP_Widget {
     /**
      * Widget Update
      * -------------------------------------------------------------------------
-     * @param  array    $new_args       New args variables.
-     * @param  array    $old_args       Old args variables.
-     * @return array    $args           New args settings.
+     * @param  array    $new_defaults       New defaults variables.
+     * @param  array    $old_defaults       Old defaults variables.
+     * @return array    $defaults           New defaults settings.
      */
 
-    function update($new_args, $old_args) {
-        $args = array();
+    function update($new_defaults, $old_defaults) {
+        $defaults = array();
 
-        $args['widget_title'] = filter_var($new_args['widget_title'], FILTER_SANITIZE_STRIPPED);
-        $args['author_list'] = $new_args['author_list'];
+        $defaults['widget_title'] = filter_var($new_defaults['widget_title'], FILTER_SANITIZE_STRIPPED);
+        $defaults['author_list'] = $new_defaults['author_list'];
 
-        return $args;
+        return $defaults;
     }
 
     /**
@@ -125,15 +125,15 @@ class tuairisc_authors extends WP_Widget {
      * @param array     $instance         Widget instance arguments.
      */
 
-    public function widget($args, $instance) {
+    public function widget($defaults, $instance) {
         $title = apply_filters('widget_title', $instance['widget_title']);
 
         $author_query = get_users(array(
             'include' => $instance['author_list'],
         ));
 
-        if (!empty($args['before_widget'])) {
-            printf('%s', $before_widget);
+        if (!empty($defaults['before_widget'])) {
+            printf('%s', $defaults['before_widget']);
         }
 
         ?>
@@ -152,7 +152,11 @@ class tuairisc_authors extends WP_Widget {
 
         <?php
 
-        printf('%', $after_widget);
+        if (!empty($defaults['after_widget'])) {
+            printf('%s', $defaults['after_widget']);
+        }
+
+        wp_reset_postdata();
     }
 }
 

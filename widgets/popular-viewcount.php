@@ -168,7 +168,11 @@ class tuairisc_popular extends WP_Widget {
         }
 
         printf('</div>');
-        printf($defaults['after_widget']);
+
+        if (!empty($defaults['after_widget'])) {
+            printf($defaults['after_widget']);
+        }
+
         wp_reset_postdata();
     }
 }
