@@ -66,10 +66,14 @@ function is_sticky_post($post) {
 /**
  * Reset Sticky Post
  * -----------------------------------------------------------------------------
+ * Remove sticky post by setting post ID to -1, which doesn't exist.
  */
 
 function reset_sticky() {
-    // TODO
+    update_option('tuairisc_sticky_post', array(
+        'id' => -1,
+        'expires', 0
+    ));
 }
 
 /**
@@ -77,28 +81,22 @@ function reset_sticky() {
  * -----------------------------------------------------------------------------
  */
 
-function update_sticky() {
-    // TODO
+function update_sticky($post = null, $expiry = null) {
+    $post = get_post($post);
+
+    if (!$post) {
+        return false;
+    }
+
+    if (get_post_status($post->ID) !== 'publish') {
+        return false;
+    }
+
+    update_option('tuairisc_sticky_post', array(
+        'id' => $post->ID,
+        'expires' => $expiry
+    ));
 }
-
-/**
- * Validate Sticky
- * -----------------------------------------------------------------------------
- */
-
-// update_sticky_post($post, $expiry_date) {
-//     $debug = true;
-//     $post = get_post($post);
-// 
-//     if (!$post) {
-//         return;
-//     }
-// 
-//     update_option('tuairisc_sticky_post', array(
-//         'id' => $post_id,
-//         'expires' => $expiry
-//     ));
-// }
 
 /**
  * Add Post Editor Meta Box
@@ -133,7 +131,6 @@ function meta_box_content($post) {
             $sticky = get_option('tuairisc_sticky_post');
             $expiry_date = $sticky['expires'];
         } else if (is_sticky_post($post) && sticky_expired()) {
-            // TODO?
             reset_sticky();
         }
     }
@@ -153,11 +150,11 @@ function meta_box_content($post) {
 
     <ul>
         <li>
-            <input id="meta-tuairisc-featured" name="featured" type="checkbox">
+            <input id="meta-tuairisc-featured" name="make-featured" type="checkbox">
             <label for="meta-tuairisc-featured"><?php _e('Feature Post', TTD); ?></label>
         </li>
         <li class="stickycheck">
-            <input id="meta-tuairisc-sticky" name="sticky" type="checkbox">
+            <input id="meta-tuairisc-sticky" name="make-sticky" type="checkbox">
             <label for="meta-tuairisc-sticky"><?php _e('Sticky Post', TTD); ?></label>
         </li>
         <li class="expiryinfo">
@@ -203,25 +200,34 @@ function update_meta_box($post_id) {
         return;
     }
 
-    $is_featured = $_POST['featured'];
-    $is_sticky = $_POST['sticky'];
-    $sticky_id = get_option('tuairisc_sticky_post')['id'];
+    $make_featured = false;
+    $make_sticky = false;
 
+    if (isset($_POST['make-featured'])) {
+        $make_featured = ($_POST['make-featured'] === 'on');     
+    }
+
+    if (isset($_POST['make-sticky'])) {
+        $make_sticky = ($_POST['make-sticky'] === 'on');     
+    }
+
+    // Sanitiize date input and mkdate.
     $year = filter_var($_POST['year'], FILTER_SANITIZE_NUMBER_INT);
     $month = filter_var($_POST['month'], FILTER_SANITIZE_NUMBER_INT); $month++;
     $day = filter_var($_POST['day'], FILTER_SANITIZE_NUMBER_INT);
     $hour = filter_var($_POST['hour'], FILTER_SANITIZE_NUMBER_INT);
     $minute = filter_var($_POST['minute'], FILTER_SANITIZE_NUMBER_INT);
-
     $expiry = mktime($hour, $minute, 0, $month, $day, $year);
 
-    update_post_meta($post_id, get_option('tuairisc_feature_post_key'), $is_featured);
-    // update_sticky_post($post_id, $expiry, $is_sticky);
+    // Update meta.
+    update_post_meta($post_id, get_option('tuairisc_feature_post_key'), $make_featured);
 
-    update_option('tuairisc_sticky_post', array(
-        'id' => $post_id,
-        'expires' => $expiry
-    ));
+    // Validate sticky and set it, if required.
+    if ($make_featured && $make_sticky && $expiry) {
+        update_sticky($post_id, $expiry);
+    } else if (!$make_sticky && is_sticky_post($post_id)) {
+        reset_sticky();
+    }
 }
 
 /**
