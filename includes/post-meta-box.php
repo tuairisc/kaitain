@@ -39,7 +39,7 @@ $nonce = array(
  * @return  bool                            Post has expired, true/false.
  */
 
-function sticky_expired() {
+function tuairisc_sticky_expired() {
     $expiry_date = get_option('tuairisc_sticky_post')['expires'];
     $current_date = (int) date('U');
     return ($current_date >= $expiry_date);
@@ -52,7 +52,7 @@ function sticky_expired() {
  * @return  bool                            Post ID is sticky, true/false.
  */
 
-function is_sticky_post($post) {
+function is_tuairisc_sticky_post($post) {
     $post = get_post($post);
 
     if (!$post) {
@@ -69,7 +69,7 @@ function is_sticky_post($post) {
  * Remove sticky post by setting post ID to -1, which doesn't exist.
  */
 
-function reset_sticky() {
+function reset_tuairisc_sticky() {
     update_option('tuairisc_sticky_post', array(
         'id' => -1,
         'expires', 0
@@ -81,7 +81,7 @@ function reset_sticky() {
  * -----------------------------------------------------------------------------
  */
 
-function update_sticky($post = null, $expiry = null) {
+function update_tuairisc_sticky($post = null, $expiry = null) {
     $post = get_post($post);
 
     if (!$post) {
@@ -126,12 +126,12 @@ function meta_box_content($post) {
     $is_sticky = false;
 
     if ($is_featured) {
-        if (is_sticky_post($post) && !sticky_expired()) {
+        if (is_tuairisc_sticky_post($post) && !tuairisc_sticky_expired()) {
             $is_sticky = !$is_sticky;
             $sticky = get_option('tuairisc_sticky_post');
             $expiry_date = $sticky['expires'];
-        } else if (is_sticky_post($post) && sticky_expired()) {
-            reset_sticky();
+        } else if (is_tuairisc_sticky_post($post) && tuairisc_sticky_expired()) {
+            reset_tuairisc_sticky();
         }
     }
     ?>
@@ -224,9 +224,9 @@ function update_meta_box($post_id) {
 
     // Validate sticky and set it, if required.
     if ($make_featured && $make_sticky && $expiry) {
-        update_sticky($post_id, $expiry);
-    } else if (!$make_sticky && is_sticky_post($post_id)) {
-        reset_sticky();
+        update_tuairisc_sticky($post_id, $expiry);
+    } else if (!$make_sticky && is_tuairisc_sticky_post($post_id)) {
+        reset_tuairisc_sticky();
     }
 }
 
