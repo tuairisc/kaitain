@@ -169,6 +169,7 @@ include(THEME_INCLUDES . 'post-meta-box.php');
 
 include(THEME_WIDGETS . 'popular-viewcount.php');
 include(THEME_WIDGETS . 'recent-posts.php');
+include(THEME_WIDGETS . 'authors.php');
 
 /** 
  * Fonts, Styles and Scripts
