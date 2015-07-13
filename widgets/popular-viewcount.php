@@ -50,6 +50,13 @@ class tuairisc_popular extends WP_Widget {
      */
 
     public function form($instance) {
+        $defaults = array(
+            // Widget defaults.
+            'widget_title' => __('Most Viewed', TTD),
+            'max_posts' => 10,
+            'elapsed_days' => '7'
+        );
+
         $instance = wp_parse_args($instance, $defaults);
 
         $options = array(
@@ -66,13 +73,7 @@ class tuairisc_popular extends WP_Widget {
             '2' => 'Two Days',
             '1' => 'Today',
         );
-
-        $defaults = array(
-            // Widget defaults.
-            'widget_title' => __('Most Viewed', TTD),
-            'max_posts' => 10,
-            'elapsed_days' => '7'
-        ); ?>
+        ?>
 
         <script>
             // This jQuery is easier for me to parse and debug than a mess of inline PHP.

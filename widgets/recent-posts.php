@@ -50,14 +50,14 @@ class tuairisc_recent extends WP_Widget {
      */
 
     public function form($instance) {
-        $instance = wp_parse_args($instance, $defaults);
-
         $defaults = array(
             // Widget defaults.
             'widget_title' => __('Recent Posts', TTD),
             'max_posts' => 10,
             'category' => 0
         ); 
+
+        $instance = wp_parse_args($instance, $defaults);
         
         $categories = get_categories(array(
             'type' => 'post',

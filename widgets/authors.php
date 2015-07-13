@@ -152,9 +152,7 @@ class tuairisc_authors extends WP_Widget {
 
         <?php
 
-        if (!empty($args['after_widget'])) {
-            printf('%', $after_widget);
-        }
+        printf('%', $after_widget);
     }
 }
 
