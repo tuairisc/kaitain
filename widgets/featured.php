@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Recent Website Posts
+ * Featured Posts Widget
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Tuairisc.ie
@@ -27,7 +27,7 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
-class tuairisc_recent extends WP_Widget {
+class tuairisc_featured extends WP_Widget {
     /**
      * Widget Constructor
      * -------------------------------------------------------------------------
@@ -35,10 +35,10 @@ class tuairisc_recent extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('tuairisc_recent', TTD),
-            __('Tuairisc: Recent Posts', TTD),
+            __('tuairisc_featured', TTD),
+            __('Tuairisc: Featured and Sticky Posts', TTD),
             array(
-                'description' => __('An ordered list of recent Tuairisc posts sorted by date. Choose from either one category, or all categories.', TTD),
+                'description' => __('The frontpiece of the home page: An ordered list of featured and sticky posts.', TTD),
             )
         );
     }
@@ -50,58 +50,34 @@ class tuairisc_recent extends WP_Widget {
      */
 
     public function form($instance) {
-        $instance = wp_parse_args($instance, $defaults);
-
         $defaults = array(
             // Widget defaults.
-            'widget_title' => __('Recent Posts', TTD),
-            'max_posts' => 10,
-            'category' => 0
+            'number_posts' => 4,
+            'show_sticky' => true
         ); 
-        
-        $categories = get_categories(array(
-            'type' => 'post',
-            'orderby' => 'name',
-            'order' => 'ASC',
-            'pad_counts' => 'false'
-        ));
+
+        $instance = wp_parse_args($instance, $defaults);
         
         ?>
 
+        <ul>
+            <li>
+                <input id="<?php printf($this->get_field_id('show_sticky')); ?>" type="checkbox" name="<?php printf($this->get_field_name('show_sticky')); ?>" />
+                <label for="<?php printf($this->get_field_id('show_sticky')); ?>"><?php _e('Show Sticky Post', TTD); ?></label>
+            </li>
+            <li>
+                <label for="<?php printf($this->get_field_id('number_posts')); ?>"><?php _e('Number of posts to display: ', TTD); ?></label>
+                <select id="<?php printf($this->get_field_id('number_posts')); ?>" name="<?php printf($this->get_field_name('number_posts')); ?>">
+                    <?php for ($i = 0; $i < 16; $i += 4) {
+                        printf('<option value="%d">%d</option>', $i, $i);
+                    }  ?>
+                </select>
+            </li>
+        </ul>
         <script>
-            // This jQuery is easier for me to parse and debug than a mess of inline PHP.
-            jQuery(function($) {
-                // Set 'category' selected option.
-                $('<?php printf('#%s', $this->get_field_id("category")); ?>').val('<?php printf($instance["category"]); ?>');
-                // Set 'max_posts' selected option. 
-                $('<?php printf('#%s', $this->get_field_id("max_posts")); ?>').val('<?php printf($instance["max_posts"]); ?>');
-            });
+            jQuery('#<?php printf($this->get_field_id('number_posts')); ?>').val(<?php printf($instance['number_posts']); ?>);
+            jQuery('#<?php printf($this->get_field_id('show_sticky')); ?>').prop('checked', <?php printf($instance['show_sticky'] ? 'true' : 'false'); ?>);
         </script>
-        
-        <p>
-            <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', TTD); ?></label><br />
-            <input id="<?php printf($this->get_field_id('widget_title')); ?>" name="<?php printf($this->get_field_name('widget_title')); ?>" value="<?php printf($instance['widget_title']); ?>" type="text" class="widefat" />
-        </p>
-
-        <p>
-            <label for="<?php printf($this->get_field_id('category')); ?>"><?php _e('Category:', TTD); ?></label><br />
-            <select id="<?php printf($this->get_field_id('category')); ?>" name="<?php printf($this->get_field_name('category')); ?>">
-                <option value="0"><?php _e('All', TTD); ?></option>
-
-                <?php foreach ($categories as $category) {
-                    // Iterate through all caterories. 
-                    printf('<option value="%d">%s (%d)</option>', $category->cat_ID, $category->cat_name, $category->category_count);
-                }  ?>
-            </select>
-        </p>
-        <p>
-            <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', TTD); ?></label><br />
-            <select id="<?php printf($this->get_field_id('max_posts')); ?>" name="<?php printf($this->get_field_name('max_posts')); ?>">
-                <?php for ($i = 1; $i <= $defaults['max_posts']; $i++) {
-                    printf('<option value="%d">%d</option>', $i, $i);
-                } ?>
-            </select>
-        </p>
 
         <?php
     }
@@ -116,9 +92,8 @@ class tuairisc_recent extends WP_Widget {
 
     function update($new_args, $old_args) {
         $args = array();
-        $args['widget_title'] = strip_tags($new_args['widget_title']);
-        $args['max_posts'] = $new_args['max_posts'];
-        $args['category'] = $new_args['category'];
+        $args['show_sticky'] = ($new_args['show_sticky'] === 'on');
+        $args['number_posts'] = $new_args['number_posts'];
         return $args;
     }
 
@@ -130,43 +105,89 @@ class tuairisc_recent extends WP_Widget {
      */
 
     public function widget($defaults, $instance) {
-        $key = get_option('tuairisc_view_counter_key');
-        $title = apply_filters('widget_title', $instance['widget_title']);
-        
-        $recent_posts = array(
-            'post_type' => 'post',
-            'numberposts' => $instance['max_posts'],
-            'order' => 'DESC',
-        );
+        $featured_key = get_option('tuairisc_featured_post_key');
+        $sticky_id = -1;
+        $featured_posts = array();
 
-        if ($instance['category']) {
-            $recent_posts['category'] = $instance['category'];
+        if ($instance['show_sticky']) {
+            /* If sticky was checked, see if it is available to use. If so, use it.
+             * Otherwise grab the last featured post. */
+            if (tuairisc_sticky_expired()) {
+                reset_tuairisc_sticky();
+
+                $featured_posts[] = get_posts(array(
+                    'numberposts' => 1,
+                    'meta_key' => $featured_key,
+                    'post_status' => 'publish',
+                    'meta_value' => 'on',
+                    'orderby' => 'date',
+                    'order' => 'DESC'
+                ));
+            } else {
+                $featured_posts[] = get_post(get_option('tuairisc_sticky_post')['id']);
+            }
+
+            $sticky_id = $featured_posts[0]->ID;
         }
 
-        $recent_posts = get_posts($recent_posts);
+        if ((int) $instance['number_posts'] > 0) {
+            // Grab top n featured posts if n > 0
+            $other_featured_posts = get_posts(array(
+                'numberposts' => $instance['number_posts'],
+                'meta_key' => $featured_key,
+                'post_status' => 'publish',
+                'meta_value' => true,
+                'orderby' => 'date',
+                'order' => 'DESC',
+                'exclude' => array($sticky_id)
+            ));
+
+            $featured_posts = array_merge($featured_posts, $other_featured_posts);
+        }
+
+        if ($instance['show_sticky'] && sizeof($featured_posts) < $instance['number_posts'] + 1 || sizeof($featured_posts) < $instance['number_posts']) {
+            // Fetch recent posts as filler if there is a shortfall.
+            $filler_posts = get_posts(array(
+                'numberposts' => $instance['number_posts'] - sizeof($featured_posts),
+                'order' => 'DESC',
+                'orderby' => 'date',
+                'meta_key' => $featured_key,
+                'meta_compare' => '!=',
+                'meta_value' => true,
+                'post_status' => 'publish',
+            ));
+
+            $featured_posts = array_merge($featured_posts, $filler_posts);
+        }
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
-            printf($defaults['before_title'] . apply_filters('widget_title', $instance['widget_title']) . $defaults['after_title']);
         }
+        ?>
 
-        printf('<div class="recent-widget tuairisc-post-widget">');
+        <div class="recent-widget tuairisc-post-widget">
+            <br /><br />
+            <?php foreach ($featured_posts as $index => $post) {
+                if ($instance['show_sticky'] && $index === 0) {
+                    printf('Lead Post: <br />');
+                    printf($post->ID);
+                    printf('<br />-----<br />');
+                } else {
+                    // Loop other posts normally.
+                    printf($post->ID);
+                    printf('<br />');
+                }
+            } ?>
+            <br /><br />
+        </div>
 
-        foreach ($recent_posts as $recent) {
-            printf('<hr>');
-            printf('<ul>');
-            printf('<li>%s</li>', $recent->post_title);
-            printf('<li>%s</li>', get_post_image($recent->ID));
-            printf('<li>%s</li>', get_the_date_strftime(get_option('tuairisc_strftime_date_format'), $recent->ID));
-            printf('</ul>');
-        }
+        <?php
 
-        printf('</div>');
         printf($defaults['after_widget']);
         wp_reset_postdata();
     }
 }
 
-add_action('widgets_init', create_function('', 'return register_widget("tuairisc_recent");'));
+add_action('widgets_init', create_function('', 'return register_widget("tuairisc_featured");'));
 
 ?>
