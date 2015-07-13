@@ -85,16 +85,16 @@ class tuairisc_featured extends WP_Widget {
     /**
      * Widget Update
      * -------------------------------------------------------------------------
-     * @param  array    $new_args       New args variables.
-     * @param  array    $old_args       Old args variables.
-     * @return array    $args           New args settings.
+     * @param  array    $new_default       New default variables.
+     * @param  array    $old_default       Old default variables.
+     * @return array    $default           New widget settings.
      */
 
     function update($new_args, $old_args) {
-        $args = array();
-        $args['show_sticky'] = ($new_args['show_sticky'] === 'on');
-        $args['number_posts'] = $new_args['number_posts'];
-        return $args;
+        $defaults = array();
+        $defaults['show_sticky'] = ($new_args['show_sticky'] === 'on');
+        $defaults['number_posts'] = $new_args['number_posts'];
+        return $defaults;
     }
 
     /**

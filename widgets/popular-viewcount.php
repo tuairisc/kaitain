@@ -84,44 +84,51 @@ class tuairisc_popular extends WP_Widget {
                 $('<?php printf('#%s', $this->get_field_id("max_posts")); ?>').val('<?php printf($instance["max_posts"]); ?>');
             });
         </script>
-        
-        <p>
-            <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', TTD); ?></label><br />
-            <input id="<?php printf($this->get_field_id('widget_title')); ?>" name="<?php printf($this->get_field_name('widget_title')); ?>" value="<?php printf($instance['widget_title']); ?>" type="text" class="widefat" />
-        </p>
-        <p>
-            <label for="<?php printf($this->get_field_id('elapsed_days')); ?>"><?php _e('Show most viewed posts for:', TTD); ?></label><br />
-            <select id="<?php printf($this->get_field_id('elapsed_days')); ?>" name="<?php printf($this->get_field_name('elapsed_days')); ?>">
-                <?php foreach ($options as $key => $value) {
-                    printf('<option value="%d">%s</option>', $key, $value);
-                }  ?>
-            </select>
-        </p>
-        <p>
-            <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', TTD); ?></label><br />
-            <select id="<?php printf($this->get_field_id('max_posts')); ?>" name="<?php printf($this->get_field_name('max_posts')); ?>">
-                <?php for ($i = 1; $i <= $defaults['max_posts']; $i++) {
-                    printf('<option value="%d">%d</option>', $i, $i);
-                } ?>
-            </select>
-        </p>
+        <ul>
+            <li>
+                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', TTD); ?></label>
+            </li>
+            <li>
+                <input id="<?php printf($this->get_field_id('widget_title')); ?>" name="<?php printf($this->get_field_name('widget_title')); ?>" value="<?php printf($instance['widget_title']); ?>" type="text" class="widefat" />
+            </li>
+            <li>
+                <label for="<?php printf($this->get_field_id('elapsed_days')); ?>"><?php _e('Show most viewed posts for:', TTD); ?></label>
+            </li>
+            <li>
+                <select id="<?php printf($this->get_field_id('elapsed_days')); ?>" name="<?php printf($this->get_field_name('elapsed_days')); ?>">
+                    <?php foreach ($options as $key => $value) {
+                        printf('<option value="%d">%s</option>', $key, $value);
+                    }  ?>
+                </select>
+            </li>
+            <li>
+                <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', TTD); ?></label>
+            </li>
+            <li>
+                <select id="<?php printf($this->get_field_id('max_posts')); ?>" name="<?php printf($this->get_field_name('max_posts')); ?>">
+                    <?php for ($i = 1; $i <= $defaults['max_posts']; $i++) {
+                        printf('<option value="%d">%d</option>', $i, $i);
+                    } ?>
+                </select>
+            </li>
+        </ul>
         <?php
     }
 
     /**
      * Widget Update
      * -------------------------------------------------------------------------
-     * @param  array    $new_args       New args variables.
-     * @param  array    $old_args       Old args variables.
-     * @return array    $args           New args settings.
+     * @param  array    $new_default       New default variables.
+     * @param  array    $old_default       Old default variables.
+     * @return array    $default           New widget settings.
      */
 
     function update($new_args, $old_args) {
-        $args = array();
-        $args['widget_title'] = strip_tags($new_args['widget_title']);
-        $args['max_posts'] = $new_args['max_posts'];
-        $args['elapsed_days'] = $new_args['elapsed_days'];
-        return $args;
+        $defaults = array();
+        $defaults['widget_title'] = strip_tags($new_args['widget_title']);
+        $defaults['max_posts'] = $new_args['max_posts'];
+        $defaults['elapsed_days'] = $new_args['elapsed_days'];
+        return $defaults;
     }
 
     /**

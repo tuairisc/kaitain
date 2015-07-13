@@ -104,9 +104,9 @@ class tuairisc_authors extends WP_Widget {
     /**
      * Widget Update
      * -------------------------------------------------------------------------
-     * @param  array    $new_defaults       New defaults variables.
-     * @param  array    $old_defaults       Old defaults variables.
-     * @return array    $defaults           New defaults settings.
+     * @param  array    $new_default       New default variables.
+     * @param  array    $old_default       Old default variables.
+     * @return array    $default           New widget settings.
      */
 
     function update($new_defaults, $old_defaults) {
