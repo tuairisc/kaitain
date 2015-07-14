@@ -70,7 +70,7 @@ class tuairisc_authors extends WP_Widget {
                 <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Title:', TTD); ?></label>
             </li>
             <li>
-                <?php printf('<input id="%s" name="%s" value="%s" type="text" class="widefat" />', $this->get_field_id('widget_title'), $this->get_field_name('widget_title'), $instance['widget_title']); ?>
+                <?php printf('<input id="%s" name="%s" value="%s" type="text" />', $this->get_field_id('widget_title'), $this->get_field_name('widget_title'), $instance['widget_title']); ?>
             </li>
 
             <?php for ($i = 0; $i < 4;  $i++) :
@@ -94,7 +94,7 @@ class tuairisc_authors extends WP_Widget {
             var users = <?php printf(json_encode($instance['author_list'])); ?>;
             
             jQuery.each(users, function(i, v) {
-                jQuery('#widget-tuairisc_authors-3-author_list-' + i).val(v);
+                jQuery('<?php printf('#%s-', $this->get_field_id('author_list')); ?>' + i).val(v);
             });
         </script>
 
@@ -111,6 +111,8 @@ class tuairisc_authors extends WP_Widget {
 
     function update($new_defaults, $old_defaults) {
         $defaults = array();
+
+        error_log(print_r($new_defaults, true));
 
         $defaults['widget_title'] = filter_var($new_defaults['widget_title'], FILTER_SANITIZE_STRIPPED);
         $defaults['author_list'] = $new_defaults['author_list'];
@@ -142,7 +144,7 @@ class tuairisc_authors extends WP_Widget {
         <div class="tuairisc-author-list">
             <?php foreach ($author_query as $author) : ?>
                 <div class="tuairisc-author">
-                    <?php printf('<div class="%s" style="background-image: url(\'%s\');">', get_avatar_url_only($author->ID), $author->display_name); ?>
+                    <?php printf('<div class="%s" style="background-image: url(\'%s\');">', 'asdad', $author->display_name); ?>
                         <a href="<?php printf(get_author_posts_url($author->ID)); ?>"></a>
                     </div>
                     <h6><a href="<?php printf(get_author_posts_url($author->ID)); ?>"><?php printf($author->display_name); ?></a></h6>
