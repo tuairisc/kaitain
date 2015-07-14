@@ -172,6 +172,7 @@ include(THEME_WIDGETS . 'recent-posts.php');
 include(THEME_WIDGETS . 'authors.php');
 include(THEME_WIDGETS . 'featured-articles.php');
 include(THEME_WIDGETS . 'featured-category.php');
+include(THEME_WIDGETS . 'home-category.php');
 
 /** 
  * Fonts, Styles and Scripts
@@ -221,14 +222,9 @@ $widget_defaults = array(
 
 $widget_areas = array(
     array(
-        'name' => __('Front Page Main', TTD),
+        'name' => __('Front Page', TTD),
         'description' => __('Front page widget area.', TTD),
-        'id' => 'widgets-front-page-main'
-    ),
-    array(
-        'name' => __('Front Page Footer', TTD),
-        'description' => __('Front page footer widget area.', TTD),
-        'id' => 'widgets-front-page-footer'
+        'id' => 'widgets-front-page'
     ),
     array(
         'name' => __('Sidebar', TTD),
