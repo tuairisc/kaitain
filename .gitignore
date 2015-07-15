@@ -7,7 +7,7 @@ sftp-config.json
 # Node
 #################
 
-.node_modules/
+node_modules/
 
 #################
 # Sass and CSS
