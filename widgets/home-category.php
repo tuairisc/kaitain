@@ -64,9 +64,10 @@ function category_widget_output($cats, $show_title = true, $numberposts = 4)  {
 
         printf('<div class="category-widget-display">');
 
-        foreach ($category_posts as $cat_post) {
-            printf('<article %s id="%s">', get_post_class($current_post === 0 ? 'left' : ''), get_the_ID);
-            printf('<br />');
+        foreach ($category_posts as $cat_post) { 
+            $post_classes = implode(' ', get_post_class($current_post === 0 ? 'left' : '', $cat_post->ID));
+
+            printf('<article class="%s" id="%s">', $post_classes, $cat_post->ID);
             printf('%d %s<br />', $cat_post->ID, $cat_post->post_title);
             printf('</article>');
 
