@@ -34,7 +34,7 @@ if (have_posts()) {
         the_post();
         get_template_part(PARTIAL_ARTICLES, 'full');
         include_once(THEME_INCLUDES . 'related.php');
-        comments_template();
+        // comments_template();
     }
 } else {
     get_template_part(PARTIAL_ARTICLES, 'missing');
