@@ -65,9 +65,9 @@ define('ASSETS_URL', THEME_URL . '/assets/');
  * templates.
  */
 
-define('THEME_INCLUDES',  THEME_PATH . '/includes/');
-define('THEME_WIDGETS',  THEME_PATH . '/widgets/');
-define('THEME_PARTIALS',  '/partials/');
+define('THEME_INCLUDES', THEME_PATH . '/includes/');
+define('THEME_WIDGETS', THEME_PATH . '/widgets/');
+define('THEME_PARTIALS', '/partials/');
 
 /**
  * Theme Partial Templates
@@ -76,7 +76,7 @@ define('THEME_PARTIALS',  '/partials/');
 
 define('PARTIAL_ARTICLES', THEME_PARTIALS . 'articles/article');
 define('PARTIAL_ARCHIVES', THEME_PARTIALS . 'archives/archive');
-define('PARTIAL_PAGES',    THEME_PARTIALS . 'pages/');
+define('PARTIAL_PAGES', THEME_PARTIALS . 'pages/');
 
 /**
  * Image, CSS and JavaScript Assets
@@ -162,8 +162,8 @@ include(THEME_INCLUDES . 'get-the-image/get-the-image.php');
 include(THEME_INCLUDES . 'wp-custom-post-type-class/src/CPT.php');
 include(THEME_INCLUDES . 'post-meta-box.php');
 
-/**
- * Theme Widgets
+/** 
+ * Widgets
  * -----------------------------------------------------------------------------
  */
 
@@ -174,44 +174,6 @@ include(THEME_WIDGETS . 'featured-articles.php');
 include(THEME_WIDGETS . 'featured-category.php');
 include(THEME_WIDGETS . 'home-category.php');
 
-/** 
- * Fonts, Styles and Scripts
- * -----------------------------------------------------------------------------
- */
-
-$google_fonts = array(
-    /* All Google Fonts to be loaded.
-     * Use format 'Open Sans:300', 'Droid Sans:400'
-     * etc. */
-);
-
-$theme_javascript = array(
-    'google-analytics' => THEME_JS . 'analytics.js',
-    'functions' => THEME_JS . 'functions.js'
-);
-
-$theme_admin_javascript = array(
-    'post-meta-box' => array('post.php', THEME_JS . 'meta-box.js')
-);
-
-$conditional_scripts = array(
-    'html5-shiv' => array(
-        THEME_URL . '/node_modules/html5shiv/dist/html5shiv.min.js',
-        'lte IE 9'
-    )
-);
-
-$theme_styles = array(
-    // Compressed, compiled theme CSS.
-    'main-style' => THEME_CSS . 'main.css',
-    // WordPress style.css. Not really used.
-    'wordpress-style' => THEME_URL . '/style.css',
-);
-
-/** 
- * Widgets
- * -----------------------------------------------------------------------------
- */
 
 $widget_defaults = array(
     'before_widget' => '<div id="%1$s" class="%2$s">',
@@ -251,6 +213,40 @@ $widget_areas = array(
         'description' => __('Footer widget area #4.', TTD),
         'id' => 'widgets-footer-4'
     ),
+);
+
+/** 
+ * Fonts, Styles and Scripts
+ * -----------------------------------------------------------------------------
+ */
+
+$google_fonts = array(
+    /* All Google Fonts to be loaded.
+     * Use format 'Open Sans:300', 'Droid Sans:400'
+     * etc. */
+);
+
+$theme_javascript = array(
+    'google-analytics' => THEME_JS . 'analytics.js',
+    'functions' => THEME_JS . 'functions.js'
+);
+
+$theme_admin_javascript = array(
+    'post-meta-box' => array('post.php', THEME_JS . 'meta-box.js')
+);
+
+$conditional_scripts = array(
+    'html5-shiv' => array(
+        THEME_URL . '/node_modules/html5shiv/dist/html5shiv.min.js',
+        'lte IE 9'
+    )
+);
+
+$theme_styles = array(
+    // Compressed, compiled theme CSS.
+    'main-style' => THEME_CSS . 'main.css',
+    // WordPress style.css. Not really used.
+    'wordpress-style' => THEME_URL . '/style.css',
 );
 
 /**
@@ -413,6 +409,41 @@ function theme_title($title, $sep) {
     }
 
     return $title;
+}
+
+/**
+ * Pagination Post Counter
+ * -----------------------------------------------------------------------------
+ * Fetch and display total post count in format of 'Page 1 of 10'.
+ * This only counts published, public posts; drafts, pages, custom
+ * post types and private posts are all excluded unless you specify
+ * inclusion.
+ * 
+ * @param   int     $page_num       Current page in pagination.
+ * @param   int     $total_results  Total results, for pagination.
+ * @return  string                  The post counter.
+ */
+
+function archive_page_count($echo = false, $page_num = null, $total_results = null) {
+    global $wp_query;
+
+    if (is_null($total_results)) {
+        $total_results = $wp_query->found_posts;
+    }
+
+    if (is_null($page_num)) {
+        $page_num = (get_query_var('paged')) ? get_query_var('paged') : 1;
+    }
+
+    $posts_per_page = get_option('posts_per_page');
+    $total_pages = ceil($total_results / $posts_per_page);
+    $page_count = sprintf(__('Page %s of %s', TTD), $page_num, $total_pages);
+
+    if (!$echo) {
+        return $page_count;
+    }
+
+    printf($page_count);
 }
 
 /**
