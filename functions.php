@@ -157,21 +157,31 @@ add_option('tuairisc_favicons', array(
  * -----------------------------------------------------------------------------
  */
 
+// Open Graph and Twitter Card <head> meta tag links.
 include(THEME_INCLUDES . 'social-meta/social-meta.php');
+// Generate post images of arbitrary size.
 include(THEME_INCLUDES . 'get-the-image/get-the-image.php');
+// Custom post type manager.
 include(THEME_INCLUDES . 'wp-custom-post-type-class/src/CPT.php');
-include(THEME_INCLUDES . 'post-meta-box.php');
+// Featured/Sticky post post.php box.
+include(THEME_INCLUDES . 'featured-edit-box.php');
 
 /** 
  * Widgets
  * -----------------------------------------------------------------------------
  */
 
+// Popular posts, sorted by internally-tracked view count.
 include(THEME_WIDGETS . 'popular-viewcount.php');
+// Recent posts in $foo category.
 include(THEME_WIDGETS . 'recent-posts.php');
+// Link to selected author profiles.
 include(THEME_WIDGETS . 'authors.php');
+// Front page featured and sticky article widget.
 include(THEME_WIDGETS . 'featured-articles.php');
+// Sidebar featured category.
 include(THEME_WIDGETS . 'featured-category.php');
+// Front page category widgets.
 include(THEME_WIDGETS . 'home-category.php');
 
 
