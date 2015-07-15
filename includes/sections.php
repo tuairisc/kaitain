@@ -151,11 +151,11 @@ function setup_sections() {
             case 'single': 
                 // If single, fetch first category.
                 $cat_id = get_the_category($post->ID);
-                $cat_id = find_category_parent_id($cat_id[0]->term_id);
+                $cat_id = category_parent_id($cat_id[0]->term_id);
                 break;
             case 'category':
                 // Fetch category parent ID.
-                $cat_id = find_category_parent_id(get_query_var('cat'));
+                $cat_id = category_parent_id(get_query_var('cat'));
                 break;
             default: 
                 // Everything-*everything*-else is grouped under 'other'. 
@@ -222,16 +222,32 @@ function secondary_section_menu() {
 }
 
 /**
- * Helper Functions
+ * Return ID of Category Children
  * -----------------------------------------------------------------------------
+ * @param   int     $category       ID of category.
  */
 
-function category_children_ids($cat_id) {
-    $categories = get_categories(array('child_of' => $cat_id));
+function category_children_ids($category) {
+    $category = get_category($category);
+
+    if (!$category) {
+        return false;
+    }
+
+    $categories = get_categories(array('child_of' => $category));
+
+    if (!$categories) {
+        return false;
+    }
+
     $children = array();
 
-    foreach($categories as $category) {
-        $children[] = $category->term_id;
+    foreach($categories as $cat) {
+        $children[] = $cat->term_id;
+    }
+
+    if (sizeof($children) === 0) {
+        return false;
     }
 
     return $children;
@@ -379,7 +395,7 @@ function generate_menu_link($object_type = null, $object_id = null) {
  * @return  int     $cat_id         Numeric ID of category's ultimate parent.
  */
 
-function find_category_parent_id($cat_id = null) {
+function category_parent_id($cat_id = null) {
     if (is_null($cat_id) || !is_integer($cat_id) || !term_exists($cat_id, 'category')) {
         return false;
     }
@@ -387,7 +403,7 @@ function find_category_parent_id($cat_id = null) {
     $category = get_category($cat_id); 
 
     if ($category->category_parent) {
-        $cat_id = find_category_parent_id($category->category_parent);
+        $cat_id = category_parent_id($category->category_parent);
     }
 
     return $cat_id;
