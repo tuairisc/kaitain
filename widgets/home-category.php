@@ -27,6 +27,64 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * Category Widget Output
+ * -----------------------------------------------------------------------------
+ * Output the one-left-three right output of the category widget. This is in a 
+ * separate function as it also used in archives.
+ * 
+ * @param   int/array/string        $cats           Categor{y,ies}.
+ * @param   int                     $numberposts    Number of posts to output.
+ */
+
+function category_widget_output($cats, $show_title = true, $numberposts = 4)  {
+    $categories = array();
+    $current_post = 0;
+
+    if (is_int($cats) || is_string($cats)) {
+        $categories[] = intval($cats);
+    } else if (is_array($cats)) {
+        $categories = $cats;
+    } else {
+        return false;
+    }
+
+    printf('<br /><br /><br />');
+
+    foreach($categories as $category) {
+        $category_posts = get_posts(array(
+            'numberposts' => $numberposts,
+            'order' => 'DESC',
+            'category' => $category
+        ));
+        
+        if ($show_title) {
+            printf('<h2>%s</h2>', get_category($category)->cat_name);
+        }
+
+        printf('<div class="category-widget-display">');
+
+        foreach ($category_posts as $cat_post) {
+            printf('<article %s id="%s">', get_post_class($current_post === 0 ? 'left' : ''), get_the_ID);
+            printf('<br />');
+            printf('%d %s<br />', $cat_post->ID, $cat_post->post_title);
+            printf('</article>');
+
+            if ($current_post === 0) {
+                printf('<div class="right">');
+            }
+
+            $current_post++;
+        }
+        
+        $current_post = 0;    
+        printf('</div></div>');
+        printf('<br /><br /><br />');
+    }
+
+    wp_reset_postdata();
+}
+
 class tuairisc_home_category extends WP_Widget {
     /**
      * Widget Constructor
@@ -115,20 +173,11 @@ class tuairisc_home_category extends WP_Widget {
     public function widget($defaults, $instance) {
         $title = apply_filters('widget_title', $instance['widget_title']);
 
-        $author_query = get_users(array(
-            'include' => $instance['author_list'],
-        ));
-
         if (!empty($defaults['before_widget'])) {
             printf('%s', $defaults['before_widget']);
         }
-
-        // TODO: HTML
-        ?>
-
-        <h2><?php printf(apply_filters('widget_title', $instance['widget_title'])); ?></h2>
-
-        <?php
+        
+        category_widget_output($instance['category'], $instance['show_title'], 4);
 
         if (!empty($defaults['after_widget'])) {
             printf('%s', $defaults['after_widget']);
