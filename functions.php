@@ -628,7 +628,7 @@ function set_favicon() {
  * -----------------------------------------------------------------------------
  * This was requested by the client for internal use. I do not consider this to
  * be an objectively reliable means to tally view counters for buisness use, but
- * it is Good Enough for information interior use.
+ * it is Good Enough.
  *
  * @param   int     $post_id        ID of the post.
  */
