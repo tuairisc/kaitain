@@ -51,6 +51,13 @@ function category_widget_output($cats, $show_title = true, $numberposts = 4)  {
 
     printf('<br /><br /><br />');
 
+    /* Double loop:
+     * 1. Loop each supplied category.
+     * 2. For each category, output $numberposts posts.
+     * 
+     * Order of output is 1 left, $numberposts - 1 right.
+     * Left post has an excerpt. */
+
     foreach($categories as $category) {
         $category_posts = get_posts(array(
             'numberposts' => $numberposts,
@@ -69,6 +76,11 @@ function category_widget_output($cats, $show_title = true, $numberposts = 4)  {
 
             printf('<article class="%s" id="%s">', $post_classes, $cat_post->ID);
             printf('%d %s<br />', $cat_post->ID, $cat_post->post_title);
+
+            if ($current_post === 0) {
+                printf('<p>%s</p>', $cat_post->post_excerpt);
+            }
+
             printf('</article>');
 
             if ($current_post === 0) {
