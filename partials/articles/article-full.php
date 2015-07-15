@@ -37,7 +37,6 @@
     </main>
 
     <?php if (is_single()) {
-        get_template_part(THEME_PARTIALS . '/pagination');
         get_template_part(THEME_PARTIALS . 'footer', 'full');
     } ?>
 </article>
