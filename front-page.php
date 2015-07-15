@@ -36,16 +36,10 @@ get_header();
  * Nuacht, Tuairmiocht, Sport, Cultur 
  * 5. Side-by-side category widgets for Saol, Greann, Pobal */
 
-if (is_active_sidebar('widgets-front-page-main')) {
-    dynamic_sidebar('widgets-front-page-main');
+if (is_active_sidebar('widgets-front-page')) {
+    dynamic_sidebar('widgets-front-page');
 } else {
     printf('<h3>%s</h3>', __('Add your main front page widgets FFS!', TTD));
-}
-
-if (is_active_sidebar('widgets-front-page-footer')) {
-    dynamic_sidebar('widgets-front-page-footer');
-} else {
-    printf('<h3>%s</h3>', __('Add your front page footer widgets FFS!', TTD));
 }
 
 get_footer();
