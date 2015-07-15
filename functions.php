@@ -157,6 +157,8 @@ add_option('tuairisc_favicons', array(
  * -----------------------------------------------------------------------------
  */
 
+// Site sections.
+include(THEME_INCLUDES . 'sections.php');
 // Open Graph and Twitter Card <head> meta tag links.
 include(THEME_INCLUDES . 'social-meta/social-meta.php');
 // Generate post images of arbitrary size.
