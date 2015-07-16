@@ -25,206 +25,54 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */ 
 
+$current_section = null;
+
 /**
  * Variables
  * -----------------------------------------------------------------------------
  */
 
-$section_category_ids = array(
+$section_categories = array(
     /* The eight sections of the Tuairisc site, with a ninth fallback class for
      * every other thing that does not fit neatly into these. */
-    191, 154, 155, 156, 157, 159, 187, 158 
+    191 => 'nuacht',
+    154 => 'tuairimiocht',
+    155 => 'sport',
+    156 => 'cultur',
+    157 => 'saol',
+    159 => 'pobal',
+    187 => 'education',
+    158 => 'greann',
+    999 => 'other'
 );
 
 /**
- * CSS Classes 
+ * Get ID of Category's Ultimate Parent
  * -----------------------------------------------------------------------------
- * These are used throughout the entire theme 
+ * The site is sectioned into several parent categories with children and 
+ * grandchildren beneath. Recursively ascend through parent categories until you
+ * hit the top.
+ * 
+ * @param   int     $category     
+ * @return  int     $category         Numeric ID of category's ultimate parent.
  */
 
-// Prefix for all sections, either main or specific.
-define('SECTION_PREFIX', 'section-');
-define('HAS_SECTION_CLASS', 'website-section');
-// Sitewide text and background colour classes to use the current section's trim.
-define('SECTION_TRIM_TEXT', 'section-trim-text');
-define('SECTION_TRIM_TEXT_HOVER', 'section-trim-text-hover');
-define('SECTION_TRIM_BACKGROUND', 'section-trim-background');
-define('SECTION_TRIM_BACKGROUND_HOVER', 'section-trim-background-hover');
-// Suffixes for text and background hovering.
-define('SECTION_SUFFIX_BACKGROUND_HOVER', '-background-hover');
-define('SECTION_SUFFIX_TEXT_HOVER', '-text-hover');
-// Suffix for the fallback section. .section-fallback instead of .section-foo
-define('SECTION_FALLBACK_SUFFIX', 'fallback');
+function category_parent_id($cat_id = null) {
+    $category = get_category($cat_id);
 
-/**
- * Classes
- * -----------------------------------------------------------------------------
- */
-
-/**
- * Sectioneer
- * -----------------------------------------------------------------------------
- * Manage the sections of the site. As of April 27 2015, it is crude in 
- * function and in need of expansion.
- */
-
-class Sectioneer {
-    public $categories;
-    public $size;
-    public $current_set;
-    public $current_id;
-    public $current_slug;
-    public $current_class;
-
-    public function __construct($size = 8) {
-        $this->categories = array();
-        $this->size = $size;
-        $this->current_set = false;
-        $this->current_id = 0;
-        $this->current_slug = '';
-        $this->current_class = '';
+    if ($category->category_parent) {
+        $cat_id = category_parent_id($category->category_parent);
     }
 
-    public function add($id, $slug, $class) {
-        if (count($this->categories) < $this->size) {
-            $this->categories[$id] = array('id' => $id, 'slug' => $slug, 'class' => $class);
-            return current($this->categories);
-        } else {
-            throw new RunTimeException('You\'ve added too many categories!');
-        }
-    }
-
-    public function remove($id) {
-        unset($this->categories, $id);
-        return $this->categories;
-    }
-
-    public function set_current($id = -1) {
-        if (array_key_exists($id, $this->categories)) {
-            $this->current_id = $this->categories[$id]['id'];
-            $this->current_slug = $this->categories[$id]['slug'];
-            $this->current_class = $this->categories[$id]['class'];
-            $this->current_set = true;
-        } else {
-            throw new RunTimeException('Invalid category specified!');
-        }
-    }
-}
-
-if (!is_admin()) {
-    $Sections = new Sectioneer(8);
+    return $cat_id;
 }
 
 /**
- * Functions
+ * Get Category Children IDs
  * -----------------------------------------------------------------------------
- */
-
-/**
- * Set Site Section
- * -----------------------------------------------------------------------------
- */
-
-function setup_sections() {
-    // 1. Determine loop type.
-    // 2. If post or category, get root category ID.
-    // global $post, $section_category_ids, $Sections;
-
-    global $section_category_ids, $Sections;
-
-    $category = 0;
-    $cat_id = 0;
-    $slug = SECTION_FALLBACK_SUFFIX;
-    $class = '';
-    $is_section = true;
-
-    foreach($section_category_ids as $id) {
-        $category = get_category($id);
-        $slug = $category->slug;
-        $class = SECTION_PREFIX . $slug;
-
-        $Sections->add($id, $slug, $class);
-    }
-
-    if (!$Sections->current_set) {
-        switch(get_loop_type()) {
-            case 'single': 
-                // If single, fetch first category.
-                $cat_id = get_the_category($post->ID);
-                $cat_id = category_parent_id($cat_id[0]->term_id);
-                break;
-            case 'category':
-                // Fetch category parent ID.
-                $cat_id = category_parent_id(get_query_var('cat'));
-                break;
-            default: 
-                // Everything-*everything*-else is grouped under 'other'. 
-                $is_section = false;
-                break;
-        }
-
-        if (in_array($cat_id, $section_category_ids) && $is_section) {
-            // Set section to whatever is in the sections array.
-            $category = get_category($cat_id);
-            $slug = $category->slug;
-            $class = SECTION_PREFIX . $slug;
-
-            $Sections->set_current($cat_id);
-        }
-    }
-}
-
-function add_section_class_to_body($classes) {
-    global $Sections;
-
-    if ($Sections->current_set) {
-        $classes[] = $Sections->current_class;
-        $classes[] = HAS_SECTION_CLASS;
-    }
-    
-    return $classes;
-}
-
-/**
- * Generate Primary Section Menu
- * -----------------------------------------------------------------------------
- * Add the primary section menu, based on 
- */
-
-function primary_section_menu() {
-    global $Sections;
-
-    foreach ($Sections->categories as $category) {
-        printf(
-            '<li class="%s%s%s">%s</li>', 
-            ($category['id'] === $Sections->current_id) ? SECTION_TRIM_BACKGROUND : '',
-            ($category['id'] === $Sections->current_id) ? ' ' : '',
-            $category['class'] . SECTION_SUFFIX_BACKGROUND_HOVER,
-            generate_menu_link('category', $category['id'])
-        );
-    }
-}
-
-/**
- * Generate Secondary Section Menu
- * -----------------------------------------------------------------------------
- */
-
-function secondary_section_menu() {
-    global $Sections;
-    $children = category_children_ids($Sections->current_id);
-
-    if (count($children) > 0) {
-        foreach ($children as $child) {
-            printf('<li>%s</li>', generate_menu_link('category', $child));
-        }
-    }
-}
-
-/**
- * Return ID of Category Children
- * -----------------------------------------------------------------------------
- * @param   int     $category       ID of category.
+ * Return array of all category childen categories.
+ *
+ * @param   array    $category       ID of category.
  */
 
 function category_children_ids($category) {
@@ -254,48 +102,54 @@ function category_children_ids($category) {
 }
 
 /**
- * Determine Loop Type
+ * Generate Primary Section Menu
  * -----------------------------------------------------------------------------
- * I was surprised to find WordPress didn't already have just this.
- * 
- * @return  string      $loop_type          Type of current loop.
+ * Add the primary section menu, based on 
  */
 
-function get_loop_type() {
-    global $wp_query; 
-    $loop_type = 'notfound';
+function sections_menu($echo = false) {
+    global $section_categories, $section_id;
+    $menu = array();
 
-    if ($wp_query->is_page) {
-        $loop_type = is_front_page() ? 'front' : 'page';
-    } elseif ($wp_query->is_home) {
-        $loop_type = 'home';
-    } elseif ($wp_query->is_single) {
-        $loop_type = ($wp_query->is_attachment) ? 'attachment' : 'single';
-    } elseif ($wp_query->is_category) {
-        $loop_type = 'category';
-    } elseif ($wp_query->is_tag) {
-        $loop_type = 'tag';
-    } elseif ($wp_query->is_tax) {
-        $loop_type = 'tax';
-    } elseif ($wp_query->is_archive) {
-        if ($wp_query->is_day) {
-            $loop_type = 'day';
-        } elseif ($wp_query->is_month) {
-            $loop_type = 'month';
-        } elseif ($wp_query->is_year) {
-            $loop_type = 'year';
-        } elseif ($wp_query->is_author) {
-            $loop_type = 'author';
-        } else {
-            $loop_type = 'archive';
+    $menu[] = '<ul id="sections-menu">';
+    
+    foreach ($section_categories as $id => $section) {
+           // TODO: Add menu link, with text.
+        if (category_exists($id)) {
+            $category = get_category($id);
+
+            $menu[] = sprintf('<li class="%s">%s</li>',
+               'a',
+               $category->name
+            );
         }
-    } elseif ($wp_query->is_search) {
-        $loop_type = 'search';
-    } elseif ($wp_query->is_404) {
-        $loop_type = 'notfound';
+    }
+    
+    $menu[] = '</ul>';
+
+    $menu = implode('', $menu);
+
+    if (!$echo) {
+        return $menu;
     }
 
-    return $loop_type;
+    printf($menu);
+}
+
+/**
+ * Generate Secondary Section Menu
+ * -----------------------------------------------------------------------------
+ */
+
+function secondary_section_menu() {
+    global $Sections;
+    $children = category_children_ids($Sections->current_id);
+
+    if (count($children) > 0) {
+        foreach ($children as $child) {
+            printf('<li>%s</li>', generate_menu_link('category', $child));
+        }
+    }
 }
 
 /**
@@ -385,28 +239,92 @@ function generate_menu_link($object_type = null, $object_id = null) {
 }
 
 /**
- * Get ID of Category's Ultimate Parent
+ * Get ID of Site Section
  * -----------------------------------------------------------------------------
- * The site is sectioned into several parent categories with children and 
- * grandchildren beneath. Recursively ascend through parent categories until you
- * hit the top.
+ * Get the ID of the section of the site. The site is broken up into sections 
+ * defined by category-one each for major categories, with a final fallback 
+ * section for everything else.
  * 
- * @param   int     $cat_id     
- * @return  int     $cat_id         Numeric ID of category's ultimate parent.
+ * @return  int     $section_id         Numerical ID of section.
  */
 
-function category_parent_id($cat_id = null) {
-    if (is_null($cat_id) || !is_integer($cat_id) || !term_exists($cat_id, 'category')) {
-        return false;
+function get_section_id() {
+    global $section_id;
+
+    if (is_null($section_id)) {
+        $section_id = set_section_id();
     }
 
-    $category = get_category($cat_id); 
+    return $section_id;
+}
 
-    if ($category->category_parent) {
-        $cat_id = category_parent_id($category->category_parent);
+/**
+ * Set ID of Site Section
+ * -----------------------------------------------------------------------------
+ * Get the ID of the section of the site. The site is broken up into sections 
+ * defined by category-one each for major categories, with a final fallback 
+ * section for everything else.
+ * 
+ * @return  int     $section_id         Numerical ID of section.
+ */
+
+function set_site_section() {
+    global $post, $section_categories, $section_id;
+
+    if (is_home() || is_front_page()) {
+        $section_id = 191;
+    } else if (is_category() || is_single()) {
+        if (is_category()) {
+            $category = get_query_var('cat');
+        } else if (is_single()) {
+            $category = get_the_category($post->ID)[0]->cat_ID;
+        }
+
+        $category = category_parent_id($category);
+
+        if (array_key_exists($category, $section_categories)) {
+            $section_id = $category;
+        }
+
+        // Add more sections here if they need to be evaluated.
     }
 
-    return $cat_id;
+    return $section_id;
+}
+
+/**
+ * Get Section Class from Site ID
+ * -----------------------------------------------------------------------------
+ * Each numerically-identified section also has an attached class.
+ * 
+ * @param   bool    $prepend            Prepend class with 'section-'.
+ * @param   int     $section_id         ID of section which needs a class.
+ * @param   string                      Classname for section.
+ */
+
+function get_section_class($prepend = false, $section_id = null) {
+    global $section_categories, $section_id;
+    $section_class = array();
+
+    error_log($section_id);
+
+    if ($prepend) {
+        $section_class[] = 'section-';
+    }
+
+    $section_class[] = $section_categories[$section_id];
+    
+    return implode('', $section_class);
+}
+
+/**
+ * Set Body Classes
+ * -----------------------------------------------------------------------------
+ */
+
+function set_section_classes($classes) {
+    $classes[] = get_section_class(true);
+    return $classes;
 }
 
 /**
@@ -414,7 +332,7 @@ function category_parent_id($cat_id = null) {
  * -----------------------------------------------------------------------------
  */
 
-add_action('wp_head', 'setup_sections');
-add_filter('body_class', 'add_section_class_to_body');
+add_action('wp_head', 'set_site_section');
+add_filter('body_class', 'set_section_classes');
 
 ?>
