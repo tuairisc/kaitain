@@ -88,8 +88,10 @@ if ($page_number < 2) {
 
 if (have_posts()) {
     while (have_posts()) {
-        the_post();
-        get_template_part(PARTIAL_ARTICLES, 'archive');
+        // if (get_the_ID() !== $featured_post_id) {
+            the_post();
+            get_template_part(PARTIAL_ARTICLES, 'archive');
+        // }
     }
 }
 
