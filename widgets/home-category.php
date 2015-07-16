@@ -37,7 +37,7 @@
  * @param   int                     $numberposts    Number of posts to output.
  */
 
-function category_widget_output($cats, $show_title = true, $numberposts = 4)  {
+function category_widget_output($cats, $show_category_name = true, $numberposts = 4)  {
     $categories = array();
     $current_post = 0;
 
@@ -65,7 +65,7 @@ function category_widget_output($cats, $show_title = true, $numberposts = 4)  {
             'category' => $category
         ));
         
-        if ($show_title) {
+        if ($show_category_name) {
             printf('<h2>%s</h2>', get_category($category)->cat_name);
         }
 
@@ -184,13 +184,11 @@ class tuairisc_home_category extends WP_Widget {
      */
 
     public function widget($defaults, $instance) {
-        $title = apply_filters('widget_title', $instance['widget_title']);
-
         if (!empty($defaults['before_widget'])) {
             printf('%s', $defaults['before_widget']);
         }
         
-        category_widget_output($instance['category'], $instance['show_title'], 4);
+        category_widget_output($instance['category'], $instance['show_category_name'], 4);
 
         if (!empty($defaults['after_widget'])) {
             printf('%s', $defaults['after_widget']);
