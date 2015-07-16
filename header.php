@@ -31,18 +31,16 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-    <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
+ <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; ?>
+    php $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; ?>
     <title><?php wp_title('-', true, 'right'); ?></title>
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-    <div id="header">
-        <?php sections_menu(true); ?>
-    </div>
+    <div id="header"></div>
     <div id="site">
         <div id="main" role="main">
             <div id="content">
