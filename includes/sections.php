@@ -77,25 +77,16 @@ function category_parent_id($cat_id = null) {
 
 function category_children_ids($category) {
     $category = get_category($category);
+    $children = array();
 
     if (!$category) {
-        return false;
+        return $children;
     }
 
     $categories = get_categories(array('child_of' => $category));
 
-    if (!$categories) {
-        return false;
-    }
-
-    $children = array();
-
     foreach($categories as $cat) {
         $children[] = $cat->term_id;
-    }
-
-    if (sizeof($children) === 0) {
-        return false;
     }
 
     return $children;
@@ -104,36 +95,63 @@ function category_children_ids($category) {
 /**
  * Generate Primary Section Menu
  * -----------------------------------------------------------------------------
- * Add the primary section menu, based on 
  */
 
-function sections_menu($echo = false) {
+function section_menu($args) {
     global $section_categories, $section_id;
     $menu = array();
 
-    $menu[] = '<ul id="sections-menu">';
-    
-    foreach ($section_categories as $id => $section) {
-           // TODO: Add menu link, with text.
-        if (category_exists($id)) {
-            $category = get_category($id);
+    $defaults = array(
+        'type' => 'primary',
+        'wrap' => 'true',
+        'echo' => true,
+        'menu_classes' => array('section-menu'),
+        'menu_item_class' => 'section-menu-item'
+    );
 
-            $menu[] = sprintf('<li class="%s">%s</li>',
-               'a',
-               $category->name
-            );
-        }
+    $args = wp_parse_args($args, $defaults);
+
+    if (!array_key_exists('id', $args)) {
+        $args['id'] = $args['type'] . '-menu';
+    }
+
+    if ($args['wrap']) {
+        $menu[] = sprintf('<ul class="%s" id="%s">', implode(' ', $args['menu_classes']), $args['id']);
+    }
+
+    if ($args['type'] === 'primary') {
+        $menu[] = generate_primary_menu($args['menu_item_class']);
+    } else {
+        $menu[] = generate_secondary_menu($args['menu_item_class']);
     }
     
-    $menu[] = '</ul>';
+    if ($args['wrap']) {
+        $menu[] = '</ul>';
+    }
 
     $menu = implode('', $menu);
 
-    if (!$echo) {
+    if (!$args['echo']) {
         return $menu;
     }
 
     printf($menu);
+}
+
+function generate_primary_menu($class) {
+    global $section_categories, $section_id;
+
+    foreach ($section_categories as $id => $section) {
+        if (category_exists($id)) {
+            $category = get_category($id);
+
+            // TODO: Add menu link, with text.
+            $menu[] = sprintf('<li class="%s">%s</li>',
+                'a',
+                $category->name
+            );
+        }
+    }
 }
 
 /**
@@ -141,15 +159,17 @@ function sections_menu($echo = false) {
  * -----------------------------------------------------------------------------
  */
 
-function secondary_section_menu() {
-    global $Sections;
-    $children = category_children_ids($Sections->current_id);
+function generate_secondary_menu($echo = false) {
+    global $section_id;
+    $children = category_children_ids($section_id);
 
-    if (count($children) > 0) {
-        foreach ($children as $child) {
-            printf('<li>%s</li>', generate_menu_link('category', $child));
-        }
+    printf('<ul class="section-menu" id="secondary">');
+
+    foreach ($children as $child) {
+        printf('<li>%s</li>', generate_menu_link('category', $child));
     }
+
+    printf('</ul>');
 }
 
 /**
@@ -272,8 +292,10 @@ function set_site_section() {
     global $post, $section_categories, $section_id;
 
     if (is_home() || is_front_page()) {
+        // 1. If home page or main index, default to Nuacht.
         $section_id = 191;
     } else if (is_category() || is_single()) {
+        // 2. Else set categroy by the parent category.
         if (is_category()) {
             $category = get_query_var('cat');
         } else if (is_single()) {
@@ -286,10 +308,20 @@ function set_site_section() {
             $section_id = $category;
         }
 
-        // Add more sections here if they need to be evaluated.
+        // 3. Add more sections here if they need to be evaluated.
     }
+    
+    error_log('a: ' . $section_id);
+}
 
-    return $section_id;
+/**
+ * Set Body Classes
+ * -----------------------------------------------------------------------------
+ */
+
+function set_section_classes($classes) {
+    $classes[] = get_section_class(true);
+    return $classes;
 }
 
 /**
@@ -302,7 +334,7 @@ function set_site_section() {
  * @param   string                      Classname for section.
  */
 
-function get_section_class($prepend = false, $section_id = null) {
+function get_section_class($prepend = false) {
     global $section_categories, $section_id;
     $section_class = array();
 
@@ -318,21 +350,11 @@ function get_section_class($prepend = false, $section_id = null) {
 }
 
 /**
- * Set Body Classes
- * -----------------------------------------------------------------------------
- */
-
-function set_section_classes($classes) {
-    $classes[] = get_section_class(true);
-    return $classes;
-}
-
-/**
  * Filters, Options and Actions
  * -----------------------------------------------------------------------------
  */
 
 add_action('wp_head', 'set_site_section');
-add_filter('body_class', 'set_section_classes');
+// add_filter('body_class', 'set_section_classes');
 
 ?>
