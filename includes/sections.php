@@ -25,26 +25,22 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-$current_section = null;
-
 /**
- * Variables
+ * Sections
  * -----------------------------------------------------------------------------
+ * The eight sections of the Tuairisc site, with a ninth fallback class for
+ * every other thing that does not fit neatly into these. The order of these 
+ * elements is important, because this is the order in which the menu is output.
  */
 
-$section_categories = array(
-    /* The eight sections of the Tuairisc site, with a ninth fallback class for
-     * every other thing that does not fit neatly into these. */
-    191 => 'nuacht',
-    154 => 'tuairimiocht',
-    155 => 'sport',
-    156 => 'cultur',
-    157 => 'saol',
-    159 => 'pobal',
-    187 => 'education',
-    158 => 'greann',
-    999 => 'other'
+$tuairisc_sections = array(
+    191, 153, 155, 156, 157, 159, 187, 158
 );
+
+$home_section = 191;
+$fallback_section = 999;
+
+$GLOBALS['tuairisc_section'] = null;
 
 /**
  * Get ID of Category's Ultimate Parent
@@ -72,228 +68,70 @@ function category_parent_id($cat_id = null) {
  * -----------------------------------------------------------------------------
  * Return array of all category childen categories.
  *
- * @param   array    $category       ID of category.
+ * @param   int/object      $category      The category.
+ * @return  array           $children      Array of category children IDs.
  */
 
-function category_children_ids($category) {
+function category_children($category) {
     $category = get_category($category);
-    $children = array();
 
     if (!$category) {
-        return $children;
+        return null;
     }
 
-    $categories = get_categories(array('child_of' => $category));
+    $children = array();
+    $categories = get_categories(array('child_of' => $category->cat_ID));
 
     foreach($categories as $cat) {
-        $children[] = $cat->term_id;
+        $children[] = $cat->cat_ID;
     }
 
     return $children;
 }
 
 /**
- * Generate Primary Section Menu
+ * Determine Current Section
  * -----------------------------------------------------------------------------
+ * The site is segmented into n primary sections. This generates the WordPress
+ * options for the site sections if the array of sections changes.
  */
 
-function section_menu($args) {
-    global $section_categories, $section_id;
-    $menu = array();
-
-    $defaults = array(
-        'type' => 'primary',
-        'wrap' => 'true',
-        'echo' => true,
-        'menu_classes' => array('section-menu'),
-        'menu_item_class' => 'section-menu-item'
+function sections_opt_setup($new_sections) {
+    $sections_option = array(
+        'id' => array(),
+        'section' => array()
     );
 
-    $args = wp_parse_args($args, $defaults);
+    foreach ($new_sections as $section) {
+        $section = get_category($section);
 
-    if (!array_key_exists('id', $args)) {
-        $args['id'] = $args['type'] . '-menu';
-    }
-
-    if ($args['wrap']) {
-        $menu[] = sprintf('<ul class="%s" id="%s">', implode(' ', $args['menu_classes']), $args['id']);
-    }
-
-    if ($args['type'] === 'primary') {
-        $menu[] = generate_primary_menu($args['menu_item_class']);
-    } else {
-        $menu[] = generate_secondary_menu($args['menu_item_class']);
-    }
-    
-    if ($args['wrap']) {
-        $menu[] = '</ul>';
-    }
-
-    $menu = implode('', $menu);
-
-    if (!$args['echo']) {
-        return $menu;
-    }
-
-    printf($menu);
-}
-
-function generate_primary_menu($class) {
-    global $section_categories, $section_id;
-
-    foreach ($section_categories as $id => $section) {
-        if (category_exists($id)) {
-            $category = get_category($id);
-
-            // TODO: Add menu link, with text.
-            $menu[] = sprintf('<li class="%s">%s</li>',
-                'a',
-                $category->name
-            );
+        if ($section) {
+            $sections_option['id'][] = $section->cat_ID;
+            $sections_option['section'][$section->cat_ID] = $section->slug;
         }
     }
+
+    update_option('tuairisc_sections', $sections_option);
+    return $sections_option;
 }
 
 /**
- * Generate Secondary Section Menu
- * -----------------------------------------------------------------------------
- */
-
-function generate_secondary_menu($echo = false) {
-    global $section_id;
-    $children = category_children_ids($section_id);
-
-    printf('<ul class="section-menu" id="secondary">');
-
-    foreach ($children as $child) {
-        printf('<li>%s</li>', generate_menu_link('category', $child));
-    }
-
-    printf('</ul>');
-}
-
-/**
- * Get Object Link
- * -----------------------------------------------------------------------------
- * Return the permalink for several WordPress objects from its type and ID.
- * 
- * @param   string  $object_type        Type of object-post, page, etc.
- * @param   int     $object_id          ID of object.    
- * @return  string  $object_permalink   Permalink to object.
- */
-
-function get_object_permalink($object_type = null, $object_id = null) {
-    if (is_null($object_type) || is_null($object_id)) {
-        // TODO: throw error
-    }
-
-    $object_permalink = '';
-
-    switch ($object_type) {
-        case 'category': 
-            $object_permalink = get_category_link($object_id); break;
-        case 'post':
-        case 'page':
-            $object_permalink = get_permalink($object_id); break;
-        case 'tag': 
-            $object_permalink = get_tag_link($object_id); break;
-        // default: 
-        //     $object_permalink = get_home_url(); break;            
-    }
-
-    return $object_permalink;
-}
-
-/**
- * Get Object Name
- * -----------------------------------------------------------------------------
- * Return the name/label of several WordPress objects, from its type and ID.
- * 
- * @param   string  $object_type        Type of object-post, page, etc.
- * @param   int     $object_id          ID of object.    
- * @return  string  $object_name        Permalink to object.
- */
-
-function get_object_name($object_type = null, $object_id = null) {
-    if (is_null($object_type) || is_null($object_id)) {
-        // TODO: throw error
-    }
-
-    $object_name = '';
-
-    switch ($object_type) {
-        case 'category': 
-            $object_name = get_cat_name($object_id); break;
-        case 'post':
-        case 'page':
-            $object_name = get_the_title($object_id); break;
-        case 'tag': 
-            $object_name = get_term_by('id', $object_id, 'post_tag'); break;
-    }
-
-    return $object_name;
-}
-
-/**
- * Generate HTML Link for Item
- * -----------------------------------------------------------------------------
- * @param   string  $object_type    Type of object.
- * @param   int     $object_id      ID of object.
- * @param   array   $classes        Option classes to append to hyperlink.
- * @param   array   $ids            Optional IDs to append to hyperlink.
- * @return  string  $hyperlink      The generated hyperlink to the object.
- */
-
-function generate_menu_link($object_type = null, $object_id = null) {
-    if (is_null($object_type) || is_null($object_id)) {
-        // throw error
-    }
-
-    $hyperlink = array('<a href="');
-    $hyperlink[] = get_object_permalink($object_type, $object_id) . '"';
-    $hyperlink[] = '>';
-    $hyperlink[] = get_object_name($object_type, $object_id); 
-    $hyperlink[] = '</a>';
-
-    return implode('', $hyperlink);
-}
-
-/**
- * Get ID of Site Section
+ * Determine Current Section
  * -----------------------------------------------------------------------------
  * Get the ID of the section of the site. The site is broken up into sections 
  * defined by category-one each for major categories, with a final fallback 
  * section for everything else.
- * 
- * @return  int     $section_id         Numerical ID of section.
  */
 
-function get_section_id() {
-    global $section_id;
+function determine_section() {
+    global $home_section, $fallback_section;
 
-    if (is_null($section_id)) {
-        $section_id = set_section_id();
-    }
-
-    return $section_id;
-}
-
-/**
- * Set ID of Site Section
- * -----------------------------------------------------------------------------
- * Get the ID of the section of the site. The site is broken up into sections 
- * defined by category-one each for major categories, with a final fallback 
- * section for everything else.
- * 
- * @return  int     $section_id         Numerical ID of section.
- */
-
-function set_site_section() {
-    global $post, $section_categories, $section_id;
+    $section = $fallback_section;
+    $sections_opt = get_option('tuairisc_sections')['id'];
 
     if (is_home() || is_front_page()) {
-        // 1. If home page or main index, default to Nuacht.
-        $section_id = 191;
+        // 1. If home page or main index, default to first item.
+        $section = $home_section;
     } else if (is_category() || is_single()) {
         // 2. Else set categroy by the parent category.
         if (is_category()) {
@@ -304,49 +142,130 @@ function set_site_section() {
 
         $category = category_parent_id($category);
 
-        if (array_key_exists($category, $section_categories)) {
-            $section_id = $category;
+        if (in_array($category, $sections_opt)) {
+            $section = $category;
         }
+    } 
 
-        // 3. Add more sections here if they need to be evaluated.
+    // 3. Add more sections here if they need to be evaluated.
+    return $section;
+}
+
+/**
+ * Sections Setup
+ * -----------------------------------------------------------------------------
+ * Setup everything related to sections:
+ *
+ * 1. Sections array, if not set, or changed.
+ * 2. Sections menus, if not set, or changed.
+ * 3. Current site section, if unset.
+ */
+
+function section_setup() {
+    global $post, $tuairisc_sections;
+
+    if (!isset($GLOBALS['tuairisc_section'])) {
+        // Set current site section.
+        $GLOBALS['tuairisc_section'] = determine_section();
     }
-    
-    error_log('a: ' . $section_id);
+
+    // Ordered array of site sections + slugs.
+    $sections_option = get_option('tuairisc_sections');
+
+    // Generate menus for each section.
+    $menus_opt = get_option('tuairisc_sections_menus');
+
+    if (!$sections_option || !$menus_opt || $sections_option['id'] !== $tuairisc_sections) {
+        // Setup sections option if it was changed, or hasn't been already set.
+        sections_opt_setup($tuairisc_sections);
+        sections_menus_setup();
+    }
+
+    // FIXME DEBUG
+    sections_menus_setup();
 }
 
 /**
  * Set Body Classes
  * -----------------------------------------------------------------------------
+ * Attaches to body_class. I think it's a bit mad like that WordPress doesn't
+ * have an action for body_id.
+ *
+ * @param   array       $classes        Array of body classes.
+ * @return  array       $classes        Array of body classes.
  */
 
-function set_section_classes($classes) {
-    $classes[] = get_section_class(true);
+function set_section_body_class($classes) {
+    $section_opt = get_option('tuairisc_sections')['section'];
+    $section_class = array();
+
+    $section_class[] = 'section-';
+
+    if (array_key_exists($GLOBALS['tuairisc_section'], $section_opt)) {
+        $section_class[] = $section_opt[$GLOBALS['tuairisc_section']];
+    } else {
+        $section_class[] = 'other';
+    }
+
+    $classes[] = implode('', $section_class);
+
     return $classes;
 }
 
 /**
- * Get Section Class from Site ID
+ * Setup Section Menus
  * -----------------------------------------------------------------------------
- * Each numerically-identified section also has an attached class.
- * 
- * @param   bool    $prepend            Prepend class with 'section-'.
- * @param   int     $section_id         ID of section which needs a class.
- * @param   string                      Classname for section.
+ * Save generated sections menu to site options.
  */
 
-function get_section_class($prepend = false) {
-    global $section_categories, $section_id;
-    $section_class = array();
+function sections_menus_setup() {
+    $sections_opt = get_option('tuairisc_sections')['section'];
+    $menus = array();
 
-    error_log($section_id);
-
-    if ($prepend) {
-        $section_class[] = 'section-';
+    foreach ($sections_opt as $id => $slug) {
+        $menus['primary'][] = generate_menu_item($id);
+        
+        foreach (category_children($id) as $child) {
+            $menus[$slug][] = generate_menu_item($child);
+        }
     }
 
-    $section_class[] = $section_categories[$section_id];
-    
-    return implode('', $section_class);
+    update_option('tuairisc_sections_menus', $menus);
+}
+
+/**
+ * Generate HTML Category List Item
+ * -----------------------------------------------------------------------------
+ * @param   object/int  $category       Category which needs a link.
+ * @return  string  $ln                 Generated menu item.
+ */
+
+function generate_menu_item($category) {
+    $category = get_category($category);
+
+    if (!$category) {
+        return;
+    }
+
+    $li = array();
+
+    // TODO FIXME
+    // if ($type === 'primary' && $GLOBALS['tuairisc_section'] != $category->cat_ID) {
+    //     $class_for_current = '-hover';
+    //     $classes[] = sprintf('section-%s-background%s', $category->slug, $class_for_current);
+    // }
+
+    $li[] = '<li class="%s">';
+
+    $li[] = sprintf('<a class="%%s" title="%s" href="%s" rel="bookmark">%s</a>',
+        $category->cat_name,
+        esc_url(get_category_link($category->cat_ID)),
+        $category->cat_name
+    );
+
+    $li[] = '</li>';
+
+    return implode('', $li);
 }
 
 /**
@@ -354,7 +273,7 @@ function get_section_class($prepend = false) {
  * -----------------------------------------------------------------------------
  */
 
-add_action('wp_head', 'set_site_section');
-// add_filter('body_class', 'set_section_classes');
+add_action('wp_head', 'section_setup');
+add_filter('body_class', 'set_section_body_class');
 
 ?>
