@@ -182,9 +182,6 @@ function section_setup() {
         sections_opt_setup($tuairisc_sections);
         sections_menus_setup();
     }
-
-    // FIXME DEBUG
-    sections_menus_setup();
 }
 
 /**
