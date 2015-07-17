@@ -40,6 +40,24 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+    <div id="header">
+        <nav class="sections-menu">
+            <ul class="primary">
+                <?php sections_menu(array(
+                    'type' => 'primary',
+                    'li_class' =>  'asda',
+                    'a_class' => 'asad'
+                )); ?>
+            </ul>
+            <ul class="secondary">
+                <?php sections_menu(array(
+                    'type' => 'secondary',
+                    'li_class' =>  'asda',
+                    'a_class' => 'asad'
+                )); ?>
+            </ul>
+        </nav>
+    </div>
     <div id="site">
         <div id="main" role="main">
             <div id="content">

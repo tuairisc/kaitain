@@ -248,12 +248,6 @@ function generate_menu_item($category) {
 
     $li = array();
 
-    // TODO FIXME
-    // if ($type === 'primary' && $GLOBALS['tuairisc_section'] != $category->cat_ID) {
-    //     $class_for_current = '-hover';
-    //     $classes[] = sprintf('section-%s-background%s', $category->slug, $class_for_current);
-    // }
-
     $li[] = '<li class="%s">';
 
     $li[] = sprintf('<a class="%%s" title="%s" href="%s" rel="bookmark">%s</a>',
@@ -265,6 +259,16 @@ function generate_menu_item($category) {
     $li[] = '</li>';
 
     return implode('', $li);
+}
+
+function sections_menu($args) {
+    // TODO FIXME
+    // if ($type === 'primary' && $GLOBALS['tuairisc_section'] != $category->cat_ID) {
+    //     $class_for_current = '-hover';
+    //     $classes[] = sprintf('section-%s-background%s', $category->slug, $class_for_current);
+    // }
+
+    return;
 }
 
 /**
