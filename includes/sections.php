@@ -222,10 +222,10 @@ function sections_menus_setup() {
     $menus = array();
 
     foreach ($sections_opt as $id => $slug) {
-        $menus['primary'][] = generate_menu_item($id);
+        $menus['primary'][$slug] = generate_menu_item($id);
         
         foreach (category_children($id) as $child) {
-            $menus[$slug][] = generate_menu_item($child);
+            $menus['secondary'][$slug][] = generate_menu_item($child);
         }
     }
 
@@ -248,9 +248,9 @@ function generate_menu_item($category) {
 
     $li = array();
 
-    $li[] = '<li class="%s">';
+    $li[] = '<li%s role="menuitem">';
 
-    $li[] = sprintf('<a class="%%s" title="%s" href="%s" rel="bookmark">%s</a>',
+    $li[] = sprintf('<a title="%s" href="%s">%s</a>',
         $category->cat_name,
         esc_url(get_category_link($category->cat_ID)),
         $category->cat_name
@@ -261,14 +261,47 @@ function generate_menu_item($category) {
     return implode('', $li);
 }
 
-function sections_menu($args) {
-    // TODO FIXME
-    // if ($type === 'primary' && $GLOBALS['tuairisc_section'] != $category->cat_ID) {
-    //     $class_for_current = '-hover';
-    //     $classes[] = sprintf('section-%s-background%s', $category->slug, $class_for_current);
-    // }
+/*
+ * Output Section Menu
+ * -----------------------------------------------------------------------------
+ * @param   array       $args      Arguments for menu output (type and classes).
+ */
 
-    return;
+function sections_menu($args) {
+    $defaults = array(
+        'type' => 'primary',
+        'classes' => array()
+    );
+
+    $args = wp_parse_args($args, $defaults);
+    $slug = get_category($GLOBALS['tuairisc_section'])->slug;
+
+    // Get menu from saved menu, and reduce secondary if called.
+    $menu = get_option('tuairisc_sections_menus')[$args['type']];
+
+    if ($args['type'] === 'secondary') {
+        $menu = $menu[$slug];
+    }
+
+    foreach ($menu as $key => $item) {
+        $class_attr = '';
+        $classes = $args['classes'];
+
+        if ($args['type'] === 'primary') {
+            /* Primary menu items have hover and current section classes.
+             * Uncurrent-section only show section colour on hover. */
+            $uncurrent = ($key !== $slug) ? '-hover' : '';
+            $classes[] = sprintf('section-%s-background%s', $key, $uncurrent);
+        }
+        
+        if (!empty($classes)) {
+            // Menu items are generated with '<li%s role=...'
+            $class_attr = ' class="%s"';
+        }
+
+        // Put it all together and output.
+        printf($item, sprintf($class_attr, implode(' ', $classes)));
+    }
 }
 
 /**
