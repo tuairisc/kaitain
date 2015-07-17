@@ -37,9 +37,11 @@ $tuairisc_sections = array(
     191, 153, 155, 156, 157, 159, 187, 158
 );
 
+// ID for site home section.
 $home_section = 191;
+// ID to be used if none match.
 $fallback_section = 999;
-
+// Variable for current section ID.
 $GLOBALS['tuairisc_section'] = null;
 
 /**
@@ -49,8 +51,8 @@ $GLOBALS['tuairisc_section'] = null;
  * grandchildren beneath. Recursively ascend through parent categories until you
  * hit the top.
  * 
- * @param   int     $category     
- * @return  int     $category         Numeric ID of category's ultimate parent.
+ * @param   int     $cat_id          Category ID
+ * @param   int     $cat_id          ID of original category's ultimate parent.
  */
 
 function category_parent_id($cat_id = null) {
