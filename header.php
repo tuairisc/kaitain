@@ -41,15 +41,15 @@
 </head>
 <body <?php body_class(); ?>>
     <div id="header">
-        <nav class="sections-menu">
-            <ul class="primary">
+        <nav id="sections-menu">
+            <ul id="primary">
                 <?php sections_menu(array(
                     'type' => 'primary',
                     'li_class' =>  'asda',
                     'a_class' => 'asad'
                 )); ?>
             </ul>
-            <ul class="secondary">
+            <ul id="secondary">
                 <?php sections_menu(array(
                     'type' => 'secondary',
                     'li_class' =>  'asda',
