@@ -43,18 +43,10 @@
     <div id="header">
         <nav id="sections-menu">
             <ul id="primary">
-                <?php sections_menu(array(
-                    'type' => 'primary',
-                    'li_class' =>  'asda',
-                    'a_class' => 'asad'
-                )); ?>
+                <?php sections_menu(array('type' => 'primary')); ?>
             </ul>
             <ul id="secondary">
-                <?php sections_menu(array(
-                    'type' => 'secondary',
-                    'li_class' =>  'asda',
-                    'a_class' => 'asad'
-                )); ?>
+                <?php sections_menu(array('type' => 'secondary')); ?>
             </ul>
         </nav>
     </div>
