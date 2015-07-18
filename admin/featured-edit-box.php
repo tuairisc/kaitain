@@ -27,87 +27,21 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
-$nonce = array(
-    'action' => 'tuairisc_meta_box',
-    'name' => 'tuairisc_meta_box_nonce'
+$featured_nonce = array(
+    'action' => 'tuairisc_featured_box',
+    'name' => 'tuairisc_featured_box_nonce'
 );
-
-/**
- * Check if Sticky Expired
- * -----------------------------------------------------------------------------
- * @param   string      $expiry_date
- * @return  bool                            Post has expired, true/false.
- */
-
-function tuairisc_sticky_expired() {
-    $expiry_date = get_option('tuairisc_sticky_post')['expires'];
-    $current_date = (int) date('U');
-    return ($current_date >= $expiry_date);
-}
-
-/**
- *  Test if Post is Sticky
- * -----------------------------------------------------------------------------
- * @param   object/int  $post               Post ID or post object.
- * @return  bool                            Post ID is sticky, true/false.
- */
-
-function is_tuairisc_sticky_post($post) {
-    $post = get_post($post);
-
-    if (!$post) {
-        return false;
-    }
-
-    $sticky_id = get_option('tuairisc_sticky_post')['id'];
-    return ($sticky_id === (int) $post->ID);
-}
-
-/**
- * Reset Sticky Post
- * -----------------------------------------------------------------------------
- * Remove sticky post by setting post ID to -1, which doesn't exist.
- */
-
-function reset_tuairisc_sticky() {
-    update_option('tuairisc_sticky_post', array(
-        'id' => -1,
-        'expires', 0
-    ));
-}
-
-/**
- * Update Sticky Post
- * -----------------------------------------------------------------------------
- */
-
-function update_tuairisc_sticky($post = null, $expiry = null) {
-    $post = get_post($post);
-
-    if (!$post) {
-        return false;
-    }
-
-    if (get_post_status($post->ID) !== 'publish') {
-        return false;
-    }
-
-    update_option('tuairisc_sticky_post', array(
-        'id' => $post->ID,
-        'expires' => $expiry
-    ));
-}
 
 /**
  * Add Post Editor Meta Box
  * -----------------------------------------------------------------------------
  */
 
-function tuairisc_meta_box() {
+function tuairisc_featured_meta_box() {
     add_meta_box(
-        'tuairisc_post_meta',
+        'tuairisc_featured_meta',
         __('Feature', TTD),
-        'meta_box_content',
+        'tuairisc_featured_box_content',
         'post'
     );
 }
@@ -118,9 +52,9 @@ function tuairisc_meta_box() {
  * @param   object      $post           Post object.
  */
 
-function meta_box_content($post) {
-    global $nonce;
-    wp_nonce_field($nonce['action'], $nonce['name']);
+function tuairisc_featured_box_content($post) {
+    global $featured_nonce;
+    wp_nonce_field($featured_nonce['action'], $featured_nonce['name']);
 
     $is_featured = get_post_meta($post->ID, get_option('tuairisc_feature_post_key'), true);
     $is_sticky = false;
@@ -178,17 +112,17 @@ function meta_box_content($post) {
  * -----------------------------------------------------------------------------
  * Validate /ALL/ the things!
  * 
- * @param   int      $post_id           Post object.
+ * @param   int      $post_id           Post object ID.
  */
 
-function update_meta_box($post_id) {
-    global $nonce;
+function update_featured_meta_box($post_id) {
+    global $featured_nonce;
     
-    if (!ctype_alnum($_POST[$nonce['name']]) || !isset($_POST[$nonce['name']])) {
+    if (!ctype_alnum($_POST[$featured_nonce['name']]) || !isset($_POST[$featured_nonce['name']])) {
         return;
     }
 
-    if (!wp_verify_nonce($_POST[$nonce['name']], $nonce['action'])) {
+    if (!wp_verify_nonce($_POST[$featured_nonce['name']], $featured_nonce['action'])) {
         return;
     }
     
@@ -235,7 +169,7 @@ function update_meta_box($post_id) {
  * -----------------------------------------------------------------------------
  */
 
-add_action('add_meta_boxes', 'tuairisc_meta_box');
-add_action('save_post', 'update_meta_box');
+add_action('add_meta_boxes', 'tuairisc_featured_meta_box');
+add_action('save_post', 'update_featured_meta_box');
 
 ?>
