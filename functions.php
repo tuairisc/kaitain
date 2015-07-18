@@ -32,7 +32,7 @@
  * -----------------------------------------------------------------------------
  */
 
-define('THEME_VERSION', 1.0);
+define('THEME_VERSION', 1.1);
 define('TTD', 'tuairisc');
 
 /**
@@ -123,12 +123,15 @@ add_option('tuairisc_feature_post_key', 'tuairisc_is_featured_post');
  * -----------------------------------------------------------------------------
  */
 
+// Flag post as job.
+add_option('tuairisc_job_post_key', 'is_tuairisc_job', '', true);
+
 // strftime date and locale.
 add_option('tuairisc_fallback_locale', 'ga_IE','', true);
 add_option('tuairisc_strftime_date_format', '%A, %B %e %Y','', true);
 
 // Ghetto view counter meta key.
-add_option('tuairisc_view_counter_key', 'tuairisc_view_counter','', true);
+add_option('tuairisc_view_counter_key', 'tuairisc_view_counter', '', true);
 
 add_option('tuairisc_prefetch_domains', array(
     // Media prefetch domains.
@@ -158,22 +161,24 @@ add_option('tuairisc_favicons', array(
  * -----------------------------------------------------------------------------
  */
 
+// Featured and sticky posts.
+include(THEME_INCLUDES . 'featured.php');
 // Site sections.
 include(THEME_INCLUDES . 'sections.php');
 // Open Graph and Twitter Card <head> meta tag links.
 include(THEME_INCLUDES . 'social-meta/social-meta.php');
 // Generate post images of arbitrary size.
 include(THEME_INCLUDES . 'get-the-image/get-the-image.php');
-// Custom post type manager.
-include(THEME_INCLUDES . 'wp-custom-post-type-class/src/CPT.php');
 
 /**
  * Theme Admin Includes
  * -----------------------------------------------------------------------------
  */
 
-// Featured/Sticky post post.php box.
+// Featured/Sticky post meta box.
 include(THEME_ADMIN . 'featured-edit-box.php');
+// Declare post as job listing.
+include(THEME_ADMIN . 'job-checkbox.php');
 
 /** 
  * Widgets
