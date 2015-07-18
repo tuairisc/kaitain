@@ -45,7 +45,7 @@
             <ul id="primary">
                 <?php sections_menu(array('type' => 'primary')); ?>
             </ul>
-            <ul id="secondary">
+            <ul class="section-trim-background" id="secondary">
                 <?php sections_menu(array('type' => 'secondary')); ?>
             </ul>
         </nav>
