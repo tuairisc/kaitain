@@ -66,6 +66,7 @@ define('ASSETS_URL', THEME_URL . '/assets/');
  */
 
 define('THEME_INCLUDES', THEME_PATH . '/includes/');
+define('THEME_ADMIN', THEME_PATH . '/admin/');
 define('THEME_WIDGETS', THEME_PATH . '/widgets/');
 define('THEME_PARTIALS', '/partials/');
 
@@ -165,8 +166,14 @@ include(THEME_INCLUDES . 'social-meta/social-meta.php');
 include(THEME_INCLUDES . 'get-the-image/get-the-image.php');
 // Custom post type manager.
 include(THEME_INCLUDES . 'wp-custom-post-type-class/src/CPT.php');
+
+/**
+ * Theme Admin Includes
+ * -----------------------------------------------------------------------------
+ */
+
 // Featured/Sticky post post.php box.
-include(THEME_INCLUDES . 'featured-edit-box.php');
+include(THEME_ADMIN . 'featured-edit-box.php');
 
 /** 
  * Widgets
