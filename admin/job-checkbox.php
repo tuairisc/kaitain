@@ -99,10 +99,9 @@ function update_job_meta_box($post_id) {
     if (!current_user_can('edit_post', $post_id)) {
         return;
     }
-    
-    // UPDATE JOB POST META KEY YOLO MILEY CYRUS
+
     $key = get_option('tuairisc_job_post_key');
-    $value = ($_POST['make-job'] === 'on') ? true : false;
+    $value = (filter_var($_POST['make-job'], FILTER_SANITIZE_STRIPPED) === 'on');
 
     update_post_meta($post_id, $key, $value);
 }
