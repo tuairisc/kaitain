@@ -88,24 +88,6 @@ define('THEME_JS', ASSETS_URL . 'js/');
 define('THEME_IMAGES', ASSETS_URL . 'images/');
 define('THEME_CSS', ASSETS_URL . 'css/');
 
-/** 
- * Social Media Accounts
- * -----------------------------------------------------------------------------
- */
-
-add_option('social_m_twitter', '@tuairiscnuacht','', true);
-add_option('social_m_facebook', 'tuairisc.ie','', true);
-
-/**
- * Sitewide Fallback Image File
- * -----------------------------------------------------------------------------
- */
-
-add_option('article_i_image', array(
-    'url' => THEME_URL . '/assets/images/tuairisc.jpg',
-    'path' => THEME_PATH . '/assets/images/tuairisc.jpg'
-),'', true);
-
 /**
  * Featured and Sticky Post Keys
  * -----------------------------------------------------------------------------
@@ -124,7 +106,7 @@ add_option('tuairisc_feature_post_key', 'tuairisc_is_featured_post');
  */
 
 // Flag post as job.
-add_option('tuairisc_job_post_key', 'is_tuairisc_job', '', true);
+add_option('tuairisc_notice_post_key', 'is_tuairisc_notice', '', true);
 
 // strftime date and locale.
 add_option('tuairisc_fallback_locale', 'ga_IE','', true);
@@ -170,6 +152,20 @@ include(THEME_INCLUDES . 'social-meta/social-meta.php');
 // Generate post images of arbitrary size.
 include(THEME_INCLUDES . 'get-the-image/get-the-image.php');
 
+/** 
+ * Social Media Accounts
+ * -----------------------------------------------------------------------------
+ */
+
+$tuairisc_social_meta = new Social_Meta(array(
+    'twitter' => '@tuairiscnuacht',
+    'facebook' => 'tuairisc.ie',
+    'fallback_image' => array(
+        'url' => THEME_URL . '/assets/images/tuairisc.jpg',
+        'path' => THEME_PATH . '/assets/images/tuairisc.jpg'
+    )
+));
+
 /**
  * Theme Admin Includes
  * -----------------------------------------------------------------------------
@@ -177,8 +173,7 @@ include(THEME_INCLUDES . 'get-the-image/get-the-image.php');
 
 // Featured/Sticky post meta box.
 include(THEME_ADMIN . 'featured-edit-box.php');
-// Declare post as job listing.
-include(THEME_ADMIN . 'job-checkbox.php');
+include(THEME_ADMIN . 'notice-edit-box.php');
 
 /** 
  * Widgets
