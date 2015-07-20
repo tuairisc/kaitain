@@ -1,8 +1,3 @@
-[submodule "includes/social-meta"]
-	path = includes/social-meta
-	url = git@github.com:bhalash/social-meta.git
-    branch = master
-    ignore = dirty
 [submodule "includes/get-the-image"]
 	path = includes/get-the-image
 	url = git@github.com:justintadlock/get-the-image.git
