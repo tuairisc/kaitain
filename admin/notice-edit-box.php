@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Job Checkbox
+ * Public Notice Meta Box
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Tuairisc.ie
@@ -27,9 +27,9 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
-$job_nonce = array(
-    'action' => 'tuairisc_job_box',
-    'name' => 'tuairisc_job_box_nonce'
+$notice_nonce = array(
+    'action' => 'tuairisc_notice_box',
+    'name' => 'tuairisc_notice_box_nonce'
 );
 
 /**
@@ -37,11 +37,11 @@ $job_nonce = array(
  * -----------------------------------------------------------------------------
  */
 
-function tuairisc_job_meta_box() {
+function tuairisc_notice_meta_box() {
     add_meta_box(
-        'tuairisc_job_meta',
-        __('Job Listing', TTD),
-        'tuairisc_job_box_content',
+        'tuairisc_notice_meta',
+        __('Public Notice', TTD),
+        'tuairisc_notice_box_content',
         'post'
     );
 }
@@ -52,23 +52,23 @@ function tuairisc_job_meta_box() {
  * @param   object      $post           Post object.
  */
 
-function tuairisc_job_box_content($post, $args) {
-    global $job_nonce;
-    wp_nonce_field($job_nonce['action'], $job_nonce['name']);
+function tuairisc_notice_box_content($post, $args) {
+    global $notice_nonce;
+    wp_nonce_field($notice_nonce['action'], $notice_nonce['name']);
 
-    $key = get_option('tuairisc_job_post_key');
-    $is_job = !!get_post_meta($post->ID, $key, true) ? 'checked' : '';;
+    $key = get_option('tuairisc_notice_post_key');
+    $is_notice = !!get_post_meta($post->ID, $key, true) ? 'checked' : '';;
 
     ?>
 
     <p>
-        <?php _e('Mark post as a listing for a government or private business employment position.', TTD); ?>
+        <?php _e('This post is a public notice.', TTD); ?>
     </p>
 
     <ul>
         <li>
-            <input id="meta-tuairisc-job" name="make-job" type="checkbox" <?php printf($is_job); ?>>
-            <label for="meta-tuairisc-job"><?php _e('Job Listing', TTD); ?></label>
+            <input id="meta-tuairisc-notice" name="make-notice" type="checkbox" <?php printf($is_notice); ?>>
+            <label for="meta-tuairisc-notice"><?php _e('Public Notice', TTD); ?></label>
         </li>
     </ul>
 
@@ -81,14 +81,14 @@ function tuairisc_job_box_content($post, $args) {
  * @param   int      $post_id           Post object ID.
  */
 
-function update_job_meta_box($post_id) {
-    global $job_nonce;
+function tuairisc_notice_box_update($post_id) {
+    global $notice_nonce;
     
-    if (!ctype_alnum($_POST[$job_nonce['name']]) || !isset($_POST[$job_nonce['name']])) {
+    if (!ctype_alnum($_POST[$notice_nonce['name']]) || !isset($_POST[$notice_nonce['name']])) {
         return;
     }
 
-    if (!wp_verify_nonce($_POST[$job_nonce['name']], $job_nonce['action'])) {
+    if (!wp_verify_nonce($_POST[$notice_nonce['name']], $notice_nonce['action'])) {
         return;
     }
     
@@ -100,8 +100,8 @@ function update_job_meta_box($post_id) {
         return;
     }
 
-    $key = get_option('tuairisc_job_post_key');
-    $value = (filter_var($_POST['make-job'], FILTER_SANITIZE_STRIPPED) === 'on');
+    $key = get_option('tuairisc_notice_post_key');
+    $value = (filter_var($_POST['make-notice'], FILTER_SANITIZE_STRIPPED) === 'on');
 
     update_post_meta($post_id, $key, $value);
 }
@@ -111,7 +111,7 @@ function update_job_meta_box($post_id) {
  * -----------------------------------------------------------------------------
  */
 
-add_action('add_meta_boxes', 'tuairisc_job_meta_box');
-add_action('save_post', 'update_job_meta_box');
+add_action('add_meta_boxes', 'tuairisc_notice_meta_box');
+add_action('save_post', 'tuairisc_notice_box_update');
 
 ?>
