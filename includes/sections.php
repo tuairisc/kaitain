@@ -33,16 +33,152 @@
  * elements is important, because this is the order in which the menu is output.
  */
 
-$tuairisc_sections = array(
-    191, 153, 155, 156, 157, 159, 187, 158
-);
+class Section_Manager {
+    static $instantiated = false;
 
-// ID for site home section.
-$home_section = 191;
-// ID to be used if none match.
-$fallback_section = 999;
-// Variable for current section ID.
-$GLOBALS['tuairisc_section'] = null;
+    // Current site section.
+    public $section = null;
+
+    private $keys = array(
+        'sections' => 'section_manager_sections',
+        'menus' => 'section_manager_menus'
+    );
+
+    public function __construct($categories) {
+        if (self::$instantiated) {
+            // More than one running instance can lead to strange things.
+            throw new Exception('Error: Section Manager can only be instantiated once.');
+        }
+        
+        self::$instantiated = true;
+
+        if (!is_array($categories) || empty($categories)) {
+            throw new Exception('Error: An array of categories must be passed to Section Manager.');
+        }
+
+        $sections = get_option($this->keys['sections']);
+
+        if ($categories['categories'] !== $sections['id'] || $categories['home'] !== $sections['home'] || WP_DEBUG) {
+            // Update generated options and menu if sctions have changed.
+            $this->sections_option_setup($categories);
+            // $this->sections_menus_setup();
+        }
+
+        add_action('wp_head', array($this, 'set_current_section'));
+        // add_filter('body_class', array($this, 'set_section_body_class'));
+    }
+
+    /**
+     * Determine Current Section
+     * -----------------------------------------------------------------------------
+     * The site is segmented into n primary sections. This generates the WordPress
+     * options for the site sections if the array of sections changes.
+     */
+
+    private function sections_option_setup($categories = null) {
+        $sections = array(
+            'id' => array(),
+            'section' => array()
+        );
+
+        foreach ($categories['categories'] as $cat) {
+            $category = get_category($cat);
+
+            if (!$category) {
+                if (WP_DEBUG) {
+                    trigger_error(sprintf('"%s" is not a valid category and will be skipped', $cat), E_USER_WARNING);
+                }
+
+                continue;
+            }
+
+            if ($category->category_parent) {
+                if (WP_DEBUG) {
+                    trigger_error(sprintf('"%s" is a child category and will be skipped', $cat), E_USER_WARNING);
+                }
+
+                continue;
+            }
+
+            $sections['id'][] = $category->cat_ID;
+            $sections['section'][$category->cat_ID] = $category->slug;
+        }
+
+        if (isset($categories['home']) && get_category($categories['home'])) {
+            // If home is set, use it, otherwise, pick first passed category.
+            $sections['home'] = $categories['home'];
+        } else {
+            $sections['home'] = $sections['id'][0];
+        }
+
+        update_option($this->keys['sections'], $sections);
+        return $sections;
+    }
+
+    /**
+     * Determine Current Section on Page Load
+     * -----------------------------------------------------------------------------
+     * Get the ID of the section of the site. The site is broken up into sections 
+     * defined by category-one each for major categories, with a final fallback 
+     * section for everything else.
+     * 
+     * @return  array       $current_section        ID and slug of current section.
+     */
+
+    public function set_current_section() {
+        $sections = get_option($this->keys['sections']);
+        $current_id = 999;
+
+        if (is_home() || is_front_page()) {
+            // 1. If home page or main index, default to first item.
+            $current_id = $sections['home'];
+        } else if (is_category() || is_single()) {
+            // 2. Else set categroy by the parent category.
+            if (is_category()) {
+                $category = get_query_var('cat');
+            } else if (is_single()) {
+                $category = get_the_category($post->ID)[0]->cat_ID;
+            }
+
+            $category = $this->category_parent_id($category);
+
+            if ($this->is_section_category($category)) {
+                $current_id = $category;
+            }
+
+            // 3. Add more sections here if they need to be evaluated.
+        } 
+
+        $current_section = array(
+            'id' => $current_id,
+            'slug' => get_section_slug($current_id)
+        );
+
+        error_log(print_r($section, true));
+
+        return $current_section;
+    }
+
+    /**
+     * Is Current Category a Section?
+     * -----------------------------------------------------------------------------
+     * Only matches top-level categories, as it is used in circumstances where parent
+     * has been already determined.
+     * 
+     * @param   object/id       $category       Category ID or object.
+     * @return  bool                            Category is section, true/false.
+     */
+
+    private function is_section_category($category) {
+        $category = get_category($category);
+
+        if (!$category) {
+            return false;
+        }
+        
+        return (in_array($category->cat_ID, get_option($this->keys['sections'])['id']));
+    }
+}
 
 /**
  * Get ID of Category's Ultimate Parent
@@ -92,96 +228,20 @@ function category_children($category) {
 }
 
 /**
- * Determine Current Section
+ * Get Section Slug
  * -----------------------------------------------------------------------------
- * The site is segmented into n primary sections. This generates the WordPress
- * options for the site sections if the array of sections changes.
+ * @param   object/id       $category       Category ID or object.
+ * @return  string          $slog           Slug for current section.
  */
 
-function sections_opt_setup($new_sections) {
-    $sections_option = array(
-        'id' => array(),
-        'section' => array()
-    );
+function get_section_slug($category) {
+    $slug = get_option('tuairisc_sections')['section'][$category];
 
-    foreach ($new_sections as $section) {
-        $section = get_category($section);
-
-        if ($section) {
-            $sections_option['id'][] = $section->cat_ID;
-            $sections_option['section'][$section->cat_ID] = $section->slug;
-        }
+    if (!$slug) {
+        $slug = 'other';
     }
 
-    update_option('tuairisc_sections', $sections_option);
-    return $sections_option;
-}
-
-/**
- * Determine Current Section
- * -----------------------------------------------------------------------------
- * Get the ID of the section of the site. The site is broken up into sections 
- * defined by category-one each for major categories, with a final fallback 
- * section for everything else.
- */
-
-function determine_section() {
-    global $home_section, $fallback_section;
-
-    $section = $fallback_section;
-    $sections_opt = get_option('tuairisc_sections')['id'];
-
-    if (is_home() || is_front_page()) {
-        // 1. If home page or main index, default to first item.
-        $section = $home_section;
-    } else if (is_category() || is_single()) {
-        // 2. Else set categroy by the parent category.
-        if (is_category()) {
-            $category = get_query_var('cat');
-        } else if (is_single()) {
-            $category = get_the_category($post->ID)[0]->cat_ID;
-        }
-
-        $category = category_parent_id($category);
-
-        if (in_array($category, $sections_opt)) {
-            $section = $category;
-        }
-    } 
-
-    // 3. Add more sections here if they need to be evaluated.
-    return $section;
-}
-
-/**
- * Sections Setup
- * -----------------------------------------------------------------------------
- * Setup everything related to sections:
- *
- * 1. Sections array, if not set, or changed.
- * 2. Sections menus, if not set, or changed.
- * 3. Current site section, if unset.
- */
-
-function section_setup() {
-    global $post, $tuairisc_sections;
-
-    if (!isset($GLOBALS['tuairisc_section'])) {
-        // Set current site section.
-        $GLOBALS['tuairisc_section'] = determine_section();
-    }
-
-    // Ordered array of site sections + slugs.
-    $sections_option = get_option('tuairisc_sections');
-
-    // Generate menus for each section.
-    $menus_opt = get_option('tuairisc_sections_menus');
-
-    if (!$sections_option || !$menus_opt || $sections_option['id'] !== $tuairisc_sections) {
-        // Setup sections option if it was changed, or hasn't been already set.
-        sections_opt_setup($tuairisc_sections);
-        sections_menus_setup();
-    }
+    return $slug;
 }
 
 /**
@@ -199,13 +259,7 @@ function set_section_body_class($classes) {
     $section_class = array();
 
     $section_class[] = 'section-';
-
-    if (array_key_exists($GLOBALS['tuairisc_section'], $section_opt)) {
-        $section_class[] = $section_opt[$GLOBALS['tuairisc_section']];
-    } else {
-        $section_class[] = 'other';
-    }
-
+    $section_class[] = $GLOBALS['tuairisc_section']['slug'];
     $classes[] = implode('', $section_class);
 
     return $classes;
@@ -274,33 +328,35 @@ function sections_menu($args) {
     );
 
     $args = wp_parse_args($args, $defaults);
-    $slug = get_category($GLOBALS['tuairisc_section'])->slug;
-
+    // Current section.
+    $section = $GLOBALS['tuairisc_section'];
     // Get menu from saved menu, and reduce secondary if called.
     $menu = get_option('tuairisc_sections_menus')[$args['type']];
 
     if ($args['type'] === 'secondary') {
-        $menu = $menu[$slug];
+        $menu = $menu[$section['slug']];
     }
 
-    foreach ($menu as $key => $item) {
-        $class_attr = '';
-        $classes = $args['classes'];
+    if (!empty($menu)) {
+        foreach ($menu as $key => $item) {
+            $class_attr = '';
+            $classes = $args['classes'];
 
-        if ($args['type'] === 'primary') {
-            /* Primary menu items have hover and current section classes.
-             * Uncurrent-section only show section colour on hover. */
-            $uncurrent = ($key !== $slug) ? '-hover' : '';
-            $classes[] = sprintf('section-%s-background%s', $key, $uncurrent);
-        }
-        
-        if (!empty($classes)) {
-            // Menu items are generated with '<li%s role=...'
-            $class_attr = ' class="%s"';
-        }
+            if ($args['type'] === 'primary') {
+                /* Primary menu items have hover and current section classes.
+                 * Uncurrent-section only show section colour on hover. */
+                $uncurrent = ($key !== $section['slug']) ? '-hover' : '';
+                $classes[] = sprintf('section-%s-background%s', $key, $uncurrent);
+            }
+            
+            if (!empty($classes)) {
+                // Menu items are generated with '<li%s role=...'
+                $class_attr = ' class="%s"';
+            }
 
-        // Put it all together and output.
-        printf($item, sprintf($class_attr, implode(' ', $classes)));
+            // Put it all together and output.
+            printf($item, sprintf($class_attr, implode(' ', $classes)));
+        }
     }
 }
 
@@ -308,8 +364,5 @@ function sections_menu($args) {
  * Filters, Options and Actions
  * -----------------------------------------------------------------------------
  */
-
-add_action('wp_head', 'section_setup');
-add_filter('body_class', 'set_section_body_class');
 
 ?>
