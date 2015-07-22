@@ -43,10 +43,10 @@
     <div id="header">
         <nav id="sections-menu">
             <ul id="primary">
-                <?php sections_menu(array('type' => 'primary')); ?>
+                <?php // sections_menu(array('type' => 'primary')); ?>
             </ul>
             <ul class="section-trim-background" id="secondary">
-                <?php sections_menu(array('type' => 'secondary')); ?>
+                <?php // sections_menu(array('type' => 'secondary')); ?>
             </ul>
         </nav>
     </div>
