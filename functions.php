@@ -166,6 +166,17 @@ $tuairisc_social_meta = new Social_Meta(array(
     )
 ));
 
+
+/**
+ * Site Sections
+ * -----------------------------------------------------------------------------
+ */
+
+$tuairisc_sections = new Section_Manager(array(
+    'categories' => array(191, 154, 155, 156, 157, 159, 187, 158), 
+    'home' => 191
+));
+
 /**
  * Theme Admin Includes
  * -----------------------------------------------------------------------------
