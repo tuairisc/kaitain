@@ -146,7 +146,7 @@ add_option('tuairisc_favicons', array(
 // Featured and sticky posts.
 include(THEME_INCLUDES . 'featured.php');
 // Site sections.
-include(THEME_INCLUDES . 'sections.php');
+include(THEME_INCLUDES . 'section-manager/section-manager.php');
 // Open Graph and Twitter Card <head> meta tag links.
 include(THEME_INCLUDES . 'social-meta/social-meta.php');
 // Generate post images of arbitrary size.
@@ -166,13 +166,12 @@ $tuairisc_social_meta = new Social_Meta(array(
     )
 ));
 
-
 /**
  * Site Sections
  * -----------------------------------------------------------------------------
  */
 
-$tuairisc_sections = new Section_Manager(array(
+$sections = new Section_Manager(array(
     'categories' => array(191, 154, 155, 156, 157, 159, 187, 158), 
     'home' => 191
 ));
@@ -355,9 +354,9 @@ function tuairisc_styles() {
 
 function clean_header() {
     if (!is_admin()) {
-    remove_action('wp_head', 'wp_print_scripts');
-    remove_action('wp_head', 'wp_print_head_scripts', 9);
-    remove_action('wp_head', 'wp_enqueue_scripts', 1);
+        remove_action('wp_head', 'wp_print_scripts');
+        remove_action('wp_head', 'wp_print_head_scripts', 9);
+        remove_action('wp_head', 'wp_enqueue_scripts', 1);
     }
 }
 
