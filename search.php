@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Search Template
+ * Search Results
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Tuairisc.ie
@@ -27,4 +27,6 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
+get_header();
+get_footer();
 ?>
