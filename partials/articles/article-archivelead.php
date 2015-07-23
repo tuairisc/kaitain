@@ -27,8 +27,6 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
-add_image_size('archive_lead', 700, 325, array('center', 'center'));
-
 ?>
 
 <article <?php post_class('archive-lead'); ?> id="<?php the_id(); ?>">
