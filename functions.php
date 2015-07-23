@@ -416,25 +416,37 @@ function register_widget_areas() {
  * 
  * @param   string      $title          Title of whatever.
  * @param   string      $sep            Title separator.
+ * @param   string      $side           Side on which separator will appear.
  * @return  string      $title          Modded title.
  */
 
-function theme_title($title, $sep) {
+function theme_title($title, $separator, $side) {
     global $paged, $page;
-
     if (is_feed()) {
         return $title;
+    }
+
+    if (is_404()) {
+        $title = _e('Earráid 404', TTD);
+
+        if ($separator) {
+            if ($side === 'left') {
+                $title = " $separator $title";
+            } else {
+                $title = "$title $separator ";
+            }
+        }
     }
 
     $title .= get_bloginfo('name');
     $site_description = get_bloginfo('description', 'display');
 
     if ($site_description && (is_home() || is_front_page())) {
-        $title = "$title $sep $site_description";
+        $title = "$title $separator $site_description";
     }
 
     if ($paged >= 2 || $page >= 2) {
-        $title = "$title $sep " . sprintf(__('Page %s', TTD), max($paged, $page));
+        $title = "$title $separator " . sprintf(__('Page %s', TTD), max($paged, $page));
     }
 
     return $title;
@@ -853,7 +865,7 @@ add_filter('get_the_date', 'date_to_irish');
 add_filter('the_date', 'date_to_irish');
 
 // Title function.
-add_filter('wp_title', 'theme_title', 10, 2);
+add_filter('wp_title', 'theme_title', 1, 3);
 
 /* This theme only calls content on the load of a full page article. It's a good
  * point at which to insert the post count increment. */
