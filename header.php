@@ -27,6 +27,8 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
+global $sections;
+
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -43,10 +45,10 @@
     <div id="header">
         <nav id="sections-menu">
             <ul id="primary">
-                <?php // sections_menu(array('type' => 'primary')); ?>
+                <?php $sections->sections_menu('primary'); ?>
             </ul>
             <ul class="section-trim-background" id="secondary">
-                <?php // sections_menu(array('type' => 'secondary')); ?>
+                <?php $sections->sections_menu('secondary'); ?>
             </ul>
         </nav>
     </div>
