@@ -149,8 +149,6 @@ include(THEME_INCLUDES . 'featured.php');
 include(THEME_INCLUDES . 'section-manager/section-manager.php');
 // Open Graph and Twitter Card <head> meta tag links.
 include(THEME_INCLUDES . 'social-meta/social-meta.php');
-// Generate post images of arbitrary size.
-include(THEME_INCLUDES . 'get-the-image/get-the-image.php');
 
 /** 
  * Social Media Accounts
