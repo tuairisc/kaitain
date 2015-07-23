@@ -166,19 +166,13 @@ class tuairisc_featured extends WP_Widget {
         ?>
 
         <div class="recent-widget tuairisc-post-widget">
-            <br /><br />
             <?php foreach ($featured_posts as $index => $post) {
                 if ($instance['show_sticky'] && $index === 0) {
-                    printf('Lead Post: <br />');
-                    printf($post->ID);
-                    printf('<br />-----<br />');
+                    get_template_part(PARTIAL_ARTICLES, 'archivelead');
                 } else {
-                    // Loop other posts normally.
-                    printf($post->ID);
-                    printf('<br />');
+                    get_template_part(PARTIAL_ARTICLES, 'archive');
                 }
             } ?>
-            <br /><br />
         </div>
 
         <?php
