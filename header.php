@@ -42,16 +42,18 @@ global $sections;
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-    <div id="header">
-        <nav id="sections-menu">
-            <ul id="primary">
-                <?php $sections->sections_menu('primary'); ?>
-            </ul>
-            <ul class="section-trim-background" id="secondary">
-                <?php $sections->sections_menu('secondary'); ?>
-            </ul>
-        </nav>
-    </div>
+    <?php if (!is_404()) : ?>
+        <div id="header">
+            <nav id="sections-menu">
+                <ul id="primary">
+                    <?php $sections->sections_menu('primary'); ?>
+                </ul>
+                <ul class="section-trim-background" id="secondary">
+                    <?php $sections->sections_menu('secondary'); ?>
+                </ul>
+            </nav>
+        </div>
+    <?php endif; ?>
     <div id="site">
         <div id="main" role="main">
             <div id="content">
