@@ -38,6 +38,7 @@
  */
 
 function category_widget_output($cats, $show_category_name = true, $numberposts = 4)  {
+    global $post, $sections;
     $categories = array();
     $current_post = 0;
 
@@ -48,8 +49,6 @@ function category_widget_output($cats, $show_category_name = true, $numberposts 
     } else {
         return false;
     }
-
-    printf('<br /><br /><br />');
 
     /* Double loop:
      * 1. Loop each supplied category.
@@ -64,24 +63,43 @@ function category_widget_output($cats, $show_category_name = true, $numberposts 
             'order' => 'DESC',
             'category' => $category
         ));
+
+        $category = get_category($category);
+        $section_slug = $sections->get_section_slug($category);
+
+        $section_text = sprintf('section-%s-text', $section_slug);
+        $section_back = sprintf('section-%s-background', $section_slug);
         
         if ($show_category_name) {
-            printf('<h2>%s</h2>', get_category($category)->cat_name);
+            printf('<h2 class="widget-title"><a class="%s" title="%s" href="%s">%s</a></h2>', 
+                $section_text,
+                $category->cat_name,
+                get_category_link($category),
+                $category->cat_name
+            );
         }
 
         printf('<div class="category-widget-display">');
 
-        foreach ($category_posts as $cat_post) { 
-            $post_classes = implode(' ', get_post_class($current_post === 0 ? 'left' : '', $cat_post->ID));
+        foreach ($category_posts as $index => $post) { 
+            setup_postdata($post);
+            $post_classes = implode(' ', get_post_class($current_post === 0 ? 'left' : '', get_the_ID()));
+            $image_size = ($index === 0) ? 'medium' : 'thumbnail';
 
-            printf('<article class="%s" id="%s">', $post_classes, $cat_post->ID);
-            printf('%d %s<br />', $cat_post->ID, $cat_post->post_title);
+            ?>
 
-            if ($current_post === 0) {
-                printf('<p>%s</p>', $cat_post->post_excerpt);
-            }
+            <article class="<?php printf($post_classes); ?>" id="<?php the_ID(); ?>">
+                <div class="category-article-image">
+                    <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark">
+                        <img class="cover-fit" src="<?php the_post_image(get_the_ID(), $image_size); ?>" alt="">
+                    </a>
+                </div>
+                <p class="category-article-title <?php printf($index === 0 ? $section_back : 'title'); ?>">
+                    <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a>
+                </p>
+            </article>
 
-            printf('</article>');
+            <?php
 
             if ($current_post === 0) {
                 printf('<div class="right">');
@@ -92,7 +110,6 @@ function category_widget_output($cats, $show_category_name = true, $numberposts 
         
         $current_post = 0;    
         printf('</div></div>');
-        printf('<br /><br /><br />');
     }
 
     wp_reset_postdata();

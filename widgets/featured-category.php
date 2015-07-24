@@ -137,6 +137,7 @@ class tuairisc_sidebar_category extends WP_Widget {
      */
 
     public function widget($defaults, $instance) {
+        global $sections;
         $key = get_option('tuairisc_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
         
@@ -161,6 +162,7 @@ class tuairisc_sidebar_category extends WP_Widget {
             if ($instance['show_image'] && $index === 0) {
                 printf('<br />%s<br />', get_post_image($post)); 
             } 
+
             printf('</li>');
         }
                 

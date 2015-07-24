@@ -70,7 +70,7 @@ class tuairisc_featured extends WP_Widget {
                 <select id="<?php printf($this->get_field_id('number_posts')); ?>" name="<?php printf($this->get_field_name('number_posts')); ?>">
                     <?php for ($i = 0; $i < 16; $i += 4) {
                         printf('<option value="%d">%d</option>', $i, $i);
-                    }  ?>
+                    } ?>
                 </select>
             </li>
         </ul>
@@ -105,6 +105,9 @@ class tuairisc_featured extends WP_Widget {
      */
 
     public function widget($defaults, $instance) {
+        // $post object is needed in order to correctly run setup_postdata().
+        global $post;
+
         $featured_key = get_option('tuairisc_featured_post_key');
         $sticky_id = -1;
         $featured_posts = array();
@@ -168,9 +171,25 @@ class tuairisc_featured extends WP_Widget {
         <div class="recent-widget tuairisc-post-widget">
             <?php foreach ($featured_posts as $index => $post) {
                 if ($instance['show_sticky'] && $index === 0) {
+                    // 1. Show lead post.
+                    setup_postdata($post);
                     get_template_part(PARTIAL_ARTICLES, 'archivelead');
-                } else {
-                    get_template_part(PARTIAL_ARTICLES, 'archive');
+                    printf('<hr>');
+                }
+
+                if ($instance['number_posts'] > 0 && $index % 4 === 1 && $index !== 0) {
+                    // If 1, 5, 9, ...
+                    printf('<div class="featured-row home-flex-row">');
+                }
+
+                if (!$instance['show_sticky'] || $index > 0) {
+                    // 2. Show row posts.
+                    get_template_part(PARTIAL_ARTICLES, 'archivesmall');
+                }
+
+                if ($instance['number_posts'] > 0 && $index % 4 === 0 && $index !== 0) {
+                    // If 4, 8, 12, ...
+                    printf('</div>');
                 }
             } ?>
         </div>
