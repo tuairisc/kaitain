@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Archive Lead Article
+ * Featured Small Article
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Tuairisc.ie
@@ -29,22 +29,13 @@
 
 ?>
 
-<article <?php post_class('archive-lead'); ?> id="<?php the_id(); ?>">
+<article <?php post_class('archive-small'); ?> id="<?php the_id(); ?>">
     <div class="thumbnail">
-        <a rel="bookmark" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'large'); ?>" /></a>
+        <a rel="bookmark" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'thumbnail'); ?>" /></a>
     </div>
     <header>
-        <h2 class="title">
+        <h5 class="title">
             <a rel="bookmark" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
-        </h2>
-        <h4 class="attribution">
-            <a href="<?php printf(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php the_author(); ?></a>
-        </h4>
-        <span class="date">
-            <small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small>
-        </span>
+        </h5>
     </header>
-    <p>
-        <?php the_excerpt(); ?>
-    </p>
 </article>
