@@ -15,7 +15,8 @@ All of the PHP code in the project is licensed under the GPL v3 or later, except
 A copy of the license is included in the root of the plugin’s directory. The file is named LICENSE.
 
 ## Includes and Libraries
-* The [social-meta](https://github.com/bhalash/social-meta) library is copyright of [Mark Grealish](http://www.bhalash.com) and included under the MIT License.
+* The [social-meta](https://github.com/bhalash/social-meta) library is copyright of [Mark Grealish](https://www.bhalash.com) and included under the MIT License.
+* The [section-manager](https://github.com/bhalash/section-manager) library is copyright of [Mark Grealish](https://www.bhalash.com) and includede under the GPL v3.
 
 ## Media
 * The Tuairisc.ie and Ar Son na Cúise brands are copyright and trademark of [Tuairisc.ie](http://tuairisc.ie/) and all rights are reserved.
