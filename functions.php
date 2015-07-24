@@ -84,6 +84,7 @@ define('PARTIAL_PAGES', THEME_PARTIALS . 'pages/');
  * -----------------------------------------------------------------------------
  */
 
+define('NODE_SCRIPTS', THEME_URL . '/node_modules/');
 define('THEME_JS', ASSETS_URL . 'js/');
 define('THEME_IMAGES', ASSETS_URL . 'images/');
 define('THEME_CSS', ASSETS_URL . 'css/');
@@ -201,7 +202,6 @@ include(THEME_WIDGETS . 'featured-category.php');
 // Front page category widgets.
 include(THEME_WIDGETS . 'home-category.php');
 
-
 $widget_defaults = array(
     'before_widget' => '<div id="%1$s" class="%2$s">',
     'after_widget' => '</div>',
@@ -255,6 +255,7 @@ $google_fonts = array(
 
 $theme_javascript = array(
     'google-analytics' => THEME_JS . 'analytics.js',
+    'object-fit' => NODE_SCRIPTS . 'object-fit/dist/polyfill.object-fit.min.js',
     'functions' => THEME_JS . 'functions.js'
 );
 
@@ -264,7 +265,7 @@ $theme_admin_javascript = array(
 
 $conditional_scripts = array(
     'html5-shiv' => array(
-        THEME_URL . '/node_modules/html5shiv/dist/html5shiv.min.js',
+        NODE_SCRIPTS . 'html5shiv/dist/html5shiv.min.js',
         'lte IE 9'
     )
 );
@@ -274,6 +275,7 @@ $theme_styles = array(
     'main-style' => THEME_CSS . 'main.css',
     // WordPress style.css. Not really used.
     'wordpress-style' => THEME_URL . '/style.css',
+    'object-fit-css' => NODE_SCRIPTS . 'object-fit/dist/polyfill.object-fit.css'
 );
 
 /**
@@ -737,9 +739,12 @@ function increment_view_counter($content) {
  * @return  string                  The avatar's URL.
  */
 
-function get_avatar_url_only($id_or_email, $size, $default, $alt) {
-   $avatar = get_avatar($id_or_email, $size, $default, $alt);
-   return preg_replace('/(^.*src="|"\s.*$)/', '', $avatar);
+function get_avatar_url_only($avatar, $id_or_email, $size, $default, $alt) {
+    if (!is_admin()) {
+        $avatar = preg_replace('/(^.*src="|"\s.*$)/', '', $avatar);
+   }
+
+   return $avatar;
 }
 
 /**
@@ -857,17 +862,15 @@ add_action('wp_enqueue_scripts', 'clean_header');
 remove_filter('the_content', 'convert_smilies');
 remove_filter('the_excerpt', 'convert_smilies');
 
-// Return date in Irish.
-add_filter('get_comment_date', 'date_to_irish');
-add_filter('get_the_date', 'date_to_irish');
-add_filter('the_date', 'date_to_irish');
-
 // Title function.
 add_filter('wp_title', 'theme_title', 1, 3);
 
 /* This theme only calls content on the load of a full page article. It's a good
  * point at which to insert the post count increment. */
 add_filter('the_content', 'increment_view_counter');
+
+// Strip HTML from avatar URL.
+add_filter('get_avatar', 'get_avatar_url_only', 10, 5);
 
 /**
  * Theme Supports
