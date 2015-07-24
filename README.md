@@ -15,8 +15,6 @@ All of the PHP code in the project is licensed under the GPL v3 or later, except
 A copy of the license is included in the root of the plugin’s directory. The file is named LICENSE.
 
 ## Includes and Libraries
-* The [get-the-image](https://github.com/justintadlock/get-the-image) library is copyright of [Justin Tadlock](https://github.com/justintadlock) and included under the GPL v2.
-* The [wp-custom-post-type-class](https://github.com/jjgrainger/wp-custom-post-type-class) library is copyright of [Joe Grainger](https://twitter.com/jjgrainger) and included under the MIT License.
 * The [social-meta](https://github.com/bhalash/social-meta) library is copyright of [Mark Grealish](http://www.bhalash.com) and included under the MIT License.
 
 ## Media
