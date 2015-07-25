@@ -33,20 +33,19 @@
  * Output the one-left-three right output of the category widget. This is in a 
  * separate function as it also used in archives.
  * 
- * @param   int/array/string        $cats           Categor{y,ies}.
- * @param   int                     $numberposts    Number of posts to output.
+ * @param   int/array/string    $widget_categories  Categor{y,ies}.
+ * @param   int                 $numberposts        Number of posts to output.
  */
 
-function category_widget_output($cats, $show_category_name = true, $numberposts = 4)  {
+function category_widget_output($widget_categories, $show_category_name = true, $numberposts = 4)  {
     global $post, $sections;
     $categories = array();
-    $current_post = 0;
 
     // Resolve categories down to ID.
-    if (is_int($cats) || is_string($cats)) {
-        $categories[] = intval($cats);
-    } else if (is_array($cats)) {
-        $categories = $cats;
+    if (is_int($widget_categories) || is_string($widget_categories)) {
+        $categories[] = intval($widget_categories);
+    } else if (is_array($widget_categories)) {
+        $categories = $widget_categories;
     } else {
         return false;
     }
@@ -87,47 +86,60 @@ function category_widget_output($cats, $show_category_name = true, $numberposts 
 
         foreach ($category_posts as $index => $post) { 
             setup_postdata($post);
-            $post_classes = implode(' ', get_post_class($current_post === 0 ? 'category-left' : '', get_the_ID()));
+
             $image_size = ($index === 0) ? 'medium' : 'thumbnail';
 
-            // Articles on either side have the same HTML, but different classes.
-            printf('<article class="%s" id="%s">', $post_classes, get_the_ID());
-            printf('<div class="%s">', 'category-article-image');
-
-            printf('<a href="%s" title="%s" rel="bookmark"><img class="%s" src="%s" alt="%s" /></a>',
-                get_the_permalink(),
-                the_title_attribute('echo=0'),
-                'cover-fit',
-                get_post_image(get_the_ID(), $image_size),
-                the_title_attribute('echo=0')
+            $classes = array(
+                'article' => implode(' ', get_post_class($index === 0 ? 'category-left' : '', get_the_ID())),
+                'paragraph' => ($index === 0) ? $section_background : '',
+                'anchor' => $section_hover
             );
 
-            // End category-article-image
-            printf('</div>');
+            category_article_output($post, $classes, $image_size);
 
-            printf('<p class="%s %s"><a class="%s" href="%s" title="%s" rel="bookmark">%s</a></p>',
-                'category-article-title',
-                ($index === 0) ? $section_background : $section_hover,
-                ($index !== 0) ? $section_hover : '',
-                get_the_permalink(),
-                the_title_attribute('echo=0'),
-                get_the_title()
-            );
-
-            printf('</article>');
-
-            if ($current_post === 0) {
+            if ($index === 0) {
                 printf('<div class="category-right">');
             }
-
-            $current_post++;
         }
-        
-        $current_post = 0;    
+
         printf('</div></div></div>');
     }
 
     wp_reset_postdata();
+}
+
+/**
+ * Category Article Output
+ * -----------------------------------------------------------------------------
+ * Articles on either side of the widget have the same HTML, but different
+ * classes. I separated this for my sanity.
+ *
+ * @param   int/object      $post           The post object.
+ * @param   array           $classes        Classes for article elements.
+ * @param   string          $image_size     Thumbnail image size.
+ */
+
+function category_article_output($post, $classes, $image_size) {
+    $post = get_post($post);
+
+    if (!$post) {
+        return;
+    }
+
+    ?> 
+
+    <article class="<?php printf($classes['article']); ?>" id="<?php the_ID(); ?>">
+        <a class="<?php printf($classes['anchor']); ?>" href="<?php the_permalink(); ?>" rel="bookmark">
+            <div class="category-article-image">
+                <img class="cover-fit" src="<?php the_post_image(get_the_ID(), $image_size); ?>" alt="<?php the_title_attribute(); ?>" />
+            </div>
+            <p class="category-article-title <?php printf($classes['paragraph']); ?>">
+                <?php the_title(); ?>
+            </p>
+        </a>
+    </article>
+
+    <?php
 }
 
 ?>
