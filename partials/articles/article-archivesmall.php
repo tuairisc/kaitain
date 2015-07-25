@@ -27,15 +27,22 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
+global $sections;
+$section_slug = $sections->get_section_slug(get_the_category()[0]);
+
+$section_hover = sprintf('section-%s-text-hover', $section_slug);
+$section_background = sprintf('section-%s-background', $section_slug);
+
 ?>
 
 <article <?php post_class('archive-small'); ?> id="<?php the_id(); ?>">
-    <div class="thumbnail">
-        <a rel="bookmark" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'thumbnail'); ?>" /></a>
-    </div>
-    <header>
-        <h5 class="title">
-            <a rel="bookmark" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
-        </h5>
-    </header>
+    <a class="<?php printf($section_hover); ?>" rel="bookmark" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+        <div class="thumbnail">
+            <img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'thumbnail'); ?>" />
+            <div class="archive-trim <?php printf($section_background); ?>"></div>
+        </div>
+        <header>
+            <h5><?php the_title(); ?></h5>
+        </header>
+    </a>
 </article>
