@@ -28,8 +28,8 @@
  */
 
 global $sections;
-$section_slug = $sections->get_section_slug(get_the_category()[0]);
 
+$section_slug = $sections->get_section_slug(get_the_category()[0]);
 $section_hover = sprintf('section-%s-text-hover', $section_slug);
 $section_background = sprintf('section-%s-background', $section_slug);
 
@@ -39,7 +39,7 @@ $section_background = sprintf('section-%s-background', $section_slug);
     <a class="<?php printf($section_hover); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail">
             <img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'thumbnail'); ?>" />
-            <div class="archive-trim <?php printf($section_background); ?>"></div>
+            <div class="archive-trim-bottom <?php printf($section_background); ?>"></div>
         </div>
         <header>
             <h5><?php the_title(); ?></h5>
