@@ -139,6 +139,8 @@ class tuairisc_popular extends WP_Widget {
      */
 
     public function widget($defaults, $instance) {
+        global $post;
+
         $key = get_option('tuairisc_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
         $start_date = new DateTime();
@@ -164,14 +166,9 @@ class tuairisc_popular extends WP_Widget {
 
         printf('<div class="popular-widget tuairisc-post-widget">');
 
-        foreach ($popular_posts as $popular) {
-            printf('<hr>');
-            printf('<ul>');
-            printf('<li>%s</li>', $popular->post_title);
-            printf('<li>%s</li>', get_post_image($popular->ID));
-            printf('<li>%s</li>', get_the_date_strftime(get_option('tuairisc_strftime_date_format'), $popular->ID));
-            printf('<li>%s</li>', get_post_meta($popular->ID, $key, true));
-            printf('</ul>');
+        foreach ($popular_posts as $index => $post) {
+            setup_postdata($post);
+            get_template_part(PARTIAL_ARTICLES, 'sidebar');
         }
 
         printf('</div>');
