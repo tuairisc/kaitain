@@ -28,26 +28,26 @@
  */
 
 global $sections;
-$section_slug = $sections->get_section_slug(get_the_category()[0]);
 
-$section_hover = sprintf('section-%s-text-hover', $section_slug);
+$section_slug = $sections->get_section_slug(get_the_category()[0]);
+$section_text = sprintf('section-%s-text-hover', $section_slug);
 $section_background = sprintf('section-%s-background', $section_slug);
 
 ?>
 
 <article <?php post_class('archive-lead'); ?> id="<?php the_id(); ?>">
-    <div class="thumbnail">
-        <a rel="bookmark" href="<?php the_permalink(); ?>"><img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'large'); ?>" /></a>
-        <div class="archive-trim <?php printf($section_background); ?>"></div>
-    </div>
+    <a class="<?php printf($section_text); ?> "rel="bookmark" href="<?php the_permalink(); ?>">
+        <div class="thumbnail">
+            <img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'large'); ?>" />
+            <div class="archive-trim-bottom <?php printf($section_background); ?>"></div>
+        </div>
+        <h2><?php the_title(); ?></h2>
+    </a>
     <header>
-        <h2 class="<?php printf($section_hover); ?>">
-            <a class="<?php printf($section_hover); ?>" rel="bookmark" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-        </h2>
         <h4 class="attribution">
             <a href="<?php printf(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php the_author(); ?></a>
         </h4>
-        <span class="date">
+        <span class="post-date">
             <small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small>
         </span>
     </header>
