@@ -191,18 +191,18 @@ include(THEME_ADMIN . 'notice-edit-box.php');
  * -----------------------------------------------------------------------------
  */
 
-// Popular posts, sorted by internally-tracked view count.
-include(THEME_WIDGETS . 'popular-viewcount.php');
-// Recent posts in $foo category.
-include(THEME_WIDGETS . 'recent-posts.php');
 // Link to selected author profiles.
-include(THEME_WIDGETS . 'authors.php');
+include(THEME_WIDGETS . 'home-authors.php');
 // Front page featured and sticky article widget.
-include(THEME_WIDGETS . 'featured-articles.php');
-// Sidebar featured category.
-include(THEME_WIDGETS . 'featured-category.php');
+include(THEME_WIDGETS . 'home-featured-articles.php');
 // Front page category widgets.
 include(THEME_WIDGETS . 'home-category.php');
+// Sidebar featured category.
+include(THEME_WIDGETS . 'sidebar-featured-category.php');
+// Popular posts, sorted by internally-tracked view count.
+include(THEME_WIDGETS . 'sidebar-popular-viewcount.php');
+// Recent posts in $foo category.
+include(THEME_WIDGETS . 'sidebar-recent-posts.php');
 
 $widget_defaults = array(
     'before_widget' => '<div id="%1$s" class="%2$s">',
