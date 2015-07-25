@@ -150,6 +150,8 @@ include(THEME_INCLUDES . 'featured.php');
 include(THEME_INCLUDES . 'section-manager/section-manager.php');
 // Open Graph and Twitter Card <head> meta tag links.
 include(THEME_INCLUDES . 'social-meta/social-meta.php');
+// Home and archive widget category output.
+include(THEME_INCLUDES . 'home-category-output.php');
 
 /** 
  * Social Media Accounts
