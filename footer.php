@@ -35,7 +35,7 @@
         } ?>
     </div><?php // End #main ?>
     <?php if (!is_404()) : ?>
-        <div id="footer">
+        <div class="section-trim-background" id="footer">
             <?php for ($i = 1; $i <= 4; $i++) {
                if (is_active_sidebar('widgets-footer-' . $i)) {
                      dynamic_sidebar('widgets-sidebar-' . $i);
