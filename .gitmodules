@@ -1,17 +1,17 @@
 [submodule "includes/get-the-image"]
-	path = includes/get-the-image
-	url = git@github.com:justintadlock/get-the-image.git
+    path = includes/get-the-image
+    url = git@github.com:justintadlock/get-the-image.git
     branch = master
 [submodule "assets/css"]
-	path = assets/css
-	url = git@github.com:bhalash/tuairisc-css.git
+    path = assets/css
+    url = git@github.com:bhalash/tuairisc-css.git
     branch = master
     ignore = dirty
 [submodule "includes/social-meta"]
-	path = includes/social-meta
-	url = git@github.com:bhalash/social-meta.git
-	branch = master
+    path = includes/social-meta
+    url = git@github.com:bhalash/social-meta.git
+    branch = master
 [submodule "includes/section-manager"]
-	path = includes/section-manager
-	url = git@github.com:bhalash/section-manager.git
-	branch = master
+    path = includes/section-manager
+    url = git@github.com:bhalash/section-manager.git
+    branch = master
