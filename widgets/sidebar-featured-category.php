@@ -55,6 +55,7 @@ class tuairisc_sidebar_category extends WP_Widget {
             'widget_title' => __('Featued Category', TTD),
             'max_posts' => 10,
             'show_image' => false,
+            'use_section_trim' => false,
             'category' => 0
         ); 
 
@@ -101,12 +102,17 @@ class tuairisc_sidebar_category extends WP_Widget {
                 <input id="<?php printf($this->get_field_id('show_image')); ?>" name="<?php printf($this->get_field_name('show_image')); ?>" type="checkbox"  />
                 <label for="<?php printf($this->get_field_id('show_image')); ?>"><?php _e('Show thumbnail image for lead post', TTD); ?></label>
             </li>
+            <li>
+                <input id="<?php printf($this->get_field_id('use_section_trim')); ?>" name="<?php printf($this->get_field_name('use_section_trim')); ?>" type="checkbox"  />
+                <label for="<?php printf($this->get_field_id('use_section_trim')); ?>"><?php _e('Use section trim colour instead of a grey background.', TTD); ?></label>
+            </li>
         </ul>
         <script>
             // This jQuery is easier for me to parse and debug than a mess of inline PHP.
             jQuery('#<?php printf($this->get_field_id('category')); ?>').val('<?php printf($instance['category']); ?>');
             jQuery('#<?php printf($this->get_field_id('max_posts')); ?>').val('<?php printf($instance['max_posts']); ?>');
             jQuery('#<?php printf($this->get_field_id('show_image')); ?>').prop('checked', <?php printf($instance['show_image'] ? 'true' : 'false'); ?>);
+            jQuery('#<?php printf($this->get_field_id('use_section_trim')); ?>').prop('checked', <?php printf($instance['use_section_trim'] ? 'true' : 'false'); ?>);
         </script>
 
         <?php
@@ -124,6 +130,7 @@ class tuairisc_sidebar_category extends WP_Widget {
         $defaults = array();
         $defaults['widget_title'] = filter_var($new_defaults['widget_title'], FILTER_SANITIZE_STRIPPED);
         $defaults['show_image'] = ($new_defaults['show_image'] === 'on');
+        $defaults['use_section_trim'] = ($new_defaults['use_section_trim'] === 'on');
         $defaults['max_posts'] = $new_defaults['max_posts'];
         $defaults['category'] = $new_defaults['category'];
         return $defaults;
@@ -137,9 +144,11 @@ class tuairisc_sidebar_category extends WP_Widget {
      */
 
     public function widget($defaults, $instance) {
-        global $sections;
+        global $sections, $post;
         $key = get_option('tuairisc_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
+
+        $category = get_category($instance['category']);
         
         $category_posts = get_posts(array(
             'post_type' => 'post',
@@ -151,19 +160,34 @@ class tuairisc_sidebar_category extends WP_Widget {
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
-            printf($defaults['before_title'] . apply_filters('widget_title', $instance['widget_title']) . $defaults['after_title']);
         }
 
-        printf('<div class="recent-widget tuairisc-post-widget"></ul>');
+        if ($instance['use_section_trim']) {
+            $section_slug = $sections->get_section_slug(get_the_category()[0]);
+            $section_background = sprintf('section-%s-background', $section_slug);
+            $background = $section_background;
+        } else {
+            $background = 'sidebar-category-grey';
+        }
+
+        printf('<div class="%s">', $background);
+        printf('<h3 class="widget-title">%s</h3>', $category->cat_name);
 
         foreach ($category_posts as $index => $post) {
-            printf('<li>%s', $post->post_title); 
+            setup_postdata($post);
 
-            if ($instance['show_image'] && $index === 0) {
-                printf('<br />%s<br />', get_post_image($post)); 
-            } 
+            ?>
 
-            printf('</li>');
+            <h5 class="title">
+                <a href="<?php the_permalink(); ?>">
+                    <?php if ($instance['show_image'] && $index === 0) : ?>
+                        <img class="cover-fit" src="<?php the_post_image($post); ?>" alt="<?php the_title(); ?>" />
+                    <?php endif; ?> 
+                    <?php the_title(); ?>
+                </a>
+            </h5>
+
+            <?php
         }
                 
         printf('</div>');
