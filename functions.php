@@ -145,7 +145,9 @@ add_option('tuairisc_favicons', array(
  */
 
 // Featured and sticky posts.
-include(THEME_INCLUDES . 'featured.php');
+include(THEME_INCLUDES . 'featured-sticky-posts.php');
+// Related posts for full articles.
+// include(THEME_INCLUDES . 'single-post-related-posts.php');
 // Site sections.
 include(THEME_INCLUDES . 'section-manager/section-manager.php');
 // Open Graph and Twitter Card <head> meta tag links.
