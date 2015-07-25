@@ -134,20 +134,17 @@ class tuairisc_recent extends WP_Widget {
      */
 
     public function widget($defaults, $instance) {
+        global $post;
+
         $key = get_option('tuairisc_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
-        
-        $recent_posts = array(
+
+        $recent_posts = get_posts(array(
             'post_type' => 'post',
             'numberposts' => $instance['max_posts'],
             'order' => 'DESC',
-        );
-
-        if ($instance['category']) {
-            $recent_posts['category'] = $instance['category'];
-        }
-
-        $recent_posts = get_posts($recent_posts);
+            'category' => ($instance['category']) ? $instance['category'] : ''
+        ));
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
@@ -156,13 +153,9 @@ class tuairisc_recent extends WP_Widget {
 
         printf('<div class="recent-widget tuairisc-post-widget">');
 
-        foreach ($recent_posts as $recent) {
-            printf('<hr>');
-            printf('<ul>');
-            printf('<li>%s</li>', $recent->post_title);
-            printf('<li>%s</li>', get_post_image($recent->ID));
-            printf('<li>%s</li>', get_the_date_strftime(get_option('tuairisc_strftime_date_format'), $recent->ID));
-            printf('</ul>');
+        foreach ($recent_posts as $index => $post) {
+            setup_postdata($post);
+            get_template_part(PARTIAL_ARTICLES, 'sidebar');
         }
 
         printf('</div>');
