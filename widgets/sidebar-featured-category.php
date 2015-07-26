@@ -162,16 +162,17 @@ class tuairisc_sidebar_category extends WP_Widget {
             printf($defaults['before_widget']);
         }
 
+        $background = 'grey';
+
         if ($instance['use_section_trim']) {
+            // Looks ugly, but I could. ¯\_(ツ)_/¯ Use section trim.
             $section_slug = $sections->get_section_slug(get_the_category()[0]);
             $section_background = sprintf('section-%s-background', $section_slug);
             $background = $section_background;
-        } else {
-            $background = 'sidebar-category-grey';
         }
 
-        printf('<div class="%s">', $background);
-        printf('<h3 class="widget-title">%s</h3>', $category->cat_name);
+        printf('<div class="sidebar-category-widget-interior %s">', $background);
+        printf('<h3 class="sidebar-widget-title">%s</h3>', $category->cat_name);
 
         foreach ($category_posts as $index => $post) {
             setup_postdata($post);
@@ -179,7 +180,7 @@ class tuairisc_sidebar_category extends WP_Widget {
             ?>
 
             <h5 class="title">
-                <a href="<?php the_permalink(); ?>">
+                <a class="green-link" href="<?php the_permalink(); ?>">
                     <?php if ($instance['show_image'] && $index === 0) : ?>
                         <img class="cover-fit" src="<?php the_post_image($post); ?>" alt="<?php the_title(); ?>" />
                     <?php endif; ?> 
