@@ -31,36 +31,28 @@ $next = $paged + 1;
 $previous = $paged - 1;
 
 ?>
-
-<hr>
-<hr>
-
 <nav id="pagination">
-    <p class="previous<?php echo (is_single()) ? '-post' : ''; ?>">
-        <small>
+    <div class="previous">
+        <h3>
             <?php if (is_single()) {
                 next_post_link('%link', '&larr; %title', false);
             } else {
-                previous_posts_link('&larr; Page ' . $previous);
+                previous_posts_link(__('&larr; Siar', TTD));
             } ?>
-        </small>
-    </p>
-
-    <p class="count">
-        <small>
-            <?php if (!is_single()) : ?>
-                <span><?php archive_page_count(true); ?></span>
-            <?php endif; ?>
-        </small>
-    </p>
-
-    <p class="next<?php echo (is_single()) ? '-post' : ''; ?>">
-        <small>
+        </h3>
+    </div>
+    <div class="count">
+        <?php if (!is_single()) : ?>
+            <h3><span><?php archive_page_count(true); ?></span></h3>
+        <?php endif; ?>
+    </div>
+    <div class="next">
+        <h3>
             <?php if (is_single()) {
                 previous_post_link('%link', '%title &rarr;', false);
             } else {
-                next_posts_link('Page ' . $next . ' &rarr;'); 
+                next_posts_link(__('Lean ar Aghaidh &rarr;', TTD)); 
             } ?>
-        </small>
-    </p>
+        </h3>
+    </div>
 </nav>
