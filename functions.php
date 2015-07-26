@@ -99,7 +99,7 @@ add_option('tuairisc_sticky_post', array(
     'expires' => 0
 ), '', true);
 
-add_option('tuairisc_feature_post_key', 'tuairisc_is_featured_post');
+add_option('tuairisc_featured_post_key', 'tuairisc_is_featured_post');
 
 /**
  *  Other Variables
@@ -209,7 +209,7 @@ include(THEME_WIDGETS . 'sidebar-recent-posts.php');
 $widget_defaults = array(
     'before_widget' => '<div id="%1$s" class="%2$s">',
     'after_widget' => '</div>',
-    'before_title' => '<h3>',
+    'before_title' => '<h3 class="sidebar-widget-title">',
     'after_title' => '</h3>'
 );
 
@@ -450,7 +450,7 @@ function theme_title($title, $separator, $side) {
     }
 
     if ($paged >= 2 || $page >= 2) {
-        $title = "$title $separator " . sprintf(__('Page %s', TTD), max($paged, $page));
+        $title = "$title $separator " . sprintf(__('Leathanach %s', TTD), max($paged, $page));
     }
 
     return $title;
@@ -482,7 +482,7 @@ function archive_page_count($echo = false, $page_num = null, $total_results = nu
 
     $posts_per_page = get_option('posts_per_page');
     $total_pages = ceil($total_results / $posts_per_page);
-    $page_count = sprintf(__('Page %s of %s', TTD), $page_num, $total_pages);
+    $page_count = sprintf(__('%s / %s', TTD), $page_num, $total_pages);
 
     if (!$echo) {
         return $page_count;
@@ -775,34 +775,8 @@ function clean_search_url() {
  */
 
 function theme_comments($comment, $args, $depth) {
-    $GLOBALS['comment'] = $comment; ?>
-
-    <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
-        <div class="avatar-wrapper">
-            <?php echo get_avatar($comment, 75); ?>
-        </div>
-        <div class="comment-interior">
-            <header>
-                <p class="author"><?php comment_author_link(); ?></p>
-                <p class="date"><small><?php printf(__('%1$s at %2$s', TTD), get_comment_date(), get_comment_time()); ?></small></p>
-            </header>
-
-            <?php if ($comment->comment_approved === '0') {
-                printf('<p>%s</p>', _e('Your comment has been held for moderation.', TTD));
-            } ?>
-
-            <div class="comment-body">
-                <?php comment_text(); ?>
-            </div>
-            <?php if (is_user_logged_in()) : ?>
-                <footer>
-                    <p><small>
-                        <?php edit_comment_link(__('edit', TTD),'  ',''); ?>
-                    </small></p>
-                </footer>
-            <?php endif; ?>
-        </div>
-    </li><?php
+    $GLOBALS['comment'] = $comment;
+    get_template_part(THEME_PARTIALS, 'comments');
 }
 
 /**
@@ -825,7 +799,7 @@ function wrap_comment_fields_after() {
  */
 
 if (!isset($content_width)) {
-    $content_width = 960;
+    $content_width = 1140;
 }
 
 // Enqueue all scripts and stylesheets.
