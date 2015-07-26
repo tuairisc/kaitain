@@ -28,7 +28,6 @@
  */
 
 get_header();
-
 global $cat;
 
 $page_number = intval(get_query_var('paged'));
