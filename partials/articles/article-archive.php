@@ -27,26 +27,23 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
+global $sections;
+
+$section_slug = $sections->get_section_slug(get_the_category()[0]);
+$section_text = sprintf('section-%s-text-hover', $section_slug);
+$section_background = sprintf('section-%s-background', $section_slug);
+
 ?>
 
 <article <?php post_class('archive'); ?> id="<?php the_id(); ?>">
-    <div class="thumbnail">
-        <a rel="bookmark" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><img src="<?php the_post_image(); ?>" /></a>
-    </div>
-    <div class="archive-content"> 
-        <header>
-            <h1 class="title">
-                <a rel="bookmark" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
-            </h1>
-            <h3 class="attribution">
-                <a href=""><?php the_author(); ?></a>
-            </h3>
-            <span class="meta">
-                <?php the_date_strftime(); ?>
-            </span>
-        </header>
-        <p>
-            <?php the_excerpt(); ?>
-        </p>
-    </div>
+    <a class="<?php printf($section_text); ?> "rel="bookmark" href="<?php the_permalink(); ?>">
+        <div class="thumbnail">
+            <img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'large'); ?>" />
+            <div class="archive-trim-bottom <?php printf($section_background); ?>"></div>
+        </div>
+        <div class="post-content">
+            <h3 class="archive-title"><?php the_title(); ?></h3>
+            <p><small><?php the_excerpt(); ?></small></p>
+        </div>
+    </a>
 </article>
