@@ -65,8 +65,9 @@ function category_widget_output($widget_categories, $show_category_name = true, 
         ));
 
         $category = get_category($category);
-        $section_slug = $sections->get_section_slug($category);
 
+        // Fetch section trim colours.
+        $section_slug = $sections->get_section_slug($category);
         $section_text = sprintf('section-%s-text', $section_slug);
         $section_hover = sprintf('section-%s-text-hover', $section_slug);
         $section_background = sprintf('section-%s-background', $section_slug);
@@ -74,7 +75,8 @@ function category_widget_output($widget_categories, $show_category_name = true, 
         printf('<div class="%s">', 'category-widget');
         
         if ($show_category_name) {
-            printf('<h2 class="widget-title"><a class="%s" title="%s" href="%s">%s</a></h2>', 
+            // Title links to category.
+            printf('<h2 class="%s widget-title"><a title="%s" href="%s">%s</a></h2>', 
                 $section_text,
                 $category->cat_name,
                 get_category_link($category),
@@ -87,9 +89,11 @@ function category_widget_output($widget_categories, $show_category_name = true, 
         foreach ($category_posts as $index => $post) { 
             setup_postdata($post);
 
+            // "Side" posts only need athumbnail size image.
             $image_size = ($index === 0) ? 'medium' : 'thumbnail';
 
             $classes = array(
+                // Less ugly than some alternatives I tried.
                 'article' => implode(' ', get_post_class($index === 0 ? 'category-left' : '', get_the_ID())),
                 'paragraph' => ($index === 0) ? $section_background : '',
                 'anchor' => $section_hover
