@@ -44,16 +44,40 @@ global $sections;
 <body <?php body_class(); ?>>
     <?php if (!is_404()) : ?>
         <div id="header">
+            <div class="section-trim-background" id="brand">
+                <nav id="hamburger">
+                    <ul>
+                        <li>
+                            <a class="facebook" href="http://www.facebook.com"></a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav id="home">
+                    <a id="home" rel="home" href="<?php printf(home_url()); ?>"></a> 
+                </nav>
+                <nav id="external">
+                    <ul>
+                        <li>
+                            <a class="facebook" href="http://www.facebook.com"></a>
+                        </li>
+                        <li>
+                            <a class="twitter" href="http://www.twitter.com"></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
             <nav id="sections-menu">
+                <ul id="secondary">
+                    <?php $sections->sections_menu('secondary'); ?>
+                </ul>
                 <ul id="primary">
                     <?php $sections->sections_menu('primary'); ?>
-                </ul>
-                <ul class="section-trim-background" id="secondary">
-                    <?php $sections->sections_menu('secondary'); ?>
                 </ul>
             </nav>
         </div>
     <?php endif; ?>
-    <div id="site">
-        <div id="main" role="main">
-            <div id="content">
+    <?php if (function_exists('adrotate_group')) {
+        printf('%s', adrotate_group(1));
+    } ?>
+    <div id="main" role="main">
+        <div id="content">

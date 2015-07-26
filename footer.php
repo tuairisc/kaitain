@@ -34,8 +34,11 @@
             get_sidebar(); 
         } ?>
     </div><?php // End #main ?>
+    <?php if (function_exists('adrotate_group')) {
+        printf('%s', adrotate_group(1));
+    } ?>
     <?php if (!is_404()) : ?>
-        <div class="section-trim-background" id="footer">
+        <div id="footer">
             <?php for ($i = 1; $i <= 4; $i++) {
                if (is_active_sidebar('widgets-footer-' . $i)) {
                      dynamic_sidebar('widgets-sidebar-' . $i);
@@ -44,6 +47,10 @@
                  }
              } ?>
         </div>
+        <?php if (is_single()) : ?>
+            <div id="sharing">
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
     <?php wp_footer(); ?>
 </body>
