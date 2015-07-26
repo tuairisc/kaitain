@@ -42,7 +42,7 @@ $section_background = sprintf('section-%s-background', $section_slug);
             <div class="archive-trim-bottom <?php printf($section_background); ?>"></div>
         </div>
         <header>
-            <h4><?php the_title(); ?></h4>
+            <h5><?php the_title(); ?></h5>
             <span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small></span>
         </header>
     </a>
