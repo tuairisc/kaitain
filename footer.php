@@ -47,14 +47,15 @@
                if (is_active_sidebar('widgets-footer-' . $i)) {
                      dynamic_sidebar('widgets-sidebar-' . $i);
                  } else {
-                     printf('<h3>%s</h3>', __("Add widgets to footer #$i FFS!", TTD));
+                     printf('<h3>%s</h3>', __("Please add widgets to footer section #$i", TTD));
                  }
              } ?>
+             <p id="copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Breo Teorantha</a></p>
+             <div id="foras">
+                <p><small>Le Cabhair ó</small></p>
+                <!-- Foras -->
+             </div>
         </div>
-        <?php if (is_single()) : ?>
-            <div id="sharing">
-            </div>
-        <?php endif; ?>
     <?php endif; ?>
     <?php wp_footer(); ?>
 </body>
