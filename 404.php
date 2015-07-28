@@ -33,7 +33,7 @@ get_header(); ?>
 <div id="error">
     <h1><?php _e('Earráid 404', TTD); ?></h1>
     <p><?php _e('Aistear amú – tada anseo. :(', TTD); ?></p>
-    <p><small><a href="<?php printf(site_url()); ?>"><?php _e('téigh abhaile', TTD); ?></a></small></p>
+    <p><small><a class="green-link" href="<?php printf(site_url()); ?>"><?php _e('téigh abhaile', TTD); ?></a></small></p>
 </div>
 
 <?php get_footer(); ?>
