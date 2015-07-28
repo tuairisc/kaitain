@@ -31,19 +31,21 @@
 global $sections;
 
 ?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
- <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; ?>
-    <title><?php wp_title('-', true, 'right'); ?></title>
-    <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-    <?php wp_head(); ?>
+<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="<?php bloginfo('charset'); ?>" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title><?php wp_title('-', true, 'right'); ?></title>
+<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
+<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
     <?php if (!is_404()) : ?>
+        <?php // Disabled on 404 pages. ?>
         <div id="header">
             <div class="section-trim-background" id="brand">
                 <nav class="left-nav" id="hamburger">
@@ -56,18 +58,17 @@ global $sections;
                 <nav class="center-nav" id="home">
                     <a id="home" rel="home" href="<?php printf(home_url()); ?>"></a> 
                 </nav>
-                <nav class="right-nav" id="external">
-                    <ul class="social">
-                        <li class="button">
-                            <a class="facebook" href="http://www.facebook.com"></a>
-                        </li>
-                        <li class="button">
-                            <a class="twitter" href="http://www.twitter.com"></a>
-                        </li>
-                    </ul>
-                </nav>
+                <?php wp_nav_menu(array(
+                    // Output header nav menu.
+                    'theme_location' => 'top-external-social',
+                    'menu_class' => 'social',
+                    'container' => 'nav',
+                    'container_class' => 'right-nav',
+                    'container_id' => 'external'
+                )); ?>
             </div>
             <nav id="sections-menu">
+                <?php // Section menus. See section-manager.php ?>
                 <ul class="section-trim-background" id="secondary">
                     <?php $sections->sections_menu('secondary'); ?>
                 </ul>
@@ -77,7 +78,7 @@ global $sections;
             </nav>
         </div>
     <?php endif; ?>
-    <?php if (function_exists('adrotate_group')) {
+    <?php if (function_exists('adrotate_group') && !is_404()) {
         printf('%s', adrotate_group(1));
     } ?>
     <div id="main" role="main">
