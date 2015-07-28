@@ -82,4 +82,7 @@ global $sections;
         printf('%s', adrotate_group(1));
     } ?>
     <div id="main" role="main">
+        <?php if (!is_404()) : ?>
+            <div class="tuairisc-strip trim-absolute trim-top"></div>
+        <?php endif; ?>
         <div id="content">
