@@ -31,13 +31,15 @@
 ?>
 
 <div id="sidebar">
-    <?php if (is_active_sidebar('widgets-sidebar')) {
-        dynamic_sidebar('widgets-sidebar');
-    } else {
-        printf('<h3>%s</h3>', __('Add your sidebar widgets FFS!', TTD));
-    }
+    <div class="sidebar-widgets">
+        <?php if (is_active_sidebar('widgets-sidebar')) {
+            dynamic_sidebar('widgets-sidebar');
+        } else {
+            printf('<h3>%s</h3>', __('Add your sidebar widgets FFS!', TTD));
+        } ?>
+    </div>
     
-    // AdRotate groups 3, 4 and 5
+    <?php // AdRotate groups 3, 4 and 5
     if (function_exists('adrotate_group')) {
         printf('<div class="sidebar-adverts">');
         printf('%s', adrotate_group(3));
