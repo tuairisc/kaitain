@@ -35,7 +35,7 @@
             get_sidebar(); 
         } ?>
     </div><?php // End #main ?>
-    <?php if (function_exists('adrotate_group')) {
+    <?php if (function_exists('adrotate_group') && !is_404()) {
         printf('%s', adrotate_group(1));
     } ?>
     <?php if (!is_404()) : ?>
