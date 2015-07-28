@@ -7,21 +7,22 @@
  * @package    Tuairisc.ie
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
- * @license    https://www.gnu.org/copyleft/gpl.html The GNU General Public License v3.0
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
  * @link       https://github.com/bhalash/tuairisc.ie
  * @link       http://www.tuairisc.ie
  *
  * This file is part of Tuairisc.ie.
  *
- * Tuairisc.ie is free software: you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
+ * Tuairisc.ie is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
  *
- * Tuairisc.ie is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ * Tuairisc.ie is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
  * You should have received a copy of the GNU General Public License along with
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
@@ -32,7 +33,7 @@
  * -----------------------------------------------------------------------------
  */
 
-define('THEME_VERSION', 1.1);
+define('THEME_VER', 1.1);
 define('TTD', 'tuairisc');
 
 /**
@@ -319,14 +320,14 @@ function tuairisc_scripts() {
             $script = str_replace('.js', '.min.js', $script);
         }
 
-        wp_enqueue_script($name, $script, array('jquery'), THEME_VERSION, true);
+        wp_enqueue_script($name, $script, array('jquery'), THEME_VER, true);
     }
 
     foreach ($conditional_scripts as $name => $script) {
         $path = $script[0];
         $condition = $script[1];
 
-        wp_enqueue_script($name, $path, array(), THEME_VERSION, false);
+        wp_enqueue_script($name, $path, array(), THEME_VER, false);
         wp_script_add_data($name, 'conditional', $condition);
     }
 }
@@ -341,7 +342,7 @@ function tuairisc_styles() {
     global $theme_styles, $google_fonts;
 
     foreach ($theme_styles as $name => $style) {
-        wp_enqueue_style($name, $style, array(), THEME_VERSION);
+        wp_enqueue_style($name, $style, array(), THEME_VER);
     }
 
     if (!empty($google_fonts)) {
@@ -392,7 +393,7 @@ function admin_scripts($hook) {
             continue;
         }
         
-        wp_enqueue_script($name, $script[1], array('jquery'), THEME_VERSION, true);
+        wp_enqueue_script($name, $script[1], array('jquery'), THEME_VER, true);
     }
 }
 
@@ -450,7 +451,8 @@ function theme_title($title, $separator, $side) {
     }
 
     if ($paged >= 2 || $page >= 2) {
-        $title = "$title $separator " . sprintf(__('Leathanach %s', TTD), max($paged, $page));
+        $title = "$title $separator ";
+        $title .= sprintf(__('Leathanach %s', TTD), max($paged, $page));
     }
 
     return $title;
@@ -469,11 +471,11 @@ function theme_title($title, $separator, $side) {
  * @return  string                  The post counter.
  */
 
-function archive_page_count($echo = false, $page_num = null, $total_results = null) {
+function archive_page_count($echo = false, $page_num = null, $total = null) {
     global $wp_query;
 
-    if (is_null($total_results)) {
-        $total_results = $wp_query->found_posts;
+    if (is_null($total)) {
+        $total = $wp_query->found_posts;
     }
 
     if (is_null($page_num)) {
@@ -481,7 +483,7 @@ function archive_page_count($echo = false, $page_num = null, $total_results = nu
     }
 
     $posts_per_page = get_option('posts_per_page');
-    $total_pages = ceil($total_results / $posts_per_page);
+    $total_pages = ceil($total / $posts_per_page);
     $page_count = sprintf(__('%s / %s', TTD), $page_num, $total_pages);
 
     if (!$echo) {
@@ -515,8 +517,8 @@ function dns_prefetch() {
  * 
  * @param   string      $format      Format to use for the date.
  * @param   int         $post        ID of post whose date is needed.
- * @param   string      $locale      Locale to be used. Must be present on system!
- * @return  string                   Date in desired locale, with fallback to default locale.
+ * @param   string      $locale      Locale to be used. Must be present.
+ * @return  string                   Date in desired locale.
  * 
  * @link https://secure.php.net/manual/en/function.strftime.php
  * @link http://www.bhalash.com/archives/13544804637  
@@ -559,18 +561,13 @@ function get_the_date_strftime($format = null, $post = null, $locale = null) {
  * -----------------------------------------------------------------------------
  * @param   string      $format      Format to use for the date.
  * @param   int         $post        ID of post whose date is needed.
- * @param   string      $locale      Locale to be used. Must be present on system!
+ * @param   string      $locale      Locale to be used.
  * @param   bool        $echo        Print the date, if true.
  */
 
-function the_date_strftime($format = null, $post = null, $locale = null, $echo = true) {
+function the_date_strftime($format = null, $post = null, $locale = null) {
     $date = get_the_date_strftime($format, $post, $locale); 
-
-    if ($echo) {
-        printf($date);
-    } else {
-        return $date;
-    }
+    printf($date);
 }
 
 /**
@@ -782,7 +779,7 @@ function theme_comments($comment, $args, $depth) {
 /**
  * Wrap Comment Fields in Elements
  * -----------------------------------------------------------------------------
- * @link    https://wordpress.stackexchange.com/questions/172052/how-to-wrap-comment-form-fields-in-one-div
+ * @link https://goo.gl/m9kv1z
  */
 
 function wrap_comment_fields_before() {
