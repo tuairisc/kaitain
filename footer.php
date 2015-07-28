@@ -43,17 +43,18 @@
     } ?>
     <?php if (!is_404()) : ?>
         <div id="footer">
-            <?php for ($i = 1; $i <= 4; $i++) {
-               if (is_active_sidebar('widgets-footer-' . $i)) {
-                     dynamic_sidebar('widgets-sidebar-' . $i);
-                 } else {
-                     printf('<h3>%s</h3>', __("Please add widgets to footer section #$i", TTD));
-                 }
-             } ?>
-             <p id="copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Breo Teorantha</a></p>
+            <div class="menus">
+                <?php for ($i = 1; $i <= 4; $i++) {
+                   if (is_active_sidebar('widgets-footer-' . $i)) {
+                         dynamic_sidebar('widgets-sidebar-' . $i);
+                     } else {
+                         printf('<h3>%s</h3>', __("Please add widgets to footer section #$i", TTD));
+                     }
+                 } ?>
+                 <p id="copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Breo Teorantha</a></p>
+             </div>
              <div id="foras">
                 <p><small>Le Cabhair ó</small></p>
-                <!-- Foras -->
              </div>
         </div>
     <?php endif; ?>
