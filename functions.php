@@ -505,6 +505,18 @@ function archive_page_count($echo = false, $page_num = null, $total = null) {
 }
 
 /**
+ * Pagination Classes
+ * -----------------------------------------------------------------------------
+ */
+
+function pagination_classes() {
+    return 'class="green-link-hover"';
+}
+
+add_filter('next_posts_link_attributes', 'pagination_classes');
+add_filter('previous_posts_link_attributes', 'pagination_classes');
+
+/**
  * Media Prefetch
  * -----------------------------------------------------------------------------
  * Set prefetch for a given media domain. Useful if your site is image heavy.
