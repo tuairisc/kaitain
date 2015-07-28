@@ -45,29 +45,29 @@ global $sections;
     <?php if (!is_404()) : ?>
         <div id="header">
             <div class="section-trim-background" id="brand">
-                <nav id="hamburger">
+                <nav class="left-nav" id="hamburger">
                     <ul>
-                        <li>
-                            <a class="facebook" href="http://www.facebook.com"></a>
+                        <li class="button">
+                            <a class="submenu-toggle" href="javascript:void(0)"></a>
                         </li>
                     </ul>
                 </nav>
-                <nav id="home">
+                <nav class="center-nav" id="home">
                     <a id="home" rel="home" href="<?php printf(home_url()); ?>"></a> 
                 </nav>
-                <nav id="external">
-                    <ul>
-                        <li>
+                <nav class="right-nav" id="external">
+                    <ul class="social">
+                        <li class="button">
                             <a class="facebook" href="http://www.facebook.com"></a>
                         </li>
-                        <li>
+                        <li class="button">
                             <a class="twitter" href="http://www.twitter.com"></a>
                         </li>
                     </ul>
                 </nav>
             </div>
             <nav id="sections-menu">
-                <ul id="secondary">
+                <ul class="section-trim-background" id="secondary">
                     <?php $sections->sections_menu('secondary'); ?>
                 </ul>
                 <ul id="primary">
