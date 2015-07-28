@@ -31,11 +31,10 @@
 ?>
 
 <article <?php post_class('full'); ?> id="article-<?php the_ID(); ?>">
-    <?php get_template_part(THEME_PARTIALS . 'header', 'full'); ?>
-
-    <main>
+    <h3><?php the_title(); ?></h3>
+    <div class="post-content">
         <?php the_content(__('Read the rest of this post &raquo;', TTD)); ?>
-    </main>
+    </div>
 
     <?php if (is_single()) {
         get_template_part(THEME_PARTIALS . 'footer', 'full');
