@@ -415,6 +415,17 @@ function register_widget_areas() {
 }
 
 /**
+ * Register Menu Areas
+ * -----------------------------------------------------------------------------
+ */
+
+function register_menus() {
+    register_nav_menus(array(
+        'top-external-social' => __('Site Social Presences', TTD)
+    ));
+}
+
+/**
  * Blog Title
  * -----------------------------------------------------------------------------
  * Stolen from Twenty Twelve. 
@@ -827,6 +838,8 @@ add_action('widgets_init', 'register_widget_areas');
 
 // Load all site JS in footer.
 add_action('wp_enqueue_scripts', 'clean_header');
+
+add_action('init', 'register_menus');
 
 /**
  * Filters 
