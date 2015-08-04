@@ -28,15 +28,30 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
+$author = get_the_author_meta('ID');
+$avatar = get_avatar($author, 32);
+
 ?>
 
 <article <?php post_class('full'); ?> id="article-<?php the_ID(); ?>">
-    <h3><?php the_title(); ?></h3>
+    <?php // TODO FIXME No good dirty bad hack. ?>
+    <header>
+        <h1><a class="green-link-hover" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+        <p class="post-excerpt"><small><?php printf(get_the_excerpt()); ?></small></p>
+        <div class="author-meta">
+            <div class="author-avatar">
+                <a class="tuairisc-author author-photo" title="<?php the_author_meta('display_name'); ?>" href="<?php printf(get_author_posts_url($author)); ?>"><img class="cover-fit" src="<?php printf(get_avatar(get_the_author_meta('ID'), 32)); ?>" /></a>
+            </div>
+            <div class="author-info">
+                <span class="author-link"><a class="green-link-hover" href="<?php printf(get_author_posts_url($author)); ?>"><?php the_author_meta('display_name'); ?></a></span> <br />
+                <span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small></span>
+            </div>
+        </div>
+    </header>
     <div class="post-content">
         <?php the_content(__('Read the rest of this post &raquo;', TTD)); ?>
     </div>
-
-    <?php if (is_single()) {
-        get_template_part(THEME_PARTIALS . 'footer', 'full');
-    } ?>
+    <footer>
+        <?php include(THEME_INCLUDES  . 'single-post-related-posts.php'); ?>
+    </footer>
 </article>
