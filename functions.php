@@ -224,27 +224,7 @@ $widget_areas = array(
         'name' => __('Sidebar', TTD),
         'description' => __('Sidebar widget area.', TTD),
         'id' => 'widgets-sidebar'
-    ),
-    array(
-        'name' => __('Footer #1', TTD),
-        'description' => __('Footer widget area #1.', TTD),
-        'id' => 'widgets-footer-1'
-    ),
-    array(
-        'name' => __('Footer #2', TTD),
-        'description' => __('Footer widget area #2.', TTD),
-        'id' => 'widgets-footer-2'
-    ),
-    array(
-        'name' => __('Footer #3', TTD),
-        'description' => __('Footer widget area #3.', TTD),
-        'id' => 'widgets-footer-3'
-    ),
-    array(
-        'name' => __('Footer #4', TTD),
-        'description' => __('Footer widget area #4.', TTD),
-        'id' => 'widgets-footer-4'
-    ),
+    )
 );
 
 /** 
@@ -256,6 +236,7 @@ $google_fonts = array(
     /* All Google Fonts to be loaded.
      * Use format 'Open Sans:300', 'Droid Sans:400'
      * etc. */
+     'Open Sans:400'
 );
 
 $theme_javascript = array(
@@ -265,7 +246,8 @@ $theme_javascript = array(
 );
 
 $theme_admin_javascript = array(
-    'post-meta-box' => array('post.php', THEME_JS . 'meta-box.js')
+    'post-meta-box' => array('post.php', THEME_JS . 'meta-box.js'),
+    'new-meta-box' => array('post.php', THEME_JS . 'new-meta-box.js')
 );
 
 $conditional_scripts = array(
@@ -421,7 +403,8 @@ function register_widget_areas() {
 
 function register_menus() {
     register_nav_menus(array(
-        'top-external-social' => __('Site Social Presences', TTD)
+        'top-external-social' => __('Site Social Presences', TTD),
+        'footer-site-links' => __('Footer Site Information Links', TTD)
     ));
 }
 
