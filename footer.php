@@ -28,6 +28,9 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
+global $sections;
+$count = 1;
+
 ?>
 
         </div><?php // End #content ?>
@@ -44,17 +47,53 @@
     <?php if (!is_404()) : ?>
         <div id="footer">
             <div class="menus">
-                <?php for ($i = 1; $i <= 4; $i++) {
-                   if (is_active_sidebar('widgets-footer-' . $i)) {
-                         dynamic_sidebar('widgets-sidebar-' . $i);
-                     } else {
-                         printf('<h3>%s</h3>', __("Please add widgets to footer section #$i", TTD));
-                     }
-                 } ?>
-                 <p id="copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Breo Teorantha</a></p>
+                <div class="menu-columns">
+                    <?php wp_nav_menu(array(
+                        'theme_location' => 'footer-site-links',
+                        'container' => 'nav',
+                    )); ?>
+                    <?php // Bad no good dirty ugly hack for demo. ?>
+                    <?php foreach ($sections::$sections as $id => $slug) {
+                        $parent = get_category($id);
+
+                        $children = get_categories(array(
+                            'child_of' => $id
+                        ));
+
+                        if ($count % 3 === 1) {
+                            printf('<nav class="footer-site-sections">');
+                            printf('<ul>');
+                        }
+                        
+                        printf('<li class="normal"><a title="%s" href="%s"><strong>%s</strong></a></li>',
+                            esc_attr($parent->cat_name),
+                            get_category_link($parent->cat_ID),
+                            $parent->cat_name
+                        );
+
+                        if ($children) {
+                            foreach ($children as $child) {
+                                printf('<li><a title="%s" href="%s">%s</a></li>',
+                                    esc_attr($child->cat_name),
+                                    get_category_link($child->cat_ID),
+                                    $child->cat_name
+                                );
+                            }
+                        }
+
+                        if ($count > 0 && $count % 3 === 0) {
+                            printf('</ul>');
+                            printf('</nav>');
+                        }
+
+                        $count++;
+                    } ?>
+                </div>
+                 <p id="copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Breo Teorantha</a>.</p>
              </div>
              <div id="foras">
                 <p><small>Le Cabhair ó</small></p>
+                <p><a rel="nofollow" target="_blank" href="http://www.gaeilge.ie/"><img src="<?php printf(THEME_URL . '/assets/images/brands/foras-white.svg'); ?>" alt="Foras na Gaeilge" /></a></p>
              </div>
         </div>
     <?php endif; ?>
