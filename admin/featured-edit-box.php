@@ -94,11 +94,11 @@ function tuairisc_featured_box_content($post) {
         </li>
         <li class="expiryinfo">
             <label><?php _e('Until', TTD); ?></label>
-            <input id="expiry-hour" name="hour" type="text" min="00" max="23" minlength="2" maxlength="2" size="2" value="00"> :
-            <input id="expiry-minute" name="minute" type="text" min="00" max="59" minlength="2" maxlength="2" size="2" value="00">
+            <input class="datepicker-hour" id="expiry-hour" name="hour" type="text" min="00" max="23" minlength="2" maxlength="2" size="2" value="00"> :
+            <input class="datepicker-minute" id="expiry-minute" name="minute" type="text" min="00" max="59" minlength="2" maxlength="2" size="2" value="00">
         </li>
         <li class="expiryinfo">
-            on <select id="expiry-day" name="day"></select><select id="expiry-month" name="month"></select><select id="expiry-year" name="year"></select>
+            on <select class="datepicker-day" id="expiry-day" name="day"></select><select class="datepicker-month" id="expiry-month" name="month"></select><select class="datepicker-year" id="expiry-year" name="year"></select>
         </li>
     </ul>
     <p class="expiryinfo" id="meta-tuairisc-sticky-info">
