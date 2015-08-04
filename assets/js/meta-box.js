@@ -55,8 +55,6 @@ date = {
 if (tuairiscMetaInfo.sticky) {
     var expiry = new Date(tuairiscMetaInfo.expiry * 1000);
 
-    console.log(expiry);
-
     expiry = {
         year: expiry.getFullYear(),
         month: expiry.getMonth(),
@@ -119,6 +117,8 @@ jQuery.fn.stickyCheckToggle = function() {
     } else {
         jQuery(this).hide();
     }
+
+    return this;
 };
 
 /**
@@ -131,6 +131,7 @@ jQuery.fn.stickyCheckToggle = function() {
 
 Array.prototype.addOptionHtml = function(value, text) {
     this.push('<option value="' + value + '">' + text + '</option>');    
+    return this;
 }
 
 /**
@@ -146,6 +147,8 @@ jQuery.fn.setSelectedOption = function(value) {
     if (value && this.children('option[value=' + value + ']').length > 0) {
         this.val(value);
     }
+
+    return this;
 }
     
 /*
@@ -161,6 +164,8 @@ jQuery.fn.reset = function(options, value) {
         // Yearly input doesn't care about old value.
         this.setSelectedOption(value);
     }
+
+    return this;
 }
 
 /**
@@ -182,6 +187,8 @@ jQuery.fn.update = function() {
         case 'minute': minuteOptionUpdate.apply(this, arguments); break;
         default: break;
     }
+
+    return this;
 }
 
 /**
@@ -212,6 +219,7 @@ function yearOptionUpdate(padding, year) {
     }
 
     this.reset(options, value);
+    return this;
 }
 
 /**
@@ -236,6 +244,7 @@ function monthOptionUpdate(year, month) {
     });
 
     this.reset(options, value);
+    return this;
 }
 
 /**
@@ -274,6 +283,7 @@ function dayOptionUpdate(year, month, day) {
     }
 
     this.reset(options, value);
+    return this;
 }
 
 
@@ -287,6 +297,7 @@ function hourOptionUpdate(hour) {
     hour = hour || date.hour;
     hour = (hour < 10) ? '0' + hour : hour;
     this.val(hour);
+    return this;
 }
 
 /**
@@ -299,6 +310,7 @@ function minuteOptionUpdate(minute) {
     minute = minute || date.minute;
     minute = (minute < 10) ? '0' + minute : minute;
     this.val(minute);
+    return this;
 }
 
 /**
