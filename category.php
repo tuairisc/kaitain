@@ -81,7 +81,7 @@ if ($page_number < 2) {
 
     if (!empty($children_categories)) {
         foreach ($children_categories as $child) {
-            category_widget_output($child->cat_ID);
+            category_widget_output($child->cat_ID, 5);
         }
     }
 }
