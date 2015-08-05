@@ -69,11 +69,11 @@ global $sections;
             </div>
             <nav id="sections-menu">
                 <?php // Section menus. See section-manager.php ?>
-                <ul class="section-trim-background" id="secondary">
-                    <?php $sections->sections_menu('secondary'); ?>
-                </ul>
                 <ul id="primary">
                     <?php $sections->sections_menu('primary'); ?>
+                </ul>
+                <ul id="secondary">
+                    <?php $sections->sections_menu('secondary'); ?>
                 </ul>
             </nav>
         </div>
