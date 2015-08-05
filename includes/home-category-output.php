@@ -38,29 +38,27 @@
  * @param   int                 $numberposts        Number of posts to output.
  */
 
-function category_widget_output($widget_categories, $show_category_name = true, $numberposts = 5)  {
+function category_widget_output($cats, $show_name = true, $count = 5) {
     global $post, $sections;
     $categories = array();
 
     // Resolve categories down to ID.
-    if (is_int($widget_categories) || is_string($widget_categories)) {
-        $categories[] = intval($widget_categories);
-    } else if (is_array($widget_categories)) {
-        $categories = $widget_categories;
-    } else {
-        return false;
+    if (is_int($cats) || is_string($cats)) {
+        $categories[] = intval($cats);
+    } else if (!is_array($cats)) {
+        return;
     }
 
     /* Double loop:
      * 1. Loop each supplied category.
-     * 2. For each category, output $numberposts posts.
+     * 2. For each category, output $count posts.
      * 
-     * Order of output is 1 left, $numberposts - 1 right.
+     * Order of output is 1 left, $count - 1 right.
      * Left post has an excerpt. */
 
     foreach($categories as $category) {
         $category_posts = get_posts(array(
-            'numberposts' => $numberposts,
+            'numberposts' => $count,
             'order' => 'DESC',
             'category' => $category
         ));
@@ -75,10 +73,11 @@ function category_widget_output($widget_categories, $show_category_name = true, 
 
         printf('<div class="%s">', 'category-widget');
         
-        if ($show_category_name) {
+        if ($show_name) {
             // Title links to category.
-            printf('<h2 class="%s widget-title"><a title="%s" href="%s">%s</a></h2>', 
+            printf('<h2 class="%s %s"><a title="%s" href="%s">%s</a></h2>', 
                 $section_text,
+                'widget-title',
                 $category->cat_name,
                 get_category_link($category),
                 $category->cat_name
@@ -88,14 +87,21 @@ function category_widget_output($widget_categories, $show_category_name = true, 
         printf('<div class="%s">', 'category-widget-display');
 
         foreach ($category_posts as $index => $post) { 
+            $classes = '';
             setup_postdata($post);
 
             // "Side" posts only need athumbnail size image.
             $image_size = ($index === 0) ? 'medium' : 'thumbnail';
 
+            if ($index === 0) {
+                $classes = 'category-left';
+            }
+
+            $classes = get_post_class($classes, get_the_ID());
+            $classes = implode(' ', $classes);
+
             $classes = array(
-                // Less ugly than some alternatives I tried.
-                'article' => implode(' ', get_post_class($index === 0 ? 'category-left' : '', get_the_ID())),
+                'article' => $classes,
                 'paragraph' => ($index === 0) ? $section_background : '',
                 'anchor' => $section_hover
             );
@@ -135,7 +141,7 @@ function category_article_output($post, $classes, $image_size) {
 
     <article class="<?php printf($classes['article']); ?>" id="<?php the_ID(); ?>">
         <a class="<?php printf($classes['anchor']); ?>" href="<?php the_permalink(); ?>" rel="bookmark">
-            <div class="category-article-image">
+            <div class="thumbnail">
                 <img class="cover-fit" src="<?php the_post_image(get_the_ID(), $image_size); ?>" alt="<?php the_title_attribute(); ?>" />
             </div>
             <p class="category-article-title <?php printf($classes['paragraph']); ?>">
