@@ -118,7 +118,7 @@ class tuairisc_home_category extends WP_Widget {
             printf('%s', $defaults['before_widget']);
         }
         
-        category_widget_output($instance['category'], $instance['show_category_name'], 4);
+        category_widget_output($instance['category'], $instance['show_category_name'], 5);
 
         if (!empty($defaults['after_widget'])) {
             printf('%s', $defaults['after_widget']);
