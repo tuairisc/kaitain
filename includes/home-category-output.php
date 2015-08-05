@@ -38,7 +38,7 @@
  * @param   int                 $numberposts        Number of posts to output.
  */
 
-function category_widget_output($widget_categories, $show_category_name = true, $numberposts = 4)  {
+function category_widget_output($widget_categories, $show_category_name = true, $numberposts = 5)  {
     global $post, $sections;
     $categories = array();
 
