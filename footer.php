@@ -29,7 +29,6 @@
  */
 
 global $sections;
-$count = 1;
 
 ?>
 
@@ -42,52 +41,18 @@ $count = 1;
         <?php endif; ?>
     </div><?php // End #main ?>
     <?php if (function_exists('adrotate_group') && !is_404()) {
-        printf('%s', adrotate_group(1));
+        printf(adrotate_group(1));
     } ?>
     <?php if (!is_404()) : ?>
         <div id="footer">
             <div class="menus">
                 <div class="menu-columns">
+                    <?php // Custom footer menu and section cavalcade. ?>
                     <?php wp_nav_menu(array(
                         'theme_location' => 'footer-site-links',
                         'container' => 'nav',
                     )); ?>
-                    <?php // Bad no good dirty ugly hack for demo. ?>
-                    <?php foreach ($sections::$sections as $id => $slug) {
-                        $parent = get_category($id);
-
-                        $children = get_categories(array(
-                            'child_of' => $id
-                        ));
-
-                        if ($count % 3 === 1) {
-                            printf('<nav class="footer-site-sections">');
-                            printf('<ul>');
-                        }
-                        
-                        printf('<li class="normal"><a title="%s" href="%s"><strong>%s</strong></a></li>',
-                            esc_attr($parent->cat_name),
-                            get_category_link($parent->cat_ID),
-                            $parent->cat_name
-                        );
-
-                        if ($children) {
-                            foreach ($children as $child) {
-                                printf('<li><a title="%s" href="%s">%s</a></li>',
-                                    esc_attr($child->cat_name),
-                                    get_category_link($child->cat_ID),
-                                    $child->cat_name
-                                );
-                            }
-                        }
-
-                        if ($count > 0 && $count % 3 === 0) {
-                            printf('</ul>');
-                            printf('</nav>');
-                        }
-
-                        $count++;
-                    } ?>
+                    <?php $sections->section_cavalcade(); ?>
                 </div>
                  <p id="copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Breo Teorantha</a>.</p>
              </div>
