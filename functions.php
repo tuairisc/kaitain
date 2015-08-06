@@ -534,7 +534,7 @@ function get_the_date_strftime($format = null, $post = null, $locale = null) {
     $post = get_post($post);
 
     if (!$post) {
-       return $false;
+       return false;
     } else {
         $time = mysql2date('U', $post->post_date);
     }
