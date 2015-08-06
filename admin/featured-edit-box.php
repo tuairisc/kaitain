@@ -57,7 +57,7 @@ function tuairisc_featured_box_content($post) {
     global $featured_nonce;
     wp_nonce_field($featured_nonce['action'], $featured_nonce['name']);
 
-    $is_featured = is_feature($post);
+    $is_featured = is_featured($post);
     $is_sticky = false;
 
     if ($is_featured && is_sticky_post($post)) {
@@ -115,7 +115,8 @@ function tuairisc_featured_box_content($post) {
 function update_featured_meta_box($post_id) {
     global $featured_nonce;
     
-    if (!ctype_alnum($_POST[$featured_nonce['name']]) || !isset($_POST[$featured_nonce['name']])) {
+    if (!ctype_alnum($_POST[$featured_nonce['name']])
+    || !isset($_POST[$featured_nonce['name']])) {
         return;
     }
 
