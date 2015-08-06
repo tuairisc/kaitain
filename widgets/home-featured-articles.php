@@ -53,8 +53,8 @@ class tuairisc_featured extends WP_Widget {
     public function form($instance) {
         $defaults = array(
             // Widget defaults.
-            'number_posts' => 4,
-            'show_sticky' => true
+            'count' => 4,
+            'sticky' => true
         ); 
 
         $instance = wp_parse_args($instance, $defaults);
@@ -63,12 +63,12 @@ class tuairisc_featured extends WP_Widget {
 
         <ul>
             <li>
-                <input id="<?php printf($this->get_field_id('show_sticky')); ?>" type="checkbox" name="<?php printf($this->get_field_name('show_sticky')); ?>" />
-                <label for="<?php printf($this->get_field_id('show_sticky')); ?>"><?php _e('Show Sticky Post', TTD); ?></label>
+                <input id="<?php printf($this->get_field_id('sticky')); ?>" type="checkbox" name="<?php printf($this->get_field_name('sticky')); ?>" />
+                <label for="<?php printf($this->get_field_id('sticky')); ?>"><?php _e('Show Sticky Post', TTD); ?></label>
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('number_posts')); ?>"><?php _e('Number of posts to display: ', TTD); ?></label>
-                <select id="<?php printf($this->get_field_id('number_posts')); ?>" name="<?php printf($this->get_field_name('number_posts')); ?>">
+                <label for="<?php printf($this->get_field_id('count')); ?>"><?php _e('Number of posts to display: ', TTD); ?></label>
+                <select id="<?php printf($this->get_field_id('count')); ?>" name="<?php printf($this->get_field_name('count')); ?>">
                     <?php for ($i = 0; $i < 16; $i += 4) {
                         printf('<option value="%d">%d</option>', $i, $i);
                     } ?>
@@ -76,8 +76,8 @@ class tuairisc_featured extends WP_Widget {
             </li>
         </ul>
         <script>
-            jQuery('#<?php printf($this->get_field_id('number_posts')); ?>').val(<?php printf($instance['number_posts']); ?>);
-            jQuery('#<?php printf($this->get_field_id('show_sticky')); ?>').prop('checked', <?php printf($instance['show_sticky'] ? 'true' : 'false'); ?>);
+            jQuery('#<?php printf($this->get_field_id('count')); ?>').val(<?php printf($instance['count']); ?>);
+            jQuery('#<?php printf($this->get_field_id('sticky')); ?>').prop('checked', <?php printf($instance['sticky'] ? 'true' : 'false'); ?>);
         </script>
 
         <?php
@@ -93,8 +93,8 @@ class tuairisc_featured extends WP_Widget {
 
     function update($new_args, $old_args) {
         $defaults = array();
-        $defaults['show_sticky'] = ($new_args['show_sticky'] === 'on');
-        $defaults['number_posts'] = $new_args['number_posts'];
+        $defaults['sticky'] = ($new_args['sticky'] === 'on');
+        $defaults['count'] = $new_args['count'];
         return $defaults;
     }
 
@@ -109,93 +109,49 @@ class tuairisc_featured extends WP_Widget {
         // $post object is needed in order to correctly run setup_postdata().
         global $post;
 
-        $featured_key = get_option('tuairisc_featured_post_key');
-        $sticky_id = -1;
-        $featured_posts = array();
+        $featured = array();
 
-        if ($instance['show_sticky']) {
-            /* If sticky was checked, see if it is available to use. If so, use it.
-             * Otherwise grab the last featured post. */
-            if (tuairisc_sticky_expired()) {
-                reset_tuairisc_sticky();
+        // Show other featured posts if they were elected ot be shown.
+        $featured = get_featured($instance['count'], $instance['sticky'], true);
 
-                $featured_posts[] = get_posts(array(
-                    'numberposts' => 1,
-                    'meta_key' => $featured_key,
-                    'post_status' => 'publish',
-                    'meta_value' => 'on',
-                    'orderby' => 'date',
-                    'order' => 'DESC'
-                ));
-            } else {
-                $featured_posts[] = get_post(get_option('tuairisc_sticky_post')['id']);
-            }
-
-            $sticky_id = $featured_posts[0]->ID;
-        }
-
-        if ((int) $instance['number_posts'] > 0) {
-            // Grab top n featured posts if n > 0
-            $other_featured_posts = get_posts(array(
-                'numberposts' => $instance['number_posts'],
-                'meta_key' => $featured_key,
-                'post_status' => 'publish',
-                'meta_value' => true,
-                'orderby' => 'date',
-                'order' => 'DESC',
-                'exclude' => array($sticky_id)
-            ));
-
-            $featured_posts = array_merge($featured_posts, $other_featured_posts);
-        }
-
-        if ($instance['show_sticky'] && sizeof($featured_posts) < $instance['number_posts'] + 1 || sizeof($featured_posts) < $instance['number_posts']) {
-            // Fetch recent posts as filler if there is a shortfall.
-            $filler_posts = get_posts(array(
-                'numberposts' => $instance['number_posts'] - sizeof($featured_posts),
-                'order' => 'DESC',
-                'orderby' => 'date',
-                'meta_key' => $featured_key,
-                'meta_compare' => '!=',
-                'meta_value' => true,
-                'post_status' => 'publish',
-            ));
-
-            $featured_posts = array_merge($featured_posts, $filler_posts);
+        if ($instance['sticky']) {
+            /* If sticky was checked, see if it is available to use. Otherwise
+             * grab the last featured post. */
+            $featured = array_unshift($featured, get_sticky(true));
         }
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
         }
-        ?>
 
-        <div class="recent-widget tuairisc-post-widget">
-            <?php foreach ($featured_posts as $index => $post) {
-                if ($instance['show_sticky'] && $index === 0) {
-                    // 1. Show lead post.
-                    setup_postdata($post);
-                    get_template_part(PARTIAL_ARTICLES, 'archivelead');
-                    printf('<hr>');
-                }
+        printf('<div class="recent-widget tuairisc-post-widget">');
 
-                if ($instance['number_posts'] > 0 && $index % 4 === 1 && $index !== 0) {
-                    // If 1, 5, 9, ...
-                    printf('<div class="featured-row home-flex-row">');
-                }
+        foreach ($featured as $index => $post) {
+            setup_postdata($post);
 
-                if (!$instance['show_sticky'] || $index > 0) {
-                    // 2. Show row posts.
-                    get_template_part(PARTIAL_ARTICLES, 'archivesmall');
-                }
+            if ($instance['sticky'] && $index === 0) {
+                // 1. Show lead post.
+                get_template_part(PARTIAL_ARTICLES, 'archivelead');
+                printf('<hr>');
+            }
 
-                if ($instance['number_posts'] > 0 && $index % 4 === 0 && $index !== 0) {
-                    // If 4, 8, 12, ...
-                    printf('</div>');
-                }
-            } ?>
-        </div>
+            if ($instance['count'] > 0 && $index % 4 === 1 && $index !== 0) {
+                // 1, 5, 9
+                printf('<div class="featured-row home-flex-row">');
+            }
 
-        <?php
+            if (!$instance['sticky'] || $index > 0) {
+                // 2. Show row posts.
+                get_template_part(PARTIAL_ARTICLES, 'archivesmall');
+            }
+
+            if ($instance['count'] > 0 && $index % 4 === 0 && $index !== 0) {
+                // 4, 8, 12
+                printf('</div>');
+            }
+        }
+
+        printf('</div>');
 
         if (!empty($defaults['after_widget'])) {
             printf($defaults['after_widget']);
@@ -205,6 +161,9 @@ class tuairisc_featured extends WP_Widget {
     }
 }
 
-add_action('widgets_init', create_function('', 'return register_widget("tuairisc_featured");'));
+add_action(
+    'widgets_init',
+    create_function('', 'return register_widget("tuairisc_featured");')
+);
 
 ?>
