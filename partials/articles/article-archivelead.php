@@ -31,16 +31,22 @@
 global $sections;
 
 $section_slug = $sections->get_section_slug(get_the_category()[0]);
-$section_text = sprintf('section-%s-text-hover', $section_slug);
-$section_background = sprintf('section-%s-background', $section_slug);
+
+$trim = $sections->get_section_slug(get_the_category()[0]);
+
+$trim = array(
+    'slug' => $trim,
+    'text' => sprintf('section-%s-text-hover', $trim),
+    'background' => sprintf('section-%s-background', $trim)
+);
 
 ?>
 
 <article <?php post_class('archive-lead'); ?> id="<?php the_id(); ?>">
-    <a class="<?php printf($section_text); ?> "rel="bookmark" href="<?php the_permalink(); ?>">
+    <a class="<?php printf($trim['text']); ?> "rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail">
             <img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'large'); ?>" />
-            <div class="archive-trim-bottom <?php printf($section_background); ?>"></div>
+            <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
         <h2><?php the_title(); ?></h2>
     </a>
