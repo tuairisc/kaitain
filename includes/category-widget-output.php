@@ -57,26 +57,35 @@ function category_widget_output($cats, $show_name = true, $count = 5) {
      * Left post has an excerpt. */
 
     foreach($categories as $category) {
+        $category = get_category($category);
+
+        if (!$category) {
+            continue;
+        }
+
         $category_posts = get_posts(array(
             'numberposts' => $count,
             'order' => 'DESC',
-            'category' => $category
+            'category' => $category->cat_ID
         ));
 
-        $category = get_category($category);
-
         // Fetch section trim colours.
-        $section_slug = $sections->get_section_slug($category);
-        $section_text = sprintf('section-%s-text', $section_slug);
-        $section_hover = sprintf('section-%s-text-hover', $section_slug);
-        $section_background = sprintf('section-%s-background', $section_slug);
+        $trim = $sections->get_section_slug($category);
+
+        $trim = array(
+            // Section trim class information.
+            'slug' => $trim,
+            'text' => sprintf('section-%s-text', $trim),
+            'hover' => sprintf('section-%s-text-hover', $trim),
+            'background' => sprintf('section-%s-background', $trim)
+        );
 
         printf('<div class="%s">', 'category-widget');
         
         if ($show_name) {
-            // Title links to category.
+            // Category name, and link to category.
             printf('<h2 class="%s %s"><a title="%s" href="%s">%s</a></h2>', 
-                $section_text,
+                $trim['text'],
                 'widget-title',
                 $category->cat_name,
                 get_category_link($category),
@@ -93,6 +102,7 @@ function category_widget_output($cats, $show_name = true, $count = 5) {
             // "Side" posts only need athumbnail size image.
             $image_size = ($index === 0) ? 'medium' : 'thumbnail';
 
+            // First post has a different layout, in a different position.
             if ($index === 0) {
                 $classes = 'category-left';
             }
@@ -102,8 +112,8 @@ function category_widget_output($cats, $show_name = true, $count = 5) {
 
             $classes = array(
                 'article' => $classes,
-                'paragraph' => ($index === 0) ? $section_background : '',
-                'anchor' => $section_hover
+                'paragraph' => ($index === 0) ? $trim['background']: '',
+                'anchor' => $trim['hover']
             );
 
             category_article_output($post, $classes, $image_size);
