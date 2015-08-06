@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Featured Post Functions
+ * Featured and Sticky Post Control
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Tuairisc.ie
@@ -127,7 +127,7 @@ function get_sticky($use_fallback = false) {
     $sticky_id = get_option($keys['sticky'])['id'];
     $sticky = get_post($sticky_id);
 
-    if (!tuairisc_sticky_set() && $use_fallback) {
+    if (!sticky_set() && $use_fallback) {
         // Grab a featured post as fallback if requested.
         $sticky = get_featured(1);
     }
