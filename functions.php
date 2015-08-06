@@ -91,18 +91,6 @@ define('THEME_IMAGES', ASSETS_URL . 'images/');
 define('THEME_CSS', ASSETS_URL . 'css/');
 
 /**
- * Featured and Sticky Post Keys
- * -----------------------------------------------------------------------------
- */
-
-add_option('tuairisc_sticky_post', array(
-    'id' => 0,
-    'expires' => 0
-), '', true);
-
-add_option('tuairisc_featured_post_key', 'tuairisc_is_featured_post');
-
-/**
  *  Other Variables
  * -----------------------------------------------------------------------------
  */
