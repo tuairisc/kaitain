@@ -61,10 +61,10 @@ function tuairisc_featured_box_content($post) {
     $is_sticky = false;
 
     if ($is_featured && is_sticky_post($post)) {
-            $is_sticky = true;
-            $expiry = get_option('tuairisc_sticky_post');
-        }
+        $is_sticky = true;
+        $expiry = get_option('tuairisc_sticky_post')['expires'];
     }
+
     ?>
 
     <script>
