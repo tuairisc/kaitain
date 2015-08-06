@@ -57,6 +57,7 @@ class tuairisc_featured extends WP_Widget {
             'sticky' => true
         ); 
 
+        $featured_rows_limit = 16;
         $instance = wp_parse_args($instance, $defaults);
         
         ?>
@@ -69,7 +70,7 @@ class tuairisc_featured extends WP_Widget {
             <li>
                 <label for="<?php printf($this->get_field_id('count')); ?>"><?php _e('Number of posts to display: ', TTD); ?></label>
                 <select id="<?php printf($this->get_field_id('count')); ?>" name="<?php printf($this->get_field_name('count')); ?>">
-                    <?php for ($i = 0; $i < 16; $i += 4) {
+                    <?php for ($i = 0; $i < $featured_rows_limit; $i += 4) {
                         printf('<option value="%d">%d</option>', $i, $i);
                     } ?>
                 </select>
