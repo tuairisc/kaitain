@@ -120,7 +120,8 @@ class tuairisc_featured extends WP_Widget {
         }
 
         // Show other featured posts if they were elected ot be shown.
-        $featured[] = get_featured($instance['count'], $instance['sticky'], true);
+        // TODO FIXME NOTGOOD
+        // $featured[] = get_featured($instance['count'], $instance['sticky'], true);
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
