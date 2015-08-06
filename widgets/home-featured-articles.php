@@ -109,17 +109,18 @@ class tuairisc_featured extends WP_Widget {
     public function widget($defaults, $instance) {
         // $post object is needed in order to correctly run setup_postdata().
         global $post;
-
+        
+        // Array of featured and sticky posts.
         $featured = array();
-
-        // Show other featured posts if they were elected ot be shown.
-        $featured = get_featured($instance['count'], $instance['sticky'], true);
 
         if ($instance['sticky']) {
             /* If sticky was checked, see if it is available to use. Otherwise
              * grab the last featured post. */
-            $featured = array_unshift($featured, get_sticky(true));
+            $featured[] = get_sticky(true);
         }
+
+        // Show other featured posts if they were elected ot be shown.
+        $featured[] = get_featured($instance['count'], $instance['sticky'], true);
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
