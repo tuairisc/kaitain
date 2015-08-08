@@ -64,8 +64,8 @@ class tuairisc_featured extends WP_Widget {
 
         <ul>
             <li>
-                <input id="<?php printf($this->get_field_id('sticky')); ?>" type="checkbox" name="<?php printf($this->get_field_name('sticky')); ?>" />
-                <label for="<?php printf($this->get_field_id('sticky')); ?>"><?php _e('Show Sticky Post', TTD); ?></label>
+                <input id="<?php printf($this->get_field_id('show_sticky')); ?>" type="checkbox" name="<?php printf($this->get_field_name('show_sticky')); ?>" />
+                <label for="<?php printf($this->get_field_id('show_sticky')); ?>"><?php _e('Show Sticky Post', TTD); ?></label>
             </li>
             <li>
                 <label for="<?php printf($this->get_field_id('count')); ?>"><?php _e('Number of posts to display: ', TTD); ?></label>
@@ -78,7 +78,7 @@ class tuairisc_featured extends WP_Widget {
         </ul>
         <script>
             jQuery('#<?php printf($this->get_field_id('count')); ?>').val(<?php printf($instance['count']); ?>);
-            jQuery('#<?php printf($this->get_field_id('sticky')); ?>').prop('checked', <?php printf($instance['sticky'] ? 'true' : 'false'); ?>);
+            jQuery('#<?php printf($this->get_field_id('show_sticky')); ?>').prop('checked', <?php printf($instance['show_sticky'] ? 'true' : 'false'); ?>);
         </script>
 
         <?php
@@ -94,7 +94,7 @@ class tuairisc_featured extends WP_Widget {
 
     function update($new_args, $old_args) {
         $defaults = array();
-        $defaults['sticky'] = ($new_args['sticky'] === 'on');
+        $defaults['show_sticky'] = ($new_args['show_sticky'] === 'on');
         $defaults['count'] = $new_args['count'];
         return $defaults;
     }
@@ -113,15 +113,14 @@ class tuairisc_featured extends WP_Widget {
         // Array of featured and sticky posts.
         $featured = array();
 
-        if ($instance['sticky']) {
+        if ($instance['show_sticky'] && is_tc_sticky_set()) {
             /* If sticky was checked, see if it is available to use. Otherwise
              * grab the last featured post. */
-            $featured[] = get_sticky(true);
+            $featured[] = get_tc_sticky(true);
         }
 
         // Show other featured posts if they were elected ot be shown.
-        // TODO FIXME NOTGOOD
-        // $featured[] = get_featured($instance['count'], $instance['sticky'], true);
+        $featured = array_merge(get_tc_featured($instance['count'], !$instance['show_sticky'], true), $featured);
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
@@ -130,27 +129,29 @@ class tuairisc_featured extends WP_Widget {
         printf('<div class="recent-widget tuairisc-post-widget">');
 
         foreach ($featured as $index => $post) {
-            setup_postdata($post);
+            if (!empty($post)) {
+                setup_postdata($post);
 
-            if ($instance['sticky'] && $index === 0) {
-                // 1. Show lead post.
-                get_template_part(PARTIAL_ARTICLES, 'archivelead');
-                printf('<hr>');
-            }
+                if ($instance['show_sticky'] && $index === 0) {
+                    // 1. Show lead post.
+                    get_template_part(PARTIAL_ARTICLES, 'archivelead');
+                    printf('<hr>');
+                }
 
-            if ($instance['count'] > 0 && $index % 4 === 1 && $index !== 0) {
-                // 1, 5, 9
-                printf('<div class="featured-row home-flex-row">');
-            }
+                if ($instance['count'] > 0 && $index % 4 === 1 && $index !== 0) {
+                    // 1, 5, 9
+                    printf('<div class="featured-row home-flex-row">');
+                }
 
-            if (!$instance['sticky'] || $index > 0) {
-                // 2. Show row posts.
-                get_template_part(PARTIAL_ARTICLES, 'archivesmall');
-            }
+                if (!$instance['show_sticky'] || $index > 0) {
+                    // 2. Show row posts.
+                    get_template_part(PARTIAL_ARTICLES, 'archivesmall');
+                }
 
-            if ($instance['count'] > 0 && $index % 4 === 0 && $index !== 0) {
-                // 4, 8, 12
-                printf('</div>');
+                if ($instance['count'] > 0 && $index % 4 === 0 && $index !== 0) {
+                    // 4, 8, 12
+                    printf('</div>');
+                }
             }
         }
 
