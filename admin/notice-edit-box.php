@@ -68,7 +68,7 @@ function tuairisc_notice_box_content($post, $args) {
 
     <ul>
         <li>
-            <input id="meta-tuairisc-notice" name="make-notice" type="checkbox" <?php printf($is_notice); ?>>
+            <input id="meta-tuairisc-notice" name="make_notice" type="checkbox" <?php printf($is_notice); ?>>
             <label for="meta-tuairisc-notice"><?php _e('Public Notice', TTD); ?></label>
         </li>
     </ul>
@@ -104,8 +104,8 @@ function tuairisc_notice_box_update($post_id) {
     $key = get_option('tuairisc_notice_post_key');
     $value = false;
 
-    if (isset($_POST['make-notice'])) {
-        $value = (filter_var($_POST['make-notice'], FILTER_SANITIZE_STRIPPED) === 'on');
+    if (isset($_POST['make_notice'])) {
+        $value = (isset($_POST['make_notice']) && filter_var($_POST['make_notice'], FILTER_SANITIZE_STRIPPED) === 'on');
     }
 
     update_post_meta($post_id, $key, $value);
