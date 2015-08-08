@@ -39,7 +39,7 @@ $keys = array(
  * @return  bool        Post has expired, true/false.
  */
 
-function sticky_set() {
+function is_tc_sticky_set() {
     global $keys; 
 
     $sticky = get_option($keys['sticky']);
@@ -48,13 +48,13 @@ function sticky_set() {
     $set = !!get_post($sticky['id']);
 
     if ($set) {
-        $expiry = $sticky['expired'];
-        $date = (int) date('U');
-        $set = ($date < $expiry);
+        $expiry = $sticky['expires'];
+        $date = date('U');
+        $set = ($date <= $expiry);
 
         if (!$set) {
             // Remove sticky post by setting post ID to -1, which doesn't exist.
-            remove_sticky();
+            remove_tc_sticky();
         }
     }
 
@@ -70,17 +70,17 @@ function sticky_set() {
  * @return  bool                            Post ID is sticky, true/false.
  */
 
-function is_sticky_post($post) {
+function is_tc_sticky_post($post) {
     global $keys; 
 
     $post = get_post($post);
 
-    if (!$post || !sticky_set()) {
+    if (!$post || !is_tc_sticky_set()) {
         return false;
     }
 
     $sticky = get_option($keys['sticky'])['id'];
-    return ($sticky === (int) $post->ID);
+    return ($sticky === $post->ID);
 }
 
 /**
@@ -89,16 +89,13 @@ function is_sticky_post($post) {
  * @param   int     $post       ID of post.
  */
 
-function set_sticky($post = -1, $expiry = -1) {
+function set_tc_sticky($post, $expiry) {
     global $keys; 
 
-    if (!is_int($post)) {
-        $post = -1;
-    }
+    $post = get_post($post);
 
-    if (!is_int($expiry)) {
-        $expiry = -1;
-    }
+    $post = !!$post ? $post->ID : -1;
+    $expiry = !!$post ? $expiry : -1;
 
     update_option($keys['sticky'], array(
         'id' => $post,
@@ -112,8 +109,8 @@ function set_sticky($post = -1, $expiry = -1) {
  * Reset sticky post.
  */
 
-function remove_sticky() {
-    sticky_sticky(-1, -1);
+function remove_tc_sticky() {
+    set_tc_sticky(-1, -1);
 }
 
 /**
@@ -121,15 +118,15 @@ function remove_sticky() {
  * -----------------------------------------------------------------------------
  */
 
-function get_sticky($use_fallback = false) {
+function get_tc_sticky($use_fallback = false) {
     global $keys; 
 
     $sticky_id = get_option($keys['sticky'])['id'];
     $sticky = get_post($sticky_id);
 
-    if (!sticky_set() && $use_fallback) {
+    if (!is_tc_sticky_set() && $use_fallback) {
         // Grab a featured post as fallback if requested.
-        $sticky = get_featured(1);
+        $sticky = get_tc_featured(1);
     }
 
     return $sticky;
@@ -142,7 +139,7 @@ function get_sticky($use_fallback = false) {
  * @return  bool            Post is featured, true/false.
  */
 
-function is_featured($post) {
+function is_tc_featured($post) {
     global $keys;
     $post = get_post($post);
 
@@ -156,7 +153,7 @@ function is_featured($post) {
  * @param   bool            $feature    Make post featured.
  */
 
-function set_as_featured($post = null, $feature = true) {
+function set_as_tc_featured($post = null, $feature = true) {
     global $keys;
 
     $post = get_post($post);
@@ -176,12 +173,13 @@ function set_as_featured($post = null, $feature = true) {
  * @param   bool    $add_filler     Include filler post if query comes up short.
  */
 
-function get_featured($number = 8, $use_sticky = true, $add_filler = false) {
+function get_tc_featured($number = 8, $use_sticky = true, $add_filler = false) {
     global $keys; 
     $featured = array();
+    $featured_query = array();
 
     if ($number > 0) {
-        $feautred = array(
+        $featured_query = array(
             'numberposts' => $number,
             'meta_key' => $keys['featured'],
             'post_status' => 'publish',
@@ -190,31 +188,30 @@ function get_featured($number = 8, $use_sticky = true, $add_filler = false) {
             'order' => 'DESC',
         );
 
-        if (!$use_sticky && sticky_set()) {
-            $featured['exclude'] = array($sticky_id);
-        }
-        
-        $featurd = get_posts($featured);
-
-        if ($use_sticky && sticky_set()) {
-            $featured[] = get_sticky(false);
+        if (!$use_sticky && is_tc_sticky_set()) {
+            /* Is a sticky is set, but you elect to /not/ show it. Sticky post
+             * will probably be included otherwise. */
+            $sticky = get_option($keys['sticky'])['id'];
+            $featured_query['exclude'] = array($sticky);
         }
 
-        if (sizeof($featured) < $number && $add_filler) {
-            $balnace = sizeof($featured) - $number;
+        $featured = get_posts($featured_query);
+
+        if ($add_filler && sizeof($featured) < $number) {
+            // Pad out query.
+            $balance = $number - sizeof($featured);
             
-            $filler = get_posts(array(
+            $filler_query = array(
                 // Filler posts are /any/ post without the meta key.
-                'balance' => $balance,
+                'numberposts' => $balance,
                 'order' => 'DESC',
                 'orderby' => 'date',
+                'post_status' => 'publish',
                 'meta_key' => $keys['featured'], 
                 'meta_compare' => '!=',
-                'meta_value' => true,
-                'post_status' => 'publish',
-            ));
+            );
 
-            $featured = array_merge($featured, $filler);
+            $featured = array_merge($featured, get_posts($filler_query));
         }
     }
 
