@@ -57,21 +57,25 @@ function tuairisc_featured_box_content($post) {
     global $featured_nonce;
     wp_nonce_field($featured_nonce['action'], $featured_nonce['name']);
 
-    $is_featured = is_featured($post);
+    $is_featured = is_tc_featured($post);
     $is_sticky = false;
+    $expiry = date('U');
 
-    if ($is_featured && is_sticky_post($post)) {
-        $is_sticky = true;
-        $expiry = get_option('tuairisc_sticky_post')['expires'];
+    if ($is_featured) {
+        $is_sticky = is_tc_sticky_post($post);
+
+        if ($is_featured && $is_sticky) {
+            $expiry = get_option('tuairisc_sticky_post')['expires'];
+        }
     }
 
     ?>
 
     <script>
         var tuairiscMetaInfo = {
-            featured: <?php printf('%s', $is_featued ? 'true' : 'false'); ?>,
+            featured: <?php printf('%s', $is_featured ? 'true' : 'false'); ?>,
             sticky: <?php printf('%s', $is_sticky ? 'true' : 'false'); ?>,
-            expiry: <?php printf('%u', $is_sticky ? $expiry : date('U')); ?>
+            expiry: <?php printf('%u', $expiry); ?>
         };
     </script>
 
@@ -81,11 +85,11 @@ function tuairisc_featured_box_content($post) {
 
     <ul>
         <li>
-            <input id="meta-tuairisc-featured" name="feature" type="checkbox">
+            <input id="meta-tuairisc-featured" name="make_featured" type="checkbox">
             <label for="meta-tuairisc-featured"><?php _e('Feature Post', TTD); ?></label>
         </li>
         <li class="stickycheck">
-            <input id="meta-tuairisc-sticky" name="sticky" type="checkbox">
+            <input id="meta-tuairisc-sticky" name="make_sticky" type="checkbox">
             <label for="meta-tuairisc-sticky"><?php _e('Sticky Post', TTD); ?></label>
         </li>
         <li class="expiryinfo">
@@ -132,34 +136,28 @@ function update_featured_meta_box($post_id) {
         return;
     }
 
-    $set_as_featured = false;
-    $make_sticky = false;
-
-    if (isset($_POST['feature'])) {
-        $set_as_featured = ($_POST['feature'] === 'on');     
-    }
-
-    if (isset($_POST['sticky'])) {
-        $make_sticky = ($_POST['sticky'] === 'on');     
-    }
-
-    // Sanitiize date input and mkdate.
-    $year = filter_var($_POST['year'], FILTER_SANITIZE_NUMBER_INT);
-    $month = filter_var($_POST['month'], FILTER_SANITIZE_NUMBER_INT); $month++;
-    $day = filter_var($_POST['day'], FILTER_SANITIZE_NUMBER_INT);
-    $hour = filter_var($_POST['hour'], FILTER_SANITIZE_NUMBER_INT);
-    $minute = filter_var($_POST['minute'], FILTER_SANITIZE_NUMBER_INT);
-    $expiry = mktime($hour, $minute, 0, $month, $day, $year);
+    $make_featured = (isset($_POST['make_featured']) && $_POST['make_featured'] === 'on');
+    $make_sticky = (isset($_POST['make_sticky']) && $_POST['make_sticky'] === 'on');
 
     // Update meta.
-    set_as_featured($post_id, $set_as_featured);
+    set_as_tc_featured($post_id, $make_featured);
 
-    if ($set_as_featured && $make_sticky && $expiry) {
-        // Set sticky if validated.
-        set_sticky($post_id, $expiry);
-    } else if (!$make_sticky && is_sticky_post($post_id)) {
+    if ($make_featured && $make_sticky) {
+        // Sanitiize date input and mkdate.
+        $year = filter_var($_POST['year'], FILTER_SANITIZE_NUMBER_INT);
+        $month = filter_var($_POST['month'], FILTER_SANITIZE_NUMBER_INT); $month++;
+        $day = filter_var($_POST['day'], FILTER_SANITIZE_NUMBER_INT);
+        $hour = filter_var($_POST['hour'], FILTER_SANITIZE_NUMBER_INT);
+        $minute = filter_var($_POST['minute'], FILTER_SANITIZE_NUMBER_INT);
+        $expiry = mktime($hour, $minute, 0, $month, $day, $year);
+
+        if ($expiry) {
+            // Set sticky if validated.
+            set_tc_sticky($post_id, $expiry);
+        }
+    } else if (!$make_sticky && is_tc_sticky_post($post_id)) {
         // If post was sticky, but no longer.
-        remove_sticky();
+        remove_tc_sticky();
     }
 }
 
