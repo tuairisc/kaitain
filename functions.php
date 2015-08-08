@@ -235,7 +235,7 @@ $theme_javascript = array(
 
 $theme_admin_javascript = array(
     'post-meta-box' => array('post.php', THEME_JS . 'meta-box.js'),
-    'new-meta-box' => array('post.php', THEME_JS . 'new-meta-box.js')
+    // 'new-meta-box' => array('post.php', THEME_JS . 'new-meta-box.js')
 );
 
 $conditional_scripts = array(
