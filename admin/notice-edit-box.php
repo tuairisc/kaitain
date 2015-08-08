@@ -102,7 +102,11 @@ function tuairisc_notice_box_update($post_id) {
     }
 
     $key = get_option('tuairisc_notice_post_key');
-    $value = (filter_var($_POST['make-notice'], FILTER_SANITIZE_STRIPPED) === 'on');
+    $value = false;
+
+    if (isset($_POST['make-notice'])) {
+        $value = (filter_var($_POST['make-notice'], FILTER_SANITIZE_STRIPPED) === 'on');
+    }
 
     update_post_meta($post_id, $key, $value);
 }
