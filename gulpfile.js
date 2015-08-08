@@ -103,3 +103,7 @@ gulp.task('default', function() {
     gulp.watch(paths.js.batch, ['js']);
     gulp.watch(paths.css.batch, ['css']);
 });
+
+gulp.task('css-dev-watch', function() {
+    gulp.watch(paths.css.batch, ['css-dev']);
+});
