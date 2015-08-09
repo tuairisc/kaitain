@@ -28,6 +28,7 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
+$page_number = intval(get_query_var('paged'));
 get_header();
 
 /* 1. Big Lead Article.
@@ -37,10 +38,19 @@ get_header();
  * Nuacht, Tuairmiocht, Sport, Cultur 
  * 5. Side-by-side category widgets for Saol, Greann, Pobal */
 
-if (is_active_sidebar('widgets-front-page')) {
-    dynamic_sidebar('widgets-front-page');
+if (!$page_number) {
+    if (is_active_sidebar('widgets-front-page')) {
+        dynamic_sidebar('widgets-front-page');
+    } else {
+        printf('<h3>%s</h3>', __('Add your main front page widgets FFS!', TTD));
+    }
 } else {
-    printf('<h3>%s</h3>', __('Add your main front page widgets FFS!', TTD));
+    while (have_posts()) {
+        the_post();
+        get_template_part(PARTIAL_ARTICLES, 'archive');
+    }
+
+    get_template_part(THEME_PARTIALS . '/pagination');
 }
 
 get_footer();
