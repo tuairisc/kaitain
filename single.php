@@ -34,7 +34,7 @@ if (have_posts()) {
     while (have_posts()) {
         the_post();
         get_template_part(PARTIAL_ARTICLES, 'full');
-        include_once(THEME_INCLUDES . 'related.php');
+        include_once(THEME_INCLUDES . 'single-post-related-posts.php');
         // comments_template();
     }
 } else {
