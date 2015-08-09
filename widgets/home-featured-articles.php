@@ -154,7 +154,6 @@ class tuairisc_featured extends WP_Widget {
                 if ($instance['show_sticky'] && $num === 0) {
                     // 1. Show lead post.
                     get_template_part(PARTIAL_ARTICLES, 'archivelead');
-                    printf('<hr>');
                 }
 
                 if ($instance['count'] > 0 && $num % 4 === 1 && $num !== 0) {
@@ -175,6 +174,7 @@ class tuairisc_featured extends WP_Widget {
         }
 
         printf('</div>');
+        printf('<hr>');
 
         if (!empty($defaults['after_widget'])) {
             printf($defaults['after_widget']);

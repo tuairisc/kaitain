@@ -155,6 +155,8 @@ class tuairisc_authors extends WP_Widget {
             printf('%s', $defaults['after_widget']);
         }
 
+        printf('<hr>');
+
         wp_reset_postdata();
     }
 }
