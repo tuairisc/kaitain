@@ -57,12 +57,12 @@ function tuairisc_featured_box_content($post) {
     global $featured_nonce;
     wp_nonce_field($featured_nonce['action'], $featured_nonce['name']);
 
-    $is_featured = is_tc_featured($post);
+    $is_featured = is_featured_post($post);
     $is_sticky = false;
     $expiry = date('U');
 
     if ($is_featured) {
-        $is_sticky = is_tc_sticky_post($post);
+        $is_sticky = is_post_sticky($post);
 
         if ($is_featured && $is_sticky) {
             $expiry = get_option('tuairisc_sticky_post')['expires'];
@@ -140,7 +140,7 @@ function update_featured_meta_box($post_id) {
     $make_sticky = (isset($_POST['make_sticky']) && $_POST['make_sticky'] === 'on');
 
     // Update meta.
-    set_as_tc_featured($post_id, $make_featured);
+    update_featured_posts($post_id, $make_featured);
 
     if ($make_featured && $make_sticky) {
         // Sanitiize date input and mkdate.
@@ -153,11 +153,11 @@ function update_featured_meta_box($post_id) {
 
         if ($expiry) {
             // Set sticky if validated.
-            set_tc_sticky($post_id, $expiry);
+            set_sticky_post($post_id, $expiry);
         }
-    } else if (!$make_sticky && is_tc_sticky_post($post_id)) {
+    } else if (!$make_sticky && is_post_sticky($post_id)) {
         // If post was sticky, but no longer.
-        remove_tc_sticky();
+        remove_sticky_post();
     }
 }
 
