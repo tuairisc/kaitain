@@ -30,7 +30,6 @@
 
 global $sections;
 
-$section_slug = $sections->get_section_slug(get_the_category()[0]);
 $trim = $sections->get_section_slug(get_the_category()[0]);
 
 $trim = array(
@@ -40,22 +39,21 @@ $trim = array(
 
 ?>
 
-<article <?php post_class('related'); ?> id="article-<?php the_ID(); ?>">
-    <a class="<?php printf($trim['text']); ?> "rel="bookmark" href="<?php the_permalink(); ?>">
+<article <?php post_class('related'); ?> id="related-<?php the_ID(); ?>">
+    <a class="<?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+        <div class="thumbnail">
+            <img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'large'); ?>" alt="<?php the_title_attribute(); ?>" />
+            <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
+        </div>
         <header>
-            <div>
-                <a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"></a>
-            </div>
-            <h5 class="title">
-                <a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
-            </h5>
+            <h5 class="title"><?php the_title(); ?></h5>
             <?php if (!is_page()) : ?>
-                <small><time datetime="<?php the_time('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small>
+                <span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small></span>
             <?php endif; ?>
         </header>
         <?php if (is_user_logged_in()) : ?>
             <footer>
-                <small><?php edit_post_link(__('edit post', TTD), ' ', ''); ?></small>
+                <p><small><?php edit_post_link(__('edit post', TTD), ' ', ''); ?></small></p>
             </footer>
         <?php endif; ?>
     </a>
