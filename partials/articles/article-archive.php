@@ -39,15 +39,18 @@ $trim = array(
 
 ?>
 
-<article <?php post_class('archive'); ?> id="<?php the_id(); ?>">
-    <a class="<?php printf($trim['text']); ?> "rel="bookmark" href="<?php the_permalink(); ?>">
+<article <?php post_class('archive'); ?> id="archive-<?php the_id(); ?>">
+    <a class="<?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail">
             <img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'large'); ?>" />
             <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
         <div class="post-content">
-            <h3 class="archive-title"><?php the_title(); ?></h3>
-            <p><small><?php the_excerpt(); ?></small></p>
+            <header>
+                <h3 class="archive-title"><?php the_title(); ?></h3>
+                <p><span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small></span></p>
+            </header>
+            <p class="post-excerpt"><small><?php printf(get_the_excerpt()); ?></small></p>
         </div>
     </a>
 </article>
