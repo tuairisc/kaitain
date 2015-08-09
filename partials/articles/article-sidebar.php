@@ -30,20 +30,23 @@
 
 global $sections;
 
-$section_slug = $sections->get_section_slug(get_the_category()[0]);
-$section_text = sprintf('section-%s-text-hover', $section_slug);
-$section_background = sprintf('section-%s-background', $section_slug);
+$trim = $sections->get_section_slug(get_the_category()[0]);
+
+$trim = array(
+    'text' => sprintf('section-%s-text-hover', $trim),
+    'background' => sprintf('section-%s-background', $trim)
+);
 
 ?>
 
-<article <?php post_class('sidebar'); ?> id="<?php the_id(); ?>">
-    <a class="<?php printf($section_text); ?> "rel="bookmark" href="<?php the_permalink(); ?>">
+<article <?php post_class('sidebar'); ?> id="sidebar-<?php the_id(); ?>">
+    <a class="<?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail">
-            <img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'thumbnail'); ?>" />
-            <div class="archive-trim-bottom <?php printf($section_background); ?>"></div>
+            <img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'thumbnail'); ?>" alt="<?php the_title_attribute(); ?>" />
+            <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
         <header>
-            <h5><?php the_title(); ?></h5>
+            <h5 class="title"><?php the_title(); ?></h5>
             <span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small></span>
         </header>
     </a>
