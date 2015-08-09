@@ -34,6 +34,7 @@ global $cat;
 $trans_name = 'category_lead_post';
 $page_number = intval(get_query_var('paged'));
 $meta_key = get_option('tuairisc_featured_post_key');
+$children = get_categories(array('child_of' => $cat));
 $featured_post_id = 0;
 
 /**
@@ -42,29 +43,20 @@ $featured_post_id = 0;
  */
 
 if ($page_number < 2) {
-    if (!($category_lead_post = get_transient($trans_name))) {
-        $category_lead_post = get_posts(array(
-            // Get last featured post to go in the top slot.
-            'numberposts' => 1,
-            'category' => $cat,
-            'order' => 'DESC'
-        ));
-
-        set_transient($trans_name, $category_lead_post, get_option('tuairisc_transient_timeout')); 
-    }
-
-    if (sizeof($category_lead_featured) === 0) {
+    if (!($category_lead_post = get_cat_featured_post($cat))) {
         // If it is empty, just grab the latest post to replace.
-        $category_lead_featured = get_posts(array(
+        $category_lead_post = get_posts(array(
             'numberposts' => 1,
             'category' => $cat,
             'order' => 'DESC'
         ));
+    } else {
+        $category_lead_post = array_slice($category_lead_post, 0, 1);
     }
 
-    $featured_post_id = $category_lead_featured[0]->ID;
+    $featured_post_id = $category_lead_post[0]->ID;
 
-    foreach ($category_lead_featured as $post) {
+    foreach ($category_lead_post as $post) {
         setup_postdata($post);
         get_template_part(PARTIAL_ARTICLES, 'archivelead');
     }
@@ -90,12 +82,13 @@ if ($page_number < 2) {
     }
 }
 
-if (have_posts()) {
+if (have_posts() && $page_number || empty($children)) {
     while (have_posts()) {
-        // if (get_the_ID() !== $featured_post_id) {
-            the_post();
+        the_post();
+
+        if (get_the_ID() !== $featured_post_id) {
             get_template_part(PARTIAL_ARTICLES, 'archive');
-        // }
+        }
     }
 }
 
