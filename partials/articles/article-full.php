@@ -34,16 +34,18 @@ $avatar = get_avatar($author, 32);
 ?>
 
 <article <?php post_class('full'); ?> id="article-<?php the_ID(); ?>">
-    <?php // TODO FIXME No good dirty bad hack. ?>
     <header>
-        <h1><a class="green-link-hover" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+        <h1 class="title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
         <p class="post-excerpt"><small><?php printf(get_the_excerpt()); ?></small></p>
         <div class="author-meta">
-            <div class="author-avatar">
-                <a class="tuairisc-author author-photo" title="<?php the_author_meta('display_name'); ?>" href="<?php printf(get_author_posts_url($author)); ?>"><img class="cover-fit" src="<?php printf(get_avatar(get_the_author_meta('ID'), 32)); ?>" /></a>
+            <div class="photo">
+                <a title="<?php the_author_meta('display_name'); ?>" href="<?php printf(get_author_posts_url($author)); ?>">
+                    <img class="cover-fit" src="<?php printf(get_avatar(get_the_author_meta('ID'), 32)); ?>" />
+                </a>
             </div>
             <div class="author-info">
-                <span class="author-link"><a class="green-link-hover" href="<?php printf(get_author_posts_url($author)); ?>"><?php the_author_meta('display_name'); ?></a></span> <br />
+                <span class="author-link"><a class="green-link-hover" href="<?php printf(get_author_posts_url($author)); ?>"><?php the_author_meta('display_name'); ?></a></span>
+                </br />
                 <span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small></span>
             </div>
         </div>
