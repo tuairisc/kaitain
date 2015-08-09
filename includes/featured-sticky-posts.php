@@ -29,9 +29,12 @@
  */
 
 $keys = array(
-    'sticky' => 'tuairisc_sticky_post',
-    'featured' => 'tuairisc_feautre_post'
+    'sticky' => 'tc_sticky_post',
+    'featured' => 'tc_feautred_posts'
 );
+
+add_option($keys['sticky'], array(), '', true);
+add_option($keys['featured'], array(), '', true);
 
 /**
  * Check if Sticky Expired
@@ -39,7 +42,7 @@ $keys = array(
  * @return  bool        Post has expired, true/false.
  */
 
-function is_tc_sticky_set() {
+function has_sticky_been_set() {
     global $keys; 
 
     $sticky = get_option($keys['sticky']);
@@ -54,7 +57,7 @@ function is_tc_sticky_set() {
 
         if (!$set) {
             // Remove sticky post by setting post ID to -1, which doesn't exist.
-            remove_tc_sticky();
+            remove_sticky_post();
         }
     }
 
@@ -70,12 +73,12 @@ function is_tc_sticky_set() {
  * @return  bool                            Post ID is sticky, true/false.
  */
 
-function is_tc_sticky_post($post) {
+function is_post_sticky($post) {
     global $keys; 
 
     $post = get_post($post);
 
-    if (!$post || !is_tc_sticky_set()) {
+    if (!$post || !has_sticky_been_set()) {
         return false;
     }
 
@@ -89,7 +92,7 @@ function is_tc_sticky_post($post) {
  * @param   int     $post       ID of post.
  */
 
-function set_tc_sticky($post, $expiry) {
+function set_sticky_post($post, $expiry) {
     global $keys; 
 
     $post = get_post($post);
@@ -109,8 +112,8 @@ function set_tc_sticky($post, $expiry) {
  * Reset sticky post.
  */
 
-function remove_tc_sticky() {
-    set_tc_sticky(-1, -1);
+function remove_sticky_post() {
+    set_sticky_post(-1, -1);
 }
 
 /**
@@ -118,13 +121,13 @@ function remove_tc_sticky() {
  * -----------------------------------------------------------------------------
  */
 
-function get_tc_sticky($use_fallback = false) {
+function get_sticky_post($use_fallback = false) {
     global $keys; 
 
     $sticky_id = get_option($keys['sticky'])['id'];
     $sticky = get_post($sticky_id);
 
-    if (!is_tc_sticky_set() && $use_fallback) {
+    if (!has_sticky_been_set() && $use_fallback) {
         // Grab a featured post as fallback if requested.
         $sticky = get_tc_featured(1);
     }
@@ -139,11 +142,11 @@ function get_tc_sticky($use_fallback = false) {
  * @return  bool            Post is featured, true/false.
  */
 
-function is_tc_featured($post) {
+function is_featured_post($post) {
     global $keys;
+    $featured = get_option($keys['featured']);
     $post = get_post($post);
-
-    return (!!$post && get_post_meta($post->ID, $keys['featured'], true));
+    return (!!$post && in_array($post->ID, $featured));
 }
 
 /**
@@ -151,18 +154,25 @@ function is_tc_featured($post) {
  * -----------------------------------------------------------------------------
  * @param   int/object      $post       Post object.
  * @param   bool            $feature    Make post featured.
+ * @reutrn  array           $featured   Array of all featured posts.
  */
 
-function set_as_tc_featured($post = null, $feature = true) {
+function update_featured_posts($post = null, $make_featured = true) {
     global $keys;
 
     $post = get_post($post);
+    $featured_posts = get_option($keys['featured']);
+    $is_featured_post = is_featured_post($post);
 
-    if ($post && $feature) {
-        update_post_meta($post->ID, $keys['featured'], true);
-    } else if ($post && !$feature) {
-        delete_post_meta($post->ID, $keys['featured']);
+    if ($post && $make_featured && !$is_featured_post) {
+        $featured_posts[] = $post->ID;
+    } else if ($post && !$make_featured && $is_featured_post) {
+        $key = array_search($post->ID, $featured_posts);
+        unset($featured_posts[$key]);
     }
+
+    update_option($keys['featured'], $featured_posts);
+    return $featured_posts;
 }
 
 /**
@@ -173,22 +183,21 @@ function set_as_tc_featured($post = null, $feature = true) {
  * @param   bool    $add_filler     Include filler post if query comes up short.
  */
 
-function get_tc_featured($number = 8, $use_sticky = true, $add_filler = false) {
+function get_featured_posts($num = 8, $no_sticky = true, $add_filler = false) {
     global $keys; 
-    $featured = array();
+    $featured_posts = get_option($keys['featured']);
     $featured_query = array();
 
-    if ($number > 0) {
+    if ($num > 0) {
         $featured_query = array(
-            'numberposts' => $number,
-            'meta_key' => $keys['featured'],
+            'numberposts' => $num,
             'post_status' => 'publish',
-            'meta_value' => true,
+            'post__in' => $featured_posts,
             'orderby' => 'date',
             'order' => 'DESC',
         );
 
-        if (!$use_sticky && is_tc_sticky_set()) {
+        if (!$no_sticky && has_sticky_been_set()) {
             /* Is a sticky is set, but you elect to /not/ show it. Sticky post
              * will probably be included otherwise. */
             $sticky = get_option($keys['sticky'])['id'];
@@ -197,25 +206,40 @@ function get_tc_featured($number = 8, $use_sticky = true, $add_filler = false) {
 
         $featured = get_posts($featured_query);
 
-        if ($add_filler && sizeof($featured) < $number) {
+        if ($add_filler && sizeof($featured_posts) < $num) {
             // Pad out query.
-            $balance = $number - sizeof($featured);
-            
-            $filler_query = array(
-                // Filler posts are /any/ post without the meta key.
-                'numberposts' => $balance,
-                'order' => 'DESC',
-                'orderby' => 'date',
-                'post_status' => 'publish',
-                'meta_key' => $keys['featured'], 
-                'meta_compare' => '!=',
+            $featured = array_merge(
+                $featured,
+                featured_filler($num - sizeof($featured))
             );
-
-            $featured = array_merge($featured, get_posts($filler_query));
         }
     }
 
     return $featured;
+}
+
+/**
+ * Fill Out or Replace Missing Featured Posts
+ * -----------------------------------------------------------------------------
+ * @param   int     $num        Number of posts to return.
+ * @return  array   $filler     Filler posts.
+ */
+
+function featured_filler($num = 1) {
+    global $keys; 
+    $featured_posts = get_option($keys['featured']);
+    $filler = array();
+    
+    $filler = get_posts(array(
+        // Filler posts are any posts outside of featured.
+        'numberposts' => $num,
+        'order' => 'DESC',
+        'orderby' => 'date',
+        'post_status' => 'publish',
+        'post__not_in' => $featured_posts
+    ));
+
+    return $filler;
 }
 
 ?>
