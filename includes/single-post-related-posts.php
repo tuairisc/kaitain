@@ -28,30 +28,32 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
+global $post;
 $category = get_the_category($post->ID); 
+$related_count = 3;
 
-// 3 posts is a good number.
-$desired_related_count = 3;
-    
-$related_posts = new WP_Query(array(
+$range = array(
+    'after' => get_the_date('Y-m-j') . ' -180 days',
+    'before' => get_the_date('Y-m-j') . ' -7 days'
+);
+
+$related = get_posts(array(
     // The next two lines force the exclusion of private posts.
     'perm' => 'readable',
     'post_status' => 'publish',
     'cat' => $category[0]->cat_ID,
-    'posts_per_page' => $desired_related_count,
+    'posts_per_page' => $related_count,
     'orderby' => 'rand',
     'order' => 'DESC',
-    'post__not_in' => array(
-        get_the_ID()
-    ),
+    'post__not_in' => array($post->ID),
     'date_query' => array(
         'inclusive' => false,
-        'after' => get_the_date('Y-m-j') . ' -180 days',
-        'before' => get_the_date('Y-m-j') . ' -7 days',
+        'after' => $range['after'],
+        'before' => $range['before']
     )
 )); 
 
-if ($related_posts->found_posts < $desired_related_count) {
+if (sizeof($related) < $related_count) {
     /*
      * Related Posts Filler
      * -------------------------------------------------------------------------
@@ -60,46 +62,39 @@ if ($related_posts->found_posts < $desired_related_count) {
      * random post from this period and add it to the original loop as a filler.
      */
 
-    $filler_count = $desired_related_count - $related_posts->found_posts;
-    $excluded_posts = array();
+    $missing = $related_count - sizeof($related);
+    $excluded = array();
 
-    foreach($related_posts->posts as $post => $key) {
+    foreach($related as $post) {
         // Add any found posts to the array of excluded images.
-        array_push($excluded_posts, $post->ID);
+        $excluded[] = $post->ID;
     }
 
-    $related_posts_filler = new WP_Query(array(
+    $filler = get_posts(array(
         // The next two lines force the exclusion of private posts.
         'perm' => 'readable',
         'post_status' => 'publish',
         // Exclude already chosen posts.
-        'post__not_in' => $excluded_posts,
+        'post__not_in' => $excluded,
         'posts_per_page' => $filler_count,
         'orderby' => 'rand',
         'order' => 'DESC',
         'date_query' => array(
             'inclusive' => false,
-            'after' => get_the_date('Y-m-j') . ' -180 days',
-            'before' => get_the_date('Y-m-j') . ' -7 days',
+            'after' => $range['after'],
+            'before' => $range['before']
         )
     ));
 
-    // // Merge queries.
-    $join_query = new WP_Query();
-    $join_query->posts = array_merge($related_posts->posts, $related_posts_filler->posts);
-    $join_query->post_count = $related_posts->post_count + $related_posts_filler->post_count;
-    $related_posts = $join_query;
+    $related = array_merge($related, $filler);
 }
 
-if ($related_posts->have_posts()) {
-    printf('<hr><div class="%s">', 'related-articles');
+printf('<hr><div class="%s">', 'related-articles');
 
-    while ($related_posts->have_posts()) {
-        $related_posts->the_post();
-        get_template_part(PARTIAL_ARTICLES, 'related');
-    }
-
-    printf('</div>');
+foreach ($related as $post) {
+    setup_postdata($post);
+    get_template_part(PARTIAL_ARTICLES, 'related');
 }
 
+printf('</div>');
 wp_reset_postdata(); ?>
