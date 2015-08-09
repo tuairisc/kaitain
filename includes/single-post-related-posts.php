@@ -97,4 +97,6 @@ foreach ($related as $post) {
 }
 
 printf('</div>');
-wp_reset_postdata(); ?>
+wp_reset_postdata();
+
+?>
