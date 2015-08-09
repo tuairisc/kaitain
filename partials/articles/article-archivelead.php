@@ -30,12 +30,9 @@
 
 global $sections;
 
-$section_slug = $sections->get_section_slug(get_the_category()[0]);
-
 $trim = $sections->get_section_slug(get_the_category()[0]);
 
 $trim = array(
-    'slug' => $trim,
     'text' => sprintf('section-%s-text-hover', $trim),
     'background' => sprintf('section-%s-background', $trim)
 );

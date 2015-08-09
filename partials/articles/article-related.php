@@ -28,9 +28,20 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
+global $sections;
+
+$section_slug = $sections->get_section_slug(get_the_category()[0]);
+$trim = $sections->get_section_slug(get_the_category()[0]);
+
+$trim = array(
+    'text' => sprintf('section-%s-text-hover', $trim),
+    'background' => sprintf('section-%s-background', $trim)
+);
+
 ?>
 
 <article <?php post_class('related'); ?> id="article-<?php the_ID(); ?>">
+    <a class="<?php printf($trim['text']); ?> "rel="bookmark" href="<?php the_permalink(); ?>"></a>
     <header>
         <div>
             <a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"></a>
