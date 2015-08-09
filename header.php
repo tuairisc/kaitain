@@ -35,9 +35,8 @@ global $sections;
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>" />
+<meta charset="<?php printf(get_option('blog_charset')); ?>" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta charset="<?php bloginfo('charset'); ?>" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title><?php wp_title('-', true, 'right'); ?></title>
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
@@ -48,14 +47,9 @@ global $sections;
         <?php // Disabled on 404 pages. ?>
         <div id="header">
             <div class="section-trim-background" id="brand">
-                <nav class="left-nav" id="hamburger">
-                    <ul>
-                        <li class="button">
-                            <a class="submenu-toggle" href="javascript:void(0)"></a>
-                        </li>
-                    </ul>
-                </nav>
-                <nav class="center-nav" id="home">
+                <?php // Empty until I have something better. ?>
+                <nav class="left-nav" id="hamburger"></nav>
+                <nav class="center-nav" id="home-link">
                     <a id="home" rel="home" href="<?php printf(home_url()); ?>"></a> 
                 </nav>
                 <?php wp_nav_menu(array(
@@ -69,12 +63,8 @@ global $sections;
             </div>
             <nav id="sections-menu">
                 <?php // Section menus. See section-manager.php ?>
-                <ul id="primary">
-                    <?php $sections->sections_menu('primary'); ?>
-                </ul>
-                <ul id="secondary">
-                    <?php $sections->sections_menu('secondary'); ?>
-                </ul>
+                <ul id="primary"><?php $sections->sections_menu('primary'); ?></ul>
+                <ul id="secondary"><?php $sections->sections_menu('secondary'); ?></ul>
             </nav>
         </div>
     <?php endif; ?>
