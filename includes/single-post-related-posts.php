@@ -32,13 +32,16 @@ global $post;
 $category = get_the_category($post->ID); 
 $related_count = 3;
 $related_trans_name = 'single_post_related_' . $post->ID;
+$filler_trans_name = 'single_post_filler_' . $post->ID;
 
 $range = array(
-    'after' => get_the_date('Y-m-j') . ' -180 days',
-    'before' => get_the_date('Y-m-j') . ' -7 days'
+    'after' => date('Y-m-j') . ' -14 days',
+    'before' => date('Y-m-j') . ' -7 days'
 );
 
-if (!($related = get_transient($related_trans_name))) {
+$related = get_transient($related_trans_name);
+
+if (!$related || empty($related) || WP_DEBUG) {
     $related = get_posts(array(
         // The next two lines force the exclusion of private posts.
         'perm' => 'readable',
@@ -49,7 +52,7 @@ if (!($related = get_transient($related_trans_name))) {
         'order' => 'DESC',
         'post__not_in' => array($post->ID),
         'date_query' => array(
-            'inclusive' => false,
+            'inclusive' => true,
             'after' => $range['after'],
             'before' => $range['before']
         )
@@ -58,7 +61,7 @@ if (!($related = get_transient($related_trans_name))) {
     set_transient($related_trans_name, $related, get_option('tuairisc_transient_timeout')); 
 }
 
-if (sizeof($related) < $related_count) {
+if (($missing = $related_count - sizeof($related)) > 0) {
     /*
      * Related Posts Filler
      * -------------------------------------------------------------------------
@@ -67,7 +70,6 @@ if (sizeof($related) < $related_count) {
      * random post from this period and add it to the original loop as a filler.
      */
 
-    $missing = $related_count - sizeof($related);
     $excluded = array();
 
     foreach($related as $post) {
@@ -75,24 +77,35 @@ if (sizeof($related) < $related_count) {
         $excluded[] = $post->ID;
     }
 
-    $single_post_filler = get_posts(array(
-        // The next two lines force the exclusion of private posts.
-        'perm' => 'readable',
-        'post_status' => 'publish',
-        // Exclude already chosen posts.
-        'post__not_in' => $excluded,
-        'posts_per_page' => $filler_count,
-        'orderby' => 'rand',
-        'order' => 'DESC',
-        'date_query' => array(
-            'inclusive' => false,
-            'after' => $range['after'],
-            'before' => $range['before']
-        )
-    ));
+    $filler = get_transient($filler_trans_name);
+    
+    if (!$filler || empty($filler) || WP_DEBUG) {
+        $filler = array(
+            // The next two lines force the exclusion of private posts.
+            'perm' => 'readable',
+            'post_status' => 'publish',
+            // Exclude already chosen posts.
+            'post__not_in' => $excluded,
+            'posts_per_page' => $missing,
+            'orderby' => 'rand',
+            'order' => 'DESC',
+        );
+        
+        if (!WP_DEBUG) {
+            // Test server's copy of posts are way out of date.
+            $filler['date_query'] = array(
+                'inclusive' => true,
+                'after' => $range['after'],
+                'before' => $range['before']
+            );
+        }
 
-    set_transient('single_post_filler', get_option('tuairisc_transient_timeout')); 
-    $related = array_merge($single_post_related, $single_post_filler);
+        $filler = get_posts($filler);
+
+        set_transient($filler_trans_name, $filler, get_option('tuairisc_transient_timeout')); 
+    }
+
+    $related = array_merge($related, $filler);
 }
 
 printf('<hr><div class="%s">', 'related-articles');
