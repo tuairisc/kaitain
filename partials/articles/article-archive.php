@@ -28,12 +28,11 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
-global $ections;
+global $sections;
 
 $trim = $sections->get_section_slug(get_the_category()[0]);
 
 $trim = array(
-    'slug' => $trim,
     'text' => sprintf('section-%s-text-hover', $trim),
     'background' => sprintf('section-%s-background', $trim)
 );
@@ -52,3 +51,4 @@ $trim = array(
         </div>
     </a>
 </article>
+<hr>
