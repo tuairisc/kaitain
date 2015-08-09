@@ -76,9 +76,16 @@ class tuairisc_featured extends WP_Widget {
                 </select>
             </li>
         </ul>
+        <?php
+            $count = $instance['count'];    
+
+            $show_sticky = 
+                isset($instance['show_sticky']) && $instance['show_sticky']
+                ? 'true' : 'false';
+        ?>
         <script>
-            jQuery('#<?php printf($this->get_field_id('count')); ?>').val(<?php printf($instance['count']); ?>);
-            jQuery('#<?php printf($this->get_field_id('show_sticky')); ?>').prop('checked', <?php printf($instance['show_sticky'] ? 'true' : 'false'); ?>);
+            jQuery('#<?php printf($this->get_field_id('count')); ?>').val(<?php printf($count); ?>);
+            jQuery('#<?php printf($this->get_field_id('show_sticky')); ?>').prop('checked', <?php printf($show_sticky); ?>);
         </script>
 
         <?php
@@ -94,7 +101,12 @@ class tuairisc_featured extends WP_Widget {
 
     function update($new_args, $old_args) {
         $defaults = array();
-        $defaults['show_sticky'] = ($new_args['show_sticky'] === 'on');
+
+        $defaults['show_sticky'] = (
+            isset($new_args['show_sticky']) 
+            && $new_args['show_sticky'] === 'on'
+        );
+
         $defaults['count'] = $new_args['count'];
         return $defaults;
     }
@@ -113,14 +125,21 @@ class tuairisc_featured extends WP_Widget {
         // Array of featured and sticky posts.
         $featured = array();
 
-        if ($instance['show_sticky'] && is_tc_sticky_set()) {
+        if ($instance['show_sticky'] && has_sticky_been_set()) {
             /* If sticky was checked, see if it is available to use. Otherwise
              * grab the last featured post. */
-            $featured[] = get_tc_sticky(true);
+            $featured[] = get_sticky_post(true);
         }
 
         // Show other featured posts if they were elected ot be shown.
-        $featured = array_merge(get_tc_featured($instance['count'], !$instance['show_sticky'], true), $featured);
+        $featured = array_merge(
+            get_featured_posts(
+                $instance['count'],
+                !$instance['show_sticky'],
+                true
+            ), 
+            $featured
+        );
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
@@ -128,27 +147,27 @@ class tuairisc_featured extends WP_Widget {
 
         printf('<div class="recent-widget tuairisc-post-widget">');
 
-        foreach ($featured as $index => $post) {
+        foreach ($featured as $num => $post) {
             if (!empty($post)) {
                 setup_postdata($post);
 
-                if ($instance['show_sticky'] && $index === 0) {
+                if ($instance['show_sticky'] && $num === 0) {
                     // 1. Show lead post.
                     get_template_part(PARTIAL_ARTICLES, 'archivelead');
                     printf('<hr>');
                 }
 
-                if ($instance['count'] > 0 && $index % 4 === 1 && $index !== 0) {
+                if ($instance['count'] > 0 && $num % 4 === 1 && $num !== 0) {
                     // 1, 5, 9
                     printf('<div class="featured-row home-flex-row">');
                 }
 
-                if (!$instance['show_sticky'] || $index > 0) {
+                if (!$instance['show_sticky'] || $num > 0) {
                     // 2. Show row posts.
                     get_template_part(PARTIAL_ARTICLES, 'archivesmall');
                 }
 
-                if ($instance['count'] > 0 && $index % 4 === 0 && $index !== 0) {
+                if ($instance['count'] > 0 && $num % 4 === 0 && $num !== 0) {
                     // 4, 8, 12
                     printf('</div>');
                 }
