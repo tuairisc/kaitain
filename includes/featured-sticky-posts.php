@@ -44,13 +44,10 @@ add_option($keys['featured'], array(), '', true);
 
 function has_sticky_been_set() {
     global $keys; 
-
     $sticky = get_option($keys['sticky']);
 
-    // Check if sticky ID matches a valid post ID; the default ID is -1.
-    $set = !!get_post($sticky['id']);
-
-    if ($set) {
+    if ($set = !!get_post($sticky['id'])) {
+        // Check if sticky ID matches a valid post ID; the default ID is -1.
         $expiry = $sticky['expires'];
         $date = date('U');
         $set = ($date <= $expiry);
@@ -76,9 +73,7 @@ function has_sticky_been_set() {
 function is_post_sticky($post) {
     global $keys; 
 
-    $post = get_post($post);
-
-    if (!$post || !has_sticky_been_set()) {
+    if (!($post = get_post($post)) || !has_sticky_been_set()) {
         return false;
     }
 
@@ -220,6 +215,46 @@ function get_featured_posts($num = 8, $no_sticky = true, $add_filler = false) {
     }
 
     return $featured;
+}
+
+/**
+ * Get Featured Posts from Given Category
+ * -----------------------------------------------------------------------------
+ * @param   int/object      $category           Category ID/object.
+ * @return  array           $cat_featured       Category featured posts.
+ */
+
+function get_cat_featured_post($category) {
+    global $keys; 
+
+    if (!($category = get_category($category))) {
+        return;
+    }
+
+    $featured_posts = get_option($keys['featured']);
+    $trans_name = sprintf('featured_posts_%s', $category->slug);
+
+    if (!($featured = get_transient($trans_name))) {
+        $featured = get_posts(array(
+            'numberposts' => -1,
+            'cat' > $category->cat_ID,
+            'post__in' => $featured_posts,
+            'order' => 'DESC',
+            'orderby' => 'date'
+        ));
+
+        $cat_featured = array();
+
+        foreach ($featured as $post) {
+            if (in_category($post, $category)) {
+                $cat_featured[] = $post;
+            }
+        }
+
+        set_transient($trans_name, $cat_featured, get_option('tuairisc_transient_timeout'));
+    }
+
+    return $cat_featured;
 }
 
 /**
