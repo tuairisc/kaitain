@@ -95,6 +95,11 @@ define('THEME_CSS', ASSETS_URL . 'css/');
  * -----------------------------------------------------------------------------
  */
 
+add_option('tuairisc_hidden_users', array(
+    // Users whose avatar should not display in single posts.
+    1, 2, 37, 48
+), '', true);
+
 // Transient API timeout in minutes.
 add_option('tuairisc_transient_timeout', 60 * 20, '', true);
 
@@ -579,7 +584,7 @@ function reduce_sizes($sizes) {
         $sizes[$i] .= 'x' . $sizes[$i];
     }
 
-    return implode(', ', $sizes);
+    return implode(' ', $sizes);
 }
 
 /**
