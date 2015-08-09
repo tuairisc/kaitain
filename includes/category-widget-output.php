@@ -40,6 +40,7 @@
 
 function category_widget_output($cats, $show_name = true, $count = 5) {
     global $post, $sections;
+    $trans_name = 'category_posts_';
     $categories = array();
 
     // Resolve categories down to ID.
@@ -63,13 +64,17 @@ function category_widget_output($cats, $show_name = true, $count = 5) {
             continue;
         }
 
-        $category_posts = get_posts(array(
-            'numberposts' => $count,
-            'order' => 'DESC',
-            'category' => $category->cat_ID
-        ));
+        $cat_trans_name = $trans_name . $category->slug;
 
-        set_transient('category_posts', get_option('tuairisc_transient_timeout')); 
+        if (!($category_posts = get_transient($cat_trans_name))) {
+            $category_posts = get_posts(array(
+                'numberposts' => $count,
+                'order' => 'DESC',
+                'category' => $category->cat_ID
+            ));
+
+            set_transient($cat_trans_name, $category_posts, get_option('tuairisc_transient_timeout')); 
+        }
 
         // Fetch section trim colours.
         $trim = $sections->get_section_slug($category);

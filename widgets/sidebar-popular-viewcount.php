@@ -147,21 +147,22 @@ class tuairisc_popular extends WP_Widget {
         $start_date = new DateTime();
         $start_date = $start_date->sub(new DateInterval('P' . $instance['elapsed_days'] . 'D'));
 
-        $sidebar_popular_posts = get_posts(array(
-            'post_type' => 'post',
-            'meta_key' => $key, 
-            'orderby' => 'meta_value_num',
-            'numberposts' => $instance['max_posts'],
-            'order' => 'DESC',
-            'date_query' => array(
-                'after' => $start_date->format('Y-m-d'),
-                'before' => date('Y-m-d'),
-                'inclusive' => true
-            )
-        ));
+        if (!($popular = get_transient('sidebar_popular_posts'))) {
+            $popular = get_posts(array(
+                'post_type' => 'post',
+                'meta_key' => $key, 
+                'orderby' => 'meta_value_num',
+                'numberposts' => $instance['max_posts'],
+                'order' => 'DESC',
+                'date_query' => array(
+                    'after' => $start_date->format('Y-m-d'),
+                    'before' => date('Y-m-d'),
+                    'inclusive' => true
+                )
+            ));
 
-
-        set_transient('sidebar_popular_posts', get_option('tuairisc_transient_timeout')); 
+            set_transient('sidebar_popular_posts', $popular, get_option('tuairisc_transient_timeout')); 
+        }
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
@@ -170,7 +171,7 @@ class tuairisc_popular extends WP_Widget {
 
         printf('<div class="popular-widget tuairisc-post-widget">');
 
-        foreach ($sidebar_popular_posts as $index => $post) {
+        foreach ($popular as $index => $post) {
             setup_postdata($post);
             get_template_part(PARTIAL_ARTICLES, 'sidebar');
         }

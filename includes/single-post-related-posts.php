@@ -31,29 +31,32 @@
 global $post;
 $category = get_the_category($post->ID); 
 $related_count = 3;
+$related_trans_name = 'single_post_related_' . $post->ID;
 
 $range = array(
     'after' => get_the_date('Y-m-j') . ' -180 days',
     'before' => get_the_date('Y-m-j') . ' -7 days'
 );
 
-$single_post_related = get_posts(array(
-    // The next two lines force the exclusion of private posts.
-    'perm' => 'readable',
-    'post_status' => 'publish',
-    'cat' => $category[0]->cat_ID,
-    'posts_per_page' => $related_count,
-    'orderby' => 'rand',
-    'order' => 'DESC',
-    'post__not_in' => array($post->ID),
-    'date_query' => array(
-        'inclusive' => false,
-        'after' => $range['after'],
-        'before' => $range['before']
-    )
-)); 
+if (!($related = get_transient($related_trans_name))) {
+    $related = get_posts(array(
+        // The next two lines force the exclusion of private posts.
+        'perm' => 'readable',
+        'post_status' => 'publish',
+        'cat' => $category[0]->cat_ID,
+        'posts_per_page' => $related_count,
+        'orderby' => 'rand',
+        'order' => 'DESC',
+        'post__not_in' => array($post->ID),
+        'date_query' => array(
+            'inclusive' => false,
+            'after' => $range['after'],
+            'before' => $range['before']
+        )
+    )); 
 
-set_transient('single_post_related', get_option('tuairisc_transient_timeout')); 
+    set_transient($related_trans_name, $related, get_option('tuairisc_transient_timeout')); 
+}
 
 if (sizeof($related) < $related_count) {
     /*

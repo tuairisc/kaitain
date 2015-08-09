@@ -185,6 +185,7 @@ function update_featured_posts($post = null, $make_featured = true) {
 
 function get_featured_posts($num = 8, $no_sticky = true, $add_filler = false) {
     global $keys; 
+    $trans_name = 'featured_posts';
     $featured_posts = get_option($keys['featured']);
     $featured_query = array();
 
@@ -204,8 +205,10 @@ function get_featured_posts($num = 8, $no_sticky = true, $add_filler = false) {
             $featured_query['exclude'] = array($sticky);
         }
 
-        $featured = get_posts($featured_query);
-        set_transient('featured', get_option('tuairisc_transient_timeout')); 
+        if (!($featured = get_transient($trans_name))) {
+            $featured = get_posts($featured_query);
+            set_transient($trans_name, $featured, get_option('tuairisc_transient_timeout')); 
+        }
 
         if ($add_filler && sizeof($featured_posts) < $num) {
             // Pad out query.
@@ -228,19 +231,22 @@ function get_featured_posts($num = 8, $no_sticky = true, $add_filler = false) {
 
 function featured_filler($num = 1) {
     global $keys; 
+    $trans_name = 'featured_posts_filler';
     $featured_posts = get_option($keys['featured']);
     $filler = array();
     
-    $filler = get_posts(array(
-        // Filler posts are any posts outside of featured.
-        'numberposts' => $num,
-        'order' => 'DESC',
-        'orderby' => 'date',
-        'post_status' => 'publish',
-        'post__not_in' => $featured_posts
-    ));
+    if (!($filler = get_transient($trans_name))) {
+        $filler = get_posts(array(
+            // Filler posts are any posts outside of featured.
+            'numberposts' => $num,
+            'order' => 'DESC',
+            'orderby' => 'date',
+            'post_status' => 'publish',
+            'post__not_in' => $featured_posts
+        ));
 
-    set_transient('filler', get_option('tuairisc_transient_timeout')); 
+        set_transient($trans_name, $filler, get_option('tuairisc_transient_timeout')); 
+    }
 
     return $filler;
 }

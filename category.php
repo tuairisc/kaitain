@@ -31,6 +31,7 @@
 get_header();
 global $cat;
 
+$trans_name = 'category_lead_post';
 $page_number = intval(get_query_var('paged'));
 $meta_key = get_option('tuairisc_featured_post_key');
 $featured_post_id = 0;
@@ -41,15 +42,16 @@ $featured_post_id = 0;
  */
 
 if ($page_number < 2) {
-    $category_lead_featured = get_posts(array(
-        // Get last featured post to go in the top slot.
-        'numberposts' => 1,
-        'meta_key' => $meta_key,
-        'category' => $cat,
-        'order' => 'DESC'
-    ));
+    if (!($category_lead_post = get_transient($trans_name))) {
+        $category_lead_post = get_posts(array(
+            // Get last featured post to go in the top slot.
+            'numberposts' => 1,
+            'category' => $cat,
+            'order' => 'DESC'
+        ));
 
-    set_transient('category_lead_featured', get_option('tuairisc_transient_timeout')); 
+        set_transient($trans_name, $category_lead_post, get_option('tuairisc_transient_timeout')); 
+    }
 
     if (sizeof($category_lead_featured) === 0) {
         // If it is empty, just grab the latest post to replace.

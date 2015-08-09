@@ -148,24 +148,24 @@ class tuairisc_sidebar_category extends WP_Widget {
         global $sections, $post;
         $key = get_option('tuairisc_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
-
         $category = get_category($instance['category']);
+        $trans_name = 'sidebar_category_posts_' . $category->slug;
         
-        $sidebar_category_posts = get_posts(array(
-            'post_type' => 'post',
-            'post_status' => 'publish',
-            'numberposts' => $instance['max_posts'],
-            'category' => $instance['category'],
-            'order' => 'DESC',
-        ));
+        if (!($category_posts = get_transient($trans_name))) {
+            $category_posts = get_posts(array(
+                'post_type' => 'post',
+                'post_status' => 'publish',
+                'numberposts' => $instance['max_posts'],
+                'category' => $instance['category'],
+                'order' => 'DESC',
+            ));
 
-        set_transient('sidebar_category_posts', get_option('tuairisc_transient_timeout')); 
+            set_transient($trans_name, $category_posts, get_option('tuairisc_transient_timeout')); 
+        }
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
         }
-
-        $background = 'grey';
 
         if ($instance['use_section_trim']) {
             // Looks ugly, but I could. ¯\_(ツ)_/¯ Use section trim.
@@ -174,10 +174,10 @@ class tuairisc_sidebar_category extends WP_Widget {
             $background = $section_background;
         }
 
-        printf('<div class="sidebar-category-widget-interior %s">', $background);
+        printf('<div class="sidebar-category-widget-interior %s">', 'grey');
         printf('<h3 class="sidebar-widget-title">%s</h3>', $category->cat_name);
 
-        foreach ($sidebar_category_posts as $index => $post) {
+        foreach ($category_posts as $index => $post) {
             setup_postdata($post);
 
             ?>

@@ -136,18 +136,21 @@ class tuairisc_recent extends WP_Widget {
 
     public function widget($defaults, $instance) {
         global $post;
+        $trans_name = 'sidebar_recent_posts';
 
         $key = get_option('tuairisc_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
 
-        $sidebar_recent_posts = get_posts(array(
-            'post_type' => 'post',
-            'numberposts' => $instance['max_posts'],
-            'order' => 'DESC',
-            'category' => ($instance['category']) ? $instance['category'] : ''
-        ));
+        if (!($recent = get_transient($trans_name))) {
+            $recent = get_posts(array(
+                'post_type' => 'post',
+                'numberposts' => $instance['max_posts'],
+                'order' => 'DESC',
+                'category' => ($instance['category']) ? $instance['category'] : ''
+            ));
 
-        set_transient('sidebar_recent_posts', get_option('tuairisc_transient_timeout')); 
+            set_transient($trans_name, $recent, get_option('tuairisc_transient_timeout')); 
+        }
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
@@ -156,7 +159,7 @@ class tuairisc_recent extends WP_Widget {
 
         printf('<div class="recent-widget tuairisc-post-widget">');
 
-        foreach ($sidebar_recent_posts as $index => $post) {
+        foreach ($recent as $post) {
             setup_postdata($post);
             get_template_part(PARTIAL_ARTICLES, 'sidebar');
         }
