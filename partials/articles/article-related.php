@@ -41,17 +41,22 @@ $trim = array(
 ?>
 
 <article <?php post_class('related'); ?> id="article-<?php the_ID(); ?>">
-    <a class="<?php printf($trim['text']); ?> "rel="bookmark" href="<?php the_permalink(); ?>"></a>
-    <header>
-        <div>
-            <a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"></a>
-        </div>
-        <h6 class="title"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h6>
-        <?php if (!is_page()) : ?>
-            <small><time datetime="<?php the_time('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small>
+    <a class="<?php printf($trim['text']); ?> "rel="bookmark" href="<?php the_permalink(); ?>">
+        <header>
+            <div>
+                <a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"></a>
+            </div>
+            <h5 class="title">
+                <a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+            </h5>
+            <?php if (!is_page()) : ?>
+                <small><time datetime="<?php the_time('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small>
+            <?php endif; ?>
+        </header>
+        <?php if (is_user_logged_in()) : ?>
+            <footer>
+                <small><?php edit_post_link(__('edit post', TTD), ' ', ''); ?></small>
+            </footer>
         <?php endif; ?>
-    </header>
-    <footer>
-        <small><?php edit_post_link(__('edit post', TTD), ' ', ''); ?></small>
-    </footer>
+    </a>
 </article>
