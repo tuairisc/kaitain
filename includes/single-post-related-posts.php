@@ -37,7 +37,7 @@ $range = array(
     'before' => get_the_date('Y-m-j') . ' -7 days'
 );
 
-$related = get_posts(array(
+$single_post_related = get_posts(array(
     // The next two lines force the exclusion of private posts.
     'perm' => 'readable',
     'post_status' => 'publish',
@@ -52,6 +52,8 @@ $related = get_posts(array(
         'before' => $range['before']
     )
 )); 
+
+set_transient('single_post_related', get_option('tuairisc_transient_timeout')); 
 
 if (sizeof($related) < $related_count) {
     /*
@@ -70,7 +72,7 @@ if (sizeof($related) < $related_count) {
         $excluded[] = $post->ID;
     }
 
-    $filler = get_posts(array(
+    $single_post_filler = get_posts(array(
         // The next two lines force the exclusion of private posts.
         'perm' => 'readable',
         'post_status' => 'publish',
@@ -86,7 +88,8 @@ if (sizeof($related) < $related_count) {
         )
     ));
 
-    $related = array_merge($related, $filler);
+    set_transient('single_post_filler', get_option('tuairisc_transient_timeout')); 
+    $related = array_merge($single_post_related, $single_post_filler);
 }
 
 printf('<hr><div class="%s">', 'related-articles');

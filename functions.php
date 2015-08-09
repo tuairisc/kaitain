@@ -95,6 +95,9 @@ define('THEME_CSS', ASSETS_URL . 'css/');
  * -----------------------------------------------------------------------------
  */
 
+// Transient API timeout in minutes.
+add_option('tuairisc_transient_timeout', 60 * 20, '', true);
+
 // Flag post as job.
 add_option('tuairisc_notice_post_key', 'is_tuairisc_notice', '', true);
 

@@ -69,6 +69,8 @@ function category_widget_output($cats, $show_name = true, $count = 5) {
             'category' => $category->cat_ID
         ));
 
+        set_transient('category_posts', get_option('tuairisc_transient_timeout')); 
+
         // Fetch section trim colours.
         $trim = $sections->get_section_slug($category);
 

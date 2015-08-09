@@ -36,7 +36,7 @@ $avatar = get_avatar($author, 32);
 <article <?php post_class('full'); ?> id="article-<?php the_ID(); ?>">
     <header>
         <h1 class="title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
-        <p class="post-excerpt"><small><?php printf(get_the_excerpt()); ?></small></p>
+        <p class="post-excerpt"><?php printf(get_the_excerpt()); ?></p>
         <div class="author-meta">
             <div class="photo">
                 <a title="<?php the_author_meta('display_name'); ?>" href="<?php printf(get_author_posts_url($author)); ?>">

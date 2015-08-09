@@ -205,6 +205,7 @@ function get_featured_posts($num = 8, $no_sticky = true, $add_filler = false) {
         }
 
         $featured = get_posts($featured_query);
+        set_transient('featured', get_option('tuairisc_transient_timeout')); 
 
         if ($add_filler && sizeof($featured_posts) < $num) {
             // Pad out query.
@@ -238,6 +239,8 @@ function featured_filler($num = 1) {
         'post_status' => 'publish',
         'post__not_in' => $featured_posts
     ));
+
+    set_transient('filler', get_option('tuairisc_transient_timeout')); 
 
     return $filler;
 }

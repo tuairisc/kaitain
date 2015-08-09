@@ -147,7 +147,7 @@ class tuairisc_popular extends WP_Widget {
         $start_date = new DateTime();
         $start_date = $start_date->sub(new DateInterval('P' . $instance['elapsed_days'] . 'D'));
 
-        $popular_posts = get_posts(array(
+        $sidebar_popular_posts = get_posts(array(
             'post_type' => 'post',
             'meta_key' => $key, 
             'orderby' => 'meta_value_num',
@@ -160,6 +160,9 @@ class tuairisc_popular extends WP_Widget {
             )
         ));
 
+
+        set_transient('sidebar_popular_posts', get_option('tuairisc_transient_timeout')); 
+
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
             printf($defaults['before_title'] . apply_filters('widget_title', $instance['widget_title']) . $defaults['after_title']);
@@ -167,7 +170,7 @@ class tuairisc_popular extends WP_Widget {
 
         printf('<div class="popular-widget tuairisc-post-widget">');
 
-        foreach ($popular_posts as $index => $post) {
+        foreach ($sidebar_popular_posts as $index => $post) {
             setup_postdata($post);
             get_template_part(PARTIAL_ARTICLES, 'sidebar');
         }

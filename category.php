@@ -49,6 +49,8 @@ if ($page_number < 2) {
         'order' => 'DESC'
     ));
 
+    set_transient('category_lead_featured', get_option('tuairisc_transient_timeout')); 
+
     if (sizeof($category_lead_featured) === 0) {
         // If it is empty, just grab the latest post to replace.
         $category_lead_featured = get_posts(array(
