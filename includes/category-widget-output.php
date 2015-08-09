@@ -81,7 +81,6 @@ function category_widget_output($cats, $show_name = true, $count = 5) {
         );
 
         printf('<div class="%s">', 'category-widget');
-        printf('<hr>');
         
         if ($show_name) {
             // Category name, and link to category.
@@ -124,8 +123,8 @@ function category_widget_output($cats, $show_name = true, $count = 5) {
             }
         }
 
-
         printf('</div></div></div>');
+        printf('<hr>');
     }
 
     wp_reset_postdata();
