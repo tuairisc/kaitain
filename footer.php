@@ -41,7 +41,7 @@ global $sections;
         <?php endif; ?>
     </div><?php // End #main ?>
     <?php if (function_exists('adrotate_group') && !is_404()) {
-        printf(adrotate_group(1));
+        printf(adrotate_group(2));
     } ?>
     <?php if (!is_404()) : ?>
         <div id="footer">
