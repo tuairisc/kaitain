@@ -42,13 +42,13 @@ $avatar = get_avatar($author, 32);
             <?php if (!in_array($author, $hidden_users)) : ?>
                 <div class="photo">
                     <a title="<?php the_author_meta('display_name'); ?>" href="<?php printf(get_author_posts_url($author)); ?>">
-                        <img class="cover-fit" src="<?php printf(get_avatar(get_the_author_meta('ID'), 32)); ?>" />
+                        <img class="cover-fit" src="<?php printf(get_avatar(get_the_author_meta('ID'), 32)); ?>" alt="<?php the_author_meta('display_name'); ?>" />
                     </a>
                 </div>
             <?php endif; ?>
             <div class="author-info">
                 <span class="author-link"><a class="green-link-hover" href="<?php printf(get_author_posts_url($author)); ?>"><?php the_author_meta('display_name'); ?></a></span>
-                </br />
+                <br />
                 <span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small></span>
             </div>
         </div>
@@ -56,7 +56,5 @@ $avatar = get_avatar($author, 32);
     <div class="post-content">
         <?php the_content(__('Read the rest of this post &raquo;', TTD)); ?>
     </div>
-    <footer>
-        <?php include(THEME_INCLUDES  . 'single-post-related-posts.php'); ?>
-    </footer>
+    <?php include(THEME_INCLUDES  . 'single-post-related-posts.php'); ?>
 </article>
