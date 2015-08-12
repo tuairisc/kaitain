@@ -50,11 +50,13 @@ $avatar = get_avatar($author, 32);
                 <span class="author-link"><a class="green-link-hover" href="<?php printf(get_author_posts_url($author)); ?>"><?php the_author_meta('display_name'); ?></a></span>
                 <br />
                 <span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small></span>
+                <br />
+                <span><?php edit_post_link(__('edit post', TTD), '', ''); ?></span>
             </div>
         </div>
     </header>
+    <?php get_share_links(); ?>
     <div class="post-content">
         <?php the_content(__('Read the rest of this post &raquo;', TTD)); ?>
     </div>
-    <?php include(THEME_INCLUDES  . 'single-post-related-posts.php'); ?>
 </article>
