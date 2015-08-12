@@ -108,13 +108,16 @@ if (($missing = $related_count - sizeof($related)) > 0) {
     $related = array_merge($related, $filler);
 }
 
-printf('<hr><div class="%s">', 'related-articles');
+printf('<div class="%s">', 'related-articles-wrapper');
+printf('<h4 class="%s">%s</h4>', 'subtitle related-title', __('Léigh tuilleadh sa rannóg seo', TTD));
+printf('<div class="%s">', 'related-articles');
 
 foreach ($related as $post) {
     setup_postdata($post);
     get_template_part(PARTIAL_ARTICLES, 'related');
 }
 
+printf('</div>');
 printf('</div>');
 wp_reset_postdata();
 
