@@ -35,7 +35,7 @@
         <?php if (is_active_sidebar('widgets-sidebar')) {
             dynamic_sidebar('widgets-sidebar');
         } else {
-            printf('<h3>%s</h3>', __('Add your sidebar widgets FFS!', TTD));
+            printf('<h3>%s</h3>', __('Add your sidebar widgets!', TTD));
         } ?>
     </div>
     
