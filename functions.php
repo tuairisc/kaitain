@@ -205,7 +205,7 @@ include(THEME_WIDGETS . 'sidebar-recent-posts.php');
 $widget_defaults = array(
     'before_widget' => '<div id="%1$s" class="%2$s">',
     'after_widget' => '</div>',
-    'before_title' => '<h3 class="sidebar-widget-title">',
+    'before_title' => '<h3 class="widget-title">',
     'after_title' => '</h3>'
 );
 
@@ -218,7 +218,8 @@ $widget_areas = array(
     array(
         'name' => __('Sidebar', TTD),
         'description' => __('Sidebar widget area.', TTD),
-        'id' => 'widgets-sidebar'
+        'id' => 'widgets-sidebar',
+        'before_title' => '<h3 class="widget-title widget-subtitle">'
     )
 );
 
@@ -387,7 +388,7 @@ function register_widget_areas() {
     global $widget_areas, $widget_defaults;
 
     foreach ($widget_areas as $widget) {
-        register_sidebar(array_merge($widget, $widget_defaults));
+        register_sidebar(wp_parse_args($widget, $widget_defaults));
     }
 }
 
