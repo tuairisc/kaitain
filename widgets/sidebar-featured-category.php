@@ -146,12 +146,19 @@ class tuairisc_sidebar_category extends WP_Widget {
 
     public function widget($defaults, $instance) {
         global $sections, $post;
-        $key = get_option('tuairisc_view_counter_key');
-        $title = apply_filters('widget_title', $instance['widget_title']);
-        $category = get_category($instance['category']);
-        $trans_name = 'sidebar_category_posts_' . $category->slug;
+
+        if (!($category = get_category($instance['category']))) {
+            return;
+        }
         
-        if (!($category_posts = get_transient($trans_name))) {
+        // Widget title.
+        $title = apply_filters('widget_title', $category->cat_name);
+        // Transient API name.
+        $trans = 'sidebar_category_posts_' . $category->slug;
+        // Default classname to set colour.
+        $trim = 'grey'; 
+        
+        if (!($category_posts = get_transient($trans))) {
             $category_posts = get_posts(array(
                 'post_type' => 'post',
                 'post_status' => 'publish',
@@ -160,7 +167,7 @@ class tuairisc_sidebar_category extends WP_Widget {
                 'order' => 'DESC',
             ));
 
-            set_transient($trans_name, $category_posts, get_option('tuairisc_transient_timeout')); 
+            set_transient($trans, $category_posts, get_option('tuairisc_transient_timeout')); 
         }
 
         if (!empty($defaults['before_widget'])) {
@@ -168,14 +175,12 @@ class tuairisc_sidebar_category extends WP_Widget {
         }
 
         if ($instance['use_section_trim']) {
-            // Looks ugly, but I could. ¯\_(ツ)_/¯ Use section trim.
             $section_slug = $sections->get_section_slug(get_the_category()[0]);
-            $section_background = sprintf('section-%s-background', $section_slug);
-            $background = $section_background;
+            $trim = sprintf('section-%s-background', $section_slug);
         }
 
-        printf('<div class="sidebar-category-widget-interior %s">', 'grey');
-        printf('<h3 class="sidebar-widget-title">%s</h3>', $category->cat_name);
+        printf('<div class="sidebar-category-widget-interior %s">', $trim);
+        printf($defaults['before_title'] . $title . $defaults['after_title']);
 
         foreach ($category_posts as $index => $post) {
             setup_postdata($post);

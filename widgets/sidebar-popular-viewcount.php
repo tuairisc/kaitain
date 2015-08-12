@@ -166,7 +166,7 @@ class tuairisc_popular extends WP_Widget {
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
-            printf($defaults['before_title'] . apply_filters('widget_title', $instance['widget_title']) . $defaults['after_title']);
+            printf($defaults['before_title'] . $title . $defaults['after_title']);
         }
 
         printf('<div class="popular-widget tuairisc-post-widget">');
