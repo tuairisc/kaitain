@@ -125,27 +125,29 @@ class tuairisc_featured extends WP_Widget {
         // Array of featured and sticky posts.
         $featured = array();
 
-        if ($instance['show_sticky'] && has_sticky_been_set()) {
+        if ($instance['show_sticky']) {
             /* If sticky was checked, see if it is available to use. Otherwise
              * grab the last featured post. */
-            $featured[] = get_sticky_post(true);
+
+            if (has_sticky_been_set()) {
+                $featured[] = get_sticky_post();
+            } else {
+                /* If no stick is set, but was asked to display, increment
+                 * count to fill. */
+                $instance['count']++;
+            }
         }
 
         // Show other featured posts if they were elected ot be shown.
-        $featured = array_merge(
-            get_featured_posts(
-                $instance['count'],
-                !$instance['show_sticky'],
-                true
-            ), 
-            $featured
-        );
+        $featured = array_merge($featured, get_featured($instance['count'], true));
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
         }
 
         printf('<div class="recent-widget tuairisc-post-widget">');
+
+        $last_post = end($featured);
 
         foreach ($featured as $num => $post) {
             if (!empty($post)) {
@@ -166,8 +168,9 @@ class tuairisc_featured extends WP_Widget {
                     get_template_part(PARTIAL_ARTICLES, 'archivesmall');
                 }
 
-                if ($instance['count'] > 0 && $num % 4 === 0 && $num !== 0) {
-                    // 4, 8, 12
+                if ($instance['count'] > 0 && $num % 4 === 0 && $num !== 0 
+                || $post === $last_post) {
+                    // 4, 8, 12, or last item.
                     printf('</div>');
                 }
             }
