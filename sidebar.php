@@ -31,7 +31,7 @@
 ?>
 
 <div id="sidebar">
-    <div class="sidebar-widgets">
+    <div class="sidebar-container sidebar-widgets">
         <?php if (is_active_sidebar('widgets-sidebar')) {
             dynamic_sidebar('widgets-sidebar');
         } else {
@@ -40,11 +40,15 @@
     </div>
     
     <?php // AdRotate groups 3, 4 and 5
-    if (function_exists('adrotate_group')) {
-        printf('<div class="sidebar-adverts">');
-        printf('%s', adrotate_group(3));
-        printf('%s', adrotate_group(4));
-        printf('%s', adrotate_group(5));
-        printf('</div>');
-    } ?>
+    if (function_exists('adrotate_group')) : ?>
+        <div class="sidebar-container sidebar-adverts">
+            <?php 
+
+            printf('%s', adrotate_group(3));
+            printf('%s', adrotate_group(4));
+            printf('%s', adrotate_group(5));
+
+            ?>
+        </div>
+    <?php endif; ?>
 </div>
