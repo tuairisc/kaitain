@@ -143,14 +143,13 @@ add_option('tuairisc_favicons', array(
 
 // Featured and sticky posts.
 include(THEME_INCLUDES . 'featured-sticky-posts.php');
-// Related posts for full articles.
-// include(THEME_INCLUDES . 'single-post-related-posts.php');
 // Site sections.
 include(THEME_INCLUDES . 'section-manager/section-manager.php');
 // Open Graph and Twitter Card <head> meta tag links.
 include(THEME_INCLUDES . 'social-meta/social-meta.php');
 // Home and archive widget category output.
 include(THEME_INCLUDES . 'category-widget-output.php');
+include(THEME_INCLUDES . 'social-share.php');
 
 /** 
  * Social Media Accounts
@@ -665,18 +664,14 @@ function set_favicon() {
  * @param   int     $post_id        ID of the post.
  */
 
-function set_view_count($post_id = null) {
+function set_view_count() {
     if (is_singular('post') && !is_user_logged_in()) {
-        $post = get_post($post);
+        global $post;
 
-        if (!$post) {
-            return false;
-        }
-        
         $key = get_option('tuairisc_view_counter_key');
         $count = (int) get_post_meta($post->ID, $key, true);
         $count++;
-        update_post_meta($post_id, $key, $count);
+        update_post_meta($post->ID, $key, $count);
     }
 }
 
@@ -716,7 +711,7 @@ function get_view_count($post = null) {
  */
 
 function increment_view_counter($content) {
-    set_view_count(get_the_ID());
+    set_view_count();
     return $content;
 }
 
