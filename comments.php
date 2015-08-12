@@ -29,21 +29,26 @@
  */
 
 if (comments_open()) {
-    printf('<div class="article-comments" id="comments">');
-
     if (post_password_required()) {
-        printf('<h5 class="reply-title">%s</h5>', __('This post is password protected. Enter the password to view comments.', TTD));
+        printf('<h4 class="reply-title">%s</h4>',
+            __('This post is password protected. Enter the password to view comments.', TTD)
+        );
+
         return;
     }
 
+    printf('<div class="article-comments" id="comments">');
+        printf('<h4 class="comments-title subtitle">%s \'%s:\'</h4>',
+            'Fág freagra ar',
+            get_the_title()
+        );
+            // (get_comments_number() === 1) ? '' : 's',
+
     if (have_comments()) {
-        $plural = (get_comments_number() === 1) ? '' : 's';
-
-        printf('<hr>');
-
-        printf(__('<h5 class="reply-title">%d comment%s on \'%s\':</h5>', TTD), 
-            get_comments_number(), 
-            $plural,
+        // Iterate comments.
+        printf('<h4 class="reply-title">%d %s "%s":</h4>',
+            get_comments_number(),
+            __('nóta tráchta ar', TTD),
             get_the_title()
         );
 
@@ -59,30 +64,46 @@ if (comments_open()) {
         printf('</ul>');
     }
 
-    printf('</div>');
-
-    printf('<hr>');
     printf('<div id="comment-entry">');
 
-    printf('<h5 class="reply-title">%s on \'%s\':</h5>', 
-        __('Have your own say', TTD), 
-        get_the_title()
+    // Template input for name, email and URL.
+    $input = '<input class="%s-name" id="%s" name="%s" placeholder="%s" type="text" required="required">';
+    $textarea = '<textarea class="comment-form-comment" id="comment" name="comment" required="required"></textarea>';
+
+    $fields = array(
+        // Name, author and email fields.
+        'author' => sprintf($input, 'author', 'author', 'author', __('D\'ainm*', TTD)), 
+        'email' => sprintf($input, 'email', 'email', 'email', __('Ríomhphoist*', TTD)), 
+        'url' => sprintf($input, 'url', 'url', 'url', __('Láithreán gréasáin', TTD))
+    );
+
+    $comment_notes = array(
+        // We will not publish your email.
+        'before' => sprintf('<p class="comment-notes">%s</p>',
+            __('Ní bheidh muid a fhoilsiú do sheoladh r-phoist.', TTD)
+        ),
+        // Allowed tags.
+        'after' => sprintf('<p class="form-allowed-tags">%s <code>%s</code></p>',
+            __('Is féidir leat úsáid a bhaint ', TTD),
+            allowed_tags()
+        )
     );
 
     comment_form(array(
         'id_form' => 'commentform',
         'id_submit' => 'submit',
-        'title_reply' => __('Have your say:', TTD),
-        'comment_field' => '<p id="textarea"><textarea class="comment-form-comment" id="comment" name="comment" required="required"></textarea></p>',
+        // 'title_reply' => __('Fág freagra:', TTD),
+        'title_reply' => '',
+        'comment_field' => sprintf('<p id="textarea">%s</p>', $textarea),
         'comment_form_before_fields' => '<div class="comment-form">',
         'comment_form_after_fields' =>'</div>',
-        'fields' => array(
-            'author' => '<input class="author-name" id="author" name="author" placeholder="' . __('Name*', TTD) . '" type="text" required="required">',
-            'email' => '<input class="author-email" id="email" name="email" placeholder="' . __('Email*', TTD) . '" type="text" required="required">',
-            'url' => '<input class="author-url" id="url" name="url" placeholder="' . __('Website', TTD) . '" type="text">'
-        )
+        'comment_notes_before' => $comment_notes['before'],
+        'comment_notes_after' => $comment_notes['after'],
+        'label_submit' => __('Seol', TTD),
+        'fields' => $fields,
     ));
 
+    printf('</div>');
     printf('</div>');
 }
 
