@@ -42,7 +42,7 @@ if (!$page_number) {
     if (is_active_sidebar('widgets-front-page')) {
         dynamic_sidebar('widgets-front-page');
     } else {
-        printf('<h3>%s</h3>', __('Add your main front page widgets FFS!', TTD));
+        printf('<h3>%s</h3>', __('Add your main front page widgets!', TTD));
     }
 } else {
     while (have_posts()) {
