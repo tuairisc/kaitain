@@ -46,36 +46,29 @@ add_option('tc_date_strftime_format', '%A, %B %e %Y','', true);
  * @link http://www.bhalash.com/archives/13544804637  
  */
 
-function get_the_date_strftime($format = null, $post = null, $locale = null) {
-    $post = get_post($post);
-
-    if (!$post) {
-       return false;
-    } else {
-        $time = mysql2date('U', $post->post_date);
-    }
+function get_the_date_strftime($date = null, $format = null, $locale = null) {
+    $date = mysql2date('U', $date);
 
     if (!$locale) {
         $locale = get_option('tc_date_fallback_locale');
     }
 
     if (!$format) {
-        $format = get_option('tc_date_strftime_format');
+        $format = get_option('tc_date_strfdate_format');
     }
 
-    $locale = array(
-        // Try to match common variants of the locale.
+    // @link http://stackoverflow.com/a/19351555/1433400
+    setlocale(LC_ALL, '');
+
+    // Try to match common variants of the locale.
+    setlocale(LC_ALL,
         $locale,
         $locale . '.utf8',
         $locale . '@euro',
         $locale . '@euro.utf8'
     );
 
-    // @link http://stackoverflow.com/a/19351555/1433400
-    setlocale(LC_ALL, '');
-    setlocale(LC_ALL, $locale[0], $locale[1], $locale[2], $locale[3]);
-
-    return strftime($format, $time);
+    return strftime($format, $date);
 }
 
 /*
@@ -88,12 +81,11 @@ function get_the_date_strftime($format = null, $post = null, $locale = null) {
  */
 
 function the_date_strftime($format = null, $post = null, $locale = null) {
-    $date = get_the_date_strftime($format, $post, $locale); 
-    printf($date);
+    printf(get_the_date_strftime($format, $post, $locale));
 }
 
 /**
- *
+ * Get Post Date through System Locale
  * -----------------------------------------------------------------------------
  */
 
@@ -102,11 +94,11 @@ function get_post_date_strftime($post = null) {
         global $post;
     }
 
-    get_the_date_strftime($post->post_date);
+    return get_the_date_strftime($post->post_date);
 }
 
 /**
- *
+ * Print Post Date through System Locale
  * -----------------------------------------------------------------------------
  */
 
@@ -115,18 +107,20 @@ function the_post_date_strftime($post = null) {
 }
 
 /**
- *
+ * Get Comment Date through System Locale
  * -----------------------------------------------------------------------------
  */
 
-function get_comment_date_strftime($comment) {
+function get_comment_date_strftime($comment = null) {
     if (!($comment = get_comment($comment))) {
-        return false;
+        global $coment;
     }
+
+    return get_the_date_strftime($comment->comment_date);
 }
 
 /**
- *
+ * Print Comment Date through System Locale
  * -----------------------------------------------------------------------------
  */
 
