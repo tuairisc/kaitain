@@ -1,5 +1,33 @@
 <?php 
 
+/**
+ * Favicon Meta Tags
+ * -----------------------------------------------------------------------------
+ * @category   PHP Script
+ * @package    Tuairisc.ie
+ * @author     Mark Grealish <mark@bhalash.com>
+ * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
+ * @version    2.0
+ * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       http://www.tuairisc.ie
+ *
+ * This file is part of Tuairisc.ie.
+ *
+ * Tuairisc.ie is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Tuairisc.ie is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 add_option('tuairisc_favicons', array(
     // Website favicon assets.
     'favicon' => array(
@@ -44,7 +72,11 @@ function favicon_ico($icon) {
     $sizes = '';
 
     $sizes = reduce_sizes($icon['sizes']);
-    $favicon[] = sprintf('<link rel="shortcut icon" sizes="%s" type="image/x-icon" href="%s">', $sizes, $icon['path']);
+
+    $favicon[] = sprintf('<link rel="shortcut icon" sizes="%s" type="image/x-icon" href="%s">',
+        $sizes,
+        $icon['path']
+    );
 
     return implode('', $favicon);
 }
@@ -61,7 +93,11 @@ function favicon_apple($icon) {
     $sizes = '';
 
     $sizes = reduce_sizes($icon['sizes']);
-    $apple_icon[] = sprintf('<link rel="apple-touch-icon" sizes="%s" href="%s">', $sizes, $icon['path']);
+
+    $apple_icon[] = sprintf('<link rel="apple-touch-icon" sizes="%s" href="%s">',
+        $sizes,
+        $icon['path']
+    );
 
     return implode('', $apple_icon);
 }
@@ -76,9 +112,17 @@ function favicon_apple($icon) {
 function favicon_windows($icon) {
     $windows_icon = array();
 
-    $windows_icon[] = sprintf('<meta name="application-name" content="%s">', $icon['name']);
-    $windows_icon[] = sprintf('<meta name="msapplication-TileImage" content="%s">', $icon['path']);
-    $windows_icon[] = sprintf('<meta name="msapplication-TileColor" content="%s">', $icon['colour']);
+    $windows_icon[] = sprintf('<meta name="application-name" content="%s">',
+        $icon['name']
+    );
+
+    $windows_icon[] = sprintf('<meta name="msapplication-TileImage" content="%s">',
+        $icon['path']
+    );
+
+    $windows_icon[] = sprintf('<meta name="msapplication-TileColor" content="%s">',
+        $icon['colour']
+    );
 
     return implode('', $windows_icon);
 }
