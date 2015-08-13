@@ -51,10 +51,5 @@ $trim = array(
                 <span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small></span>
             <?php endif; ?>
         </header>
-        <?php if (is_user_logged_in()) : ?>
-            <footer>
-                <p><small><?php edit_post_link(__('edit post', TTD), ' ', ''); ?></small></p>
-            </footer>
-        <?php endif; ?>
     </a>
 </article>
