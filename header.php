@@ -29,6 +29,7 @@
  */
 
 global $sections;
+header("Access-Control-Allow-Origin: *");
 
 ?>
 
