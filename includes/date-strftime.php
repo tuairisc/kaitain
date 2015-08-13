@@ -37,9 +37,9 @@ add_option('tc_date_strftime_format', '%A, %B %e %Y','', true);
  * This function mirrors get_the_date(), except it uses strftiime(), and any 
  * localization supported by your system.
  * 
- * @param   string      $format      Format to use for the date.
- * @param   int         $post        ID of post whose date is needed.
+ * @param   string      $date        The date.
  * @param   string      $locale      Locale to be used. Must be present.
+ * @param   string      $format      Format to use for the date.
  * @return  string                   Date in desired locale.
  * 
  * @link https://secure.php.net/manual/en/function.strftime.php
@@ -74,10 +74,9 @@ function get_the_date_strftime($date = null, $format = null, $locale = null) {
 /*
  * Print Date using System Locale
  * -----------------------------------------------------------------------------
+ * @param   string      $date        The date.
+ * @param   string      $locale      Locale to be used. Must be present.
  * @param   string      $format      Format to use for the date.
- * @param   int         $post        ID of post whose date is needed.
- * @param   string      $locale      Locale to be used.
- * @param   bool        $echo        Print the date, if true.
  */
 
 function the_date_strftime($format = null, $post = null, $locale = null) {
@@ -87,6 +86,8 @@ function the_date_strftime($format = null, $post = null, $locale = null) {
 /**
  * Get Post Date through System Locale
  * -----------------------------------------------------------------------------
+ * @param   int/object  $post        The post.
+ * @return  string                   The date.
  */
 
 function get_post_date_strftime($post = null) {
@@ -100,6 +101,7 @@ function get_post_date_strftime($post = null) {
 /**
  * Print Post Date through System Locale
  * -----------------------------------------------------------------------------
+ * @param   int/object  $post        The post.
  */
 
 function the_post_date_strftime($post = null) {
@@ -109,6 +111,8 @@ function the_post_date_strftime($post = null) {
 /**
  * Get Comment Date through System Locale
  * -----------------------------------------------------------------------------
+ * @param   int/object  $comment       The comment.
+ * @return  string                   The date.
  */
 
 function get_comment_date_strftime($comment = null) {
@@ -122,6 +126,7 @@ function get_comment_date_strftime($comment = null) {
 /**
  * Print Comment Date through System Locale
  * -----------------------------------------------------------------------------
+ * @param   int/object  $comment       The comment.
  */
 
 function the_comment_date_strftime($comment = null) {
