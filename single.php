@@ -34,7 +34,25 @@ if (have_posts()) {
     while (have_posts()) {
         the_post();
         get_template_part(PARTIAL_ARTICLES, 'full');
-        include(THEME_INCLUDES  . 'single-post-related-posts.php');
+
+        printf('<div class="%s">', 'related-articles-wrapper');
+
+        printf('<h4 class="%s">%s</h4>',
+            'subtitle related-title',
+            __('Léigh tuilleadh sa rannóg seo', TTD)
+        );
+
+        printf('<div class="%s">', 'related-articles');
+
+        foreach (get_related() as $post) {
+            setup_postdata($post);
+            get_template_part(PARTIAL_ARTICLES, 'related');
+        }
+
+        printf('</div>');
+        printf('</div>');
+
+        wp_reset_postdata();
         comments_template();
     }
 } else {
