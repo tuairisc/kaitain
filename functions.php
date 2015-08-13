@@ -33,7 +33,7 @@
  * -----------------------------------------------------------------------------
  */
 
-define('THEME_VER', 1.1);
+define('THEME_VER', 1.9);
 define('TTD', 'tuairisc');
 
 /**
@@ -106,10 +106,6 @@ add_option('tuairisc_transient_timeout', 60 * 20, '', true);
 // Flag post as job.
 add_option('tuairisc_notice_post_key', 'is_tuairisc_notice', '', true);
 
-// strftime date and locale.
-add_option('tuairisc_fallback_locale', 'ga_IE','', true);
-add_option('tuairisc_strftime_date_format', '%A, %B %e %Y','', true);
-
 // Ghetto view counter meta key.
 add_option('tuairisc_view_counter_key', 'tuairisc_view_counter', '', true);
 
@@ -119,40 +115,93 @@ add_option('tuairisc_prefetch_domains', array(
     $_SERVER['SERVER_NAME'])
 ),'', true);
 
-add_option('tuairisc_favicons', array(
-    // Website favicon assets.
-    'favicon' => array(
-        'path' => THEME_IMAGES . 'icons/favicon.ico',
-        'sizes' => array(16, 24, 32, 48, 64),
-    ),
-    'windows' => array(
-        'name' => get_bloginfo('name'),
-        'colour' => '#475967',
-        'path' => THEME_IMAGES . 'icons/icon-windows.png',
-    ),
-    'apple' => array(
-        'path' => THEME_IMAGES . 'icons/icon-apple.png',
-        'sizes' => array(152),
-    )
-),'', true);
-
 /**
  * Theme Includes
  * -----------------------------------------------------------------------------
  */
 
-// Featured and sticky posts.
-include(THEME_INCLUDES . 'featured-sticky-posts.php');
-// Site sections.
-include(THEME_INCLUDES . 'section-manager/section-manager.php');
-// Open Graph and Twitter Card <head> meta tag links.
-include(THEME_INCLUDES . 'social-meta/social-meta.php');
-// Home and archive widget category output.
-include(THEME_INCLUDES . 'category-widget-output.php');
-// Single post social sharing links.
-include(THEME_INCLUDES . 'social-share.php');
-// Categorically-related posts.
-include(THEME_INCLUDES . 'single-post-related-posts.php');
+$included_scripts = array(
+    // Featured and sticky posts.
+    'featured-sticky-posts',
+    // Site sections.
+    'section-manager/section-manager',
+    // Open Graph and Twitter Card <head> meta tag links.
+    'social-meta/social-meta',
+    // Home and archive widget category output.
+    'category-widget-output',
+    // Single post social sharing links.
+    'social-share',
+    // Categorically-related posts.
+    'single-post-related-posts',
+    // Localized date.
+    'date-strftime',
+    // Favicon management
+    'favicon-meta'
+);
+
+foreach ($included_scripts as $script) {
+    include_once(THEME_INCLUDES . $script . '.php');
+}
+
+/**
+ * Theme Admin Includes
+ * -----------------------------------------------------------------------------
+ */
+
+$included_admin_scripts = array(
+    // Featured/Sticky post meta box.
+    'featured-edit-box',
+    'notice-edit-box',
+);
+
+foreach($included_admin_scripts as $script) {
+    include_once(THEME_ADMIN  . $script . '.php');
+}
+
+/** 
+ * Widgets
+ * -----------------------------------------------------------------------------
+ */
+
+$included_widgets = array(
+    // Link to selected author profiles.
+    'home-authors',
+    // Front page featured and sticky article widget.
+    'home-featured-articles',
+    // Front page category widgets.
+    'home-category',
+    // Sidebar featured category.
+    'sidebar-featured-category',
+    // Popular posts, sorted by internally-tracked view count.
+    'sidebar-popular-viewcount',
+    // Recent posts in $foo category.
+    'sidebar-recent-posts',
+);
+
+foreach($included_widgets as $widget) {
+    include_once(THEME_WIDGETS  . $widget . '.php');
+}
+
+$widget_defaults = array(
+    'before_widget' => '<div id="%1$s" class="%2$s">',
+    'after_widget' => '</div>',
+    'before_title' => '<h3 class="widget-title">',
+    'after_title' => '</h3>'
+);
+
+$widget_areas = array(
+    array(
+        'name' => __('Front Page', TTD),
+        'description' => __('Front page widget area.', TTD),
+        'id' => 'widgets-front-page'
+    ),
+    array(
+        'name' => __('Sidebar', TTD),
+        'description' => __('Sidebar widget area.', TTD),
+        'id' => 'widgets-sidebar',
+        'before_title' => '<h3 class="widget-title widget-subtitle">'
+    )
+);
 
 /** 
  * Social Media Accounts
@@ -177,54 +226,6 @@ $sections = new Section_Manager(array(
     'categories' => array(191, 154, 155, 156, 157, 159, 187, 158), 
     'home' => 191
 ));
-
-/**
- * Theme Admin Includes
- * -----------------------------------------------------------------------------
- */
-
-// Featured/Sticky post meta box.
-include(THEME_ADMIN . 'featured-edit-box.php');
-include(THEME_ADMIN . 'notice-edit-box.php');
-
-/** 
- * Widgets
- * -----------------------------------------------------------------------------
- */
-
-// Link to selected author profiles.
-include(THEME_WIDGETS . 'home-authors.php');
-// Front page featured and sticky article widget.
-include(THEME_WIDGETS . 'home-featured-articles.php');
-// Front page category widgets.
-include(THEME_WIDGETS . 'home-category.php');
-// Sidebar featured category.
-include(THEME_WIDGETS . 'sidebar-featured-category.php');
-// Popular posts, sorted by internally-tracked view count.
-include(THEME_WIDGETS . 'sidebar-popular-viewcount.php');
-// Recent posts in $foo category.
-include(THEME_WIDGETS . 'sidebar-recent-posts.php');
-
-$widget_defaults = array(
-    'before_widget' => '<div id="%1$s" class="%2$s">',
-    'after_widget' => '</div>',
-    'before_title' => '<h3 class="widget-title">',
-    'after_title' => '</h3>'
-);
-
-$widget_areas = array(
-    array(
-        'name' => __('Front Page', TTD),
-        'description' => __('Front page widget area.', TTD),
-        'id' => 'widgets-front-page'
-    ),
-    array(
-        'name' => __('Sidebar', TTD),
-        'description' => __('Sidebar widget area.', TTD),
-        'id' => 'widgets-sidebar',
-        'before_title' => '<h3 class="widget-title widget-subtitle">'
-    )
-);
 
 /** 
  * Fonts, Styles and Scripts
@@ -515,167 +516,6 @@ function dns_prefetch() {
 }
 
 /**
- * Get Date Using System Locale Files
- * -----------------------------------------------------------------------------
- * This function mirrors get_the_date(), except it uses strftiime(), and any 
- * localization supported by your system.
- * 
- * @param   string      $format      Format to use for the date.
- * @param   int         $post        ID of post whose date is needed.
- * @param   string      $locale      Locale to be used. Must be present.
- * @return  string                   Date in desired locale.
- * 
- * @link https://secure.php.net/manual/en/function.strftime.php
- * @link http://www.bhalash.com/archives/13544804637  
- */
-
-function get_the_date_strftime($format = null, $post = null, $locale = null) {
-    $post = get_post($post);
-
-    if (!$post) {
-       return false;
-    } else {
-        $time = mysql2date('U', $post->post_date);
-    }
-
-    if (!$locale) {
-        $locale = get_option('tuairisc_fallback_locale');
-    }
-
-    if (!$format) {
-        $format = get_option('tuairisc_strftime_date_format');
-    }
-
-    $locale = array(
-        // Try to match common variants of the locale.
-        $locale,
-        $locale . '.utf8',
-        $locale . '@euro',
-        $locale . '@euro.utf8'
-    );
-
-    // @link http://stackoverflow.com/a/19351555/1433400
-    setlocale(LC_ALL, '');
-    setlocale(LC_ALL, $locale[0], $locale[1], $locale[2], $locale[3]);
-
-    return strftime($format, $time);
-}
-
-// TODO
-// TODO
-// TODO
-// TODO
-
-function get_post_date_strftime($post) {
-    if (!($post = get_post($post))) {
-        return false;
-    }
-}
-
-function get_comment_date_strftime($comment) {
-    if (!($comment = get_comment($comment))) {
-        return false;
-    }
-}
-
-/*
- * Print Date using System Locale
- * -----------------------------------------------------------------------------
- * @param   string      $format      Format to use for the date.
- * @param   int         $post        ID of post whose date is needed.
- * @param   string      $locale      Locale to be used.
- * @param   bool        $echo        Print the date, if true.
- */
-
-function the_date_strftime($format = null, $post = null, $locale = null) {
-    $date = get_the_date_strftime($format, $post, $locale); 
-    printf($date);
-}
-
-/**
- * Reduce Favicon Sizes
- * -----------------------------------------------------------------------------
- * @param   array       $sizes      Array of icon sizes (32, 48, etc.).
- * @return  string      $sizes      Sizes as strings separated by ', '.
- */
-
-function reduce_sizes($sizes) {
-    for ($i = 0; $i < count($sizes); $i++) {
-        $sizes[$i] .= 'x' . $sizes[$i];
-    }
-
-    return implode(' ', $sizes);
-}
-
-/**
- * Generate ICO Favicon Meta Tag
- * -----------------------------------------------------------------------------
- * @param   array       $icon       Icon information.
- * @return  string                  Favicon HTML meta tag.
- */
-
-function favicon_ico($icon) {
-    $favicon = array();
-    $sizes = '';
-
-    $sizes = reduce_sizes($icon['sizes']);
-    $favicon[] = sprintf('<link rel="shortcut icon" sizes="%s" type="image/x-icon" href="%s">', $sizes, $icon['path']);
-
-    return implode('', $favicon);
-}
-
-/**
- * Generate iOS Icon Meta Tag
- * -----------------------------------------------------------------------------
- * @param   array       $icon       Icon information.
- * @return  string                  Apple icon HTML meta tag.
- */
-
-function favicon_apple($icon) {
-    $apple_icon = array();
-    $sizes = '';
-
-    $sizes = reduce_sizes($icon['sizes']);
-    $apple_icon[] = sprintf('<link rel="apple-touch-icon" sizes="%s" href="%s">', $sizes, $icon['path']);
-
-    return implode('', $apple_icon);
-}
-
-/**
- * Generate Windows 8/10 Pinned Tile Meta Tag
- * -----------------------------------------------------------------------------
- * @param   array       $icon       Icon information.
- * @return  string                  Windows icon HTML meta tag.
- */
-
-function favicon_windows($icon) {
-    $windows_icon = array();
-
-    $windows_icon[] = sprintf('<meta name="application-name" content="%s">', $icon['name']);
-    $windows_icon[] = sprintf('<meta name="msapplication-TileImage" content="%s">', $icon['path']);
-    $windows_icon[] = sprintf('<meta name="msapplication-TileColor" content="%s">', $icon['colour']);
-
-    return implode('', $windows_icon);
-}
-
-/**
- * Load Favicon
- * -----------------------------------------------------------------------------
- * Every different browser has their own special snowflake favicon format. 
- */
-
-function set_favicon() {
-    $favicons = get_option('tuairisc_favicons'); 
-    $meta_tags = array();
-
-    $meta_tags[] = favicon_ico($favicons['favicon']);
-    $meta_tags[] = favicon_apple($favicons['apple']);
-    $meta_tags[] = favicon_windows($favicons['windows']);
-
-    printf(implode('', $meta_tags));
-}
-
-/**
  * Increment Ghetto View Counter
  * -----------------------------------------------------------------------------
  * This was requested by the client for internal use. I do not consider this to
@@ -816,9 +656,6 @@ remove_action('wp_head', 'wp_generator');
 // Stop WordPress loading JavaScript that helps render emoji correctly.
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
-
-// Set site favicon.
-add_action('wp_head', 'set_favicon');
 
 // Set prefetch domain for media.
 add_action('wp_head', 'dns_prefetch');
