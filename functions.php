@@ -111,8 +111,7 @@ add_option('tuairisc_view_counter_key', 'tuairisc_view_counter', '', true);
 
 add_option('tc_dns_prefetch_domains', array(
     // Media prefetch domains.
-    preg_replace('/^www\./','',
-    $_SERVER['SERVER_NAME'])
+    preg_replace('/^www\./', '', $_SERVER['SERVER_NAME'])
 ),'', true);
 
 /**
