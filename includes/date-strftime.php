@@ -54,7 +54,7 @@ function get_the_date_strftime($date = null, $format = null, $locale = null) {
     }
 
     if (!$format) {
-        $format = get_option('tc_date_strfdate_format');
+        $format = get_option('tc_date_strftime_format');
     }
 
     // @link http://stackoverflow.com/a/19351555/1433400
