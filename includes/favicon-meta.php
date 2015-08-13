@@ -99,19 +99,19 @@ function favicon_apple($icon) {
  * @return  string                  Windows icon HTML meta tag.
  */
 
-function favicon_windows($icon) {
+function favicon_windows($favicon) {
     $icon = array();
 
     $icon[] = sprintf('<meta name="application-name" content="%s">',
-        $icon['name']
+        $favicon['name']
     );
 
     $icon[] = sprintf('<meta name="msapplication-TileImage" content="%s">',
-        $icon['path']
+        $favicon['path']
     );
 
     $icon[] = sprintf('<meta name="msapplication-TileColor" content="%s">',
-        $icon['colour']
+        $favicon['colour']
     );
 
     return implode('', $icon);
