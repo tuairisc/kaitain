@@ -134,8 +134,11 @@ $included_scripts = array(
     'single-post-related-posts',
     // Localized date.
     'date-strftime',
-    // Favicon management
-    'favicon-meta'
+    // Favicon management.
+    'favicon-meta',
+    // Theme image sizes.
+    'theme-image-sizes'
+
 );
 
 foreach ($included_scripts as $script) {
@@ -240,7 +243,6 @@ $google_fonts = array(
 
 $theme_javascript = array(
     'google-analytics' => THEME_JS . 'analytics.js',
-    // 'object-fit' => NODE_SCRIPTS . 'object-fit/dist/polyfill.object-fit.min.js',
     'functions' => THEME_JS . 'functions.js'
 );
 
@@ -261,7 +263,6 @@ $theme_styles = array(
     'main-style' => THEME_CSS . 'main.css',
     // WordPress style.css. Not really used.
     'wordpress-style' => THEME_URL . '/style.css',
-    // 'object-fit-css' => NODE_SCRIPTS . 'object-fit/dist/polyfill.object-fit.css'
 );
 
 /**
