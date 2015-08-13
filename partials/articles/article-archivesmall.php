@@ -39,7 +39,7 @@ $section_background = sprintf('section-%s-background', $section_slug);
 <article <?php post_class('archive-small'); ?> id="archive-small-<?php the_id(); ?>">
     <a class="<?php printf($section_hover); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail">
-            <img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'thumbnail'); ?>" alt="<?php the_title_attribute(); ?>" />
+            <?php the_post_thumbnail('tc_home_feature_small'); ?>
             <div class="archive-trim-bottom <?php printf($section_background); ?>"></div>
         </div>
         <header>

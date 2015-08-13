@@ -42,7 +42,7 @@ $avatar = get_avatar($author, 32);
             <?php if (!in_array($author, $hidden_users)) : ?>
                 <div class="photo">
                     <a title="<?php the_author_meta('display_name'); ?>" href="<?php printf(get_author_posts_url($author)); ?>">
-                        <img class="cover-fit" src="<?php printf(get_avatar(get_the_author_meta('ID'), 32)); ?>" alt="<?php the_author_meta('display_name'); ?>" />
+                    <?php get_avatar(get_the_author_meta('ID'), 'tc_post_avatar'); ?>
                     </a>
                 </div>
             <?php endif; ?>

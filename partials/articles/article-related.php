@@ -41,7 +41,7 @@ $trim = array(
 <article <?php post_class('related'); ?> id="related-<?php the_ID(); ?>">
     <a class="<?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail">
-            <img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'large'); ?>" alt="<?php the_title_attribute(); ?>" />
+            <?php the_post_thumbnail('tc_post_related'); ?>
             <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
         <header>

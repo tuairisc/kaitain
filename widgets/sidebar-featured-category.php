@@ -189,10 +189,13 @@ class tuairisc_sidebar_category extends WP_Widget {
 
             <h5 class="title">
                 <a class="green-link-hover" href="<?php the_permalink(); ?>">
-                    <?php if ($instance['show_image'] && $index === 0) : ?>
-                        <img class="cover-fit" src="<?php the_post_image($post); ?>" alt="<?php the_title(); ?>" />
-                    <?php endif; ?> 
-                    <?php the_title(); ?>
+                    <?php
+                    if ($instance['show_image'] && $index === 0) {
+                        the_post_thumbnail('tc_sidebar_category');
+                    }
+
+                    the_title();
+                    ?>
                 </a>
             </h5>
 

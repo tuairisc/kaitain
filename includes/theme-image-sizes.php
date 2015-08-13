@@ -31,20 +31,20 @@
 $crop = array('center', 'center');
 
 // Home featured posts.
-add_image_size('tc_home_feature_lead', 385, 290, $crop);
-add_image_size('tc_home_feature_small', 192, 125, $crop);
+add_image_size('tc_home_feature_lead', 790, 385, $crop);
+add_image_size('tc_home_feature_small', 190, 125, $crop);
 
 // Home authot widget.
-add_image_size('tc_home_author', 180, 151, $crop);
+add_image_size('tc_home_author', 180, 150, $crop);
 
 // Sidebar widget post.
-add_image_size('tc_post_sidebar', 70, 40, $crop);
+add_image_size('tc_post_sidebar', 70, 45, $crop);
 
 // Category archive.
 add_image_size('tc_post_archive', 390, 170, $crop);
 
 // Single post related post.
-add_image_size('tc_post_related', 252, 170, $crop);
+add_image_size('tc_post_related', 255, 170, $crop);
 
 // Comment author and post author avatar.
 add_image_size('tc_post_avatar', 70, 70, $crop);

@@ -107,7 +107,11 @@ function category_widget_output($cats, $show_name = true, $count = 5) {
             setup_postdata($post);
 
             // "Side" posts only need athumbnail size image.
-            $image_size = ($index === 0) ? 'medium' : 'thumbnail';
+            if ($index === 0) {
+                $image_size = 'tc_home_category_lead';
+            } else {
+                $image_size = 'tc_home_category_small';
+            }
 
             // First post has a different layout, in a different position.
             if ($index === 0) {
@@ -123,7 +127,7 @@ function category_widget_output($cats, $show_name = true, $count = 5) {
                 'anchor' => $trim['hover']
             );
 
-            category_article_output($post, $classes, $image_size);
+            category_article_output($classes, $image_size);
 
             if ($index === 0) {
                 printf('<div class="category-right">');
@@ -148,19 +152,13 @@ function category_widget_output($cats, $show_name = true, $count = 5) {
  * @param   string          $image_size     Thumbnail image size.
  */
 
-function category_article_output($post, $classes, $image_size) {
-    $post = get_post($post);
-
-    if (!$post) {
-        return;
-    }
-
+function category_article_output($classes, $image_size) {
     ?> 
 
     <article class="<?php printf($classes['article']); ?>" id="<?php the_ID(); ?>">
         <a class="<?php printf($classes['anchor']); ?>" href="<?php the_permalink(); ?>" rel="bookmark">
             <div class="thumbnail">
-                <img class="cover-fit" src="<?php the_post_image(get_the_ID(), $image_size); ?>" alt="<?php the_title_attribute(); ?>" />
+            <?php the_post_thumbnail($image_size); ?>
             </div>
             <p class="category-article-title <?php printf($classes['paragraph']); ?>">
                 <?php the_title(); ?>

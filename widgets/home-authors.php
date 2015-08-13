@@ -143,8 +143,8 @@ class tuairisc_authors extends WP_Widget {
         <div class="tuairisc-author-list home-flex-row">
             <?php foreach ($author_query as $author) : ?>
                 <a class="green-link-hover tuairisc-author author-photo" title="<?php printf($author->display_name); ?>" href="<?php printf(get_author_posts_url($author->ID)); ?>" id="<?php printf('author-%s', $author->user_nicename); ?>">
-                    <img class="cover-fit" src="<?php printf(get_avatar($author->ID), 32); ?>" alt="<?php printf($author->display_name); ?>" />
-                    <h6 class="author-name"><?php printf($author->display_name); ?></h6>
+                <?php get_avatar($author->ID, 'tc_home_author'); ?>                    
+                <h6 class="author-name"><?php printf($author->display_name); ?></h6>
                 </a>
             <?php endforeach; ?>
         </div>
