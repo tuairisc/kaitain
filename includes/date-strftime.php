@@ -28,9 +28,8 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
-// strftime date and locale.
-add_option('tuairisc_fallback_locale', 'ga_IE','', true);
-add_option('tuairisc_strftime_date_format', '%A, %B %e %Y','', true);
+add_option('tc_date_fallback_locale', 'ga_IE','', true);
+add_option('tc_date_strftime_format', '%A, %B %e %Y','', true);
 
 /**
  * Get strftime Date
@@ -57,11 +56,11 @@ function get_the_date_strftime($format = null, $post = null, $locale = null) {
     }
 
     if (!$locale) {
-        $locale = get_option('tuairisc_fallback_locale');
+        $locale = get_option('tc_date_fallback_locale');
     }
 
     if (!$format) {
-        $format = get_option('tuairisc_strftime_date_format');
+        $format = get_option('tc_date_strftime_format');
     }
 
     $locale = array(
