@@ -561,6 +561,23 @@ function get_the_date_strftime($format = null, $post = null, $locale = null) {
     return strftime($format, $time);
 }
 
+// TODO
+// TODO
+// TODO
+// TODO
+
+function get_post_date_strftime($post) {
+    if (!($post = get_post($post))) {
+        return false;
+    }
+}
+
+function get_comment_date_strftime($comment) {
+    if (!($comment = get_comment($comment))) {
+        return false;
+    }
+}
+
 /*
  * Print Date using System Locale
  * -----------------------------------------------------------------------------
@@ -762,19 +779,6 @@ function clean_search_url() {
         wp_redirect(home_url('/search/') . urlencode(get_query_var('s')));
         exit();
     }
-}
-
-/**
- * Custom Comment and Comment Form Output
- * -----------------------------------------------------------------------------
- * @param   string  $comment    The comment.
- * @param   array   $args       Array argument
- * @param   int     $depth      Depth of the comments thread.
- */
-
-function theme_comments($comment, $args, $depth) {
-    $GLOBALS['comment'] = $comment;
-    get_template_part(THEME_PARTIALS, 'comments');
 }
 
 /**
