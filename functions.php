@@ -149,7 +149,10 @@ include(THEME_INCLUDES . 'section-manager/section-manager.php');
 include(THEME_INCLUDES . 'social-meta/social-meta.php');
 // Home and archive widget category output.
 include(THEME_INCLUDES . 'category-widget-output.php');
+// Single post social sharing links.
 include(THEME_INCLUDES . 'social-share.php');
+// Categorically-related posts.
+include(THEME_INCLUDES . 'single-post-related-posts.php');
 
 /** 
  * Social Media Accounts
