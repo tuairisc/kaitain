@@ -28,7 +28,7 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
-add_option('tuairisc_favicons', array(
+add_option('tc_favicon_array', array(
     // Website favicon assets.
     'favicon' => array(
         'path' => THEME_IMAGES . 'icons/favicon.ico',
@@ -124,7 +124,7 @@ function favicon_windows($icon) {
  */
 
 function set_favicon() {
-    $favicons = get_option('tuairisc_favicons'); 
+    $favicons = get_option('tc_favicon_array'); 
     $meta_tags = array();
 
     $meta_tags[] = favicon_ico($favicons['favicon']);
