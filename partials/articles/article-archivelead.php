@@ -49,7 +49,7 @@ $trim = array(
     </a>
     <header>
         <h4 class="attribution"><a href="<?php printf(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php the_author(); ?></a></h4>
-        <span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_date_strftime(); ?></time></small></span>
+        <span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></small></span>
     </header>
     <p class="post-excerpt"><?php printf(get_the_excerpt()); ?></p>
 </article>
