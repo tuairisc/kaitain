@@ -109,7 +109,7 @@ add_option('tuairisc_notice_post_key', 'is_tuairisc_notice', '', true);
 // Ghetto view counter meta key.
 add_option('tuairisc_view_counter_key', 'tuairisc_view_counter', '', true);
 
-add_option('tuairisc_prefetch_domains', array(
+add_option('tc_dns_prefetch_domains', array(
     // Media prefetch domains.
     preg_replace('/^www\./','',
     $_SERVER['SERVER_NAME'])
@@ -506,7 +506,7 @@ add_filter('previous_posts_link_attributes', 'pagination_classes');
  */
 
 function dns_prefetch() {
-    $domains = get_option('tuairisc_prefetch_domains');
+    $domains = get_option('tc_dns_prefetch_domains');
     
     if (!empty($domains)) {
         foreach ($domains as $domain) {
