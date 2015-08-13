@@ -38,21 +38,13 @@ if (comments_open()) {
     }
 
     printf('<div class="article-comments" id="comments">');
-        printf('<h4 class="comments-title subtitle">%s \'%s:\'</h4>',
+        printf('<h4 class="comments-title subtitle">%s \'%s\'</h4>',
             'Fág freagra ar',
             get_the_title()
         );
-            // (get_comments_number() === 1) ? '' : 's',
 
     if (have_comments()) {
-        // Iterate comments.
-        printf('<h4 class="reply-title">%d %s "%s":</h4>',
-            get_comments_number(),
-            __('nóta tráchta ar', TTD),
-            get_the_title()
-        );
-
-        printf('<ul>');
+        printf('<ul class="%s">', 'commentlist');
 
         wp_list_comments(array(
             'callback' => 'theme_comments',
@@ -90,7 +82,7 @@ if (comments_open()) {
     );
 
     $logged_in_as = sprintf('<p class="logged-in-as">%s</p>',
-        sprintf(__('Logáilte isteach mar <a class="green-link" href="%1$s">%2$s</a>. <a class="green-link" href="%3$s">Logáil amach?</a>', TTD), 
+        sprintf(__('Logáilte isteach mar <a href="%1$s">%2$s</a>. <a href="%3$s">Logáil amach?</a>', TTD), 
            admin_url('profile.php'),
            $user_identity,
            wp_logout_url(apply_filters('the_permalink', get_permalink()))
@@ -114,6 +106,54 @@ if (comments_open()) {
 
     printf('</div>');
     printf('</div>');
+}
+
+
+/**
+ * Custom Comment and Comment Form Output
+ * -----------------------------------------------------------------------------
+ * @param   string  $comment    The comment.
+ * @param   array   $args       Array argument
+ * @param   int     $depth      Depth of the comments thread.
+ */
+
+function theme_comments($comment, $args, $depth) {
+    $GLOBALS['comment'] = $comment;
+    ?>
+
+    <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
+        <div class="photo comment-photo">
+            <img class="cover-fit" src="<?php printf(get_avatar($comment, 75)); ?>" alt="<?php comment_author(); ?>" />
+        </div>
+        <div class="comment-body">
+            <header>
+                <p class="comment-author-link"><?php comment_author_link(); ?></p>
+                <p class="comment-date">
+                    <?php printf('<small>%s</small>',
+                        sprintf(__('%1$s at %2$s', TTD),
+                            get_comment_date(),
+                            get_comment_time()
+                        )
+                    ); ?>
+                </p>
+            </header>
+
+            <?php if (!$comment->comment_approved) {
+                printf('<p>%s</p>', _e('Tá do thrácht á mheas.', TTD));
+            } ?>
+
+            <div class="comment-body">
+                <?php comment_text(); ?>
+            </div>
+            <?php if (is_user_logged_in()) : ?>
+                <footer>
+                    <p><small><?php edit_comment_link(__('edit', TTD),'', ''); ?></small></p>
+                </footer>
+            <?php endif; ?>
+        </div>
+    </li>
+
+    <?php
 }
 
 ?>
