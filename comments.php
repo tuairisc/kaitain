@@ -30,10 +30,6 @@
 
 if (comments_open()) {
     if (post_password_required()) {
-        printf('<h4 class="reply-title">%s</h4>',
-            __('This post is password protected. Enter the password to view comments.', TTD)
-        );
-
         return;
     }
 
@@ -64,15 +60,21 @@ if (comments_open()) {
 
     $fields = array(
         // Name, author and email fields.
-        'author' => sprintf($input, 'author', 'author', 'author', __('D\'ainm*', TTD)), 
-        'email' => sprintf($input, 'email', 'email', 'email', __('Ríomhphoist*', TTD)), 
-        'url' => sprintf($input, 'url', 'url', 'url', __('Láithreán gréasáin', TTD))
+        'author' => sprintf($input,
+            'author', 'author', 'author', __('D\'ainm*', TTD)
+        ), 
+        'email' => sprintf($input,
+            'email', 'email', 'email', __('Ríomhphoist*', TTD)
+        ), 
+        'url' => sprintf($input,
+            'url', 'url', 'url', __('Láithreán gréasáin', TTD)
+        )
     );
 
     $comment_notes = array(
         // We will not publish your email.
         'before' => sprintf('<p class="comment-notes">%s</p>',
-            __('Ní bheidh muid a fhoilsiú do sheoladh r-phoist.', TTD)
+            __('Ní bheidh muid a fhoilsiú do sheoladh r-phoist!', TTD)
         ),
         // Allowed tags.
         'after' => sprintf('<p class="form-allowed-tags">%s <code>%s</code></p>',
@@ -123,31 +125,38 @@ function theme_comments($comment, $args, $depth) {
 
     <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
         <div class="photo comment-photo">
-            <img class="cover-fit" src="<?php printf(get_avatar($comment, 75)); ?>" alt="<?php comment_author(); ?>" />
+            <?php printf('<img class="%s" src="%s" alt="%s" />',
+                'cover-fit',
+                get_avatar($comment, 75),
+                get_comment_author()
+            ); ?>
         </div>
         <div class="comment-body">
             <header>
-                <p class="comment-author-link"><?php comment_author_link(); ?></p>
-                <p class="comment-date">
-                    <?php printf('<small>%s</small>',
-                        sprintf(__('%1$s at %2$s', TTD),
-                            get_comment_date(),
-                            get_comment_time()
-                        )
+                <p class="comment-meta">
+                    <span class="comment-author-link"><?php comment_author_link(); ?></span>
+                    <?php printf('<span class="%s"><time datetime="%s">%s</time></span>',
+                        'post-date',
+                        get_comment_date('Y-M-d H:i'),
+                        get_comment_date_strftime()
                     ); ?>
                 </p>
             </header>
 
-            <?php if (!$comment->comment_approved) {
-                printf('<p>%s</p>', _e('Tá do thrácht á mheas.', TTD));
-            } ?>
-
             <div class="comment-body">
-                <?php comment_text(); ?>
+                <?php if (!$comment->comment_approved) {
+                    printf('<p class="%s">%s</p>',
+                        'comment-unapproved',
+                        __('Tá do thrácht á mheas.', TTD)
+                    );
+                } else {
+                    comment_text();
+                } ?>
             </div>
+
             <?php if (is_user_logged_in()) : ?>
                 <footer>
-                    <p><small><?php edit_comment_link(__('edit', TTD),'', ''); ?></small></p>
+                    <p><?php edit_comment_link(__('edit', TTD),'', ''); ?></p>
                 </footer>
             <?php endif; ?>
         </div>
