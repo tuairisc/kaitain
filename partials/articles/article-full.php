@@ -30,7 +30,7 @@
 
 $author = get_the_author_meta('ID');
 $hidden_users = get_option('tuairisc_hidden_users');
-$avatar = get_avatar($author, 32);
+$avatar = get_avatar($author);
 
 ?>
 
@@ -40,11 +40,12 @@ $avatar = get_avatar($author, 32);
         <p class="post-excerpt"><?php printf(get_the_excerpt()); ?></p>
         <div class="author-meta">
             <?php if (!in_array($author, $hidden_users)) : ?>
-                <div class="photo">
-                    <a title="<?php the_author_meta('display_name'); ?>" href="<?php printf(get_author_posts_url($author)); ?>">
-                    <?php get_avatar(get_the_author_meta('ID'), 'tc_post_avatar'); ?>
-                    </a>
-                </div>
+                <?php printf('<div class="%s" style="%s"><a title="%s" href="%s"></a></div>',
+                    'photo',
+                    sprintf('background-image: url(%s);', $avatar),
+                    get_the_author_meta('display_name'),
+                    get_author_posts_url($author)
+                ); ?>
             <?php endif; ?>
             <div class="author-info">
                 <span class="author-link"><a class="green-link-hover" href="<?php printf(get_author_posts_url($author)); ?>"><?php the_author_meta('display_name'); ?></a></span>

@@ -123,14 +123,13 @@ function theme_comments($comment, $args, $depth) {
     $GLOBALS['comment'] = $comment;
     ?>
 
-    <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
-        <div class="photo comment-photo">
-            <?php printf('<img class="%s" src="%s" alt="%s" />',
-                'cover-fit',
-                get_avatar($comment, 75),
-                get_comment_author()
-            ); ?>
-        </div>
+    <li <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
+        <?php printf('<div class="%s" style="%s"><a title="%s" href="%s"></a></div>',
+            'photo comment-photo',
+            sprintf('background-image: url(%s);', get_avatar($comment)),
+            get_comment_author(),
+            get_comment_author_url()
+        ); ?>
         <div class="comment-body">
             <header>
                 <p class="comment-meta">
