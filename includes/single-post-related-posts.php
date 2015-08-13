@@ -28,97 +28,94 @@
  * Tuairisc.ie. If not, see <http://www.gnu.org/licenses/>.
  */
 
-global $post;
-$category = get_the_category($post->ID); 
-$related_count = 3;
-$related_trans_name = 'single_post_related_' . $post->ID;
-$filler_trans_name = 'single_post_filler_' . $post->ID;
+/**
+ * Get Related Posts from the Same Category
+ * -----------------------------------------------------------------------------
+ * Fetch posts related to given post, by category.
+ * 
+ * @param   int/object        $post       Post object.
+ * @param   int               $count      Number of related posts to fetch.
+ * @param   int               $timeout    Delay in hours for transient API. 
+ * @param   array             $range      Date range to to back in time.
+ * @return  array             $related    Array of related posts.
+ */
 
-$range = array(
-    'after' => date('Y-m-j') . ' -14 days',
-    'before' => date('Y-m-j') . ' -7 days'
-);
-
-$related = get_transient($related_trans_name);
-
-if (!$related || empty($related) || WP_DEBUG) {
-    $related = get_posts(array(
-        // The next two lines force the exclusion of private posts.
-        'perm' => 'readable',
-        'post_status' => 'publish',
-        'cat' => $category[0]->cat_ID,
-        'posts_per_page' => $related_count,
-        'orderby' => 'rand',
-        'order' => 'DESC',
-        'post__not_in' => array($post->ID),
-        'date_query' => array(
-            'inclusive' => true,
-            'after' => $range['after'],
-            'before' => $range['before']
-        )
-    )); 
-
-    set_transient($related_trans_name, $related, get_option('tuairisc_transient_timeout')); 
-}
-
-if (($missing = $related_count - sizeof($related)) > 0) {
-    /*
-     * Related Posts Filler
-     * -------------------------------------------------------------------------
-     * As you go farther back in time in the blog archives, there will be fewer
-     * matching related posts. In that case, I would prefer to just grab any
-     * random post from this period and add it to the original loop as a filler.
-     */
-
-    $excluded = array();
-
-    foreach($related as $post) {
-        // Add any found posts to the array of excluded images.
-        $excluded[] = $post->ID;
+function get_related($post = null, $count = 3, $timeout = 12, $range = null) {
+    if (!($post = get_post($post))) {
+        global $post;
     }
 
-    $filler = get_transient($filler_trans_name);
-    
-    if (!$filler || empty($filler) || WP_DEBUG) {
-        $filler = array(
-            // The next two lines force the exclusion of private posts.
-            'perm' => 'readable',
-            'post_status' => 'publish',
-            // Exclude already chosen posts.
-            'post__not_in' => $excluded,
-            'posts_per_page' => $missing,
-            'orderby' => 'rand',
-            'order' => 'DESC',
+    $trans = 'single_post_related_' . $post->ID;
+    $timeout *= HOUR_IN_SECONDS;
+    $query_cat = array();
+
+    if (!($categories = get_the_category($post->ID))) {
+        $categories = get_option('default_category');
+    }
+
+    foreach ($categories as $cat) {
+        $query_cat[] = $cat->cat_ID;
+    }
+
+    if (!$range) {
+        $range = array(
+            'after' => date('Y-m-j') . ' -21 days',
+            'before' => date('Y-m-j')
         );
-        
-        if (!WP_DEBUG) {
-            // Test server's copy of posts are way out of date.
-            $filler['date_query'] = array(
+    }
+
+    if (!($related = get_transient($trans))) {
+        $related = get_posts(array(
+            'category__in' => $query_cat,
+            'date_query' => array(
                 'inclusive' => true,
                 'after' => $range['after'],
                 'before' => $range['before']
-            );
-        }
+            ),
+            'numberposts' => $count,
+            'order' => 'DESC',
+            'orderby' => 'rand',
+            'perm' => 'readable',
+            'post_status' => 'publish',
+            'post__not_in' => array($post->ID)
+        )); 
 
-        $filler = get_posts($filler);
-
-        set_transient($filler_trans_name, $filler, get_option('tuairisc_transient_timeout')); 
+        set_transient($trans, $related, $timeout);
     }
 
-    $related = array_merge($related, $filler);
+    if ($missing = $count - sizeof($related)) {
+        // Filler isn't cached because that could cause problems.
+        $related = related_filler($post, $missing, $related);
+    }
+
+    return $related;
 }
 
-printf('<div class="%s">', 'related-articles-wrapper');
-printf('<h4 class="%s">%s</h4>', 'subtitle related-title', __('Léigh tuilleadh sa rannóg seo', TTD));
-printf('<div class="%s">', 'related-articles');
+/**
+ * Related Posts Filler
+ * -----------------------------------------------------------------------------
+ * @param   int/object        $post       Post object.
+ * @param   int               $count      Number of related posts to fetch.
+ * @param   array             $related    Array of related posts to exclude.
+ * @return  array             Filler posts.
+ */
 
-foreach ($related as $post) {
-    setup_postdata($post);
-    get_template_part(PARTIAL_ARTICLES, 'related');
+function related_filler($post, $count, $related) {
+    $exlude = array(); 
+    $exclude[] = $post->ID;
+
+    foreach ($related as $r) {
+        $exclude[] = $r->ID;
+    }
+    
+    $filler = get_posts(array(
+        'numberposts' => $count,
+        'order' => 'DESC',
+        'orederby' => 'rand',
+        'post__not_in' => $exclude
+    ));
+
+    return array_merge($related, $filler);
 }
-
-printf('</div>');
-printf('</div>');
-wp_reset_postdata();
 
 ?>
