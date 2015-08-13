@@ -240,7 +240,7 @@ $google_fonts = array(
 
 $theme_javascript = array(
     'google-analytics' => THEME_JS . 'analytics.js',
-    'object-fit' => NODE_SCRIPTS . 'object-fit/dist/polyfill.object-fit.min.js',
+    // 'object-fit' => NODE_SCRIPTS . 'object-fit/dist/polyfill.object-fit.min.js',
     'functions' => THEME_JS . 'functions.js'
 );
 
@@ -261,7 +261,7 @@ $theme_styles = array(
     'main-style' => THEME_CSS . 'main.css',
     // WordPress style.css. Not really used.
     'wordpress-style' => THEME_URL . '/style.css',
-    'object-fit-css' => NODE_SCRIPTS . 'object-fit/dist/polyfill.object-fit.css'
+    // 'object-fit-css' => NODE_SCRIPTS . 'object-fit/dist/polyfill.object-fit.css'
 );
 
 /**
