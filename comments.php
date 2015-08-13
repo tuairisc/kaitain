@@ -89,6 +89,14 @@ if (comments_open()) {
         )
     );
 
+    $logged_in_as = sprintf('<p class="logged-in-as">%s</p>',
+        sprintf(__('Logáilte isteach mar <a class="green-link" href="%1$s">%2$s</a>. <a class="green-link" href="%3$s">Logáil amach?</a>', TTD), 
+           admin_url('profile.php'),
+           $user_identity,
+           wp_logout_url(apply_filters('the_permalink', get_permalink()))
+        )
+    );
+
     comment_form(array(
         'id_form' => 'commentform',
         'id_submit' => 'submit',
@@ -100,6 +108,7 @@ if (comments_open()) {
         'comment_notes_before' => $comment_notes['before'],
         'comment_notes_after' => $comment_notes['after'],
         'label_submit' => __('Seol', TTD),
+        'logged_in_as' => $logged_in_as,
         'fields' => $fields,
     ));
 
