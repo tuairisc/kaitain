@@ -68,17 +68,12 @@ function reduce_sizes($sizes) {
  */
 
 function favicon_ico($icon) {
-    $favicon = array();
-    $sizes = '';
-
-    $sizes = reduce_sizes($icon['sizes']);
-
-    $favicon[] = sprintf('<link rel="shortcut icon" sizes="%s" type="image/x-icon" href="%s">',
-        $sizes,
+    $icon = sprintf('<link rel="shortcut icon" sizes="%s" type="image/x-icon" href="%s">',
+        reduce_sizes($icon['sizes']),
         $icon['path']
     );
 
-    return implode('', $favicon);
+    return $icon;
 }
 
 /**
@@ -89,17 +84,12 @@ function favicon_ico($icon) {
  */
 
 function favicon_apple($icon) {
-    $apple_icon = array();
-    $sizes = '';
-
-    $sizes = reduce_sizes($icon['sizes']);
-
-    $apple_icon[] = sprintf('<link rel="apple-touch-icon" sizes="%s" href="%s">',
-        $sizes,
+    $icon = sprintf('<link rel="apple-touch-icon" sizes="%s" href="%s">',
+        reduce_sizes($icon['sizes']),
         $icon['path']
     );
 
-    return implode('', $apple_icon);
+    return $icon;
 }
 
 /**
@@ -110,21 +100,21 @@ function favicon_apple($icon) {
  */
 
 function favicon_windows($icon) {
-    $windows_icon = array();
+    $icon = array();
 
-    $windows_icon[] = sprintf('<meta name="application-name" content="%s">',
+    $icon[] = sprintf('<meta name="application-name" content="%s">',
         $icon['name']
     );
 
-    $windows_icon[] = sprintf('<meta name="msapplication-TileImage" content="%s">',
+    $icon[] = sprintf('<meta name="msapplication-TileImage" content="%s">',
         $icon['path']
     );
 
-    $windows_icon[] = sprintf('<meta name="msapplication-TileColor" content="%s">',
+    $icon[] = sprintf('<meta name="msapplication-TileColor" content="%s">',
         $icon['colour']
     );
 
-    return implode('', $windows_icon);
+    return implode('', $icon);
 }
 
 /**
