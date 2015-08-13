@@ -48,7 +48,7 @@ $trim = array(
         <div class="post-content">
             <header>
                 <h3 class="archive-title"><?php the_title(); ?></h3>
-                <p><span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></small></span></p>
+                <p><span class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span></p>
             </header>
             <p class="post-excerpt"><small><?php printf(get_the_excerpt()); ?></small></p>
         </div>

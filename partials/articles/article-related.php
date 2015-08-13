@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Related Articles
+ * Related Article Single Post
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Tuairisc.ie
@@ -29,7 +29,6 @@
  */
 
 global $sections;
-
 $trim = $sections->get_section_slug(get_the_category()[0]);
 
 $trim = array(
@@ -48,7 +47,7 @@ $trim = array(
         <header>
             <h5 class="title"><?php the_title(); ?></h5>
             <?php if (!is_page()) : ?>
-                <span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></small></span>
+                <span class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span>
             <?php endif; ?>
         </header>
     </a>
