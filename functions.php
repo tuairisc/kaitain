@@ -260,6 +260,13 @@ $conditional_scripts = array(
     )
 );
 
+$conditional_styles = array(
+    'ie-fallback' => array(
+        THEME_CSS . 'ie.css',
+        'lte IE 9'
+    )
+);
+
 $theme_styles = array(
     // Compressed, compiled theme CSS.
     'main-style' => THEME_CSS . 'main.css',
@@ -323,7 +330,7 @@ function tuairisc_scripts() {
  */
 
 function tuairisc_styles() {
-    global $theme_styles, $google_fonts;
+    global $theme_styles, $google_fonts, $conditional_styles;
 
     foreach ($theme_styles as $name => $style) {
         wp_enqueue_style($name, $style, array(), THEME_VER);
@@ -332,6 +339,14 @@ function tuairisc_styles() {
     if (!empty($google_fonts)) {
         wp_register_style('google-fonts', google_font_url($google_fonts));
         wp_enqueue_style('google-fonts');
+    }
+
+    foreach ($conditional_styles as $name => $style) {
+        $path = $style[0];
+        $condition = $style[1];
+
+        wp_enqueue_style($name, $path, array(), THEME_VER);
+        wp_style_add_data($name, 'conditional', $condition);
     }
 }
 
