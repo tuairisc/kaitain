@@ -126,6 +126,8 @@ $included_scripts = array(
     'section-manager/section-manager',
     // Open Graph and Twitter Card <head> meta tag links.
     'social-meta/social-meta',
+    // Avatar output.
+    'avatars',
     // Home and archive widget category output.
     'category-widget-output',
     // Single post social sharing links.
@@ -577,36 +579,6 @@ function increment_view_counter($content) {
 }
 
 /**
- * Get Avatar URL
- * -----------------------------------------------------------------------------
- * Wrapper for get_avatar that only returns the URL. Yes, WordPress added a
- * get_avatar_url() function in version 4.2. The Tuairisc site, however, uses
- * a plugin named WP User Avatar (https://wordpress.org/plugins/wp-user-avatar/)
- * to upload and serve avatars from a local source.
- *
- * 1. WP User Avatar hooks into get_avatar()
- * 2. As of April 29 2015 the plugin does not support the new get_avatar_data()
- *    and get_avatar_url() functions.
- *
- * That is to say both new functions will stil only serve from Gravatar without
- * consideration of locally-uploaded avatars.
- *
- * @param   string  $id_or_email    Either user ID or email address.
- * @param   int     $size           Avatar size.
- * @param   string  $default        URL for fallback avatar.
- * @param   string  $alt            Alt text for image.
- * @return  string                  The avatar's URL.
- */
-
-function get_avatar_url_only($avatar, $id_or_email, $size, $default, $alt) {
-    if (!is_admin()) {
-        $avatar = preg_replace('/(^.*src="|"\s.*$)/', '', $avatar);
-   }
-
-   return $avatar;
-}
-
-/**
  * Rewrite Search URL Cleanly
  * -----------------------------------------------------------------------------
  * Cleanly rewrite search URL from ?s=topic to /search/topic
@@ -687,9 +659,6 @@ add_filter('wp_title', 'theme_title', 1, 3);
 /* This theme only calls content on the load of a full page article. It's a good
  * point at which to insert the post count increment. */
 add_filter('the_content', 'increment_view_counter');
-
-// Strip HTML from avatar URL.
-add_filter('get_avatar', 'get_avatar_url_only', 10, 5);
 
 /**
  * Theme Supports
