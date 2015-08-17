@@ -1,6 +1,6 @@
 {
   "name": "tuairisc.ie",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Packages necessary to transpile, prefix and compress Tuairisc.ie's Sass.",
   "main": "gulpfile.js",
   "dependencies": {
@@ -26,7 +26,7 @@
     "scss"
   ],
   "author": "Mark Grealish",
-  "license": "GPLv3",
+  "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/bhalash/tuairisc.ie/issues"
   }

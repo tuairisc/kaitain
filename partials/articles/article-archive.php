@@ -42,7 +42,7 @@ $trim = array(
 <article <?php post_class('archive'); ?> id="archive-<?php the_id(); ?>">
     <a class="<?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail">
-            <img class="cover-fit" src="<?php the_post_image(get_the_ID(), 'large'); ?>" />
+            <?php post_image_html(get_the_ID(), 'tc_post_archive', true); ?>
             <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
         <div class="post-content">

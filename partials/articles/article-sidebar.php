@@ -42,7 +42,7 @@ $trim = array(
 <article <?php post_class('sidebar'); ?> id="sidebar-<?php the_id(); ?>">
     <a class="<?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail">
-            <?php the_post_thumbnail('tc_post_sidebar'); ?>
+            <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>
             <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
         <header>

@@ -42,7 +42,7 @@ $trim = array(
 <article <?php post_class('archive-lead'); ?> id="archive-lead-<?php the_id(); ?>">
     <a class="<?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail">
-            <?php the_post_thumbnail('tc_home_feature_lead'); ?>
+            <?php post_image_html(get_the_ID(), 'tc_home_feature_lead', true); ?>
             <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
         <h2><?php the_title(); ?></h2>
