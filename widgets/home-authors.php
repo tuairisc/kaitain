@@ -137,19 +137,57 @@ class tuairisc_authors extends WP_Widget {
             printf('%s', $defaults['before_widget']);
         }
 
-        ?>
+        $avatar = get_avatar_background($author, 'tc_home_author');
 
-        <h3 class="widget-title"><?php printf(apply_filters('widget_title', $instance['widget_title'])); ?></h3>
-        <div class="tuairisc-author-list home-flex-row">
-            <?php foreach ($author_query as $author) : ?>
-                <a class="green-link-hover tuairisc-author author-photo" title="<?php printf($author->display_name); ?>" href="<?php printf(get_author_posts_url($author->ID)); ?>" id="<?php printf('author-%s', $author->user_nicename); ?>">
-                <?php get_avatar($author->ID, 'tc_home_author'); ?>                    
-                <h6 class="author-name"><?php printf($author->display_name); ?></h6>
-                </a>
-            <?php endforeach; ?>
-        </div>
+        $classes = array(
+            // The HTML was a gorram mess so I separated classes.
+            'anchor' => array(
+                'green-link-hover',
+                'tuairisc-author',
+                'author-photo'
+            ),
+            'div' => array(
+                'tuairisc-author-list',
+                'home-flex-row'
+            ),
+            'title' => array(
+                'widget-title'
+            ),
+            'author' => array(
+                'author-name'
+            )
+        );
 
-        <?php
+        printf('<h3 class="%s">%s</h3>',
+            implode(' ', $classes['title']),
+            apply_filters('widget_title', $instance['widget_title'])
+        );
+
+        // Wrapping interior container.
+        printf('<div class="%s">', implode(' ', $classes['div']));
+
+
+        foreach ($author_query as $author) {
+            avatar_background($author->ID, 'tc_home_avatar', 'photo');
+
+            printf('<a class="%s" title="%s" href="%s" id="%s">',
+                // Wrapping anchor for avatar and author name.
+                implode(' ', $classes['anchor']),
+                $author->display_name,
+                $author->ID,
+                $author->user_nicename
+            ); 
+
+            printf('<h6 class="%s">%s</h6>',
+                // Author name.
+                implode(' ', $classes['author']),
+                $author->display_name
+            );
+
+            printf('</a>');
+        }
+
+        printf('</div>');
 
         if (!empty($defaults['after_widget'])) {
             printf('%s', $defaults['after_widget']);
