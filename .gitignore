@@ -16,8 +16,8 @@ node_modules/
 
 .sass-cache/
 sass/.sass-cache/
-main.css
-main.css.map
+*.css
+*.map
 
 #################
 ## JavaScript
