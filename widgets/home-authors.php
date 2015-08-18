@@ -144,7 +144,6 @@ class tuairisc_authors extends WP_Widget {
             'anchor' => array(
                 'green-link-hover',
                 'tuairisc-author',
-                'author-photo'
             ),
             'div' => array(
                 'tuairisc-author-list',
@@ -168,7 +167,7 @@ class tuairisc_authors extends WP_Widget {
 
 
         foreach ($author_query as $author) {
-            avatar_background($author->ID, 'tc_home_avatar', 'photo');
+            avatar_background($author->ID, 'tc_home_avatar', 'author-photo');
 
             printf('<a class="%s" title="%s" href="%s" id="%s">',
                 // Wrapping anchor for avatar and author name.
