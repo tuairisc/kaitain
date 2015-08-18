@@ -160,7 +160,7 @@ class tuairisc_featured extends WP_Widget {
 
                 if ($instance['count'] > 0 && $num % 4 === 1 && $num !== 0) {
                     // 1, 5, 9
-                    printf('<div class="featured-row home-flex-row">');
+                    printf('<div class="%s">', 'home-featured-row');
                 }
 
                 if (!$instance['show_sticky'] || $num > 0) {
