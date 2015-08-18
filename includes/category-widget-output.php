@@ -115,7 +115,7 @@ function category_widget_output($cats, $show_name = true, $count = 5) {
 
             // First post has a different layout, in a different position.
             if ($index === 0) {
-                $classes = 'category-left';
+                printf('<div class="category-left">');
             }
 
             $classes = get_post_class($classes, get_the_ID());
@@ -130,6 +130,7 @@ function category_widget_output($cats, $show_name = true, $count = 5) {
             category_article_output($classes, $image_size);
 
             if ($index === 0) {
+                printf('</div>');
                 printf('<div class="category-right">');
             }
         }
@@ -160,9 +161,11 @@ function category_article_output($classes, $image_size) {
             <div class="thumbnail">
             <?php post_image_html(get_the_ID(), $image_size, true); ?>
             </div>
-            <p class="category-article-title <?php printf($classes['paragraph']); ?>">
-                <?php the_title(); ?>
-            </p>
+            <div class="post-content">
+                <p class="category-article-title <?php printf($classes['paragraph']); ?>">
+                    <?php the_title(); ?>
+                </p>
+            </div>
         </a>
     </article>
 
