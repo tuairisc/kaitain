@@ -104,7 +104,7 @@ add_option('tuairisc_hidden_users', array(
 add_option('tuairisc_transient_timeout', 60 * 20, '', true);
 // Flag post as job.
 add_option('tuairisc_notice_post_key', 'is_tuairisc_notice', '', true);
-// Ghetto view counter meta key.
+// View counter meta key.
 add_option('tuairisc_view_counter_key', 'tuairisc_view_counter', '', true);
 
 add_option('tc_dns_prefetch_domains', array(
@@ -309,7 +309,7 @@ function dns_prefetch() {
 }
 
 /**
- * Increment Ghetto View Counter
+ * Increment View Counter
  * -----------------------------------------------------------------------------
  * This was requested by the client for internal use. I do not consider this to
  * be an objectively reliable means to tally view counters for buisness use, but
@@ -330,7 +330,7 @@ function set_view_count() {
 }
 
 /*
- * Fetch Ghetto View Counter
+ * Fetch View Counter
  * -----------------------------------------------------------------------------
  * @param   int     $post_id        ID of the post.
  * @return  int     $count          View count of the post.
