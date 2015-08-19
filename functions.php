@@ -102,15 +102,13 @@ add_option('tuairisc_hidden_users', array(
 
 // Transient API timeout in minutes.
 add_option('tuairisc_transient_timeout', 60 * 20, '', true);
-
 // Flag post as job.
 add_option('tuairisc_notice_post_key', 'is_tuairisc_notice', '', true);
-
 // Ghetto view counter meta key.
 add_option('tuairisc_view_counter_key', 'tuairisc_view_counter', '', true);
 
 add_option('tc_dns_prefetch_domains', array(
-    // Media prefetch domains.
+    // Media prefetch domains. Add any domains you feel are worthy.
     preg_replace('/^www\./', '', $_SERVER['SERVER_NAME'])
 ),'', true);
 
@@ -120,31 +118,36 @@ add_option('tc_dns_prefetch_domains', array(
  */
 
 $included_scripts = array(
+    // All theme widgets.
+    'theme-widgets.php',
+    // Theme CSS.
+    'theme-css.php',
+    // Theme JavaScript.
+    'theme-js.php',
     // Featured and sticky posts.
-    'featured-sticky-posts',
+    'featured-sticky-posts.php',
     // Site sections.
-    'section-manager/section-manager',
+    'section-manager/section-manager.php',
     // Open Graph and Twitter Card <head> meta tag links.
-    'social-meta/social-meta',
+    'social-meta/social-meta.php',
     // Avatar output.
-    'avatars',
+    'avatars.php',
     // Home and archive widget category output.
-    'category-widget-output',
+    'category-widget-output.php',
     // Single post social sharing links.
-    'social-share',
+    'social-share.php',
     // Categorically-related posts.
-    'single-post-related-posts',
+    'single-post-related-posts.php',
     // Localized date.
-    'date-strftime',
+    'date-strftime.php',
     // Favicon management.
-    'favicon-meta',
+    'favicon-meta.php',
     // Theme image sizes.
-    'theme-image-sizes'
-
+    'theme-image-sizes.php'
 );
 
 foreach ($included_scripts as $script) {
-    include_once(THEME_INCLUDES . $script . '.php');
+    include_once(THEME_INCLUDES . $script);
 }
 
 /**
@@ -161,51 +164,6 @@ $included_admin_scripts = array(
 foreach($included_admin_scripts as $script) {
     include_once(THEME_ADMIN  . $script . '.php');
 }
-
-/** 
- * Widgets
- * -----------------------------------------------------------------------------
- */
-
-$included_widgets = array(
-    // Link to selected author profiles.
-    'home-authors',
-    // Front page featured and sticky article widget.
-    'home-featured-articles',
-    // Front page category widgets.
-    'home-category',
-    // Sidebar featured category.
-    'sidebar-featured-category',
-    // Popular posts, sorted by internally-tracked view count.
-    'sidebar-popular-viewcount',
-    // Recent posts in $foo category.
-    'sidebar-recent-posts',
-);
-
-foreach($included_widgets as $widget) {
-    include_once(THEME_WIDGETS  . $widget . '.php');
-}
-
-$widget_defaults = array(
-    'before_widget' => '<div id="%1$s" class="%2$s">',
-    'after_widget' => '</div>',
-    'before_title' => '<h3 class="widget-title">',
-    'after_title' => '</h3>'
-);
-
-$widget_areas = array(
-    array(
-        'name' => __('Front Page', TTD),
-        'description' => __('Front page widget area.', TTD),
-        'id' => 'widgets-front-page'
-    ),
-    array(
-        'name' => __('Sidebar', TTD),
-        'description' => __('Sidebar widget area.', TTD),
-        'id' => 'widgets-sidebar',
-        'before_title' => '<h3 class="widget-title widget-subtitle">'
-    )
-);
 
 /** 
  * Social Media Accounts
@@ -230,188 +188,6 @@ $sections = new Section_Manager(array(
     'categories' => array(191, 154, 155, 156, 157, 159, 187, 158), 
     'home' => 191
 ));
-
-/** 
- * Fonts, Styles and Scripts
- * -----------------------------------------------------------------------------
- */
-
-$google_fonts = array(
-    /* All Google Fonts to be loaded.
-     * Use format 'Open Sans:300', 'Droid Sans:400'
-     * etc. */
-     'Open Sans:400'
-);
-
-$theme_javascript = array(
-    'google-analytics' => THEME_JS . 'analytics.js',
-    'functions' => THEME_JS . 'functions.js'
-);
-
-$theme_admin_javascript = array(
-    'post-meta-box' => array('post.php', THEME_JS . 'meta-box.js'),
-    // 'new-meta-box' => array('post.php', THEME_JS . 'new-meta-box.js')
-);
-
-$conditional_scripts = array(
-    'html5-shiv' => array(
-        NODE_SCRIPTS . 'html5shiv/dist/html5shiv.min.js',
-        'lte IE 9'
-    )
-);
-
-$conditional_styles = array(
-    'ie-fallback' => array(
-        THEME_CSS . 'ie.css',
-        'lte IE 9'
-    )
-);
-
-$theme_styles = array(
-    // Compressed, compiled theme CSS.
-    'main-style' => THEME_CSS . 'main.css',
-    // WordPress style.css. Not really used.
-    'wordpress-style' => THEME_URL . '/style.css',
-);
-
-/**
- * Parse Google Fonts from Array
- * -----------------------------------------------------------------------------
- * @param   array   $fonts          Array of fonts to be used.
- * @return  string  $google_url     Parsed URL of fonts to be enqueued.
- */
-
-function google_font_url($fonts) {
-    global $google_fonts;
-    $google_url = array('//fonts.googleapis.com/css?family=');
-
-    foreach ($fonts as $key => $value) {
-        $google_url[] = str_replace(' ', '+', $value);
-
-        if ($key < sizeof($google_fonts) - 1) {
-            $google_url[] = '|';
-        }
-    }
-
-    return implode('', $google_url);
-}
-
-/** 
- * Load Theme JavaScript
- * -----------------------------------------------------------------------------
- */
-
-function tuairisc_scripts() {
-    global $theme_javascript, $conditional_scripts, $wp_scripts;
-
-    foreach ($theme_javascript as $name => $script) {
-        if (!WP_DEBUG) {
-            // Instead load minified version if you aren't debugging.
-            $script = str_replace(THEME_JS, THEME_JS . 'min/', $script);
-            $script = str_replace('.js', '.min.js', $script);
-        }
-
-        wp_enqueue_script($name, $script, array('jquery'), THEME_VER, true);
-    }
-
-    foreach ($conditional_scripts as $name => $script) {
-        $path = $script[0];
-        $condition = $script[1];
-
-        wp_enqueue_script($name, $path, array(), THEME_VER, false);
-        wp_script_add_data($name, 'conditional', $condition);
-    }
-}
-
-/**
- * Load Theme Custom Styles
- * -----------------------------------------------------------------------------
- * Load all theme CSS.
- */
-
-function tuairisc_styles() {
-    global $theme_styles, $google_fonts, $conditional_styles;
-
-    foreach ($theme_styles as $name => $style) {
-        wp_enqueue_style($name, $style, array(), THEME_VER);
-    }
-
-    if (!empty($google_fonts)) {
-        wp_register_style('google-fonts', google_font_url($google_fonts));
-        wp_enqueue_style('google-fonts');
-    }
-
-    foreach ($conditional_styles as $name => $style) {
-        $path = $style[0];
-        $condition = $style[1];
-
-        wp_enqueue_style($name, $path, array(), THEME_VER);
-        wp_style_add_data($name, 'conditional', $condition);
-    }
-}
-
-/**
- * Load Site JS in Footer
- * -----------------------------------------------------------------------------
- * @link http://www.kevinleary.net/move-javascript-bottom-wordpress/
- */
-
-function clean_header() {
-    if (!is_admin()) {
-        remove_action('wp_head', 'wp_print_scripts');
-        remove_action('wp_head', 'wp_print_head_scripts', 9);
-        remove_action('wp_head', 'wp_enqueue_scripts', 1);
-    }
-}
-
-/**
- * Load Administration Stylesheet
- * -----------------------------------------------------------------------------
- * Custom styling for theme elements on the admin side.
- * 
- * @param   string      $hook       The current admin page.
- */
-
-function admin_styles($hook) { 
-    wp_enqueue_style('tuairisc-admin', THEME_CSS . 'admin.css');
-}
-
-/**
- * Load Administration Scripts
- * -----------------------------------------------------------------------------
- * Custom styling for theme elements on the admin side.
- * 
- * @param   string      $hook       The current admin page.
- */
-
-function admin_scripts($hook) { 
-    global $theme_admin_javascript;
-
-    foreach ($theme_admin_javascript as $name => $script) {
-        if ($script[0] && $hook !== $script[0]) {
-            continue;
-        }
-        
-        wp_enqueue_script($name, $script[1], array('jquery'), THEME_VER, true);
-    }
-}
-
-/**
- * Register Widget Areas
- * -----------------------------------------------------------------------------
- * register_sidebars() doesn't give me enough options to name and identify 
- * several unique widget areas, but either do I want a half dozen 
- * register_sidebar() calls littering the function. They all share the same
- * defaults, so...
- */
-
-function register_widget_areas() {
-    global $widget_areas, $widget_defaults;
-
-    foreach ($widget_areas as $widget) {
-        register_sidebar(wp_parse_args($widget, $widget_defaults));
-    }
-}
 
 /**
  * Register Menu Areas
@@ -627,16 +403,6 @@ function wrap_comment_fields_after() {
  * -----------------------------------------------------------------------------
  */
 
-if (!isset($content_width)) {
-    $content_width = 1140;
-}
-
-// Enqueue all scripts and stylesheets.
-add_action('wp_enqueue_scripts', 'tuairisc_styles');
-add_action('wp_enqueue_scripts', 'tuairisc_scripts');
-add_action('admin_enqueue_scripts', 'admin_styles');
-add_action('admin_enqueue_scripts', 'admin_scripts');
-
 // Remove the "Generate by WordPress x.y.x" tag from the header.
 remove_action('wp_head', 'wp_generator');
 
@@ -650,12 +416,6 @@ add_action('wp_head', 'dns_prefetch');
 // Wrap comment form fields in <div></div> tags.
 add_action('comment_form_before_fields', 'wrap_comment_fields_before');
 add_action('comment_form_after_fields', 'wrap_comment_fields_after');
-
-// Register widget areas.
-add_action('widgets_init', 'register_widget_areas');
-
-// Load all site JS in footer.
-add_action('wp_enqueue_scripts', 'clean_header');
 
 add_action('init', 'register_menus');
 
@@ -679,6 +439,10 @@ add_filter('the_content', 'increment_view_counter');
  * Theme Supports
  * -----------------------------------------------------------------------------
  */
+
+if (!isset($content_width)) {
+    $content_width = 1140;
+}
 
 /* Critical part of the theme; every post has a crafted exerpt and thumbnail
  * image. */
