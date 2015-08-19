@@ -45,9 +45,11 @@ $trim = array(
             <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>
             <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
-        <header>
-            <h5 class="title"><?php the_title(); ?></h5>
-            <span class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span>
-        </header>
+        <div class="post-content">
+            <header>
+                <h5 class="title"><?php the_title(); ?></h5>
+                <span class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span>
+            </header>
+        </div>
     </a>
 </article>
