@@ -37,7 +37,7 @@ global $sections;
             get_sidebar(); 
         } ?>
         <?php if (!is_404()) : ?>
-            <div class="tuairisc-strip trim-absolute trim-bottom"></div>
+            <?php // <div class="tuairisc-strip trim-absolute trim-bottom"></div> ?>
         <?php endif; ?>
     </div><?php // End #main ?>
     <?php if (function_exists('adrotate_group') && !is_404()) {
