@@ -192,6 +192,7 @@ class tuairisc_sidebar_category extends WP_Widget {
                     <?php
                     if ($instance['show_image'] && $index === 0) {
                         the_post_thumbnail('tc_sidebar_category');
+                        printf('<br />');
                     }
 
                     the_title();
