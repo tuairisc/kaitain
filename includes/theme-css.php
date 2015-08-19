@@ -30,8 +30,11 @@
 
 $google_fonts = array(
     /* All Google Fonts to be loaded.
-     * Use format 'Open Sans:300', 'Droid Sans:400'
-     * etc. */
+     * Use format:
+     * 
+     *      'Open Sans:300',
+     *      'Droid Sans:400'
+     */
      'Open Sans:400'
 );
 
@@ -44,7 +47,7 @@ $theme_styles = array(
     // Compressed, compiled theme CSS.
     'main-style' => THEME_CSS . 'main.css',
     // WordPress style.css. Not really used.
-    'wordpress-style' => THEME_URL . '/style.css',
+    // 'wordpress-style' => THEME_URL . '/style.css',
 );
 
 /**
