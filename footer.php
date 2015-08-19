@@ -36,13 +36,13 @@ global $sections;
         <?php if (!is_404()) {
             get_sidebar(); 
         } ?>
-        <?php if (!is_404()) : ?>
-            <?php // <div class="tuairisc-strip trim-absolute trim-bottom"></div> ?>
-        <?php endif; ?>
     </div><?php // End #main ?>
-    <?php if (function_exists('adrotate_group') && !is_404()) {
-        printf(adrotate_group(2));
-    } ?>
+    <div class="advert-block">
+        <div class="tuairisc-strip trim-absolute trim-top"></div>
+        <?php if (function_exists('adrotate_group') && !is_404()) {
+            printf(adrotate_group(2));
+        } ?>
+    </div>
     <?php if (!is_404()) : ?>
         <div id="footer">
             <div class="menus">

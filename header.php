@@ -68,11 +68,11 @@ global $sections;
             </nav>
         </div>
     <?php endif; ?>
-    <?php if (function_exists('adrotate_group') && !is_404()) {
-        printf('%s', adrotate_group(1));
-    } ?>
+    <div class="advert-block">
+        <?php if (function_exists('adrotate_group') && !is_404()) {
+            printf(adrotate_group(1));
+        } ?>
+        <div class="tuairisc-strip trim-absolute trim-bottom"></div>
+    </div>
     <div id="main" role="main">
-        <?php if (!is_404()) : ?>
-            <?php // <div class="tuairisc-strip trim-absolute trim-top"></div> ?>
-        <?php endif; ?>
         <div id="content">
