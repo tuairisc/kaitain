@@ -71,11 +71,10 @@ function get_avatar_url_only($avatar, $id_or_email, $size, $default, $alt) {
  */
 
 function get_avatar_background($id_or_email, $size = 'large', $classes = null) {
-    if (!($author = get_user_by('id', $id_or_email))) {
+    if (!($avatar = get_avatar($id_or_email, $size))) {
         return false;
     }
 
-    $avatar = get_avatar($id_or_email, $size);
     $background = sprintf('background-image: url(%s);', $avatar);
 
     if ($classes) {
@@ -86,11 +85,9 @@ function get_avatar_background($id_or_email, $size = 'large', $classes = null) {
         $classes = sprintf(' class="%s"', $classes);
     }
 
-    $html = sprintf('<div%s style="%s"><a title="%s" href="%s"></a></div>',
+    $html = sprintf('<div%s style="%s"></div>',
         $classes,
-        $background,
-        $author->display_name,
-        get_author_posts_url($author->ID)
+        $background
     );
 
     return $html;

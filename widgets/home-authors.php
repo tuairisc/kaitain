@@ -165,17 +165,21 @@ class tuairisc_authors extends WP_Widget {
         // Wrapping interior container.
         printf('<div class="%s">', implode(' ', $classes['div']));
 
-
         foreach ($author_query as $author) {
-            avatar_background($author->ID, 'tc_home_avatar', 'author-photo');
+            printf('<div class="tuairisc-author" id="%s">',
+                'author-' . $author->user_nicename
+            );
 
-            printf('<a class="%s" title="%s" href="%s" id="%s">',
+            printf('<a class="%s" title="%s" href="%s">',
                 // Wrapping anchor for avatar and author name.
                 implode(' ', $classes['anchor']),
                 $author->display_name,
                 $author->ID,
-                $author->user_nicename
+                $author->display_name
             ); 
+
+            // Avatar image.
+            avatar_background($author->ID, 'tc_home_avatar', 'author-photo');
 
             printf('<h6 class="%s">%s</h6>',
                 // Author name.
@@ -184,6 +188,7 @@ class tuairisc_authors extends WP_Widget {
             );
 
             printf('</a>');
+            printf('</div>');
         }
 
         printf('</div>');

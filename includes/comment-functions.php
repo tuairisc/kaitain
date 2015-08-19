@@ -41,12 +41,9 @@ function theme_comments($comment, $args, $depth) {
     ?>
 
     <li <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
-        <?php printf('<div class="%s" style="%s"><a title="%s" href="%s"></a></div>',
-            'photo comment-photo',
-            sprintf('background-image: url(%s);', get_avatar($comment)),
-            get_comment_author(),
-            get_comment_author_url()
-        ); ?>
+        <div class="avatar">
+            <?php avatar_background($comment, 'tc_post_avatar', 'author-photo'); ?>
+        </div>
         <div class="comment-body">
             <header>
                 <p class="comment-meta">
