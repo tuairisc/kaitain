@@ -29,5 +29,6 @@
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/bhalash/tuairisc.ie/issues"
-  }
+  },
+  "devDependencies": {}
 }
