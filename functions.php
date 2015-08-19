@@ -124,6 +124,8 @@ $included_scripts = array(
     'theme-css.php',
     // Theme JavaScript.
     'theme-js.php',
+    // All comment functions.
+    'comment-functions.php',
     // Featured and sticky posts.
     'featured-sticky-posts.php',
     // Site sections.
@@ -385,20 +387,6 @@ function clean_search_url() {
 }
 
 /**
- * Wrap Comment Fields in Elements
- * -----------------------------------------------------------------------------
- * @link https://goo.gl/m9kv1z
- */
-
-function wrap_comment_fields_before() {
-    printf('<div class="commentform-inputs">');
-}
-
-function wrap_comment_fields_after() {
-    printf('</div>');
-}
-
-/**
  * Filters, Options and Actions
  * -----------------------------------------------------------------------------
  */
@@ -413,10 +401,7 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 // Set prefetch domain for media.
 add_action('wp_head', 'dns_prefetch');
 
-// Wrap comment form fields in <div></div> tags.
-add_action('comment_form_before_fields', 'wrap_comment_fields_before');
-add_action('comment_form_after_fields', 'wrap_comment_fields_after');
-
+// Init theme menus.
 add_action('init', 'register_menus');
 
 /**
