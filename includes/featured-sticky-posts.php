@@ -141,6 +141,7 @@ function is_featured_post($post) {
  */
 
 function update_featured_posts($post = null, $make_featured = true) {
+    global $fe_keys;
     $featured = get_featured_list(true);
     $is_featured_post = is_featured_post($post);
 
