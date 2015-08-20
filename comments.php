@@ -46,6 +46,7 @@ if (comments_open()) {
             'callback' => 'theme_comments',
             'avatar_size' => 0,
             'format' => 'html5',
+            'type' =>'comment',
             'style' => 'ul'
         ));
 
