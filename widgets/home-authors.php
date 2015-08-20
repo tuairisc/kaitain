@@ -130,8 +130,6 @@ class tuairisc_authors extends WP_Widget {
             printf('%s', $defaults['before_widget']);
         }
 
-        $avatar = get_avatar_background($author, 'tc_home_author');
-
         $classes = array(
             // The HTML was a gorram mess so I separated classes.
             'anchor' => array(
