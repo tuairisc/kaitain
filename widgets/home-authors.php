@@ -71,7 +71,11 @@ class tuairisc_authors extends WP_Widget {
                 <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Title:', TTD); ?></label>
             </li>
             <li>
-                <?php printf('<input id="%s" name="%s" value="%s" type="text" />', $this->get_field_id('widget_title'), $this->get_field_name('widget_title'), $instance['widget_title']); ?>
+                <?php printf('<input id="%s" name="%s" value="%s" type="text" />',
+                    $this->get_field_id('widget_title'),
+                    $this->get_field_name('widget_title'),
+                    $instance['widget_title']);
+                ?>
             </li>
 
             <?php for ($i = 0; $i < 4;  $i++) :
@@ -113,7 +117,11 @@ class tuairisc_authors extends WP_Widget {
     function update($new_defaults, $old_defaults) {
         $defaults = array();
 
-        $defaults['widget_title'] = filter_var($new_defaults['widget_title'], FILTER_SANITIZE_STRIPPED);
+        $defaults['widget_title'] = filter_var(
+            $new_defaults['widget_title'],
+            FILTER_SANITIZE_STRIPPED
+        );
+
         $defaults['author_list'] = $new_defaults['author_list'];
 
         return $defaults;
@@ -174,7 +182,7 @@ class tuairisc_authors extends WP_Widget {
                 // Wrapping anchor for avatar and author name.
                 implode(' ', $classes['anchor']),
                 $author->display_name,
-                $author->ID,
+                get_author_posts_url($author->ID),
                 $author->display_name
             ); 
 
