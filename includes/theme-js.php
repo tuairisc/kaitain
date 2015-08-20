@@ -42,6 +42,14 @@ $conditional_scripts = array(
     'html5-shiv' => array(
         NODE_SCRIPTS . 'html5shiv/dist/html5shiv.min.js',
         'lte IE 9'
+    ),
+    'jquery-placeholder' => array(
+        NODE_SCRIPTS . 'jquery-placeholder/jquery.placeholder.min.js',
+        'lte IE 9'
+    ),
+    'functions-ie' => array(
+        THEME_JS . 'functions-ie.js',
+        'lte IE 9'
     )
 );
 
@@ -53,6 +61,14 @@ $conditional_scripts = array(
 function tuairisc_scripts() {
     global $theme_javascript, $conditional_scripts, $wp_scripts;
 
+    foreach ($conditional_scripts as $name => $script) {
+        $path = $script[0];
+        $condition = $script[1];
+
+        wp_enqueue_script($name, $path, array(), THEME_VER, false);
+        wp_script_add_data($name, 'conditional', $condition);
+    }
+
     foreach ($theme_javascript as $name => $script) {
         if (!WP_DEBUG) {
             // Instead load minified version if you aren't debugging.
@@ -61,14 +77,6 @@ function tuairisc_scripts() {
         }
 
         wp_enqueue_script($name, $script, array('jquery'), THEME_VER, true);
-    }
-
-    foreach ($conditional_scripts as $name => $script) {
-        $path = $script[0];
-        $condition = $script[1];
-
-        wp_enqueue_script($name, $path, array(), THEME_VER, false);
-        wp_script_add_data($name, 'conditional', $condition);
     }
 }
 
