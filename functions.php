@@ -14,12 +14,11 @@
  */
 
 /**
- * Theme Version and Text Domain
+ * Theme Version
  * -----------------------------------------------------------------------------
  */
 
-define('THEME_VER', 1.9);
-define('TTD', 'tuairisc');
+define('THEME_VER', 2.0);
 
 /**
  * Theme PHP File and URL Paths 
@@ -55,15 +54,6 @@ define('THEME_INCLUDES', THEME_PATH . '/includes/');
 define('THEME_ADMIN', THEME_PATH . '/admin/');
 define('THEME_WIDGETS', THEME_PATH . '/widgets/');
 define('THEME_PARTIALS', '/partials/');
-
-/**
- * Theme Partial Templates
- * -----------------------------------------------------------------------------
- */
-
-define('PARTIAL_ARTICLES', THEME_PARTIALS . 'articles/article');
-define('PARTIAL_ARCHIVES', THEME_PARTIALS . 'archives/archive');
-define('PARTIAL_PAGES', THEME_PARTIALS . 'pages/');
 
 /**
  * Image, CSS and JavaScript Assets
@@ -183,8 +173,8 @@ $sections = new Section_Manager(array(
 
 function register_menus() {
     register_nav_menus(array(
-        'top-external-social' => __('Site Social Presences', TTD),
-        'footer-site-links' => __('Footer Site Information Links', TTD)
+        'top-external-social' => __('Site Social Presences', 'tuairisc'),
+        'footer-site-links' => __('Footer Site Information Links', 'tuairisc')
     ));
 }
 
@@ -207,7 +197,7 @@ function theme_title($title, $separator, $side) {
     }
 
     if (is_404()) {
-        $title = _e('Earráid 404', TTD);
+        $title = _e('Earráid 404', 'tuairisc');
 
         if ($separator) {
             if ($side === 'left') {
@@ -227,10 +217,23 @@ function theme_title($title, $separator, $side) {
 
     if ($paged >= 2 || $page >= 2) {
         $title = "$title $separator ";
-        $title .= sprintf(__('Leathanach %s', TTD), max($paged, $page));
+        $title .= sprintf(__('Leathanach %s', 'tuairisc'), max($paged, $page));
     }
 
     return $title;
+}
+
+/**
+ * Partial Wrapper
+ * -----------------------------------------------------------------------------
+ * Shorthand wrapper for get_template_part to reduce the verbosity of calls.
+ * 
+ * @param   string      $name           Partial name.
+ * @param   strgin      $slug           Partial slug.
+ */
+
+function partial($name, $slug = '') {
+    get_template_part(THEME_PARTIALS . $name, $slug);
 }
 
 /**
@@ -259,7 +262,7 @@ function archive_page_count($echo = false, $page_num = null, $total = null) {
 
     $posts_per_page = get_option('posts_per_page');
     $total_pages = ceil($total / $posts_per_page);
-    $page_count = sprintf(__('%s / %s', TTD), $page_num, $total_pages);
+    $page_count = sprintf(__('%s / %s', 'tuairisc'), $page_num, $total_pages);
 
     if (!$echo) {
         return $page_count;
@@ -355,21 +358,6 @@ function get_view_count($post = null) {
 function increment_view_counter($content) {
     set_view_count();
     return $content;
-}
-
-/**
- * Rewrite Search URL Cleanly
- * -----------------------------------------------------------------------------
- * Cleanly rewrite search URL from ?s=topic to /search/topic
- *
- * @link    http://wpengineer.com/2258/change-the-search-url-of-wordpress/
- */
-
-function clean_search_url() {
-    if (is_search() && ! empty($_GET['s'])) {
-        wp_redirect(home_url('/search/') . urlencode(get_query_var('s')));
-        exit();
-    }
 }
 
 /**
