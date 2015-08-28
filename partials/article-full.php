@@ -34,7 +34,7 @@ $hidden_users = get_option('tuairisc_hidden_users');
                     <br />
                     <span class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span>
                     <br />
-                    <span><?php edit_post_link(__('edit post', TTD), '', ''); ?></span>
+                    <span><?php edit_post_link(__('edit post', 'tuairisc'), '', ''); ?></span>
                 </div>
             </div>
         <?php endif; ?>
@@ -43,6 +43,6 @@ $hidden_users = get_option('tuairisc_hidden_users');
         get_share_links(); 
     } ?>
     <div class="post-content">
-        <?php the_content(__('Read the rest of this post &raquo;', TTD)); ?>
+        <?php the_content(__('Read the rest of this post &raquo;', 'tuairisc')); ?>
     </div>
 </article>

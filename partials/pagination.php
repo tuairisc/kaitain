@@ -23,7 +23,7 @@ $previous = $paged - 1;
             <?php if (is_single()) {
                 next_post_link('%link', '&larr; %title', false);
             } else {
-                previous_posts_link(__('&larr; Siar', TTD));
+                previous_posts_link(__('&larr; Siar', 'tuairisc'));
             } ?>
         </h3>
     </div>
@@ -37,7 +37,7 @@ $previous = $paged - 1;
             <?php if (is_single()) {
                 previous_post_link('%link', '%title &rarr;', false);
             } else {
-                next_posts_link(__('Lean ar Aghaidh &rarr;', TTD)); 
+                next_posts_link(__('Lean ar Aghaidh &rarr;', 'tuairisc')); 
             } ?>
         </h3>
     </div>
