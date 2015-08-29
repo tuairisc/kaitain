@@ -13,12 +13,29 @@
  * @link       http://www.tuairisc.ie
  */
 
+global $wp_query;
+
+$query = get_search_query();
+$action = esc_url(home_url('/'));
+$total = $wp_query->found_posts;
+
+$result = 'result';
+$result .= $total > 1 ? 's' : '';
+
 ?>
 
-<form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-    <div>
-        <label class="screen-reader-text" for="s"><?php _x( 'Search for:', 'label' ); ?></label>
-        <input type="text" value="<?php echo get_search_query(); ?>" name="s" id="s" />
-        <input type="submit" id="searchsubmit" value="<?php echo esc_attr_x( 'Search', 'submit button' ); ?>" />
-    </div>
+<form role="search" class="searchform vspace-half" id="searchform" method="get" action="<?php printf($action); ?>" autocomplete="off">
+    <fieldset>
+        <input class="searchform-input" name="s" placeholder="<?php _e('search', 'tuairisc'); ?>" type="text" required="required" value="<?php printf($query); ?>">
+    </fieldset>
 </form>
+<div class="clearfix search-results-meta">
+    <span class="total meta left-float"><?php printf('%d %s', $total, $result); ?></span>
+    <span class="total meta right-float">
+        Sort by: 
+
+        <a href="<?php search_url('asc'); ?>"><?php _e('oldest', 'tuairisc'); ?></a> |
+        <a href="<?php search_url('desc'); ?>"><?php _e('newest', 'tuairisc'); ?></a>
+    </span>
+</div>
+<hr>
