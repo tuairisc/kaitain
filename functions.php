@@ -117,8 +117,6 @@ $included_scripts = array(
     'single-post-related-posts.php',
     // Localized date.
     'date-strftime.php',
-    // Favicon management.
-    'favicon-meta.php',
     // Theme image sizes.
     'theme-image-sizes.php'
 );
@@ -221,6 +219,60 @@ function theme_title($title, $separator, $side) {
     }
 
     return $title;
+}
+
+/**
+ * Get Total Number of Pages in Query
+ * -----------------------------------------------------------------------------
+ * @return  int      Total number of pages in current query, rounded up.
+ */
+
+function query_page_total() {
+    global $wp_query;
+    
+    return ceil($wp_query->found_posts / get_option('posts_per_page'));
+}
+
+/**
+ * See if Query Has Pages
+ * -----------------------------------------------------------------------------
+ * @return bool     Query has pages, true/false.
+ */
+
+function query_has_pages() {
+    return (query_page_total() > 1);
+}
+
+/**
+ * Generate Ascending and Descending Search Link
+ * -----------------------------------------------------------------------------
+ * @param   string      $order          'asc' or 'desc'
+ * @param   bool        $echo           Echo it, true/false.
+ * @return  string      $url            Generated URL.
+ */
+
+function search_url($order = null, $echo = true) {
+    if (!$order) {
+        $order = 'asc';
+    }
+
+    $query = get_search_query();
+    $url = array();
+
+    $url[] = esc_url(home_url('/')); 
+    $url[] = '?s=';
+    $url[] = esc_attr($query);
+    $url[] = '&sort=date';
+    $url[] = '&order=';
+    $url[] = $order;
+
+    $url = implode('', $url);
+
+    if (!$echo) {
+        return $url;
+    }
+
+    printf($url);
 }
 
 /**
