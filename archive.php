@@ -18,10 +18,10 @@ get_header();
 if (have_posts()) {
     while (have_posts()) {
         the_post();
-        get_template_part(PARTIAL_ARTICLES, 'archive');
+        partial('article', 'archive');
     }
 }
 
-get_template_part(THEME_PARTIALS . '/pagination');
+partial('pagination');
 get_footer();
 ?>

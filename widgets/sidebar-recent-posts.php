@@ -21,10 +21,10 @@ class tuairisc_recent extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('tuairisc_recent', TTD),
-            __('Tuairisc: Recent Posts', TTD),
+            __('tuairisc_recent', 'tuairisc'),
+            __('Tuairisc: Recent Posts', 'tuairisc'),
             array(
-                'description' => __('An ordered list of recent Tuairisc posts sorted by date. Choose from either one category, or all categories.', TTD),
+                'description' => __('An ordered list of recent Tuairisc posts sorted by date. Choose from either one category, or all categories.', 'tuairisc'),
             )
         );
     }
@@ -38,7 +38,7 @@ class tuairisc_recent extends WP_Widget {
     public function form($instance) {
         $defaults = array(
             // Widget defaults.
-            'widget_title' => __('Recent Posts', TTD),
+            'widget_title' => __('Recent Posts', 'tuairisc'),
             'max_posts' => 10,
             'category' => 0
         ); 
@@ -65,17 +65,17 @@ class tuairisc_recent extends WP_Widget {
         </script>
         <ul>
             <li>
-                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', TTD); ?></label>
+                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', 'tuairisc'); ?></label>
             </li>
             <li>
                 <input id="<?php printf($this->get_field_id('widget_title')); ?>" name="<?php printf($this->get_field_name('widget_title')); ?>" value="<?php printf($instance['widget_title']); ?>" type="text" class="widefat" />
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('category')); ?>"><?php _e('Category:', TTD); ?></label>
+                <label for="<?php printf($this->get_field_id('category')); ?>"><?php _e('Category:', 'tuairisc'); ?></label>
             </li>
             <li>
                 <select id="<?php printf($this->get_field_id('category')); ?>" name="<?php printf($this->get_field_name('category')); ?>">
-                    <option value="0"><?php _e('All', TTD); ?></option>
+                    <option value="0"><?php _e('All', 'tuairisc'); ?></option>
 
                     <?php foreach ($categories as $category) {
                         // Iterate through all caterories. 
@@ -84,7 +84,7 @@ class tuairisc_recent extends WP_Widget {
                 </select>
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', TTD); ?></label>
+                <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', 'tuairisc'); ?></label>
                 <select id="<?php printf($this->get_field_id('max_posts')); ?>" name="<?php printf($this->get_field_name('max_posts')); ?>">
                     <?php for ($i = 1; $i <= $defaults['max_posts']; $i++) {
                         printf('<option value="%d">%d</option>', $i, $i);
@@ -146,7 +146,7 @@ class tuairisc_recent extends WP_Widget {
 
         foreach ($recent as $post) {
             setup_postdata($post);
-            get_template_part(PARTIAL_ARTICLES, 'sidebar');
+            partial('article', 'sidebar');
         }
 
         printf('</div>');

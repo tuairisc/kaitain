@@ -47,30 +47,30 @@ if (comments_open()) {
     $fields = array(
         // Name, author and email fields.
         'author' => sprintf($input,
-            'author', 'author', 'author', __('D\'ainm*', TTD)
+            'author', 'author', 'author', __('D\'ainm*', 'tuairisc')
         ), 
         'email' => sprintf($input,
-            'email', 'email', 'email', __('Ríomhphoist*', TTD)
+            'email', 'email', 'email', __('Ríomhphoist*', 'tuairisc')
         ), 
         'url' => sprintf($input,
-            'url', 'url', 'url', __('Láithreán gréasáin', TTD)
+            'url', 'url', 'url', __('Láithreán gréasáin', 'tuairisc')
         )
     );
 
     $comment_notes = array(
         // We will not publish your email.
         'before' => sprintf('<p class="comment-notes">%s</p>',
-            __('Ní bheidh muid a fhoilsiú do sheoladh r-phoist!', TTD)
+            __('Ní bheidh muid a fhoilsiú do sheoladh r-phoist!', 'tuairisc')
         ),
         // Allowed tags.
         'after' => sprintf('<p class="form-allowed-tags">%s <code>%s</code></p>',
-            __('Is féidir leat úsáid a bhaint ', TTD),
+            __('Is féidir leat úsáid a bhaint ', 'tuairisc'),
             allowed_tags()
         )
     );
 
     $logged_in_as = sprintf('<p class="logged-in-as">%s</p>',
-        sprintf(__('Logáilte isteach mar <a href="%1$s">%2$s</a>. <a href="%3$s">Logáil amach?</a>', TTD), 
+        sprintf(__('Logáilte isteach mar <a href="%1$s">%2$s</a>. <a href="%3$s">Logáil amach?</a>', 'tuairisc'), 
            admin_url('profile.php'),
            $user_identity,
            wp_logout_url(apply_filters('the_permalink', get_permalink()))
@@ -80,14 +80,14 @@ if (comments_open()) {
     comment_form(array(
         'id_form' => 'commentform',
         'id_submit' => 'submit',
-        // 'title_reply' => __('Fág freagra:', TTD),
+        // 'title_reply' => __('Fág freagra:', 'tuairisc'),
         'title_reply' => '',
         'comment_field' => sprintf('<p id="textarea">%s</p>', $textarea),
         'comment_form_before_fields' => '<div class="comment-form">',
         'comment_form_after_fields' =>'</div>',
         'comment_notes_before' => $comment_notes['before'],
         'comment_notes_after' => $comment_notes['after'],
-        'label_submit' => __('Seol', TTD),
+        'label_submit' => __('Seol', 'tuairisc'),
         'logged_in_as' => $logged_in_as,
         'fields' => $fields,
     ));

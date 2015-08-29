@@ -17,6 +17,7 @@ $next = $paged + 1;
 $previous = $paged - 1;
 
 ?>
+
 <nav id="pagination">
     <div class="previous">
         <h3>
@@ -28,7 +29,7 @@ $previous = $paged - 1;
         </h3>
     </div>
     <div class="count">
-        <?php if (!is_single() && !is_home() || is_home() && $paged > 1) : ?>
+        <?php if (query_has_pages() && (!is_single() && !is_home() || is_home() && $paged > 1)) : ?>
             <h3><span><?php archive_page_count(true); ?></span></h3>
         <?php endif; ?>
     </div>

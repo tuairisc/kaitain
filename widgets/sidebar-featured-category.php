@@ -21,10 +21,10 @@ class tuairisc_sidebar_category extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('tuairisc_sidebar_category', TTD),
-            __('Tuairisc: Featured Sidebar Category', TTD),
+            __('tuairisc_sidebar_category', 'tuairisc'),
+            __('Tuairisc: Featured Sidebar Category', 'tuairisc'),
             array(
-                'description' => __('A featured sidebar category list with optional lead image display.', TTD),
+                'description' => __('A featured sidebar category list with optional lead image display.', 'tuairisc'),
             )
         );
     }
@@ -38,7 +38,7 @@ class tuairisc_sidebar_category extends WP_Widget {
     public function form($instance) {
         $defaults = array(
             // Widget defaults.
-            'widget_title' => __('Featued Category', TTD),
+            'widget_title' => __('Featued Category', 'tuairisc'),
             'max_posts' => 10,
             'show_image' => false,
             'use_section_trim' => false,
@@ -58,13 +58,13 @@ class tuairisc_sidebar_category extends WP_Widget {
 
         <ul>
             <li>
-                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', TTD); ?></label>
+                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', 'tuairisc'); ?></label>
             </li>
             <li>
                 <input id="<?php printf($this->get_field_id('widget_title')); ?>" name="<?php printf($this->get_field_name('widget_title')); ?>" value="<?php printf($instance['widget_title']); ?>" type="text" class="widefat" />
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('category')); ?>"><?php _e('Category:', TTD); ?></label>
+                <label for="<?php printf($this->get_field_id('category')); ?>"><?php _e('Category:', 'tuairisc'); ?></label>
             </li>
             <li>
                 <select id="<?php printf($this->get_field_id('category')); ?>" name="<?php printf($this->get_field_name('category')); ?>">
@@ -75,7 +75,7 @@ class tuairisc_sidebar_category extends WP_Widget {
                 </select>
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', TTD); ?></label>
+                <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', 'tuairisc'); ?></label>
             </li>
             <li>
                 <select id="<?php printf($this->get_field_id('max_posts')); ?>" name="<?php printf($this->get_field_name('max_posts')); ?>">
@@ -86,11 +86,11 @@ class tuairisc_sidebar_category extends WP_Widget {
             </li>
             <li>
                 <input id="<?php printf($this->get_field_id('show_image')); ?>" name="<?php printf($this->get_field_name('show_image')); ?>" type="checkbox"  />
-                <label for="<?php printf($this->get_field_id('show_image')); ?>"><?php _e('Show thumbnail image for lead post', TTD); ?></label>
+                <label for="<?php printf($this->get_field_id('show_image')); ?>"><?php _e('Show thumbnail image for lead post', 'tuairisc'); ?></label>
             </li>
             <li>
                 <input id="<?php printf($this->get_field_id('use_section_trim')); ?>" name="<?php printf($this->get_field_name('use_section_trim')); ?>" type="checkbox"  />
-                <label for="<?php printf($this->get_field_id('use_section_trim')); ?>"><?php _e('Use section trim colour instead of a grey background.', TTD); ?></label>
+                <label for="<?php printf($this->get_field_id('use_section_trim')); ?>"><?php _e('Use section trim colour instead of a grey background.', 'tuairisc'); ?></label>
             </li>
         </ul>
         <script>

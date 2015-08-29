@@ -37,13 +37,13 @@ $widget_defaults = array(
 
 $widget_areas = array(
     array(
-        'name' => __('Front Page', TTD),
-        'description' => __('Front page widget area.', TTD),
+        'name' => __('Front Page', 'tuairisc'),
+        'description' => __('Front page widget area.', 'tuairisc'),
         'id' => 'widgets-front-page'
     ),
     array(
-        'name' => __('Sidebar', TTD),
-        'description' => __('Sidebar widget area.', TTD),
+        'name' => __('Sidebar', 'tuairisc'),
+        'description' => __('Sidebar widget area.', 'tuairisc'),
         'id' => 'widgets-sidebar',
         'before_title' => '<h3 class="widget-title widget-subtitle">'
     )

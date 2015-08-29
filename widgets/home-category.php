@@ -21,10 +21,10 @@ class tuairisc_home_category extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('tuairisc_home_category', TTD),
-            __('Tuairisc: Home Page Category', TTD),
+            __('tuairisc_home_category', 'tuairisc'),
+            __('Tuairisc: Home Page Category', 'tuairisc'),
             array(
-                'description' => __('Selected category to featured on the website home page', TTD),
+                'description' => __('Selected category to featured on the website home page', 'tuairisc'),
             )
         );
     }
@@ -56,7 +56,7 @@ class tuairisc_home_category extends WP_Widget {
         <ul>
             <li>
                 <input type="checkbox" id="<?php printf($this->get_field_id('show_category_name')); ?>" name="<?php printf($this->get_field_name('show_category_name')); ?>" />
-                <label for="<?php printf($this->get_field_id('show_category_name')); ?>"><?php _e('Show category name', TTD); ?></label>
+                <label for="<?php printf($this->get_field_id('show_category_name')); ?>"><?php _e('Show category name', 'tuairisc'); ?></label>
             </li>
             <li>
             </li>

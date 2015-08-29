@@ -43,7 +43,7 @@ if ($page_number < 2) {
 
     foreach ($category_lead_post as $post) {
         setup_postdata($post);
-        get_template_part(PARTIAL_ARTICLES, 'archivelead');
+        partial('article', 'archive');
     }
 }
 
@@ -72,12 +72,12 @@ if (have_posts() && $page_number || empty($children)) {
         the_post();
 
         if (get_the_ID() !== $featured_post_id) {
-            get_template_part(PARTIAL_ARTICLES, 'archive');
+            partial('article', 'archivelead');
         }
     }
 }
 
-get_template_part(THEME_PARTIALS . '/pagination');
+partial('pagination');
 get_footer();
 
 ?>

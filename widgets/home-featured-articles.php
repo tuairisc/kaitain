@@ -21,10 +21,10 @@ class tuairisc_featured extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('tuairisc_featured', TTD),
-            __('Tuairisc: Featured and Sticky Posts', TTD),
+            __('tuairisc_featured', 'tuairisc'),
+            __('Tuairisc: Featured and Sticky Posts', 'tuairisc'),
             array(
-                'description' => __('The frontpiece of the home page: An ordered list of featured and sticky posts.', TTD),
+                'description' => __('The frontpiece of the home page: An ordered list of featured and sticky posts.', 'tuairisc'),
             )
         );
     }
@@ -50,10 +50,10 @@ class tuairisc_featured extends WP_Widget {
         <ul>
             <li>
                 <input id="<?php printf($this->get_field_id('show_sticky')); ?>" type="checkbox" name="<?php printf($this->get_field_name('show_sticky')); ?>" />
-                <label for="<?php printf($this->get_field_id('show_sticky')); ?>"><?php _e('Show Sticky Post', TTD); ?></label>
+                <label for="<?php printf($this->get_field_id('show_sticky')); ?>"><?php _e('Show Sticky Post', 'tuairisc'); ?></label>
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('count')); ?>"><?php _e('Number of posts to display: ', TTD); ?></label>
+                <label for="<?php printf($this->get_field_id('count')); ?>"><?php _e('Number of posts to display: ', 'tuairisc'); ?></label>
                 <select id="<?php printf($this->get_field_id('count')); ?>" name="<?php printf($this->get_field_name('count')); ?>">
                     <?php for ($i = 0; $i < $featured_rows_limit; $i += 4) {
                         printf('<option value="%d">%d</option>', $i, $i);
@@ -140,7 +140,7 @@ class tuairisc_featured extends WP_Widget {
 
                 if ($instance['show_sticky'] && $num === 0) {
                     // 1. Show lead post.
-                    get_template_part(PARTIAL_ARTICLES, 'archivelead');
+                    partial('article', 'archivelead');
                 }
 
                 if ($instance['count'] > 0 && $num % 4 === 1 && $num !== 0) {
@@ -150,7 +150,7 @@ class tuairisc_featured extends WP_Widget {
 
                 if (!$instance['show_sticky'] || $num > 0) {
                     // 2. Show row posts.
-                    get_template_part(PARTIAL_ARTICLES, 'archivesmall');
+                    partial('article', 'archivesmall');
                 }
 
                 if ($instance['count'] > 0 && $num % 4 === 0 && $num !== 0 

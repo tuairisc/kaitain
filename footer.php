@@ -42,7 +42,7 @@ global $sections;
                  <p id="copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Breo Teorantha</a>.</p>
              </div>
              <div id="foras">
-                <p><small><?php _e('Le Cabhair ó', TTD); ?></small></p>
+                <p><small><?php _e('Le Cabhair ó', 'tuairisc'); ?></small></p>
                 <p><a rel="nofollow" target="_blank" href="http://www.gaeilge.ie/"><img src="<?php printf(THEME_URL . '/assets/images/brands/foras-white.svg'); ?>" alt="Foras na Gaeilge" /></a></p>
              </div>
         </div>

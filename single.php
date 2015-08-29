@@ -18,20 +18,20 @@ get_header();
 if (have_posts()) {
     while (have_posts()) {
         the_post();
-        get_template_part(PARTIAL_ARTICLES, 'full');
+        partial('article', 'full');
 
         printf('<div class="%s">', 'related-articles-wrapper');
 
         printf('<h4 class="%s">%s</h4>',
             'subtitle related-title',
-            __('Léigh tuilleadh sa rannóg seo', TTD)
+            __('Léigh tuilleadh sa rannóg seo', 'tuairisc')
         );
 
         printf('<div class="%s">', 'related-articles');
 
         foreach (get_related() as $post) {
             setup_postdata($post);
-            get_template_part(PARTIAL_ARTICLES, 'related');
+            partial('article', 'related');
         }
 
         printf('</div>');
@@ -41,7 +41,7 @@ if (have_posts()) {
         comments_template();
     }
 } else {
-    get_template_part(PARTIAL_ARTICLES, 'missing');
+    partial('article', 'missing');
 }
 
 get_footer();

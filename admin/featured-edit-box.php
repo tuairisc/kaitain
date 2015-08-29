@@ -26,7 +26,7 @@ $featured_nonce = array(
 function tuairisc_featured_meta_box() {
     add_meta_box(
         'tuairisc_featured_meta',
-        __('Feature', TTD),
+        __('Feature', 'tuairisc'),
         'tuairisc_featured_box_content',
         'post'
     );
@@ -65,20 +65,20 @@ function tuairisc_featured_box_content($post) {
     </script>
 
     <p>
-        <?php _e('Featured posts are displayed on the website\'s homepage in the lead articles widget.', TTD); ?>
+        <?php _e('Featured posts are displayed on the website\'s homepage in the lead articles widget.', 'tuairisc'); ?>
     </p>
 
     <ul>
         <li>
             <input id="meta-tuairisc-featured" name="make_featured" type="checkbox">
-            <label for="meta-tuairisc-featured"><?php _e('Feature Post', TTD); ?></label>
+            <label for="meta-tuairisc-featured"><?php _e('Feature Post', 'tuairisc'); ?></label>
         </li>
         <li class="stickycheck">
             <input id="meta-tuairisc-sticky" name="make_sticky" type="checkbox">
-            <label for="meta-tuairisc-sticky"><?php _e('Sticky Post', TTD); ?></label>
+            <label for="meta-tuairisc-sticky"><?php _e('Sticky Post', 'tuairisc'); ?></label>
         </li>
         <li class="expiryinfo">
-            <label><?php _e('Until', TTD); ?></label>
+            <label><?php _e('Until', 'tuairisc'); ?></label>
             <input class="datepicker-hour" id="expiry-hour" name="hour" type="text" min="00" max="23" minlength="2" maxlength="2" size="2" value="00"> :
             <input class="datepicker-minute" id="expiry-minute" name="minute" type="text" min="00" max="59" minlength="2" maxlength="2" size="2" value="00">
         </li>
@@ -87,7 +87,7 @@ function tuairisc_featured_box_content($post) {
         </li>
     </ul>
     <p class="expiryinfo" id="meta-tuairisc-sticky-info">
-        <em><?php _e('A sticky post will remain in the top position on the front page until either the set time passes, or another post is set to replace it.', TTD); ?></em>
+        <em><?php _e('A sticky post will remain in the top position on the front page until either the set time passes, or another post is set to replace it.', 'tuairisc'); ?></em>
    </p>
 
     <?php

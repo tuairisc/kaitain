@@ -21,10 +21,10 @@ class tuairisc_authors extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('tuairisc_authors', TTD),
-            __('Tuairisc: Author Showcase', TTD),
+            __('tuairisc_authors', 'tuairisc'),
+            __('Tuairisc: Author Showcase', 'tuairisc'),
             array(
-                'description' => __('A display of four selected Tuairisc authors.', TTD),
+                'description' => __('A display of four selected Tuairisc authors.', 'tuairisc'),
             )
         );
     }
@@ -53,7 +53,7 @@ class tuairisc_authors extends WP_Widget {
 
         <ul>
             <li>
-                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Title:', TTD); ?></label>
+                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Title:', 'tuairisc'); ?></label>
             </li>
             <li>
                 <?php printf('<input id="%s" name="%s" value="%s" type="text" />',
@@ -68,7 +68,7 @@ class tuairisc_authors extends WP_Widget {
                 $name = $this->get_field_name('author_list') . '[]';
                 ?>
                 <li>
-                    <label for="<?php printf($id); ?>"><?php _e('Author #' . ($i + 1), TTD); ?></label>
+                    <label for="<?php printf($id); ?>"><?php _e('Author #' . ($i + 1), 'tuairisc'); ?></label>
                 </li>
                 <li>
                     <select class="author-widget-admin" id="<?php printf($id); ?>" name="<?php printf($name); ?>">

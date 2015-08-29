@@ -26,7 +26,7 @@ $notice_nonce = array(
 function tuairisc_notice_meta_box() {
     add_meta_box(
         'tuairisc_notice_meta',
-        __('Public Notice', TTD),
+        __('Public Notice', 'tuairisc'),
         'tuairisc_notice_box_content',
         'post'
     );
@@ -48,13 +48,13 @@ function tuairisc_notice_box_content($post, $args) {
     ?>
 
     <p>
-        <?php _e('This post is a public notice.', TTD); ?>
+        <?php _e('This post is a public notice.', 'tuairisc'); ?>
     </p>
 
     <ul>
         <li>
             <input id="meta-tuairisc-notice" name="make_notice" type="checkbox" <?php printf($is_notice); ?>>
-            <label for="meta-tuairisc-notice"><?php _e('Public Notice', TTD); ?></label>
+            <label for="meta-tuairisc-notice"><?php _e('Public Notice', 'tuairisc'); ?></label>
         </li>
     </ul>
 

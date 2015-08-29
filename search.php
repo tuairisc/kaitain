@@ -15,19 +15,19 @@
 
 global $wp_query;
 get_header();
-
 get_search_form();
-echo $wp_query->found_posts;
 
 if (have_posts()) {
     while (have_posts()) {
         the_post();
-        get_template_part(PARTIAL_ARTICLES, 'archive');
+        partial('article', 'archive');
     }
+} else {
+    partial('article', 'missing');
 }
 
 if ($wp_query->found_posts) {
-    get_template_part(THEME_PARTIALS . '/pagination');
+    partial('pagination');
 }
 
 get_footer();
