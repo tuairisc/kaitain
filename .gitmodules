@@ -11,6 +11,7 @@
     path = includes/social-meta
     url = git@github.com:bhalash/social-meta.git
     branch = master
+    ignore = dirty
 [submodule "includes/section-manager"]
 	path = includes/section-manager
 	url = git@github.com:bhalash/section-manager.git
