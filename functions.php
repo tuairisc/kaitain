@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Theme Functions
+ * Kaitain Functions 
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Tuairisc.ie
@@ -13,266 +13,219 @@
  * @link       http://www.tuairisc.ie
  */
 
+$GLOBALS['kaitain_version'] = 1.0;
+
 /**
- * Theme Version
+ * Sheepie Setup
  * -----------------------------------------------------------------------------
  */
 
-define('THEME_VER', 2.0);
+function kaitain_setup() {
+    add_option('tuairisc_hidden_users', array(
+        // Users whose avatar should not display in single posts.
+        1, 2, 37, 48
+    ), '', true);
 
-/**
- * Theme PHP File and URL Paths 
- * -----------------------------------------------------------------------------
- */
+    // Transient API timeout in minutes.
+    add_option('tuairisc_transient_timeout', 60 * 20, '', true);
+    // Flag post as job.
+    add_option('tuairisc_notice_post_key', 'is_tuairisc_notice', '', true);
+    // View counter meta key.
+    add_option('tuairisc_view_counter_key', 'tuairisc_view_counter', '', true);
 
-define('THEME_PATH', get_template_directory());
-define('THEME_URL', get_template_directory_uri());
+    // All theme PHP.
+    kaitain_includes(); 
 
-/**
- * Theme Asset File and URL Paths
- * -----------------------------------------------------------------------------
- */
+    kaitain_image_sizes();
 
-define('ASSETS_PATH', THEME_PATH . '/assets/');
-define('ASSETS_URL', THEME_URL . '/assets/');
+    // Header tag DNS prefetch.
+    kaitain_dns_prefetch();
 
-/**
- * Theme Includes and Partials Paths
- * -----------------------------------------------------------------------------
- * File paths are inconsistent between get_template_part() and include() or
- * require(). 
- * 
- * 1. With include(), / is the ultimate root on the filesystem, as provided by 
- *    get_template_directory();
- * 2. With get_template_parth(), / is the WordPress theme folder. 
- * 
- * Included files are entire standalone scripts, and partials are partials 
- * templates.
- */
+    // Theme widgets.
+    add_action('widgets_init', 'kaitain_widgets');
 
-define('THEME_INCLUDES', THEME_PATH . '/includes/');
-define('THEME_ADMIN', THEME_PATH . '/admin/');
-define('THEME_WIDGETS', THEME_PATH . '/widgets/');
-define('THEME_PARTIALS', '/partials/');
+    // Theme menus.
+    add_action('init', 'kaitain_menus');
 
-/**
- * Image, CSS and JavaScript Assets
- * -----------------------------------------------------------------------------
- */
+    // Them widget areas.
+    add_action('widgets_init', 'kaitain_widgets');
 
-define('NODE_SCRIPTS', THEME_URL . '/node_modules/');
-define('THEME_JS', ASSETS_URL . 'js/');
-define('THEME_IMAGES', ASSETS_URL . 'images/');
-define('THEME_CSS', ASSETS_URL . 'css/');
+    // Header DNS prefetch meta tags.
+    add_action('wp_head', 'kaitain_dns_prefetch');
 
-/**
- *  Other Variables
- * -----------------------------------------------------------------------------
- */
+    // Remove WordPress version from site header.
+    remove_action('wp_head', 'wp_generator');
 
-add_option('tuairisc_hidden_users', array(
-    // Users whose avatar should not display in single posts.
-    1, 2, 37, 48
-), '', true);
+    add_filter('wp_title', 'kaitain_title', 10, 2);
 
-// Transient API timeout in minutes.
-add_option('tuairisc_transient_timeout', 60 * 20, '', true);
-// Flag post as job.
-add_option('tuairisc_notice_post_key', 'is_tuairisc_notice', '', true);
-// View counter meta key.
-add_option('tuairisc_view_counter_key', 'tuairisc_view_counter', '', true);
+    // Remove the fuck out of emoji and emoticons.
+    remove_filter('the_content', 'convert_smilies');
+    remove_filter('the_excerpt', 'convert_smilies');
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    
+    add_theme_support('automatic-feed-links');
+    add_theme_support('post-thumbnails');
+    add_theme_support('title-tag');
 
-add_option('tc_dns_prefetch_domains', array(
-    // Media prefetch domains. Add any domains you feel are worthy.
-    preg_replace('/^www\./', '', $_SERVER['SERVER_NAME'])
-),'', true);
+    add_theme_support('html5', array(
+        'comment-list',
+        'comment-form',
+        'search-form',
+        'gallery',
+        'caption'
+    ));
+
+    // Content width.
+    $GLOBALS['content_width'] = 1140;
+
+    $tuairisc_social_meta = new Social_Meta(array(
+        'twitter' => '@tuairiscnuacht',
+        'facebook' => 'tuairisc.ie',
+        'fallback_image' => array(
+            'url' => THEME_URL . '/assets/images/tuairisc.jpg',
+            'path' => THEME_PATH . '/assets/images/tuairisc.jpg'
+        )
+    ));
+
+    $sections = new Section_Manager(array(
+        'categories' => array(191, 154, 155, 156, 157, 159, 187, 158), 
+        'home' => 191
+    ));
+}
+
+add_action('after_setup_theme', 'kaitain_setup');
 
 /**
  * Theme Includes
  * -----------------------------------------------------------------------------
  */
 
-$included_scripts = array(
-    // All theme widgets.
-    'theme-widgets.php',
-    // Theme CSS.
-    'theme-css.php',
-    // Theme JavaScript.
-    'theme-js.php',
-    // All comment functions.
-    'comment-functions.php',
-    // Featured and sticky posts.
-    'featured-sticky-posts.php',
-    // Site sections.
-    'section-manager/section-manager.php',
-    // Open Graph and Twitter Card <head> meta tag links.
-    'social-meta/social-meta.php',
-    // Avatar output.
-    'avatars.php',
-    // Home and archive widget category output.
-    'category-widget-output.php',
-    // Single post social sharing links.
-    'social-share.php',
-    // Categorically-related posts.
-    'single-post-related-posts.php',
-    // Localized date.
-    'date-strftime.php',
-    // Theme image sizes.
-    'theme-image-sizes.php'
-);
+function kaitain_includes() {
+    $included_scripts = array(
+        // Theme scripts
+        'kaitain-scripts.php',
+        // Avatar output.
+        'kaitain-avatars.php',
+        // Side-by-side category widget.
+        'category-widget/category-widget.php',
+        // All comment functions.
+        'comment-functions.php',
+        // Featured and sticky posts.
+        'featured-sticky-posts.php',
+        // Site sections.
+        'section-manager/section-manager.php',
+        // Open Graph and Twitter Card <head> meta tag links.
+        'social-meta/social-meta.php',
+        // Single post social sharing links.
+        'social-share.php',
+        // Categorically-related posts.
+        'single-post-related-posts.php',
+        // Localized date.
+        'date-strftime.php'
+    );
 
-foreach ($included_scripts as $script) {
-    include_once(THEME_INCLUDES . $script);
-}
+    $included_admin_scripts = array(
+        // Featured/Sticky post meta box.
+        'featured-edit-box.php',
+        'notice-edit-box.php',
+    );
 
-/**
- * Theme Admin Includes
- * -----------------------------------------------------------------------------
- */
-
-$included_admin_scripts = array(
-    // Featured/Sticky post meta box.
-    'featured-edit-box',
-    'notice-edit-box',
-);
-
-foreach($included_admin_scripts as $script) {
-    include_once(THEME_ADMIN  . $script . '.php');
-}
-
-/** 
- * Social Media Accounts
- * -----------------------------------------------------------------------------
- */
-
-$tuairisc_social_meta = new Social_Meta(array(
-    'twitter' => '@tuairiscnuacht',
-    'facebook' => 'tuairisc.ie',
-    'fallback_image' => array(
-        'url' => THEME_URL . '/assets/images/tuairisc.jpg',
-        'path' => THEME_PATH . '/assets/images/tuairisc.jpg'
-    )
-));
-
-/**
- * Site Sections
- * -----------------------------------------------------------------------------
- */
-
-$sections = new Section_Manager(array(
-    'categories' => array(191, 154, 155, 156, 157, 159, 187, 158), 
-    'home' => 191
-));
-
-/**
- * Register Menu Areas
- * -----------------------------------------------------------------------------
- */
-
-function register_menus() {
-    register_nav_menus(array(
-        'top-external-social' => __('Site Social Presences', 'tuairisc'),
-        'footer-site-links' => __('Footer Site Information Links', 'tuairisc')
-    ));
-}
-
-/**
- * Blog Title
- * -----------------------------------------------------------------------------
- * Stolen from Twenty Twelve. 
- * 
- * @param   string      $title          Title of whatever.
- * @param   string      $sep            Title separator.
- * @param   string      $side           Side on which separator will appear.
- * @return  string      $title          Modded title.
- */
-
-function theme_title($title, $separator, $side) {
-    global $paged, $page;
-
-    if (is_feed()) {
-        return $title;
-    }
-
-    if (is_404()) {
-        $title = _e('Earráid 404', 'tuairisc');
-
-        if ($separator) {
-            if ($side === 'left') {
-                $title = " $separator $title";
-            } else {
-                $title = "$title $separator ";
-            }
+    if (!is_admin()) {
+        foreach ($included_scripts as $script) {
+            include_once(get_template_directory() . '/includes/' . $script);
         }
     }
 
-    $title .= get_bloginfo('name');
-    $site_description = get_bloginfo('description', 'display');
-
-    if ($site_description && (is_home() || is_front_page())) {
-        $title = "$title $separator $site_description";
+    if (is_admin()) {
+        foreach($included_admin_scripts as $script) {
+            include_once(get_template_directory() . '/admin/' . $script);
+        }
     }
-
-    if ($paged >= 2 || $page >= 2) {
-        $title = "$title $separator ";
-        $title .= sprintf(__('Leathanach %s', 'tuairisc'), max($paged, $page));
-    }
-
-    return $title;
 }
 
 /**
- * Get Total Number of Pages in Query
+ * Kaitain Theme Widgets
  * -----------------------------------------------------------------------------
- * @return  int      Total number of pages in current query, rounded up.
+ * register_sidebars() doesn't give me enough options to name and identify 
+ * several unique widget areas, but either do I want a half dozen 
+ * register_sidebar() calls littering the function. They all share the same
+ * defaults, so...
  */
 
-function query_page_total() {
-    global $wp_query;
-    
-    return ceil($wp_query->found_posts / get_option('posts_per_page'));
-}
+function kaitain_widgets() {
+    $included_widgets = array(
+        // Link to selected author profiles.
+        'home-authors.php',
+        // Front page featured and sticky article widget.
+        'home-featured-articles.php',
+        // Front page category widgets.
+        'home-category.php',
+        // Sidebar featured category.
+        'sidebar-featured-category.php',
+        // Popular posts, sorted by internally-tracked view count.
+        'sidebar-popular-viewcount.php',
+        // Recent posts in $foo category.
+        'sidebar-recent-posts.php',
+    );
 
-/**
- * See if Query Has Pages
- * -----------------------------------------------------------------------------
- * @return bool     Query has pages, true/false.
- */
+    $widget_defaults = array(
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h3 class="widget-title">',
+        'after_title' => '</h3>'
+    );
 
-function query_has_pages() {
-    return (query_page_total() > 1);
-}
+    $widget_areas = array(
+        array(
+            'name' => __('Front Page', 'tuairisc'),
+            'description' => __('Front page widget area.', 'tuairisc'),
+            'id' => 'widgets-front-page'
+        ),
+        array(
+            'name' => __('Sidebar', 'tuairisc'),
+            'description' => __('Sidebar widget area.', 'tuairisc'),
+            'id' => 'widgets-sidebar',
+            'before_title' => '<h3 class="widget-title widget-subtitle">'
+        )
+    );
 
-/**
- * Generate Ascending and Descending Search Link
- * -----------------------------------------------------------------------------
- * @param   string      $order          'asc' or 'desc'
- * @param   bool        $echo           Echo it, true/false.
- * @return  string      $url            Generated URL.
- */
-
-function search_url($order = null, $echo = true) {
-    if (!$order) {
-        $order = 'asc';
+    foreach($included_widgets as $widget) {
+        include_once(get_template_directory() . '/widgets/' . $widget);
     }
 
-    $query = get_search_query();
-    $url = array();
-
-    $url[] = esc_url(home_url('/')); 
-    $url[] = '?s=';
-    $url[] = esc_attr($query);
-    $url[] = '&sort=date';
-    $url[] = '&order=';
-    $url[] = $order;
-
-    $url = implode('', $url);
-
-    if (!$echo) {
-        return $url;
+    foreach ($widget_areas as $widget) {
+        register_sidebar(wp_parse_args($widget, $widget_defaults));
     }
+}
 
-    printf($url);
+function kaitain_image_sizes() {
+    $crop = array('center', 'center');
+
+    // Home featured posts.
+    add_image_size('tc_home_feature_lead', 790, 385, $crop);
+    add_image_size('tc_home_feature_small', 190, 125, $crop);
+
+    // Home authot widget.
+    add_image_size('tc_home_author', 180, 150, $crop);
+
+    // Sidebar widget post.
+    add_image_size('tc_post_sidebar', 70, 45, $crop);
+
+    // Category archive.
+    add_image_size('tc_post_archive', 390, 170, $crop);
+
+    // Single post related post.
+    add_image_size('tc_post_related', 255, 170, $crop);
+
+    // Comment author and post author avatar.
+    add_image_size('tc_post_avatar', 70, 70, $crop);
+
+    // Sidebar featured category widget.
+    add_image_size('tc_sidebar_category', 250, 140, $crop);
+
+    // Main column category widget.
+    add_image_size('tc_home_category_lead', 390, 200, $crop);
+    add_image_size('tc_home_category_small', 110, 60, $crop);
 }
 
 /**
@@ -284,43 +237,8 @@ function search_url($order = null, $echo = true) {
  * @param   strgin      $slug           Partial slug.
  */
 
-function partial($name, $slug = '') {
-    get_template_part(THEME_PARTIALS . $name, $slug);
-}
-
-/**
- * Pagination Post Counter
- * -----------------------------------------------------------------------------
- * Fetch and display total post count in format of 'Page 1 of 10'.
- * This only counts published, public posts; drafts, pages, custom
- * post types and private posts are all excluded unless you specify
- * inclusion.
- * 
- * @param   int     $page_num       Current page in pagination.
- * @param   int     $total_results  Total results, for pagination.
- * @return  string                  The post counter.
- */
-
-function archive_page_count($echo = false, $page_num = null, $total = null) {
-    global $wp_query;
-
-    if (is_null($total)) {
-        $total = $wp_query->found_posts;
-    }
-
-    if (is_null($page_num)) {
-        $page_num = (get_query_var('paged')) ? get_query_var('paged') : 1;
-    }
-
-    $posts_per_page = get_option('posts_per_page');
-    $total_pages = ceil($total / $posts_per_page);
-    $page_count = sprintf(__('%s / %s', 'tuairisc'), $page_num, $total_pages);
-
-    if (!$echo) {
-        return $page_count;
-    }
-
-    printf($page_count);
+function kaitain_partial($name, $slug = '') {
+    get_template_part('/partials/' . $name, $slug);
 }
 
 /**
@@ -328,7 +246,7 @@ function archive_page_count($echo = false, $page_num = null, $total = null) {
  * -----------------------------------------------------------------------------
  */
 
-function pagination_classes() {
+function kaitain_pagination_classes() {
     return 'class="green-link-hover"';
 }
 
@@ -341,13 +259,14 @@ add_filter('previous_posts_link_attributes', 'pagination_classes');
  * Set prefetch for a given media domain. Useful if your site is image heavy.
  */
 
-function dns_prefetch() {
-    $domains = get_option('tc_dns_prefetch_domains');
+function kaitain_dns_prefetch() {
+    // Media prefetch domain: If null or empty, defaults to site domain.
+    $prefetch = array(
+        preg_replace('/^www\./','', $_SERVER['SERVER_NAME'])
+    );
     
-    if (!empty($domains)) {
-        foreach ($domains as $domain) {
-            printf('<link rel="dns-prefetch" href="//%s">', $domain);
-        }
+    foreach ($domains as $domain) {
+        printf('<link rel="dns-prefetch" href="//%s">', $domain);
     }
 }
 
@@ -361,7 +280,7 @@ function dns_prefetch() {
  * @param   int     $post_id        ID of the post.
  */
 
-function set_view_count() {
+function kaitain_set_view_count() {
     if (is_singular('post') && !is_user_logged_in()) {
         global $post;
 
@@ -379,7 +298,7 @@ function set_view_count() {
  * @return  int     $count          View count of the post.
  */
 
-function get_view_count($post = null) {
+function kaitain_get_view_count($post = null) {
     $post = get_post($post);
     
     if (!$post) {
@@ -407,64 +326,24 @@ function get_view_count($post = null) {
  * @return  string      $content        Post content.
  */
 
-function increment_view_counter($content) {
+function kaitain_increment_view_counter($content) {
     set_view_count();
     return $content;
 }
 
-/**
- * Filters, Options and Actions
- * -----------------------------------------------------------------------------
- */
-
-// Remove the "Generate by WordPress x.y.x" tag from the header.
-remove_action('wp_head', 'wp_generator');
-
-// Stop WordPress loading JavaScript that helps render emoji correctly.
-remove_action('wp_head', 'print_emoji_detection_script', 7);
-remove_action('wp_print_styles', 'print_emoji_styles');
-
-// Set prefetch domain for media.
-add_action('wp_head', 'dns_prefetch');
-
-// Init theme menus.
-add_action('init', 'register_menus');
-
-/**
- * Filters 
- * ----------------------------------------------------------------------------
- */
-
-// Wordpress repeatedly inserted emoticons. No more, ever.
-remove_filter('the_content', 'convert_smilies');
-remove_filter('the_excerpt', 'convert_smilies');
-
-// Title function.
-add_filter('wp_title', 'theme_title', 1, 3);
-
-/* This theme only calls content on the load of a full page article. It's a good
- * point at which to insert the post count increment. */
 add_filter('the_content', 'increment_view_counter');
 
-/**
- * Theme Supports
- * -----------------------------------------------------------------------------
- */
 
-if (!isset($content_width)) {
-    $content_width = 1140;
+
+
+
+
+
+function kaitain_menus() {
+    register_nav_menus(array(
+        'top-external-social' => __('Site Social Presences', 'tuairisc'),
+        'footer-site-links' => __('Footer Site Information Links', 'tuairisc')
+    ));
 }
-
-/* Critical part of the theme; every post has a crafted exerpt and thumbnail
- * image. */
-add_theme_support('post-thumbnails');
-
-// HTML5 support in theme.
-current_theme_supports('html5');
-current_theme_supports('menus');
-
-add_theme_support('html5', array(
-    'comment-list', 'comment-form', 'search-form', 'gallery', 'caption'
-));    
 
 ?>

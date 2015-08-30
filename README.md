@@ -1,6 +1,4 @@
-![The Tuairisc.ie logo](/assets/images/tuairisc.jpg?raw=true 'Tuairisc.ie')
-
-# Tuairisc.ie
+# Kaitain
 This repository is the WordPress theme for [Tuairisc.ie](http://www.tuairisc.ie).
 
 ## License
