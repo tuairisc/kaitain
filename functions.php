@@ -82,8 +82,8 @@ function kaitain_setup() {
         'twitter' => '@tuairiscnuacht',
         'facebook' => 'tuairisc.ie',
         'fallback_image' => array(
-            'url' => THEME_URL . '/assets/images/tuairisc.jpg',
-            'path' => THEME_PATH . '/assets/images/tuairisc.jpg'
+            'url' => get_template_directory() . '/assets/images/tuairisc.jpg',
+            'path' => get_template_directory_uri(). '/assets/images/tuairisc.jpg'
         )
     ));
 
@@ -101,7 +101,7 @@ add_action('after_setup_theme', 'kaitain_setup');
  */
 
 function kaitain_includes() {
-    $included_scripts = array(
+    $includes = array(
         // Theme scripts
         'kaitain-scripts.php',
         // Avatar output.
@@ -124,20 +124,18 @@ function kaitain_includes() {
         'date-strftime.php'
     );
 
-    $included_admin_scripts = array(
+    $admin_incldues = array(
         // Featured/Sticky post meta box.
         'featured-edit-box.php',
         'notice-edit-box.php',
     );
 
-    if (!is_admin()) {
-        foreach ($included_scripts as $script) {
-            include_once(get_template_directory() . '/includes/' . $script);
-        }
+    foreach ($includes as $script) {
+        include_once(get_template_directory() . '/includes/' . $script);
     }
 
     if (is_admin()) {
-        foreach($included_admin_scripts as $script) {
+        foreach($admin_includes as $script) {
             include_once(get_template_directory() . '/admin/' . $script);
         }
     }
