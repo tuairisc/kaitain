@@ -20,24 +20,26 @@ if (have_posts()) {
         the_post();
         partial('article', 'full');
 
-        printf('<div class="%s">', 'related-articles-wrapper');
+        if (function_exists('rp_get_related')) {
+            printf('<div class="%s">', 'related-articles-wrapper');
 
-        printf('<h4 class="%s">%s</h4>',
-            'subtitle related-title',
-            __('Léigh tuilleadh sa rannóg seo', 'tuairisc')
-        );
+            printf('<h4 class="%s">%s</h4>',
+                'subtitle related-title',
+                __('Léigh tuilleadh sa rannóg seo', 'tuairisc')
+            );
 
-        printf('<div class="%s">', 'related-articles');
+            printf('<div class="%s">', 'related-articles');
 
-        foreach (get_related() as $post) {
-            setup_postdata($post);
-            partial('article', 'related');
+            foreach (rp_get_related() as $post) {
+                setup_postdata($post);
+                partial('article', 'related');
+            }
+
+            printf('</div>');
+            printf('</div>');
+            wp_reset_postdata();
         }
 
-        printf('</div>');
-        printf('</div>');
-
-        wp_reset_postdata();
         comments_template();
     }
 } else {
