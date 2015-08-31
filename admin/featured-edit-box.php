@@ -13,11 +13,6 @@
  * @link       http://www.tuairisc.ie
  */
 
-$featured_nonce = array(
-    'action' => 'kaitain_featured_box',
-    'name' => 'kaitain_featured_box_nonce'
-);
-
 /**
  * Add Post Editor Meta Box
  * -----------------------------------------------------------------------------
@@ -41,12 +36,11 @@ add_action('add_meta_boxes', 'kaitain_featured_meta_box');
  */
 
 function kaitain_featured_box_content($post) {
-    global $featured_nonce;
-    wp_nonce_field($featured_nonce['action'], $featured_nonce['name']);
+    wp_nonce_field('kaitain_featured_box_data', 'kaitain_featured_box_nonce');
 
     $is_featured = kaitain_is_featured_post($post);
     $is_sticky = false;
-    $expiry = date('U');
+    $expiry = 0;
 
     if ($is_featured) {
         $is_sticky = kaitain_is_post_sticky($post);
@@ -64,6 +58,8 @@ function kaitain_featured_box_content($post) {
             sticky: <?php printf('%s', $is_sticky ? 'true' : 'false'); ?>,
             expiry: <?php printf('%u', $expiry); ?>
         };
+
+        console.log(kaitainMetaInfo);
     </script>
 
     <p>
@@ -112,15 +108,11 @@ function kaitain_featured_box_content($post) {
  */
 
 function kaitain_update_featured_meta_box($post_id) {
-    global $featured_nonce;
-    
-    if (!ctype_alnum($_POST[$featured_nonce['name']])
-    || !isset($_POST[$featured_nonce['name']])) {
-        // TODO FIXME
+    if (!isset($_POST['kaitain_featured_box_nonce'])) {
         return;
     }
 
-    if (!wp_verify_nonce($_POST[$featured_nonce['name']], $featured_nonce['action'])) {
+    if (!wp_verify_nonce($_POST['kaitain_featured_box_nonce'], 'kaitain_featured_box_data')) {
         return;
     }
     
@@ -134,8 +126,6 @@ function kaitain_update_featured_meta_box($post_id) {
 
     $make_featured = (isset($_POST['make_featured']) && $_POST['make_featured'] === 'on');
     $make_sticky = (isset($_POST['make_sticky']) && $_POST['make_sticky'] === 'on');
-
-    error_log(print_r($_POST, true));
 
     // Update meta.
     kaitain_update_featured_posts($post_id, $make_featured);
