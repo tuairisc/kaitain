@@ -88,7 +88,7 @@ function kaitain_includes() {
         // All comment functions.
         'kaitain-comments.php',
         // Featured and sticky posts.
-        'featured-sticky-posts.php',
+        'kaitain-featured-posts.php',
         // Single post social sharing links.
         'social-share.php',
         // Localized date.
