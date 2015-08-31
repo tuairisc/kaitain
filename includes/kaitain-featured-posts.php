@@ -18,7 +18,11 @@ $GLOBALS['kaitain_featured_keys'] = array(
     'featured' => 'kaitain_featured_posts_list'
 );
 
-add_option('kaitain_sticky_post', array(), '', true);
+add_option('kaitain_sticky_post', array(
+    'id' => 0,
+    'expires' => 0
+), '', true);
+
 add_option('kaitain_featured_posts_list', array(), '', true);
 
 /**
