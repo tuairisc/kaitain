@@ -4,18 +4,18 @@
  * Post Meta Box
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
 $featured_nonce = array(
-    'action' => 'tuairisc_featured_box',
-    'name' => 'tuairisc_featured_box_nonce'
+    'action' => 'kaitain_featured_box',
+    'name' => 'kaitain_featured_box_nonce'
 );
 
 /**
@@ -23,14 +23,16 @@ $featured_nonce = array(
  * -----------------------------------------------------------------------------
  */
 
-function tuairisc_featured_meta_box() {
+function kaitain_featured_meta_box() {
     add_meta_box(
-        'tuairisc_featured_meta',
-        __('Feature', 'tuairisc'),
-        'tuairisc_featured_box_content',
+        'kaitain_featured_meta',
+        __('Feature', 'kaitain'),
+        'kaitain_featured_box_content',
         'post'
     );
 }
+
+add_action('add_meta_boxes', 'kaitain_featured_meta_box');
 
 /**
  * Add Post Editor Meta Box
@@ -38,26 +40,26 @@ function tuairisc_featured_meta_box() {
  * @param   object      $post           Post object.
  */
 
-function tuairisc_featured_box_content($post) {
+function kaitain_featured_box_content($post) {
     global $featured_nonce;
     wp_nonce_field($featured_nonce['action'], $featured_nonce['name']);
 
-    $is_featured = is_featured_post($post);
+    $is_featured = kaitain_is_featured_post($post);
     $is_sticky = false;
     $expiry = date('U');
 
     if ($is_featured) {
-        $is_sticky = is_post_sticky($post);
+        $is_sticky = kaitain_is_post_sticky($post);
 
         if ($is_featured && $is_sticky) {
-            $expiry = get_option('tuairisc_sticky_post')['expires'];
+            $expiry = get_option('kaitain_sticky_post')['expires'];
         }
     }
 
     ?>
 
     <script>
-        var tuairiscMetaInfo = {
+        var kaitainMetaInfo = {
             featured: <?php printf('%s', $is_featured ? 'true' : 'false'); ?>,
             sticky: <?php printf('%s', $is_sticky ? 'true' : 'false'); ?>,
             expiry: <?php printf('%u', $expiry); ?>
@@ -65,29 +67,37 @@ function tuairisc_featured_box_content($post) {
     </script>
 
     <p>
-        <?php _e('Featured posts are displayed on the website\'s homepage in the lead articles widget.', 'tuairisc'); ?>
+        <?php _e('Featured posts are displayed on the website\'s homepage in the lead articles widget.', 'kaitain'); ?>
     </p>
 
     <ul>
         <li>
-            <input id="meta-tuairisc-featured" name="make_featured" type="checkbox">
-            <label for="meta-tuairisc-featured"><?php _e('Feature Post', 'tuairisc'); ?></label>
+            <fieldset>
+                <input id="meta-tuairisc-featured" name="make_featured" type="checkbox">
+                <label for="meta-tuairisc-featured"><?php _e('Feature Post', 'kaitain'); ?></label>
+            </fieldset>
         </li>
         <li class="stickycheck">
-            <input id="meta-tuairisc-sticky" name="make_sticky" type="checkbox">
-            <label for="meta-tuairisc-sticky"><?php _e('Sticky Post', 'tuairisc'); ?></label>
+            <fieldset>
+                <input id="meta-tuairisc-sticky" name="make_sticky" type="checkbox">
+                <label for="meta-tuairisc-sticky"><?php _e('Sticky Post', 'kaitain'); ?></label>
+            </fieldset>
         </li>
         <li class="expiryinfo">
-            <label><?php _e('Until', 'tuairisc'); ?></label>
-            <input class="datepicker-hour" id="expiry-hour" name="hour" type="text" min="00" max="23" minlength="2" maxlength="2" size="2" value="00"> :
-            <input class="datepicker-minute" id="expiry-minute" name="minute" type="text" min="00" max="59" minlength="2" maxlength="2" size="2" value="00">
+            <fieldset>
+                <label><?php _e('Until', 'kaitain'); ?></label>
+                <input class="datepicker-hour" id="expiry-hour" name="hour" type="text" min="00" max="23" minlength="2" maxlength="2" size="2" value="00"> :
+                <input class="datepicker-minute" id="expiry-minute" name="minute" type="text" min="00" max="59" minlength="2" maxlength="2" size="2" value="00">
+                </fieldset>
         </li>
         <li class="expiryinfo">
-            on <select class="datepicker-day" id="expiry-day" name="day"></select><select class="datepicker-month" id="expiry-month" name="month"></select><select class="datepicker-year" id="expiry-year" name="year"></select>
+            <fieldset>
+                on <select class="datepicker-day" id="expiry-day" name="day"></select><select class="datepicker-month" id="expiry-month" name="month"></select><select class="datepicker-year" id="expiry-year" name="year"></select>
+            </fieldset>
         </li>
     </ul>
     <p class="expiryinfo" id="meta-tuairisc-sticky-info">
-        <em><?php _e('A sticky post will remain in the top position on the front page until either the set time passes, or another post is set to replace it.', 'tuairisc'); ?></em>
+        <em><?php _e('A sticky post will remain in the top position on the front page until either the set time passes, or another post is set to replace it.', 'kaitain'); ?></em>
    </p>
 
     <?php
@@ -101,11 +111,12 @@ function tuairisc_featured_box_content($post) {
  * @param   int      $post_id           Post object ID.
  */
 
-function update_featured_meta_box($post_id) {
+function kaitain_update_featured_meta_box($post_id) {
     global $featured_nonce;
     
     if (!ctype_alnum($_POST[$featured_nonce['name']])
     || !isset($_POST[$featured_nonce['name']])) {
+        // TODO FIXME
         return;
     }
 
@@ -124,8 +135,10 @@ function update_featured_meta_box($post_id) {
     $make_featured = (isset($_POST['make_featured']) && $_POST['make_featured'] === 'on');
     $make_sticky = (isset($_POST['make_sticky']) && $_POST['make_sticky'] === 'on');
 
+    error_log(print_r($_POST, true));
+
     // Update meta.
-    update_featured_posts($post_id, $make_featured);
+    kaitain_update_featured_posts($post_id, $make_featured);
 
     if ($make_featured && $make_sticky) {
         // Sanitiize date input and mkdate.
@@ -138,20 +151,14 @@ function update_featured_meta_box($post_id) {
 
         if ($expiry) {
             // Set sticky if validated.
-            set_sticky_post($post_id, $expiry);
+            kaitain_set_sticky_post($post_id, $expiry);
         }
-    } else if (!$make_sticky && is_post_sticky($post_id)) {
+    } else if (!$make_sticky && kaitain_is_post_sticky($post_id)) {
         // If post was sticky, but no longer.
-        remove_sticky_post();
+        kaitain_remove_sticky_post();
     }
 }
 
-/**
- * Update Post Meta Box
- * -----------------------------------------------------------------------------
- */
-
-add_action('add_meta_boxes', 'tuairisc_featured_meta_box');
-add_action('save_post', 'update_featured_meta_box');
+add_action('save_post', 'kaitain_update_featured_meta_box');
 
 ?>

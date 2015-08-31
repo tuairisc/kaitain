@@ -4,12 +4,12 @@
  * Kaitain Scripts
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
@@ -20,7 +20,6 @@ function kaitain_scripts() {
     $node_path = $assets . '/node_modules/';
 
     $kaitain_js = array(
-        'google-analytics' => $js_path . 'analytics.js',
         'functions' => $js_path . 'functions.js'
     );
 
@@ -68,8 +67,10 @@ function kaitain_scripts() {
     );
 
     kaitain_js($kaitain_js, $kaitain_admin_js, $kaitain_conditional_js, $js_path);
-    kaitain_css($kaitain_css, $kaitain_admmin_css, $kaitain_conditional_css, $kaitain_fonts);
+    kaitain_css($kaitain_css, $kaitain_admin_css, $kaitain_conditional_css, $kaitain_fonts);
 }
+
+add_action('wp_head', 'kaitain_scripts');
 
 /*
  * Load Site JS in Footer

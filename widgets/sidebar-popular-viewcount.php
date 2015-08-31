@@ -4,16 +4,16 @@
  * Popular Posts by View Counter
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
-class tuairisc_popular extends WP_Widget {
+class Kaitain_Popular_Posts_Widget extends WP_Widget {
     /**
      * Widget Constructor
      * -------------------------------------------------------------------------
@@ -21,10 +21,10 @@ class tuairisc_popular extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('tuairisc_popular', 'tuairisc'),
-            __('Tuairisc: Popular Posts', 'tuairisc'),
+            __('kaitain_popular', 'kaitain'),
+            __('Tuairisc: Popular Posts', 'kaitain'),
             array(
-                'description' => __('An ordered list of popular Tuairisc posts sorted by view count.', 'tuairisc'),
+                'description' => __('An ordered list of popular Tuairisc posts sorted by view count.', 'kaitain'),
             )
         );
     }
@@ -38,12 +38,12 @@ class tuairisc_popular extends WP_Widget {
     public function form($instance) {
         $defaults = array(
             // Widget defaults.
-            'widget_title' => __('Most Viewed', 'tuairisc'),
+            'widget_title' => __('Most Viewed', 'kaitain'),
             'max_posts' => 10,
             'elapsed_days' => '7'
         );
 
-        $instance = wp_parse_args($instance, $defaults);
+        $instance = wp_parse_args($defaults, $instance);
 
         $options = array(
             // Post duration options. Range (days) and label.
@@ -59,6 +59,7 @@ class tuairisc_popular extends WP_Widget {
             '2' => 'Two Days',
             '1' => 'Today',
         );
+
         ?>
 
         <script>
@@ -72,13 +73,13 @@ class tuairisc_popular extends WP_Widget {
         </script>
         <ul>
             <li>
-                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', 'kaitain'); ?></label>
             </li>
             <li>
                 <input id="<?php printf($this->get_field_id('widget_title')); ?>" name="<?php printf($this->get_field_name('widget_title')); ?>" value="<?php printf($instance['widget_title']); ?>" type="text" class="widefat" />
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('elapsed_days')); ?>"><?php _e('Show most viewed posts for:', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('elapsed_days')); ?>"><?php _e('Show most viewed posts for:', 'kaitain'); ?></label>
             </li>
             <li>
                 <select id="<?php printf($this->get_field_id('elapsed_days')); ?>" name="<?php printf($this->get_field_name('elapsed_days')); ?>">
@@ -88,7 +89,7 @@ class tuairisc_popular extends WP_Widget {
                 </select>
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', 'kaitain'); ?></label>
             </li>
             <li>
                 <select id="<?php printf($this->get_field_id('max_posts')); ?>" name="<?php printf($this->get_field_name('max_posts')); ?>">
@@ -127,7 +128,7 @@ class tuairisc_popular extends WP_Widget {
     public function widget($defaults, $instance) {
         global $post;
 
-        $key = get_option('tuairisc_view_counter_key');
+        $key = get_option('kaitain_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
         $start_date = new DateTime();
         $start_date = $start_date->sub(new DateInterval('P' . $instance['elapsed_days'] . 'D'));
@@ -146,7 +147,7 @@ class tuairisc_popular extends WP_Widget {
                 )
             ));
 
-            set_transient('sidebar_popular_posts', $popular, get_option('tuairisc_transient_timeout')); 
+            set_transient('sidebar_popular_posts', $popular, get_option('kaitain_transient_timeout')); 
         }
 
         if (!empty($defaults['before_widget'])) {
@@ -158,7 +159,7 @@ class tuairisc_popular extends WP_Widget {
 
         foreach ($popular as $index => $post) {
             setup_postdata($post);
-            partial('article', 'sidebar');
+           kaitain_partial('article', 'sidebar');
         }
 
         printf('</div>');
@@ -171,6 +172,6 @@ class tuairisc_popular extends WP_Widget {
     }
 }
 
-add_action('widgets_init', create_function('', 'return register_widget("tuairisc_popular");'));
+add_action('widgets_init', create_function('', 'return register_widget("Kaitain_Popular_Posts_Widget");'));
 
 ?>

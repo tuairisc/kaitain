@@ -2,7 +2,7 @@
  * Gulp Build Script
  * -----------------------------------------------------------------------------
  * @category   Node.js Build File
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2015 Mark Grealish
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0

@@ -4,12 +4,12 @@
  * Site Footer
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
@@ -22,13 +22,13 @@ global $sections;
             get_sidebar(); 
         } ?>
     </div><?php // End #main ?>
-    <div class="advert-block">
-        <div class="tuairisc-strip trim-absolute trim-top"></div>
-        <?php if (function_exists('adrotate_group') && !is_404()) {
-            printf(adrotate_group(2));
-        } ?>
-    </div>
     <?php if (!is_404()) : ?>
+        <div class="advert-block">
+            <div class="tuairisc-strip trim-absolute trim-top"></div>
+            <?php if (function_exists('adrotate_group') && !is_404()) {
+                printf(adrotate_group(2));
+            } ?>
+        </div>
         <div id="footer">
             <div class="menus">
                 <div class="menu-columns">
@@ -42,8 +42,8 @@ global $sections;
                  <p id="copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Breo Teorantha</a>.</p>
              </div>
              <div id="foras">
-                <p><small><?php _e('Le Cabhair ó', 'tuairisc'); ?></small></p>
-                <p><a rel="nofollow" target="_blank" href="http://www.gaeilge.ie/"><img src="<?php printf(THEME_URL . '/assets/images/brands/foras-white.svg'); ?>" alt="Foras na Gaeilge" /></a></p>
+                <p><small><?php _e('Le Cabhair ó', 'kaitain'); ?></small></p>
+                <p><a rel="nofollow" target="_blank" href="http://www.gaeilge.ie/"><img src="<?php printf(get_template_directory_uri() . '/assets/images/brands/foras-white.svg'); ?>" alt="Foras na Gaeilge" /></a></p>
              </div>
         </div>
     <?php endif; ?>

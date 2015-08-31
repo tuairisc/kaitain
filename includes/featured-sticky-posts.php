@@ -4,12 +4,12 @@
  * Featured and Sticky Post Control
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
@@ -27,12 +27,12 @@ add_option($fe_keys['featured'], array(), '', true);
  * @return  bool        Post has expired, true/false.
  */
 
-function has_sticky_been_set() {
+function kaitain_has_sticky_been_set() {
     $set = false;
 
-    if (($set = get_sticky_id())) {
-        if (!($set = (date('U') <= get_sticky_expiry()))) {
-            remove_sticky_post();
+    if (($set = kaitain_get_sticky_id())) {
+        if (!($set = (date('U') <= kaitain_get_sticky_expiry()))) {
+            kaitain_remove_sticky_post();
         }
     }
 
@@ -48,12 +48,12 @@ function has_sticky_been_set() {
  * @return  bool                            Post ID is sticky, true/false.
  */
 
-function is_post_sticky($post) {
-    if (!($post = get_post($post)) || !has_sticky_been_set()) {
+function kaitain_is_post_sticky($post) {
+    if (!($post = get_post($post)) || !kaitain_has_sticky_been_set()) {
         return false;
     }
 
-    $sticky = get_sticky_id();
+    $sticky = kaitain_get_sticky_id();
     return ($sticky === $post->ID);
 }
 
@@ -63,7 +63,7 @@ function is_post_sticky($post) {
  * @param   int     $post       ID of post.
  */
 
-function set_sticky_post($post, $expiry) {
+function kaitain_set_sticky_post($post, $expiry) {
     global $fe_keys; 
 
     $post = get_post($post);
@@ -83,7 +83,7 @@ function set_sticky_post($post, $expiry) {
  * @return bool/int     Sticky ID, if set. false if not.
  */
 
-function get_sticky_id() {
+function kaitain_get_sticky_id() {
     global $fe_keys;
     return get_option($fe_keys['sticky'])['id'];
 }
@@ -94,7 +94,7 @@ function get_sticky_id() {
  * @return bool/int     Sticky expiry, if set. false if not.
  */
 
-function get_sticky_expiry() {
+function kaitain_get_sticky_expiry() {
     global $fe_keys;
     return get_option($fe_keys['sticky'])['expires'];
 }
@@ -105,8 +105,8 @@ function get_sticky_expiry() {
  * Reset sticky post.
  */
 
-function remove_sticky_post() {
-    set_sticky_post(false, false);
+function kaitain_remove_sticky_post() {
+    kaitain_set_sticky_post(false, false);
 }
 
 /**
@@ -115,7 +115,7 @@ function remove_sticky_post() {
  * @return object/bool          Sticky post, if set. Otherwise false.
  */
 
-function get_sticky_post() {
+function kaitain_get_sticky_post() {
     global $fe_keys; 
     return get_post(get_option($fe_keys['sticky'])['id']);
 }
@@ -127,8 +127,8 @@ function get_sticky_post() {
  * @return  bool            Post is featured, true/false.
  */
 
-function is_featured_post($post) {
-    $featured = get_featured_list(true);
+function kaitain_is_featured_post($post) {
+    $featured = kaitain_get_featured_list(true);
     return (($post = get_post($post)) && in_array($post->ID, $featured));
 }
 
@@ -140,14 +140,14 @@ function is_featured_post($post) {
  * @reutrn  array           $featured   Array of all featured posts.
  */
 
-function update_featured_posts($post = null, $make_featured = true) {
+function kaitain_update_featured_posts($post = null, $make_featured = true) {
     global $fe_keys;
-    $featured = get_featured_list(true);
-    $is_featured_post = is_featured_post($post);
+    $featured = kaitain_get_featured_list(true);
+    $kaitain_is_featured_post = kaitain_is_featured_post($post);
 
-    if (($post = get_post($post)) && $make_featured && !$is_featured_post) {
+    if (($post = get_post($post)) && $make_featured && !$kaitain_is_featured_post) {
         $featured[] = $post->ID;
-    } else if ($post && !$make_featured && $is_featured_post) {
+    } else if ($post && !$make_featured && $kaitain_is_featured_post) {
         $featured = array_diff($featured, [$post->ID]);
     }
 
@@ -163,22 +163,22 @@ function update_featured_posts($post = null, $make_featured = true) {
  * @return  array   $featured       Array of featured posts.
  */
 
-function get_featured($count = 8, $add_filler = false) {
+function kaitain_get_featured($count = 8, $add_filler = false) {
     $featured = array();
 
     if ($count > 0) {
         // Transient name and timeout period.
         $trans = 'featured_posts';
-        $timeout = get_option('tuairisc_transient_timeout');
+        $timeout = get_option('kaitain_transient_timeout');
 
         // ID of sticky post.
-        $sticky_id = get_sticky_id();
+        $sticky_id = kaitain_get_sticky_id();
 
         if (!($featured = get_transient($trans)) || sizeof($featured) < $count) {
             $featured = get_posts(array(
                 'numberposts' => $count,
                 'post_status' => 'publish',
-                'post__in' => get_featured_list(false),
+                'post__in' => kaitain_get_featured_list(false),
                 'orderby' => 'date',
                 'order' => 'DESC',
                 'exclude' => array($sticky_id)
@@ -188,7 +188,7 @@ function get_featured($count = 8, $add_filler = false) {
 
             if ($add_filler && $missing > 0) {
                 // Pad out query.
-                $featured = featured_filler($missing, $featured);
+                $featured = kaitain_featured_filler($missing, $featured);
             }
 
             set_transient($trans, $featured, $timeout);
@@ -205,13 +205,13 @@ function get_featured($count = 8, $add_filler = false) {
  * @return  array       $featured       List of featured posts.
  */
 
-function get_featured_list($use_sticky = true) {
+function kaitain_get_featured_list($use_sticky = true) {
     global $fe_keys;
 
     $featured = get_option($fe_keys['featured']);
 
     if (!$use_sticky) {
-        $sticky = get_sticky_id();
+        $sticky = kaitain_get_sticky_id();
         $featured = array_diff($featured, [$sticky]);
     }
 
@@ -225,20 +225,20 @@ function get_featured_list($use_sticky = true) {
  * @return  array           $cat_featured       Category featured posts.
  */
 
-function get_cat_featured_post($category) {
+function kaitain_get_cat_featured_post($category) {
     if (!($category = get_category($category))) {
         return;
     }
 
     $trans = sprintf('featured_posts_%s', $category->slug);
-    $timeout = get_option('tuairisc_transient_timeout');
+    $timeout = get_option('kaitain_transient_timeout');
     $cat_featured = array();
 
     if (!($featured = get_transient($trans))) {
         $featured = get_posts(array(
             'numberposts' => -1,
             'cat' > $category->cat_ID,
-            'post__in' => get_featured_list(false),
+            'post__in' => kaitain_get_featured_list(false),
             'order' => 'DESC',
             'orderby' => 'date'
         ));
@@ -264,7 +264,7 @@ function get_cat_featured_post($category) {
  * @return  array   $filler     Filler posts.
  */
 
-function featured_filler($count = 1, $featured_posts = null) {
+function kaitain_featured_filler($count = 1, $featured_posts = null) {
     $exclude = array();
     
     $filler = get_posts(array(
@@ -273,7 +273,7 @@ function featured_filler($count = 1, $featured_posts = null) {
         'order' => 'DESC',
         'orderby' => 'date',
         'post_status' => 'publish',
-        'post__not_in' => get_featured_list(true)
+        'post__not_in' => kaitain_get_featured_list(true)
     ));
 
     if ($featured_posts && is_array($featured_posts)) {

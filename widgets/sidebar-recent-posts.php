@@ -4,16 +4,16 @@
  * Recent Website Posts
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
-class tuairisc_recent extends WP_Widget {
+class Kaitain_Recent_Posts_Widget extends WP_Widget {
     /**
      * Widget Constructor
      * -------------------------------------------------------------------------
@@ -21,10 +21,10 @@ class tuairisc_recent extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('tuairisc_recent', 'tuairisc'),
-            __('Tuairisc: Recent Posts', 'tuairisc'),
+            __('kaitain_recent', 'kaitain'),
+            __('Tuairisc: Recent Posts', 'kaitain'),
             array(
-                'description' => __('An ordered list of recent Tuairisc posts sorted by date. Choose from either one category, or all categories.', 'tuairisc'),
+                'description' => __('An ordered list of recent Tuairisc posts sorted by date. Choose from either one category, or all categories.', 'kaitain'),
             )
         );
     }
@@ -38,12 +38,12 @@ class tuairisc_recent extends WP_Widget {
     public function form($instance) {
         $defaults = array(
             // Widget defaults.
-            'widget_title' => __('Recent Posts', 'tuairisc'),
+            'widget_title' => __('Recent Posts', 'kaitain'),
             'max_posts' => 10,
             'category' => 0
         ); 
 
-        $instance = wp_parse_args($instance, $defaults);
+        $instance = wp_parse_args($defaults, $instance);
         
         $categories = get_categories(array(
             'type' => 'post',
@@ -65,17 +65,17 @@ class tuairisc_recent extends WP_Widget {
         </script>
         <ul>
             <li>
-                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', 'kaitain'); ?></label>
             </li>
             <li>
                 <input id="<?php printf($this->get_field_id('widget_title')); ?>" name="<?php printf($this->get_field_name('widget_title')); ?>" value="<?php printf($instance['widget_title']); ?>" type="text" class="widefat" />
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('category')); ?>"><?php _e('Category:', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('category')); ?>"><?php _e('Category:', 'kaitain'); ?></label>
             </li>
             <li>
                 <select id="<?php printf($this->get_field_id('category')); ?>" name="<?php printf($this->get_field_name('category')); ?>">
-                    <option value="0"><?php _e('All', 'tuairisc'); ?></option>
+                    <option value="0"><?php _e('All', 'kaitain'); ?></option>
 
                     <?php foreach ($categories as $category) {
                         // Iterate through all caterories. 
@@ -84,7 +84,7 @@ class tuairisc_recent extends WP_Widget {
                 </select>
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', 'kaitain'); ?></label>
                 <select id="<?php printf($this->get_field_id('max_posts')); ?>" name="<?php printf($this->get_field_name('max_posts')); ?>">
                     <?php for ($i = 1; $i <= $defaults['max_posts']; $i++) {
                         printf('<option value="%d">%d</option>', $i, $i);
@@ -123,7 +123,7 @@ class tuairisc_recent extends WP_Widget {
         global $post;
         $trans_name = 'sidebar_recent_posts';
 
-        $key = get_option('tuairisc_view_counter_key');
+        $key = get_option('kaitain_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
 
         if (!($recent = get_transient($trans_name))) {
@@ -134,7 +134,7 @@ class tuairisc_recent extends WP_Widget {
                 'category' => ($instance['category']) ? $instance['category'] : ''
             ));
 
-            set_transient($trans_name, $recent, get_option('tuairisc_transient_timeout')); 
+            set_transient($trans_name, $recent, get_option('kaitain_transient_timeout')); 
         }
 
         if (!empty($defaults['before_widget'])) {
@@ -146,7 +146,7 @@ class tuairisc_recent extends WP_Widget {
 
         foreach ($recent as $post) {
             setup_postdata($post);
-            partial('article', 'sidebar');
+           kaitain_partial('article', 'sidebar');
         }
 
         printf('</div>');
@@ -159,6 +159,6 @@ class tuairisc_recent extends WP_Widget {
     }
 }
 
-add_action('widgets_init', create_function('', 'return register_widget("tuairisc_recent");'));
+add_action('widgets_init', create_function('', 'register_widget("Kaitain_Recent_Posts_Widget");'));
 
 ?>

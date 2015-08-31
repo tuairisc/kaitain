@@ -4,12 +4,12 @@
  * Category Archive
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
@@ -18,7 +18,7 @@ global $cat;
 
 $trans_name = 'category_lead_post';
 $page_number = intval(get_query_var('paged'));
-$meta_key = get_option('tuairisc_featured_post_key');
+$meta_key = get_option('kaitain_featured_post_key');
 $children = get_categories(array('child_of' => $cat));
 $featured_post_id = 0;
 
@@ -28,7 +28,7 @@ $featured_post_id = 0;
  */
 
 if ($page_number < 2) {
-    if (!($category_lead_post = get_cat_featured_post($cat))) {
+    if (!($category_lead_post = kaitain_get_cat_featured_post($cat))) {
         // If it is empty, just grab the latest post to replace.
         $category_lead_post = get_posts(array(
             'numberposts' => 1,
@@ -43,7 +43,7 @@ if ($page_number < 2) {
 
     foreach ($category_lead_post as $post) {
         setup_postdata($post);
-        partial('article', 'archive');
+        kaitain_partial('article', 'archivelead');
     }
 }
 
@@ -62,7 +62,7 @@ if ($page_number < 2) {
 
     if (!empty($children_categories)) {
         foreach ($children_categories as $child) {
-            category_widget_output($child->cat_ID, 5);
+            bh_category_widget_output($child->cat_ID, 5);
         }
     }
 }
@@ -72,12 +72,12 @@ if (have_posts() && $page_number || empty($children)) {
         the_post();
 
         if (get_the_ID() !== $featured_post_id) {
-            partial('article', 'archivelead');
+            kaitain_partial('article', 'archive');
         }
     }
 }
 
-partial('pagination');
+kaitain_partial('pagination');
 get_footer();
 
 ?>

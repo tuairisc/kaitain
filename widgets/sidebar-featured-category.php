@@ -4,16 +4,16 @@
  * Sidebar Featured Category
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
-class tuairisc_sidebar_category extends WP_Widget {
+class Kaitain_Sidebar_Category_Widget extends WP_Widget {
     /**
      * Widget Constructor
      * -------------------------------------------------------------------------
@@ -21,10 +21,10 @@ class tuairisc_sidebar_category extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('tuairisc_sidebar_category', 'tuairisc'),
-            __('Tuairisc: Featured Sidebar Category', 'tuairisc'),
+            __('kaitain_sidebar_category', 'kaitain'),
+            __('Tuairisc: Featured Sidebar Category', 'kaitain'),
             array(
-                'description' => __('A featured sidebar category list with optional lead image display.', 'tuairisc'),
+                'description' => __('A featured sidebar category list with optional lead image display.', 'kaitain'),
             )
         );
     }
@@ -38,14 +38,14 @@ class tuairisc_sidebar_category extends WP_Widget {
     public function form($instance) {
         $defaults = array(
             // Widget defaults.
-            'widget_title' => __('Featued Category', 'tuairisc'),
+            'widget_title' => __('Featued Category', 'kaitain'),
             'max_posts' => 10,
             'show_image' => false,
             'use_section_trim' => false,
             'category' => 0
         ); 
 
-        $instance = wp_parse_args($instance, $defaults);
+        $instance = wp_parse_args($defaults, $instance);
         
         $categories = get_categories(array(
             'type' => 'post',
@@ -58,13 +58,13 @@ class tuairisc_sidebar_category extends WP_Widget {
 
         <ul>
             <li>
-                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', 'kaitain'); ?></label>
             </li>
             <li>
                 <input id="<?php printf($this->get_field_id('widget_title')); ?>" name="<?php printf($this->get_field_name('widget_title')); ?>" value="<?php printf($instance['widget_title']); ?>" type="text" class="widefat" />
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('category')); ?>"><?php _e('Category:', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('category')); ?>"><?php _e('Category:', 'kaitain'); ?></label>
             </li>
             <li>
                 <select id="<?php printf($this->get_field_id('category')); ?>" name="<?php printf($this->get_field_name('category')); ?>">
@@ -75,7 +75,7 @@ class tuairisc_sidebar_category extends WP_Widget {
                 </select>
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('max_posts')); ?>"><?php _e('Number of posts to display:', 'kaitain'); ?></label>
             </li>
             <li>
                 <select id="<?php printf($this->get_field_id('max_posts')); ?>" name="<?php printf($this->get_field_name('max_posts')); ?>">
@@ -86,11 +86,11 @@ class tuairisc_sidebar_category extends WP_Widget {
             </li>
             <li>
                 <input id="<?php printf($this->get_field_id('show_image')); ?>" name="<?php printf($this->get_field_name('show_image')); ?>" type="checkbox"  />
-                <label for="<?php printf($this->get_field_id('show_image')); ?>"><?php _e('Show thumbnail image for lead post', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('show_image')); ?>"><?php _e('Show thumbnail image for lead post', 'kaitain'); ?></label>
             </li>
             <li>
                 <input id="<?php printf($this->get_field_id('use_section_trim')); ?>" name="<?php printf($this->get_field_name('use_section_trim')); ?>" type="checkbox"  />
-                <label for="<?php printf($this->get_field_id('use_section_trim')); ?>"><?php _e('Use section trim colour instead of a grey background.', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('use_section_trim')); ?>"><?php _e('Use section trim colour instead of a grey background.', 'kaitain'); ?></label>
             </li>
         </ul>
         <script>
@@ -114,11 +114,18 @@ class tuairisc_sidebar_category extends WP_Widget {
 
     function update($new_defaults, $old_defaults) {
         $defaults = array();
+
         $defaults['widget_title'] = filter_var($new_defaults['widget_title'], FILTER_SANITIZE_STRIPPED);
-        $defaults['show_image'] = ($new_defaults['show_image'] === 'on');
-        $defaults['use_section_trim'] = ($new_defaults['use_section_trim'] === 'on');
+
+        $defaults['show_image'] = (array_key_exists('show_image', $new_defaults) 
+            && $new_defaults['show_image'] === 'on');
+
+        $defaults['use_section_trim'] = (array_key_exists('use_section_trim', $new_defaults) 
+            && $new_defaults['use_section_trim'] === 'on');
+
         $defaults['max_posts'] = $new_defaults['max_posts'];
         $defaults['category'] = $new_defaults['category'];
+
         return $defaults;
     }
 
@@ -152,7 +159,7 @@ class tuairisc_sidebar_category extends WP_Widget {
                 'order' => 'DESC',
             ));
 
-            set_transient($trans, $category_posts, get_option('tuairisc_transient_timeout')); 
+            set_transient($trans, $category_posts, get_option('kaitain_transient_timeout')); 
         }
 
         if (!empty($defaults['before_widget'])) {
@@ -198,6 +205,6 @@ class tuairisc_sidebar_category extends WP_Widget {
     }
 }
 
-add_action('widgets_init', create_function('', 'return register_widget("tuairisc_sidebar_category");'));
+add_action('widgets_init', create_function('', 'register_widget("Kaitain_Sidebar_Category_Widget");'));
 
 ?>

@@ -19,6 +19,10 @@
 [submodule "includes/category-widget"]
 	path = includes/category-widget
 	url = git@github.com:bhalash/category-widget.git
+    ignore = dirty
 [submodule "includes/related-posts"]
 	path = includes/related-posts
 	url = git@github.com:bhalash/related-posts.git
+[submodule "includes/archive-functions"]
+	path = includes/archive-functions
+	url = git@github.com:bhalash/archive-functions.git

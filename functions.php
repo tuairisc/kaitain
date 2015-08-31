@@ -4,12 +4,12 @@
  * Kaitain Functions 
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
@@ -21,42 +21,26 @@ $GLOBALS['kaitain_version'] = 1.0;
  */
 
 function kaitain_setup() {
-    // add_option('tuairisc_hidden_users', array(
+    // add_option('kaitain_hidden_users', array(
     //     // Users whose avatar should not display in single posts.
     //     1, 2, 37, 48
     // ), '', true);
 
     // Transient API timeout in minutes.
-    add_option('tuairisc_transient_timeout', 60 * 20, '', true);
+    add_option('kaitain_transient_timeout', 60 * 20, '', true);
     // Flag post as job.
-    add_option('tuairisc_notice_post_key', 'is_tuairisc_notice', '', true);
-    // View counter meta key.
-    add_option('tuairisc_view_counter_key', 'tuairisc_view_counter', '', true);
-
-    // All theme PHP.
-    kaitain_includes(); 
+    add_option('kaitain_notice_post_key', 'kaitain_is_notice', '', true);
 
     kaitain_image_sizes();
 
     // Header tag DNS prefetch.
     kaitain_dns_prefetch();
 
-    // Theme widgets.
-    add_action('widgets_init', 'kaitain_widgets');
-
     // Theme menus.
     add_action('init', 'kaitain_menus');
 
-    // Them widget areas.
-    add_action('widgets_init', 'kaitain_widgets');
-
-    // Header DNS prefetch meta tags.
-    add_action('wp_head', 'kaitain_dns_prefetch');
-
     // Remove WordPress version from site header.
     remove_action('wp_head', 'wp_generator');
-
-    add_filter('wp_title', 'kaitain_title', 10, 2);
 
     // Remove the fuck out of emoji and emoticons.
     remove_filter('the_content', 'convert_smilies');
@@ -77,20 +61,6 @@ function kaitain_setup() {
 
     // Content width.
     $GLOBALS['content_width'] = 1140;
-
-    $tuairisc_social_meta = new Social_Meta(array(
-        'twitter' => '@tuairiscnuacht',
-        'facebook' => 'tuairisc.ie',
-        'fallback_image' => array(
-            'url' => get_template_directory() . '/assets/images/tuairisc.jpg',
-            'path' => get_template_directory_uri(). '/assets/images/tuairisc.jpg'
-        )
-    ));
-
-    $sections = new Section_Manager(array(
-        'categories' => array(191, 154, 155, 156, 157, 159, 187, 158), 
-        'home' => 191
-    ));
 }
 
 add_action('after_setup_theme', 'kaitain_setup');
@@ -102,29 +72,43 @@ add_action('after_setup_theme', 'kaitain_setup');
 
 function kaitain_includes() {
     $includes = array(
+        // Side-by-side category widget.
+        'category-widget/category-widget.php',
+        // Site sections.
+        'section-manager/section-manager.php',
+        'archive-functions/archive-functions.php',
+        // Open Graph and Twitter Card <head> meta tag links.
+        'social-meta/social-meta.php',
+        // Categorically-related posts.
+        'related-posts/related-posts.php',
         // Theme scripts
         'kaitain-scripts.php',
         // Avatar output.
         'kaitain-avatars.php',
-        // Side-by-side category widget.
-        'category-widget/category-widget.php',
         // All comment functions.
-        'comment-functions.php',
+        'kaitain-comments.php',
         // Featured and sticky posts.
         'featured-sticky-posts.php',
-        // Site sections.
-        'section-manager/section-manager.php',
-        // Open Graph and Twitter Card <head> meta tag links.
-        'social-meta/social-meta.php',
         // Single post social sharing links.
         'social-share.php',
-        // Categorically-related posts.
-        'single-post-related-posts.php',
         // Localized date.
         'date-strftime.php'
     );
 
-    $admin_incldues = array(
+    $widgets = array(
+        // Link to selected author profiles.
+        'home-authors.php',
+        // Front page featured and sticky article widget.
+        'home-featured-articles.php',
+        // Sidebar featured category.
+        'sidebar-featured-category.php',
+        // Popular posts, sorted by internally-tracked view count.
+        'sidebar-popular-viewcount.php',
+        // Recent posts in $foo category.
+        'sidebar-recent-posts.php',
+    );
+
+    $admin_includes = array(
         // Featured/Sticky post meta box.
         'featured-edit-box.php',
         'notice-edit-box.php',
@@ -134,12 +118,18 @@ function kaitain_includes() {
         include_once(get_template_directory() . '/includes/' . $script);
     }
 
+    foreach($widgets as $widget) {
+        include_once(get_template_directory() . '/widgets/' . $widget);
+    }
+
     if (is_admin()) {
         foreach($admin_includes as $script) {
             include_once(get_template_directory() . '/admin/' . $script);
         }
     }
 }
+
+kaitain_includes();
 
 /**
  * Kaitain Theme Widgets
@@ -151,21 +141,6 @@ function kaitain_includes() {
  */
 
 function kaitain_widgets() {
-    $included_widgets = array(
-        // Link to selected author profiles.
-        'home-authors.php',
-        // Front page featured and sticky article widget.
-        'home-featured-articles.php',
-        // Front page category widgets.
-        'home-category.php',
-        // Sidebar featured category.
-        'sidebar-featured-category.php',
-        // Popular posts, sorted by internally-tracked view count.
-        'sidebar-popular-viewcount.php',
-        // Recent posts in $foo category.
-        'sidebar-recent-posts.php',
-    );
-
     $widget_defaults = array(
         'before_widget' => '<div id="%1$s" class="%2$s">',
         'after_widget' => '</div>',
@@ -175,26 +150,41 @@ function kaitain_widgets() {
 
     $widget_areas = array(
         array(
-            'name' => __('Front Page', 'tuairisc'),
-            'description' => __('Front page widget area.', 'tuairisc'),
+            'name' => __('Front Page', 'kaitain'),
+            'description' => __('Front page widget area.', 'kaitain'),
             'id' => 'widgets-front-page'
         ),
         array(
-            'name' => __('Sidebar', 'tuairisc'),
-            'description' => __('Sidebar widget area.', 'tuairisc'),
+            'name' => __('Sidebar', 'kaitain'),
+            'description' => __('Sidebar widget area.', 'kaitain'),
             'id' => 'widgets-sidebar',
             'before_title' => '<h3 class="widget-title widget-subtitle">'
         )
     );
 
-    foreach($included_widgets as $widget) {
-        include_once(get_template_directory() . '/widgets/' . $widget);
-    }
-
     foreach ($widget_areas as $widget) {
         register_sidebar(wp_parse_args($widget, $widget_defaults));
     }
 }
+
+add_action('widgets_init', 'kaitain_widgets');
+
+/**
+ * Kaitain Menus
+ * -----------------------------------------------------------------------------
+ */
+
+function kaitain_menus() {
+    register_nav_menus(array(
+        'top-external-social' => __('Site Social Presences', 'kaitain'),
+        'footer-site-links' => __('Footer Site Information Links', 'kaitain')
+    ));
+}
+
+/**
+ * Kaitain Image Sizes
+ * -----------------------------------------------------------------------------
+ */
 
 function kaitain_image_sizes() {
     $crop = array('center', 'center');
@@ -248,8 +238,8 @@ function kaitain_pagination_classes() {
     return 'class="green-link-hover"';
 }
 
-add_filter('next_posts_link_attributes', 'pagination_classes');
-add_filter('previous_posts_link_attributes', 'pagination_classes');
+add_filter('next_posts_link_attributes', 'kaitain_pagination_classes');
+add_filter('previous_posts_link_attributes', 'kaitain_pagination_classes');
 
 /**
  * Media Prefetch
@@ -258,15 +248,21 @@ add_filter('previous_posts_link_attributes', 'pagination_classes');
  */
 
 function kaitain_dns_prefetch() {
-    // Media prefetch domain: If null or empty, defaults to site domain.
+    if (is_admin()) {
+        // Can cause weird problems with widgets.
+        return;
+    }
+
     $prefetch = array(
         preg_replace('/^www\./','', $_SERVER['SERVER_NAME'])
     );
     
-    foreach ($domains as $domain) {
+    foreach ($prefetch as $domain) {
         printf('<link rel="dns-prefetch" href="//%s">', $domain);
     }
 }
+
+add_action('wp_head', 'kaitain_dns_prefetch');
 
 /**
  * Increment View Counter
@@ -282,12 +278,14 @@ function kaitain_set_view_count() {
     if (is_singular('post') && !is_user_logged_in()) {
         global $post;
 
-        $key = get_option('tuairisc_view_counter_key');
+        $key = 'kaitain_single_post_view_count';
         $count = (int) get_post_meta($post->ID, $key, true);
         $count++;
         update_post_meta($post->ID, $key, $count);
     }
 }
+
+add_filter('the_content', 'kaitain_increment_view_counter');
 
 /*
  * Fetch View Counter
@@ -303,7 +301,7 @@ function kaitain_get_view_count($post = null) {
         return false;
     }
 
-    $key = get_option('tuairisc_view_counter_key');
+    $key = 'kaitain_single_post_view_count';
     $count = (int) get_post_meta($post->ID, $key, true);
 
     if (!is_integer($count)) {
@@ -325,23 +323,32 @@ function kaitain_get_view_count($post = null) {
  */
 
 function kaitain_increment_view_counter($content) {
-    set_view_count();
+    kaitain_set_view_count();
     return $content;
 }
 
-add_filter('the_content', 'increment_view_counter');
+/**
+ * Theme Sections
+ * -----------------------------------------------------------------------------
+ */
 
+$sections = new Section_Manager(array(
+    'categories' => array(191, 154, 155, 156, 157, 159, 187, 158), 
+    'home' => 191
+));
 
+/**
+ * Open Graph and Twitter Card Meta Tags
+ * -----------------------------------------------------------------------------
+ */
 
-
-
-
-
-function kaitain_menus() {
-    register_nav_menus(array(
-        'top-external-social' => __('Site Social Presences', 'tuairisc'),
-        'footer-site-links' => __('Footer Site Information Links', 'tuairisc')
-    ));
-}
+$kaitain_social_meta = new Social_Meta(array(
+    'twitter' => '@tuairiscnuacht',
+    'facebook' => 'tuairisc.ie',
+    'fallback_image' => array(
+        'url' => get_template_directory() . '/assets/images/tuairisc.jpg',
+        'path' => get_template_directory_uri(). '/assets/images/tuairisc.jpg'
+    )
+));
 
 ?>

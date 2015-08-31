@@ -4,16 +4,16 @@
  * Popular Posts by View Counter
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
-class tuairisc_authors extends WP_Widget {
+class Kaitain_Columnist_Widget extends WP_Widget {
     /**
      * Widget Constructor
      * -------------------------------------------------------------------------
@@ -21,10 +21,10 @@ class tuairisc_authors extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('tuairisc_authors', 'tuairisc'),
-            __('Tuairisc: Author Showcase', 'tuairisc'),
+            __('kaitain_authors', 'kaitain'),
+            __('Tuairisc: Author Showcase', 'kaitain'),
             array(
-                'description' => __('A display of four selected Tuairisc authors.', 'tuairisc'),
+                'description' => __('A display of four selected authors.', 'kaitain'),
             )
         );
     }
@@ -53,7 +53,7 @@ class tuairisc_authors extends WP_Widget {
 
         <ul>
             <li>
-                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Title:', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Title:', 'kaitain'); ?></label>
             </li>
             <li>
                 <?php printf('<input id="%s" name="%s" value="%s" type="text" />',
@@ -68,7 +68,7 @@ class tuairisc_authors extends WP_Widget {
                 $name = $this->get_field_name('author_list') . '[]';
                 ?>
                 <li>
-                    <label for="<?php printf($id); ?>"><?php _e('Author #' . ($i + 1), 'tuairisc'); ?></label>
+                    <label for="<?php printf($id); ?>"><?php printf('%s %d', __('Author # ', 'kaitain'), $i + 1); ?></label>
                 </li>
                 <li>
                     <select class="author-widget-admin" id="<?php printf($id); ?>" name="<?php printf($name); ?>">
@@ -194,6 +194,5 @@ class tuairisc_authors extends WP_Widget {
     }
 }
 
-add_action('widgets_init', create_function('', 'return register_widget("tuairisc_authors");'));
-
+add_action('widgets_init', create_function('', 'register_widget("Kaitain_Columnist_Widget");'));
 ?>

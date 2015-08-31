@@ -4,12 +4,12 @@
  * Header
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
@@ -23,7 +23,6 @@ global $sections;
 <meta charset="<?php printf(get_option('blog_charset')); ?>" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title><?php wp_title('-', true, 'right'); ?></title>
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <?php wp_head(); ?>
 </head>
@@ -52,12 +51,12 @@ global $sections;
                 <ul id="secondary"><?php $sections->sections_menu('secondary'); ?></ul>
             </nav>
         </div>
+        <div class="advert-block">
+            <?php if (function_exists('adrotate_group')) {
+                printf(adrotate_group(1));
+            } ?>
+            <div class="tuairisc-strip trim-absolute trim-bottom"></div>
+        </div>
     <?php endif; ?>
-    <div class="advert-block">
-        <?php if (function_exists('adrotate_group') && !is_404()) {
-            printf(adrotate_group(1));
-        } ?>
-        <div class="tuairisc-strip trim-absolute trim-bottom"></div>
-    </div>
     <div id="main" role="main">
         <div id="content">

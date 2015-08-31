@@ -4,12 +4,12 @@
  * Comment Functions and Actions
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
@@ -21,13 +21,13 @@
  * @param   int     $depth      Depth of the comments thread.
  */
 
-function theme_comments($comment, $args, $depth) {
+function kaitain_theme_comments($comment, $args, $depth) {
     $GLOBALS['comment'] = $comment;
     ?>
 
     <li <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
         <div class="avatar">
-            <?php avatar_background($comment, 'tc_post_avatar', 'author-photo'); ?>
+            <?php kaitain_avatar_background_html($comment, 'tc_post_avatar', 'author-photo'); ?>
         </div>
         <div class="comment-body">
             <header>
@@ -45,7 +45,7 @@ function theme_comments($comment, $args, $depth) {
                 <?php if (!$comment->comment_approved) {
                     printf('<p class="%s">%s</p>',
                         'comment-unapproved',
-                        __('Tá do thrácht á mheas.', 'tuairisc')
+                        __('Tá do thrácht á mheas.', 'kaitain')
                     );
                 } else {
                     comment_text();
@@ -54,7 +54,7 @@ function theme_comments($comment, $args, $depth) {
 
             <?php if (is_user_logged_in()) : ?>
                 <footer>
-                    <p><?php edit_comment_link(__('edit', 'tuairisc'),'', ''); ?></p>
+                    <p><?php edit_comment_link(__('edit', 'kaitain'),'', ''); ?></p>
                 </footer>
             <?php endif; ?>
         </div>
@@ -71,11 +71,11 @@ function theme_comments($comment, $args, $depth) {
  * @link http://wordpress.stackexchange.com/a/172055
  */
 
-function wrap_comment_fields_before() {
+function kaitain_wrap_comment_fields_before() {
     printf('<div class="commentform-inputs">');
 }
 
-function wrap_comment_fields_after() {
+function kaitain_wrap_comment_fields_after() {
     printf('</div>');
 }
 
@@ -84,7 +84,7 @@ function wrap_comment_fields_after() {
  * -----------------------------------------------------------------------------
  */
 
-add_action('comment_form_before_fields', 'wrap_comment_fields_before');
-add_action('comment_form_after_fields', 'wrap_comment_fields_after');
+add_action('comment_form_before_fields', 'kaitain_wrap_comment_fields_before');
+add_action('comment_form_after_fields', 'kaitain_wrap_comment_fields_after');
 
 ?>

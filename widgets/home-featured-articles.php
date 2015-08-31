@@ -4,16 +4,16 @@
  * Featured Posts Widget
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
-class tuairisc_featured extends WP_Widget {
+class Kaitain_Featured_Post_Widget extends WP_Widget {
     /**
      * Widget Constructor
      * -------------------------------------------------------------------------
@@ -21,10 +21,10 @@ class tuairisc_featured extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('tuairisc_featured', 'tuairisc'),
-            __('Tuairisc: Featured and Sticky Posts', 'tuairisc'),
+            __('kaitain_featured', 'kaitain'),
+            __('Tuairisc: Featured and Sticky Posts', 'kaitain'),
             array(
-                'description' => __('The frontpiece of the home page: An ordered list of featured and sticky posts.', 'tuairisc'),
+                'description' => __('The frontpiece of the home page: An ordered list of featured and sticky posts.', 'kaitain'),
             )
         );
     }
@@ -43,17 +43,17 @@ class tuairisc_featured extends WP_Widget {
         ); 
 
         $featured_rows_limit = 16;
-        $instance = wp_parse_args($instance, $defaults);
+        $instance = wp_parse_args($defaults, $instance);
         
         ?>
 
         <ul>
             <li>
                 <input id="<?php printf($this->get_field_id('show_sticky')); ?>" type="checkbox" name="<?php printf($this->get_field_name('show_sticky')); ?>" />
-                <label for="<?php printf($this->get_field_id('show_sticky')); ?>"><?php _e('Show Sticky Post', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('show_sticky')); ?>"><?php _e('Show Sticky Post', 'kaitain'); ?></label>
             </li>
             <li>
-                <label for="<?php printf($this->get_field_id('count')); ?>"><?php _e('Number of posts to display: ', 'tuairisc'); ?></label>
+                <label for="<?php printf($this->get_field_id('count')); ?>"><?php _e('Number of posts to display: ', 'kaitain'); ?></label>
                 <select id="<?php printf($this->get_field_id('count')); ?>" name="<?php printf($this->get_field_name('count')); ?>">
                     <?php for ($i = 0; $i < $featured_rows_limit; $i += 4) {
                         printf('<option value="%d">%d</option>', $i, $i);
@@ -140,7 +140,7 @@ class tuairisc_featured extends WP_Widget {
 
                 if ($instance['show_sticky'] && $num === 0) {
                     // 1. Show lead post.
-                    partial('article', 'archivelead');
+                   kaitain_partial('article', 'archivelead');
                 }
 
                 if ($instance['count'] > 0 && $num % 4 === 1 && $num !== 0) {
@@ -150,7 +150,7 @@ class tuairisc_featured extends WP_Widget {
 
                 if (!$instance['show_sticky'] || $num > 0) {
                     // 2. Show row posts.
-                    partial('article', 'archivesmall');
+                   kaitain_partial('article', 'archivesmall');
                 }
 
                 if ($instance['count'] > 0 && $num % 4 === 0 && $num !== 0 
@@ -172,9 +172,6 @@ class tuairisc_featured extends WP_Widget {
     }
 }
 
-add_action(
-    'widgets_init',
-    create_function('', 'return register_widget("tuairisc_featured");')
-);
+add_action('widgets_init', create_function('', 'register_widget("Kaitain_Featured_Post_Widget");'));
 
 ?>

@@ -4,18 +4,18 @@
  * Public Notice Meta Box
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
 $notice_nonce = array(
-    'action' => 'tuairisc_notice_box',
-    'name' => 'tuairisc_notice_box_nonce'
+    'action' => 'kaitain_notice_box',
+    'name' => 'kaitain_notice_box_nonce'
 );
 
 /**
@@ -23,11 +23,11 @@ $notice_nonce = array(
  * -----------------------------------------------------------------------------
  */
 
-function tuairisc_notice_meta_box() {
+function kaitain_notice_meta_box() {
     add_meta_box(
-        'tuairisc_notice_meta',
-        __('Public Notice', 'tuairisc'),
-        'tuairisc_notice_box_content',
+        'kaitain_notice_meta',
+        __('Public Notice', 'kaitain'),
+        'kaitain_notice_box_content',
         'post'
     );
 }
@@ -38,23 +38,23 @@ function tuairisc_notice_meta_box() {
  * @param   object      $post           Post object.
  */
 
-function tuairisc_notice_box_content($post, $args) {
+function kaitain_notice_box_content($post, $args) {
     global $notice_nonce;
     wp_nonce_field($notice_nonce['action'], $notice_nonce['name']);
 
-    $key = get_option('tuairisc_notice_post_key');
+    $key = get_option('kaitain_notice_post_key');
     $is_notice = !!get_post_meta($post->ID, $key, true) ? 'checked' : '';;
 
     ?>
 
     <p>
-        <?php _e('This post is a public notice.', 'tuairisc'); ?>
+        <?php _e('This post is a public notice.', 'kaitain'); ?>
     </p>
 
     <ul>
         <li>
             <input id="meta-tuairisc-notice" name="make_notice" type="checkbox" <?php printf($is_notice); ?>>
-            <label for="meta-tuairisc-notice"><?php _e('Public Notice', 'tuairisc'); ?></label>
+            <label for="meta-tuairisc-notice"><?php _e('Public Notice', 'kaitain'); ?></label>
         </li>
     </ul>
 
@@ -67,7 +67,7 @@ function tuairisc_notice_box_content($post, $args) {
  * @param   int      $post_id           Post object ID.
  */
 
-function tuairisc_notice_box_update($post_id) {
+function kaitain_notice_box_update($post_id) {
     global $notice_nonce;
     
     if (!ctype_alnum($_POST[$notice_nonce['name']]) || !isset($_POST[$notice_nonce['name']])) {
@@ -86,7 +86,7 @@ function tuairisc_notice_box_update($post_id) {
         return;
     }
 
-    $key = get_option('tuairisc_notice_post_key');
+    $key = get_option('kaitain_notice_post_key');
     $value = false;
 
     if (isset($_POST['make_notice'])) {
@@ -101,7 +101,7 @@ function tuairisc_notice_box_update($post_id) {
  * -----------------------------------------------------------------------------
  */
 
-add_action('add_meta_boxes', 'tuairisc_notice_meta_box');
-add_action('save_post', 'tuairisc_notice_box_update');
+add_action('add_meta_boxes', 'kaitain_notice_meta_box');
+add_action('save_post', 'kaitain_notice_box_update');
 
 ?>

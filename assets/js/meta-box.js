@@ -2,12 +2,12 @@
  * Post Meta JavaScript
  * -----------------------------------------------------------------------------
  * @category   JavaScript
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
@@ -37,8 +37,8 @@ date = {
     }
 };
 
-if (tuairiscMetaInfo.sticky) {
-    var expiry = new Date(tuairiscMetaInfo.expiry * 1000);
+if (kaitainMetaInfo.sticky) {
+    var expiry = new Date(kaitainMetaInfo.expiry * 1000);
 
     expiry = {
         year: expiry.getFullYear(),
@@ -61,8 +61,8 @@ if (tuairiscMetaInfo.sticky) {
 
 var input = {
     checkbox: {
-        featured: '#meta-tuairisc-featured',
-        sticky: '#meta-tuairisc-sticky'
+        featured: '#meta-kaitain-featured',
+        sticky: '#meta-kaitain-sticky'
     },
     select: {
         day: '#expiry-day',
@@ -82,8 +82,8 @@ var input = {
  * -----------------------------------------------------------------------------
  */
 
-jQuery(input.checkbox.featured).prop('checked', tuairiscMetaInfo.featured);
-jQuery(input.checkbox.sticky).prop('checked', tuairiscMetaInfo.sticky);
+jQuery(input.checkbox.featured).prop('checked', kaitainMetaInfo.featured);
+jQuery(input.checkbox.sticky).prop('checked', kaitainMetaInfo.sticky);
 
 /**
  * Toggle Element if Box Checked

@@ -4,12 +4,12 @@
  * Front Page Template
  * -----------------------------------------------------------------------------
  * @category   PHP Script
- * @package    Tuairisc.ie
+ * @package    Kaitain
  * @author     Mark Grealish <mark@bhalash.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/tuairisc.ie
+ * @link       https://github.com/bhalash/kaitain-theme
  * @link       http://www.tuairisc.ie
  */
 
@@ -27,15 +27,18 @@ if (!$page_number) {
     if (is_active_sidebar('widgets-front-page')) {
         dynamic_sidebar('widgets-front-page');
     } else {
-        printf('<h3>%s</h3>', __('Add your main front page widgets!', 'tuairisc'));
+        printf('<p class="%s">%s</p>', 
+            'no-widgets',
+            __('Add your front page widgets!', 'kaitain')
+        );
     }
 } else {
     while (have_posts()) {
         the_post();
-        partial('article', 'archive');
+        kaitain_partial('article', 'archive');
     }
 }
 
-partial('pagination');
+kaitain_partial('pagination');
 get_footer();
 ?>
