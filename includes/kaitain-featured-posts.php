@@ -13,13 +13,13 @@
  * @link       http://www.tuairisc.ie
  */
 
-$fe_keys = array(
+$kaitain_featured_keys = array(
     'sticky' => 'tc_sticky_post',
     'featured' => 'tc_feautred_posts'
 );
 
-add_option($fe_keys['sticky'], array(), '', true);
-add_option($fe_keys['featured'], array(), '', true);
+add_option($kaitain_featured_keys['sticky'], array(), '', true);
+add_option($kaitain_featured_keys['featured'], array(), '', true);
 
 /**
  * Check if Sticky Expired
@@ -64,14 +64,14 @@ function kaitain_is_post_sticky($post) {
  */
 
 function kaitain_set_sticky_post($post, $expiry) {
-    global $fe_keys; 
+    global $kaitain_featured_keys; 
 
     $post = get_post($post);
 
     $post = !!$post ? $post->ID : false;
     $expiry = !!$post ? $expiry : false;
 
-    update_option($fe_keys['sticky'], array(
+    update_option($kaitain_featured_keys['sticky'], array(
         'id' => $post,
         'expires' => $expiry
     ));
@@ -84,8 +84,8 @@ function kaitain_set_sticky_post($post, $expiry) {
  */
 
 function kaitain_get_sticky_id() {
-    global $fe_keys;
-    return get_option($fe_keys['sticky'])['id'];
+    global $kaitain_featured_keys;
+    return get_option($kaitain_featured_keys['sticky'])['id'];
 }
 
 /**
@@ -95,8 +95,8 @@ function kaitain_get_sticky_id() {
  */
 
 function kaitain_get_sticky_expiry() {
-    global $fe_keys;
-    return get_option($fe_keys['sticky'])['expires'];
+    global $kaitain_featured_keys;
+    return get_option($kaitain_featured_keys['sticky'])['expires'];
 }
 
 /**
@@ -116,8 +116,8 @@ function kaitain_remove_sticky_post() {
  */
 
 function kaitain_get_sticky_post() {
-    global $fe_keys; 
-    return get_post(get_option($fe_keys['sticky'])['id']);
+    global $kaitain_featured_keys; 
+    return get_post(get_option($kaitain_featured_keys['sticky'])['id']);
 }
 
 /**
@@ -141,7 +141,7 @@ function kaitain_is_featured_post($post) {
  */
 
 function kaitain_update_featured_posts($post = null, $make_featured = true) {
-    global $fe_keys;
+    global $kaitain_featured_keys;
     $featured = kaitain_get_featured_list(true);
     $kaitain_is_featured_post = kaitain_is_featured_post($post);
 
@@ -151,7 +151,7 @@ function kaitain_update_featured_posts($post = null, $make_featured = true) {
         $featured = array_diff($featured, [$post->ID]);
     }
 
-    update_option($fe_keys['featured'], $featured);
+    update_option($kaitain_featured_keys['featured'], $featured);
     return $featured;
 }
 
@@ -206,9 +206,11 @@ function kaitain_get_featured($count = 8, $add_filler = false) {
  */
 
 function kaitain_get_featured_list($use_sticky = true) {
-    global $fe_keys;
+    global $kaitain_featured_keys;
 
-    $featured = get_option($fe_keys['featured']);
+    if (!($featured = get_option($kaitain_featured_keys['featured']))) {
+        $featured = array();
+    }
 
     if (!$use_sticky) {
         $sticky = kaitain_get_sticky_id();
