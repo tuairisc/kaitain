@@ -13,11 +13,16 @@
  * @link       http://www.tuairisc.ie
  */
 
+$GLOBALS['kaitain_asset_paths'] = array(
+    'js' => get_template_directory_uri() . '/assets/js/',
+    'css' => get_template_directory_uri() . '/assets/css/',
+    'node' => get_template_directory_uri() . '/node_modules/'
+);
+
 function kaitain_scripts() {
-    $assets = get_template_directory_uri() . '/assets/';
-    $js_path = $assets . 'js/';
-    $css_path = $assets . 'css/';
-    $node_path = $assets . '/node_modules/';
+    $js_path = $GLOBALS['kaitain_asset_paths']['js'];
+    $css_path = $GLOBALS['kaitain_asset_paths']['css'];
+    $node_path = $GLOBALS['kaitain_asset_paths']['node'];
 
     $kaitain_js = array(
         'functions' => $js_path . 'functions.js'
@@ -36,11 +41,6 @@ function kaitain_scripts() {
             $js_path . 'functions-ie.js',
             'lte IE 9'
         )
-    );
-  
-    $kaitain_admin_js = array(
-        'post-meta-box' => array('post.php', $js_path . 'meta-box.js'),
-        // 'new-meta-box' => array('post.php', $js_path . 'new-meta-box.js')
     );
 
     $kaitain_fonts = array(
@@ -62,10 +62,6 @@ function kaitain_scripts() {
         'ie-fallback' => array($css_path . 'ie.css', 'lte IE 9')
     );
 
-    $kaitain_admin_css = array(
-        'tuairic-admin' => $css_path . 'admin.css'
-    );
-
     kaitain_js($kaitain_js, $kaitain_admin_js, $kaitain_conditional_js, $js_path);
     kaitain_css($kaitain_css, $kaitain_admin_css, $kaitain_conditional_css, $kaitain_fonts);
 }
@@ -76,6 +72,30 @@ add_action('wp_head', 'kaitain_scripts');
  * Load Site JS in Footer
  * -----------------------------------------------------------------------------
  * @link http://www.kevinleary.net/move-javascript-bottom-wordpress/#comment-56740
+ */
+
+function kaitain_admin_scripts() {
+    $js_path = $GLOBALS['kaitain_asset_paths']['js'];
+    $css_path = $GLOBALS['kaitain_asset_paths']['css'];
+
+    $kaitain_admin_js = array(
+        'post-meta-box' => array('post.php', $js_path . 'meta-box.js'),
+        // 'new-meta-box' => array('post.php', $js_path . 'new-meta-box.js')
+    );
+
+    $kaitain_admin_css = array(
+        'tuairic-admin' => $css_path . 'admin.css'
+    );
+
+    kaitain_admin_js($kaitain_admin_js);
+    kaitain_admin_css($kaitain_admin_css);
+}
+
+add_action('admin_head', 'kaitain_admin_scripts');
+
+/*
+ * Admin Scripts
+ * -----------------------------------------------------------------------------
  */
 
 function kaitain_clean_header() {
@@ -91,46 +111,44 @@ add_action('wp_enqueue_scripts', 'kaitain_clean_header');
  * -----------------------------------------------------------------------------
  */
 
-function kaitain_js($kaitain_js, $kaitain_admin_js, $kaitain_conditional_js, $js_path) {
+function kaitain_js($kaitain_js, $kaitain_conditional_js, $js_path) {
     if (is_404()) {
         return;
     }
 
-    if (!is_admin()) {
-        foreach ($kaitain_js as $name => $script) {
-            // Regular frontend JavaScript.
-            if (!WP_DEBUG) {
-                // Instead load minified version if you aren't debugging.
-                $script = str_replace($js_path, $js_path . 'min/', $script);
-                $script = str_replace('.js', '.min.js', $script);
-            }
-
-            wp_enqueue_script($name, $script, array('jquery'), $GLOBALS['kaitain_version'], true);
+    foreach ($kaitain_js as $name => $script) {
+        // Regular frontend JavaScript.
+        if (!WP_DEBUG) {
+            // Instead load minified version if you aren't debugging.
+            $script = str_replace($js_path, $js_path . 'min/', $script);
+            $script = str_replace('.js', '.min.js', $script);
         }
 
-        foreach ($kaitain_conditional_js as $name => $script) {
-            // Internet Explorer scripts.
-            $path = $script[0];
-            $condition = $script[1];
-
-            wp_enqueue_script($name, $path, array(), $GLOBALS['kaitain_version'], false);
-            wp_script_add_data($name, 'conditional', $condition);
-        }
-
-        if (is_singular()) {
-            wp_enqueue_script('comment-reply');
-        }
+        wp_enqueue_script($name, $script, array('jquery'), $GLOBALS['kaitain_version'], true);
     }
-    
-    if (is_admin()) {
-        // Admin JavaScript.
-        foreach ($kaitain_admin_js as $name => $script) {
-            if ($script[0] && $hook !== $script[0]) {
-                continue;
-            }
-            
-            wp_enqueue_script($name, $script[1], array('jquery'), THEME_VER, true);
+
+    foreach ($kaitain_conditional_js as $name => $script) {
+        // Internet Explorer scripts.
+        $path = $script[0];
+        $condition = $script[1];
+
+        wp_enqueue_script($name, $path, array(), $GLOBALS['kaitain_version'], false);
+        wp_script_add_data($name, 'conditional', $condition);
+    }
+
+    if (is_singular()) {
+        wp_enqueue_script('comment-reply');
+    }
+}
+
+function kaitain_admin_js($kaitain_admin_js) {
+    // Admin JavaScript.
+    foreach ($kaitain_admin_js as $name => $script) {
+        if ($script[0] && $hook !== $script[0]) {
+            continue;
         }
+        
+        wp_enqueue_script($name, $script[1], array('jquery'), THEME_VER, true);
     }
 }
 
@@ -140,7 +158,7 @@ function kaitain_js($kaitain_js, $kaitain_admin_js, $kaitain_conditional_js, $js
  * Load all theme CSS.
  */
 
-function kaitain_css($kaitain_css, $kaitain_admin_css, $kaitain_conditional_css, $kaitain_fonts) {
+function kaitain_css($kaitain_css, $kaitain_conditional_css, $kaitain_fonts) {
     foreach ($kaitain_css as $name => $style) {
         wp_enqueue_style($name, $style, array(), $GLOBALS['kaitain_version']);
     }
@@ -157,11 +175,11 @@ function kaitain_css($kaitain_css, $kaitain_admin_css, $kaitain_conditional_css,
         wp_enqueue_style($name, $path, array(), $GLOBALS['kaitain_version']);
         wp_style_add_data($name, 'conditional', $condition);
     }
+}
 
-    if (is_admin()) {
-        foreach ($kaitain_admin_css as $name => $style) {
-            wp_enqueue_style($name, $style);
-        }
+function kaitain_admin_css($kaitain_admin_css) {
+    foreach ($kaitain_admin_css as $name => $style) {
+        wp_enqueue_style($name, $style);
     }
 }
 
@@ -173,7 +191,6 @@ function kaitain_css($kaitain_css, $kaitain_admin_css, $kaitain_conditional_css,
  */
 
 function kaitain_google_font_url($fonts) {
-    global $google_fonts;
     $google_url = array('//fonts.googleapis.com/css?family=');
 
     foreach ($fonts as $key => $value) {
