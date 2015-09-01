@@ -53,13 +53,11 @@ function kaitain_featured_box_content($post) {
     ?>
 
     <script>
-        var kaitainMetaInfo = {
+        var pmFeatured = {
             featured: <?php printf('%s', $is_featured ? 'true' : 'false'); ?>,
             sticky: <?php printf('%s', $is_sticky ? 'true' : 'false'); ?>,
             expiry: <?php printf('%u', $expiry); ?>
         };
-
-        console.log(kaitainMetaInfo);
     </script>
 
     <p>
@@ -69,30 +67,26 @@ function kaitain_featured_box_content($post) {
     <ul>
         <li>
             <fieldset>
-                <input id="meta-tuairisc-featured" name="make_featured" type="checkbox">
-                <label for="meta-tuairisc-featured"><?php _e('Feature Post', 'kaitain'); ?></label>
+                <input id="kaitain-featured-checkbox" name="make_featured" type="checkbox">
+                <label for="meta-kaitain-featured"><?php _e('Feature Post', 'kaitain'); ?></label>
             </fieldset>
         </li>
-        <li class="stickycheck">
+        <li class="kaitain-stickycheck">
             <fieldset>
-                <input id="meta-tuairisc-sticky" name="make_sticky" type="checkbox">
-                <label for="meta-tuairisc-sticky"><?php _e('Sticky Post', 'kaitain'); ?></label>
+                <input id="kaitain-sticky-checkbox" name="make_sticky" type="checkbox">
+                <label for="meta-kaitain-sticky"><?php _e('Sticky Post', 'kaitain'); ?></label>
             </fieldset>
         </li>
-        <li class="expiryinfo">
-            <fieldset>
-                <label><?php _e('Until', 'kaitain'); ?></label>
-                <input class="datepicker-hour" id="expiry-hour" name="hour" type="text" min="00" max="23" minlength="2" maxlength="2" size="2" value="00"> :
-                <input class="datepicker-minute" id="expiry-minute" name="minute" type="text" min="00" max="59" minlength="2" maxlength="2" size="2" value="00">
-                </fieldset>
+        <li class="kaitain-expiryinfo" id="kaitain-sticky-time">
+            <span><?php _e('Until', 'kaitain'); ?></span>
+            <?php // Hour and minute inputs are added and set via JS.
         </li>
-        <li class="expiryinfo">
-            <fieldset>
-                on <select class="datepicker-day" id="expiry-day" name="day"></select><select class="datepicker-month" id="expiry-month" name="month"></select><select class="datepicker-year" id="expiry-year" name="year"></select>
-            </fieldset>
+        <li class="kaitain-expiryinfo" id="kaitain-sticky-date">
+            <span><?php _e('on', 'kaitain'); ?></span>
+            <?php // Day, month and year inputs are set and added via JS.
         </li>
     </ul>
-    <p class="expiryinfo" id="meta-tuairisc-sticky-info">
+    <p class="expiryinfo" id="meta-kaitain-sticky-info">
         <em><?php _e('A sticky post will remain in the top position on the front page until either the set time passes, or another post is set to replace it.', 'kaitain'); ?></em>
    </p>
 
