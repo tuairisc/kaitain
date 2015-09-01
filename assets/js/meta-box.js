@@ -11,6 +11,66 @@
  * @link       http://www.tuairisc.ie
  */
 
+var checkbox = {
+    featured: '#kaitain-featured-checkbox',
+    sticky: '#kaitain-sticky-checkbox'
+};
+
+var info = {
+    featured: '.kaitain-stickycheck',
+    sticky: '.kaitain-expiryinfo'
+};
+
+/**
+ * Linked Toggle
+ * -----------------------------------------------------------------------------
+ * Linked checkbox toggle. When checkbox is checked, make connected elements
+ * appear. When checkbox is unchecked, uncheck and hide all linked elements
+ * and checkboxes.
+ * 
+ * @param   array     linkedElements      Array of checkboxes.
+ * @param   object    targetElement       Linked selector to toggle.
+ * @return  object    this
+ */
+
+(function($) {
+    $.fn.linkedToggle = function(linkedElements, targetElement) {
+        var isChecked = function(element) {
+            return $(element).is(':checked');
+        }
+
+        linkedElements.push(this);
+
+        this.on('change', function(event) {
+            var checked = linkedElements.every(isChecked);
+
+            $(targetElement).toggle(checked);
+
+            if (!checked) {
+                // Uncheck and hide all descendent elements when unchecked.
+                $(targetElement).find('input[type=checkbox]')
+                    .prop('checked', false).trigger('change');
+            }
+        });
+
+        return this;
+    }
+})(jQuery);
+
+/**
+ * Checkbox Setup
+ * -----------------------------------------------------------------------------
+ * Add change to checkboxes and set state.
+ */
+
+jQuery(checkbox.featured).linkedToggle([], info.featured)
+    .prop('checked', kaitainMetaInfo.featured)
+    .trigger('change');
+
+jQuery(checkbox.sticky).linkedToggle([checkbox.featured], info.sticky)
+    .prop('checked', kaitainMetaInfo.sticky)
+    .trigger('change');
+
 /**
  * Dates
  * -----------------------------------------------------------------------------
@@ -60,10 +120,6 @@ if (kaitainMetaInfo.sticky) {
  */
 
 var input = {
-    checkbox: {
-        featured: '#meta-kaitain-featured',
-        sticky: '#meta-kaitain-sticky'
-    },
     select: {
         day: '#expiry-day',
         month: '#expiry-month',
@@ -71,19 +127,12 @@ var input = {
         hour: '#expiry-hour',
         minute: '#expiry-minute'
     },
-    info: {
-        check: '.stickycheck',
-        expiry: '.expiryinfo'
-    }
 };
 
 /**
  * Setup Checkboxes
  * -----------------------------------------------------------------------------
  */
-
-jQuery(input.checkbox.featured).prop('checked', kaitainMetaInfo.featured);
-jQuery(input.checkbox.sticky).prop('checked', kaitainMetaInfo.sticky);
 
 /**
  * Toggle Element if Box Checked
@@ -310,10 +359,6 @@ jQuery(input.select.day).update('day', expiry.year, expiry.month, expiry.day);
 jQuery(input.select.hour).update('hour', expiry.hour);
 jQuery(input.select.minute).update('minute', expiry.minute);
 
-// Setup checkboxes.
-jQuery(input.info.check).stickyCheckToggle(input.checkbox.featured);
-jQuery(input.info.expiry).stickyCheckToggle(input.checkbox.featured, input.checkbox.sticky);
-
 // Input field change handlers.
 jQuery(input.select.year).on('change', function() {
     var year = jQuery(this).val();
@@ -328,19 +373,4 @@ jQuery(input.select.month).on('change', function() {
     var month = jQuery(this).val();
 
     jQuery(input.select.day).update('day', year, month);
-});
-
-// Checkbox state change handlers.
-jQuery(input.checkbox.featured).on('change', function() {
-    // Uncheck "sticky" if post isn't featured.
-    if (!jQuery(this).prop('checked')) {
-        jQuery(input.checkbox.sticky).prop('checked', false);
-        jQuery(input.info.expiry).stickyCheckToggle(this, input.checkbox.sticky);
-    }
-
-    jQuery(input.info.check).stickyCheckToggle(this);
-});
-
-jQuery(input.checkbox.sticky).on('change', function() { 
-    jQuery(input.info.expiry).stickyCheckToggle(this, input.checkbox.featured);
 });
