@@ -28,18 +28,20 @@ var info = {
  * appear. When checkbox is unchecked, uncheck and hide all linked elements
  * and checkboxes.
  * 
- * @param   array     linkedElements      Array of checkboxes.
- * @param   object    targetElement       Linked selector to toggle.
- * @return  object    this
+ * @param   array       linkedElements      Array of checkboxes.
+ * @param   object      targetElement       Linked selector to toggle.
+ * @param   bool        state               Default state.
+ * @return  object      this
  */
 
 (function($) {
-    $.fn.linkedToggle = function(linkedElements, targetElement) {
+    $.fn.linkedToggle = function(linkedElements, targetElement, state) {
         var isChecked = function(element) {
             return $(element).is(':checked');
         }
 
         linkedElements.push(this);
+        state = state || false;
 
         this.on('change', function(event) {
             var checked = linkedElements.every(isChecked);
@@ -53,6 +55,8 @@ var info = {
             }
         });
 
+        // Set default checkced unchecked state.
+        this.prop('checked', state).trigger('change');
         return this;
     }
 })(jQuery);
@@ -63,13 +67,13 @@ var info = {
  * Add change to checkboxes and set state.
  */
 
-jQuery(checkbox.featured).linkedToggle([], info.featured)
-    .prop('checked', kaitainMetaInfo.featured)
-    .trigger('change');
+jQuery(checkbox.featured).linkedToggle(
+    [], info.featured, kaitainMetaInfo.featured
+);
 
-jQuery(checkbox.sticky).linkedToggle([checkbox.featured], info.sticky)
-    .prop('checked', kaitainMetaInfo.sticky)
-    .trigger('change');
+jQuery(checkbox.sticky).linkedToggle(
+    [checkbox.featured], info.sticky, kaitainMetaInfo.sticky
+);
 
 /**
  * Dates
