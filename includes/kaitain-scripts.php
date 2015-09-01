@@ -78,17 +78,18 @@ function kaitain_admin_scripts() {
     $js_path = $GLOBALS['kaitain_asset_paths']['js'];
     $css_path = $GLOBALS['kaitain_asset_paths']['css'];
 
-    $kaitain_admin_js = array(
-        'post-meta-box' => array('post.php', $js_path . 'meta-box.js'),
-        // 'new-meta-box' => array('post.php', $js_path . 'new-meta-box.js')
-    );
+    kaitain_admin_js(array(
+        'postmeta-functions' => array(
+            'post.php', $js_path . 'postmeta-functions.js'
+        ),
+        'postmeta-setup' => array(
+            'post.php', $js_path . 'postmeta-setup.js'
+        ),
+    ));
 
-    $kaitain_admin_css = array(
+    kaitain_admin_css(array(
         'tuairic-admin' => $css_path . 'admin.css'
-    );
-
-    kaitain_admin_js($kaitain_admin_js);
-    kaitain_admin_css($kaitain_admin_css);
+    ));
 }
 
 add_action('admin_head', 'kaitain_admin_scripts');
@@ -142,13 +143,18 @@ function kaitain_js($kaitain_js, $kaitain_conditional_js, $js_path) {
 }
 
 function kaitain_admin_js($kaitain_admin_js) {
-    // Admin JavaScript.
     foreach ($kaitain_admin_js as $name => $script) {
-        if ($script[0] && $hook !== $script[0]) {
-            continue;
-        }
+        // if ($script[0] && $hook !== $script[0]) {
+        //     continue;
+        // }
         
-        wp_enqueue_script($name, $script[1], array('jquery'), THEME_VER, true);
+        wp_enqueue_script(
+            $name,
+            $script[1],
+            array('jquery'),
+            $GLOBALS['kaitain_version'],
+            true
+        );
     }
 }
 
