@@ -79,11 +79,11 @@ function kaitain_featured_box_content($post) {
         </li>
         <li class="kaitain-expiryinfo" id="kaitain-sticky-time">
             <span><?php _e('Until', 'kaitain'); ?></span>
-            <?php // Hour and minute inputs are added and set via JS.
+            <?php // Hour and minute inputs are added and set via JS. ?>
         </li>
         <li class="kaitain-expiryinfo" id="kaitain-sticky-date">
             <span><?php _e('on', 'kaitain'); ?></span>
-            <?php // Day, month and year inputs are set and added via JS.
+            <?php // Day, month and year inputs are set and added via JS. ?>
         </li>
     </ul>
     <p class="expiryinfo" id="meta-kaitain-sticky-info">
