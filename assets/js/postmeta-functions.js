@@ -11,20 +11,20 @@
  * @link       http://www.tuairisc.ie
  */
 
-(function($) {
-    /**
-     * Linked Toggle
-     * -------------------------------------------------------------------------
-     * Linked checkbox toggle. When checkbox is checked, make connected elements
-     * appear. When checkbox is unchecked, uncheck and hide all linked elements
-     * and checkboxes.
-     * 
-     * @param   array       linkedElements      Array of checkboxes.
-     * @param   object      targetElement       Linked selector to toggle.
-     * @param   bool        state               Default state.
-     * @return  object      this
-     */
+/**
+ * Linked Toggle
+ * -----------------------------------------------------------------------------
+ * Linked checkbox toggle. When checkbox is checked, make connected elements
+ * appear. When checkbox is unchecked, uncheck and hide all linked elements
+ * and checkboxes.
+ * 
+ * @param   array       linkedElements      Array of checkboxes.
+ * @param   object      targetElement       Linked selector to toggle.
+ * @param   bool        state               Default state.
+ * @return  object      this
+ */
 
+;(function($) {
     $.fn.linkedToggle = function(linkedElements, targetElement, state) {
         var isChecked = function(element) {
             return $(element).is(':checked');
@@ -49,6 +49,162 @@
         this.prop('checked', state).trigger('change');
         return this;
     }
+})(jQuery);
+
+/**
+ * Time and Date Checker
+ * -----------------------------------------------------------------------------
+ * Does:
+ * 
+ * 1. Append either time (hour:minute) or date (day/month/year) selects to
+ *    target element.
+ * 2. Selects are prefixed with a given string, and suffixed with the input
+ *    type foo_year, foo_month, etc.
+ * 3. A given time and date can be provided by a Unix timestamp, and the inputs
+ *    will be set to this value. 
+ */
+
+;(function($) {
+    $.fn.checker = function(method, prefix, expiry) {
+        var add = {
+            /* Inputs are added without a value or options. These are set via
+             * update.foo()
+             */
+
+            fieldset: {
+                time: function(prefix, expiry) {
+                    // Append hour fieldset with hour and minute.
+                    var fieldset = $('<fieldset>')
+                        .append(add.input('hour', prefix))
+                        .append(' : ')
+                        .append(add.input('minute', prefix));
+
+                    this.append(fieldset);
+                },
+                date: function(prefix, expiry) {
+                    // Append date fieldset with day, month, year values.
+                    var fieldset = $('<fieldset>')
+                        .append(add.select('day', prefix))
+                        .append('/')
+                        .append(add.select('month', prefix))
+                        .append('/')
+                        .append(add.select('year', prefix));
+
+                    this.append(fieldset);
+                }
+            },
+            select: function(type, prefix, values) {
+                // Generate select HTML.
+                var attr = prefix + '-' + type; 
+
+                var select = $('<select>', {
+                    'class': attr,
+                    id: attr,
+                    name: attr
+                });
+
+                return select;
+            },
+            input: function(type, prefix) {
+                // Generate hour and minute input HTML.
+                var attr = prefix + '-' + type; 
+                var max = (type === 'hour') ? 23 : 59;
+
+                var input = $('<input>', {
+                    type: 'text',
+                    'class': attr,
+                    id: attr,
+                    name: attr,
+                    min: '00',
+                    max: max,
+                    minlength: 2,
+                    maxlength: 2,
+                    value: '00'
+                });
+
+                // Size attr is ignored in Chrome if set above. 
+                input.attr('size', 2);
+
+                return input;
+            }
+        };
+
+        var update = {
+            time: {
+                hour: function() {},
+                minute: function() {},
+            },
+            date: {
+                day: function() {},
+                month: function() {},
+                year: function() {},
+            },
+            option: function(value, text) {
+                // Generate option HTML.
+                return '<option value="' + value + '">' + text + '</option>';
+            },
+        };
+
+        function randChars(amount, divider) {
+            // Generate stream of random chars prefixed by a dividing char.
+            amount = amount || 10;
+            divider = divider || '';
+
+            return divider + Math.random()
+                .toString(36)
+                .replace(/[^a-z]+/g, '')
+                .substr(0, amount);
+        }
+
+        method = (method === 'time') ? method : 'date';
+        prefix = prefix || randChars(10);
+        expiry = expiry || $.now();
+
+        add.fieldset[method].apply(this, Array.prototype.slice.call(arguments, 1));
+        return this;
+    }
+
+/**
+ * Dates
+ * -----------------------------------------------------------------------------
+ * Current year, month, day and calendar year as Bearla.
+ */
+
+// Widget date will be set by WordPress.
+var date = new Date();
+
+date = {
+    year: date.getFullYear(),
+    month: date.getMonth(),
+    day: date.getDate(),
+    hour: date.getHours(),
+    minute: date.getMinutes(),
+    calendar: [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ],
+    daysInMonth: function(year, month) {
+        // Return days in given month.
+        return new Date(year, month, 0).getDate();
+    }
+};
+
+var expiry;
+
+if (pmFeatured.sticky) {
+    var expiry = new Date(pmFeatured.expiry * 1000);
+
+    expiry = {
+        year: expiry.getFullYear(),
+        month: expiry.getMonth(),
+        day: expiry.getDate(),
+        hour: expiry.getHours(),
+        minute: expiry.getMinutes(),
+    };
+} else {
+    expiry = date;
+}
+
 
     /**
      * Generate Option HTML
@@ -57,11 +213,6 @@
      * @param   string      value           Value for a given option.
      * @param   string      text            Text for the option.       
      */
-
-    Array.prototype.addOptionHtml = function(value, text) {
-        this.push('<option value="' + value + '">' + text + '</option>');    
-        return this;
-    }
 
     /**
      * Reset Select Selected Option
