@@ -38,15 +38,22 @@ add_action('add_meta_boxes', 'kaitain_featured_meta_box');
 function kaitain_featured_box_content($post) {
     wp_nonce_field('kaitain_featured_box_data', 'kaitain_featured_box_nonce');
 
+    // These three values will be echoed out as JavaScript variables.
     $is_featured = kaitain_is_featured_post($post);
     $is_sticky = false;
-    $expiry = 0;
+    $expiry = false;
 
     if ($is_featured) {
         $is_sticky = kaitain_is_post_sticky($post);
 
         if ($is_featured && $is_sticky) {
-            $expiry = get_option('kaitain_sticky_post')['expires'];
+            if (!($expiry = get_option('kaitain_sticky_post')['expires'])) {
+                // 0 is falsy in both JavaScript and PHP.
+                $expiry = 0;
+            } else {
+                // To make it a JavaScript Unix timestamp.
+                $expiry *= 1000;
+            }
         }
     }
 
@@ -77,13 +84,8 @@ function kaitain_featured_box_content($post) {
                 <label for="meta-kaitain-sticky"><?php _e('Sticky Post', 'kaitain'); ?></label>
             </fieldset>
         </li>
-        <li class="kaitain-expiryinfo" id="kaitain-sticky-time">
-            <span><?php _e('Until', 'kaitain'); ?></span>
-            <?php // Hour and minute inputs are added and set via JS. ?>
-        </li>
-        <li class="kaitain-expiryinfo" id="kaitain-sticky-date">
-            <span><?php _e('on', 'kaitain'); ?></span>
-            <?php // Day, month and year inputs are set and added via JS. ?>
+        <li class="kaitain-expiryinfo" id="kaitain-sticky-expiry">
+            <?php // Inputs are added and set via JS. ?>
         </li>
     </ul>
     <p class="expiryinfo" id="meta-kaitain-sticky-info">
