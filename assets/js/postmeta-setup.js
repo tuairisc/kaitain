@@ -31,10 +31,4 @@ jQuery('#kaitain-sticky-checkbox').linkedToggle(
  * Add change to checkboxes and set state.
  */
 
-jQuery('#kaitain-sticky-time').checker(
-    'time', 'stickyexpires', pmFeatured.expiry
-);
-
-jQuery('#kaitain-sticky-date').checker(
-    'date', 'stickyexpires', pmFeatured.expiry
-);
+jQuery('#kaitain-sticky-expiry').checker('stickyexpires', pmFeatured.expiry);

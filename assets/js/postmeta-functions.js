@@ -65,217 +65,147 @@
  */
 
 ;(function($) {
-    $.fn.checker = function(method, prefix, expiry) {
+    $.fn.checker = function(prefix, target) {
         var add = {
             /* Inputs are added without a value or options. These are set via
              * update.foo()
              */
+            fieldset: function(prefix) {
+                var $fieldset = $('<fieldset>').append('Until: ');
 
-            fieldset: {
-                time: function(prefix, expiry) {
-                    // Append hour fieldset with hour and minute.
-                    var fieldset = $('<fieldset>')
-                        .append(add.input('hour', prefix))
-                        .append(' : ')
-                        .append(add.input('minute', prefix));
+                $.each(['hour', 'minute'], function(index, name) {
+                    add.input.call($fieldset, name, prefix);
 
-                    this.append(fieldset);
-                },
-                date: function(prefix, expiry) {
-                    // Append date fieldset with day, month, year values.
-                    var fieldset = $('<fieldset>')
-                        .append(add.select('day', prefix))
-                        .append('/')
-                        .append(add.select('month', prefix))
-                        .append('/')
-                        .append(add.select('year', prefix));
-
-                    this.append(fieldset);
-                }
-            },
-            select: function(type, prefix, values) {
-                // Generate select HTML.
-                var attr = prefix + '-' + type; 
-
-                var select = $('<select>', {
-                    'class': attr,
-                    id: attr,
-                    name: attr
+                    if (index === 0) {
+                        $fieldset.append(' : ');
+                    }
                 });
 
-                return select;
+                $fieldset.append('<br />').append('on: ');
+
+                $.each(['day', 'month', 'year'], function(index, name) {
+                    add.input.call($fieldset, name, prefix);
+
+                    if (index === 0 || index === 1) {
+                        // Insert dividing forward slash.
+                        $fieldset.append(' / ');
+                    }
+                });
+
+                $fieldset.on('change', 'input', validate);
+                this.append($fieldset);
             },
-            input: function(type, prefix) {
+            input: function(name, prefix) {
                 // Generate hour and minute input HTML.
-                var attr = prefix + '-' + type; 
-                var max = (type === 'hour') ? 23 : 59;
+                var attr = (prefix) ? prefix + '-' + name : name;
+                var max = (name === 'hour') ? 23 : 59;
 
                 var input = $('<input>', {
                     type: 'text',
                     'class': attr,
                     id: attr,
                     name: attr,
-                    min: '00',
-                    max: max,
                     minlength: 2,
                     maxlength: 2,
-                    value: '00'
                 });
 
                 // Size attr is ignored in Chrome if set above. 
-                input.attr('size', 2);
-
-                return input;
+                input.attr('size', 2).data('name', name);
+                this.append(input);
             }
         };
 
-        var update = {
-            time: {
-                hour: function() {
-                    hour = hour || date.hour;
-                    hour = (hour < 10) ? '0' + hour : hour;
-                    this.val(hour);
-                    return this;
-                },
-                minute: function() {
-                    minute = minute || date.minute;
-                    minute = (minute < 10) ? '0' + minute : minute;
-                    this.val(minute);
-                    return this;
-                },
-            },
-            date: {
-                day: function(day, month, year) {
-                    day = parseInt(day) || date.day;
-                    month = parseInt(month) || date.month;
-                    year = parseInt(year) || date.year;
-
-                    var value = $(this).val() || day;
-                    var options = [];
-
-                    var days = {
-                        start: 1,
-                        end: 0
-                    };
-
-                    if (year == date.year && month == date.month) {
-                        // If month and year are current, use current day.
-                        days.start = date.day;
-                    }
-
-                    /* Month returned is 0, 1, 2, ... 
-                     * Month needed is 1, 2, 3, ... */
-                    month++;
-
-                    days.end = date.daysInMonth(year, month);
-
-                    for (var i = days.start; i <= days.end; i++) {
-                        options.addOptionHtml(i, i);
-                    }
-
-                    this.reset(options, value);
-                    return this;
-                },
-                month: function(month, year) {
-                    // Update month option.
-                    year = parseInt(year) || date.year;
-                    month = parseInt(month) || date.month;
-
-                    var options = [];
-                    var value = $(this).val() || month;
-                    
-                    $.each(date.calendar, function(i, v) {
-                        if (year === date.year && i < date.month) {
-                            return true;
-                        }
-                            
-                        options.addOptionHtml(i, v);
-                    });
-
-                    this.reset(options, value);
-                    return this;
-                },
-                year: function(year, padding) {
-                    year = parseInt(year) || date.year;
-                    padding = padding || 5;
-
-                    var options = [];
-                    var value = $(this).val() || year;
-
-                    var years = {
-                        start: year,
-                        end: year + padding
-                    }
-
-                    if (years.start > date.year) {
-                        years.start -= (year - date.year);
-                    }
-
-                    for (var i = years.start; i <= years.end; i++) {
-                        options.addOptionHtml(i, i); 
-                    }
-
-                    this.reset(options, value);
-                    return this;
-                },
-            },
-            option: function(value, text) {
-                // Generate option HTML.
-                return '<option value="' + value + '">' + text + '</option>';
-            },
+        var regex = {
+            minute: /^[0-5][0-9]$/,
+            hour: /^([0-1][0-9]|2[0-3])$/,
+            day: /^(0[1-9]|[12]\d|3[01])$/,
+            month: /^(0[1-9]|1[0-2])$/,
+            year: /^[1-2](9|0)[0-9]{2}$/
         };
 
-        function randChars(amount, divider) {
-            // Generate stream of random chars prefixed by a dividing char.
-            amount = amount || 10;
-            divider = divider || '';
-
-            return divider + Math.random()
-                .toString(36)
-                .replace(/[^a-z]+/g, '')
-                .substr(0, amount);
+        var isLeapYear = function(year) {
+            return (year % 100 !== 0 && year % 4 === 0 || year % 400 === 0);
         }
 
-        // Widget date will be set by WordPress.
-        var date = new Date();
+        var validate = function(event) {
+            console.log(this);
+            return;
+
+            // Order:
+            // 0. If empty, pull in values from target.
+            // 1. If fewer digits than max, pad out with leading 0's.
+            // 2. After padding, validate against regex above.
+            // 3. If regex is invalid flag input and keep focus there.
+            // 4. If field validates, pass back values to date.target.
+            // 5. If date.target is less than date.now, change date.target to date.now.
+            // 6. If date.target is less than date.now, change all values to that of date.now.
+
+            var name = $(this).data('name');
+            var max = (name === 'hour') ? 23 : 59;
+
+            value = parseInt($(this).val(), 10) || date.target[name];
+            date.target[name] = value;
+
+            if (targetLessThanNow() && value !== date.now[name]) {
+                value = date.now[name];
+                $(this).siblings('input').val('').trigger('change');
+                $(this).siblings('select').empty();
+            }
+
+            // Conform valueue to sane maximums and pad.
+            value = (value > max) ? max : value;
+            // value = (value.toString().length === 1) ? '0' + value : value;
+           
+            $(this).val(value);
+            return this;
+        }
+
+        var daysInMonth = function(year, month) {
+            // Return days in given month.
+            return new Date(year, month, 0).getDate();
+        }
+
+        var targetLessThanNow = function() {
+            var now = 0;
+            var target = 0;
+
+            $.each(date.target, function(key) {
+                now += parseInt(date.now[key], 10);
+                target += parseInt(date.target[key], 10);
+            });
+
+            return (now > target);
+        }
+
+        var calendar = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November',
+            'December'
+        ];
+
+        var date = {
+            now: new Date(),
+            target: target || new Date()
+        };
 
         date = {
-            year: date.getFullYear(),
-            month: date.getMonth(),
-            day: date.getDate(),
-            hour: date.getHours(),
-            minute: date.getMinutes(),
-            calendar: [
-                'January', 'February', 'March', 'April', 'May', 'June',
-                'July', 'August', 'September', 'October', 'November', 'December'
-            ],
-            daysInMonth: function(year, month) {
-                // Return days in given month.
-                return new Date(year, month, 0).getDate();
-            }
+            now: {
+                minute: date.now.getMinutes(),
+                hour: date.now.getHours(),
+                day: date.now.getDate(),
+                month: date.now.getMonth(),
+                year: date.now.getFullYear()
+            },
+            target: {
+                minute: date.target.getMinutes(),
+                hour: date.target.getHours(),
+                day: date.target.getDate(),
+                month: date.target.getMonth(),
+                year: date.target.getFullYear()
+            },
         };
 
-        var expiry;
-
-        if (pmFeatured.sticky) {
-            var expiry = new Date(pmFeatured.expiry * 1000);
-
-            expiry = {
-                year: expiry.getFullYear(),
-                month: expiry.getMonth(),
-                day: expiry.getDate(),
-                hour: expiry.getHours(),
-                minute: expiry.getMinutes(),
-            };
-        } else {
-            expiry = date;
-        }
-
-        method = (method === 'time') ? method : 'date';
-        prefix = prefix || randChars(10);
-        expiry = expiry || $.now();
-
-        add.fieldset[method].apply(this, Array.prototype.slice.call(arguments, 1));
+        add.fieldset.call(this, prefix);
         return this;
     }
 })(jQuery);
