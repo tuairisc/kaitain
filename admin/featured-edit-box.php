@@ -88,7 +88,7 @@ function kaitain_featured_box_content($post) {
             <?php // Inputs are added and set via JS. ?>
         </li>
     </ul>
-    <p class="expiryinfo" id="meta-kaitain-sticky-info">
+    <p class="kaitain-expiryinfo" id="meta-kaitain-sticky-info">
         <em><?php _e('A sticky post will remain in the top position on the front page until either the set time passes, or another post is set to replace it.', 'kaitain'); ?></em>
    </p>
 
