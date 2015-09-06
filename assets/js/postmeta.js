@@ -234,3 +234,25 @@
         return this;
     }
 })(jQuery);
+
+/**
+ * Checkbox Setup
+ * -----------------------------------------------------------------------------
+ * Add change to checkboxes and set state.
+ */
+
+jQuery('#kaitain-featured-checkbox').linkedToggle(
+    [], '.kaitain-stickycheck', pmFeatured.featured
+);
+
+jQuery('#kaitain-sticky-checkbox').linkedToggle(
+    ['#kaitain-featured-checkbox'], '.kaitain-expiryinfo', pmFeatured.sticky
+);
+
+/**
+ * Date and Time Setup
+ * -----------------------------------------------------------------------------
+ * Add change to checkboxes and set state.
+ */
+
+jQuery('#kaitain-sticky-expiry').checker('stickyexpires', pmFeatured.expiry);
