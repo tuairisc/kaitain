@@ -119,15 +119,17 @@
         };
 
         var inputSetup = function() {
+            // Reset all input values to whatever target says.
             $(this).find('input').empty().each(function() {
-                padInputValue.call(this, date.target[$(this).data('name')]);
+                padInputValue.call(this, target[$(this).data('name')]);
             });
         }
 
         var padInputValue = function(value) {
-            value = value.toString() || $(this).val().toString();
-
+            // Pad input values with zeroes for neatness.
             var zeroes = '';
+
+            value = value.toString() || $(this).val().toString();
 
             for (var i = 0; i < $(this).attr('size') - value.length; i ++) {
                 zeroes += '0';
@@ -143,82 +145,48 @@
             var value = parseInt($(this).val(), 10);
             // 2. Validate regex. Regex acounts for leading zeros anyhow.
             var valid = regex[name].test(value);
-            return;
 
             $(this).toggleClass('input-error', !valid);
             
             if (!valid) {
+                // 3. If regex is invalid, focus back on input.
                 $(this).focus().select();
                 return;
             }
 
-            switch (name) {
-                case 'day':
-                    // Reduce day to number of days in given month
-                    var dim = daysInMonth(date.target.year, date.target.month);
-                    console.log(date.target.year, date.target.month, dim);
-                    value = (value > dim) ? dim: value;
-                    break;
-                case 'month':
-                    value--;
-                    break;
-                default:
-                    break;
+            // 5. Update target date object.
+            target[name] = value;
+
+            if (name.match(/^(day|month|year)$/)) {
+                /* 6. If date change, ensure day of month isn't greater than
+                 * days in month.
+                 */
+
+                var dim = date.daysInMonth(target.year, target.month);
+
+                if (target.day > dim) {
+                    target.day = dim;
+                    value = dim;
+
+                    if (name !== 'day') {
+                        $(this).siblings('[id*=day]').val(dim);
+                    }
+                }
             }
 
-            date.target[name] = value;
-
-            // 2. Pad zeros in in the input field.
-            // padInputValue.call(this, value);
-            
-            return;
-            // Order:
-            // 0. If empty, pull in values from target.
-            // 1. If fewer digits than max, pad out with leading 0's.
-            // 2. After padding, validate against regex above.
-            // 3. If regex is invalid flag input and keep focus there.
-            // 4. If field validates, pass back values to date.target.
-            // 5. If date.target is less than date.now, change date.target to date.now.
-            // 6. If date.target is less than date.now, change all values to that of date.now.
-
-            var name = $(this).data('name');
-            var max = (name === 'hour') ? 23 : 59;
-
-            value = parseInt($(this).val(), 10) || date.target[name];
-            date.target[name] = value;
-
-            if (targetLessThanNow() && value !== date.now[name]) {
-                value = date.now[name];
-                $(this).siblings('input').val('').trigger('change');
-                $(this).siblings('select').empty();
+            if (date.timeLessThanNow(target, name)) {
+                // 7. If target date < current datetime, reset it.
+                target = date.split($.now());
+                inputSetup.call($(this).parent());
             }
 
-            // Conform valueue to sane maximums and pad.
-            value = (value > max) ? max : value;
-            // value = (value.toString().length === 1) ? '0' + value : value;
-           
-            $(this).val(value);
+            // 8. Pad value.
+            padInputValue.call(this, value);
             return this;
         }
 
-        var daysInMonth = function(year, month) {
-            // Return days in given month.
-            return new Date(year, month, 0).getDate();
-        }
-
-        var targetLessThanNow = function() {
-            var now = 0;
-            var target = 0;
-
-            $.each(date.target, function(key) {
-                now += parseInt(date.now[key], 10);
-                target += parseInt(date.target[key], 10);
-            });
-
-            return (now > target);
-        }
-
         var regex = {
+            // Regex for input evaluation.
             minute: /^([0-5])?\d$/,
             hour: /^((\d)|[0-1]\d|2[0-3])$/,
             day: /^(([1-9])?|[1-2]\d|3[0-2])$/,
@@ -227,27 +195,41 @@
         };
 
         var date = {
-            now: new Date(),
-            target: target || new Date()
+            daysInMonth: function(year, month) {
+                // Return days in given month.
+                return new Date(year, month, 0).getDate();
+            },
+            split: function(date) {
+                // Split datetime object into comparison date.
+                var valid = (new Date(date)) > 0;
+                date = (valid) ? new Date(date) : new Date();
+
+                return {
+                    minute: date.getMinutes(),
+                    hour: date.getHours(),
+                    day: date.getDate(),
+                    month: date.getMonth() + 1,
+                    year: date.getFullYear()
+                };
+            },
+            join: function(timestamp) {
+                // Rejoin split datetime object for evaluation.
+                return Math.floor(new Date(
+                    timestamp.year,
+                    timestamp.month - 1,
+                    timestamp.day,
+                    timestamp.hour,
+                    timestamp.minute,
+                    0, 0
+                ).getTime() / 1000);
+            },
+            timeLessThanNow: function(time, name) {
+                // Is updated target time less than the current time?
+                return (date.join(time) < Math.floor($.now() / 1000));
+            },
         };
 
-        date = {
-            now: {
-                minute: date.now.getMinutes(),
-                hour: date.now.getHours(),
-                day: date.now.getDate(),
-                month: date.now.getMonth() + 1,
-                year: date.now.getFullYear()
-            },
-            target: {
-                minute: date.target.getMinutes(),
-                hour: date.target.getHours(),
-                day: date.target.getDate(),
-                month: date.target.getMonth() + 1,
-                year: date.target.getFullYear()
-            },
-        };
-
+        target = date.split(target || null);
         add.fieldset.call(this, prefix);
         return this;
     }
