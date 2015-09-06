@@ -75,7 +75,7 @@ function kaitain_featured_box_content($post) {
         <li>
             <fieldset>
                 <input id="kaitain-featured-checkbox" name="make_featured" type="checkbox">
-                <label for="meta-kaitain-featured"><?php _e('Feature Post', 'kaitain'); ?></label>
+                <label for="kaitain-featured-checkbox"><?php _e('Feature Post', 'kaitain'); ?></label>
             </fieldset>
         </li>
         <li class="kaitain-stickycheck">
@@ -84,11 +84,11 @@ function kaitain_featured_box_content($post) {
                 <label for="meta-kaitain-sticky"><?php _e('Sticky Post', 'kaitain'); ?></label>
             </fieldset>
         </li>
-        <li class="kaitain-expiryinfo" id="kaitain-sticky-expiry">
+        <li class="kaitain-sticky-expiryinfo" id="kaitain-sticky-expiry">
             <?php // Inputs are added and set via JS. ?>
         </li>
     </ul>
-    <p class="kaitain-expiryinfo" id="meta-kaitain-sticky-info">
+    <p class="kaitain-sticky-expiryinfo" id="meta-kaitain-sticky-info">
         <em><?php _e('A sticky post will remain in the top position on the front page until either the set time passes, or another post is set to replace it.', 'kaitain'); ?></em>
    </p>
 
