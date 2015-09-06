@@ -129,7 +129,7 @@ function kaitain_update_featured_meta_box($post_id) {
     if ($make_featured && $make_sticky) {
         // Sanitiize date input and mkdate.
         $year = filter_var($_POST['stickyexpires-year'], FILTER_SANITIZE_NUMBER_INT);
-        $month = filter_var($_POST['stickyexpires-month'], FILTER_SANITIZE_NUMBER_INT); $month++;
+        $month = filter_var($_POST['stickyexpires-month'], FILTER_SANITIZE_NUMBER_INT);
         $day = filter_var($_POST['stickyexpires-day'], FILTER_SANITIZE_NUMBER_INT);
         $hour = filter_var($_POST['stickyexpires-hour'], FILTER_SANITIZE_NUMBER_INT);
         $minute = filter_var($_POST['stickyexpires-minute'], FILTER_SANITIZE_NUMBER_INT);
