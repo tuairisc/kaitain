@@ -13,11 +13,6 @@
  * @link       http://www.tuairisc.ie
  */
 
-$notice_nonce = array(
-    'action' => 'kaitain_notice_box',
-    'name' => 'kaitain_notice_box_nonce'
-);
-
 /**
  * Add Post Editor Meta Box
  * -----------------------------------------------------------------------------
@@ -39,22 +34,31 @@ function kaitain_notice_meta_box() {
  */
 
 function kaitain_notice_box_content($post, $args) {
-    global $notice_nonce;
-    wp_nonce_field($notice_nonce['action'], $notice_nonce['name']);
-
-    $key = get_option('kaitain_notice_post_key');
-    $is_notice = !!get_post_meta($post->ID, $key, true) ? 'checked' : '';;
+    wp_nonce_field('kaitain_notice_box_data', 'kaitain_notice_box_nonce');
+    $is_notice = !!get_post_meta($post->ID, 'kaitain_is_public_notice', true) ? 'checked' : '';;
 
     ?>
+    <script>
+        var pmNotice = {
+            notice: <?php printf('%s', $is_notice ? 'true' : 'false'); ?>
+        };
+    </script>
 
     <p>
-        <?php _e('This post is a public notice.', 'kaitain'); ?>
+        <?php _e('Public notices include material like job listings and event announcements.', 'kaitain'); ?>
     </p>
 
     <ul>
         <li>
-            <input id="meta-tuairisc-notice" name="make_notice" type="checkbox" <?php printf($is_notice); ?>>
-            <label for="meta-tuairisc-notice"><?php _e('Public Notice', 'kaitain'); ?></label>
+            <input id="kaitain-notice-checkbox" name="make_notice" type="checkbox" <?php printf($is_notice); ?>>
+            <label for="kaitain-notice-checkbox"><?php _e('Public Notice', 'kaitain'); ?></label>
+        </li>
+        <li class="kaitain-noticecheck">
+            <input id="kaitain-notice-expiry-checkbox" name="notice_expires" type="checkbox" <?php printf($is_notice); ?>>
+            <label for="kaitain-notice-expiry-checkbox"><?php _e('Display Notice Until', 'kaitain'); ?></label>
+        </li>
+        <li class="kaitain-notice-expiryinfo" id="kaitain-notice-expiry">
+            <?php // Inputs are added and set via JS. ?>
         </li>
     </ul>
 
@@ -68,15 +72,14 @@ function kaitain_notice_box_content($post, $args) {
  */
 
 function kaitain_notice_box_update($post_id) {
-    global $notice_nonce;
-    
-    if (!ctype_alnum($_POST[$notice_nonce['name']]) || !isset($_POST[$notice_nonce['name']])) {
+    if (!isset($_POST['kaitain_notice_box_nonce'])) {
         return;
     }
 
-    if (!wp_verify_nonce($_POST[$notice_nonce['name']], $notice_nonce['action'])) {
+    if (!wp_verify_nonce($_POST['kaitain_notice_box_nonce'], 'kaitain_notice_box_data')) {
         return;
     }
+    
     
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
         return; 
@@ -86,11 +89,11 @@ function kaitain_notice_box_update($post_id) {
         return;
     }
 
-    $key = get_option('kaitain_notice_post_key');
+    $key = 'kaitain_is_public_notice';
     $value = false;
 
     if (isset($_POST['make_notice'])) {
-        $value = (isset($_POST['make_notice']) && filter_var($_POST['make_notice'], FILTER_SANITIZE_STRIPPED) === 'on');
+        $value = (filter_var($_POST['make_notice'], FILTER_SANITIZE_STRIPPED) === 'on');
     }
 
     update_post_meta($post_id, $key, $value);
