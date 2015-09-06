@@ -93,6 +93,7 @@
                 });
 
                 $fieldset.on('change', 'input', validate);
+                inputSetup.call($fieldset);
                 this.append($fieldset);
             },
             input: function(name, prefix) {
@@ -117,25 +118,60 @@
             }
         };
 
-        var regex = {
-            minute: /^[0-5][0-9]$/,
-            hour: /^([0-1][0-9]|2[0-3])$/,
-            day: /^(0[1-9]|[12]\d|3[01])$/,
-            month: /^(0[1-9]|1[0-2])$/,
-            year: /^[1-2](9|0)[0-9]{2}$/
-        };
-
-        var isLeapYear = function(year) {
-            return (year % 100 !== 0 && year % 4 === 0 || year % 400 === 0);
+        var inputSetup = function() {
+            $(this).find('input').empty().each(function() {
+                padInputValue.call(this, date.target[$(this).data('name')]);
+            });
         }
 
-        var padInputValue = function() {
+        var padInputValue = function(value) {
+            value = value.toString() || $(this).val().toString();
+
+            var zeroes = '';
+
+            for (var i = 0; i < $(this).attr('size') - value.length; i ++) {
+                zeroes += '0';
+            }
+
+            $(this).val(zeroes + value); 
         }
 
         var validate = function(event) {
-            console.log(this);
+            // 0. Get element type/name from added data.
+            var name = $(this).data('name');
+            // 1. Strip leading zeroes.
+            var value = parseInt($(this).val(), 10);
+            // 2. Validate regex. Regex acounts for leading zeros anyhow.
+            var valid = regex[name].test(value);
             return;
 
+            $(this).toggleClass('input-error', !valid);
+            
+            if (!valid) {
+                $(this).focus().select();
+                return;
+            }
+
+            switch (name) {
+                case 'day':
+                    // Reduce day to number of days in given month
+                    var dim = daysInMonth(date.target.year, date.target.month);
+                    console.log(date.target.year, date.target.month, dim);
+                    value = (value > dim) ? dim: value;
+                    break;
+                case 'month':
+                    value--;
+                    break;
+                default:
+                    break;
+            }
+
+            date.target[name] = value;
+
+            // 2. Pad zeros in in the input field.
+            // padInputValue.call(this, value);
+            
+            return;
             // Order:
             // 0. If empty, pull in values from target.
             // 1. If fewer digits than max, pad out with leading 0's.
@@ -182,11 +218,13 @@
             return (now > target);
         }
 
-        var calendar = [
-            'January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November',
-            'December'
-        ];
+        var regex = {
+            minute: /^([0-5])?\d$/,
+            hour: /^((\d)|[0-1]\d|2[0-3])$/,
+            day: /^(([1-9])?|[1-2]\d|3[0-2])$/,
+            month: /^(0?|[1-9]|1[0-2])$/,
+            year: /^[1-2](9|0)\d{2}$/
+        };
 
         var date = {
             now: new Date(),
@@ -198,14 +236,14 @@
                 minute: date.now.getMinutes(),
                 hour: date.now.getHours(),
                 day: date.now.getDate(),
-                month: date.now.getMonth(),
+                month: date.now.getMonth() + 1,
                 year: date.now.getFullYear()
             },
             target: {
                 minute: date.target.getMinutes(),
                 hour: date.target.getHours(),
                 day: date.target.getDate(),
-                month: date.target.getMonth(),
+                month: date.target.getMonth() + 1,
                 year: date.target.getFullYear()
             },
         };
