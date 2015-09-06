@@ -246,7 +246,15 @@ jQuery('#kaitain-featured-checkbox').linkedToggle(
 );
 
 jQuery('#kaitain-sticky-checkbox').linkedToggle(
-    ['#kaitain-featured-checkbox'], '.kaitain-expiryinfo', pmFeatured.sticky
+    ['#kaitain-featured-checkbox'], '.kaitain-sticky-expiryinfo', pmFeatured.sticky
+);
+
+jQuery('#kaitain-notice-checkbox').linkedToggle(
+    [], '.kaitain-noticecheck', pmNotice.notice
+);
+
+jQuery('#kaitain-notice-expiry-checkbox').linkedToggle(
+    ['#kaitain-notice-checkbox'], '.kaitain-notice-expiryinfo', pmNotice.notice
 );
 
 /**
@@ -256,3 +264,4 @@ jQuery('#kaitain-sticky-checkbox').linkedToggle(
  */
 
 jQuery('#kaitain-sticky-expiry').checker('stickyexpires', pmFeatured.expiry);
+jQuery('#kaitain-notice-expiry').checker('noticeexpires', pmNotice.expiry);
