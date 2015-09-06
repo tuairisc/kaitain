@@ -99,18 +99,20 @@
                 // Generate hour and minute input HTML.
                 var attr = (prefix) ? prefix + '-' + name : name;
                 var max = (name === 'hour') ? 23 : 59;
+                var size = (name === 'year') ? 4 : 2;
+
 
                 var input = $('<input>', {
                     type: 'text',
                     'class': attr,
                     id: attr,
                     name: attr,
-                    minlength: 2,
-                    maxlength: 2,
+                    minlength: size,
+                    maxlength: size
                 });
 
                 // Size attr is ignored in Chrome if set above. 
-                input.attr('size', 2).data('name', name);
+                input.attr('size', size).data('name', name);
                 this.append(input);
             }
         };
@@ -125,6 +127,9 @@
 
         var isLeapYear = function(year) {
             return (year % 100 !== 0 && year % 4 === 0 || year % 400 === 0);
+        }
+
+        var padInputValue = function() {
         }
 
         var validate = function(event) {
