@@ -39,11 +39,11 @@ class Kaitain_Featured_Post_Widget extends WP_Widget {
         $defaults = array(
             // Widget defaults.
             'count' => 4,
-            'sticky' => true
+            'show_sticky' => true
         ); 
 
         $featured_rows_limit = 16;
-        $instance = wp_parse_args($defaults, $instance);
+        $instance = wp_parse_args($instance, $defaults);
         
         ?>
 
@@ -63,10 +63,7 @@ class Kaitain_Featured_Post_Widget extends WP_Widget {
         </ul>
         <?php
             $count = $instance['count'];    
-
-            $show_sticky = 
-                isset($instance['show_sticky']) && $instance['show_sticky']
-                ? 'true' : 'false';
+            $show_sticky = $instance['show_sticky'] ? 'true' : 'false';
         ?>
         <script>
             jQuery('#<?php printf($this->get_field_id('count')); ?>').val(<?php printf($count); ?>);
@@ -79,21 +76,21 @@ class Kaitain_Featured_Post_Widget extends WP_Widget {
     /**
      * Widget Update
      * -------------------------------------------------------------------------
-     * @param  array    $new_default       New default variables.
-     * @param  array    $old_default       Old default variables.
-     * @return array    $default           New widget settings.
+     * @param  array    $new_instance      New instance variables.
+     * @param  array    $old_instance      Old instance variables.
+     * @return array    $instance          New widget settings.
      */
 
-    function update($new_args, $old_args) {
-        $defaults = array();
+    public function update($new_instance, $old_instance) {
+        $instance = array();
 
-        $defaults['show_sticky'] = (
-            isset($new_args['show_sticky']) 
-            && $new_args['show_sticky'] === 'on'
+        $instance['show_sticky'] = (
+            isset($new_instance['show_sticky']) 
+            && $new_instance['show_sticky'] === 'on'
         );
 
-        $defaults['count'] = $new_args['count'];
-        return $defaults;
+        $instance['count'] = $new_instance['count'];
+        return $instance;
     }
 
     /**
@@ -114,8 +111,8 @@ class Kaitain_Featured_Post_Widget extends WP_Widget {
             /* If sticky was checked, see if it is available to use. Otherwise
              * grab the last featured post. */
 
-            if (has_sticky_been_set()) {
-                $featured[] = get_sticky_post();
+            if (kaitain_has_sticky_been_set()) {
+                $featured[] = kaitain_get_sticky_post();
             } else {
                 /* If no stick is set, but was asked to display, increment
                  * count to fill. */
@@ -124,7 +121,7 @@ class Kaitain_Featured_Post_Widget extends WP_Widget {
         }
 
         // Show other featured posts if they were elected ot be shown.
-        $featured = array_merge($featured, get_featured($instance['count'], true));
+        $featured = array_merge($featured, kaitain_get_featured($instance['count'], true));
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
@@ -132,37 +129,36 @@ class Kaitain_Featured_Post_Widget extends WP_Widget {
 
         printf('<div class="recent-widget tuairisc-post-widget">');
 
-        $last_post = end($featured);
+        // Number modifier for when sticky posts are selected.
+        $mod = $instance['show_sticky'] ? 0 : 1;
 
-        foreach ($featured as $num => $post) {
+        foreach ($featured as $number => $post) {
             if (!empty($post)) {
                 setup_postdata($post);
 
-                if ($instance['show_sticky'] && $num === 0) {
-                    // 1. Show lead post.
+                if ($instance['show_sticky'] && $number === 0) {
                    kaitain_partial('article', 'archivelead');
                 }
 
-                if ($instance['count'] > 0 && $num % 4 === 1 && $num !== 0) {
-                    // 1, 5, 9
+                if (($number + $mod) % 4 === 1) {
                     printf('<div class="%s">', 'featured-row');
                 }
 
-                if (!$instance['show_sticky'] || $num > 0) {
-                    // 2. Show row posts.
-                   kaitain_partial('article', 'archivesmall');
+                if (!$instance['show_sticky'] || $number > 0) {
+                    kaitain_partial('article', 'archivesmall');
                 }
 
-                if ($instance['count'] > 0 && $num % 4 === 0 && $num !== 0 
-                || $post === $last_post) {
-                    // 4, 8, 12, or last item.
+                if ($number > 0 && ($number + $mod) % 4 === 0) {
                     printf('</div>');
                 }
             }
         }
 
         printf('</div>');
-        printf('<hr>');
+
+        if ($instance['count'] > 1) {
+            printf('<hr>');
+        }
 
         if (!empty($defaults['after_widget'])) {
             printf($defaults['after_widget']);

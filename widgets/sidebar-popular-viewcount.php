@@ -43,7 +43,7 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
             'elapsed_days' => '7'
         );
 
-        $instance = wp_parse_args($defaults, $instance);
+        $instance = wp_parse_args($instance, $defaults);
 
         $options = array(
             // Post duration options. Range (days) and label.

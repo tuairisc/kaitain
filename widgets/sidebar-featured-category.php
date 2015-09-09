@@ -45,7 +45,7 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
             'category' => 0
         ); 
 
-        $instance = wp_parse_args($defaults, $instance);
+        $instance = wp_parse_args($instance, $defaults);
         
         $categories = get_categories(array(
             'type' => 'post',
