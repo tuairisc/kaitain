@@ -168,30 +168,34 @@ function kaitain_get_featured($count = 8, $add_filler = false) {
 
     if ($count > 0) {
         // Transient name and timeout period.
-        $trans = 'featured_posts';
+        $trans = 'kaitain_featured_posts';
         $timeout = get_option('kaitain_transient_timeout');
-
-        // ID of sticky post.
+        $featured = array();
+        $featured_list = kaitain_get_featured_list(false);
         $sticky_id = kaitain_get_sticky_id();
 
-        if (!($featured = get_transient($trans)) || sizeof($featured) < $count) {
-            $featured = get_posts(array(
-                'numberposts' => $count,
-                'post_status' => 'publish',
-                'post__in' => kaitain_get_featured_list(false),
-                'orderby' => 'date',
-                'order' => 'DESC',
-                'exclude' => array($sticky_id)
-            ));
+        delete_transient($trans);
 
-            $missing = $count - sizeof($featured); 
+        if ($featured_list) { 
+            if (!($featured = get_transient($trans))) {
+                $featured = get_posts(array(
+                    'numberposts' => $count,
+                    'post_status' => 'publish',
+                    'post__in' => $featured_list,
+                    'orderby' => 'date',
+                    'order' => 'DESC',
+                    'exclude' => array($sticky_id)
+                ));
 
-            if ($add_filler && $missing > 0) {
-                // Pad out query.
-                $featured = kaitain_featured_filler($missing, $featured);
+                set_transient($trans, $featured, $timeout);
             }
+        }
 
-            set_transient($trans, $featured, $timeout);
+        $missing = $count - sizeof($featured);
+
+        if ($add_filler && $missing > 0) {
+            // Pad out query.
+            $featured = kaitain_featured_filler($missing, $featured);
         }
     }
 
@@ -209,7 +213,7 @@ function kaitain_get_featured_list($use_sticky = true) {
     $featured_key = $GLOBALS['kaitain_featured_keys']['featured'];
 
     if (!($featured = get_option($featured_key))) {
-        $featured = array();
+        return false;
     }
 
     if (!$use_sticky) {
