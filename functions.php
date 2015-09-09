@@ -21,15 +21,7 @@ $GLOBALS['kaitain_version'] = 1.0;
  */
 
 function kaitain_setup() {
-    // Transient API timeout in minutes.
-    add_option('kaitain_transient_timeout', 60 * 20, '', true);
-    // Flag post as job.
-    add_option('kaitain_notice_post_key', 'kaitain_is_notice', '', true);
-
     kaitain_image_sizes();
-
-    // Header tag DNS prefetch.
-    kaitain_dns_prefetch();
 
     // Theme menus.
     add_action('init', 'kaitain_menus');
@@ -59,6 +51,16 @@ function kaitain_setup() {
 }
 
 add_action('after_setup_theme', 'kaitain_setup');
+
+/**
+ * Theme Options
+ * -----------------------------------------------------------------------------
+ */
+ 
+// Transient API timeout in minutes.
+add_option('kaitain_transient_timeout', 60 * 20, '', true);
+// Flag post as job.
+add_option('kaitain_notice_post_key', 'kaitain_is_notice', '', true);
 
 /**
  * Theme Includes
