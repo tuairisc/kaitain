@@ -134,10 +134,10 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             // The HTML was a gorram mess so I separated classes.
             'anchor' => array(
                 'green-link-hover',
-                'tuairisc-author',
+                'kaitain-author',
             ),
             'div' => array(
-                'tuairisc-author-list',
+                'kaitain-author-list',
                 'home-flex-row'
             ),
             'title' => array(
@@ -157,7 +157,7 @@ class Kaitain_Columnist_Widget extends WP_Widget {
         printf('<div class="%s">', implode(' ', $classes['div']));
 
         foreach ($author_query as $author) {
-            printf('<div class="tuairisc-author" id="%s">',
+            printf('<div class="kaitain-author" id="%s">',
                 'author-' . $author->user_nicename
             );
 
@@ -170,7 +170,7 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             ); 
 
             // Avatar image.
-            avatar_background($author->ID, 'tc_home_avatar', 'author-photo');
+            kaitain_avatar_background_html($author->ID, 'tc_home_avatar', 'author-photo');
 
             printf('<h6 class="%s">%s</h6>',
                 // Author name.
