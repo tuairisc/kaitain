@@ -62,8 +62,8 @@ function kaitain_scripts() {
         'ie-fallback' => array($css_path . 'ie.css', 'lte IE 9')
     );
 
-    kaitain_js($kaitain_js, $kaitain_admin_js, $kaitain_conditional_js, $js_path);
-    kaitain_css($kaitain_css, $kaitain_admin_css, $kaitain_conditional_css, $kaitain_fonts);
+    kaitain_js($kaitain_js, $kaitain_conditional_js, $js_path);
+    kaitain_css($kaitain_css, $kaitain_conditional_css, $kaitain_fonts);
 }
 
 add_action('wp_head', 'kaitain_scripts');
@@ -199,7 +199,7 @@ function kaitain_google_font_url($fonts) {
     foreach ($fonts as $key => $value) {
         $google_url[] = str_replace(' ', '+', $value);
 
-        if ($key < sizeof($google_fonts) - 1) {
+        if ($key < sizeof($fonts) - 1) {
             $google_url[] = '|';
         }
     }
