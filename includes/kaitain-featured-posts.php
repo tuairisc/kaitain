@@ -160,7 +160,6 @@ function kaitain_update_featured_posts($post = null, $make_featured = true) {
  * -----------------------------------------------------------------------------
  * @param   int     $count         Number of posts to retrieve.
  * @param   bool    $add_filler     Include filler post if query comes up short.
- * @return  array   $featured       Array of featured posts.
  */
 
 function kaitain_get_featured($count = 8, $add_filler = false) {
