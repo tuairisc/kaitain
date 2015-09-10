@@ -174,8 +174,6 @@ function kaitain_get_featured($count = 8, $add_filler = false) {
         $featured_list = kaitain_get_featured_list(false);
         $sticky_id = kaitain_get_sticky_id();
 
-        delete_transient($trans);
-
         if ($featured_list) { 
             if (!($featured = get_transient($trans))) {
                 $featured = get_posts(array(
