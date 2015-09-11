@@ -11,3 +11,19 @@
  * @link       http://www.tuairisc.ie
  */
 
+;(function($, window, document) {
+    $.fn.linkedToggle = function(target, input) {
+        var $target = $(target);
+        var $input = $(input);
+
+        var toggle = function(event) {
+            $(this).toggleClass('close');
+            $target.attr('tabindex', 2).toggleClass('show').find('input').focus();
+        }
+
+        this.on('click', toggle);
+        return this;
+    }
+
+    $('.bigsearch-toggle').linkedToggle('#bigsearch', '.bigsearch-input');
+})(jQuery, window, document);
