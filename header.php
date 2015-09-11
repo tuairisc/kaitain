@@ -57,6 +57,13 @@ global $sections;
             } ?>
             <div class="tuairisc-strip trim-absolute trim-bottom"></div>
         </div>
+        <div class="section-trim-background" id="bigsearch">
+            <form role="search" class="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off">
+                <fieldset>
+                    <input class="bigsearch-input" name="s" placeholder="<?php _e('cuardaigh', 'sheepie'); ?>" type="search" required="required">
+                </fieldset>
+            </form>
+        </div>
     <?php endif; ?>
     <div id="main" role="main">
         <div id="content">
