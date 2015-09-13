@@ -14,6 +14,7 @@
  */
 
 global $sections;
+$action = esc_url(home_url('/'));
 
 ?>
 
@@ -30,12 +31,14 @@ global $sections;
     <?php if (!is_404()) : ?>
         <?php // Disabled on 404 pages. ?>
         <div id="header">
-            <div class="section-trim-background" id="brand">
+            <div class="section-trim-background" id="navrow">
                 <?php // Empty until I have something better. ?>
-                <nav class="left-nav" id="hamburger"></nav>
+                <nav class="left-nav"></nav>
+
                 <nav class="center-nav" id="home-link">
                     <a id="home" rel="home" href="<?php printf(home_url()); ?>"></a> 
                 </nav>
+
                 <?php wp_nav_menu(array(
                     // Output header nav menu.
                     'theme_location' => 'top-external-social',
@@ -45,11 +48,13 @@ global $sections;
                     'container_id' => 'external'
                 )); ?>
             </div>
-            <nav id="sections-menu">
-                <?php // Section menus. See section-manager.php ?>
-                <ul id="primary"><?php $sections->sections_menu('primary'); ?></ul>
-                <ul id="secondary"><?php $sections->sections_menu('secondary'); ?></ul>
-            </nav>
+            <?php if (1 > 2) : ?>
+                <nav id="sections-menu">
+                    <?php // Section menus. See section-manager.php ?>
+                    <ul id="primary"><?php $sections->sections_menu('primary'); ?></ul>
+                    <ul id="secondary"><?php $sections->sections_menu('secondary'); ?></ul>
+                </nav>
+            <?php endif; ?>
         </div>
         <div class="advert-block">
             <?php if (function_exists('adrotate_group')) {
