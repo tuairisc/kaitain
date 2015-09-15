@@ -23,11 +23,13 @@ global $sections;
         } ?>
     </div><?php // End #main ?>
     <?php if (!is_404()) : ?>
-        <div class="advert-block">
-            <div class="tuairisc-strip trim-absolute trim-top"></div>
-            <?php if (function_exists('adrotate_group') && !is_404()) {
-                printf(adrotate_group(2));
-            } ?>
+        <div class="trim-block">
+            <div class="advert-block">
+                <div class="tuairisc-strip trim-absolute trim-top"></div>
+                <?php if (function_exists('adrotate_group') && !is_404()) {
+                    printf(adrotate_group(2));
+                } ?>
+            </div>
         </div>
         <div id="footer">
             <div class="menus">
