@@ -64,7 +64,6 @@ gulp.task('css-dev', function() {
     // Development and debug CSS.
     sass(paths.css.main, {
             sourcemap: true,
-            style: 'compressed'
         })
         .on('error', function(err) {
             console.log(err.message);
@@ -90,7 +89,6 @@ gulp.task('ie-css-dev', function() {
     // Development and debug CSS.
     sass(paths.css.ie, {
             sourcemap: true,
-            style: 'compressed'
         })
         .on('error', function(err) {
             console.log(err.message);
