@@ -33,20 +33,30 @@ $action = esc_url(home_url('/'));
         <div id="header">
             <div class="section-trim-background" id="navrow">
                 <?php // Empty until I have something better. ?>
-                <nav class="left-nav"></nav>
+                <nav class="left-nav">
+                    <button class="navbutton menu" type="button">
+                        <span class="nav-socialspan"></span>
+                    </button>
+                </nav>
 
                 <nav class="center-nav" id="home-link">
                     <a id="home" rel="home" href="<?php printf(home_url()); ?>"></a> 
                 </nav>
 
-                <?php wp_nav_menu(array(
-                    // Output header nav menu.
-                    'theme_location' => 'top-external-social',
-                    'menu_class' => 'social',
-                    'container' => 'nav',
-                    'container_class' => 'right-nav',
-                    'container_id' => 'external'
-                )); ?>
+                <nav class="right-nav">                    
+                    <button class="navbutton search" type="button">
+                        <span class="nav-socialspan"></span>
+                    </button>
+                    <?php wp_nav_menu(array(
+                        // Output header nav menu.
+                        'theme_location' => 'top-external-social',
+                        'menu_class' => 'social',
+                        'container' => false,
+                        'container_id' => 'external-social',
+                        'link_before' => '<span class="nav-socialspan">',
+                        'link_after' => '</span>'
+                    )); ?>
+                </nav>
             </div>
             <?php if (1 > 2) : ?>
                 <nav id="sections-menu">
@@ -56,13 +66,15 @@ $action = esc_url(home_url('/'));
                 </nav>
             <?php endif; ?>
         </div>
-        <div class="advert-block">
-            <?php if (function_exists('adrotate_group')) {
-                printf(adrotate_group(1));
-            } ?>
+        <div class="trim-block">
+            <div class="advert-block" id="header-advert-block">
+                <?php if (function_exists('adrotate_group')) {
+                    printf(adrotate_group(1));
+                } ?>
+            </div>
             <div class="tuairisc-strip trim-absolute trim-bottom"></div>
         </div>
-        <div class="section-trim-background" id="bigsearch">
+        <div class="section-trim-background show" id="bigsearch">
             <form role="search" class="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off">
                 <fieldset>
                     <input class="bigsearch-input" name="s" placeholder="<?php _e('cuardaigh', 'sheepie'); ?>" type="search" required="required">
