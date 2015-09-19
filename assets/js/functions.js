@@ -12,18 +12,70 @@
  */
 
 ;(function($, window, document) {
-    $.fn.linkedToggle = function(target, input) {
-        var $target = $(target);
-        var $input = $(input);
+    if (!$('#header-advert-block').is(':visible')) {
+        // Ghetto AdbLock check.
+    }
 
-        var toggle = function(event) {
-            $(this).toggleClass('close');
-            $target.attr('tabindex', 2).toggleClass('show').find('input').focus();
+    /**
+     * Linked Element Class Toggle
+     * -------------------------------------------------------------------------
+     */
+
+    $.fn.link = function(args) {
+        var defaults = {
+            child: '',
+            childClass: '',
+            target: '',
+            targetClass: '',
+            linkedClass: '.linked-class-toggle',
+            isTargetInput: false,
+            toggled: false
+        };
+
+        var opts = {};
+
+        function clickToggle(event, override) {
+            if (typeof override !== 'boolean' && !opts.toggled) {
+                // Hide all other linked elements.
+                $(opts.linkedClass).not(this).trigger('click', false);
+            }
+
+            opts.toggled = (typeof override === 'boolean') ? override : !opts.toggled;
+
+            $(opts.child).toggleClass(opts.childClass, opts.toggled);
+            $(opts.target).toggleClass(opts.targetClass, opts.toggled);
+
+            if (opts.toggled && opts.isTargetInput) {
+                $(opts.target).find('input').focus();
+            }
+
+            return;
+        } 
+
+        function closeOnEscape(event) {
+            if (event.keyCode === 27) {
+                $(opts.button).trigger('click', false);
+            }
         }
 
-        this.on('click', toggle);
+        opts = $.extend({}, defaults, args);
+        opts.button = this;
+
+        if (!$(opts.linkedClass).length) {
+            $(window).on('keyup', closeOnEscape);
+        }
+
+        this.addClass(opts.linkedClass.substring(1))
+            .on('click', clickToggle);
+
         return this;
     }
 
-    $('.bigsearch-toggle').linkedToggle('#bigsearch', '.bigsearch-input');
+    $('.searchtoggle').link({
+        child: '.searchtoggle-icon',
+        childClass: 'close',
+        target: '#bigsearch',
+        targetClass: 'show',
+        isTargetInput: true
+    });
 })(jQuery, window, document);
