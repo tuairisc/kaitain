@@ -35,8 +35,8 @@ $placeholder = __('curdaigh', 'kaitain');
             <div class="section-trim-background" id="navrow">
                 <?php // Empty until I have something better. ?>
                 <nav class="left-nav">
-                    <button class="navbutton menu" type="button">
-                        <span class="nav-socialspan"></span>
+                    <button class="menutoggle navbutton" id="nav-menutoggle" type="button">
+                        <span class="nav-buttonicon menutoggle-icon menu"></span>
                     </button>
                 </nav>
 
@@ -45,8 +45,8 @@ $placeholder = __('curdaigh', 'kaitain');
                 </nav>
 
                 <nav class="right-nav">                    
-                    <button class="navbutton search" id="nav-searchtoggle" type="button">
-                        <span class="searchtoggle-icon nav-socialspan"></span>
+                    <button class="navbutton searchtoggle" id="nav-searchtoggle" type="button">
+                        <span class="nav-buttonicon searchtoggle-icon search"></span>
                     </button>
                     <?php wp_nav_menu(array(
                         // Output header nav menu.
@@ -81,11 +81,8 @@ $placeholder = __('curdaigh', 'kaitain');
                     <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required">
                 </fieldset>
             </form>
-            <button class="navbutton search" id="nav-searchtoggle" type="button">
-                <span class="searchtoggle-icon nav-socialspan"></span>
-            </button>
-            <button class="bigsearch-toggle toggle" id="bigsearch-search-toggle">
-                <span class="toggle-icon search"></span> 
+            <button class="navbutton searchtoggle" id="search-searchtoggle" type="button">
+                <span class="nav-buttonicon searchtoggle-icon search"></span>
             </button>
         </div>
     <?php endif; ?>
