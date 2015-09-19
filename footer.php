@@ -21,7 +21,7 @@ global $sections;
         <?php if (!is_404()) {
             get_sidebar(); 
         } ?>
-    </div><?php // End #main ?>
+    </main><?php // End #main ?>
     <?php if (!is_404()) : ?>
         <div class="trim-block">
             <div class="advert-block">

@@ -15,6 +15,7 @@
 
 global $sections;
 $action = esc_url(home_url('/'));
+$placeholder = __('curdaigh', 'kaitain');
 
 ?>
 
@@ -44,8 +45,8 @@ $action = esc_url(home_url('/'));
                 </nav>
 
                 <nav class="right-nav">                    
-                    <button class="navbutton search" type="button">
-                        <span class="nav-socialspan"></span>
+                    <button class="navbutton search" id="nav-searchtoggle" type="button">
+                        <span class="searchtoggle-icon nav-socialspan"></span>
                     </button>
                     <?php wp_nav_menu(array(
                         // Output header nav menu.
@@ -74,13 +75,19 @@ $action = esc_url(home_url('/'));
             </div>
             <div class="tuairisc-strip trim-absolute trim-bottom"></div>
         </div>
-        <div class="section-trim-background show" id="bigsearch">
-            <form role="search" class="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off">
+        <div class="section-trim-background" id="bigsearch">
+            <form role="search" class="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
                 <fieldset>
-                    <input class="bigsearch-input" name="s" placeholder="<?php _e('cuardaigh', 'sheepie'); ?>" type="search" required="required">
+                    <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required">
                 </fieldset>
             </form>
+            <button class="navbutton search" id="nav-searchtoggle" type="button">
+                <span class="searchtoggle-icon nav-socialspan"></span>
+            </button>
+            <button class="bigsearch-toggle toggle" id="bigsearch-search-toggle">
+                <span class="toggle-icon search"></span> 
+            </button>
         </div>
     <?php endif; ?>
-    <div id="main" role="main">
+    <main id="main">
         <div id="content">
