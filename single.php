@@ -30,9 +30,17 @@ if (have_posts()) {
 
             printf('<div class="%s">', 'related-articles');
 
-            foreach (rp_get_related() as $post) {
+            $related = rp_get_related(array(
+                'range' => array(
+                    'after' => date('Y-m-j') . '-21 days',
+                    'before' => date('Y-m-j')
+                ),
+                'cache' => true
+            ));
+
+            foreach ($related as $post) {
                 setup_postdata($post);
-               kaitain_partial('article', 'related');
+                kaitain_partial('article', 'related');
             }
 
             printf('</div>');
