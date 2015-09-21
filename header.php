@@ -51,7 +51,7 @@ $placeholder = __('curdaigh', 'kaitain');
                     <?php wp_nav_menu(array(
                         // Output header nav menu.
                         'theme_location' => 'top-external-social',
-                        'menu_class' => 'social',
+                        'menu_class' => 'navbar-social',
                         'container' => false,
                         'container_id' => 'external-social',
                         'link_before' => '<span class="nav-socialspan">',
@@ -59,13 +59,11 @@ $placeholder = __('curdaigh', 'kaitain');
                     )); ?>
                 </nav>
             </div>
-            <?php if (1 > 2) : ?>
-                <nav id="sections-menu">
-                    <?php // Section menus. See section-manager.php ?>
-                    <ul id="primary"><?php $sections->sections_menu('primary'); ?></ul>
-                    <ul id="secondary"><?php $sections->sections_menu('secondary'); ?></ul>
-                </nav>
-            <?php endif; ?>
+            <nav id="navbar-sections-menu">
+                <?php // Section menus. See section-manager.php ?>
+                <ul class="sections-primary"><?php $sections->sections_menu('primary'); ?></ul>
+                <ul class="sections-secondary"><?php $sections->sections_menu('secondary'); ?></ul>
+            </nav>
         </div>
         <div class="trim-block">
             <div class="advert-block" id="header-advert-block">
