@@ -40,6 +40,7 @@
                 $(opts.linkedClass).not(this).trigger('click', false);
             }
 
+            // opts.toggled can be overriden. Otherwise, just invert it.
             opts.toggled = (typeof override === 'boolean') ? override : !opts.toggled;
 
             $(opts.child).toggleClass(opts.childClass, opts.toggled);
@@ -48,11 +49,10 @@
             if (opts.toggled && opts.isTargetInput) {
                 $(opts.target).find('input').focus();
             }
-
-            return;
         } 
 
         function closeOnEscape(event) {
+            // Will /probably/ only work if target has tabindex set.
             if (event.keyCode === 27) {
                 $(opts.button).trigger('click', false);
             }
@@ -61,12 +61,20 @@
         opts = $.extend({}, defaults, args);
         opts.button = this;
 
-        if (!$(opts.linkedClass).length) {
-            $(window).on('keyup', closeOnEscape);
-        }
+        /* There is a class for all linked elements. On button click all are
+         * hidden. */
 
         this.addClass(opts.linkedClass.substring(1))
-            .on('click', clickToggle);
+            .on('click', clickToggle)
+            .trigger('click', opts.toggled)
+
+        // Trigger false on escape keyup and window resize.
+
+        $(window).on('keyup', closeOnEscape);
+
+        $(window).on('resize', function() {
+            $(opts.button).trigger('click', false);
+        });
 
         return this;
     }
@@ -76,6 +84,14 @@
         childClass: 'close',
         target: '#bigsearch',
         targetClass: 'show',
-        isTargetInput: true
+        isTargetInput: true,
+    });
+
+    $('.menutoggle').link({
+        child: '.menutoggle-icon',
+        childClass: 'close',
+        target: '#navbar-sections-menu',
+        targetClass: 'show',
+        isTargetInput: false
     });
 })(jQuery, window, document);
