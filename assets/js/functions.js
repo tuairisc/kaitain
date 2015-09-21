@@ -69,12 +69,7 @@
             .trigger('click', opts.toggled)
 
         // Trigger false on escape keyup and window resize.
-
         $(window).on('keyup', closeOnEscape);
-
-        $(window).on('resize', function() {
-            $(opts.button).trigger('click', false);
-        });
 
         return this;
     }
