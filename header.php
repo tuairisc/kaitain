@@ -31,7 +31,7 @@ $placeholder = __('curdaigh', 'kaitain');
 <body <?php body_class(); ?>>
     <?php if (!is_404()) : ?>
         <?php // Disabled on 404 pages. ?>
-        <div id="header">
+        <header id="header">
             <div class="section-trim-background" id="navrow">
                 <?php // Empty until I have something better. ?>
                 <nav class="left-nav">
@@ -64,7 +64,7 @@ $placeholder = __('curdaigh', 'kaitain');
                 <ul class="sections-primary"><?php $sections->sections_menu('primary'); ?></ul>
                 <ul class="sections-secondary"><?php $sections->sections_menu('secondary'); ?></ul>
             </nav>
-        </div>
+        </header>
         <div class="trim-block">
             <div class="advert-block" id="header-advert-block">
                 <?php if (function_exists('adrotate_group')) {
