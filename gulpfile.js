@@ -10,8 +10,6 @@
  * @link       https://github.com/bhalash/sheepie
  */
 
-'use strict';
-
 var gulp = require('gulp');
 var sass = require('gulp-ruby-sass');
 var sourcemap = require('gulp-sourcemaps');
@@ -20,24 +18,18 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 
 var assets = {
-    folder: './assets/',
-    js: './assets/js/',
-    css: './assets/css/'
+    sass: 'assets/css/',
+    js: 'assets/js/',
 };
 
 var paths = {
-    css: {
-        folder: assets.css,
-        batch: assets.css + '*.scss',
-        main: assets.css + 'main.scss',
-        ie: assets.css + 'ie.scss',
-        out: assets.css
+    sass: {
+        batch: assets.sass + '/**/*.scss',
+        output: assets.sass
     },
     js: {
-        folder: assets.js,
         batch: assets.js + '*.js',
-        main: assets.js + 'main.js',
-        out: assets.js + '/min/'
+        output: assets.js + '/min/'
     }
 };
 
@@ -48,21 +40,21 @@ var prefixes = [
     'ie 9'
 ];
 
-gulp.task('css', function() {
-    // Build CSS.
-    sass(paths.css.main, {
+gulp.task('sass', function() {
+    // Production minified sass, without sourcemap.
+    sass(assets.sass, {
             style: 'compressed'
         })
         .on('error', function(err) {
             console.log(err.message);
         })
         .pipe(prefix(prefixes))
-        .pipe(gulp.dest(paths.css.out));
+        .pipe(gulp.dest(paths.sass.output));
 });
 
-gulp.task('css-dev', function() {
-    // Development and debug CSS.
-    sass(paths.css.main, {
+gulp.task('sass-dev', function() {
+    // Development unminified sass, with sourcemap.
+    sass(assets.sass, {
             sourcemap: true,
         })
         .on('error', function(err) {
@@ -70,32 +62,7 @@ gulp.task('css-dev', function() {
         })
         .pipe(prefix(prefixes))
         .pipe(sourcemap.write())
-        .pipe(gulp.dest(paths.css.out));
-});
-
-gulp.task('ie-css', function() {
-    // Build Internet Explorer CSS.
-    sass(paths.css.ie, {
-            style: 'compressed'
-        })
-        .on('error', function(err) {
-            console.log(err.message);
-        })
-        .pipe(prefix(prefixes))
-        .pipe(gulp.dest(paths.css.out));
-});
-
-gulp.task('ie-css-dev', function() {
-    // Development and debug CSS.
-    sass(paths.css.ie, {
-            sourcemap: true,
-        })
-        .on('error', function(err) {
-            console.log(err.message);
-        })
-        .pipe(prefix(prefixes))
-        .pipe(sourcemap.write())
-        .pipe(gulp.dest(paths.css.out));
+        .pipe(gulp.dest(paths.sass.output));
 });
 
 gulp.task('js', function() {
@@ -105,16 +72,14 @@ gulp.task('js', function() {
         .pipe(rename({
             extname: '.min.js'
         }))
-        .pipe(gulp.dest(paths.js.out));
+        .pipe(gulp.dest(paths.js.output));
 });
 
 gulp.task('default', function() {
     gulp.watch(paths.js.batch, ['js']);
-    gulp.watch(paths.css.batch, ['css']);
-    gulp.watch(paths.css.ie, ['ie-css']);
+    gulp.watch(paths.sass.batch, ['sass']);
 });
 
-gulp.task('css-dev-watch', function() {
-    gulp.watch(paths.css.batch, ['css-dev']);
-    gulp.watch(paths.css.ie, ['ie-css-dev']);
+gulp.task('dev', function() {
+    gulp.watch(paths.sass.batch, ['sass-dev']);
 });

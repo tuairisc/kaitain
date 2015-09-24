@@ -24,7 +24,7 @@
  * @return  object      this
  */
 
-;(function($) {
+(function($) {
     $.fn.linkedToggle = function(linkedElements, targetElement, state) {
         var isChecked = function(element) {
             return $(element).is(':checked');
@@ -64,7 +64,7 @@
  *    will be set to this value. 
  */
 
-;(function($) {
+(function($) {
     $.fn.checker = function(prefix, target) {
         var add = {
             /* Inputs are added without a value or options. These are set via
