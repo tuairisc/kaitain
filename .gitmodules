@@ -16,6 +16,7 @@
 	path = includes/section-manager
 	url = git@github.com:bhalash/section-manager.git
 	branch = master
+    ignore = dirty
 [submodule "includes/category-widget"]
 	path = includes/category-widget
 	url = git@github.com:bhalash/category-widget.git
