@@ -31,7 +31,7 @@ global $sections;
                 } ?>
             </div>
         </div>
-        <div id="footer">
+        <footer id="footer">
             <div class="menus">
                 <div class="menu-columns">
                     <?php // Custom footer menu and section cavalcade. ?>
@@ -47,7 +47,7 @@ global $sections;
                 <p><small><?php _e('Le Cabhair ó', 'kaitain'); ?></small></p>
                 <p><a rel="nofollow" target="_blank" href="http://www.gaeilge.ie/"><img src="<?php printf(get_template_directory_uri() . '/assets/images/brands/foras-white.svg'); ?>" alt="Foras na Gaeilge" /></a></p>
              </div>
-        </div>
+        </footer>
     <?php endif; ?>
     <?php wp_footer(); ?>
 </body>
