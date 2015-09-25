@@ -22,10 +22,10 @@ $author = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : ge
 
 <div class="author-profile-info">
     <div class="avatar">
-        <?php avatar_background($author->ID, 'tc_post_avatar', 'author-photo'); ?>
+        <?php kaitain_avatar_background_html($author->ID, 'tc_post_avatar', 'author-profile-photo author-photo'); ?>
     </div>
-    <div class="author-name-wrapper">
-        <h1 class="author-name">
+    <div class="relative">
+        <h1 class="author-profile-name">
             <span class="author-link"><a class="green-link-hover" href="<?php printf(get_author_posts_url($author->ID)); ?>"><?php printf($author->display_name); ?></a></span>
     </div>
 </div>
@@ -40,7 +40,7 @@ if (have_posts()) {
     }
 }
 
-partial('pagination', 'site');
+kaitain_partial('pagination', 'site');
 get_footer();
 
 ?>
