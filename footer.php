@@ -24,8 +24,8 @@ global $sections;
     </main><?php // End #main ?>
     <?php if (!is_404()) : ?>
         <div class="trim-block">
-            <div class="advert-block">
-                <div class="tuairisc-strip trim-absolute trim-top"></div>
+            <div class="tuairisc-strip trim-absolute trim-top"></div>
+            <div class="advert-block banner-advert-block" id="footer-advert-block">
                 <?php if (function_exists('adrotate_group') && !is_404()) {
                     printf(adrotate_group(2));
                 } ?>

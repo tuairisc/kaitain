@@ -66,7 +66,7 @@ $placeholder = __('curdaigh', 'kaitain');
             </nav>
         </header>
         <div class="trim-block">
-            <div class="advert-block" id="header-advert-block">
+            <div class="advert-block banner-advert-block" id="header-advert-block">
                 <?php if (function_exists('adrotate_group')) {
                     printf(adrotate_group(1));
                 } ?>
