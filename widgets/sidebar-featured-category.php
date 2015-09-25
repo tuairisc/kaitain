@@ -147,8 +147,8 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
         $title = apply_filters('widget_title', $category->cat_name);
         // Transient API name.
         $trans = 'sidebar_category_posts_' . $category->slug;
-        // Default classname to set colour.
-        $trim = 'grey'; 
+        // Default class colour unless overridden.
+        $trim = 'sidebar-category-grey'; 
         
         if (!($category_posts = get_transient($trans))) {
             $category_posts = get_posts(array(
@@ -179,15 +179,20 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
 
             ?>
 
-            <h5 class="title">
+            <h5 class="title sidebar-category-title">
                 <a class="green-link-hover" href="<?php the_permalink(); ?>">
                     <?php
+
                     if ($instance['show_image'] && $index === 0) {
-                        the_post_thumbnail('tc_sidebar_category');
+                        the_post_thumbnail('tc_sidebar_category', array(
+                            'class' => 'sidebar-category-thumbnail'
+                        ));
+
                         printf('<br />');
                     }
 
                     the_title();
+
                     ?>
                 </a>
             </h5>
