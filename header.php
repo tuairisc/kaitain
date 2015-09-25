@@ -74,8 +74,8 @@ $placeholder = __('curdaigh', 'kaitain');
             <div class="tuairisc-strip trim-absolute trim-bottom"></div>
         </div>
         <div class="section-trim-background" id="bigsearch">
-            <form role="search" class="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
-                <fieldset>
+            <form role="search" class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
+                <fieldset form="bigsearch-form">
                     <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required">
                 </fieldset>
             </form>
