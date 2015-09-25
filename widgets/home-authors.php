@@ -71,7 +71,7 @@ class Kaitain_Columnist_Widget extends WP_Widget {
                     <label for="<?php printf($id); ?>"><?php printf('%s %d', __('Author # ', 'kaitain'), $i + 1); ?></label>
                 </li>
                 <li>
-                    <select class="author-widget-admin" id="<?php printf($id); ?>" name="<?php printf($name); ?>">
+                    <select class="columnist-widget-admin" id="<?php printf($id); ?>" name="<?php printf($name); ?>">
                         <?php foreach ($site_users as $user) {
                             printf('<option value="%s">%s</option>', $user->ID, $user->display_name);
                         } ?>
@@ -134,17 +134,17 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             // The HTML was a gorram mess so I separated classes.
             'anchor' => array(
                 'green-link-hover',
-                'kaitain-author',
+                'kaitain-columnist',
             ),
             'div' => array(
-                'kaitain-author-list',
+                'kaitain-columnist-list',
                 'home-flex-row'
             ),
             'title' => array(
                 'widget-title'
             ),
             'author' => array(
-                'author-name'
+                'columnist-name'
             )
         );
 
@@ -157,8 +157,8 @@ class Kaitain_Columnist_Widget extends WP_Widget {
         printf('<div class="%s">', implode(' ', $classes['div']));
 
         foreach ($author_query as $author) {
-            printf('<div class="kaitain-author" id="%s">',
-                'author-' . $author->user_nicename
+            printf('<div class="kaitain-columnist" id="%s">',
+                'columnist-' . $author->user_nicename
             );
 
             printf('<a class="%s" title="%s" href="%s">',
@@ -170,7 +170,7 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             ); 
 
             // Avatar image.
-            kaitain_avatar_background_html($author->ID, 'tc_home_avatar', 'author-photo');
+            kaitain_avatar_background_html($author->ID, 'tc_home_avatar', 'author-photo columnist-photo');
 
             printf('<h6 class="%s">%s</h6>',
                 // Author name.
