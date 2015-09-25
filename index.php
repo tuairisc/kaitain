@@ -22,6 +22,7 @@ if (have_posts()) {
     }
 }
 
-partial('pagination');
+partial('pagination', 'site');
 get_footer();
+
 ?>

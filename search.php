@@ -27,8 +27,9 @@ if (have_posts()) {
 }
 
 if ($wp_query->found_posts) {
-   kaitain_partial('pagination');
+    partial('pagination', 'site');
 }
 
 get_footer();
+
 ?>
