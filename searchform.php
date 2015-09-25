@@ -25,7 +25,7 @@ $result = $total === 1 ? 'torthaí' : 'tordagh';
 
 <form role="search" class="searchform vspace-half" id="searchform" method="get" action="<?php printf($action); ?>" autocomplete="off">
     <fieldset>
-        <input class="searchform-input" id="s" name="s" placeholder="<?php _e('curdaigh', 'kaitain'); ?>" type="text" required="required" value="<?php printf($query); ?>">
+        <input class="searchform-input" id="searchform-input" name="s" placeholder="<?php _e('curdaigh', 'kaitain'); ?>" type="text" required="required" value="<?php printf($query); ?>">
     </fieldset>
 </form>
 <div class="clearfix search-results-meta">
