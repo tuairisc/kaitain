@@ -22,13 +22,13 @@ $section_background = sprintf('section-%s-background', $section_slug);
 ?>
 
 <article <?php post_class('archive-small'); ?> id="archive-small-<?php the_id(); ?>">
-    <a class="<?php printf($section_hover); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+    <a class="article-small-link <?php printf($section_hover); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail">
             <?php post_image_html(get_the_ID(), 'tc_home_feature_small', true); ?>
             <div class="archive-trim-bottom <?php printf($section_background); ?>"></div>
         </div>
         <header>
-            <h5><?php the_title(); ?></h5>
+            <h5 class="title archive-small-title"><?php the_title(); ?></h5>
         </header>
     </a>
 </article>

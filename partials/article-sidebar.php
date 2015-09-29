@@ -25,15 +25,15 @@ $trim = array(
 ?>
 
 <article <?php post_class('sidebar'); ?> id="sidebar-<?php the_id(); ?>">
-    <a class="<?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
-        <div class="thumbnail">
+    <a class="sidebar-link <?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+        <div class="thumbnail sidebar-thumbnail">
             <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>
             <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
-        <div class="post-content">
-            <header>
-                <h5 class="title"><?php the_title(); ?></h5>
-                <span class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span>
+        <div class="post-content sidebar-content">
+            <header class="sidebar-header">
+                <h5 class="title sidebar-article-title"><?php the_title(); ?></h5>
+                <span class="post-date postmeta"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span>
             </header>
         </div>
     </a>
