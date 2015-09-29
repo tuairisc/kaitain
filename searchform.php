@@ -33,8 +33,8 @@ $result = $total === 1 ? 'torthaí' : 'tordagh';
     <span class="total meta right-float">
         <?php _e('Saghas:', 'sheepie'); ?>
 
-        <a href="<?php arc_search_url('asc'); ?>"><?php _e('sine', 'kaitain'); ?></a> |
-        <a href="<?php arc_search_url('desc'); ?>"><?php _e('is nua', 'kaitain'); ?></a>
+        <a class="searchform-link green-link searchform-order-oldest" href="<?php arc_search_url('asc'); ?>"><?php _e('sine', 'kaitain'); ?></a> |
+        <a class="searchform-link green-link searchform-order-newest" href="<?php arc_search_url('desc'); ?>"><?php _e('is nua', 'kaitain'); ?></a>
     </span>
 </div>
 <hr>
