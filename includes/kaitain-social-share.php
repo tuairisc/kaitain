@@ -13,14 +13,14 @@
  * @link       http://www.tuairisc.ie
  */
 
-function get_share_links() {
+function kaitain_share_links() {
     global $post; 
 
     if (!($post = get_post($post))) {
         return false;
     }
 
-    $share = array(
+    $post_info = array(
         'blog'  => urlencode(get_bloginfo('name')),
         'url'   => urlencode(post_permalink($post->ID)),
         'title' => urlencode($post->post_title),
@@ -81,16 +81,16 @@ function get_share_links() {
         )
     );
 
-    printf('<nav class="%s">', 'share-links');
-    printf('<ul class="%s">', 'social');
+    printf('<nav class="%s">', 'kaitain-share-links');
+    printf('<ul class="%s">', 'kaitain-social');
 
-    foreach ($services as $service => $info) {
+    foreach ($services as $service => $service_info) {
         if ($service === 'discuss' && !is_singular('post') && comments_open($post->ID)) {
             // Skip comment if it isn't a single post and comments are open.
             continue;
         }
 
-        generate_social_link($share, $service, $info);
+        kaitain_social_link($post_info, $service, $service_info);
     }
 
     printf('</ul>');
@@ -100,23 +100,35 @@ function get_share_links() {
 /**
  * Output Sharing Link
  * -----------------------------------------------------------------------------
+ * Generate individual link.
+ * 
+ * @param   array        $link_info     Array of information on the page to be shared.
+ * @param   string       $service       Name of sharing service. 
+ * @param   array        $service_info  Link attributes for social sharing service.
+ * @return  string       Social link HTML.
  */
 
-function generate_social_link($share_info, $service, $service_info) {
+function kaitain_social_link($link_info, $service_name, $service_info) {
     $link = array();
     $classes = array();
 
-    $classes[] = $service;
-    $classes[] = 'share-link';
+    $classes[] = $service_name;
+    $classes[] = 'share-item';
 
     $link[] = sprintf('<li class="%s">', implode(' ', $classes));
 
-    $link[] = sprintf('<a href="%s" target="%s" title="%s"></a>',
+    $link[] = sprintf('<a class="%s" href="%s" target="%s" title="%s">',
+        'social-share-link',
         $service_info['href'],
         $service_info['target'],
-        sprintf($service_info['title'], $share_info['title'])
+        sprintf($service_info['title'], $link_info['title'])
     );
 
+    $link[] = sprintf('<span class="%s"></span>',
+        'social-share-span'
+    );
+
+    $link[] = '</a>';
     $link[] = sprintf('</li>');
 
     echo implode('', $link);
