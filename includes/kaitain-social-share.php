@@ -37,40 +37,40 @@ function kaitain_share_links() {
         'twitter' => array(
             'title' => 'Tweet %s',
             'href' => sprintf('//twitter.com/share?via=%s&text=%s&url=%s&related=@%s', 
-                $share['tuser'], 
-                $share['title'],
-                $share['url'],
-                $share['tuser']
+                $post_info['tuser'], 
+                $post_info['title'],
+                $post_info['url'],
+                $post_info['tuser']
             ),
             'target' => '_blank',
         ),
         'facebook' => array(
             'title' => 'Share %s',
             'href' => sprintf('//facebook.com/sharer.php?u=%s',
-                $share['url']
+                $post_info['url']
             ),
             'target' => '_blank',
         ),
         'email' => array(
             'title' => 'Email %s',
             'href' => sprintf('mailto:?subject=%s&amp;body=%s',
-                $share['title'],
-                $share['url']
+                $post_info['title'],
+                $post_info['url']
             ),
             'target' => '_blank',
         ),
         'google' => array(
             'title' => '+1 %s',
-            'href' => sprintf('//plus.google.com/share?url=%s',
-                $share['url']
+            'href' => sprintf('//plus.google.com/post_info?url=%s',
+                $post_info['url']
             ),
             'target' => '_blank',
         ),
         'reddit' => array(
             'title' => 'Upvote %s',
             'href' => sprintf('//reddit.com/submit?url=%s&title=%s',
-                $share['url'],
-                $share['title']
+                $post_info['url'],
+                $post_info['title']
             ),
             'target' => '_blank',
         ),
@@ -117,11 +117,11 @@ function kaitain_social_link($link_info, $service_name, $service_info) {
 
     $link[] = sprintf('<li class="%s">', implode(' ', $classes));
 
-    $link[] = sprintf('<a class="%s" href="%s" target="%s" title="%s">',
+    $link[] = sprintf('<a class="%s" href="%s%s" target="%s">',
         'social-share-link',
         $service_info['href'],
-        $service_info['target'],
-        sprintf($service_info['title'], $link_info['title'])
+        $service_info['url'],
+        $service_info['target']
     );
 
     $link[] = sprintf('<span class="%s"></span>',
