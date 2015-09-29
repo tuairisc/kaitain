@@ -24,7 +24,7 @@ $trim = array(
 
 ?>
 
-<article <?php post_class('sidebar'); ?> id="sidebar-<?php the_id(); ?>">
+<article <?php post_class('sidebar-article'); ?> id="sidebar-<?php the_id(); ?>">
     <a class="sidebar-link <?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail sidebar-thumbnail">
             <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>

@@ -138,7 +138,7 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             ),
             'div' => array(
                 'kaitain-columnist-list',
-                'home-flex-row'
+                'flex-four-cols-div'
             ),
             'title' => array(
                 'widget-title'

@@ -24,7 +24,7 @@ $trim = array(
 ?>
 
 <article <?php post_class('archive'); ?> id="archive-<?php the_id(); ?>">
-    <a class="archive-link <?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+    <a class="archive-link flex-two-cols-div <?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail archive-thumbnail">
             <?php post_image_html(get_the_ID(), 'tc_post_archive', true); ?>
             <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
