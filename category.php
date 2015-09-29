@@ -77,7 +77,7 @@ if (have_posts() && $page_number || empty($children)) {
     }
 }
 
-partial('pagination', 'site');
+kaitain_partial('pagination', 'site');
 get_footer();
 
 ?>
