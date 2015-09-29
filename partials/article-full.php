@@ -38,7 +38,7 @@ $hidden_users = get_option('kaitain_hidden_users');
         <?php endif; ?>
     </header>
     <?php if (!is_page()) {
-        get_share_links(); 
+        kaitain_share_links(); 
     } ?>
     <div class="post-content">
         <?php the_content(__('Read the rest of this post &raquo;', 'kaitain')); ?>
