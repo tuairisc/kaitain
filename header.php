@@ -48,21 +48,17 @@ $placeholder = __('curdaigh', 'kaitain');
                     <button class="navbutton searchtoggle" id="nav-searchtoggle" type="button">
                         <span class="nav-buttonicon searchtoggle-icon search"></span>
                     </button>
-                    <?php wp_nav_menu(array(
-                        // Output header nav menu.
-                        'theme_location' => 'top-external-social',
-                        'menu_class' => 'navbar-social',
-                        'container' => false,
-                        'container_id' => 'external-social',
-                        'link_before' => '<span class="nav-socialspan">',
-                        'link_after' => '</span>'
-                    )); ?>
                 </nav>
             </div>
             <nav id="navbar-sections-menu">
                 <?php // Section menus. See section-manager.php ?>
-                <ul class="sections-primary"><?php $sections->sections_menu('primary'); ?></ul>
-                <ul class="sections-secondary"><?php $sections->sections_menu('secondary'); ?></ul>
+                <div class="primary-menu-container menu-container">
+                    <?php // DEBUG TODO FIXME ?>
+                    <ul class="sections-primary"><?php $sections->sections_menu('primary'); ?></ul>
+                </div>
+                <div class="secondary-menu-container menu-container">
+                    <ul class="sections-secondary"><?php $sections->sections_menu('secondary'); ?></ul>
+                </div> 
             </nav>
         </header>
         <div class="trim-block">
