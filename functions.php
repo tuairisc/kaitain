@@ -89,7 +89,9 @@ function kaitain_includes() {
         // Single post social sharing links.
         'kaitain-social-share.php',
         // Localized date.
-        'date-strftime.php'
+        'date-strftime.php',
+        // Education Section Custom Functions
+        'kaitain-education.php'
     );
 
     $widgets = array(
