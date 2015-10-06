@@ -55,7 +55,7 @@ global $sections;
              </div>
              <div id="foras">
                 <p><small><?php _e('Le Cabhair ó', 'kaitain'); ?></small></p>
-                <p><a rel="nofollow" target="_blank" href="http://www.gaeilge.ie/"><img src="<?php printf(get_template_directory_uri() . '/assets/images/brands/foras-white.svg'); ?>" alt="Foras na Gaeilge" /></a></p>
+                <p><a class="foras-logo" rel="nofollow" target="_blank" href="http://www.gaeilge.ie/"><img src="<?php printf(get_template_directory_uri() . '/assets/images/foras-white.svg'); ?>" alt="Foras na Gaeilge" /></a></p>
              </div>
         </footer>
     <?php endif; ?>
