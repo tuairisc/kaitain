@@ -86,10 +86,8 @@ gulp.task('js', function() {
 gulp.task('default', function() {
     gulp.watch(paths.js.batch, ['js']);
     gulp.watch(paths.sass.batch, ['sass']);
-    gulp.watch(paths.sprites, '[sprites]');
 });
 
 gulp.task('dev', function() {
     gulp.watch(paths.sass.batch, ['sass-dev']);
-    gulp.watch(paths.sprites, '[sprites]');
 });
