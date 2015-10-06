@@ -86,7 +86,7 @@
         child: '.menutoggle-icon',
         childClass: 'close',
         target: '#navbar-sections-menu',
-        targetClass: 'show',
+        targetClass: 'active',
         isTargetInput: false
     });
 })(jQuery, window, document);
