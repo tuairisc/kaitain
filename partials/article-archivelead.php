@@ -30,7 +30,7 @@ $trim = array(
             <?php post_image_html(get_the_ID(), 'tc_home_feature_lead', true); ?>
             <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
-        <h2 class="title archive-lead-title"><?php the_title(); ?></h2>
+        <h1 class="title archive-lead-title"><?php the_title(); ?></h1>
     </a>
     <header>
         <h4 class="attribution"><a href="<?php printf(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php the_author(); ?></a></h4>
