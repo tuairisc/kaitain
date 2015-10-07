@@ -53,11 +53,10 @@ $placeholder = __('curdaigh', 'kaitain');
             <nav id="navbar-sections-menu">
                 <?php // Section menus. See section-manager.php ?>
                 <div class="primary-menu-container menu-container">
-                    <?php // DEBUG TODO FIXME ?>
                     <ul class="sections-primary"><?php $sections->sections_menu('primary'); ?></ul>
                 </div>
-                <div class="secondary-menu-container menu-container">
-                    <ul class="sections-secondary"><?php $sections->sections_menu('secondary'); ?></ul>
+                <div class="secondary-menu-container menu-container section-background-active">
+                    <ul class="sections-secondary"><?php $sections->sections_menu('secondary', array('box-shadow-hover')); ?></ul>
                 </div> 
             </nav>
         </header>
@@ -70,7 +69,7 @@ $placeholder = __('curdaigh', 'kaitain');
             <div class="tuairisc-strip trim-absolute trim-bottom"></div>
         </div>
         <div class="section-trim-background" id="bigsearch">
-            <form role="search" class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
+            <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
                 <fieldset form="bigsearch-form">
                     <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required">
                 </fieldset>
