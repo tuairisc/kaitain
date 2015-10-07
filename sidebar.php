@@ -16,16 +16,11 @@
 ?>
 
 <div id="sidebar">
-    <div class="sidebar-container sidebar-widgets">
-        <?php if (is_active_sidebar('widgets-sidebar')) {
-            dynamic_sidebar('widgets-sidebar');
-        } else {
-            printf('<p class="%s">%s</p>',
-                'no-widgets',
-                __('Add your sidebar widgets!', 'kaitain')
-            );
-        } ?>
-    </div>
+    <?php if (is_active_sidebar('widgets-sidebar-top')) : ?>
+        <div class="sidebar-container sidebar-widgets">
+            <?php dynamic_sidebar('widgets-sidebar-top'); ?>
+        </div>
+    <?php endif; ?>
     
     <?php // AdRotate groups 3, 4 and 5
     if (function_exists('adrotate_group')) : ?>
@@ -37,6 +32,12 @@
             printf('%s', adrotate_group(5));
 
             ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (is_active_sidebar('widgets-sidebar-bottom')) : ?>
+        <div class="sidebar-container sidebar-widgets">
+            <?php dynamic_sidebar('widgets-sidebar-bottom'); ?>
         </div>
     <?php endif; ?>
 </div>
