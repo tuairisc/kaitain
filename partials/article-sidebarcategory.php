@@ -15,14 +15,16 @@
 
 ?>
 
-<article <?php post_class('sidebar-article'); ?> id="sidebar-<?php the_id(); ?>">
+<article <?php post_class('sidebar-article'); ?> id="sidebar-category-article-<?php the_id(); ?>">
     <a class="sidebar-link green-link-hover" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail sidebar-thumbnail">
             <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>
         </div>
         <div class="post-content sidebar-content">
             <header class="sidebar-header">
-                <h5 class="title sidebar-article-title"><?php the_title(); ?></h5>
+                <h5 class="title sidebar-article-title">
+                    <?php the_title(); ?>
+                </h5>
             </header>
         </div>
     </a>
