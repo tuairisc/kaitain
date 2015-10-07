@@ -39,18 +39,17 @@ global $sections;
                         'theme_location' => 'footer-site-links',
                         'container' => 'nav',
                     )); ?>
-                    <?php wp_nav_menu(array(
-                        // TODO FIXME TODO
-                        // Output header nav menu.
-                        'theme_location' => 'top-external-social',
-                        'menu_class' => 'navbar-social',
-                        'container' => false,
-                        'container_id' => 'external-social',
-                        'link_before' => '<span class="nav-socialspan">',
-                        'link_after' => '</span>'
-                    )); ?>
                     <?php $sections->section_cavalcade(); ?>
                 </div>
+                <?php wp_nav_menu(array(
+                    // Output footer social menu.
+                    'theme_location' => 'top-external-social',
+                    'menu_class' => 'navbar-social',
+                    'container' => false,
+                    'container_id' => 'external-social',
+                    'link_before' => '<span class="nav-socialspan">',
+                    'link_after' => '</span>'
+                )); ?>
                  <p id="copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Breo Teorantha</a>.</p>
              </div>
              <div id="foras">
