@@ -43,7 +43,7 @@ global $sections;
                 </div>
                 <?php wp_nav_menu(array(
                     // Output footer social menu.
-                    'theme_location' => 'top-external-social',
+                    'theme_location' => 'footer-external-social',
                     'menu_class' => 'navbar-social',
                     'container' => false,
                     'container_id' => 'external-social',
