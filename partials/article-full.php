@@ -23,16 +23,18 @@ $hidden_users = get_option('kaitain_hidden_users');
         <h1 class="title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
         <?php if (!is_page()) : ?>
             <p class="post-excerpt"><?php printf(get_the_excerpt()); ?></p>
-            <div class="author-meta">
-                <div class="avatar">
-                    <?php kaitain_avatar_background_html($author, 'tc_post_avatar', 'author-photo'); ?>
-                </div>
-                <div class="author-info">
-                    <span class="author-link"><a class="green-link-hover" href="<?php printf(get_author_posts_url($author)); ?>"><?php the_author_meta('display_name'); ?></a></span>
-                    <br />
-                    <span class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span>
-                    <br />
-                    <span><?php edit_post_link(__('edit post', 'kaitain'), '', ''); ?></span>
+            <div class="post-meta">
+                <div class="author-meta">
+                    <div class="avatar">
+                        <?php kaitain_avatar_background_html($author, 'tc_post_avatar', 'author-photo'); ?>
+                    </div>
+                    <div class="author-info">
+                        <span class="author-link"><a class="green-link-hover" href="<?php printf(get_author_posts_url($author)); ?>"><?php the_author_meta('display_name'); ?></a></span>
+                        <br />
+                        <span class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span>
+                        <br />
+                        <span><?php edit_post_link(__('edit post', 'kaitain'), '', ''); ?></span>
+                    </div>
                 </div>
                 <?php if (!is_page()) {
                     kaitain_share_links(); 
