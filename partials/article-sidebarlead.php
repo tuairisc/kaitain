@@ -13,14 +13,24 @@
  * @link       http://www.tuairisc.ie
  */
 
+global $sections;
+
+$trim = $sections->get_section_slug(get_the_category()[0]);
+
+$trim = array(
+    'text' => sprintf('section-%s-text-hover', $trim),
+    'background' => sprintf('section-%s-background', $trim)
+);
+
 ?>
 
 <article <?php post_class('sidebar-lead-article'); ?> id="sidebar-category-lead-article-<?php the_id(); ?>">
-    <a class="green-link-hover" href="<?php the_permalink(); ?>">
+    <a class="<?php printf($trim['text']); ?>" href="<?php the_permalink(); ?>">
         <div class="thumbnail sidebar-lead-thumbnail">
             <?php the_post_thumbnail('tc_sidebar_category', array(
-                'class' => 'sidebar-category-thumbnail'
+                'class' => 'sidebar-category-lead-thumbnail'
             )); ?>
+            <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
         <h5 class="title sidebar-category-subtitle">
             <?php the_title(); ?>
