@@ -143,8 +143,8 @@ function kaitain_widgets() {
     $widget_defaults = array(
         'before_widget' => '<div id="%1$s" class="%2$s">',
         'after_widget' => '</div>',
-        'before_title' => '<h3 class="widget-title">',
-        'after_title' => '</h3>'
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>'
     );
 
     $widget_areas = array(
@@ -157,13 +157,13 @@ function kaitain_widgets() {
             'name' => __('Sidebar Top', 'kaitain'),
             'description' => __('Top sidebar widget area (above adverts).', 'kaitain'),
             'id' => 'widgets-sidebar-top',
-            'before_title' => '<h3 class="widget-title widget-subtitle">'
+            'before_title' => '<h4 class="widget-title widget-subtitle">'
         ),
         array(
             'name' => __('Sidebar Bottom', 'kaitain'),
             'description' => __('Bottom sidebar widget area (below adverts).', 'kaitain'),
             'id' => 'widgets-sidebar-bottom',
-            'before_title' => '<h3 class="widget-title widget-subtitle">'
+            'before_title' => '<h4 class="widget-title widget-subtitle">'
         )
     );
 
