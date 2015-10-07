@@ -86,7 +86,7 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
             </li>
             <li>
                 <input id="<?php printf($this->get_field_id('show_image')); ?>" name="<?php printf($this->get_field_name('show_image')); ?>" type="checkbox"  />
-                <label for="<?php printf($this->get_field_id('show_image')); ?>"><?php _e('Show thumbnail image for lead post', 'kaitain'); ?></label>
+                <label for="<?php printf($this->get_field_id('show_image')); ?>"><?php _e('Show thumbnail image for each post', 'kaitain'); ?></label>
             </li>
             <li>
                 <input id="<?php printf($this->get_field_id('use_section_trim')); ?>" name="<?php printf($this->get_field_name('use_section_trim')); ?>" type="checkbox"  />
@@ -183,7 +183,8 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
                 <a class="green-link-hover" href="<?php the_permalink(); ?>">
                     <?php
 
-                    if ($instance['show_image'] && $index === 0) {
+                    // if ($instance['show_image'] && $index === 0) {
+                    if ($instance['show_image']) {
                         the_post_thumbnail('tc_sidebar_category', array(
                             'class' => 'sidebar-category-thumbnail'
                         ));
