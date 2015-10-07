@@ -154,9 +154,15 @@ function kaitain_widgets() {
             'id' => 'widgets-front-page'
         ),
         array(
-            'name' => __('Sidebar', 'kaitain'),
-            'description' => __('Sidebar widget area.', 'kaitain'),
-            'id' => 'widgets-sidebar',
+            'name' => __('Sidebar Top', 'kaitain'),
+            'description' => __('Top sidebar widget area (above adverts).', 'kaitain'),
+            'id' => 'widgets-sidebar-top',
+            'before_title' => '<h3 class="widget-title widget-subtitle">'
+        ),
+        array(
+            'name' => __('Sidebar Bottom', 'kaitain'),
+            'description' => __('Bottom sidebar widget area (below adverts).', 'kaitain'),
+            'id' => 'widgets-sidebar-bottom',
             'before_title' => '<h3 class="widget-title widget-subtitle">'
         )
     );
@@ -175,7 +181,7 @@ add_action('widgets_init', 'kaitain_widgets');
 
 function kaitain_menus() {
     register_nav_menus(array(
-        'top-external-social' => __('Site Social Presences', 'kaitain'),
+        'footer-external-social' => __('Site Social Presences (footer)', 'kaitain'),
         'footer-site-links' => __('Footer Site Information Links', 'kaitain')
     ));
 }
