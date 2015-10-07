@@ -34,12 +34,12 @@ $hidden_users = get_option('kaitain_hidden_users');
                     <br />
                     <span><?php edit_post_link(__('edit post', 'kaitain'), '', ''); ?></span>
                 </div>
+                <?php if (!is_page()) {
+                    kaitain_share_links(); 
+                } ?>
             </div>
         <?php endif; ?>
     </header>
-    <?php if (!is_page()) {
-        kaitain_share_links(); 
-    } ?>
     <div class="post-content">
         <?php the_content(__('Read the rest of this post &raquo;', 'kaitain')); ?>
     </div>
