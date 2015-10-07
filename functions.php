@@ -199,7 +199,7 @@ function kaitain_image_sizes() {
     add_image_size('tc_post_sidebar', 70, 45, $crop);
 
     // Category archive.
-    add_image_size('tc_post_archive', 390, 170, $crop);
+    add_image_size('tc_post_archive', 390, 195, $crop);
 
     // Single post related post.
     add_image_size('tc_post_related', 255, 170, $crop);
