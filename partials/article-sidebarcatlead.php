@@ -24,15 +24,14 @@ $trim = array(
 
 ?>
 
-<article <?php post_class('sidebar-lead-article'); ?> id="sidebar-category-lead-article-<?php the_id(); ?>">
+<article <?php post_class('side-cat-article-lead'); ?> id="side-cat-lead-article-<?php the_id(); ?>">
     <a class="<?php printf($trim['text']); ?>" href="<?php the_permalink(); ?>">
-        <div class="thumbnail sidebar-lead-thumbnail">
+        <div class="thumbnail side-cat-article-lead-thumb">
             <?php the_post_thumbnail('tc_sidebar_category', array(
                 'class' => 'sidebar-category-lead-thumbnail'
             )); ?>
-            <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
-        <h5 class="title sidebar-category-subtitle">
+        <h5 class="title side-cat-article-title">
             <?php the_title(); ?>
         </h5>
     </a>

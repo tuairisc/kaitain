@@ -22,13 +22,16 @@ $trim = array(
     'background' => sprintf('section-%s-background', $trim)
 );
 
+$post_classes = array(
+    'side-cat-article', 'side-cat-lr-padding'
+);
+
 ?>
 
-<article <?php post_class('sidebar-article'); ?> id="sidebar-category-article-<?php the_id(); ?>">
+<article <?php post_class($post_classes); ?> id="side-cat-article-<?php the_id(); ?>">
     <a class="sidebar-link <?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail sidebar-thumbnail">
             <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>
-            <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
         <div class="post-content sidebar-content">
             <header class="sidebar-header">
