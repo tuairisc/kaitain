@@ -29,13 +29,13 @@ $post_classes = array(
 ?>
 
 <article <?php post_class($post_classes); ?> id="sidebar-article-<?php the_id(); ?>">
-    <a class="sidebar-link <?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
-        <div class="thumbnail sidebar-thumbnail">
+    <a class="side-article-flex <?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+        <div class="thumbnail side-thumb">
             <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>
             <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
         </div>
         <div class="post-content sidebar-content">
-            <header class="sidebar-header">
+            <header class="side-head">
                 <h5 class="title sidebar-article-title">
                     <?php the_title(); ?>
                 </h5>
