@@ -16,9 +16,13 @@
 $author = get_the_author_meta('ID');
 $hidden_users = get_option('kaitain_hidden_users');
 
+$post_classes = array(
+    'main-article-full', 'vspace'   
+);
+
 ?>
 
-<article <?php post_class('full'); ?> id="article-<?php the_ID(); ?>">
+<article <?php post_class($post_classes); ?> id="article-<?php the_ID(); ?>">
     <header>
         <h1 class="title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
         <?php if (!is_page()) : ?>

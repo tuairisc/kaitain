@@ -22,16 +22,20 @@ $trim = array(
     'background' => sprintf('section-%s-background', $trim)
 );
 
+$post_classes = array(
+    'side-cat-article-lead', 'vspace'
+);
+
 ?>
 
-<article <?php post_class('side-cat-article-lead'); ?> id="side-cat-lead-article-<?php the_id(); ?>">
+<article <?php post_class($post_classes); ?> id="side-cat-lead-article-<?php the_id(); ?>">
     <a class="<?php printf($trim['text']); ?>" href="<?php the_permalink(); ?>">
-        <div class="thumbnail side-cat-article-lead-thumb">
+        <div class="thumbnail side-cat-article-lead-thumb vspace-half">
             <?php the_post_thumbnail('tc_sidebar_category', array(
                 'class' => 'sidebar-category-lead-thumbnail'
             )); ?>
         </div>
-        <h5 class="title side-cat-article-title">
+        <h5 class="title side-cat-article-title side-cat-lr-padding">
             <?php the_title(); ?>
         </h5>
     </a>

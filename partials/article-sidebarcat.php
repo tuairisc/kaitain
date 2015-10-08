@@ -23,7 +23,7 @@ $trim = array(
 );
 
 $post_classes = array(
-    'side-cat-article', 'side-cat-lr-padding'
+    'side-cat-article', 'side-cat-lr-padding', 'vspace'
 );
 
 ?>
