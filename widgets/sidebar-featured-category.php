@@ -178,9 +178,9 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
             setup_postdata($post);
 
             if ($instance['show_image'] && $index === 0) {
-                kaitain_partial('article', 'sidebarlead');
+                kaitain_partial('article', 'sidebarcatlead');
             } else {
-                kaitain_partial('article', 'sidebarcategory');
+                kaitain_partial('article', 'sidebarcat');
             }
         }
                 
