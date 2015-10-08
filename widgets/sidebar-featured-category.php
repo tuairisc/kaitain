@@ -148,7 +148,7 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
         // Transient API name.
         $trans = 'sidebar_category_posts_' . $category->slug;
         // Default class colour unless overridden.
-        $trim = 'sidebar-category-grey'; 
+        $trim = 'side-cat-bg-grey'; 
         
         if (!($category_posts = get_transient($trans))) {
             $category_posts = get_posts(array(
@@ -171,7 +171,7 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
             $trim = sprintf('section-%s-background', $section_slug);
         }
 
-        printf('<div class="sidebar-category-widget-interior %s">', $trim);
+        printf('<div class="side-cat-interior %s">', $trim);
         printf($defaults['before_title'] . $title . $defaults['after_title']);
 
         foreach ($category_posts as $index => $post) {
