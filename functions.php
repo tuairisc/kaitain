@@ -202,7 +202,7 @@ function kaitain_image_sizes() {
     add_image_size('tc_home_author', 180, 150, $crop);
 
     // Sidebar widget post.
-    add_image_size('tc_post_sidebar', 70, 45, $crop);
+    add_image_size('tc_post_sidebar', 136, 68, $crop);
 
     // Category archive.
     add_image_size('tc_post_archive', 390, 195, $crop);
