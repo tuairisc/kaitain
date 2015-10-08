@@ -50,14 +50,10 @@ $placeholder = __('curdaigh', 'kaitain');
                     </button>
                 </nav>
             </div>
-            <nav id="navbar-sections-menu">
+            <nav class="sections-menu-container" id="navbar-sections-menu">
                 <?php // Section menus. See section-manager.php ?>
-                <div class="primary-menu-container menu-container">
-                    <ul class="sections-primary"><?php $sections->sections_menu('primary'); ?></ul>
-                </div>
-                <div class="secondary-menu-container menu-container section-background-active">
-                    <ul class="sections-secondary"><?php $sections->sections_menu('secondary', array('box-shadow-hover')); ?></ul>
-                </div> 
+                <ul class="sections-menu sections-primary"><?php $sections->sections_menu('primary'); ?></ul>
+                <ul class="sections-menu sections-secondary section-background-active"><?php $sections->sections_menu('secondary', array('box-shadow-hover')); ?></ul>
             </nav>
         </header>
         <div class="trim-block">
