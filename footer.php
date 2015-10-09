@@ -24,7 +24,7 @@ global $sections;
     </main><?php // End #main ?>
     <?php if (!is_404()) : ?>
         <div class="trim-block">
-            <div class="tuairisc-strip trim-absolute trim-top"></div>
+            <div class="stripe stripe__absolute-top"></div>
             <div class="advert-block banner-advert-block" id="footer-advert-block">
                 <?php if (function_exists('adrotate_group') && !is_404()) {
                     printf(adrotate_group(2));
@@ -32,8 +32,8 @@ global $sections;
             </div>
         </div>
         <footer id="footer">
-            <div class="menus">
-                <div class="menu-columns">
+            <div class="footer-menu" id="footer__menu">
+                <div class="footer-menu__columns flex--four-col-nav">
                     <?php // Custom footer menu and section cavalcade. ?>
                     <?php wp_nav_menu(array(
                         'theme_location' => 'footer-site-links',
@@ -50,7 +50,7 @@ global $sections;
                     'link_before' => '<span class="nav-socialspan">',
                     'link_after' => '</span>'
                 )); ?>
-                 <p id="copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Breo Teorantha</a>.</p>
+                 <p id="copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Bheo Teoranta</a>.</p>
              </div>
              <div id="foras">
                 <p><small><?php _e('Le Cabhair ó', 'kaitain'); ?></small></p>
