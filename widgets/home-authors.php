@@ -133,12 +133,12 @@ class Kaitain_Columnist_Widget extends WP_Widget {
         $classes = array(
             // The HTML was a gorram mess so I separated classes.
             'anchor' => array(
-                'green-link-hover',
+                'green-link--hover',
                 'kaitain-columnist',
             ),
             'div' => array(
                 'kaitain-columnist-list',
-                'flex-four-cols-div'
+                'flex--four-col-div'
             ),
             'title' => array(
                 'widget-title'

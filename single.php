@@ -28,7 +28,7 @@ if (have_posts()) {
                 __('Léigh tuilleadh sa rannóg seo', 'kaitain')
             );
 
-            printf('<div class="%s">', 'related-articles flex-three-cols-article');
+            printf('<div class="%s">', 'related-articles flex--three-col-article');
 
             $related = rp_get_related(array(
                 'range' => array(
@@ -51,7 +51,7 @@ if (have_posts()) {
         comments_template();
     }
 } else {
-   kaitain_partial('article', 'missing');
+    kaitain_partial('article', 'missing');
 }
 
 get_footer();

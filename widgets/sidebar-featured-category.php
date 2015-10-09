@@ -37,8 +37,6 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
 
     public function form($instance) {
         $defaults = array(
-            // Widget defaults.
-            'widget_title' => __('Featued Category', 'kaitain'),
             'max_posts' => 10,
             'show_image' => false,
             'use_section_trim' => false,
@@ -57,12 +55,6 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
         ?>
 
         <ul>
-            <li>
-                <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', 'kaitain'); ?></label>
-            </li>
-            <li>
-                <input id="<?php printf($this->get_field_id('widget_title')); ?>" name="<?php printf($this->get_field_name('widget_title')); ?>" value="<?php printf($instance['widget_title']); ?>" type="text" class="widefat" />
-            </li>
             <li>
                 <label for="<?php printf($this->get_field_id('category')); ?>"><?php _e('Category:', 'kaitain'); ?></label>
             </li>
@@ -114,8 +106,6 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
 
     function update($new_defaults, $old_defaults) {
         $defaults = array();
-
-        $defaults['widget_title'] = filter_var($new_defaults['widget_title'], FILTER_SANITIZE_STRIPPED);
 
         $defaults['show_image'] = (array_key_exists('show_image', $new_defaults) 
             && $new_defaults['show_image'] === 'on');

@@ -141,7 +141,7 @@ class Kaitain_Featured_Post_Widget extends WP_Widget {
                 }
 
                 if (($number + $mod) % 4 === 1) {
-                    printf('<div class="%s">', 'featured-row flex-four-cols-article');
+                    printf('<div class="%s">', 'featured-row flex--four-col-article');
                 }
 
                 if (!$instance['show_sticky'] || $number > 0) {
