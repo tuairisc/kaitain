@@ -240,7 +240,7 @@ function kaitain_partial($name, $slug = '') {
  */
 
 function kaitain_pagination_classes() {
-    return 'class="green-link-hover"';
+    return 'class="green-link--hover"';
 }
 
 add_filter('next_posts_link_attributes', 'kaitain_pagination_classes');
