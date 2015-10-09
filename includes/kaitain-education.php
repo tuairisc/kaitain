@@ -19,42 +19,48 @@
  * Output the HTML for the education section landing page.
  *
  * @param   int/string      $category_id_or_slug
+ * @param   string          $class_prefix           Class prefix.
  */
 
-function kaitain_education_section_pane($category_id_or_slug) {
+function kaitain_education_section_pane($category_id_or_slug, $class_prefix = null) {
     if (is_numeric($category_id_or_slug)) {
         $category = get_category($category_id_or_slug);
     } else {
         $category = get_category_by_slug($category_id_or_slug);
     }
 
-    printf('<a class="%s %s" id="%s" href="%s">',
-        'education-landing-section',
-        'education-' . $category->slug,
-        'education-' . $category->slug,
+    if (!$class_prefix) {
+        $class_prefix = 'ed-pane';
+    }
+
+    printf('<a class="%s %s" href="%s">',
+        $class_prefix,
+        $class_prefix . '--' . $category->slug,
         get_category_link($category->cat_ID)
     );
 
     printf('<div class="%s">',
-        'education-icon-wrapper'
+        $class_prefix . '__icon-wrapper'
     );
 
     printf('<div class="%s %s"></div>',
-        'education-icon',
-        'education-icon-' . $category->slug
+        $class_prefix . '__icon',
+        $class_prefix . '__icon--' . $category->slug
     );
 
     printf('</div>'); // Close icon wrapper.
 
-    printf('<div class="%s">', 'education-category-content');
+    printf('<div class="%s">',
+        $class_prefix . '__content'
+    );
 
     printf('<h1 class="%s">%s</h1>',
-        'education-name',
+        $class_prefix . '__title',
         $category->cat_name
     );
 
     printf('<p class="%s">%s</p>',
-        'education-description',
+        $class_prefix . '__desc',
         $category->category_description
     );
 
