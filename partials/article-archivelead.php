@@ -14,21 +14,15 @@
  */
 
 global $sections;
-
-$trim = $sections->get_section_slug(get_the_category()[0]);
-
-$trim = array(
-    'text' => sprintf('section-%s-text-hover', $trim),
-    'background' => sprintf('section-%s-background', $trim)
-);
+$trim = $sections->section_css_classes(get_the_category()[0]);
 
 ?>
 
 <article <?php post_class('archive-lead'); ?> id="archive-lead-<?php the_id(); ?>">
-    <a class="archive-lead-link <?php printf($trim['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+    <a class="archive-lead-link <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail">
             <?php post_image_html(get_the_ID(), 'tc_home_feature_lead', true); ?>
-            <div class="archive-trim-bottom <?php printf($trim['background']); ?>"></div>
+            <div class="archive-trim-bottom <?php printf($trim['reg']['background']); ?>"></div>
         </div>
         <h1 class="title archive-lead-title"><?php the_title(); ?></h1>
     </a>

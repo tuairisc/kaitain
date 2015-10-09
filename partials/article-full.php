@@ -33,7 +33,7 @@ $post_classes = array(
                         <?php kaitain_avatar_background_html($author, 'tc_post_avatar', 'author-photo'); ?>
                     </div>
                     <div class="author-info">
-                        <span class="author-link"><a class="green-link-hover" href="<?php printf(get_author_posts_url($author)); ?>"><?php the_author_meta('display_name'); ?></a></span>
+                        <span class="author-link"><a class="green-link--hover" href="<?php printf(get_author_posts_url($author)); ?>"><?php the_author_meta('display_name'); ?></a></span>
                         <br />
                         <span class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span>
                         <br />

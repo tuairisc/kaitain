@@ -14,13 +14,7 @@
  */
 
 global $sections;
-
-$trim = $sections->get_section_slug(get_the_category()[0]);
-
-$trim = array(
-    'text' => sprintf('section-%s-text-hover', $trim),
-    'background' => sprintf('section-%s-background', $trim)
-);
+$trim = $sections->section_css_classes(get_the_category()[0]);
 
 $post_classes = array(
     'side-cat-article-lead', 'vspace'
@@ -29,7 +23,7 @@ $post_classes = array(
 ?>
 
 <article <?php post_class($post_classes); ?> id="side-cat-lead-article-<?php the_id(); ?>">
-    <a class="<?php printf($trim['text']); ?>" href="<?php the_permalink(); ?>">
+    <a class="<?php printf($trim['hover']['text']); ?>" href="<?php the_permalink(); ?>">
         <div class="thumbnail side-cat-article-lead-thumb vspace-half">
             <?php the_post_thumbnail('tc_sidebar_category', array(
                 'class' => 'sidebar-category-lead-thumbnail'
