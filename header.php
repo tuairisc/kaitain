@@ -32,28 +32,28 @@ $placeholder = __('curdaigh', 'kaitain');
     <?php if (!is_404()) : ?>
         <?php // Disabled on 404 pages. ?>
         <header id="header">
-            <div class="section-trim-background" id="navrow">
+            <div class="section--current-bg navrow" id="header__navrow">
                 <?php // Empty until I have something better. ?>
-                <nav class="left-nav">
-                    <button class="menutoggle navbutton" id="nav-menutoggle" type="button">
-                        <span class="nav-buttonicon menutoggle-icon menu"></span>
+                <nav class="navrow__left text--left">
+                    <button class="navbutton navbutton--menutoggle navbutton__menu" id="menutoggle__nav" type="button">
+                        <span class="navbutton__icon menu"></span>
                     </button>
                 </nav>
 
-                <nav class="center-nav" id="home-link">
+                <nav class="navrow__middle" id="home-link">
                     <a id="home" rel="home" href="<?php printf(home_url()); ?>"></a> 
                 </nav>
 
-                <nav class="right-nav">                    
-                    <button class="navbutton searchtoggle" id="nav-searchtoggle" type="button">
-                        <span class="nav-buttonicon searchtoggle-icon search"></span>
+                <nav class="navrow__right text--center">                    
+                    <button class="navbutton navbutton--searchtoggle float--right" id="searchtoggle__nav" type="button">
+                        <span class="navbutton__icon search"></span>
                     </button>
                 </nav>
             </div>
-            <nav class="sections-menu-container" id="navbar-sections-menu">
-                <?php // Section menus. See section-manager.php ?>
-                <ul class="sections-menu sections-primary"><?php $sections->sections_menu('primary'); ?></ul>
-                <ul class="sections-menu sections-secondary section-background-active"><?php $sections->sections_menu('secondary', array('box-shadow-hover')); ?></ul>
+            <nav class="header-menu" id="header__menu">
+                <?php // Section header-menu. See section-manager.php ?>
+                <ul class="header-menu__menu" id="menu__main"><?php $sections->sections_menu('primary'); ?></ul>
+                <ul class="header-menu__menu disp__hide" id="menu__secondary"><?php $sections->sections_menu('secondary', array('box-shadow-hover')); ?></ul>
             </nav>
         </header>
         <div class="trim-block">
@@ -62,16 +62,16 @@ $placeholder = __('curdaigh', 'kaitain');
                     printf(adrotate_group(1));
                 } ?>
             </div>
-            <div class="tuairisc-strip trim-absolute trim-bottom"></div>
+            <div class="stripe stripe__absolute-bottom"></div>
         </div>
-        <div class="section-trim-background" id="bigsearch">
+        <div class="section--current-bg disp disp--hidden" id="bigsearch">
             <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
                 <fieldset form="bigsearch-form">
                     <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required">
                 </fieldset>
             </form>
-            <button class="navbutton searchtoggle" id="search-searchtoggle" type="button">
-                <span class="nav-buttonicon searchtoggle-icon search"></span>
+            <button class="navbutton navbutton--searchtoggle" id="searchtoggle__search" type="button">
+                <span class="navbutton__icon search"></span>
             </button>
         </div>
     <?php endif; ?>
