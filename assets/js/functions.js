@@ -43,7 +43,7 @@
             // opts.toggled can be overriden. Otherwise, just invert it.
             opts.toggled = (typeof override === 'boolean') ? override : !opts.toggled;
 
-            $(opts.child).toggleClass(opts.childClass, opts.toggled);
+            $(opts.child).children(opts.child).toggleClass(opts.childClass, opts.toggled);
             $(opts.target).toggleClass(opts.targetClass, opts.toggled);
 
             if (opts.toggled && opts.isTargetInput) {
@@ -74,19 +74,52 @@
         return this;
     }
 
-    $('.searchtoggle').link({
-        child: '.searchtoggle-icon',
+    $('.navbutton--searchtoggle').link({
+        child: '.navbutton__icon',
         childClass: 'close',
         target: '#bigsearch',
-        targetClass: 'show',
+        targetClass: 'disp--shown',
         isTargetInput: true,
     });
 
-    $('.menutoggle').link({
-        child: '.menutoggle-icon',
+    $('.navbutton--menutoggle').link({
+        child: '.navbutton__icon',
         childClass: 'close',
-        target: '#navbar-sections-menu',
-        targetClass: 'active',
+        target: '#header__menu',
+        targetClass: 'disp--shown',
         isTargetInput: false
     });
 })(jQuery, window, document);
+
+;(function(window, $) {
+    function dingdong() {
+        var a = $(window).scrollTop() + $('#header').height() - $('#main').offset().top;
+        var b = 100;
+        var c = 640;
+        var d = 0;
+
+        var nav = {
+            menu: '#header__menu',
+            button: '#menutoggle__nav'
+        };
+
+        var open = ($(window).width() > c && a > 0);
+
+        if ($(window).width() > c) {
+            if (a > 0) {
+                $(nav.menu).slideUp(b);
+                $(nav.button).slideDown(b);
+            } else {
+                $(nav.menu).slideDown(b);
+                $(nav.button).slideUp(b);
+            }
+
+        } else if (!$(nav.menu).is(':visible')) {
+            // Hidden for demo.
+            // $(nav.menu).show();
+            $(nav.button).show();
+        }
+    }
+
+    $(window).on('scroll resize', dingdong);
+})(window, jQuery);
