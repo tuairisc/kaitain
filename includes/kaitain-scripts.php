@@ -54,7 +54,7 @@ function kaitain_scripts() {
 
     $kaitain_css = array(
         // Compressed, compiled theme CSS.
-        'main-style' => $css_path . 'main.css'
+        'main-style' => $css_path . 'style.css'
     );
 
     $kaitain_conditional_css = array(
