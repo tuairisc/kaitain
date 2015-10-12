@@ -1,35 +1,36 @@
 {
-  "name": "tuairisc.ie",
-  "version": "2.0.0",
-  "description": "Packages necessary to transpile, prefix and compress Tuairisc.ie's Sass.",
+  "name": "kaitain",
+  "version": "1.0.0",
+  "description": "The Kaitain WordPRess theme",
   "main": "gulpfile.js",
   "dependencies": {
-    "gulp": "~3.9.0",
-    "gulp-autoprefixer": "~2.3.1",
-    "gulp-ruby-sass": "~1.0.5",
-    "gulp-sourcemaps": "~1.5.2",
-    "gulp-watch": "~4.2.4",
-    "html5shiv": "~3.7.2",
-    "jquery-placeholder": "~2.1.1"
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.0.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-ruby-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.1"
   },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/bhalash/tuairisc.ie.git"
+    "url": "git+https://github.com/bhalash/kaitain-theme.git"
   },
   "keywords": [
     "wordpress",
+    "sass",
     "css",
     "html5",
-    "sass",
     "scss"
   ],
   "author": "Mark Grealish",
-  "license": "BSD-2-Clause",
+  "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/bhalash/tuairisc.ie/issues"
+    "url": "https://github.com/bhalash/kaitain-theme/issues"
   },
-  "devDependencies": {}
+  "homepage": "https://github.com/bhalash/kaitain-theme#readme"
 }
