@@ -22,7 +22,7 @@ $post_classes = array(
 
 ?>
 
-<article <?php post_class($post_classes); ?> id="article--small---<?php the_id(); ?>">
+<article <?php post_class($post_classes); ?> id="article--small--<?php the_id(); ?>">
     <a class="article--small__link <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail article--small__thumb vspace--half">
             <?php post_image_html(get_the_ID(), 'tc_home_feature_small', true); ?>

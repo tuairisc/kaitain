@@ -18,7 +18,7 @@ $trim = $sections->section_css_classes(get_the_category()[0]);
 
 ?>
 
-<article <?php post_class('related'); ?> id="related-<?php the_ID(); ?>">
+<article <?php post_class('article--related'); ?> id="article--related--<?php the_ID(); ?>">
     <a class="<?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail vspace--half">
             <?php post_image_html(get_the_ID(), 'tc_post_related', true); ?>
