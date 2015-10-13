@@ -22,8 +22,9 @@ global $sections;
             get_sidebar(); 
         } ?>
     </main><?php // End #main ?>
+
     <?php if (!is_404()) : ?>
-        <div class="trim-block">
+        <div class="trim-block noprint">
             <div class="stripe stripe__absolute-top"></div>
             <div class="advert-block banner-advert-block" id="footer-advert-block">
                 <?php if (function_exists('adrotate_group') && !is_404()) {
@@ -31,8 +32,10 @@ global $sections;
                 } ?>
             </div>
         </div>
-        <footer id="footer">
-            <div class="footer-menu" id="footer__menu">
+
+        <footer class="footer noprint" id="footer">
+            <div class="footer__menus" id="footer__menus">
+
                 <div class="footer-menu__columns flex--four-col--nav">
                     <?php // Custom footer menu and section cavalcade. ?>
                     <?php wp_nav_menu(array(
@@ -41,21 +44,26 @@ global $sections;
                     )); ?>
                     <?php $sections->section_cavalcade(); ?>
                 </div>
+
                 <?php wp_nav_menu(array(
                     // Output footer social menu.
                     'theme_location' => 'footer-external-social',
-                    'menu_class' => 'navbar-social',
+                    'menu_class' => 'footer__socialmenu',
                     'container' => false,
-                    'container_id' => 'external-social',
-                    'link_before' => '<span class="nav-socialspan">',
+                    'container_class' => 'footer__social',
+                    'container_id' => 'footer__social',
+                    'link_before' => '<span class="footer__sociallink">',
                     'link_after' => '</span>'
                 )); ?>
-                 <p id="copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Bheo Teoranta</a>.</p>
-             </div>
-             <div id="foras">
+
+                <p class="footer__copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Bheo Teoranta</a>.</p>
+            </div>
+
+            <div class="footer__foras">
                 <p><small><?php _e('Le Cabhair ó', 'kaitain'); ?></small></p>
-                <p><a class="foras-logo" rel="nofollow" target="_blank" href="http://www.gaeilge.ie/"><img src="<?php printf(get_template_directory_uri() . '/assets/images/foras-white.svg'); ?>" alt="Foras na Gaeilge" /></a></p>
+                <p><a class="footer__brand" rel="nofollow" target="_blank" href="http://www.gaeilge.ie/"><img src="<?php printf(get_template_directory_uri() . '/assets/images/foras-white.svg'); ?>" alt="Foras na Gaeilge" /></a></p>
              </div>
+
         </footer>
     <?php endif; ?>
     <?php wp_footer(); ?>
