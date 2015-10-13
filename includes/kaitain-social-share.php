@@ -117,10 +117,9 @@ function kaitain_social_link($link_info, $service_name, $service_info) {
 
     $link[] = sprintf('<li class="%s">', implode(' ', $classes));
 
-    $link[] = sprintf('<a class="%s" href="%s%s" target="%s">',
+    $link[] = sprintf('<a class="%s" href="%s" target="%s">',
         'article__sharelink',
         $service_info['href'],
-        $service_info['url'],
         $service_info['target']
     );
 
