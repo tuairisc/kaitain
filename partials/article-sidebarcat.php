@@ -17,19 +17,19 @@ global $sections;
 $trim = $sections->section_css_classes(get_the_category()[0]);
 
 $post_classes = array(
-    'side-cat-article', 'side-cat-lr-padding', 'vspace'
+    'article--sidebar article--sidebar--lead', 'article--sidebar__padding', 'vspace--full'
 );
 
 ?>
 
 <article <?php post_class($post_classes); ?> id="side-cat-article-<?php the_id(); ?>">
-    <a class="side-article-flex <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
-        <div class="thumbnail side-thumb">
+    <a class="flex--asym-quarter-auto <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+        <div class="thumbnail article--sidebar__thumbnail--small">
             <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>
         </div>
         <div class="post-content sidebar-content">
-            <header class="side-head">
-                <h5 class="title sidebar-article-title">
+            <header class="article--sidebar__header">
+                <h5 class="title article--sidebar__title">
                     <?php the_title(); ?>
                 </h5>
             </header>
