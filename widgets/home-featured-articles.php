@@ -103,6 +103,11 @@ class Kaitain_Featured_Post_Widget extends WP_Widget {
     public function widget($defaults, $instance) {
         // $post object is needed in order to correctly run setup_postdata().
         global $post;
+
+        $classes = array(
+            'widget' => 'widget widget--featured',
+            'post_row' => 'flex--four-col--article vspace--half widget--featured__row'
+        );
         
         // Array of featured and sticky posts.
         $featured = array();
@@ -127,7 +132,7 @@ class Kaitain_Featured_Post_Widget extends WP_Widget {
             printf($defaults['before_widget']);
         }
 
-        printf('<div class="recent-widget tuairisc-post-widget">');
+        printf('<div class="%s">', $classes['widget']);
 
         // Number modifier for when sticky posts are selected.
         $mod = $instance['show_sticky'] ? 0 : 1;
@@ -137,15 +142,15 @@ class Kaitain_Featured_Post_Widget extends WP_Widget {
                 setup_postdata($post);
 
                 if ($instance['show_sticky'] && $number === 0) {
-                   kaitain_partial('article', 'archivelead');
+                   kaitain_partial('article', 'lead');
                 }
 
                 if (($number + $mod) % 4 === 1) {
-                    printf('<div class="%s">', 'featured-row flex--four-col--article');
+                    printf('<div class="%s">', $classes['post_row']);
                 }
 
                 if (!$instance['show_sticky'] || $number > 0) {
-                    kaitain_partial('article', 'archivesmall');
+                    kaitain_partial('article', 'small');
                 }
 
                 if ($number > 0 && ($number + $mod) % 4 === 0) {
