@@ -35,21 +35,22 @@ $placeholder = __('curdaigh', 'kaitain');
             <div class="section--current-bg navrow" id="header__navrow">
                 <?php // Empty until I have something better. ?>
                 <nav class="navrow__left text--left">
-                    <button class="navbutton navbutton--menutoggle navbutton__menu" id="menutoggle__nav" type="button">
-                        <span class="navbutton__icon menu"></span>
+                    <button class="navrow__button navrow__button--menu button--menu" id="menutoggle__nav" type="button">
+                        <span class="navrow__icon menu"></span>
                     </button>
                 </nav>
 
                 <nav class="navrow__middle" id="home-link">
-                    <a id="home" rel="home" href="<?php printf(home_url()); ?>"></a> 
+                    <a class="navrow__home-link" id="home" rel="home" href="<?php printf(home_url()); ?>"></a> 
                 </nav>
 
                 <nav class="navrow__right text--center">                    
-                    <button class="navbutton navbutton--searchtoggle float--right" id="searchtoggle__nav" type="button">
-                        <span class="navbutton__icon search"></span>
+                    <button class="navrow__button navrow__button--search float--right" id="searchtoggle__nav" type="button">
+                        <span class="navrow__icon search"></span>
                     </button>
                 </nav>
             </div>
+
             <nav class="header-menu" id="header__menu">
                 <?php // Section header-menu. See section-manager.php ?>
                 <ul class="header-menu__menu" id="menu__main"><?php $sections->sections_menu('primary'); ?></ul>
@@ -70,8 +71,8 @@ $placeholder = __('curdaigh', 'kaitain');
                     <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required">
                 </fieldset>
             </form>
-            <button class="navbutton navbutton--searchtoggle" id="searchtoggle__search" type="button">
-                <span class="navbutton__icon search"></span>
+            <button class="navrow__button navrow__button--search" id="searchtoggle__search" type="button">
+                <span class="navrow__icon search"></span>
             </button>
         </div>
     <?php endif; ?>
