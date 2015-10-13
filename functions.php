@@ -141,9 +141,9 @@ kaitain_includes();
 
 function kaitain_widgets() {
     $widget_defaults = array(
-        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget' => '</div>',
-        'before_title' => '<h4 class="widget-title">',
+        'before_title' => '<h4 class="widget__title vspace--full">',
         'after_title' => '</h4>'
     );
 
@@ -151,13 +151,13 @@ function kaitain_widgets() {
         array(
             'name' => __('Front Page', 'kaitain'),
             'description' => __('Front page widget area.', 'kaitain'),
-            'id' => 'widgets-front-page'
+            'id' => 'widgets-front-page',
+            'before_title' => '<h3 class="widget__title vspace--full">'
         ),
         array(
             'name' => __('Sidebar Top', 'kaitain'),
             'description' => __('Top sidebar widget area (above adverts).', 'kaitain'),
             'id' => 'widgets-sidebar-top',
-            'before_title' => '<h4 class="widget-title widget-subtitle">'
         ),
         array(
             'name' => __('Sidebar Bottom', 'kaitain'),
