@@ -120,6 +120,15 @@ class Kaitain_Columnist_Widget extends WP_Widget {
      */
 
     public function widget($defaults, $instance) {
+        $classes = array(
+            // The HTML was a gorram mess so I separated classes.
+            'container' => 'widget--authors flex--four-col--div',
+            'anchor' => 'green-link--hover widget--authors__author',
+            'author' => 'widget--authors__author',
+            'author_name' => 'widget--authors__name',
+            'avatar' => 'author-photo widget--authors__photo vspace--half'
+        );
+
         $title = apply_filters('widget_title', $instance['widget_title']);
 
         $author_query = get_users(array(
@@ -130,51 +139,35 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             printf('%s', $defaults['before_widget']);
         }
 
-        $classes = array(
-            // The HTML was a gorram mess so I separated classes.
-            'anchor' => array(
-                'green-link--hover',
-                'kaitain-columnist',
-            ),
-            'div' => array(
-                'kaitain-columnist-list',
-                'flex--four-col--div'
-            ),
-            'title' => array(
-                'widget-title'
-            ),
-            'author' => array(
-                'columnist-name'
-            )
-        );
-
-        printf('<h3 class="%s">%s</h3>',
-            implode(' ', $classes['title']),
-            apply_filters('widget_title', $instance['widget_title'])
-        );
+        printf($defaults['before_title'] . $title . $defaults['after_title']);
 
         // Wrapping interior container.
-        printf('<div class="%s">', implode(' ', $classes['div']));
+        printf('<div class="%s">', $classes['container']);
 
         foreach ($author_query as $author) {
-            printf('<div class="kaitain-columnist" id="%s">',
-                'columnist-' . $author->user_nicename
+            printf('<div class="%s" id="%s">',
+                $classes['author'],
+                'widget--authors--' . $author->user_nicename
             );
 
             printf('<a class="%s" title="%s" href="%s">',
                 // Wrapping anchor for avatar and author name.
-                implode(' ', $classes['anchor']),
+                $classes['anchor'],
                 $author->display_name,
                 get_author_posts_url($author->ID),
                 $author->display_name
             ); 
 
             // Avatar image.
-            kaitain_avatar_background_html($author->ID, 'tc_home_avatar', 'author-photo columnist-photo');
+            kaitain_avatar_background_html(
+                $author->ID,
+                'tc_home_avatar', 
+                $classes['avatar']
+            );
 
-            printf('<h6 class="%s">%s</h6>',
+            printf('<h6 class="%s"><strong>%s</strong></h6>',
                 // Author name.
-                implode(' ', $classes['author']),
+                $classes['author_name'],
                 $author->display_name
             );
 
