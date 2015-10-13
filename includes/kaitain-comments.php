@@ -23,16 +23,19 @@
 
 function kaitain_theme_comments($comment, $args, $depth) {
     $GLOBALS['comment'] = $comment;
+    $comment_classes = array(
+        'comments__comment', 'vspace--full'
+    )
     ?>
 
-    <li <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
-        <div class="avatar">
+    <li <?php comment_class($comment_classes); ?> id="comments__comment--<?php comment_ID() ?>">
+        <div class="comments__photo avatar">
             <?php kaitain_avatar_background_html($comment, 'tc_post_avatar', 'author-photo'); ?>
         </div>
-        <div class="comment-body">
+        <div class="comments__body">
             <header>
-                <p class="comment-meta">
-                    <span class="comment-author-link"><?php comment_author_link(); ?></span>
+                <p class="comment__meta">
+                    <span class="comments__author-website"><?php comment_author_link(); ?></span>
                     <?php printf('<span class="%s"><time datetime="%s">%s</time></span>',
                         'post-date',
                         get_comment_date('Y-M-d H:i'),
@@ -41,10 +44,10 @@ function kaitain_theme_comments($comment, $args, $depth) {
                 </p>
             </header>
 
-            <div class="comment-body">
+            <div class="comments__comment-body">
                 <?php if (!$comment->comment_approved) {
                     printf('<p class="%s">%s</p>',
-                        'comment-unapproved',
+                        'comments__unapproved',
                         __('Tá do thrácht á mheas.', 'kaitain')
                     );
                 } else {
@@ -54,7 +57,7 @@ function kaitain_theme_comments($comment, $args, $depth) {
 
             <?php if (is_user_logged_in()) : ?>
                 <footer>
-                    <p><?php edit_comment_link(__('edit', 'kaitain'),'', ''); ?></p>
+                    <?php edit_comment_link(__('edit', 'kaitain'),'<p>', '</p>'); ?>
                 </footer>
             <?php endif; ?>
         </div>
@@ -72,7 +75,7 @@ function kaitain_theme_comments($comment, $args, $depth) {
  */
 
 function kaitain_wrap_comment_fields_before() {
-    printf('<div class="commentform-inputs">');
+    printf('<div class="comments__inputs">');
 }
 
 function kaitain_wrap_comment_fields_after() {
