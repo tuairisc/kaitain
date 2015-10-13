@@ -21,14 +21,12 @@ if (have_posts()) {
        kaitain_partial('article', 'full');
 
         if (function_exists('rp_get_related')) {
-            printf('<div class="%s">', 'related-articles-wrapper');
-
             printf('<h4 class="%s">%s</h4>',
                 'subtitle related-title',
                 __('Léigh tuilleadh sa rannóg seo', 'kaitain')
             );
 
-            printf('<div class="%s">', 'related-articles flex--three-col-article');
+            printf('<div class="%s">', 'related-articles flex--three-col-article vspace--double noprint');
 
             $related = rp_get_related(array(
                 'range' => array(
@@ -43,7 +41,6 @@ if (have_posts()) {
                 kaitain_partial('article', 'related');
             }
 
-            printf('</div>');
             printf('</div>');
             wp_reset_postdata();
         }
