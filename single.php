@@ -26,7 +26,7 @@ if (have_posts()) {
                 __('Léigh tuilleadh sa rannóg seo', 'kaitain')
             );
 
-            printf('<div class="%s">', 'related-articles flex--three-col-article vspace--double noprint');
+            printf('<div class="%s">', 'related-articles flex--three-col--article vspace--double noprint');
 
             $related = rp_get_related(array(
                 'range' => array(

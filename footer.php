@@ -33,7 +33,7 @@ global $sections;
         </div>
         <footer id="footer">
             <div class="footer-menu" id="footer__menu">
-                <div class="footer-menu__columns flex--four-col-nav">
+                <div class="footer-menu__columns flex--four-col--nav">
                     <?php // Custom footer menu and section cavalcade. ?>
                     <?php wp_nav_menu(array(
                         'theme_location' => 'footer-site-links',
