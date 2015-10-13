@@ -32,7 +32,7 @@ $placeholder = __('curdaigh', 'kaitain');
     <?php if (!is_404()) : ?>
         <?php // Disabled on 404 pages. ?>
         <header id="header">
-            <div class="section--current-bg navrow" id="header__navrow">
+            <div class="section--current-bg flex--three-col--nav navrow" id="header__navrow">
                 <?php // Empty until I have something better. ?>
                 <nav class="navrow__left text--left">
                     <button class="navrow__button navrow__button--menu button--menu" id="menutoggle__nav" type="button">
