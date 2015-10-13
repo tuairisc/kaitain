@@ -22,7 +22,7 @@ $post_classes = array(
 
 ?>
 
-<article <?php post_class($post_classes); ?> id="side-cat-article-<?php the_id(); ?>">
+<article <?php post_class($post_classes); ?> id="article--sidebar--<?php the_id(); ?>">
     <a class="flex--asym-quarter-auto <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail article--sidebar__thumbnail--small">
             <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>

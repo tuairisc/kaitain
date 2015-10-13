@@ -27,7 +27,7 @@ $link_classes = array(
 
 ?>
 
-<article <?php post_class($post_classes); ?> id="article--sidebar--lead-<?php the_id(); ?>">
+<article <?php post_class($post_classes); ?> id="article--sidebar--<?php the_id(); ?>">
     <a class="<?php printf(implode(' ', $link_classes)); ?>" href="<?php the_permalink(); ?>">
         <div class="article--sidebar__thumbnail thumbnail vspace--half">
             <?php the_post_thumbnail('tc_sidebar_category', array(
