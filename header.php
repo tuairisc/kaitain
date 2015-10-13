@@ -31,7 +31,7 @@ $placeholder = __('curdaigh', 'kaitain');
 <body <?php body_class(); ?>>
     <?php if (!is_404()) : ?>
         <?php // Disabled on 404 pages. ?>
-        <header id="header">
+        <header class="noprint" id="header">
             <div class="section--current-bg flex--three-col--nav navrow" id="header__navrow">
                 <?php // Empty until I have something better. ?>
                 <nav class="navrow__left text--left">
@@ -76,5 +76,5 @@ $placeholder = __('curdaigh', 'kaitain');
             </button>
         </div>
     <?php endif; ?>
-    <main id="main">
-        <div id="content">
+    <main class="main "id="main">
+        <div class="main__content" id="main__content">
