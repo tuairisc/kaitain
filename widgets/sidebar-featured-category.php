@@ -137,10 +137,20 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
         $title = apply_filters('widget_title', $category->cat_name);
         // Transient API name.
         $trans = 'sidebar_category_posts_' . $category->slug;
-        // Default class colour unless overridden.
-        $trim = 'side-cat-bg-grey'; 
+
+        $classes = array(
+            'widget' => 'widget--sidebarcat vspace--full',
+            'trim' => 'widget--sidebarcat__bg'
+        );
+
+        if ($instance['use_section_trim']) {
+            // Override grey background with appropriate section trim.
+            $section_slug = $sections->get_section_slug(get_the_category()[0]);
+            $classes['trim'] = sprintf('section--%s-background', $section_slug);
+        }
         
         if (!($category_posts = get_transient($trans))) {
+            // Transient: fetch posts.
             $category_posts = get_posts(array(
                 'post_type' => 'post',
                 'post_status' => 'publish',
@@ -156,12 +166,8 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
             printf($defaults['before_widget']);
         }
 
-        if ($instance['use_section_trim']) {
-            $section_slug = $sections->get_section_slug(get_the_category()[0]);
-            $trim = sprintf('section-%s-background', $section_slug);
-        }
-
-        printf('<div class="side-cat-interior %s">', $trim);
+        // Widget interior.
+        printf('<div class="%s %s">', $classes['widget'], $classes['trim']);
         printf($defaults['before_title'] . $title . $defaults['after_title']);
 
         foreach ($category_posts as $index => $post) {
