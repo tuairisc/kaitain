@@ -152,18 +152,22 @@ function kaitain_widgets() {
             'name' => __('Front Page', 'kaitain'),
             'description' => __('Front page widget area.', 'kaitain'),
             'id' => 'widgets-front-page',
-            'before_title' => '<h3 class="widget__title vspace--full">'
+            'before_widget' => '<div id="%1$s" class="widget widget--home %2$s">',
+            'before_title' => '<h3 class="widget--home__title vspace--full">'
         ),
         array(
             'name' => __('Sidebar Top', 'kaitain'),
             'description' => __('Top sidebar widget area (above adverts).', 'kaitain'),
+            'before_widget' => '<div id="%1$s" class="widget widget--sidebar %2$s">',
+            'before_title' => '<h4 class="widget--sidebar__title">',
             'id' => 'widgets-sidebar-top',
         ),
         array(
             'name' => __('Sidebar Bottom', 'kaitain'),
             'description' => __('Bottom sidebar widget area (below adverts).', 'kaitain'),
             'id' => 'widgets-sidebar-bottom',
-            'before_title' => '<h4 class="widget-title widget-subtitle">'
+            'before_widget' => '<div id="%1$s" class="widget widget--sidebar %2$s">',
+            'before_title' => '<h4 class="widget--sidebar__title">'
         )
     );
 
