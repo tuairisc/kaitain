@@ -81,8 +81,8 @@ function kaitain_share_links() {
         )
     );
 
-    printf('<nav class="%s">', 'kaitain-share-links');
-    printf('<ul class="%s">', 'kaitain-social');
+    printf('<nav class="%s">', 'article__sharing');
+    printf('<ul class="%s">', 'article__sharemenu');
 
     foreach ($services as $service => $service_info) {
         if ($service === 'discuss' && !is_singular('post') && comments_open($post->ID)) {
@@ -113,19 +113,19 @@ function kaitain_social_link($link_info, $service_name, $service_info) {
     $classes = array();
 
     $classes[] = $service_name;
-    $classes[] = 'share-item';
+    $classes[] = 'article__shareitem';
 
     $link[] = sprintf('<li class="%s">', implode(' ', $classes));
 
     $link[] = sprintf('<a class="%s" href="%s%s" target="%s">',
-        'social-share-link',
+        'article__sharelink',
         $service_info['href'],
         $service_info['url'],
         $service_info['target']
     );
 
     $link[] = sprintf('<span class="%s"></span>',
-        'social-share-span'
+        'article__sharespan'
     );
 
     $link[] = '</a>';
