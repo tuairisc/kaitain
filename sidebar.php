@@ -15,9 +15,9 @@
 
 ?>
 
-<div id="sidebar">
+<div class="main_sidebar sidebar noprint" id="main__sidebar">
     <?php if (is_active_sidebar('widgets-sidebar-top')) : ?>
-        <div class="sidebar-container sidebar-widgets">
+        <div class="sidebar__widgets">
             <?php dynamic_sidebar('widgets-sidebar-top'); ?>
         </div>
     <?php endif; ?>
@@ -36,7 +36,7 @@
     <?php endif; ?>
 
     <?php if (is_active_sidebar('widgets-sidebar-bottom')) : ?>
-        <div class="sidebar-container sidebar-widgets">
+        <div class="sidebar__widgets">
             <?php dynamic_sidebar('widgets-sidebar-bottom'); ?>
         </div>
     <?php endif; ?>
