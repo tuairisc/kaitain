@@ -17,19 +17,24 @@ global $sections;
 $trim = $sections->section_css_classes(get_the_category()[0]);
 
 $post_classes = array(
-    'side-cat-article-lead', 'vspace'
+    'article--sidebar article--sidebar--lead', 'vspace--full',
+);
+
+$link_classes = array(
+    $trim['hover']['text'],
+    'article--sidebar__link'
 );
 
 ?>
 
-<article <?php post_class($post_classes); ?> id="side-cat-lead-article-<?php the_id(); ?>">
-    <a class="<?php printf($trim['hover']['text']); ?>" href="<?php the_permalink(); ?>">
-        <div class="thumbnail side-cat-article-lead-thumb vspace-half">
+<article <?php post_class($post_classes); ?> id="article--sidebar--lead-<?php the_id(); ?>">
+    <a class="<?php printf(implode(' ', $link_classes)); ?>" href="<?php the_permalink(); ?>">
+        <div class="article--sidebar__thumbnail thumbnail vspace--half">
             <?php the_post_thumbnail('tc_sidebar_category', array(
-                'class' => 'sidebar-category-lead-thumbnail'
+                'class' => 'sidebar__thumbnail'
             )); ?>
         </div>
-        <h5 class="title side-cat-article-title side-cat-lr-padding">
+        <h5 class="title article--sidebar__title article--sidebar__padding">
             <?php the_title(); ?>
         </h5>
     </a>
