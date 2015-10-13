@@ -21,7 +21,7 @@ $post_classes = array(
 
 ?>
 
-<article <?php post_class($post_classes); ?> id="article-<?php the_ID(); ?>">
+<article <?php post_class($post_classes); ?> id="article--full--<?php the_ID(); ?>">
     <header class="article--full__header">
         <h1 class="title article--full__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
         <?php if (!is_page()) : ?>
