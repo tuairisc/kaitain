@@ -75,7 +75,7 @@ gulp.task('css-dev', function() {
         .on('error', sass.logError)
         .pipe(replace(regex.comments.match, regex.comments.replace))
         .pipe(prefixer(prefixes))
-        .pipe(sourcemaps.write())
+        .pipe(sourcemap.write())
         .pipe(gulp.dest(assets.css.dest));
 });
 
