@@ -18,18 +18,20 @@ $trim = $sections->section_css_classes(get_the_category()[0]);
 
 ?>
 
-<article <?php post_class('archive-lead'); ?> id="archive-lead-<?php the_id(); ?>">
-    <a class="archive-lead-link <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
-        <div class="thumbnail">
+<article <?php post_class('article--lead'); ?> id="archive-lead-<?php the_id(); ?>">
+    <a class="article--lead__link <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+        <div class="thumbnail article--lead__thumb">
             <?php post_image_html(get_the_ID(), 'tc_home_feature_lead', true); ?>
             <div class="archive-trim-bottom <?php printf($trim['reg']['background']); ?>"></div>
         </div>
-        <h1 class="title archive-lead-title"><?php the_title(); ?></h1>
+        <h1 class="title article--lead__title"><?php the_title(); ?></h1>
     </a>
-    <header>
-        <h4 class="attribution"><a href="<?php printf(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php the_author(); ?></a></h4>
-        <span class="post-date"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></small></span>
+    <header class="article--lead__header vspace--half">
+        <h4 class="article--lead__author">
+            <strong><a href="article--lead__author-link <?php printf(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php the_author(); ?></a></strong>
+            <span class="post-meta article--lead__meta"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></small></span>
+        </h4>
     </header>
-    <p class="post-excerpt archive-lead-excerpt"><?php printf(get_the_excerpt()); ?></p>
+    <p class="post-excerpt article--lead__excerpt"><?php printf(get_the_excerpt()); ?></p>
 </article>
 <hr>
