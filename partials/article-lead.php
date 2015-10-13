@@ -18,7 +18,7 @@ $trim = $sections->section_css_classes(get_the_category()[0]);
 
 ?>
 
-<article <?php post_class('article--lead'); ?> id="archive-lead-<?php the_id(); ?>">
+<article <?php post_class('article--lead'); ?> id="article--lead--<?php the_id(); ?>">
     <a class="article--lead__link <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail article--lead__thumb">
             <?php post_image_html(get_the_ID(), 'tc_home_feature_lead', true); ?>
