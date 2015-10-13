@@ -43,7 +43,7 @@
             // opts.toggled can be overriden. Otherwise, just invert it.
             opts.toggled = (typeof override === 'boolean') ? override : !opts.toggled;
 
-            $(opts.child).children(opts.child).toggleClass(opts.childClass, opts.toggled);
+            $(opts.button).children(opts.child).toggleClass(opts.childClass, opts.toggled);
             $(opts.target).toggleClass(opts.targetClass, opts.toggled);
 
             if (opts.toggled && opts.isTargetInput) {
@@ -74,16 +74,16 @@
         return this;
     }
 
-    $('.navbutton--searchtoggle').link({
-        child: '.navbutton__icon',
+    $('.navrow__button--search').link({
+        child: '.navrow__icon',
         childClass: 'close',
         target: '#bigsearch',
         targetClass: 'disp--shown',
         isTargetInput: true,
     });
 
-    $('.navbutton--menutoggle').link({
-        child: '.navbutton__icon',
+    $('.navrow__button--menu').link({
+        child: '.navrow__icon',
         childClass: 'close',
         target: '#header__menu',
         targetClass: 'disp--shown',
