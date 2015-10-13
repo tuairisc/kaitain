@@ -22,45 +22,51 @@
  * @param   string          $class_prefix           Class prefix.
  */
 
-function kaitain_education_section_pane($category_id_or_slug, $class_prefix = null) {
+function kaitain_education_section_pane($category_id_or_slug) {
     if (is_numeric($category_id_or_slug)) {
         $category = get_category($category_id_or_slug);
     } else {
         $category = get_category_by_slug($category_id_or_slug);
     }
 
-    if (!$class_prefix) {
-        $class_prefix = 'ed-pane';
-    }
+    $classes = array(
+        'section' => 'education__section',
+        'icon_wrapper' => 'education__iconwrap',
+        'icon' => 'education__icon',
+        'content' => 'education__content',
+        'title' => 'education__title',
+        'description' => 'education__description'
+    );
 
-    printf('<a class="%s %s" href="%s">',
-        $class_prefix,
-        $class_prefix . '--' . $category->slug,
+    printf('<a class="%s %s" id="%s" href="%s">',
+        $classes['section'],
+        // Box ID. education__section--foobar
+        $classes['section'] . '--' . $category->slug,
+        $classes['section'] . '--' . $category->slug,
         get_category_link($category->cat_ID)
     );
 
     printf('<div class="%s">',
-        $class_prefix . '__icon-wrapper'
+        $classes['icon_wrapper']
     );
 
-    printf('<div class="%s %s"></div>',
-        $class_prefix . '__icon',
-        $class_prefix . '__icon--' . $category->slug
+    printf('<div class="%s"></div>',
+        $classes['icon']
     );
 
     printf('</div>'); // Close icon wrapper.
 
     printf('<div class="%s">',
-        $class_prefix . '__content'
+        $classes['content']
     );
 
     printf('<h1 class="%s">%s</h1>',
-        $class_prefix . '__title',
+        $classes['title'],
         $category->cat_name
     );
 
     printf('<p class="%s">%s</p>',
-        $class_prefix . '__desc',
+        $classes['description'],
         $category->category_description
     );
 
@@ -84,7 +90,7 @@ function kaitain_education_banner_shortcode($args, $content = null) {
 
     // Headline, <h2> or <h3>
     $headline_type = ($args['type'] === 'main') ?  2 : 3;
-    $headline_class = 'education-banner';
+    $headline_class = 'education__banner';
 
     if (!$content) {
         $content = __('Did you forget to include text?', 'kaitain');
@@ -92,7 +98,7 @@ function kaitain_education_banner_shortcode($args, $content = null) {
 
     if ($args['type'] !== 'main') {
         // If the banner is not 'main', change h2 to h2 and heading to subheading.
-        $headline_class .= '-subheading';
+        $headline_class .= '--subheading';
     }
 
     $banner = sprintf('<h%s class="%s">%s</h%s>', 
