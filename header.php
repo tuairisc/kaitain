@@ -57,7 +57,7 @@ $placeholder = __('curdaigh', 'kaitain');
                 <ul class="header-menu__menu disp__hide" id="menu__secondary"><?php $sections->sections_menu('secondary', array('box-shadow-hover')); ?></ul>
             </nav>
         </header>
-        <div class="trim-block">
+        <div class="trim-block noprint">
             <div class="advert-block banner-advert-block" id="header-advert-block">
                 <?php if (function_exists('adrotate_group')) {
                     printf(adrotate_group(1));
@@ -65,7 +65,7 @@ $placeholder = __('curdaigh', 'kaitain');
             </div>
             <div class="stripe stripe__absolute-bottom"></div>
         </div>
-        <div class="section--current-bg disp disp--hidden" id="bigsearch">
+        <div class="section--current-bg disp disp--hidden noprint" id="bigsearch">
             <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
                 <fieldset form="bigsearch-form">
                     <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required">
