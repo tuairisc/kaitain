@@ -18,8 +18,8 @@ $trim = $sections->section_css_classes(get_the_category()[0]);
 
 ?>
 
-<article <?php post_class('archive'); ?> id="archive-<?php the_id(); ?>">
-    <a class="archive-link flex-two-cols-div <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+<article <?php post_class('article--archive'); ?> id="article--archive--<?php the_id(); ?>">
+    <a class="archive-link flex--two-col--div <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail archive-thumbnail">
             <?php post_image_html(get_the_ID(), 'tc_post_archive', true); ?>
             <div class="archive-trim-bottom <?php printf($trim['reg']['background']); ?>"></div>
