@@ -19,13 +19,13 @@ if (comments_open()) {
     }
 
     printf('<div class="article-comments" id="comments">');
-        printf('<h4 class="comments-title subtitle">%s \'%s\'</h4>',
+        printf('<h4 class="comments__title subtitle">%s \'%s\'</h4>',
             'Fág freagra ar',
             get_the_title()
         );
 
     if (have_comments()) {
-        printf('<ul class="%s">', 'commentlist');
+        printf('<ul class="%s">', 'comments__commentlist vspace--double');
 
         wp_list_comments(array(
             'callback' => 'kaitain_theme_comments',
@@ -42,11 +42,11 @@ if (comments_open()) {
         sheepie_partial('pagination', 'comment');
     }
 
-    printf('<div id="comment-entry">');
+    printf('<div class="comments__form" id="comments__form">');
 
     // Template input for name, email and URL.
     $input = '<input class="%s-name" id="%s" name="%s" placeholder="%s" type="text" required="required">';
-    $textarea = '<textarea class="comment-form-comment" id="comment" name="comment" required="required"></textarea>';
+    $textarea = '<textarea class="comments__textarea" id="comment" name="comment" required="required"></textarea>';
 
     $fields = array(
         // Name, author and email fields.
@@ -63,17 +63,17 @@ if (comments_open()) {
 
     $comment_notes = array(
         // We will not publish your email.
-        'before' => sprintf('<p class="comment-notes">%s</p>',
+        'before' => sprintf('<p class="comments__notes vspace--half">%s</p>',
             __('Ní bheidh muid a fhoilsiú do sheoladh r-phoist!', 'kaitain')
         ),
         // Allowed tags.
-        'after' => sprintf('<p class="form-allowed-tags">%s <code>%s</code></p>',
+        'after' => sprintf('<p class="comments__tags vspace--full form-allowed-tags">%s <code>%s</code></p>',
             __('Is féidir leat úsáid a bhaint ', 'kaitain'),
             allowed_tags()
         )
     );
 
-    $logged_in_as = sprintf('<p class="logged-in-as">%s</p>',
+    $logged_in_as = sprintf('<p class="comments__loggedinas vspace--half logged-in-as">%s</p>',
         sprintf(__('Logáilte isteach mar <a href="%1$s">%2$s</a>. <a href="%3$s">Logáil amach?</a>', 'kaitain'), 
            admin_url('profile.php'),
            $user_identity,
@@ -82,12 +82,12 @@ if (comments_open()) {
     );
 
     comment_form(array(
-        'id_form' => 'commentform',
-        'id_submit' => 'submit',
+        'id_form' => 'comments__form',
+        'id_submit' => 'comments__submit',
         // 'title_reply' => __('Fág freagra:', 'kaitain'),
         'title_reply' => '',
         'comment_field' => sprintf('<p id="textarea">%s</p>', $textarea),
-        'comment_form_before_fields' => '<div class="comment-form">',
+        'comment_form_before_fields' => '<div class="comments__inputs">',
         'comment_form_after_fields' =>'</div>',
         'comment_notes_before' => $comment_notes['before'],
         'comment_notes_after' => $comment_notes['after'],
