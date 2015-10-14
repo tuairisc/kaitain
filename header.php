@@ -54,7 +54,7 @@ $placeholder = __('curdaigh', 'kaitain');
             <nav class="menu" id="header__menu">
                 <?php // Section header-menu. See section-manager.php ?>
                 <ul class="menu__menu menu__menu--primary" id="menu__main"><?php $sections->sections_menu('primary'); ?></ul>
-                <ul class="menu__menu menu__menu--secondary" id="menu__secondary"><?php $sections->sections_menu('secondary', array('box-shadow-hover')); ?></ul>
+                <ul class="menu__menu menu__menu--secondary" id="menu__secondary"><?php $sections->sections_menu('secondary'); ?></ul>
             </nav>
         </header>
         <div class="trim-block noprint">
