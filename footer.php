@@ -26,7 +26,7 @@ global $sections;
     <?php if (!is_404()) : ?>
         <div class="trim-block noprint">
             <div class="stripe stripe__absolute-top"></div>
-            <div class="advert-block banner-advert-block" id="footer-advert-block">
+            <div class="adverts--banner" id="adverts--footer">
                 <?php if (function_exists('adrotate_group') && !is_404()) {
                     printf(adrotate_group(2));
                 } ?>

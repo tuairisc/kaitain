@@ -15,7 +15,7 @@
 
 ?>
 
-<div class="main_sidebar sidebar noprint" id="main__sidebar">
+<div class="main__sidebar sidebar noprint" id="main__sidebar">
     <?php if (is_active_sidebar('widgets-sidebar-top')) : ?>
         <div class="sidebar__widgets">
             <?php dynamic_sidebar('widgets-sidebar-top'); ?>
@@ -24,7 +24,7 @@
     
     <?php // AdRotate groups 3, 4 and 5
     if (function_exists('adrotate_group')) : ?>
-        <div class="sidebar-container sidebar-adverts">
+        <div class="sidebar__widgets adverts--sidebar" id="adverts--sidebar">
             <?php 
 
             printf('%s', adrotate_group(3));
