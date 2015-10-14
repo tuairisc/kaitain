@@ -62,6 +62,9 @@ add_option('kaitain_transient_timeout', 60 * 20, '', true);
 // Flag post as job.
 add_option('kaitain_notice_post_key', 'kaitain_is_notice', '', true);
 
+// Users whose name and photo should not appear next to posts.
+add_option('kaitain_verboten_users', array(1, 37), '', true);
+
 /**
  * Theme Includes
  * -----------------------------------------------------------------------------
@@ -319,6 +322,20 @@ function kaitain_get_view_count($post = null) {
     }
 
     return $count;
+}
+
+/*
+ * Verboten Users
+ * -----------------------------------------------------------------------------
+ * The site has certain default users whose name should not appear beside posts.
+ * This function compares a user ID against this array.
+ *
+ * @param   int         $user_id        ID of user
+ * @return  bool                        User is verboten, true/false.
+ */
+
+function kaitain_is_verboten_user($user_id) {
+    return in_array($user_id, get_option('kaitain_verboten_users'));
 }
 
 /*
