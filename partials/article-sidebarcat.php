@@ -23,16 +23,9 @@ $post_classes = array(
 ?>
 
 <article <?php post_class($post_classes); ?> id="article--sidebar--<?php the_id(); ?>">
-    <a class="flex--asym-quarter-auto <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
-        <div class="thumbnail article--sidebar__thumbnail--small">
-            <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>
-        </div>
-        <div class="post-content sidebar-content">
-            <header class="article--sidebar__header">
-                <h5 class="title article--sidebar__title">
-                    <?php the_title(); ?>
-                </h5>
-            </header>
-        </div>
-    </a>
+    <h5 class="title article--sidebar__title">
+        <a class="<?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+            <?php the_title(); ?>
+        </a>
+    </h5>
 </article>
