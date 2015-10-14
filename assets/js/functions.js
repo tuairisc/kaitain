@@ -29,34 +29,58 @@
         isTargetInput: false
     });
 
-    function dingdong() {
-        var a = $(window).scrollTop() + $('#header').height() - $('#main').offset().top;
-        var b = 100;
-        var c = 640;
-        var d = 0;
-
-        var nav = {
-            menu: '#header__menu',
-            button: '#menutoggle__nav'
-        };
-
-        var open = ($(window).width() > c && a > 0);
-
-        if ($(window).width() > c) {
-            if (a > 0) {
-                $(nav.menu).slideUp(b);
-                $(nav.button).slideDown(b);
-            } else {
-                $(nav.menu).slideDown(b);
-                $(nav.button).slideUp(b);
-            }
-
-        } else if (!$(nav.menu).is(':visible')) {
-            // Hidden for demo.
-            // $(nav.menu).show();
-            $(nav.button).show();
+    $.fn.scrollHide = function(args) {
+        // TODO FIXME
+        //
+        var defaults = {
+            // How far up above the scroll point should you go to avoid
+            // flickering?
+            toleranceUp: 100,
+            toleranceDown: 0,
+            // Window width size below which to stop.
+            stopBelow: 0,
+            // Class to toggle.
+            toggleClass: '',
+            // Point to trigger.
+            triggerAt: '',
+            // Add the height of this element when determining trigger.
+            addHeight: true,
+            element: this
         }
+
+        var opts = {};
+
+        function toggle(event) {
+            var hasClass = $(opts.element).hasClass(opts.toggleClass);
+            var scrollTop = $(window).scrollTop() + opts.toleranceDown;
+            var trigger = $(opts.triggerAt).offset().top;
+
+            if ($(window).width() <= opts.stopAt && hasClass) {
+                $(opts.element).trigerClass(opts.toggleClass, false);
+            } else if (hasClass && scrollTop < trigger) {
+                $(opts.element).toggleClass(opts.toggleClass, false);
+            } else if (scrollTop >= trigger) {
+                $(opts.element).toggleClass(opts.toggleClass, true);
+            }
+        }
+
+        opts = $.extend({}, defaults, args);
+        $(window).on('scroll resize', toggle);
+        this.trigger('scroll');
     }
 
-    $(window).on('scroll resize', dingdong);
+    $('#header__menu').scrollHide({
+        toleranceDown: $('#header__menu').height(),
+        triggerAt: '#main',
+        toggleClass: 'scroll--up',
+        stopBelow: 640,
+    });
+
+    $('#menutoggle__nav').scrollHide({
+        toleranceDown: $('#header__menu').height(),
+        triggerAt: '#main',
+        toggleClass: 'scroll--up',
+        stopBelow: 640,
+    });
+
 })(jQuery, window, document);
