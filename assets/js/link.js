@@ -18,7 +18,8 @@
             childClass: '',
             target: '',
             targetClass: '',
-            linkedClass: '.linked-class-toggle-0907',
+            button: this,
+            linkedClass: '.linked-class-toggle',
             isTargetInput: false,
             toggled: false
         };
@@ -50,7 +51,6 @@
         }
 
         opts = $.extend({}, defaults, args);
-        opts.button = this;
 
         /* There is a class for all linked elements. On button click all are
          * hidden. */
