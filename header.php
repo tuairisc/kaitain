@@ -35,7 +35,7 @@ $placeholder = __('curdaigh', 'kaitain');
             <div class="section--current-bg flex--three-col--nav navrow" id="header__navrow">
                 <?php // Empty until I have something better. ?>
                 <nav class="navrow__left text--left">
-                    <button class="navrow__button navrow__button--menu" id="menutoggle__nav" type="button">
+                    <button class="navrow__button navrow__button--menu scroll scroll--up" id="menutoggle__nav" type="button">
                         <span class="navrow__icon menu"></span>
                     </button>
                 </nav>
@@ -51,10 +51,10 @@ $placeholder = __('curdaigh', 'kaitain');
                 </nav>
             </div>
 
-            <nav class="menu" id="header__menu">
+            <nav class="navmenu scroll" id="header__menu">
                 <?php // Section header-menu. See section-manager.php ?>
-                <ul class="menu__menu menu__menu--primary" id="menu__main"><?php $sections->sections_menu('primary'); ?></ul>
-                <ul class="menu__menu menu__menu--secondary" id="menu__secondary"><?php $sections->sections_menu('secondary'); ?></ul>
+                <ul class="navmenu__menu navmenu__menu--primary" id="navmenu__main"><?php $sections->sections_menu('primary'); ?></ul>
+                <ul class="navmenu__menu navmenu__menu--secondary" id="navmenu__secondary"><?php $sections->sections_menu('secondary'); ?></ul>
             </nav>
         </header>
         <div class="trim-block noprint">
