@@ -82,11 +82,6 @@ function kaitain_wrap_comment_fields_after() {
     printf('</fieldset>');
 }
 
-/**
- * Actions
- * -----------------------------------------------------------------------------
- */
-
 add_action('comment_form_before_fields', 'kaitain_wrap_comment_fields_before');
 add_action('comment_form_after_fields', 'kaitain_wrap_comment_fields_after');
 
