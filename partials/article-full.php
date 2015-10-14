@@ -29,13 +29,21 @@ $post_classes = array(
             <div class="article--full__postmeta">
 
                 <div class="article--full__author">
-                    <div class="article--full__avatar">
-                        <?php kaitain_avatar_background_html($author, 'tc_post_avatar', 'author-photo'); ?>
-                    </div>
+                    <?php if (!kaitain_is_verboten_user($author)) : ?>
+                        <div class="article--full__avatar">
+                            <?php kaitain_avatar_background_html($author, 'tc_post_avatar', 'author-photo'); ?>
+                        </div>
+                    <?php endif; ?>
                     <div class="article--full__author-info">
-                        <a class="author-meta__link green-link--hover" href="<?php printf(get_author_posts_url($author)); ?>"><strong><span><?php the_author_meta('display_name'); ?></strong></span></a>
-                        <br />
-                        <span class="post-date article--full__date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span>
+                        <?php if (!kaitain_is_verboten_user($author)) : ?>
+                            <a class="author-meta__link green-link--hover" href="<?php printf(get_author_posts_url($author)); ?>">
+                                <strong><span><?php the_author_meta('display_name'); ?></strong></span>
+                            </a>
+                            <br />
+                        <?php endif; ?>
+                        <span class="post-date article--full__date">
+                            <time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time>
+                        </span>
                         <br />
                         <span><?php edit_post_link(__('edit post', 'kaitain'), '', ''); ?></span>
                     </div>
