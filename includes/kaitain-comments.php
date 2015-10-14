@@ -75,11 +75,11 @@ function kaitain_theme_comments($comment, $args, $depth) {
  */
 
 function kaitain_wrap_comment_fields_before() {
-    printf('<div class="comments__inputs">');
+    printf('<fieldset class="comments__inputs">');
 }
 
 function kaitain_wrap_comment_fields_after() {
-    printf('</div>');
+    printf('</fieldset>');
 }
 
 /**

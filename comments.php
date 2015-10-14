@@ -18,7 +18,7 @@ if (comments_open()) {
         return;
     }
 
-    printf('<div class="article-comments" id="comments">');
+    printf('<div class="comments" id="comments">');
         printf('<h4 class="comments__title subtitle">%s \'%s\'</h4>',
             'Fág freagra ar',
             get_the_title()
@@ -87,8 +87,6 @@ if (comments_open()) {
         // 'title_reply' => __('Fág freagra:', 'kaitain'),
         'title_reply' => '',
         'comment_field' => sprintf('<p id="textarea">%s</p>', $textarea),
-        'comment_form_before_fields' => '<div class="comments__inputs">',
-        'comment_form_after_fields' =>'</div>',
         'comment_notes_before' => $comment_notes['before'],
         'comment_notes_after' => $comment_notes['after'],
         'label_submit' => __('Seol', 'kaitain'),
