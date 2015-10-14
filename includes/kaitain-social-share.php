@@ -59,21 +59,21 @@ function kaitain_share_links() {
             ),
             'target' => '_blank',
         ),
-        'google' => array(
-            'title' => '+1 %s',
-            'href' => sprintf('//plus.google.com/post_info?url=%s',
-                $post_info['url']
-            ),
-            'target' => '_blank',
-        ),
-        'reddit' => array(
-            'title' => 'Upvote %s',
-            'href' => sprintf('//reddit.com/submit?url=%s&title=%s',
-                $post_info['url'],
-                $post_info['title']
-            ),
-            'target' => '_blank',
-        ),
+        // 'google' => array(
+        //     'title' => '+1 %s',
+        //     'href' => sprintf('//plus.google.com/post_info?url=%s',
+        //         $post_info['url']
+        //     ),
+        //     'target' => '_blank',
+        // ),
+        // 'reddit' => array(
+        //     'title' => 'Upvote %s',
+        //     'href' => sprintf('//reddit.com/submit?url=%s&title=%s',
+        //         $post_info['url'],
+        //         $post_info['title']
+        //     ),
+        //     'target' => '_blank',
+        // ),
         'discuss' => array(
             'href' => '#comments',
             'title' => 'Read comments on %s',
