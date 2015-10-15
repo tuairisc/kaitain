@@ -103,8 +103,6 @@ function kaitain_clean_header() {
     remove_action('wp_head', 'wp_enqueue_scripts', 1);
 }
 
-add_action('wp_enqueue_scripts', 'kaitain_clean_header');
-
 /** 
  * Sheepie JavaScript Loader
  * -----------------------------------------------------------------------------
@@ -113,6 +111,10 @@ add_action('wp_enqueue_scripts', 'kaitain_clean_header');
 function kaitain_js($kaitain_js, $kaitain_conditional_js, $js_path) {
     if (is_404()) {
         return;
+    }
+
+    if (!is_admin()) {
+        add_action('wp_enqueue_scripts', 'kaitain_clean_header');
     }
 
     foreach ($kaitain_js as $name => $script) {
