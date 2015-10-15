@@ -61,18 +61,6 @@ if (comments_open()) {
         )
     );
 
-    $comment_notes = array(
-        // We will not publish your email.
-        'before' => sprintf('<p class="comments__notes vspace--half">%s</p>',
-            __('Ní bheidh muid a fhoilsiú do sheoladh r-phoist!', 'kaitain')
-        ),
-        // Allowed tags.
-        'after' => sprintf('<p class="comments__tags vspace--full form-allowed-tags">%s <code>%s</code></p>',
-            __('Is féidir leat úsáid a bhaint ', 'kaitain'),
-            allowed_tags()
-        )
-    );
-
     $logged_in_as = sprintf('<p class="comments__loggedinas vspace--half logged-in-as">%s</p>',
         sprintf(__('Logáilte isteach mar <a href="%1$s">%2$s</a>. <a href="%3$s">Logáil amach?</a>', 'kaitain'), 
            admin_url('profile.php'),
@@ -87,8 +75,9 @@ if (comments_open()) {
         // 'title_reply' => __('Fág freagra:', 'kaitain'),
         'title_reply' => '',
         'comment_field' => sprintf('<p id="textarea">%s</p>', $textarea),
-        'comment_notes_before' => $comment_notes['before'],
-        'comment_notes_after' => $comment_notes['after'],
+        // False removes them entirely.
+        'comment_notes_before' => false,
+        'comment_notes_after' => false,
         'label_submit' => __('Seol', 'kaitain'),
         'logged_in_as' => $logged_in_as,
         'fields' => $fields,
