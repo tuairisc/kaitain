@@ -45,7 +45,7 @@ if (comments_open()) {
     printf('<div class="comments__form" id="comments__form">');
 
     // Template input for name, email and URL.
-    $input = '<input class="%s-name" id="%s" name="%s" placeholder="%s" type="text" required="required">';
+    $input = '<input class="%s-name font--small vspace--full" id="%s" name="%s" placeholder="%s" type="text" required="required">';
     $textarea = '<textarea class="comments__textarea" id="comment" name="comment" required="required"></textarea>';
 
     $fields = array(
