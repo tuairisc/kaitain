@@ -60,7 +60,7 @@ function kaitain_featured_box_content($post) {
     ?>
 
     <script>
-        var pmFeatured = {
+        var postmetaFeatured = {
             featured: <?php printf('%s', $is_featured ? 'true' : 'false'); ?>,
             sticky: <?php printf('%s', $is_sticky ? 'true' : 'false'); ?>,
             expiry: <?php printf('%u', $expiry); ?>
