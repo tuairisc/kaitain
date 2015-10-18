@@ -125,7 +125,7 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             'container' => 'widget--authors flex--four-col--div',
             'anchor' => 'green-link--hover widget--authors__author',
             'author' => 'widget--authors__author',
-            'author_name' => 'widget--authors__name',
+            'author_name' => 'widget--authors__name text--bold',
             'avatar' => 'author-photo widget--authors__photo vspace--half'
         );
 
@@ -165,7 +165,7 @@ class Kaitain_Columnist_Widget extends WP_Widget {
                 $classes['avatar']
             );
 
-            printf('<h6 class="%s"><strong>%s</strong></h6>',
+            printf('<h6 class="%s">%s</h6>',
                 // Author name.
                 $classes['author_name'],
                 $author->display_name
