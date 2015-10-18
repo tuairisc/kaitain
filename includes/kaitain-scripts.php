@@ -81,7 +81,7 @@ function kaitain_admin_scripts() {
 
     kaitain_admin_js(array(
         'postmeta-functions' => array(
-            'post.php', $js_path . 'postmeta.js'
+            'post.php', $js_path . 'admin.js'
         ),
     ));
 
