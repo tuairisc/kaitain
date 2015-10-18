@@ -35,12 +35,13 @@ function kaitain_notice_meta_box() {
 
 function kaitain_notice_box_content($post, $args) {
     wp_nonce_field('kaitain_notice_box_data', 'kaitain_notice_box_nonce');
-    $is_notice = !!get_post_meta($post->ID, 'kaitain_is_public_notice', true) ? 'checked' : '';;
+    $is_notice = !!get_post_meta($post->ID, 'kaitain_is_public_notice', true);
 
     ?>
+
     <script>
-        var pmNotice = {
-            notice: <?php printf('%s', $is_notice ? 'true' : 'false'); ?>
+        var postmetaNotice = {
+            notice: <?php printf('%s', $is_notice ? 'true' : 'false'); ?>,
         };
     </script>
 
@@ -52,13 +53,6 @@ function kaitain_notice_box_content($post, $args) {
         <li>
             <input id="kaitain-notice-checkbox" name="make_notice" type="checkbox" <?php printf($is_notice); ?>>
             <label for="kaitain-notice-checkbox"><?php _e('Public Notice', 'kaitain'); ?></label>
-        </li>
-        <li class="kaitain-noticecheck">
-            <input id="kaitain-notice-expiry-checkbox" name="notice_expires" type="checkbox" <?php printf($is_notice); ?>>
-            <label for="kaitain-notice-expiry-checkbox"><?php _e('Display Notice Until', 'kaitain'); ?></label>
-        </li>
-        <li class="kaitain-notice-expiryinfo" id="kaitain-notice-expiry">
-            <?php // Inputs are added and set via JS. ?>
         </li>
     </ul>
 
@@ -89,14 +83,15 @@ function kaitain_notice_box_update($post_id) {
         return;
     }
 
-    $key = 'kaitain_is_public_notice';
-    $value = false;
+    $is_notice = false;
 
     if (isset($_POST['make_notice'])) {
-        $value = (filter_var($_POST['make_notice'], FILTER_SANITIZE_STRIPPED) === 'on');
+        // Evalute whether this ia notice, true/false.
+        $is_notice = (filter_var($_POST['make_notice'], FILTER_SANITIZE_STRIPPED) === 'on');
     }
 
-    update_post_meta($post_id, $key, $value);
+    // Article is a notice.
+    update_post_meta($post_id, 'kaitain_is_public_notice', $is_notice);
 }
 
 /**
