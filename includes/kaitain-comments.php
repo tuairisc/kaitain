@@ -14,7 +14,7 @@
  */
 
 /**
- * Custom Comment and Comment Form Output
+ * Custom Comment Template
  * -----------------------------------------------------------------------------
  * @param   string  $comment    The comment.
  * @param   array   $args       Array argument
@@ -23,9 +23,11 @@
 
 function kaitain_theme_comments($comment, $args, $depth) {
     $GLOBALS['comment'] = $comment;
+
     $comment_classes = array(
         'comments__comment', 'vspace--full'
-    )
+    );
+
     ?>
 
     <li <?php comment_class($comment_classes); ?> id="comments__comment--<?php comment_ID() ?>">
@@ -33,18 +35,18 @@ function kaitain_theme_comments($comment, $args, $depth) {
             <?php kaitain_avatar_background_html($comment, 'tc_post_avatar', 'author-photo'); ?>
         </div>
         <div class="comments__body">
-            <header>
-                <p class="comment__meta">
+            <header class="comments__header vspace--quarter">
+                <h5 class="comments__meta">
                     <span class="comments__author-website"><?php comment_author_link(); ?></span>
                     <?php printf('<span class="%s"><time datetime="%s">%s</time></span>',
                         'post-date',
                         get_comment_date('Y-M-d H:i'),
                         get_comment_date_strftime()
                     ); ?>
-                </p>
+                </h5>
             </header>
 
-            <div class="comments__comment-body">
+            <div class="comments__comment-body vspace--quarter">
                 <?php if (!$comment->comment_approved) {
                     printf('<p class="%s">%s</p>',
                         'comments__unapproved',
@@ -56,8 +58,10 @@ function kaitain_theme_comments($comment, $args, $depth) {
             </div>
 
             <?php if (is_user_logged_in()) : ?>
-                <footer>
-                    <?php edit_comment_link(__('edit', 'kaitain'),'<p>', '</p>'); ?>
+                <footer class="comments__footer">
+                    <h5 class="comments_edit-link">
+                        <?php edit_comment_link(__('edit', 'kaitain'),'', ''); ?>
+                    </h5>
                 </footer>
             <?php endif; ?>
         </div>
