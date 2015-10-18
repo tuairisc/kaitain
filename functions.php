@@ -63,7 +63,7 @@ add_option('kaitain_transient_timeout', 60 * 20, '', true);
 add_option('kaitain_notice_post_key', 'kaitain_is_notice', '', true);
 
 // Users whose name and photo should not appear next to posts.
-add_option('kaitain_verboten_users', array(1, 37), '', true);
+add_option('kaitain_verboten_users', array(1, 37, 54), '', true);
 
 add_option('kaitain_excluded_menu_categories', array(
     175, 177, 221
