@@ -19,13 +19,13 @@ $previous = $paged - 1;
 ?>
 
 <nav class="pagination pagination--comments" id="pagination--comment">
-    <p class="pagination__previous pagination__previous-comment">
-        <small><?php previous_comments_link(__('&larr; Siar', 'kaitain')); ?></small>
+    <p class="pagination__previous pagination__previous-comment text--small">
+        <?php previous_comments_link(__('&larr; Siar', 'kaitain')); ?>
     </p>
-    <p class="pagination__count">
-        <small><?php get_comment_pages_count(); ?></small>
+    <p class="pagination__count text--small">
+        <?php get_comment_pages_count(); ?></small>
     </p>
-    <p class="pagination__next pagination__next-comment">
-        <small><?php next_comments_link(__('Lean ar Aghaidh &rarr;', 'kaitain')); ?></small>
+    <p class="pagination__next pagination__next-comment text-small">
+        <?php next_comments_link(__('Lean ar Aghaidh &rarr;', 'kaitain')); ?>
     </p>
 </nav>

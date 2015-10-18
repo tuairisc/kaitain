@@ -19,15 +19,15 @@ $previous = $pages - 1;
 ?>
 
 <nav class="pagination pagination--site" id="pagination--site">
-    <p class="pagination__previous pagination__previous-page">
-        <small><?php previous_posts_link(__('&larr; Siar', 'kaitain')); ?></small>
+    <p class="pagination__previous pagination__previous-page text--small">
+        <?php previous_posts_link(__('&larr; Siar', 'kaitain')); ?>
     </p>
     <?php if (function_exists('arc_query_has_pages') && arc_query_has_pages()) : ?>
-        <p class="pagination__count">
-            <small><span><?php arc_archive_page_count(true, 'Leathnach %s de %s'); ?></span></small>
+        <p class="pagination__count text--small">
+            <span><?php arc_archive_page_count(true, 'Leathnach %s de %s'); ?></span>
         </p>
     <?php endif; ?>
-    <p class="pagination__next pagination__next-page">
-        <small><?php next_posts_link(__('Lean ar Aghaidh &rarr;', 'kaitain'));  ?></small>
+    <p class="pagination__next pagination__next-page text--small">
+        <?php next_posts_link(__('Lean ar Aghaidh &rarr;', 'kaitain'));  ?>
     </p>
 </nav>

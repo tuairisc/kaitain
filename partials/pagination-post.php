@@ -15,10 +15,10 @@
 ?>
 
 <nav class="pagination pagination--post" id="pagination--post">
-    <p class="pagination__previous pagination__previous-post">
-        <small><?php next_post_link('%link', '&larr; %title', false); ?></small>
+    <p class="pagination__previous pagination__previous-post text--small">
+        <?php next_post_link('%link', '&larr; %title', false); ?>
     </p>
-    <p class="pagination__next pagination__next-post">
-        <small><?php previous_post_link('%link', '%title &rarr;', false); ?></small>
+    <p class="pagination__next pagination__next-post text-small">
+        <?php previous_post_link('%link', '%title &rarr;', false); ?>
     </p>
 </nav>
