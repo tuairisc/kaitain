@@ -27,7 +27,9 @@ $trim = $sections->section_css_classes(get_the_category()[0]);
         <header>
             <?php the_title('<h5 class="title vspace--half">', '</h5>'); ?>
             <?php if (!is_page()) : ?>
-                <span class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span>
+                <h5 class="post-date">
+                    <time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time>
+                </h5>
             <?php endif; ?>
         </header>
     </a>

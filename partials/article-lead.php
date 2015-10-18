@@ -30,10 +30,10 @@ $trim = $sections->section_css_classes(get_the_category()[0]);
     <header class="article--lead__header vspace--half">
         <h4 class="article--lead__author">
             <?php if (!kaitain_is_verboten_user($author)) : ?>
-                <strong><a href="article--lead__author-link <?php printf(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php the_author(); ?></a></strong>
+                <a class="article--lead__author-link text--bold green-link--hover" href="<?php printf(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php the_author(); ?></a>
                 <?php endif; ?>
-            <span class="post-meta article--lead__meta"><small><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></small></span>
         </h4>
+        <h5 class="post-meta article--lead__meta"><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></h5>
     </header>
     <p class="post-excerpt article--lead__excerpt"><?php printf(get_the_excerpt()); ?></p>
 </article>

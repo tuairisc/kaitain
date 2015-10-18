@@ -30,12 +30,12 @@ $post_classes = array(
         </div>
         <div class="post-content article__postcontent">
             <header class="article--sidebar__header">
-                <h5 class="title article--sidebar__title">
+                <h5 class="title article--sidebar__title vspace--quarter">
                     <?php the_title(); ?>
                 </h5>
-                <span class="post-date article__postmeta">
+                <h6 class="post-date article__postmeta">
                     <time datetime="<?php the_time('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time>
-                </span>
+                </h6>
             </header>
         </div>
     </a>

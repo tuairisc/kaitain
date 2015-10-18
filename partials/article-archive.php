@@ -19,17 +19,17 @@ $trim = $sections->section_css_classes(get_the_category()[0]);
 ?>
 
 <article <?php post_class('article--archive'); ?> id="article--archive--<?php the_id(); ?>">
-    <a class="archive-link flex--two-col--div <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
-        <div class="thumbnail archive-thumbnail">
+    <a class="article--archive__link flex--two-col--div <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+        <div class="thumbnail article--archive__thumbnail">
             <?php post_image_html(get_the_ID(), 'tc_post_archive', true); ?>
             <div class="archive-trim-bottom <?php printf($trim['reg']['background']); ?>"></div>
         </div>
-        <div class="post-content">
-            <header>
-                <h3 class="title archive-title"><?php the_title(); ?></h3>
-                <p class="postmeta"><span class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></span></p>
+        <div class="article--archive__content">
+            <header class="article--archive__header vspace--half">
+                <h3 class="title article--artchive__title text--bold vspace--quarter"><?php the_title(); ?></h3>
+                <h5 class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></h5>
             </header>
-            <p class="post-excerpt archive-excerpt"><small><?php printf(get_the_excerpt()); ?></small></p>
+            <p class="post-excerpt article--archive__excerpt"><?php printf(get_the_excerpt()); ?></p>
         </div>
     </a>
 </article>
