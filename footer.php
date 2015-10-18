@@ -56,12 +56,18 @@ global $sections;
                     'link_after' => '</span>'
                 )); ?>
 
-                <p class="footer__copyright">©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Bheo Teoranta</a>.</p>
+                <p class="footer__copyright">
+                    ©<?php printf(date('Y')); ?> <a rel="home" href="<?php printf(home_url()); ?>">Tuairisc Bheo Teoranta</a>.
+                </p>
             </div>
 
-            <div class="footer__foras">
-                <p><small><?php _e('Le Cabhair ó', 'kaitain'); ?></small></p>
-                <p><a class="footer__brand" rel="nofollow" target="_blank" href="http://www.gaeilge.ie/"><img src="<?php printf(get_template_directory_uri() . '/assets/images/foras-white.svg'); ?>" alt="Foras na Gaeilge" /></a></p>
+            <div class="footer__foras foras">
+                <p class="foras__text text--small"><?php _e('Le Cabhair ó', 'kaitain'); ?></p>
+                <p class="foras__brand">
+                    <a class="foras__logo" rel="nofollow" target="_blank" href="http://www.gaeilge.ie/">
+                        <img src="<?php printf(get_template_directory_uri() . '/assets/images/foras-white.svg'); ?>" alt="Foras na Gaeilge" />
+                    </a>
+                </p>
              </div>
 
         </footer>
