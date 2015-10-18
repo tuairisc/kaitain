@@ -242,19 +242,15 @@
  */
 
 jQuery('#kaitain-featured-checkbox').linkedToggle(
-    [], '.kaitain-stickycheck', pmFeatured.featured
+    [], '.kaitain-stickycheck', postmetaFeatured.featured
 );
 
 jQuery('#kaitain-sticky-checkbox').linkedToggle(
-    ['#kaitain-featured-checkbox'], '.kaitain-sticky-expiryinfo', pmFeatured.sticky
+    ['#kaitain-featured-checkbox'], '.kaitain-sticky-expiryinfo', postmetaFeatured.sticky
 );
 
 jQuery('#kaitain-notice-checkbox').linkedToggle(
-    [], '.kaitain-noticecheck', pmNotice.notice
-);
-
-jQuery('#kaitain-notice-expiry-checkbox').linkedToggle(
-    ['#kaitain-notice-checkbox'], '.kaitain-notice-expiryinfo', pmNotice.notice
+    [], '.kaitain-noticecheck', postmetaNotice.notice
 );
 
 /**
@@ -263,5 +259,4 @@ jQuery('#kaitain-notice-expiry-checkbox').linkedToggle(
  * Add change to checkboxes and set state.
  */
 
-jQuery('#kaitain-sticky-expiry').checker('stickyexpires', pmFeatured.expiry);
-jQuery('#kaitain-notice-expiry').checker('noticeexpires', pmNotice.expiry);
+jQuery('#kaitain-sticky-expiry').checker('stickyexpires', postmetaFeatured.expiry);
