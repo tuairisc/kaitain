@@ -46,7 +46,7 @@ if (comments_open()) {
 
     // Template input for name, email and URL.
     $input = '<input class="%s-name font--small vspace--full" id="%s" name="%s" placeholder="%s" type="text" required="required">';
-    $textarea = '<textarea class="comments__textarea" id="comment" name="comment" required="required"></textarea>';
+    $textarea = '<textarea class="comments__textarea vspace--half" id="comment" name="comment" required="required"></textarea>';
 
     $fields = array(
         // Name, author and email fields.
