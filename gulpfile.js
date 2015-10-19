@@ -83,9 +83,6 @@ gulp.task('js', function() {
     // Minify all scripts in the JS folder.
     return gulp.src(assets.js.source)
         .pipe(uglify())
-        .pipe(rename({
-            extname: '.min.js'
-        }))
         .pipe(gulp.dest(assets.js.dest));
 });
 
