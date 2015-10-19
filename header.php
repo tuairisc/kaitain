@@ -28,15 +28,15 @@ $placeholder = __('curdaigh', 'kaitain');
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?> data-bind="event: { keyup: keypressHide }">
+<body <?php body_class(); ?> data-bind="event: { keyup: keyupHide }">
     <?php if (!is_404()) : ?>
         <?php // Disabled on 404 pages. ?>
         <header class="noprint" id="header">
             <div class="section--current-bg flex--three-col--nav navrow" id="header__navrow">
                 <?php // Empty until I have something better. ?>
                 <nav class="navrow__left text--left">
-                    <button class="navrow__button navrow__button--menu scroll scroll--up" id="menutoggle__nav" type="button">
-                        <span class="navrow__icon menu"></span>
+                    <button class="navrow__button navrow__button--menu scroll scroll--up" id="menutoggle__nav" type="button" data-bind="click: showMenu, css: { 'scroll--up': !state.menuButton() }">
+                        <span class="navrow__icon menu" data-bind="css: { close: state.menuButton() && state.menu() }"></span>
                     </button>
                 </nav>
 
@@ -45,13 +45,13 @@ $placeholder = __('curdaigh', 'kaitain');
                 </nav>
 
                 <nav class="navrow__right text--center">                    
-                    <button class="navrow__button navrow__button--search float--right" id="searchtoggle__nav" type="button" data-bind="click: toggleSearch">
-                        <span class="navrow__icon search" data-bind="css: { close: searchOpen() }"></span>
+                    <button class="navrow__button navrow__button--search float--right" id="searchtoggle__nav" type="button" data-bind="click: showSearch">
+                        <span class="navrow__icon search" data-bind="css: { close: state.search() }"></span>
                     </button>
                 </nav>
             </div>
 
-            <nav class="navmenu scroll" id="header__menu">
+            <nav class="navmenu scroll" id="header__menu" data-bind="css: { 'scroll--up': !state.menu() }">
                 <?php // Section header-menu. See section-manager.php ?>
                 <ul class="navmenu__menu navmenu__menu--primary" id="navmenu__main"><?php $sections->sections_menu('primary'); ?></ul>
                 <ul class="navmenu__menu navmenu__menu--secondary" id="navmenu__secondary"><?php $sections->sections_menu('secondary'); ?></ul>
@@ -65,14 +65,14 @@ $placeholder = __('curdaigh', 'kaitain');
             </div>
             <div class="stripe stripe__absolute-bottom"></div>
         </div>
-        <div class="section--current-bg disp disp--hidden noprint" id="bigsearch" data-bind="css: {'disp--shown': searchOpen() }">
+        <div class="section--current-bg disp disp--hidden noprint" id="bigsearch" data-bind="css: {'disp--shown': state.search() }">
             <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
                 <fieldset form="bigsearch-form">
-                    <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required" data-bind="hasFocus: searchOpen()">
+                    <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required" data-bind="hasFocus: state.search()">
                 </fieldset>
             </form>
-            <button class="navrow__button navrow__button--search" id="searchtoggle__search" type="button" data-bind="click: toggleSearch">
-                <span class="navrow__icon search" data-bind="css: { close: searchOpen() }"></span>
+            <button class="navrow__button navrow__button--search" id="searchtoggle__search" type="button" data-bind="click: showSearch">
+                <span class="navrow__icon search" data-bind="css: { close: state.search() }"></span>
             </button>
         </div>
     <?php endif; ?>
