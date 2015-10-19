@@ -24,6 +24,7 @@ sass/.sass-cache/
 #################
 
 *.min.js
+js/min/
 
 #################
 ## jQuery Library
