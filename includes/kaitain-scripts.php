@@ -14,7 +14,7 @@
  */
 
 $GLOBALS['kaitain_asset_paths'] = array(
-    'js' => get_template_directory_uri() . '/assets/js/',
+    'js' => get_template_directory_uri() . '/assets/js/min/',
     'css' => get_template_directory_uri() . '/assets/css/',
     'node' => get_template_directory_uri() . '/node_modules/'
 );
@@ -118,13 +118,6 @@ function kaitain_js($kaitain_js, $kaitain_conditional_js, $js_path) {
     }
 
     foreach ($kaitain_js as $name => $script) {
-        // Regular frontend JavaScript.
-        if (!WP_DEBUG) {
-            // Instead load minified version if you aren't debugging.
-            $script = str_replace($js_path, $js_path . 'min/', $script);
-            $script = str_replace('.js', '.min.js', $script);
-        }
-
         wp_enqueue_script($name, $script, array('jquery'), $GLOBALS['kaitain_version'], true);
     }
 
