@@ -45,8 +45,8 @@ $placeholder = __('curdaigh', 'kaitain');
                 </nav>
 
                 <nav class="navrow__right text--center">                    
-                    <button class="navrow__button navrow__button--search float--right" id="searchtoggle__nav" type="button">
-                        <span class="navrow__icon search"></span>
+                    <button class="navrow__button navrow__button--search float--right" id="searchtoggle__nav" type="button" data-bind="click: toggleSearch">
+                        <span class="navrow__icon search" data-bind="css: { close: searchOpen() }"></span>
                     </button>
                 </nav>
             </div>
@@ -65,14 +65,14 @@ $placeholder = __('curdaigh', 'kaitain');
             </div>
             <div class="stripe stripe__absolute-bottom"></div>
         </div>
-        <div class="section--current-bg disp disp--hidden noprint" id="bigsearch">
+        <div class="section--current-bg disp disp--hidden noprint" id="bigsearch" data-bind="css: {'disp--shown': searchOpen() }">
             <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
                 <fieldset form="bigsearch-form">
-                    <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required">
+                    <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required" data-bind="hasFocus: searchOpen()">
                 </fieldset>
             </form>
-            <button class="navrow__button navrow__button--search" id="searchtoggle__search" type="button">
-                <span class="navrow__icon search"></span>
+            <button class="navrow__button navrow__button--search" id="searchtoggle__search" type="button" data-bind="click: toggleSearch">
+                <span class="navrow__icon search" data-bind="css: { close: searchOpen() }"></span>
             </button>
         </div>
     <?php endif; ?>
