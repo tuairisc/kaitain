@@ -25,7 +25,7 @@ function kaitain_scripts() {
     $node_path = $GLOBALS['kaitain_asset_paths']['node'];
 
     $kaitain_js = array(
-        'linked' => $js_path . 'link.js',
+        'knockout' => $node_path . '/knockout/build/output/knockout-latest.js',
         'functions' => $js_path . 'functions.js'
     );
 
