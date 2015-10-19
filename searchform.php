@@ -23,18 +23,19 @@ $result = $total === 1 ? 'torthaí' : 'tordagh';
 
 ?>
 
-<form role="search" class="searchform vspace-half" id="searchform" method="get" action="<?php printf($action); ?>" autocomplete="off">
-    <fieldset>
-        <input class="searchform-input" id="searchform-input" name="s" placeholder="<?php _e('curdaigh', 'kaitain'); ?>" type="text" required="required" value="<?php printf($query); ?>">
-    </fieldset>
-</form>
-<div class="clearfix search-results-meta">
-    <span class="total meta left-float"><?php printf('%d %s', $total, $result); ?></span>
-    <span class="total meta right-float">
-        <?php _e('Saghas:', 'sheepie'); ?>
-
-        <a class="searchform-link green-link searchform-order-oldest" href="<?php arc_search_url('asc'); ?>"><?php _e('sine', 'kaitain'); ?></a> |
-        <a class="searchform-link green-link searchform-order-newest" href="<?php arc_search_url('desc'); ?>"><?php _e('is nua', 'kaitain'); ?></a>
-    </span>
+<div class="searchform" id="searchform">
+    <form class="searchform__form vspace--half" id="searchform__form" method="get" action="<?php printf($action); ?>" autocomplete="off">
+        <fieldset>
+            <input class="searchform__input" id="searchform__input" name="s" placeholder="<?php _e('curdaigh', 'kaitain'); ?>" type="text" required="required" value="<?php printf($query); ?>">
+        </fieldset>
+    </form>
+    <div class="searchform__meta">
+        <span class="searchform__meta--left float--left"><?php printf('%d %s', $total, $result); ?></span>
+        <span class="searchform__meta--right float--right">
+            <?php _e('Saghas:', 'sheepie'); ?>
+            <a class="green-link searchform__order--oldest" href="<?php arc_search_url('asc'); ?>"><?php _e('sine', 'kaitain'); ?></a> |
+            <a class="green-link searchform__order--newest" href="<?php arc_search_url('desc'); ?>"><?php _e('is nua', 'kaitain'); ?></a>
+        </span>
+    </div>
 </div>
 <hr>
