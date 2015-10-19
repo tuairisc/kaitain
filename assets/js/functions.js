@@ -12,4 +12,20 @@
  */
 
 ;(function($, window, document) {
+    /**
+     * Knockout Search State Directive
+     * -------------------------------------------------------------------------
+     */
+
+    var searchDisplay = function(initialState) {
+        var self = this;
+
+        self.searchOpen = ko.observable(initialState);
+
+        self.toggleSearch = function() {
+            self.searchOpen(!self.searchOpen());
+        }
+    };
+
+    ko.applyBindings(new searchDisplay(false));
 })(jQuery, window, document);
