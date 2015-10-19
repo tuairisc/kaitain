@@ -15,16 +15,26 @@
     /**
      * Knockout Search State Directive
      * -------------------------------------------------------------------------
+     * @param   bool        initialState        Initial state of search.
      */
 
     var searchDisplay = function(initialState) {
         var self = this;
 
+        // Menu state.
         self.searchOpen = ko.observable(initialState);
 
         self.toggleSearch = function() {
+            // Toggle search, true/false. Used on menu buttons.
             self.searchOpen(!self.searchOpen());
-        }
+        };
+
+        self.keypressHide = function(data, event) {
+            // Hide search and menu navigations when escape is pressed.
+            if (event.keyCode === 27) {
+                self.searchOpen(false);
+            }
+        };
     };
 
     ko.applyBindings(new searchDisplay(false));

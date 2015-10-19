@@ -28,7 +28,7 @@ $placeholder = __('curdaigh', 'kaitain');
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?> data-bind="event: { keyup: keypressHide }">
     <?php if (!is_404()) : ?>
         <?php // Disabled on 404 pages. ?>
         <header class="noprint" id="header">
