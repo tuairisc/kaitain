@@ -33,7 +33,8 @@
             // Search, menu and menu button states.
             search: ko.observable(initialState),
             menu: ko.observable(true),
-            menuButton: ko.observable(false)
+            menuButton: ko.observable(false),
+            oldWidth: false
         };
 
         /**
@@ -116,14 +117,18 @@
          */
 
         self.sizeToggle = function() {
+            var $width = $(window).width();
 
-            if ($(window).width() <= self.breaks.width) {
+            if ($width != self.state.oldWidth && $width <= self.breaks.width) {
+                // iOS vertically changes the viewport on a constant basis. This
+                // catpure, and the evaluations above, ensure that:
+                // 1. This only triggers once, on load.
+                // 2. Subsequently only triggers if their is a horizontal resize.
+                //    The vertical component is managed by the scroll function.
                 self.state.menuButton(true);
                 self.state.menu(false);
-
-                $(window).off('scroll', self.scrollToggle);
+                self.state.oldWidth = $width;
             } else {
-                // Close-on-scroll is twitchy as hell on mobile devices.
                 $(window).on('scroll', self.scrollToggle).trigger('scroll');
             }
         };
