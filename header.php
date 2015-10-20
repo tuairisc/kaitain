@@ -35,7 +35,7 @@ $placeholder = __('curdaigh', 'kaitain');
             <div class="section--current-bg flex--three-col--nav navrow" id="header__navrow">
                 <?php // Empty until I have something better. ?>
                 <nav class="navrow__left text--left">
-                    <button class="navrow__button navrow__button--menu scroll scroll--up" id="menutoggle__nav" type="button" data-bind="click: showMenu, css: { 'scroll--up': !state.menuButton() }">
+                    <button class="navrow__button navrow__button--menu conceal" id="menutoggle__nav" type="button" data-bind="click: showMenu, css: { 'navrow__button--menu--display': state.menuButton() }">
                         <span class="navrow__icon menu" data-bind="css: { close: state.menuButton() && state.menu() }"></span>
                     </button>
                 </nav>
@@ -51,7 +51,7 @@ $placeholder = __('curdaigh', 'kaitain');
                 </nav>
             </div>
 
-            <nav class="navmenu scroll" id="header__menu" data-bind="css: { 'scroll--up': !state.menu() }">
+            <nav class="navmenu conceal" id="header__menu" data-bind="css: { 'navmenu--display': state.menu() }">
                 <?php // Section header-menu. See section-manager.php ?>
                 <ul class="navmenu__menu navmenu__menu--primary" id="navmenu__main"><?php $sections->sections_menu('primary'); ?></ul>
                 <ul class="navmenu__menu navmenu__menu--secondary" id="navmenu__secondary"><?php $sections->sections_menu('secondary'); ?></ul>
@@ -65,7 +65,7 @@ $placeholder = __('curdaigh', 'kaitain');
             </div>
             <div class="stripe stripe__absolute-bottom"></div>
         </div>
-        <div class="section--current-bg disp disp--hidden noprint" id="bigsearch" data-bind="css: {'disp--shown': state.search() }">
+        <div class="section--current-bg noprint" style="display:none;" id="bigsearch" data-bind="visible: state.search()">
             <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
                 <fieldset form="bigsearch-form">
                     <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required" data-bind="hasFocus: state.search()">
