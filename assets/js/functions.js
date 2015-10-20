@@ -91,9 +91,9 @@
             var top = $(window).scrollTop();
             var main = $('#main').offset().top;
 
-            if (!self.state.menu()) {
+            if (self.state.menu()) {
                 // Add tolerance in order to prevent janky flickering.
-                top += $('#header').height();
+                top -= $('#header').height();
             }
 
             // If below break, hide menu and show menu button.
@@ -109,27 +109,22 @@
         };
 
         /**
-         *
          * Window Size Toggle Control
          * ---------------------------------------------------------------------
+         * If below break, menu button displays and scrolling hevaiour is set to
+         * just hide menu on scroll. Else inverts this behaviour.
          */
 
         self.sizeToggle = function() {
-            // If below break, menu button displays and scrolling hevaiour
-            // is set to just hide menu on scroll.
-            // Else inverts this behaviour.
-            //
+
             if ($(window).width() <= self.breaks.width) {
                 self.state.menuButton(true);
                 self.state.menu(false);
 
                 $(window).off('scroll', self.scrollToggle);
-                $(window).on('scroll', self.onscrollHide);
             } else {
-                $(window)
-                    .off('scroll', self.onscrollHide)
-                    .on('scroll', self.scrollToggle)
-                    .trigger('scroll');
+                // Close-on-scroll is twitchy as hell on mobile devices.
+                $(window).on('scroll', self.scrollToggle).trigger('scroll');
             }
         };
 
