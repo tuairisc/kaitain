@@ -12,11 +12,7 @@
  * @link       https://github.com/bhalash/kaitain-theme
  */
 
-$pages = (get_query_var('pages')) ? get_query_var('pages') : 1;
-$next = $pages + 1; 
-$previous = $pages - 1; 
-
-?>
+t?>
 
 <nav class="pagination pagination--site" id="pagination--site">
     <p class="pagination__previous pagination__previous-page text--small">
