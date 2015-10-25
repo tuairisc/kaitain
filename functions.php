@@ -16,11 +16,11 @@
 $GLOBALS['kaitain_version'] = 1.0;
 
 /**
- * Sheepie Setup
+ * Kaitain Setup
  * -----------------------------------------------------------------------------
  */
 
-function kaitain_setup() {
+add_action('after_setup_theme', function() {
     kaitain_image_sizes();
 
     // Theme menus.
@@ -48,9 +48,7 @@ function kaitain_setup() {
 
     // Content width.
     $GLOBALS['content_width'] = 1140;
-}
-
-add_action('after_setup_theme', 'kaitain_setup');
+});
 
 /**
  * Theme Options
@@ -146,7 +144,7 @@ kaitain_includes();
  * defaults, so...
  */
 
-function kaitain_widgets() {
+add_action('widgets_init', function() {
     $widget_defaults = array(
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget' => '</div>',
@@ -181,9 +179,7 @@ function kaitain_widgets() {
     foreach ($widget_areas as $widget) {
         register_sidebar(wp_parse_args($widget, $widget_defaults));
     }
-}
-
-add_action('widgets_init', 'kaitain_widgets');
+});
 
 /**
  * Kaitain Menus
@@ -263,7 +259,7 @@ add_filter('previous_posts_link_attributes', 'kaitain_pagination_classes');
  * Set prefetch for a given media domain. Useful if your site is image heavy.
  */
 
-function kaitain_dns_prefetch() {
+add_action('wp_head', function() {
     if (is_admin()) {
         // Can cause weird problems with widgets.
         return;
@@ -276,9 +272,7 @@ function kaitain_dns_prefetch() {
     foreach ($prefetch as $domain) {
         printf('<link rel="dns-prefetch" href="//%s">', $domain);
     }
-}
-
-add_action('wp_head', 'kaitain_dns_prefetch');
+});
 
 /**
  * Increment View Counter
@@ -300,8 +294,6 @@ function kaitain_set_view_count() {
         update_post_meta($post->ID, $key, $count);
     }
 }
-
-add_filter('the_content', 'kaitain_increment_view_counter');
 
 /*
  * Fetch View Counter
@@ -352,20 +344,22 @@ function kaitain_is_verboten_user($user_id) {
  * @return  string      $content        Post content.
  */
 
-function kaitain_increment_view_counter($content) {
+add_filter('the_content', function($content) {
     kaitain_set_view_count();
     return $content;
-}
+});
 
 /**
  * Theme Sections
  * -----------------------------------------------------------------------------
  */
 
-$sections = new Section_Manager(array(
-    'categories' => array(191, 154, 155, 156, 157, 159, 187, 158), 
-    'home' => 191
-));
+$sections = new Section_Manager(
+    // Array of category sections.
+    array(191, 154, 155, 156, 157, 159, 187, 158),
+    // Default category section.
+    191
+);
 
 /**
  * Open Graph and Twitter Card Meta Tags
