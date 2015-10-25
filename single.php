@@ -29,7 +29,7 @@ if (have_posts()) {
         kaitain_partial('article', 'full');
 
         if (function_exists('rp_get_related')) {
-            printf('<h4 class="%s"><a class="%s" href="%s">%s %s</a></h4>',
+            printf('<h4 class="%s"><a class="%s" href="%s">%s \'%s\'</a></h4>',
                 'subtitle related-title',
                 $section_class,
                 $section_link,
