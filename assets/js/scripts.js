@@ -119,7 +119,10 @@
         self.sizeToggle = function() {
             var $width = $(window).width();
 
-            if ($width != self.state.oldWidth && $width <= self.breaks.width) {
+            // if ($width != self.state.oldWidth && $width <= self.breaks.width) {
+            if ($width >= self.breaks.width) {
+                $(window).on('scroll', self.scrolltoggle).trigger('scroll');
+            } else {
                 // iOS vertically changes the viewport on a constant basis. This
                 // catpure, and the evaluations above, ensure that:
                 // 1. This only triggers once, on load.
@@ -128,8 +131,6 @@
                 self.state.menuButton(true);
                 self.state.menu(false);
                 self.state.oldWidth = $width;
-            } else {
-                $(window).on('scroll', self.scrollToggle).trigger('scroll');
             }
         };
 
