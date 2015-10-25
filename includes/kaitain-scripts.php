@@ -19,29 +19,24 @@ $GLOBALS['kaitain_asset_paths'] = array(
     'node' => get_template_directory_uri() . '/node_modules/'
 );
 
-function kaitain_scripts() {
+add_action('wp_head', function() {
     $js_path = $GLOBALS['kaitain_asset_paths']['js'];
     $css_path = $GLOBALS['kaitain_asset_paths']['css'];
     $node_path = $GLOBALS['kaitain_asset_paths']['node'];
 
     $kaitain_js = array(
-        'knockout' => $node_path . '/knockout/build/output/knockout-latest.js',
-        'functions' => $js_path . 'functions.js'
+        'kaitain-functions' => array(
+            $js_path . 'kaitain.js',
+            array(),
+        )
     );
 
     $kaitain_conditional_js = array(
         'html5-shiv' => array(
             $node_path . 'html5shiv/dist/html5shiv.min.js',
-            'lte IE 9'
+            'lte IE 9',
+            array()
         ),
-        'jquery-placeholder' => array(
-            $node_path . 'jquery-placeholder/jquery.placeholder.min.js',
-            'lte IE 9'
-        ),
-        'functions-ie' => array(
-            $js_path . 'functions-ie.js',
-            'lte IE 9'
-        )
     );
 
     $kaitain_fonts = array(
@@ -65,9 +60,7 @@ function kaitain_scripts() {
 
     kaitain_js($kaitain_js, $kaitain_conditional_js, $js_path);
     kaitain_css($kaitain_css, $kaitain_conditional_css, $kaitain_fonts);
-}
-
-add_action('wp_head', 'kaitain_scripts');
+});
 
 /*
  * Load Site JS in Footer
@@ -75,36 +68,37 @@ add_action('wp_head', 'kaitain_scripts');
  * @link http://www.kevinleary.net/move-javascript-bottom-wordpress/#comment-56740
  */
 
-function kaitain_admin_scripts() {
+add_action('admin_head', function() {
     $js_path = $GLOBALS['kaitain_asset_paths']['js'];
     $css_path = $GLOBALS['kaitain_asset_paths']['css'];
 
     kaitain_admin_js(array(
         'postmeta-functions' => array(
-            'post.php', $js_path . 'admin.js'
+            'post.php', $js_path . 'admin/admin.js'
         ),
     ));
 
     kaitain_admin_css(array(
         'tuairic-admin' => $css_path . 'admin.css'
     ));
-}
-
-add_action('admin_head', 'kaitain_admin_scripts');
+});
 
 /*
- * Admin Scripts
+ * Forcibly Load JS in Footer
  * -----------------------------------------------------------------------------
+ * This will affect plugin scripts too: all code will load in the footer.
  */
 
-function kaitain_clean_header() {
-    remove_action('wp_head', 'wp_print_scripts');
-    remove_action('wp_head', 'wp_print_head_scripts', 9);
-    remove_action('wp_head', 'wp_enqueue_scripts', 1);
+if (!is_admin()) {
+    add_action('wp_enqueue_scripts', function() {
+        remove_action('wp_head', 'wp_print_scripts');
+        remove_action('wp_head', 'wp_print_head_scripts', 9);
+        remove_action('wp_head', 'wp_enqueue_scripts', 1);
+    });
 }
 
 /** 
- * Sheepie JavaScript Loader
+ * Kaitain JavaScript Loader
  * -----------------------------------------------------------------------------
  */
 
@@ -113,21 +107,13 @@ function kaitain_js($kaitain_js, $kaitain_conditional_js, $js_path) {
         return;
     }
 
-    if (!is_admin()) {
-        add_action('wp_enqueue_scripts', 'kaitain_clean_header');
-    }
-
     foreach ($kaitain_js as $name => $script) {
-        wp_enqueue_script($name, $script, array('jquery'), $GLOBALS['kaitain_version'], true);
+        wp_enqueue_script($name, $script[0], $script[1], $GLOBALS['kaitain_version'], true);
     }
 
     foreach ($kaitain_conditional_js as $name => $script) {
-        // Internet Explorer scripts.
-        $path = $script[0];
-        $condition = $script[1];
-
-        wp_enqueue_script($name, $path, array(), $GLOBALS['kaitain_version'], false);
-        wp_script_add_data($name, 'conditional', $condition);
+        wp_enqueue_script($name, $script[0], $script[2], $GLOBALS['kaitain_version'], false);
+        wp_script_add_data($name, 'conditional', $script[1]);
     }
 
     if (is_singular()) {
@@ -137,10 +123,6 @@ function kaitain_js($kaitain_js, $kaitain_conditional_js, $js_path) {
 
 function kaitain_admin_js($kaitain_admin_js) {
     foreach ($kaitain_admin_js as $name => $script) {
-        // if ($script[0] && $hook !== $script[0]) {
-        //     continue;
-        // }
-        
         wp_enqueue_script(
             $name,
             $script[1],
@@ -152,7 +134,7 @@ function kaitain_admin_js($kaitain_admin_js) {
 }
 
 /**
- * Sheepie CSS Loader
+ * Kaitain CSS Loader
  * -----------------------------------------------------------------------------
  * Load all theme CSS.
  */
