@@ -42,7 +42,9 @@ global $sections;
                         'theme_location' => 'footer-site-links',
                         'container' => 'nav',
                     )); ?>
+                    <?php /*
                     <?php $sections->section_cavalcade(); ?>
+                     */ ?>
                 </div>
 
                 <?php wp_nav_menu(array(
