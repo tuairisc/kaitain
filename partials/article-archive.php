@@ -14,15 +14,15 @@
  */
 
 global $sections;
-$trim = $sections->section_css_classes(get_the_category()[0]);
+$trim = kaitain_section_css(get_the_category()[0]);
 
 ?>
 
 <article <?php post_class('article--archive'); ?> id="article--archive--<?php the_id(); ?>">
-    <a class="article--archive__link flex--two-col--div <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+    <a class="article--archive__link flex--two-col--div <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail article--archive__thumbnail">
             <?php post_image_html(get_the_ID(), 'tc_post_archive', true); ?>
-            <div class="archive-trim-bottom <?php printf($trim['reg']['background']); ?>"></div>
+            <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
         </div>
         <div class="article--archive__content">
             <header class="article--archive__header vspace--half">

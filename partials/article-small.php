@@ -13,8 +13,7 @@
  * @link       http://www.tuairisc.ie
  */
 
-global $sections;
-$trim = $sections->section_css_classes(get_the_category()[0]);
+$trim = kaitain_section_css(get_the_category()[0]);
 
 $post_classes = array(
     'article--small', 'vspace--half'
@@ -23,10 +22,10 @@ $post_classes = array(
 ?>
 
 <article <?php post_class($post_classes); ?> id="article--small--<?php the_id(); ?>">
-    <a class="article--small__link <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+    <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail article--small__thumb vspace--half">
             <?php post_image_html(get_the_ID(), 'tc_home_feature_small', true); ?>
-            <div class="archive-trim-bottom <?php printf($trim['reg']['background']); ?>"></div>
+            <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
         </div>
         <h5 class="title article--small__title"><?php the_title(); ?></h5>
     </a>

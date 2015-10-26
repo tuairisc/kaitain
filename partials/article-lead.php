@@ -13,17 +13,16 @@
  * @link       http://www.tuairisc.ie
  */
 
-global $sections;
 $author = get_the_author_meta('ID');
-$trim = $sections->section_css_classes(get_the_category()[0]);
+$trim = kaitain_section_css(get_the_category()[0]);
 
 ?>
 
 <article <?php post_class('article--lead'); ?> id="article--lead--<?php the_id(); ?>">
-    <a class="article--lead__link <?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+    <a class="article--lead__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail article--lead__thumb">
             <?php post_image_html(get_the_ID(), 'tc_home_feature_lead', true); ?>
-            <div class="archive-trim-bottom <?php printf($trim['reg']['background']); ?>"></div>
+            <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
         </div>
         <h1 class="title article--lead__title"><?php the_title(); ?></h1>
     </a>

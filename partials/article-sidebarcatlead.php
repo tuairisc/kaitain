@@ -13,15 +13,14 @@
  * @link       http://www.tuairisc.ie
  */
 
-global $sections;
-$trim = $sections->section_css_classes(get_the_category()[0]);
+$trim = kaitain_section_css(get_the_category()[0]);
 
 $post_classes = array(
     'article--sidebar article--sidebar--lead', 'vspace--full',
 );
 
 $link_classes = array(
-    $trim['hover']['text'],
+    $trim['texthover'],
     'article--sidebar__link'
 );
 

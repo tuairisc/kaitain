@@ -13,8 +13,7 @@
  * @link       http://www.tuairisc.ie
  */
 
-global $sections;
-$trim = $sections->section_css_classes(get_the_category()[0]);
+$trim = kaitain_section_css(get_the_category()[0]);
 
 $post_classes = array(
     'article--sidebar article--sidebar--lead', 'article--sidebar__padding', 'vspace--full'
@@ -24,7 +23,7 @@ $post_classes = array(
 
 <article <?php post_class($post_classes); ?> id="article--sidebar--<?php the_id(); ?>">
     <h5 class="title article--sidebar__title">
-        <a class="<?php printf($trim['hover']['text']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+        <a class="<?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
             <?php the_title(); ?>
         </a>
     </h5>
