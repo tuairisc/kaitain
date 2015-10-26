@@ -33,7 +33,7 @@ $placeholder = __('curdaigh', 'kaitain');
     <?php if (!is_404()) : ?>
         <?php // Disabled on 404 pages. ?>
         <header class="noprint" id="header">
-            <div class="section--current-bg flex--three-col--nav navrow" id="header__navrow">
+            <div class="section--current--bg flex--three-col--nav navrow" id="header__navrow">
                 <?php // Empty until I have something better. ?>
                 <nav class="navrow__left text--left">
                     <button class="navrow__button navrow__button--menu conceal" id="menutoggle__nav" type="button" data-bind="click: showMenu, css: { 'navrow__button--menu--display': state.menuButton() }">
@@ -56,7 +56,7 @@ $placeholder = __('curdaigh', 'kaitain');
                 <?php // Section header-menu. See section-manager.php ?>
                 <?php /*
                 <ul class="navmenu__menu navmenu__menu--primary" id="navmenu__main"><?php $sections->sections_menu('primary'); ?></ul>
-                <ul class="navmenu__menu navmenu__menu--secondary" id="navmenu__secondary"><?php $sections->sections_menu('secondary', array('section--current-bg-submenu--mobile')); ?></ul>
+                <ul class="navmenu__menu navmenu__menu--secondary" id="navmenu__secondary"><?php $sections->sections_menu('secondary', array('section--current--bg-submenu--mobile')); ?></ul>
                  */ ?>
             </nav>
         </header>
