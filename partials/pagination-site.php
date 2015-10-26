@@ -12,7 +12,7 @@
  * @link       https://github.com/bhalash/kaitain-theme
  */
 
-t?>
+?>
 
 <nav class="pagination pagination--site" id="pagination--site">
     <p class="pagination__previous pagination__previous-page text--small">
