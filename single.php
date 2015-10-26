@@ -13,15 +13,10 @@
  * @link       http://www.tuairisc.ie
  */
 
-global $sections;
 get_header();
 
-$section = get_category($sections->get_section_id(get_the_category()[0]));
-
-$section_link = get_category_link($section);
-$section_slug = $section->slug;
-$section_name = $section->name;
-$section_class = sprintf('section--%s-text-hover', $section_slug);
+$trim =  kaitain_current_section_css();
+$section_cat = kaitain_current_section_category();
 
 if (have_posts()) {
     while (have_posts()) {
@@ -31,10 +26,10 @@ if (have_posts()) {
         if (function_exists('rp_get_related')) {
             printf('<h4 class="%s"><a class="%s" href="%s">%s \'%s\'</a></h4>',
                 'subtitle related-title',
-                $section_class,
-                $section_link,
+                $trim['texthover'],
+                get_category_link($section_cat->cat_ID),
                 __('Léigh tuilleadh sa rannóg seo', 'kaitain'),
-                $section_name
+                $section_cat->cat_name
             );
 
             printf('<div class="%s">', 'related-articles flex--three-col--article vspace--double noprint');
