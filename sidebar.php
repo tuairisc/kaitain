@@ -13,8 +13,6 @@
  * @link       http://www.tuairisc.ie
  */
 
-return;
-
 ?>
 
 <div class="main__sidebar sidebar noprint" id="main__sidebar">
