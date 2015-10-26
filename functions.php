@@ -23,9 +23,6 @@ $GLOBALS['kaitain_version'] = 1.0;
 add_action('after_setup_theme', function() {
     kaitain_image_sizes();
 
-    // Theme menus.
-    add_action('init', 'kaitain_menus');
-
     // Remove WordPress version from site header.
     remove_action('wp_head', 'wp_generator');
 
@@ -186,12 +183,18 @@ add_action('widgets_init', function() {
  * -----------------------------------------------------------------------------
  */
 
-function kaitain_menus() {
+add_action('init', function() {
+    global $sections;
+
     register_nav_menus(array(
         'footer-external-social' => __('Site Social Presences (footer)', 'kaitain'),
         'footer-site-links' => __('Footer Site Information Links', 'kaitain')
     ));
-}
+
+    foreach ($sections::$sections_list as $slug => $id) {
+        register_nav_menu('section-' . $slug, __('Menu for section ', 'kaitain') . $slug);
+    }
+});
 
 /**
  * Kaitain Image Sizes
