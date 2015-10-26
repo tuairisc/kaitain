@@ -137,18 +137,21 @@ class Kaitain_Sidebar_Category_Widget extends WP_Widget {
         $title = apply_filters('widget_title', $category->cat_name);
         // Transient API name.
         $trans = 'sidebar_category_posts_' . $category->slug;
+
         // Site section information.
-        $section_slug = $sections->get_section_slug(get_the_category()[0]);
+        $section = kaitain_current_section_category();
+        $trim = kaitain_section_css(get_the_category()[0]);
+        $section_slug = $sections->get_category_section_slug(get_the_category()[0]);
 
         $classes = array(
             'widget' => 'widget--sidebarcat vspace--full',
             'trim_bg' => 'widget--sidebarcat__bg',
-            'trim_text' => sprintf('section--%s-text-hover', $section_slug)
+            'trim_text' => $trim['texthover']
         );
 
         if ($instance['use_section_trim']) {
             // Override grey background with appropriate section trim.
-            $classes['trim_bg'] = sprintf('section--%s-background', $section_slug);
+            $classes['trim_bg'] = $trim['bg'];
         }
 
         if (!($category_posts = get_transient($trans))) {
