@@ -350,6 +350,49 @@ add_filter('the_content', function($content) {
 });
 
 /**
+ * Theme Section Classes
+ * -----------------------------------------------------------------------------
+ * @param   object/id       $category       Category to lookup.
+ * @return  array           $classes        Section classes.
+ */
+
+function kaitain_section_css($category) {
+    global $sections;
+    $section = $sections->get_category_section_slug($category);
+
+    $classes = array(
+        'text' => 'section--' . $section . '--text',
+        'texthover' => 'section--' . $section . '--text-hover',
+        'bg' => 'section--' . $section . '--bg',
+        'bghover' => 'section--' . $section . '--bg-hover'
+    );
+
+    return $classes;
+}
+
+/**
+ * Current Section Classes
+ * -----------------------------------------------------------------------------
+ * @return  array           $classes        Section classes.
+ */
+
+function kaitain_current_section_css() {
+    global $sections;
+    return kaitain_section_css($sections::$current_section);
+}
+
+/**
+ * Current Section Category
+ * -----------------------------------------------------------------------------
+ * @return  object                          Current section category object.
+ */
+
+function kaitain_current_section_category() {
+    global $sections;
+    return get_category($sections::$current_section);
+}
+
+/**
  * Theme Sections
  * -----------------------------------------------------------------------------
  */
