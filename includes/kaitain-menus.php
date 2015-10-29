@@ -37,6 +37,35 @@ function kaitain_get_menu_from_location($location) {
 }
 
 /**
+ * Added Section Identifier to Menu Item Classes
+ * -----------------------------------------------------------------------------
+ */
+
+add_filter('wp_nav_menu_objects', function($items) {
+    global $sections;
+
+    foreach ($items as $item) {
+        if ($item->object === 'category' && !$item->menu_item_parent) {
+            $category = intval($item->object_id);
+
+            if (term_exists($category, 'category')) {
+                $category = $sections->get_category_section_id($category);
+
+                $item->classes[] = 'sections-menu-item';
+
+                if ($sections::$current_section === $category) {
+                    $item->classes[] = 'sections-current-menu-item';
+                } else {
+                    $item->classes[] = 'sections-not-current-menu-item';
+                }
+            }
+        }
+    }
+
+    return $items;
+});
+
+/**
  * Add Data Attribute to Menu Item
  * -----------------------------------------------------------------------------
  * Rant: WordPress /really does not like it when you fuck with menu items/. 
