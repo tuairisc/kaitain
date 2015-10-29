@@ -92,8 +92,10 @@ function kaitain_includes() {
         'kaitain-social-share.php',
         // Localized date.
         'kaitain-date.php',
-        // Education Section Custom Functions
-        'kaitain-education.php'
+        // Education Section Custom Functions.
+        'kaitain-education.php',
+        // Advanced custom menu functions.
+        'kaitain-menus.php'
     );
 
     $widgets = array(
@@ -401,29 +403,6 @@ $sections = new Section_Manager(
     // Default category section.
     191
 );
-
-/**
- * Fetch the Menu Attached to a Nav Location
- * -----------------------------------------------------------------------------
- * @param   string      $location       Menu location. Should be slug.
- * @return  object      $menu           The menu associated with that location.
- */
-
-function kaitain_get_menu_from_location($location) {
-    if (!($location = get_nav_menu_locations()[$location])) {
-        return false;
-    }
-
-    if (!($menu = get_term($location, 'nav_menu')->term_id)) {
-        return false;
-    }
-
-    if (!($menu = wp_get_nav_menu_items($menu))) {
-        return false;
-    }
-
-    return $menu;
-}
 
 /**
  * Open Graph and Twitter Card Meta Tags
