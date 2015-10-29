@@ -110,6 +110,25 @@
         };
 
         /**
+         * Toggle Focused Menu on Hover or Tap 
+         * ---------------------------------------------------------------------
+         */
+
+        self.setFocusMenu = function(data, event) {
+            var $parent = $(event.target.parentNode);
+            var menu = 'menu--focused';
+
+            if (event.type === 'touchstart' && $parent.hasClass(menu)) {
+                // Proceed with click if submenu was selected.
+                 return true; 
+            }
+             
+            if (!$parent.hasClass('sub-menu')) {
+                $parent.addClass(menu).siblings().removeClass(menu);
+            }
+        } 
+
+        /**
          * Window Size Toggle Control
          * ---------------------------------------------------------------------
          * If below break, menu button displays and scrolling hevaiour is set to
