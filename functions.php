@@ -91,7 +91,7 @@ function kaitain_includes() {
         // Single post social sharing links.
         'kaitain-social-share.php',
         // Localized date.
-        'date-strftime.php',
+        'kaitain-date.php',
         // Education Section Custom Functions
         'kaitain-education.php'
     );
@@ -184,16 +184,11 @@ add_action('widgets_init', function() {
  */
 
 add_action('init', function() {
-    global $sections;
-
     register_nav_menus(array(
+        'header-section-navigation' => __('Site Section Navigation', 'kaitain'),
         'footer-external-social' => __('Site Social Presences (footer)', 'kaitain'),
         'footer-site-links' => __('Footer Site Information Links', 'kaitain')
     ));
-
-    foreach ($sections::$sections_list as $slug => $id) {
-        register_nav_menu('section-' . $slug, __('Menu for section ', 'kaitain') . $slug);
-    }
 });
 
 /**
@@ -406,6 +401,29 @@ $sections = new Section_Manager(
     // Default category section.
     191
 );
+
+/**
+ * Fetch the Menu Attached to a Nav Location
+ * -----------------------------------------------------------------------------
+ * @param   string      $location       Menu location. Should be slug.
+ * @return  object      $menu           The menu associated with that location.
+ */
+
+function kaitain_get_menu_from_location($location) {
+    if (!($location = get_nav_menu_locations()[$location])) {
+        return false;
+    }
+
+    if (!($menu = get_term($location, 'nav_menu')->term_id)) {
+        return false;
+    }
+
+    if (!($menu = wp_get_nav_menu_items($menu))) {
+        return false;
+    }
+
+    return $menu;
+}
 
 /**
  * Open Graph and Twitter Card Meta Tags
