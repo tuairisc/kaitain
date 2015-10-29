@@ -53,11 +53,12 @@ $placeholder = __('curdaigh', 'kaitain');
             </div>
 
             <nav class="navmenu conceal" id="header__menu" data-bind="css: { 'navmenu--display': state.menu() }">
-                <?php // Section header-menu. See section-manager.php ?>
-                <?php /*
-                <ul class="navmenu__menu navmenu__menu--primary" id="navmenu__main"><?php $sections->sections_menu('primary'); ?></ul>
-                <ul class="navmenu__menu navmenu__menu--secondary" id="navmenu__secondary"><?php $sections->sections_menu('secondary', array('section--current--bg-submenu--mobile')); ?></ul>
-                 */ ?>
+                <?php wp_nav_menu(array(
+                    'theme_location' => 'header-section-navigation',
+                    'menu_class' => 'sections__menu',
+                    'container' => false,
+                    'walker' => new Kaitain_Walker()
+                )); ?>
             </nav>
         </header>
         <div class="trim-block noprint">
