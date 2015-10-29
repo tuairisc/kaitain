@@ -48,7 +48,7 @@ function kaitain_get_menu_from_location($location) {
  *  * There is /no function whatsoever/ through which you can add custom attributes.
  *  * Menu items are stored in the wp_posts table as post objects (WTF?), and so have
  *    no fields for things like data attributes.
- *  * The menu walker outout string...is a string. Not an array or something easy
+ *  * The menu walker output string...is a string. Not an array or something easy
  *    to manipulate. Seriously, what the fuck WordPress? The WordPress has the
  *    dubious honour of being one of the most fucked-up and pointlessly convoluted
  *    pieces of code with which I've had to work.
@@ -69,7 +69,7 @@ class Kaitain_Walker extends Walker_Nav_Menu {
     function start_el(&$output, $item, $depth = 0, $args = array()) {
         // Reduce code by extending the parent function.
         parent::start_el($output, $item, $depth = 0, $args);
-        $directive = 'data-directive="event: { mouseover: setFocusMenu, touchstart: setFocusMenu }"';
+        $directive = 'data-bind="event: { mouseover: setFocusMenu, touchstart: setFocusMenu }"';
 
         if (!$item->menu_item_parent) {
             $match = '/\<li\sid="menu-item-' . $item->ID . '"/';
