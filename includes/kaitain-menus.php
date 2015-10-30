@@ -37,8 +37,10 @@ function kaitain_get_menu_from_location($location) {
 }
 
 /**
- * Added Section Identifier to Menu Item Classes
+ * Add Section Identifier to Menu Item Classes
  * -----------------------------------------------------------------------------
+ * @param   array       $items          List of menu item object.
+ * @return  array       $items          List of menu item object.
  */
 
 add_filter('wp_nav_menu_objects', function($items) {
