@@ -44,19 +44,28 @@ function kaitain_get_menu_from_location($location) {
 add_filter('wp_nav_menu_objects', function($items) {
     global $sections;
 
+    $classes = array(
+        'menu-item' => 'section--menu-item',
+        'current' => 'section--current-bg',
+        'uncurrent' => 'section--%s-bg-hover',
+        'focused' => 'section--menu-focused'
+    );
+
     foreach ($items as $item) {
         if ($item->object === 'category' && !$item->menu_item_parent) {
             $category = intval($item->object_id);
 
             if (term_exists($category, 'category')) {
-                $category = $sections->get_category_section_id($category);
+                $category = get_category($sections->get_category_section_id($category));
+                $item->classes[] = $classes['menu-item'];
 
-                $item->classes[] = 'sections-menu-item';
-
-                if ($sections::$current_section === $category) {
-                    $item->classes[] = 'sections-current-menu-item';
+                if ($sections::$current_section === $category->cat_ID) {
+                    // Add focused and current classes if the the section is current.
+                    $item->classes[] = sprintf($classes['current'], $category->slug);
+                    $item->classes[] = $classes['focused'];
                 } else {
-                    $item->classes[] = 'sections-not-current-menu-item';
+                    // Elsewise add the hover BG class.
+                    $item->classes[] = sprintf($classes['uncurrent'], $category->slug);
                 }
             }
         }
@@ -95,9 +104,9 @@ add_filter('wp_nav_menu_objects', function($items) {
  */
 
 class Kaitain_Walker extends Walker_Nav_Menu {
-    function start_el(&$output, $item, $depth = 0, $args = array()) {
+    function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
         // Reduce code by extending the parent function.
-        parent::start_el($output, $item, $depth = 0, $args);
+        parent::start_el($output, $item, $depth = 0, $args, $id);
         $directive = 'data-bind="event: { mouseover: setFocusMenu, touchstart: setFocusMenu }"';
 
         if (!$item->menu_item_parent) {
