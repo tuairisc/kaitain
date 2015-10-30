@@ -361,10 +361,10 @@ function kaitain_section_css($category) {
     $section = $sections->get_category_section_slug($category);
 
     $classes = array(
-        'text' => 'section--' . $section . '--text',
-        'texthover' => 'section--' . $section . '--text-hover',
-        'bg' => 'section--' . $section . '--bg',
-        'bghover' => 'section--' . $section . '--bg-hover'
+        'text' => 'section--' . $section . '-text',
+        'texthover' => 'section--' . $section . '-text-hover',
+        'bg' => 'section--' . $section . '-bg',
+        'bghover' => 'section--' . $section . '-bg-hover'
     );
 
     return $classes;
