@@ -55,11 +55,13 @@ $placeholder = __('curdaigh', 'kaitain');
             <nav class="navmenu conceal" id="header__menu" data-bind="css: { 'navmenu--display': state.menu() }">
                 <?php wp_nav_menu(array(
                     'theme_location' => 'header-section-navigation',
-                    'menu_class' => 'sections__menu',
+                    'menu_class' => 'navmenu__menu',
+                    'menu_id' => 'navmenu__menu',
                     'container' => false,
                     'walker' => new Kaitain_Walker()
                 )); ?>
             </nav>
+
         </header>
         <div class="trim-block noprint">
             <div class="advert-block adverts--banner" id="adverts--sidebar">
