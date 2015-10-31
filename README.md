@@ -1,6 +1,11 @@
 # Kaitain
 This repository is the WordPress theme for [Tuairisc.ie](http://www.tuairisc.ie).
 
+## Build
+
+    npm install
+    gulp js sprites css
+
 ## License
 All of the PHP code in the project is licensed under the GPL v3 or later, except as otherwise noted. All vector branding assets are copyright of their respective owner.
 
