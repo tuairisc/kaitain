@@ -37,46 +37,6 @@ function kaitain_get_menu_from_location($location) {
 }
 
 /**
- * Add Section Identifier to Menu Item Classes
- * -----------------------------------------------------------------------------
- * @param   array       $items          List of menu item object.
- * @return  array       $items          List of menu item object.
- */
-
-add_filter('wp_nav_menu_objects', function($items) {
-    global $sections;
-
-    $classes = array(
-        'menu-item' => 'section--menu-item',
-        'current' => 'section--current-bg',
-        'uncurrent' => 'section--%s-bg-hover',
-        'focused' => 'section--menu-focused'
-    );
-
-    foreach ($items as $item) {
-        if ($item->object === 'category' && !$item->menu_item_parent) {
-            $category = intval($item->object_id);
-
-            if (term_exists($category, 'category')) {
-                $category = get_category($sections->get_category_section_id($category));
-                $item->classes[] = $classes['menu-item'];
-
-                if ($sections::$current_section === $category->cat_ID) {
-                    // Add focused and current classes if the the section is current.
-                    $item->classes[] = sprintf($classes['current'], $category->slug);
-                    $item->classes[] = $classes['focused'];
-                } else {
-                    // Elsewise add the hover BG class.
-                    $item->classes[] = sprintf($classes['uncurrent'], $category->slug);
-                }
-            }
-        }
-    }
-
-    return $items;
-});
-
-/**
  * Add Data Attribute to Menu Item
  * -----------------------------------------------------------------------------
  * Rant: WordPress /really does not like it when you fuck with menu items/. 
@@ -107,13 +67,51 @@ add_filter('wp_nav_menu_objects', function($items) {
 
 class Kaitain_Walker extends Walker_Nav_Menu {
     function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
+        global $sections;
+
+        $classes = array(
+            // Menu item CSS classes.
+            'menu-item' => 'section--menu-item',
+            'current' => 'section--current-bg',
+            'uncurrent' => 'section--%s-bg-hover',
+            'focused' => 'navmenu--focused',
+            'text-shadow' => 'section--%s-shadow-hover'
+        );
+
+        $binding = array(
+            // Array in case I need to add more.
+            'parent' => 'data-bind="event: { mouseover: setFocusMenu, touchstart: setFocusMenu }, mouseoverBubble: false"',
+        );
+
+        // Get category section parent.
+        $category = get_category($sections->get_category_section_id(intval($item->object_id)));
+
+        // Add appropriate menu classes to a given menu item.
+
+        if ($item->object === 'category' && !$item->menu_item_parent) {
+            $item->classes[] = $classes['menu-item'];
+
+            if ($sections::$current_section === $category->cat_ID) {
+                // Add focused and current classes if the the section is current.
+                $item->classes[] = sprintf($classes['current'], $category->slug);
+                // Uncomment this line to have the section menu popout by default.
+                // $item->classes[] = $classes['focused'];
+            } else {
+                // Elsewise add the hover BG class.
+                $item->classes[] = sprintf($classes['uncurrent'], $category->slug);
+            }
+        } else if ($item->menu_item_parent) {
+            $item->classes[] = sprintf($classes['text-shadow'], $category->slug);
+        }
+
         // Reduce code by extending the parent function.
         parent::start_el($output, $item, $depth = 0, $args, $id);
-        $directive = 'data-bind="event: { mouseover: setFocusMenu, touchstart: setFocusMenu }"';
 
+        // Add data attribute and binding with regex.
+        
         if (!$item->menu_item_parent) {
             $match = '/\<li\sid="menu-item-' . $item->ID . '"/';
-            $replace = '<li id="menu-item-'. $item->ID . '" ' . $directive;
+            $replace = '<li id="menu-item-'. $item->ID . '" ' . $binding['parent'];
 
             $output = preg_replace($match, $replace, $output, 1);
         }
