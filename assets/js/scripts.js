@@ -29,6 +29,8 @@
             width: 640
         };
 
+        self.menuFocusClass = 'navmenu--focused';
+
         self.state = {
             // Search, menu and menu button states.
             search: ko.observable(initialState),
@@ -116,15 +118,14 @@
 
         self.setFocusMenu = function(data, event) {
             var $parent = $(event.target.parentNode);
-            var menu = 'menu--focused';
 
-            if (event.type === 'touchstart' && $parent.hasClass(menu)) {
+            if (event.type === 'touchstart' && $parent.hasClass(self.menuFocusClass)) {
                 // Proceed with click if submenu was selected.
                  return true; 
             }
              
             if (!$parent.hasClass('sub-menu')) {
-                $parent.addClass(menu).siblings().removeClass(menu);
+                $parent.addClass(self.menuFocusClass).siblings().removeClass(self.menuFocusClass);
             }
         } 
 
