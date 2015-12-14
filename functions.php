@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Kaitain Functions 
+ * Kaitain Functions
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Kaitain
@@ -30,7 +30,7 @@ add_action('after_setup_theme', function() {
     remove_filter('the_content', 'convert_smilies');
     remove_filter('the_excerpt', 'convert_smilies');
     remove_action('wp_head', 'print_emoji_detection_script', 7);
-    
+
     add_theme_support('automatic-feed-links');
     add_theme_support('post-thumbnails');
     add_theme_support('title-tag');
@@ -51,7 +51,7 @@ add_action('after_setup_theme', function() {
  * Theme Options
  * -----------------------------------------------------------------------------
  */
- 
+
 // Transient API timeout in minutes.
 add_option('kaitain_transient_timeout', 60 * 20, '', true);
 // Flag post as job.
@@ -137,8 +137,8 @@ kaitain_includes();
 /**
  * Kaitain Theme Widgets
  * -----------------------------------------------------------------------------
- * register_sidebars() doesn't give me enough options to name and identify 
- * several unique widget areas, but either do I want a half dozen 
+ * register_sidebars() doesn't give me enough options to name and identify
+ * several unique widget areas, but either do I want a half dozen
  * register_sidebar() calls littering the function. They all share the same
  * defaults, so...
  */
@@ -232,7 +232,7 @@ function kaitain_image_sizes() {
  * Partial Wrapper
  * -----------------------------------------------------------------------------
  * Shorthand wrapper for get_template_part to reduce the verbosity of calls.
- * 
+ *
  * @param   string      $name           Partial name.
  * @param   strgin      $slug           Partial slug.
  */
@@ -268,7 +268,7 @@ add_action('wp_head', function() {
     $prefetch = array(
         preg_replace('/^www\./','', $_SERVER['SERVER_NAME'])
     );
-    
+
     foreach ($prefetch as $domain) {
         printf('<link rel="dns-prefetch" href="//%s">', $domain);
     }
@@ -304,7 +304,7 @@ function kaitain_set_view_count() {
 
 function kaitain_get_view_count($post = null) {
     $post = get_post($post);
-    
+
     if (!$post) {
         return false;
     }
@@ -338,8 +338,8 @@ function kaitain_is_verboten_user($user_id) {
  * Increment Counter within Post
  * -----------------------------------------------------------------------------
  * The only part of the theme that calls the full post content are single
- * articles. This is /good enough/ for me. 
- * 
+ * articles. This is /good enough/ for me.
+ *
  * @param   string      $content        Post content.
  * @return  string      $content        Post content.
  */

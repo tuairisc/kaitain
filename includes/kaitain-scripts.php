@@ -42,7 +42,7 @@ add_action('wp_head', function() {
     $kaitain_fonts = array(
         /* All Google Fonts to be loaded.
          * Use format:
-         * 
+         *
          * 'Open Sans:300',
          */
          'Open Sans:400'
@@ -97,7 +97,7 @@ if (!is_admin()) {
     });
 }
 
-/** 
+/**
  * Kaitain JavaScript Loader
  * -----------------------------------------------------------------------------
  */
