@@ -22,8 +22,6 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var sourcemap = require('gulp-sourcemaps');
 var replace = require('gulp-replace');
-var penthouse = require('penthouse');
-var fs = require('fs');
 var concat = require('gulp-concat');
 
 //
@@ -49,20 +47,6 @@ var assets = {
 };
 
 //
-// Penthouse
-//
-
-var phouse = {
-    // DEBUG
-    url: 'https://kaitain.bhalash.com',
-    // url: 'http://www.tuairisc.ie',
-    css: assets.css.main,
-    // Sizes are optimized for mobile delivery, targeting the iPhone 5S.
-    width: 320,
-    height: 568
-};
-
-//
 // Autoprefixer
 //
 
@@ -85,21 +69,6 @@ var regex = {
         replace: ''
     }
 };
-
-// 
-// Optimize Production CSS Layout
-//
-
-gulp.task('penthouse', function() {
-    penthouse(phouse, function(error, css) {
-        if (error) {
-            console.log(error);
-            console.log(css);
-        }
-
-        fs.writeFile(assets.css.main, css);
-    });
-});
 
 //
 // Move Up Sprite Assets
