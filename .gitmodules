@@ -4,7 +4,7 @@
     branch = master
 [submodule "assets/css"]
     path = assets/css
-    url = git@github.com:bhalash/tuairisc-css.git
+    url = git@github.com:tuairisc/tuairisc-css.git
     branch = master
     ignore = dirty
 [submodule "includes/social-meta"]
