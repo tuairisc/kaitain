@@ -27,7 +27,7 @@ add_action('wp_head', function() {
     $kaitain_js = array(
         'kaitain-functions' => array(
             $js_path . 'kaitain.js',
-            array(),
+            array('jquery'),
         )
     );
 
