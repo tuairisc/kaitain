@@ -3,6 +3,8 @@ This repository is the WordPress theme for [Tuairisc.ie](http://www.tuairisc.ie)
 
 ## Build
 
+    git clone --recursive git@github.com:tuairisc/kaitain-theme.git
+    cd kaitain-theme
     npm install
     gulp js sprites css
 
