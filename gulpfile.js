@@ -76,6 +76,7 @@ var regex = {
 
 gulp.task('sprites', function() {
     gulp.src(assets.sprites.source)
+        .pipe(rename({ dirname: '' }))
         .pipe(gulp.dest(assets.sprites.dest));
 });
 
