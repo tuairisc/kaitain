@@ -13,17 +13,17 @@
     branch = master
     ignore = dirty
 [submodule "includes/section-manager"]
-	path = includes/section-manager
+    path = includes/section-manager
     url = https://github.com/tuairisc/section-manager.git
-	branch = master
+    branch = master
     ignore = dirty
 [submodule "includes/category-widget"]
-	path = includes/category-widget
+    path = includes/category-widget
     url = https://github.com/tuairisc/category-widget.git
     ignore = dirty
 [submodule "includes/related-posts"]
-	path = includes/related-posts
+    path = includes/related-posts
     url = https://github.com/bhalash/related-posts.git
 [submodule "includes/archive-functions"]
-	path = includes/archive-functions
+    path = includes/archive-functions
     url = https://github.com/bhalash/archive-functions.git
