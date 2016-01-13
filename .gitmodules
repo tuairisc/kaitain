@@ -1,29 +1,29 @@
 [submodule "includes/get-the-image"]
     path = includes/get-the-image
-    url = git@github.com:justintadlock/get-the-image.git
+    url = https://github.com/justintadlock/get-the-image.git
     branch = master
 [submodule "assets/css"]
     path = assets/css
-    url = git@github.com:tuairisc/tuairisc-css.git
+    url = https://github.com/tuairisc/kaitain-css
     branch = master
     ignore = dirty
 [submodule "includes/social-meta"]
     path = includes/social-meta
-    url = git@github.com:bhalash/social-meta.git
+    url = https://github.com/bhalash/social-meta.git
     branch = master
     ignore = dirty
 [submodule "includes/section-manager"]
 	path = includes/section-manager
-	url = git@github.com:bhalash/section-manager.git
+    url = https://github.com/tuairisc/section-manager.git
 	branch = master
     ignore = dirty
 [submodule "includes/category-widget"]
 	path = includes/category-widget
-	url = git@github.com:bhalash/category-widget.git
+    url = https://github.com/tuairisc/category-widget.git
     ignore = dirty
 [submodule "includes/related-posts"]
 	path = includes/related-posts
-	url = git@github.com:bhalash/related-posts.git
+    url = https://github.com/bhalash/related-posts.git
 [submodule "includes/archive-functions"]
 	path = includes/archive-functions
-	url = git@github.com:bhalash/archive-functions.git
+    url = https://github.com/bhalash/archive-functions.git
