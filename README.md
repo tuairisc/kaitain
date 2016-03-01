@@ -10,7 +10,7 @@ This repository is the WordPress theme for [Tuairisc.ie](http://www.tuairisc.ie)
     Once ruby is installed
     gem install sass
     Node
-    # Using Ubuntu
+    # Using Ubuntu - http://stackoverflow.com/questions/32490328/gulp-autoprefixer-throwing-referenceerror-promise-is-not-defined
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
     sudo apt-get install -y nodejs
     npm install
