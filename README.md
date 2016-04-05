@@ -3,18 +3,20 @@ This repository is the WordPress theme for [Tuairisc.ie](http://www.tuairisc.ie)
 
 ## Build
 
+'''shell
     git clone --recursive git@github.com:tuairisc/kaitain.git
     cd kaitain
-    make sure node is installed and up to date and install ruby
-    Ruby - https://rvm.io/rvm/install
-    Once ruby is installed
+    # make sure node is installed and up to date and install ruby
+    # Ruby - https://rvm.io/rvm/install
+    # Once ruby is installed
     gem install sass
-    Node
+    # Node
     # Using Ubuntu - http://stackoverflow.com/questions/32490328/gulp-autoprefixer-throwing-referenceerror-promise-is-not-defined
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
     sudo apt-get install -y nodejs
     npm install
     gulp js sprites css
+'''
 
 ## License
 All of the PHP code in the project is licensed under the GPL v3 or later, except as otherwise noted. All vector branding assets are copyright of their respective owner.
