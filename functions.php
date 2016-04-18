@@ -189,7 +189,8 @@ add_action('init', function() {
     register_nav_menus(array(
         'header-section-navigation' => __('Site Section Navigation', 'kaitain'),
         'footer-external-social' => __('Site Social Presences (footer)', 'kaitain'),
-        'footer-site-links' => __('Footer Site Information Links', 'kaitain')
+        'footer-site-links-1' => __('Footer Site Information Links (left)', 'kaitain'),
+        'footer-site-links-2' => __('Footer Site Information Menu (right)', 'kaitain')
     ));
 });
 

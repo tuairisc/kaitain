@@ -38,13 +38,25 @@ global $sections;
 
                 <div class="footer__columns flex--four-col--nav vspace--full">
                     <?php // Custom footer menu and section cavalcade. ?>
+                    <div class="footer__site-links-1">
                     <?php wp_nav_menu(array(
-                        'theme_location' => 'footer-site-links',
+                        'theme_location' => 'footer-site-links-1', 
+                        //'menu_class' => 'footer__site-links-1 menu',
                         'container' => 'nav',
+                       // 'container_class' => 'menu',
                     )); ?>
-                    <?php /*
-                    <?php $sections->section_cavalcade(); ?>
-                     */ ?>
+		    </div>
+                    <div class="footer__site-links-2">
+                    <?php wp_nav_menu(array(
+                        'theme_location' => 'footer-site-links-2',
+                        //'menu_class' => 'menu',
+                        'container' => 'nav',
+                       // 'container_class' => 'footer__site-links-2'
+                    )); ?>
+                    </div>
+                    <?php
+                     // $sections->section_cavalcade();
+                      ?>
                 </div>
 
                 <?php wp_nav_menu(array(
