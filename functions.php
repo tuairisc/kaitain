@@ -160,18 +160,11 @@ add_action('widgets_init', function() {
             'before_title' => '<h3 class="widget--home__title vspace--full">'
         ),
         array(
-            'name' => __('Sidebar Top', 'kaitain'),
+            'name' => __('Sidebar', 'kaitain'),
             'description' => __('Top sidebar widget area (above adverts).', 'kaitain'),
             'before_widget' => '<div id="%1$s" class="widget widget--sidebar %2$s">',
             'before_title' => '<h4 class="widget--sidebar__title">',
             'id' => 'widgets-sidebar-top',
-        ),
-        array(
-            'name' => __('Sidebar Bottom', 'kaitain'),
-            'description' => __('Bottom sidebar widget area (below adverts).', 'kaitain'),
-            'id' => 'widgets-sidebar-bottom',
-            'before_widget' => '<div id="%1$s" class="widget widget--sidebar %2$s">',
-            'before_title' => '<h4 class="widget--sidebar__title">'
         )
     );
 

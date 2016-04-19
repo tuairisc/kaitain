@@ -13,7 +13,7 @@
  * @link       http://www.tuairisc.ie
  */
 
-get_header();
+get_header('post');
 
 $trim =  kaitain_current_section_css();
 $section_cat = kaitain_current_section_category();
@@ -25,6 +25,28 @@ if (have_posts()) {
         if ( has_post_thumbnail() ) {
             kaitain_partial('article', 'full-featured-image');
         } else {
+            ?>
+        <div class="trim-block noprint">
+            <div class="advert-block adverts--banner" id="adverts--sidebar">
+                <?php if (function_exists('adrotate_group')) {
+                    printf(adrotate_group(1));
+                } ?>
+            </div>
+            <div class="stripe stripe__absolute-bottom"></div>
+        </div>
+        <div class="section--current--bg noprint" style="display:none;" id="bigsearch" data-bind="visible: state.search()">
+            <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
+                <fieldset form="bigsearch-form">
+                    <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required" data-bind="hasFocus: state.search()">
+                </fieldset>
+            </form>
+            <button class="navrow__button navrow__button--search" id="searchtoggle__search" type="button" data-bind="click: showSearch">
+                <span class="navrow__icon search" data-bind="css: { close: state.search() }"></span>
+            </button>
+        </div>
+            <main class="main "id="main">
+                <div class="main__content" id="main__content">
+            <?php
             kaitain_partial('article', 'full');
         }
 

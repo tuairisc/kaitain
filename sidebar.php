@@ -16,28 +16,9 @@
 ?>
 
 <div class="main__sidebar sidebar noprint" id="main__sidebar">
-    <?php if (is_active_sidebar('widgets-sidebar-top')) : ?>
+    <?php if (is_active_sidebar('widgets-sidebar')) : ?>
         <div class="sidebar__widgets">
-            <?php dynamic_sidebar('widgets-sidebar-top'); ?>
-        </div>
-    <?php endif; ?>
-    
-    <?php // AdRotate groups 3, 4 and 5
-    if (function_exists('adrotate_group')) : ?>
-        <div class="sidebar__widgets adverts--sidebar" id="adverts--sidebar">
-            <?php 
-
-            printf('%s', adrotate_group(3));
-            printf('%s', adrotate_group(4));
-            printf('%s', adrotate_group(5));
-
-            ?>
-        </div>
-    <?php endif; ?>
-
-    <?php if (is_active_sidebar('widgets-sidebar-bottom')) : ?>
-        <div class="sidebar__widgets">
-            <?php dynamic_sidebar('widgets-sidebar-bottom'); ?>
+            <?php dynamic_sidebar('widgets-sidebar'); ?>
         </div>
     <?php endif; ?>
 </div>

@@ -159,6 +159,22 @@
     };
 
     ko.applyBindings(new navViewController(false));
+
+    /**
+     * Hides the site logo when the Search Button is clicked
+     */
+    home = $('#home');
+    searchButton = document.getElementById('search-button');
+    //searchButtonChild = document.getElementById('searchtoggle__nav').getElementsByClassName('search')[0];
+    //searchButton = document.getElementsByClassName('navrow__right')[0];
+
+    searchButton.addEventListener("click", function(ev){
+        console.log('click');
+        console.log(ev);
+        home.toggleClass('transparent');
+    });
+
+
 })(jQuery, window, document);
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

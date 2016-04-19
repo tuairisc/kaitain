@@ -29,7 +29,7 @@ $placeholder = __('curdaigh', 'kaitain');
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?> data-bind="event: { keyup: keyupHide }">
+<body <?php body_class('post-featured-image'); ?> data-bind="event: { keyup: keyupHide }">
     <?php if (!is_404()) : ?>
         <?php // Disabled on 404 pages. ?>
         <header class="noprint" id="header">
@@ -37,7 +37,7 @@ $placeholder = __('curdaigh', 'kaitain');
                 <?php // Empty until I have something better. ?>
                 <nav class="navrow__left text--left">
                     <button class="navrow__button navrow__button--menu conceal" id="menutoggle__nav" type="button" data-bind="click: showMenu, css: { 'navrow__button--menu--display': state.menuButton() }">
-                        <span id="search-button"class="navrow__icon menu" data-bind="css: { close: state.menuButton() && state.menu() }"></span>
+                        <span class="navrow__icon menu" data-bind="css: { close: state.menuButton() && state.menu() }"></span>
                     </button>
                 </nav>
 
@@ -63,24 +63,4 @@ $placeholder = __('curdaigh', 'kaitain');
             </nav>
 
         </header>
-        <div class="trim-block noprint">
-            <div class="advert-block adverts--banner" id="adverts--sidebar">
-                <?php if (function_exists('adrotate_group')) {
-                    printf(adrotate_group(1));
-                } ?>
-            </div>
-            <div class="stripe stripe__absolute-bottom"></div>
-        </div>
-        <div class="section--current--bg noprint" style="display:none;" id="bigsearch" data-bind="visible: state.search()">
-            <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
-                <fieldset form="bigsearch-form">
-                    <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required" data-bind="hasFocus: state.search()">
-                </fieldset>
-            </form>
-            <button class="navrow__button navrow__button--search" id="searchtoggle__search" type="button" data-bind="click: showSearch">
-                <span class="navrow__icon search" data-bind="css: { close: state.search() }"></span>
-            </button>
-        </div>
     <?php endif; ?>
-    <main class="main "id="main">
-        <div class="main__content" id="main__content">
