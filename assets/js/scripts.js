@@ -118,7 +118,7 @@
 
         self.setFocusMenu = function(data, event) {
             var $parent = $(event.target.parentNode);
-
+            console.log('Menu: ' + event);
             if (event.type === 'touchstart' && $parent.hasClass(self.menuFocusClass)) {
                 // Proceed with click if submenu was selected.
                  return true; 

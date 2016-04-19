@@ -164,7 +164,7 @@ add_action('widgets_init', function() {
             'description' => __('Top sidebar widget area (above adverts).', 'kaitain'),
             'before_widget' => '<div id="%1$s" class="widget widget--sidebar %2$s">',
             'before_title' => '<h4 class="widget--sidebar__title">',
-            'id' => 'widgets-sidebar-top',
+            'id' => 'widgets-sidebar',
         )
     );
 
