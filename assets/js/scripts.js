@@ -118,16 +118,40 @@
 
         self.setFocusMenu = function(data, event) {
             var $parent = $(event.target.parentNode);
-            console.log('Menu: ' + event);
             if (event.type === 'touchstart' && $parent.hasClass(self.menuFocusClass)) {
                 // Proceed with click if submenu was selected.
                  return true; 
             }
              
             if (!$parent.hasClass('sub-menu')) {
+                // adds class to current item and removes the class from siblings
                 $parent.addClass(self.menuFocusClass).siblings().removeClass(self.menuFocusClass);
             }
         } 
+
+        self.removeFocusMenu = function(data, event) {
+            
+            console.log("Don't Leave");
+            
+            var $parent = $(event.target.parentNode);
+            
+            // get element that mouse has moved to
+            //event.toElement || event.relatedTarget
+            console.log("mouseout toElement: " + event.toElement);
+                        
+            // check is element that mouse has moved to a sibling (i.e. a menu-item)
+              // if not the is it the parent?
+                // no? then remove all focus classes from triggering elemt and parents
+
+            console.table("is sibling: " + $parent.siblings());
+            //console.table($parent.siblings().inArray());
+            
+            // remove focus class
+            if ($parent.hasClass('sub-menu')) {
+                $parent.removeClass(self.menuFocusClass).siblings().removeClass(self.menuFocusClass);            
+            }
+
+        }
 
         /**
          * Window Size Toggle Control
@@ -173,6 +197,13 @@
         console.log(ev);
         home.toggleClass('transparent');
     });
+
+    menuItems = document.querySelectorAll('.menu-items');
+    for (i=0;i<menuItems.length;i++) {
+        menuItems[i].addEventListener("mouseout", function() {
+            console.log("MOUSE OUT!");
+        });
+    }
 
 
 })(jQuery, window, document);

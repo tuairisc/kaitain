@@ -129,6 +129,7 @@ gulp.task('js', function() {
 
 gulp.task('default', function() {
     gulp.watch(assets.css.source, ['css']);
+    gulp.watch(assets.js.source, ['js']);
 });
 
 gulp.task('dev', function() {

@@ -26,7 +26,9 @@ $author = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : ge
     </div>
     <div class="author__wrap">
         <h1 class="author__name">
-            <span class="author-link"><a class="green-link--hover" href="<?php printf(get_author_posts_url($author->ID)); ?>"><?php printf($author->display_name); ?></a></span>
+            <span class="author-link">
+                <a class="green-link--hover" href="<?php printf(get_author_posts_url($author->ID)); ?>"><?php printf($author->display_name); ?></a>
+            </span>
     </div>
 </div>
 <hr>

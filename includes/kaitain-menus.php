@@ -80,7 +80,7 @@ class Kaitain_Walker extends Walker_Nav_Menu {
 
         $binding = array(
             // Array in case I need to add more.
-            'parent' => 'data-bind="event: { mouseover: setFocusMenu, touchstart: setFocusMenu }, mouseoverBubble: false"',
+            'parent' => 'data-bind="event: { mouseover: setFocusMenu, touchstart: setFocusMenu, mouseout: removeFocusMenu }, mouseoverBubble: false"',
         );
 
         // Get category section parent.

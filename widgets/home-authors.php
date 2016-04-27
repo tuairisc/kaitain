@@ -44,9 +44,11 @@ class Kaitain_Columnist_Widget extends WP_Widget {
 
         $instance = wp_parse_args($instance, $defaults);
 
+        $exclude_users = get_option('kaitain_verboten_users');
+
         $site_users = get_users(array(
             'orderby' => 'nicename',
-            'exclude' => array(4, 37)
+            'exclude' => $exclude_users
         ));
 
         ?>
