@@ -412,11 +412,11 @@ $kaitain_social_meta = new Social_Meta(array(
     )
 ));
 
+/*
 function kaitain_youtube_embed_resize( $data , $postarr ) {
     // When updating the post, use the post id to grab and update the post_meta.
-    // Still experimenting with this. Currently it may need second update to affect changes.
-
-    // todo make a wp_options entry to set & get these dime/*nsions
+    // Still experimenting with this. 
+    // todo make a wp_options entry to set & get these dimensions
     $width = 360;
     $height = 190;
 
@@ -476,5 +476,5 @@ function kaitain_enqueque_custom_admin_scripts($hook) {
 
 }
 add_action( 'admin_enqueue_scripts', 'kaitain_enqueque_custom_admin_scripts' );
-
+*/
 ?>
