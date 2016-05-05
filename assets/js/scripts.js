@@ -134,17 +134,10 @@
             console.log("Don't Leave");
             
             var $parent = $(event.target.parentNode);
-            
-            // get element that mouse has moved to
-            //event.toElement || event.relatedTarget
-            console.log("mouseout toElement: " + event.toElement);
-                        
-            // check is element that mouse has moved to a sibling (i.e. a menu-item)
-              // if not the is it the parent?
-                // no? then remove all focus classes from triggering elemt and parents
 
-            console.table("is sibling: " + $parent.siblings());
-            //console.table($parent.siblings().inArray());
+	    if($parent.hasClass(self.menuFocusClass)) {
+		$parent.removeClass(self.menuFocusClass);
+		}
             
             // remove focus class
             if ($parent.hasClass('sub-menu')) {

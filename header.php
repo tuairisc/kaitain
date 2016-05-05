@@ -42,7 +42,7 @@ $placeholder = __('curdaigh', 'kaitain');
                 </nav>
 
                 <nav class="navrow__middle" id="home-link">
-                    <a class="navrow__home-link" id="home" rel="home" href="<?php printf(home_url()); ?>"></a> 
+                    <a class="navrow__home-link" id="home" rel="home" data-bind="css: { hideLogo: state.search() }" href="<?php printf(home_url()); ?>"></a> 
                 </nav>
 
                 <nav class="navrow__right text--center">                    
