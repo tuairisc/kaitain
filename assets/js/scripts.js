@@ -131,19 +131,11 @@
 
         self.removeFocusMenu = function(data, event) {
             
-            console.log("Don't Leave");
-            
-            var $parent = $(event.target.parentNode);
+	    var $parent = $(event.target).parents("." + self.menuFocusClass);
 
 	    if($parent.hasClass(self.menuFocusClass)) {
 		$parent.removeClass(self.menuFocusClass);
 		}
-            
-            // remove focus class
-            if ($parent.hasClass('sub-menu')) {
-                $parent.removeClass(self.menuFocusClass).siblings().removeClass(self.menuFocusClass);            
-            }
-
         }
 
         /**
@@ -186,8 +178,6 @@
     //searchButton = document.getElementsByClassName('navrow__right')[0];
 
     searchButton.addEventListener("click", function(ev){
-        console.log('click');
-        console.log(ev);
         home.toggleClass('transparent');
     });
 
