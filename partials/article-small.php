@@ -24,8 +24,8 @@ $post_classes = array(
 <article <?php post_class($post_classes); ?> id="article--small--<?php the_id(); ?>">
     <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <div class="thumbnail article--small__thumb vspace--half">
+        <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
             <?php post_image_html(get_the_ID(), 'tc_home_feature_small', true); ?>
-            <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
         </div>
         <h5 class="title article--small__title"><?php the_title(); ?></h5>
     </a>

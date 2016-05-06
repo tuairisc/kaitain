@@ -40,6 +40,7 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             // Widget defaults.
             'widget_title' => 'Site Authors',
             'author_list' => array(),
+            'all_authors_link' => 'http://example.com/authors'
         );
 
         $instance = wp_parse_args($instance, $defaults);
@@ -80,6 +81,18 @@ class Kaitain_Columnist_Widget extends WP_Widget {
                     </select>
                 </li>
             <?php endfor; ?>
+
+            <li>
+                <label for="<?php printf($this->get_field_id('all_authors_link')); ?>"><?php _e('All authors page:', 'kaitain'); ?></label>
+            </li>
+            <li>
+                <?php printf('<input id="%s" name="%s" value="%s" type="text" />',
+                    $this->get_field_id('all_authors_link'),
+                    $this->get_field_name('all_authors_link'),
+                    $instance['all_authors_link']);
+                ?>
+            </li>
+
         </ul>
         <script>
             // Set selected users. Cleaner than inline PHP.
@@ -111,6 +124,8 @@ class Kaitain_Columnist_Widget extends WP_Widget {
 
         $defaults['author_list'] = $new_defaults['author_list'];
 
+	$defaults['all_authors_link'] = $new_defaults['all_authors_link'];
+
         return $defaults;
     }
 
@@ -127,11 +142,12 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             'container' => 'widget--authors flex--four-col--div',
             'anchor' => 'green-link--hover widget--authors__author',
             'author' => 'widget--authors__author',
-            'author_name' => 'widget--authors__name text--bold',
+            'author_name' => 'widget--authors__name', //text--bold
             'avatar' => 'author-photo widget--authors__photo vspace--half'
         );
 
         $title = apply_filters('widget_title', $instance['widget_title']);
+	$link = $instance['all_authors_link'];
 
         $author_query = get_users(array(
             'include' => $instance['author_list'],
@@ -141,7 +157,10 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             printf('%s', $defaults['before_widget']);
         }
 
-        printf($defaults['before_title'] . $title . $defaults['after_title']);
+        printf('<a href="%s">%s</a>',
+		$link,
+		$defaults['before_title'] . $title . $defaults['after_title']
+	);
 
         // Wrapping interior container.
         printf('<div class="%s">', $classes['container']);
@@ -167,7 +186,7 @@ class Kaitain_Columnist_Widget extends WP_Widget {
                 $classes['avatar']
             );
 
-            printf('<h6 class="%s">%s</h6>',
+            printf('<h5 class="%s">%s</h5>',
                 // Author name.
                 $classes['author_name'],
                 $author->display_name

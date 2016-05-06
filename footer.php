@@ -20,10 +20,14 @@ global $sections;
         </div><?php // End #content ?>
         <?php if (!is_404()) {
             get_sidebar(); 
+                if( is_single() ) {
+                    echo "</div>"; // ends the div.flex-row
+                }
         } ?>
     </main><?php // End #main ?>
 
     <?php if (!is_404()) : ?>
+
         <div class="trim-block noprint">
             <div class="stripe stripe__absolute-top"></div>
             <div class="adverts--banner" id="adverts--footer">
