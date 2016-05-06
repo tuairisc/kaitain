@@ -80,7 +80,7 @@ class Kaitain_Walker extends Walker_Nav_Menu {
 
         $binding = array(
             // Array in case I need to add more.
-            'parent' => 'data-bind="event: { mouseover: setFocusMenu, touchstart: setFocusMenu, mouseout: removeFocusMenu }, mouseoverBubble: false"',
+            'parent' => 'data-bind="event: { mouseover: setFocusMenu, touchstart: setFocusMenu, mouseleave: removeFocusMenu }, mouseoverBubble: false, mouseleaveBubble: true"',
         );
 
         // Get category section parent.
@@ -88,6 +88,7 @@ class Kaitain_Walker extends Walker_Nav_Menu {
 
         // Add appropriate menu classes to a given menu item.
 
+        $item->classes[] = $classes['menu-item'];
         if ($item->object === 'category' && !$item->menu_item_parent) {
             $item->classes[] = $classes['menu-item'];
 
@@ -95,7 +96,7 @@ class Kaitain_Walker extends Walker_Nav_Menu {
                 // Add focused and current classes if the the section is current.
                 $item->classes[] = sprintf($classes['current'], $category->slug);
                 // Uncomment this line to have the section menu popout by default.
-                // $item->classes[] = $classes['focused'];
+                //$item->classes[] = $classes['focused'];
             } else {
                 // Elsewise add the hover BG class.
                 $item->classes[] = sprintf($classes['uncurrent'], $category->slug);
