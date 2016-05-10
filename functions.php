@@ -109,6 +109,8 @@ function kaitain_includes() {
         'sidebar-popular-viewcount.php',
         // Recent posts in $foo category.
         'sidebar-recent-posts.php',
+        // Front page featured recent articles
+        'home-featured-recent-articles.php',
     );
 
     $admin_includes = array(
@@ -152,6 +154,13 @@ add_action('widgets_init', function() {
     );
 
     $widget_areas = array(
+        array(
+            'name' => __('Front Page Top', 'kaitain'),
+            'description' => __('Front page top widget area.', 'kaitain'),
+            'id' => 'widgets-front-page-top',
+            'before_widget' => '<div id="%1$s" class="widget widget--home %2$s">',
+            'before_title' => '<h3 class="widget--home__title vspace--full">'
+        ),
         array(
             'name' => __('Front Page', 'kaitain'),
             'description' => __('Front page widget area.', 'kaitain'),
