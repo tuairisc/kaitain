@@ -421,6 +421,23 @@ $kaitain_social_meta = new Social_Meta(array(
     )
 ));
 
+/**
+ * Helper Functions used in theme
+ * -----------------------------------------------------------------------------
+ */
+function kaitain_excerpt($excerpt, $limit=20) {
+    $excerpt = explode(' ', $excerpt, $limit);
+    if (count($excerpt)>=$limit) {
+        array_pop($excerpt);
+        $excerpt = implode(" ",$excerpt).'...';
+    } else {
+        $excerpt = implode(" ",$excerpt);
+    } 
+    $excerpt = preg_replace('`\[[^\]]*\]`','',$excerpt);
+    return $excerpt;
+}
+
+
 /*
 function kaitain_youtube_embed_resize( $data , $postarr ) {
     // When updating the post, use the post id to grab and update the post_meta.

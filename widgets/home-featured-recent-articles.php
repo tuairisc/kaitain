@@ -106,7 +106,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                         </h4>
                         <h5 class="post-meta article--lead__meta"><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime($featured[0]->ID); ?></time></h5>
                     </header> 
-                    <p class="post-excerpt article--lead__excerpt"><?php printf($featured[0]->post_excerpt); ?></p>
+                    <p class="post-excerpt article--lead__excerpt"><?php printf(kaitain_excerpt($featured[0]->post_excerpt, 55 )); ?></p>
                 </article>
                 
             </div>
@@ -217,7 +217,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                 <div class="section-trim <?php printf($trim['bg']); ?>"></div>
                                 <?php post_image_html($featured[6]->ID, 'tc_home_feature_small', true); ?>
                             </div>
-                            <h5 class="title article--small__title"><?php printf($featured[6]->post_title); ?></h5>
+                            <h5 class="title article--small__title"><?php printf(kaitain_excerpt($featured[6]->post_title, 55)); ?></h5>
                         </a>
                     </article>
                 </div>
@@ -231,7 +231,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                 <div class="section-trim <?php printf($trim['bg']); ?>"></div>
                                 <?php post_image_html($featured[7]->ID, 'tc_home_feature_small', true); ?>
                             </div>
-                            <h5 class="title article--small__title"><?php printf($featured[7]->post_title); ?></h5>
+                            <h5 class="title article--small__title"><?php printf(kaitain_excerpt($featured[7]->post_title, 55)); ?></h5>
                         </a>
                     </article>
                 </div>
@@ -246,8 +246,16 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
         <?php       
         wp_reset_postdata();
 
+
+
+
+
+
     }
 }
+
+
+
 
 add_action('widgets_init', create_function('', 'register_widget("Kaitain_Featured_Recent_Post_Widget");'));
 
