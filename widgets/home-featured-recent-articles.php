@@ -196,7 +196,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                 <?php
                 // 6th article 
                 ?>
-                <div class="featured-50 gutter-half-right">
+                <div class="featured-50-a gutter-half-right">
                     <article class="article--small vspace--half" id="article--small--<?php the_id(); ?>">
                         <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[5]->ID); ?>">
                             <div class="thumbnail article--small__thumb vspace--half img-frame">
@@ -210,7 +210,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                 <?php
                 // 7th article 
                 ?>
-                <div class="featured-25 gutter-half-left">
+                <div class="featured-25-b gutter-half-left">
                     <article class="article--small vspace--half" id="article--small--<?php the_id(); ?>">
                         <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[6]->ID); ?>">
                             <div class="thumbnail article--small__thumb vspace--half">
@@ -224,7 +224,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                 <?php
                 // 8th article 
                 ?>
-                <div class="featured-25 gutter-half-left">
+                <div class="featured-25-c gutter-half-left">
                     <article class="article--small vspace--half" id="article--small--<?php the_id(); ?>">
                         <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[7]->ID); ?>">
                             <div class="thumbnail article--small__thumb vspace--half">
@@ -245,11 +245,6 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
 
         <?php       
         wp_reset_postdata();
-
-
-
-
-
 
     }
 }
