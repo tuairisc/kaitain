@@ -25,13 +25,16 @@ get_header();
 		'optioncount' => false, 'exclude_admin' => true,
 		'show_fullname' => false, 'hide_empty' => true,
 		'feed' => '', 'feed_image' => '', 'feed_type' => '', 'echo' => true,
-		'style' => 'list', 'html' => true, 'exclude' => '', 'include' => ''
+		'style' => 'list', 'html' => true, 'exclude' => '', 'include' => '',
+				
 	);
 	$exclude_users = get_option('kaitain_verboten_users');
 
 	$args = array(
         'orderby' => 'name', 'order' => 'ASC', 'number' => '',
-		'exclude' => $exclude_users, 'include' => ''
+		'exclude' => $exclude_users, 'include' => '',
+    //    'meta_key' => 'columnists',
+    //    'meta_compare' => 'EXISTS'
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -39,9 +42,17 @@ get_header();
 	$return = '';
 	$buff = '';
 
-	$query_args = wp_array_slice_assoc( $args, array( 'orderby', 'order', 'number', 'exclude', 'include' ) );
+	$query_args = wp_array_slice_assoc( $args, array( 'orderby', 'order', 'number', 'exclude', 'include', 
+	
+	//	'meta_key', 'meta_compare', 'meta_value'
+
+	) );
 	$query_args['fields'] = 'id';
+
+
+
 	$authors = get_users( $query_args );
+
 
 	// Trim colors based on sections
 	$trim = kaitain_section_css(get_the_category()[0]);
@@ -128,127 +139,6 @@ get_header();
 		$author_count[$row->post_author] = $row->count;
 	}
 
-	// echo "";
-	// echo "#####    Author Count:    #####     ";
-	// echo "";
-	// print_r($author_count);
-
-
-	// echo "";
-	// echo "    -=-=-=-=-  Authors  -=-=-=-=-    ";
-	// echo "";
-	// print_r($authors);
-
-
-
-	// get_users() test
-
-	// $user_args = array(
-	// 	'fields' => array('id','display_name'),
-	// );
-	
-	// $blogusers = get_users( $user_args );
-	// foreach ( $blogusers as $user ) {
-	// 	echo '<span>' . esc_html( $user->display_name ) . '</span> ';
-	// }
-
-
-	// foreach ( $authors as $author_id ) {
-	// 	//kaitain_partial('article', 'columnist');
-
-	// 		$author = get_userdata( $author_id );
-
-	// 		kaitain_avatar_background_html(
-	// 			$author->ID,
-	// 			'medium', 
-	// 			'columnist-avatar'
-	// 		);
-
-	// 		if ( $args['exclude_admin'] && 'admin' == $author->display_name ) {
-	// 		    continue;
-	// 		}
-
-	// 		$posts = isset( $author_count[$author->ID] ) ? $author_count[$author->ID] : 0;
-
-	// 		if ( ! $posts && $args['hide_empty'] ) {
-	// 		    continue;
-	// 		}
-
-	// 		if ( $args['show_fullname'] && $author->first_name && $author->last_name ) {
-	// 		    $name = "$author->first_name $author->last_name";
-	// 		} else {
-	// 		    $name = $author->display_name;
-	// 		}
-
-	// 		if ( ! $args['html'] ) {
-	// 		    $return .= $name . ', ';
-
-	// 		    continue; // No need to go further to process HTML.
-	// 		}
-
-	// 		if ( 'list' == $args['style'] ) {
-	// 		    $return .= '<li>';
-	// 		}
-
-	// 		$link = '<a href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf(__("Posts by %s"), $author->display_name) ) . '">' . $name . '</a>';
-
-
-	// 		if ( ! empty( $args['feed_image'] ) || ! empty( $args['feed'] ) ) {
-	// 		    $link .= ' ';
-	// 		    if ( empty( $args['feed_image'] ) ) {
-	// 		        $link .= '(';
-	// 		    }
-
-	// 		    $link .= '<a href="' . get_author_feed_link( $author->ID, $args['feed_type'] ) . '"';
-
-	// 		    $alt = '';
-	// 		    if ( ! empty( $args['feed'] ) ) {
-	// 		         $alt = ' alt="' . esc_attr( $args['feed'] ) . '"';
-	// 		         $name = $args['feed'];
-	// 		    }
-
-	// 		    $link .= '>';
-
-	// 		    if ( ! empty( $args['feed_image'] ) ) {
-	// 		         $link .= '<img src="' . esc_url( $args['feed_image'] ) . '" style="border: none;"' . $alt . ' />';
-	// 		    } else {
-	// 		         $link .= $name;
-	// 		    }
-
-	// 		    $link .= '</a>';
-
-	// 		    if ( empty( $args['feed_image'] ) ) {
-	// 		         $link .= ')';
-	// 		    }
-	// 		}
-
-	// 		if ( $args['optioncount'] ) {
-	// 		    $link .= ' ('. $posts . ')';
-	// 		}
-
-	// 		$return .= $link;
-	// 		$return .= ( 'list' == $args['style'] ) ? '</li>' : ', ';
-	// }
-	// $return = rtrim( $return, ', ' );
-
-	// if ( ! $args['echo'] ) {
-	//      return $return;
-	// }
-	// echo $return;
-
-
-
-
-
-// for each author in authors list use the article-columnist template
-// if (have_posts()) {
-//     while (have_posts()) {
-//     	the_post();
-//     	kaitain_partial('article', 'columnist');
-//     }
-// }
-
-//partial('pagination', 'site');
 get_footer('columnist');
 
 ?>

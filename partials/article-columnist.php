@@ -18,7 +18,6 @@ $trim = kaitain_section_css(get_the_category()[0]);
 
 
 // copied from wp_list_authors source... modified
-
 $author = get_userdata( $author_id );
 
 if ( $args['exclude_admin'] && 'admin' == $author->display_name ) {

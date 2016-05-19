@@ -153,6 +153,15 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             'include' => $instance['author_list'],
         ));
 
+        /*
+            Added this in front of the widget to bring it in line with the esired styling on time for delivery
+        */
+        ?>
+        <div class="trim-block noprint" style="height:4px; min-height:4px;">
+            <div class="stripe stripe__absolute-bottom"></div>
+        </div>
+        <?php
+
         if (!empty($defaults['before_widget'])) {
             printf('%s', $defaults['before_widget']);
         }

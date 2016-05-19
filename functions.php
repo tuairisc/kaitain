@@ -437,6 +437,83 @@ function kaitain_excerpt($excerpt, $limit=20) {
     return $excerpt;
 }
 
+/**
+ * Columnist admin options and user profile options
+ * -----------------------------------------------------------------------------
+ */
+
+
+// function kaitain_add_extra_user_column($columns) {
+//     return array_merge( $columns, 
+//               array('k_columnist' => __('List Columnist')) );
+// }
+// add_filter('manage_users_columns' , 'kaitain_add_extra_user_column');
+
+
+// function kaitain_new_modify_user_table_row( $val, $column_name, $user_id ) {
+
+//     if ($column_name == 'k_columnist') {
+//             return get_the_author_meta( 'k_columnist', $user_id );
+//     }
+// }
+// add_filter( 'manage_users_custom_column', 'kaitain_new_modify_user_table_row', 10, 3 );
+
+
+// /**
+//  * Show custom user profile fields
+//  * @param  obj $user The user object.
+//  * @return void
+//  */
+// function kaitain_custom_user_profile_fields($user) {
+
+
+// $columnist_data = get_the_author_meta( 'k_columnist', $user->ID );
+
+// // Reset to 0 if not checked
+// if ( $columnist_data != 'yes' || $columnist_data != 'no' ){
+//     $columnist_data = '0';
+// }
+
+
+// //Debug code
+// echo "<pre> Post  ";
+// var_dump($_POST['k_columnist']);
+// echo "</pre>";
+// 
+// <table class="form-table">
+// <tr>
+//     <th>    
+//         <label for="k_columnist"><?php _e('Columnist List'); 
+//     </th>
+//     <td>
+//         <input type="checkbox" name="k_columnist" id="k_columnist" value="1" 
+//         if ( $columnist_data == '1' ) {
+//             echo 'checked';
+//         }
+//          echo esc_attr( $columnist_data );
+
+//           />
+//          _e('List user on Columnist page.'); 
+//         </label>
+//     </td>
+// </tr>
+// </table>
+// 
+// }
+// add_action('show_user_profile', 'kaitain_custom_user_profile_fields');
+// add_action('edit_user_profile', 'kaitain_custom_user_profile_fields');
+
+
+// function my_save_extra_profile_fields( $user_id ) {
+
+//     if ( !current_user_can( 'edit_user', $user_id ) )
+//         return false;
+
+//     update_usermeta( $user_id, 'k_columnist', isset($_POST['k_columnist']) ? 'yes' : 'no' );
+// }
+// add_action( 'personal_options_update', 'my_save_extra_profile_fields' );
+// add_action( 'edit_user_profile_update', 'my_save_extra_profile_fields' );
+
 
 /*
 function kaitain_youtube_embed_resize( $data , $postarr ) {
@@ -489,7 +566,7 @@ function kaitain_youtube_embed_resize( $data , $postarr ) {
         return $data;
     }
 
-}
+}*/
 
 function kaitain_enqueque_custom_admin_scripts($hook) {
 
@@ -502,5 +579,5 @@ function kaitain_enqueque_custom_admin_scripts($hook) {
 
 }
 add_action( 'admin_enqueue_scripts', 'kaitain_enqueque_custom_admin_scripts' );
-*/
+
 ?>

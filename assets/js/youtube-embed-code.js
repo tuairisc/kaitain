@@ -1,5 +1,5 @@
 // Used in edit post
-/*
+
 jQuery(document).ready(
 	function(){
 		// Set the dimensions of the iframe
@@ -11,8 +11,9 @@ jQuery(document).ready(
 
 		parse = function (){ 
 			parsed = jQuery.parseHTML(input.val());
-			jQuery(parsed[0]).attr('height', height);
-			jQuery(parsed[0]).attr('width', width);
+			// jQuery(parsed[0]).attr('height', height);
+			// jQuery(parsed[0]).attr('width', width);
+			jQuery(parsed[0]).attr('style', "width: 100% !important; height:100% !important;");
 			input.attr('value', parsed[0].outerHTML);
 			console.log(input);
 		};
@@ -23,29 +24,8 @@ jQuery(document).ready(
 );
 
 
-
-
-
-width = jQuery(".article--category__thumb").css("width");
-height = jQuery(".article--category__thumb").css("height");
-
-iframeArr = jQuery(".article--category__thumb iframe");
-iframeArr.each(function(iframe) {
-	iframe.attr( "width", width );
-	iframe.attr( "height", height );
-});
-
-
-i = 0;
-width = 100;
-iframeArr = jQuery(".article--category__thumb iframe");
-iframeArr.each( function( index ){
-  console.log(i);
-  jQuery(iframeArr[index]).css( 'width' );
-  console.log('css ' +jQuery(iframeArr[index]).css( 'width' ));
-  jQuery(iframeArr[index]).attr( 'width', 200 );
-  console.log('attr ' + jQuery(iframeArr[index]).attr( 'width' ));
-  jQuery(iframeArr[index]).attr( 'width', width );
-  i++;
-});
-*/
+jQuery(document).ready(
+	function(){
+		jQuery("iframe").attr('style', "width: 100% !important; height:100% !important;");	
+	}
+);
