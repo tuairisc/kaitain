@@ -32,7 +32,7 @@ if (have_posts()) {
                     printf(adrotate_group(1));
                 } ?>
             </div>
-            <div class="stripe stripe__absolute-bottom"></div>
+            <div class="stripe stripe__absolute-bottom top-trim"></div>
         </div>
         <div class="section--current--bg noprint" style="display:none;" id="bigsearch" data-bind="visible: state.search()">
             <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
