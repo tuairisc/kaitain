@@ -174,6 +174,34 @@ add_action('widgets_init', function() {
             'before_widget' => '<div id="%1$s" class="widget widget--sidebar %2$s">',
             'before_title' => '<h4 class="widget--sidebar__title">',
             'id' => 'widgets-sidebar',
+        ),
+        array(
+            'name' => __('Advert Top Banner', 'kaitain'),
+            'description' => __('Top advert widget area.', 'kaitain'),
+            'before_widget' => '<div id="%1$s" class="widget widget--sidebar %2$s">',
+            'before_title' => '<h4 class="widget--sidebar__title">',
+            'id' => 'ad-top',
+        ),
+        array(
+            'name' => __('Advert Sidebar 1', 'kaitain'),
+            'description' => __('Sidebar adverts - Top', 'kaitain'),
+            'before_widget' => '<div id="%1$s" class="widget widget--sidebar %2$s">',
+            'before_title' => '<h4 class="widget--sidebar__title">',
+            'id' => 'ad-sidebar-1',
+        ),
+        array(
+            'name' => __('Advert Sidebar 2', 'kaitain'),
+            'description' => __('Sidebar adverts - Middle', 'kaitain'),
+            'before_widget' => '<div id="%1$s" class="widget widget--sidebar %2$s">',
+            'before_title' => '<h4 class="widget--sidebar__title">',
+            'id' => 'ad-sidebar-2',
+        ),
+        array(
+            'name' => __('Advert Sidebar 3', 'kaitain'),
+            'description' => __('Sidebar adverts - Bottom', 'kaitain'),
+            'before_widget' => '<div id="%1$s" class="widget widget--sidebar %2$s">',
+            'before_title' => '<h4 class="widget--sidebar__title">',
+            'id' => 'ad-sidebar-3',
         )
     );
 

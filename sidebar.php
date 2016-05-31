@@ -16,6 +16,21 @@
 ?>
 
 <div class="main__sidebar sidebar noprint" id="main__sidebar">
+	<?php if (!is_front_page() && is_active_sidebar('ad-sidebar-1')) : ?>
+        <div class="sidebar__widgets">
+            <?php dynamic_sidebar('ad-sidebar-1'); ?>
+        </div>
+    <?php endif; ?>
+	<?php if (is_active_sidebar('ad-sidebar-2')) : ?>
+        <div class="sidebar__widgets">
+            <?php dynamic_sidebar('ad-sidebar-2'); ?>
+        </div>
+    <?php endif; ?>
+    	<?php if (is_active_sidebar('ad-sidebar-3')) : ?>
+        <div class="sidebar__widgets">
+            <?php dynamic_sidebar('ad-sidebar-3'); ?>
+        </div>
+    <?php endif; ?>
     <?php if (is_active_sidebar('widgets-sidebar')) : ?>
         <div class="sidebar__widgets">
             <?php dynamic_sidebar('widgets-sidebar'); ?>

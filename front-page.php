@@ -28,9 +28,13 @@ $placeholder = __('curdaigh', 'kaitain');
 
  <div class="trim-block noprint">
             <div class="advert-block adverts--banner" id="adverts--sidebar">
-                <?php if (function_exists('adrotate_group')) {
-                    printf(adrotate_group(1));
-                } ?>
+
+                <?php if (is_active_sidebar('ad-top')) : ?>
+                    <div class="sidebar__widgets">
+                        <?php dynamic_sidebar('ad-top'); ?>
+                    </div>
+                <?php endif; ?>
+                
             </div>
             <div class="stripe stripe__absolute-bottom top-trim"></div>
         </div>
