@@ -240,15 +240,6 @@ class Kaitain_Recent_Posts_Container_Widget extends WP_Widget {
 
             $key = get_option('kaitain_view_counter_key');
             $column_title = apply_filters('widget_title', $columns[$i]['column_title']);
-
-            echo "<pre>";
-            var_dump( array(
-                    'post_type' => 'post',
-                    'numberposts' => $columns[$i]['column_max_posts'],
-                    'order' => 'DESC',
-                    'category' => ($columns[$i]['column_category']) ? $columns[$i]['column_category']: ''
-                ));
-            echo "</pre>";
             
             // $trans_name = 'sidebar_recent_posts_container-'.($i+1);
             // check if its cached in transient
