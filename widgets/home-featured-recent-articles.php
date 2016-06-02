@@ -249,10 +249,10 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                 </div>
             </div>
 
-            <div class="featured-top-30 col-sm-6 col-xs-6">
+            <div class="featured-top-30 col-sm-6 col-xs-12">
                 <div class="col-xs-12">
                     <?php if (is_active_sidebar('ad-sidebar-1')) : ?>
-                        <div class="sidebar__widgets">
+                        <div class="advert_sidebar">
                             <?php dynamic_sidebar('ad-sidebar-1'); ?>
                         </div>
                     <?php endif; ?>

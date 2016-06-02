@@ -111,6 +111,8 @@ function kaitain_includes() {
         'sidebar-recent-posts.php',
         // Front page featured recent articles
         'home-featured-recent-articles.php',
+        // Front page recent posts container
+        'home-recent-posts-container-widget.php',
     );
 
     $admin_includes = array(

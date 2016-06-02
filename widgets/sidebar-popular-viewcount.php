@@ -159,7 +159,7 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
 
         foreach ($popular as $index => $post) {
             setup_postdata($post);
-           kaitain_partial('article', 'sidebar');
+           kaitain_partial('article', 'popular');
         }
 
         printf('</div>');

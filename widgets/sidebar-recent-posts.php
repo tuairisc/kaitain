@@ -146,7 +146,7 @@ class Kaitain_Recent_Posts_Widget extends WP_Widget {
 
         foreach ($recent as $post) {
             setup_postdata($post);
-           kaitain_partial('article', 'sidebar');
+            kaitain_partial('article', 'sidebar');
         }
 
         printf('</div>');
