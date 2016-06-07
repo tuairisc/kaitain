@@ -132,6 +132,9 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
         $title = apply_filters('widget_title', $instance['widget_title']);
         $start_date = new DateTime();
         $start_date = $start_date->sub(new DateInterval('P' . $instance['elapsed_days'] . 'D'));
+        $before_widget = '<div id="kaitain_popular_'.$widget_id.'" class="widget widget--home widget_kaitain_popular container-fluid">';
+        $before_widget_title = '<h3 class="widget--home__title vspace--half">';
+        $widget_title = apply_filters('widget_title', $instance['widget_title']);
 
         if (!($popular = get_transient('sidebar_popular_posts'))) {
             $popular = get_posts(array(
@@ -151,11 +154,13 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
         }
 
         if (!empty($defaults['before_widget'])) {
-            printf($defaults['before_widget']);
-            printf($defaults['before_title'] . $title . $defaults['after_title']);
+            //printf($defaults['before_widget']);
+            //printf($defaults['before_title'] . $title . $defaults['after_title']);
+            echo $before_widget;
+            echo $before_widget_title . $widget_title . $defaults['after_title'];
         }
 
-        printf('<div class="popular-widget tuairisc-post-widget">');
+        printf('<div class="popular-widget tuairisc-post-widget row">');
 
         foreach ($popular as $index => $post) {
             setup_postdata($post);

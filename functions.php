@@ -456,7 +456,7 @@ $kaitain_social_meta = new Social_Meta(array(
  * -----------------------------------------------------------------------------
  */
 function kaitain_excerpt($excerpt, $limit=20) {
-    $excerpt = explode(' ', $excerpt, $limit);
+    $excerpt = explode(' ', $excerpt, $limit+1);
     if (count($excerpt)>=$limit) {
         array_pop($excerpt);
         $excerpt = implode(" ",$excerpt).'...';
@@ -608,6 +608,6 @@ function kaitain_enqueque_custom_admin_scripts($hook) {
     }
 
 }
-add_action( 'admin_enqueue_scripts', 'kaitain_enqueque_custom_admin_scripts' );
+//add_action( 'admin_enqueue_scripts', 'kaitain_enqueque_custom_admin_scripts' );
 
 ?>

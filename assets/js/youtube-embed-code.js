@@ -1,4 +1,4 @@
-// Used in edit post
+Used in edit post
 
 jQuery(document).ready(
 	function(){

@@ -175,7 +175,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                         <article class="article--small" id="article--small--<?php the_id(); ?>">
                             <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[4]->ID); ?>">
                                 <div class="section-trim <?php printf($trim['bg']); ?>"></div>
-                                    <div class="thumbnail article--small__thumb img-frame col-sm-3 col-xs-12">
+                                    <div class="thumbnail article--small__thumb img-frame col-sm-12 col-xs-12">
                                     <?php post_image_html($featured[4]->ID, 'tc_home_feature_small', true); ?>
                                 </div>
                                 <div class="title-container col-sm-9 col-xs-12">
