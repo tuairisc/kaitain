@@ -85,6 +85,13 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
         $featured = array();
         $featured = array_merge($featured, kaitain_get_featured(8, true));
 
+        $trim = array();
+        for ($i = 0; $i < count($featured); $i++) {
+            $cat_id = get_the_category($featured[$i]->ID);
+            $cat_id = $cat_id[0]->cat_ID;
+            $trim[$i] = kaitain_section_css($cat_id);
+        }
+        unset($i);
 
         // 1st large article
          ?>
@@ -93,9 +100,9 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
             <div class="featured-top-70 col-sm-6 col-xs-12">
                 <div class="col-xs-12">
                     <article <?php post_class('article--lead'); ?> id="article--lead--<?php printf($featured[0]->ID); ?>">
-                        <a class="article--lead__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[0]->ID); ?>">
+                        <a class="article--lead__link <?php printf($trim[0]['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[0]->ID); ?>">
+                            <div class="section-trim <?php printf($trim[0]['bg']); ?>"></div>
                             <div class="thumbnail article--lead__thumb img-frame">
-                                <div class="section-trim <?php printf($trim['bg']); ?>"></div>
                                 <?php post_image_html($featured[0]->ID, 'tc_home_feature_lead', true); ?>
                             </div>
                         </a>
@@ -103,6 +110,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                 <a class="article--lead__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[0]->ID); ?>">
                                     <h1 class="title article--lead__title"><?php the_title(); ?></h1>
                                 </a>
+                            <!-- Author Meta -->
                             <!--<header class="article--lead__header vspace--half">
                                  <h4 class="article--lead__author">
                                     <?php if (!kaitain_is_verboten_user($featured[0]->post_author)) : ?>
@@ -122,9 +130,9 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
             <div class="featured-top-30 col-sm-6 col-xs-12">
                 <div class="featured-side-100 col-md-12 col-sm-12 col-xs-6">
                     <article class="article--small" id="article--small--<?php printf($featured[1]->ID); ?>">
-                        <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[1]->ID); ?>">
+                        <a class="article--small__link <?php printf($trim[1]['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[1]->ID); ?>">
+                            <div class="section-trim <?php printf($trim[1]['bg']); ?>"></div>
                             <div class="thumbnail article--small__thumb img-frame">
-                                <div class="section-trim <?php printf($trim['bg']); ?>"></div>
                                 <?php post_image_html($featured[1]->ID, 'tc_home_feature_small featured-post-image-inner', true); ?>
                             </div>
                             <div class="title-container">
@@ -139,9 +147,9 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                 <div class="featured-top-30-middle">
                     <div class="featured-side-50 col-md-6 col-sm-12 col-xs-6">
                         <article class="article--small" id="article--small--<?php printf($featured[2]->ID); ?>">
-                            <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[2]->ID); ?>">
+                            <a class="article--small__link <?php printf($trim[2]['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[2]->ID); ?>">
+                                <div class="section-trim <?php printf($trim[2]['bg']); ?>"></div>
                                 <div class="thumbnail article--small__thumb img-frame ">
-                                    <div class="section-trim <?php printf($trim['bg']); ?>"></div>
                                     <?php post_image_html($featured[2]->ID, 'tc_home_feature_small featured-post-image-inner', true); ?>
                                 </div>
                                 <div class="title-container">
@@ -155,9 +163,9 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                     ?>
                     <div class="featured-side-50 col-md-6 col-sm-12 col-xs-6">
                         <article class="article--small" id="article--small--<?php printf($featured[3]->ID); ?>">
-                            <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[3]->ID); ?>">
+                            <a class="article--small__link <?php printf($trim[3]['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[3]->ID); ?>">
+                                <div class="section-trim <?php printf($trim[3]['bg']); ?>"></div>
                                 <div class="thumbnail article--small__thumb img-frame ">
-                                    <div class="section-trim <?php printf($trim['bg']); ?>"></div>
                                     <?php post_image_html($featured[3]->ID, 'tc_home_feature_small featured-post-image-inner', true); ?>
                                 </div>
                                 <div class="title-container">
@@ -173,12 +181,12 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                 <div class="featured-top-33-container">
                     <div class="featured-top-33-inner-container col-md-12 col-sm-12 col-xs-6">
                         <article class="article--small" id="article--small--<?php the_id(); ?>">
-                            <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[4]->ID); ?>">
-                                <div class="section-trim <?php printf($trim['bg']); ?>"></div>
-                                    <div class="thumbnail article--small__thumb img-frame col-sm-12 col-xs-12">
+                            <a class="article--small__link <?php printf($trim[4]['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[4]->ID); ?>">
+                                <div class="section-trim <?php printf($trim[4]['bg']); ?>"></div>
+                                <div class="thumbnail article--small__thumb img-frame col-md-3 col-sm-12 col-xs-12">
                                     <?php post_image_html($featured[4]->ID, 'tc_home_feature_small', true); ?>
                                 </div>
-                                <div class="title-container col-sm-9 col-xs-12">
+                                <div class="title-container col-md-9 col-sm-12 col-xs-12">
                                     <h6 class="title article--small__title"><?php printf($featured[4]->post_title); ?></h6>
                                 </div>
                             </a>
@@ -204,8 +212,8 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                 ?>
                 <div class="featured-50-a col-md-6 col-sm-12 col-xs-6">
                     <article class="article--small" id="article--small--<?php the_id(); ?>">
-                        <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[5]->ID); ?>">
-                            <div class="section-trim <?php printf($trim['bg']); ?>"></div>
+                        <a class="article--small__link <?php printf($trim[5]['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[5]->ID); ?>">
+                            <div class="section-trim <?php printf($trim[5]['bg']); ?>"></div>
                             <div class="thumbnail article--small__thumb img-frame col-xs-12">
                                 <?php post_image_html($featured[5]->ID, 'tc_home_feature_small', true); ?>
                             </div>
@@ -220,8 +228,8 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                 ?>
                 <div class="featured-25-b col-md-3 col-sm-6 col-xs-6">
                     <article class="article--small" id="article--small--<?php the_id(); ?>">
-                        <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[6]->ID); ?>">
-                            <div class="section-trim <?php printf($trim['bg']); ?>"></div>
+                        <a class="article--small__link <?php printf($trim[6]['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[6]->ID); ?>">
+                            <div class="section-trim <?php printf($trim[6]['bg']); ?>"></div>
                             <div class="thumbnail article--small__thumb img-frame col-xs-12">
                                 <?php post_image_html($featured[6]->ID, 'tc_home_feature_small', true); ?>
                             </div>
@@ -236,8 +244,8 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                 ?>
                 <div class="featured-25-c col-md-3 col-sm-6 col-xs-6">
                     <article class="article--small" id="article--small--<?php the_id(); ?>">
-                        <a class="article--small__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[7]->ID); ?>">
-                            <div class="section-trim <?php printf($trim['bg']); ?>"></div>
+                        <a class="article--small__link <?php printf($trim[7]['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[7]->ID); ?>">
+                            <div class="section-trim <?php printf($trim[7]['bg']); ?>"></div>
                             <div class="thumbnail article--small__thumb img-frame col-xs-12">
                                 <?php post_image_html($featured[7]->ID, 'tc_home_feature_small', true); ?>
                             </div>
