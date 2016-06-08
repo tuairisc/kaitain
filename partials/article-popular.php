@@ -24,11 +24,11 @@ $limit = 7; // words in title excerpt
 
 <article <?php post_class($post_classes); ?> id="article-popular-<?php the_id(); ?>">
     <a class="<?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
-        <div class="thumbnail article-popular-thumbnail img-frame col-md-3 col-sm-3 col-xs-4">
+        <div class="thumbnail article-popular-thumbnail img-frame col-md-3 col-sm-4 col-xs-4">
             <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>
             <!-- <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div> -->
         </div>
-        <div class="post-content article__postcontent col-md-9 col-sm-9 col-xs-8">
+        <div class="post-content article__postcontent col-md-9 col-sm-8 col-xs-8">
             <header class="article-popular-header <?php //printf($trim['bg']); ?>">
                 <h5 class="title article-popular-title vspace--quarter">
                     <?php echo kaitain_excerpt(get_the_title(), $limit); ?>

@@ -27,12 +27,12 @@ $post_classes = array(
 
 <article <?php post_class($post_classes); ?> id="article-recent-<?php the_id(); ?>">
     <a class="<?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
-        <div class="thumbnail article-recent-thumbnail img-frame">
+        <div class="archive-trim-top <?php printf($trim['bg']); ?>"></div>
+        <div class="thumbnail article-recent-thumbnail img-frame col-sm-12 col-xs-4">
             <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>
-            <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
         </div>
-        <div class="post-content article__postcontent">
-            <header class="article-recent-header <?php printf($trim['bg']); ?>">
+        <div class="post-content article__postcontent col-sm-12 col-xs-8 <?php printf($trim['bg']); ?>">
+            <header class="article-recent-header">
                 <h5 class="title article-recent-title vspace--quarter">
                     <?php the_title(); ?>
                 </h5>

@@ -236,7 +236,7 @@ class Kaitain_Recent_Posts_Container_Widget extends WP_Widget {
             $before_column = '<div id="kaitain_recent_container_'.$widget_id.'_column-'.($i+1).'" class="widget widget--home widget_kaitain_recent_container_column">';
             $before_column_title = '<h3 class="widget--home__title vspace--half">';
 
-            echo '<div class="recent-post tuairisc-post-widget col-md-3 col-sm-3 col-xs-6">';
+            echo '<div class="recent-post tuairisc-post-widget col-md-3 col-sm-3 col-xs-12 vspace--full">';
 
             $key = get_option('kaitain_view_counter_key');
             $column_title = apply_filters('widget_title', $columns[$i]['column_title']);
