@@ -211,7 +211,7 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             printf('%s', $defaults['after_widget']);
         }
 
-        printf('<hr>');
+        // printf('<hr>');
 
         wp_reset_postdata();
     }

@@ -75,7 +75,7 @@ if (!$page_number) {
     }
 }
 
-kaitain_partial('pagination', 'site');
+//kaitain_partial('pagination', 'site');
 get_footer();
 
 ?>
