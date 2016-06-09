@@ -42,9 +42,13 @@ $post_classes = array(
 
 <main class="main "id="main">
 
-
+<?php // Article title ?>
+    <h1 class="title article--full__title"><a class="green-link--hover" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+    <?php if (!is_page()) { ?>
+        <p class="article--full__excerpt"><?php printf(get_the_excerpt()); ?></p>
+    <?php } ?>
     <?php // Featured image ?>
-    <div class="thumbnail article--lead__thumb">
+    <div class="thumbnail article--lead__thumb img-frame">
         <?php post_image_html(get_the_ID(), 'tc_home_feature_lead', true); ?>
         <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
     </div>
@@ -56,11 +60,11 @@ $post_classes = array(
             <article <?php post_class($post_classes); ?> id="article--full--<?php the_ID(); ?>">
                 <header class="article--full__header">
 
-                    <?php // Article title ?>
-                    <h1 class="title article--full__title"><a class="green-link--hover" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+                    <!-- <?php // Article title ?>
+                    <h1 class="title article--full__title"><a class="green-link--hover" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1> -->
 
                     <?php if (!is_page()) : ?>
-                        <p class="article--full__excerpt"><?php printf(get_the_excerpt()); ?></p>
+                        <!-- <p class="article--full__excerpt"><?php printf(get_the_excerpt()); ?></p> -->
                         <div class="article--full__postmeta">
 
                             <div class="article--full__author">

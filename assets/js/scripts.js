@@ -193,10 +193,10 @@
     $("iframe").each(function(){
         $( this ).css('width', '100%');
         $( this ).css('height', '100%');
+        $( this ).attr('height', 184);
     });
 
     console.log('');
-
 
 })(jQuery, window, document);
 
