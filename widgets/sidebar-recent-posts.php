@@ -120,42 +120,46 @@ class Kaitain_Recent_Posts_Widget extends WP_Widget {
      */
 
     public function widget($defaults, $instance) {
-        global $post;
-        $trans_name = 'sidebar_recent_posts';
+        // Checks if the page is the homepage, if it isn't then render the widget
+        if (!is_front_page()) {
 
-        $key = get_option('kaitain_view_counter_key');
-        $title = apply_filters('widget_title', $instance['widget_title']);
+            global $post;
+            $trans_name = 'sidebar_recent_posts';
 
-        if (!($recent = get_transient($trans_name))) {
-            $recent = get_posts(array(
-                'post_type' => 'post',
-                'numberposts' => $instance['max_posts'],
-                'order' => 'DESC',
-                'category' => ($instance['category']) ? $instance['category'] : ''
-            ));
+            $key = get_option('kaitain_view_counter_key');
+            $title = apply_filters('widget_title', $instance['widget_title']);
 
-            set_transient($trans_name, $recent, get_option('kaitain_transient_timeout')); 
+            if (!($recent = get_transient($trans_name))) {
+                $recent = get_posts(array(
+                    'post_type' => 'post',
+                    'numberposts' => $instance['max_posts'],
+                    'order' => 'DESC',
+                    'category' => ($instance['category']) ? $instance['category'] : ''
+                ));
+
+                set_transient($trans_name, $recent, get_option('kaitain_transient_timeout')); 
+            }
+
+            if (!empty($defaults['before_widget'])) {
+                printf($defaults['before_widget']);
+                printf($defaults['before_title'] . $title . $defaults['after_title']);
+            }
+
+            printf('<div class="recent-widget tuairisc-post-widget">');
+
+            foreach ($recent as $post) {
+                setup_postdata($post);
+                kaitain_partial('article', 'sidebar');
+            }
+
+            printf('</div>');
+
+            if (!empty($defaults['after_widget'])) {
+                printf($defaults['after_widget']);
+            }
+
+            wp_reset_postdata();
         }
-
-        if (!empty($defaults['before_widget'])) {
-            printf($defaults['before_widget']);
-            printf($defaults['before_title'] . $title . $defaults['after_title']);
-        }
-
-        printf('<div class="recent-widget tuairisc-post-widget">');
-
-        foreach ($recent as $post) {
-            setup_postdata($post);
-            kaitain_partial('article', 'sidebar');
-        }
-
-        printf('</div>');
-
-        if (!empty($defaults['after_widget'])) {
-            printf($defaults['after_widget']);
-        }
-
-        wp_reset_postdata();
     }
 }
 

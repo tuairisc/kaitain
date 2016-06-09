@@ -15,10 +15,6 @@
 
 $trim = kaitain_section_css(get_the_category()[0]);
 
-// $post_classes = array(
-//     'article-recent', 'vspace--full', 'col-md-3', 'col-sm-3', 'col-xs-6' 
-// );
-
 $post_classes = array(
     'article-recent', 'vspace--full'
 );
