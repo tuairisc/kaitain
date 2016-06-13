@@ -13,7 +13,7 @@
  * @link       http://www.tuairisc.ie
  */
 
-class Kaitain_Gailleraithe_Widget extends WP_Widget {
+class Kaitain_Gallery_Widget extends WP_Widget {
     /**
      * Widget Constructor
      * -------------------------------------------------------------------------
@@ -21,10 +21,10 @@ class Kaitain_Gailleraithe_Widget extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('kaitain_gailleraithe_widget', 'kaitain'),
-            __('Tuairisc: Gailleraithe Widget', 'kaitain'),
+            __('kaitain_gallery_widget', 'kaitain'),
+            __('Tuairisc: Gallery Widget', 'kaitain'),
             array(
-                'description' => __('An list of recent Gailleraithe posts by date. Optionally show Featured Posts from Gailleraithe section.', 'kaitain'),
+                'description' => __('An list of recent gaileraithe posts by date. Optionally show Featured Posts from Gaileraithe section.', 'kaitain'),
             )
         );
     }
@@ -36,12 +36,14 @@ class Kaitain_Gailleraithe_Widget extends WP_Widget {
      */
 
     public function form($instance) {
+
         $defaults = array(
             // Widget defaults.
-            'widget_title' => __('Gailleraithe Widget', 'kaitain'),
+            'widget_title' => __('Gaileraithe Widget', 'kaitain'),
             'max_posts' => 10,
             'category' => 150,
-            'display_featured' => true
+            'display_featured' => true,
+            'featured_post_actions' => 0
         ); 
 
         $instance = wp_parse_args($instance, $defaults);
@@ -52,7 +54,11 @@ class Kaitain_Gailleraithe_Widget extends WP_Widget {
             'order' => 'ASC',
             'pad_counts' => 'false'
         ));
-        
+
+        global $post;
+        // Get featured posts from category with custom field (see helper function)
+        $featured = kaitain_get_featured_gallery_posts( ($instance['category']) ? $instance['category'] : '' );
+
         ?>
 
         <script>
@@ -62,7 +68,9 @@ class Kaitain_Gailleraithe_Widget extends WP_Widget {
                 $('<?php printf('#%s', $this->get_field_id("category")); ?>').val('<?php printf($instance["category"]); ?>');
                 // Set 'max_posts' selected option. 
                 $('<?php printf('#%s', $this->get_field_id("max_posts")); ?>').val('<?php printf($instance["max_posts"]); ?>');
+                // Set display featured checked or unchecked.
                 $('<?php printf('#%s', $this->get_field_id('display_featured')); ?>').prop('checked', <?php printf(($instance['display_featured']) ? 'true' : 'false'); ?>);
+
             });
         </script>
         <ul>
@@ -94,6 +102,46 @@ class Kaitain_Gailleraithe_Widget extends WP_Widget {
                 <label for="<?php printf($this->get_field_id('display_featured')); ?>"><?php _e('Display Featured Posts', 'kaitain'); ?></label>
             </li>
 
+            <?php
+            if (!empty($featured)) { ?>
+                <li>
+                    <label for="<?php printf($this->get_field_id('featured_post_actions')); ?>"><?php _e('List of featured gallery posts. Select desired action from list and click save to process.', 'kaitain'); ?></label>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Post Title
+                                </th>
+                                <th>Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $i = 0;
+                        foreach ($featured as $post) {
+                            setup_postdata($post);
+                            echo '<tr><td><a href="'.get_permalink($post->ID).'">'.kaitain_excerpt(get_the_title($post->ID), 5).'</a>';
+                            echo '</td><td>';
+                            ?>
+                            <select id="<?php printf( $this->get_field_id('featured_post_actions') ); ?>" name="<?php printf($this->get_field_name('featured_post_actions'). '[%d]', $i ); ?>">
+                                <option value="">No Action</option>
+                                <option value="<?php echo $post->ID; ?>,remove">Remove</option>
+                            </select><?php
+                            echo "</td></tr>";
+                            wp_reset_postdata();
+                            $i++;
+                        }
+                        unset($i);
+
+                        ?>
+                        </tbody>
+                    </table>
+                </li>
+            <?php
+            } else {
+                echo "<em>No featured gallery posts found.</em><p>To enable from Post screen:<ol><li>Open the Posts admin panel.</li><li>Select Gailearaithe category and click Filter.</li><li>Browse to desired post and click to edit.</li>Scroll to the Featured Gallery Post option and tick the checkbox.</li><li>Update the post.</li></ol>Any posts enabled using this method will display here, along with available options.</p>";
+            } ?>
+
         </ul>
         <?php
     }
@@ -112,6 +160,16 @@ class Kaitain_Gailleraithe_Widget extends WP_Widget {
         $options['max_posts'] = $new_args['max_posts'];
         $options['category'] = $new_args['category'];
         $options['display_featured'] = ($new_args['display_featured'] == 'on'); // returns true or false
+        
+        foreach ($new_args['featured_post_actions'] as $featured_post) {
+            $featured_post = explode(',', $featured_post);
+            if ($featured_post[1] === 'remove') {
+                update_post_meta($featured_post[0], 'featured_gallery', 'disabled');
+            }   
+            
+        }
+
+
         return $options;
     }
 
@@ -124,24 +182,24 @@ class Kaitain_Gailleraithe_Widget extends WP_Widget {
 
     public function widget($defaults, $instance) {
         global $post;
-        $trans_name = 'gailleraithe_posts_widget';
+        //$trans_name = 'gaileraithe_posts_widget';
 
         $key = get_option('kaitain_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
-	
-		// In progress
-		// Find all posts in category with 'featured' custom field option.
-		//		make generic or stick to hard coded category? (Generic is best)
-		if ( $instance['display_featured'] ) {
-			$featured = get_posts(array(
-                // 'post_type' => 'post',
-                // 'numberposts' => $instance['max_posts'],
-                // 'order' => 'DESC',
-                // 'category' => ($instance['category']) ? $instance['category'] : ''
-            ));
-		}
+        
+        // Get featured posts from category with custom field (see helper function)
+        $featured = kaitain_get_featured_gallery_posts( ($instance['category']) ? $instance['category'] : '' );
 
-		// Default get recent posts from category
+        printf('<div class="gallery-widget tuairisc-post-widget">');
+
+
+        foreach ($featured as $post) {
+            setup_postdata($post);
+            kaitain_partial('article', 'sidebar');
+            wp_reset_postdata();
+        }
+
+        // Default get recent posts from category
         if (!($recent = get_transient($trans_name))) {
             
             $recent = get_posts(array(
@@ -159,7 +217,6 @@ class Kaitain_Gailleraithe_Widget extends WP_Widget {
             printf($defaults['before_title'] . $title . $defaults['after_title']);
         }
 
-        printf('<div class="gailleraithe-widget tuairisc-post-widget">');
 
         foreach ($recent as $post) {
             setup_postdata($post);
@@ -172,10 +229,28 @@ class Kaitain_Gailleraithe_Widget extends WP_Widget {
             printf($defaults['after_widget']);
         }
 
-            wp_reset_postdata();
+        wp_reset_postdata();
     }
 }
 
-add_action('widgets_init', create_function('', 'register_widget("Kaitain_Gailleraithe_Widget");'));
+add_action('widgets_init', create_function('', 'register_widget("Kaitain_Gallery_Widget");'));
 
+// helper function
+function kaitain_get_featured_gallery_posts ($category) {
+    global $post;
+    $featured = get_posts( array(
+            'post_type' => 'post',
+            'numberposts' => -1, //$instance['max_posts'],
+            'order' => 'DESC',
+            'category' => $category,
+            'meta_query' => array(
+                array(
+                    'key'     => 'featured_gallery',
+                    'value'   => 'enabled',
+                    'compare' => 'like'
+                )
+            )
+    ));
+    return $featured;
+}
 ?>
