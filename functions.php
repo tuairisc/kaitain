@@ -103,20 +103,22 @@ function kaitain_includes() {
         'home-authors.php',
         // Front page featured and sticky article widget.
         'home-featured-articles.php',
-        // Sidebar featured category.
+        // Front page featured recent articles
+        'home-featured-recent-articles.php',
+        // Front page Gallery Widget, displays Gailleraithe category posts by date, with option for featured posts
+        'home-gallery-widget.php',
+        // Front page recent posts container
+        'home-recent-posts-container-widget.php',
+        // Home page recent posts in selected category.
+        'sidebar-recent-posts.php',
+        // Front page Video Widget, displays Videos category posts by date, with option for featured posts
+        'home-video-widget.php',
+         // Sidebar featured category.
         'sidebar-featured-category.php',
         // Popular posts, sorted by internally-tracked view count.
         'sidebar-popular-viewcount.php',
         // Recent posts in $foo category.
-        'sidebar-recent-posts.php',
-        // Front page featured recent articles
-        'home-featured-recent-articles.php',
-        // Front page recent posts container
-        'home-recent-posts-container-widget.php',
-        // Front page Gallery Widget, displays Gailleraithe category posts by date, with option for featured posts
-        'home-gallery-widget.php',
-        // Front page Video Widget, displays Videos category posts by date, with option for featured posts
-        'home-video-widget.php'
+        'sidebar-recent-posts.php'
     );
 
     $admin_includes = array(
@@ -470,6 +472,20 @@ function kaitain_excerpt($excerpt, $limit=20) {
     $excerpt = preg_replace('`\[[^\]]*\]`','',$excerpt);
     return $excerpt;
 }
+
+if (!function_exists('write_log')) {
+    function write_log ( $log )  {
+        if ( true === WP_DEBUG ) {
+            if ( is_array( $log ) || is_object( $log ) ) {
+                error_log( print_r( $log, true ) );
+            } else {
+                error_log( $log );
+            }
+        }
+    }
+}
+
+
 
 /**
  * Columnist admin options and user profile options

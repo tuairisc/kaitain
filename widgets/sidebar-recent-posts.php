@@ -40,7 +40,8 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
             // Widget defaults.
             'widget_title' => __('Úrnua', 'kaitain'),
             'max_posts' => 10,
-            'category' => 0
+            'category' => 0,
+            'widget_mode' => 'production'
         ); 
 
         $instance = wp_parse_args($instance, $defaults);
@@ -61,6 +62,9 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
                 $('<?php printf('#%s', $this->get_field_id("category")); ?>').val('<?php printf($instance["category"]); ?>');
                 // Set 'max_posts' selected option. 
                 $('<?php printf('#%s', $this->get_field_id("max_posts")); ?>').val('<?php printf($instance["max_posts"]); ?>');
+                // Set development mode or production mode radio menu checked or unchecked.
+                $('<?php printf('#%s-development', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'development' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
+                $('<?php printf('#%s-production', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'production' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
             });
         </script>
         <ul>
@@ -91,6 +95,15 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
                     } ?>
                 </select>
             </li>
+            <hr>
+            <li style="font-size: smaller;">
+                <input id="<?php printf($this->get_field_id('widget_mode').'-development'); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="development" />
+                <label for="<?php printf($this->get_field_id('widget_mode')); ?>"><?php _e('Development Mode (No transients)', 'kaitain'); ?></label>
+            </li>
+            <li style="font-size: smaller;">
+                <input id="<?php printf($this->get_field_id('widget_mode').'-production'); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="production" />
+                <label for="<?php printf($this->get_field_id('widget_mode')); ?>"><?php _e('Production Mode', 'kaitain'); ?></label>
+            </li>
         </ul>
 
         <?php
@@ -99,17 +112,18 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
     /**
      * Widget Update
      * -------------------------------------------------------------------------
-     * @param  array    $new_default       New default variables.
-     * @param  array    $old_default       Old default variables.
-     * @return array    $default           New widget settings.
+     * @param  array    $new_args       New default variables.
+     * @param  array    $old_args       Old default variables.
+     * @return array    $options        New widget settings.
      */
 
     function update($new_args, $old_args) {
-        $defaults = array();
-        $defaults['widget_title'] = strip_tags($new_args['widget_title']);
-        $defaults['max_posts'] = $new_args['max_posts'];
-        $defaults['category'] = $new_args['category'];
-        return $defaults;
+        $options = array();
+        $options['widget_title'] = strip_tags($new_args['widget_title']);
+        $options['max_posts'] = $new_args['max_posts'];
+        $options['category'] = $new_args['category'];
+        $options['widget_mode'] = $new_args['widget_mode'];
+        return $options;
     }
 
     /**
@@ -124,7 +138,18 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
         if (!is_front_page()) {
 
             global $post;
-            $trans_name = 'sidebar_recent_posts';
+
+            // Check widget mode
+            if ( 'development' === $instance['widget_mode'] ) {
+                if (function_exists('write_log')) {
+                    write_log("Home Gallery Widget debug:");
+                    write_log($instance);
+                }
+            }
+            else if ( 'production' ===  $instance['widget_mode'] ) {
+            // In production mode, set up transients for caching/speed.
+                $trans_name = 'recent_posts_sidebar';
+            }
 
             $key = get_option('kaitain_view_counter_key');
             $title = apply_filters('widget_title', $instance['widget_title']);

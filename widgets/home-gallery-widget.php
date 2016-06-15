@@ -43,7 +43,8 @@ class Kaitain_Gallery_Widget extends WP_Widget {
             'max_posts' => 10,
             'category' => 150,
             'display_featured' => true,
-            'featured_post_actions' => 0
+            'featured_post_actions' => 0,
+            'widget_mode' => 'production',
         ); 
 
         $instance = wp_parse_args($instance, $defaults);
@@ -57,7 +58,7 @@ class Kaitain_Gallery_Widget extends WP_Widget {
 
         global $post;
         // Get featured posts from category with custom field (see helper function)
-        $featured = kaitain_get_featured_gallery_posts( ($instance['category']) ? $instance['category'] : '' );
+        $featured = kaitain_get_featured_gallery_posts( $instance['max_posts'], ($instance['category']) ? $instance['category'] : '' );
 
         ?>
 
@@ -70,8 +71,9 @@ class Kaitain_Gallery_Widget extends WP_Widget {
                 $('<?php printf('#%s', $this->get_field_id("max_posts")); ?>').val('<?php printf($instance["max_posts"]); ?>');
                 // Set display featured checked or unchecked.
                 $('<?php printf('#%s', $this->get_field_id('display_featured')); ?>').prop('checked', <?php printf(($instance['display_featured']) ? 'true' : 'false'); ?>);
-                 // Set development mode or production mode radio menu checked or unchecked.
-                $('<?php printf('#%s', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(($instance['widget_mode']) ? 'true' : 'false'); ?>);
+                // Set development mode or production mode radio menu checked or unchecked.
+                $('<?php printf('#%s-development', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'development' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
+                $('<?php printf('#%s-production', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'production' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
             });
         </script>
         <ul>
@@ -144,13 +146,16 @@ class Kaitain_Gallery_Widget extends WP_Widget {
                 echo "<em>No featured gallery posts found.</em><p>To enable from Posts menu:<ol><li>Open the Posts admin panel.</li><li>Select Gailearaithe category and click Filter.</li><li>Browse to desired post and click Edit.</li>Scroll to the Featured Gallery Post option and tick the checkbox.</li><li>Update the post.</li></ol>Any posts enabled using this method will display here, along with available options.</p>";
             } ?>
 
-<!--            <li>
-                <input id="<?php printf($this->get_field_id('widget_mode')); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="development" />
-                <label for="<?php printf($this->get_field_id('widget_mode')); ?>"><?php _e('Development Mode (No caching)', 'kaitain'); ?></label>
-                <input id="<?php printf($this->get_field_id('widget_mode')); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="production" />
+            <hr>
+            <li style="font-size: smaller;">
+                <input id="<?php printf($this->get_field_id('widget_mode').'-development'); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="development" />
+                <label for="<?php printf($this->get_field_id('widget_mode')); ?>"><?php _e('Development Mode (No transients)', 'kaitain'); ?></label>
+            </li>
+            <li style="font-size: smaller;">
+                <input id="<?php printf($this->get_field_id('widget_mode').'-production'); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="production" />
                 <label for="<?php printf($this->get_field_id('widget_mode')); ?>"><?php _e('Production Mode', 'kaitain'); ?></label>
             </li>
--->
+
         </ul>
         <?php
     }
@@ -175,8 +180,9 @@ class Kaitain_Gallery_Widget extends WP_Widget {
             if ($featured_post[1] === 'remove') {
                 update_post_meta($featured_post[0], 'featured_gallery', 'disabled');
             }   
-            
         }
+
+        $options['widget_mode'] = $new_args['widget_mode'];
 
 
         return $options;
@@ -191,13 +197,24 @@ class Kaitain_Gallery_Widget extends WP_Widget {
 
     public function widget($defaults, $instance) {
         global $post;
-        //$trans_name = 'gallery_posts_widget';
+
+        // Check widget mode
+        if ( 'development' === $instance['widget_mode'] ) {
+            if (function_exists('write_log')) {
+                write_log("Home Gallery Widget debug:");
+                write_log($instance);
+            }
+        }
+        else if ( 'production' ===  $instance['widget_mode'] ) {
+        // In production mode, set up transients for caching/speed.
+            $trans_name = 'gallery_posts_widget';
+        }
 
         $key = get_option('kaitain_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
         
         // Get featured posts from category with custom field (see helper function)
-        $featured = kaitain_get_featured_gallery_posts( ($instance['category']) ? $instance['category'] : '' );
+        $featured = kaitain_get_featured_gallery_posts( $instance['max_posts'], ($instance['category']) ? $instance['category'] : '' );
 
         printf('<div class="gallery-widget tuairisc-post-widget">');
 
@@ -245,11 +262,11 @@ class Kaitain_Gallery_Widget extends WP_Widget {
 add_action('widgets_init', create_function('', 'register_widget("Kaitain_Gallery_Widget");'));
 
 // helper function
-function kaitain_get_featured_gallery_posts ($category) {
+function kaitain_get_featured_gallery_posts ($numberposts, $category) {
     global $post;
     $featured = get_posts( array(
             'post_type' => 'post',
-            'numberposts' => -1, //$instance['max_posts'],
+            'numberposts' => $numberposts,
             'order' => 'DESC',
             'category' => $category,
             'meta_query' => array(

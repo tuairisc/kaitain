@@ -142,45 +142,48 @@ class Kaitain_Recent_Posts_Container_Widget extends WP_Widget {
             <?php
             for ($i = 0 ; $i < count($columns); $i++) {
             ?>
-                <div class="widget-title">
+
+                <div class="widget-title widget-top" style="margin-top: 8px;">
                     <h4><?php echo "Column #".($i+1);
                     echo ": ".$columns[$i]['column_title'];
                     ?></h4>
                 </div>
-                <!-- column title -->
-                <li>
-                    <label for="<?php echo $widget_string."[columns][".$i."][column_title]"; ?>">
-                        <?php _e('Column title:', 'kaitain'); ?>
-                    </label>
-                    <input  id="<?php echo $widget_string."[columns][".$i."][column_title]"; ?>"
-                            name="<?php echo $widget_string."[columns][".$i."][column_title]"; ?>"
-                            value="<?php echo $columns[$i]['column_title']; ?>"
-                            type="text"
-                            class="widefat" />
-                </li>
+                <div class="widget-inside" style="display:block;">
+                    <!-- column title -->
+                    <li>
+                        <label for="<?php echo $widget_string."[columns][".$i."][column_title]"; ?>">
+                            <?php _e('Column title:', 'kaitain'); ?>
+                        </label>
+                        <input  id="<?php echo $widget_string."[columns][".$i."][column_title]"; ?>"
+                                name="<?php echo $widget_string."[columns][".$i."][column_title]"; ?>"
+                                value="<?php echo $columns[$i]['column_title']; ?>"
+                                type="text"
+                                class="widefat" />
+                    </li>
 
-                <!-- column category -->
-                <li>
-                    <label for="<?php echo $widget_string."[columns][".$i."][column_category]"; ?>"><?php _e('Category:', 'kaitain'); ?></label>
-                    <select id="<?php echo  $widget_string."[columns][".$i."][column_category]"; ?>" name="<?php echo  $widget_string."[columns][".$i."][column_category]"; ?>">
-                        <option value="0"><?php _e('All', 'kaitain'); ?></option>
+                    <!-- column category -->
+                    <li>
+                        <label for="<?php echo $widget_string."[columns][".$i."][column_category]"; ?>"><?php _e('Category:', 'kaitain'); ?></label>
+                        <select id="<?php echo  $widget_string."[columns][".$i."][column_category]"; ?>" name="<?php echo  $widget_string."[columns][".$i."][column_category]"; ?>">
+                            <option value="0"><?php _e('All', 'kaitain'); ?></option>
 
-                        <?php foreach ($categories as $category) {
-                            // Iterate through all caterories. 
-                            printf('<option value="%d">%s (%d)</option>', $category->cat_ID, $category->cat_name, $category->category_count);
-                        }  ?>
-                    </select>
-                </li>
+                            <?php foreach ($categories as $category) {
+                                // Iterate through all caterories. 
+                                printf('<option value="%d">%s (%d)</option>', $category->cat_ID, $category->cat_name, $category->category_count);
+                            }  ?>
+                        </select>
+                    </li>
 
-                <!-- column posts to display -->
-                <li>
-                    <label for="<?php echo $widget_string."[columns][".$i."][column_max_posts]"; ?>"><?php _e('Number of posts to display:', 'kaitain'); ?></label>
-                    <select id="<?php echo $widget_string."[columns][".$i."][column_max_posts]"; ?>" name="<?php echo $widget_string."[columns][".$i."][column_max_posts]"; ?>">
-                        <?php for ($j = 1; $j <= $defaults['max_posts']; $j++) {
-                            printf('<option value="%d">%d</option>', $j, $j);
-                        } ?>
-                    </select>
-                </li>
+                    <!-- column posts to display -->
+                    <li>
+                        <label for="<?php echo $widget_string."[columns][".$i."][column_max_posts]"; ?>"><?php _e('Number of posts to display:', 'kaitain'); ?></label>
+                        <select id="<?php echo $widget_string."[columns][".$i."][column_max_posts]"; ?>" name="<?php echo $widget_string."[columns][".$i."][column_max_posts]"; ?>">
+                            <?php for ($j = 1; $j <= $defaults['max_posts']; $j++) {
+                                printf('<option value="%d">%d</option>', $j, $j);
+                            } ?>
+                        </select>
+                    </li>
+                </div>
                 <?php 
             }; // end foreach
             ?>

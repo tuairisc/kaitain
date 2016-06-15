@@ -40,7 +40,8 @@ class Kaitain_Recent_Posts_Widget extends WP_Widget {
             // Widget defaults.
             'widget_title' => __('Recent Posts', 'kaitain'),
             'max_posts' => 10,
-            'category' => 0
+            'category' => 0,
+            'widget_mode' => 'production'
         ); 
 
         $instance = wp_parse_args($instance, $defaults);
@@ -61,6 +62,9 @@ class Kaitain_Recent_Posts_Widget extends WP_Widget {
                 $('<?php printf('#%s', $this->get_field_id("category")); ?>').val('<?php printf($instance["category"]); ?>');
                 // Set 'max_posts' selected option. 
                 $('<?php printf('#%s', $this->get_field_id("max_posts")); ?>').val('<?php printf($instance["max_posts"]); ?>');
+                // Set development mode or production mode radio menu checked or unchecked.
+                $('<?php printf('#%s-development', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'development' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
+                $('<?php printf('#%s-production', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'production' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
             });
         </script>
         <ul>
@@ -91,6 +95,15 @@ class Kaitain_Recent_Posts_Widget extends WP_Widget {
                     } ?>
                 </select>
             </li>
+            <hr>
+            <li style="font-size: smaller;">
+                <input id="<?php printf($this->get_field_id('widget_mode').'-development'); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="development" />
+                <label for="<?php printf($this->get_field_id('widget_mode')); ?>"><?php _e('Development Mode (No transients)', 'kaitain'); ?></label>
+            </li>
+            <li style="font-size: smaller;">
+                <input id="<?php printf($this->get_field_id('widget_mode').'-production'); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="production" />
+                <label for="<?php printf($this->get_field_id('widget_mode')); ?>"><?php _e('Production Mode', 'kaitain'); ?></label>
+            </li>
         </ul>
 
         <?php
@@ -120,11 +133,22 @@ class Kaitain_Recent_Posts_Widget extends WP_Widget {
      */
 
     public function widget($defaults, $instance) {
-        // Checks if the page is the homepage, if it isn't then render the widget
-        if (!is_front_page()) {
+        // Checks if the page is the front page
+        if (is_front_page()) {
 
             global $post;
-            $trans_name = 'recent_posts';
+
+            // Check widget mode
+            if ( 'development' === $instance['widget_mode'] ) {
+                if (function_exists('write_log')) {
+                    write_log("Home Recent Posts debug:");
+                    write_log($instance);
+                }
+            }
+            else if ( 'production' ===  $instance['widget_mode'] ) {
+            // In production mode, set up transients for caching/speed.
+                $trans_name = 'recent_posts_home';
+            }
 
             $key = get_option('kaitain_view_counter_key');
             $title = apply_filters('widget_title', $instance['widget_title']);
