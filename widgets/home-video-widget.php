@@ -13,7 +13,7 @@
  * @link       http://www.tuairisc.ie
  */
 
-class Kaitain_Gallery_Widget extends WP_Widget {
+class Kaitain_Video_Widget extends WP_Widget {
     /**
      * Widget Constructor
      * -------------------------------------------------------------------------
@@ -21,10 +21,10 @@ class Kaitain_Gallery_Widget extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('kaitain_gallery_widget', 'kaitain'),
-            __('Tuairisc: Gallery Widget', 'kaitain'),
+            __('kaitain_video_widget', 'kaitain'),
+            __('Tuairisc: Video Widget', 'kaitain'),
             array(
-                'description' => __('An list of recent gaileraithe posts by date. Optionally show Featured Posts from Gaileraithe section.', 'kaitain'),
+                'description' => __('An list of recent gaileraithe posts by date. Optionally show Featured Posts from Físeáin section.', 'kaitain'),
             )
         );
     }
@@ -39,7 +39,7 @@ class Kaitain_Gallery_Widget extends WP_Widget {
 
         $defaults = array(
             // Widget defaults.
-            'widget_title' => __('Gaileraithe Widget', 'kaitain'),
+            'widget_title' => __('Físeáin Widget', 'kaitain'),
             'max_posts' => 10,
             'category' => 150,
             'display_featured' => true,
@@ -57,7 +57,7 @@ class Kaitain_Gallery_Widget extends WP_Widget {
 
         global $post;
         // Get featured posts from category with custom field (see helper function)
-        $featured = kaitain_get_featured_gallery_posts( ($instance['category']) ? $instance['category'] : '' );
+        $featured = kaitain_get_featured_video_posts( ($instance['category']) ? $instance['category'] : '' );
 
         ?>
 
@@ -106,7 +106,7 @@ class Kaitain_Gallery_Widget extends WP_Widget {
             <?php
             if (!empty($featured)) { ?>
                 <li>
-                    <label for="<?php printf($this->get_field_id('featured_post_actions')); ?>"><?php _e('List of featured gallery posts. Select desired action from list and click save to process.', 'kaitain'); ?></label>
+                    <label for="<?php printf($this->get_field_id('featured_post_actions')); ?>"><?php _e('List of featured video posts. Select desired action from list and click save to process.', 'kaitain'); ?></label>
                     <table>
                         <thead>
                             <tr>
@@ -141,7 +141,7 @@ class Kaitain_Gallery_Widget extends WP_Widget {
                 </li>
             <?php
             } else {
-                echo "<em>No featured gallery posts found.</em><p>To enable from Posts menu:<ol><li>Open the Posts admin panel.</li><li>Select Gailearaithe category and click Filter.</li><li>Browse to desired post and click Edit.</li>Scroll to the Featured Gallery Post option and tick the checkbox.</li><li>Update the post.</li></ol>Any posts enabled using this method will display here, along with available options.</p>";
+                echo "<em>No featured video posts found.</em><p>To enable from Posts menu:<ol><li>Open the Posts admin panel.</li><li>Select Gailearaithe category and click Filter.</li><li>Browse to desired post and click Edit.</li>Scroll to the Featured video Post option and tick the checkbox.</li><li>Update the post.</li></ol>Any posts enabled using this method will display here, along with available options.</p>";
             } ?>
 
 <!--            <li>
@@ -173,7 +173,7 @@ class Kaitain_Gallery_Widget extends WP_Widget {
         foreach ($new_args['featured_post_actions'] as $featured_post) {
             $featured_post = explode(',', $featured_post);
             if ($featured_post[1] === 'remove') {
-                update_post_meta($featured_post[0], 'featured_gallery', 'disabled');
+                update_post_meta($featured_post[0], 'featured_video', 'disabled');
             }   
             
         }
@@ -191,15 +191,15 @@ class Kaitain_Gallery_Widget extends WP_Widget {
 
     public function widget($defaults, $instance) {
         global $post;
-        //$trans_name = 'gallery_posts_widget';
+        $trans_name = 'video_posts_widget';
 
         $key = get_option('kaitain_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
         
         // Get featured posts from category with custom field (see helper function)
-        $featured = kaitain_get_featured_gallery_posts( ($instance['category']) ? $instance['category'] : '' );
+        $featured = kaitain_get_featured_video_posts( ($instance['category']) ? $instance['category'] : '' );
 
-        printf('<div class="gallery-widget tuairisc-post-widget">');
+        printf('<div class="video-widget tuairisc-post-widget">');
 
 
         foreach ($featured as $post) {
@@ -209,7 +209,7 @@ class Kaitain_Gallery_Widget extends WP_Widget {
         }
 
         // Default get recent posts from category
-        //if (!($recent = get_transient($trans_name))) {
+        if (!($recent = get_transient($trans_name))) {
             
             $recent = get_posts(array(
                 'post_type' => 'post',
@@ -219,7 +219,7 @@ class Kaitain_Gallery_Widget extends WP_Widget {
             ));
 
             set_transient($trans_name, $recent, get_option('kaitain_transient_timeout')); 
-        //}
+        }
 
         if (!empty($defaults['before_widget'])) {
             printf($defaults['before_widget']);
@@ -242,10 +242,10 @@ class Kaitain_Gallery_Widget extends WP_Widget {
     }
 }
 
-add_action('widgets_init', create_function('', 'register_widget("Kaitain_Gallery_Widget");'));
+add_action('widgets_init', create_function('', 'register_widget("Kaitain_video_Widget");'));
 
 // helper function
-function kaitain_get_featured_gallery_posts ($category) {
+function kaitain_get_featured_video_posts ($category) {
     global $post;
     $featured = get_posts( array(
             'post_type' => 'post',
@@ -254,7 +254,7 @@ function kaitain_get_featured_gallery_posts ($category) {
             'category' => $category,
             'meta_query' => array(
                 array(
-                    'key'     => 'featured_gallery',
+                    'key'     => 'featured_video',
                     'value'   => 'enabled',
                     'compare' => 'like'
                 )

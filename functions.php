@@ -114,7 +114,9 @@ function kaitain_includes() {
         // Front page recent posts container
         'home-recent-posts-container-widget.php',
         // Front page Gallery Widget, displays Gailleraithe category posts by date, with option for featured posts
-        'home-gallery-widget.php'
+        'home-gallery-widget.php',
+        // Front page Video Widget, displays Videos category posts by date, with option for featured posts
+        'home-video-widget.php'
     );
 
     $admin_includes = array(

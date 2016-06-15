@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Single Article
+ * Template Name: Full Width Article with Featured Image
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Kaitain
- * @author     Mark Grealish <mark@bhalash.com>
+ * @author     Darren Kearney <info@educatedmachine.com>
  * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0

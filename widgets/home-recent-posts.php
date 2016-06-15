@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Sidebar Recent Website Posts
+ * Recent Website Posts
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Kaitain
@@ -13,7 +13,7 @@
  * @link       http://www.tuairisc.ie
  */
 
-class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
+class Kaitain_Recent_Posts_Widget extends WP_Widget {
     /**
      * Widget Constructor
      * -------------------------------------------------------------------------
@@ -38,7 +38,7 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
     public function form($instance) {
         $defaults = array(
             // Widget defaults.
-            'widget_title' => __('Úrnua', 'kaitain'),
+            'widget_title' => __('Recent Posts', 'kaitain'),
             'max_posts' => 10,
             'category' => 0
         ); 
@@ -124,7 +124,7 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
         if (!is_front_page()) {
 
             global $post;
-            $trans_name = 'sidebar_recent_posts';
+            $trans_name = 'recent_posts';
 
             $key = get_option('kaitain_view_counter_key');
             $title = apply_filters('widget_title', $instance['widget_title']);
@@ -163,6 +163,6 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
     }
 }
 
-add_action('widgets_init', create_function('', 'register_widget("Kaitain_Recent_Posts_Sidebar_Widget");'));
+add_action('widgets_init', create_function('', 'register_widget("Kaitain_Recent_Posts_Widget");'));
 
 ?>
