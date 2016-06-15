@@ -70,7 +70,8 @@ class Kaitain_Gallery_Widget extends WP_Widget {
                 $('<?php printf('#%s', $this->get_field_id("max_posts")); ?>').val('<?php printf($instance["max_posts"]); ?>');
                 // Set display featured checked or unchecked.
                 $('<?php printf('#%s', $this->get_field_id('display_featured')); ?>').prop('checked', <?php printf(($instance['display_featured']) ? 'true' : 'false'); ?>);
-
+                 // Set development mode or production mode radio menu checked or unchecked.
+                $('<?php printf('#%s', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(($instance['widget_mode']) ? 'true' : 'false'); ?>);
             });
         </script>
         <ul>
@@ -117,6 +118,7 @@ class Kaitain_Gallery_Widget extends WP_Widget {
                         </thead>
                         <tbody>
                         <?php
+
                         $i = 0;
                         foreach ($featured as $post) {
                             setup_postdata($post);
@@ -139,9 +141,16 @@ class Kaitain_Gallery_Widget extends WP_Widget {
                 </li>
             <?php
             } else {
-                echo "<em>No featured gallery posts found.</em><p>To enable from Post screen:<ol><li>Open the Posts admin panel.</li><li>Select Gailearaithe category and click Filter.</li><li>Browse to desired post and click to edit.</li>Scroll to the Featured Gallery Post option and tick the checkbox.</li><li>Update the post.</li></ol>Any posts enabled using this method will display here, along with available options.</p>";
+                echo "<em>No featured gallery posts found.</em><p>To enable from Posts menu:<ol><li>Open the Posts admin panel.</li><li>Select Gailearaithe category and click Filter.</li><li>Browse to desired post and click Edit.</li>Scroll to the Featured Gallery Post option and tick the checkbox.</li><li>Update the post.</li></ol>Any posts enabled using this method will display here, along with available options.</p>";
             } ?>
 
+<!--            <li>
+                <input id="<?php printf($this->get_field_id('widget_mode')); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="development" />
+                <label for="<?php printf($this->get_field_id('widget_mode')); ?>"><?php _e('Development Mode (No caching)', 'kaitain'); ?></label>
+                <input id="<?php printf($this->get_field_id('widget_mode')); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="production" />
+                <label for="<?php printf($this->get_field_id('widget_mode')); ?>"><?php _e('Production Mode', 'kaitain'); ?></label>
+            </li>
+-->
         </ul>
         <?php
     }
@@ -182,7 +191,7 @@ class Kaitain_Gallery_Widget extends WP_Widget {
 
     public function widget($defaults, $instance) {
         global $post;
-        //$trans_name = 'gaileraithe_posts_widget';
+        $trans_name = 'gallery_posts_widget';
 
         $key = get_option('kaitain_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
