@@ -137,7 +137,7 @@ function kaitain_is_featured_post($post) {
  * -----------------------------------------------------------------------------
  * @param   int/object      $post       Post object.
  * @param   bool            $feature    Make post featured.
- * @reutrn  array           $featured   Array of all featured posts.
+ * @return  array           $featured   Array of all featured posts.
  */
 
 function kaitain_update_featured_posts($post = null, $make_featured = true) {

@@ -41,6 +41,7 @@ function kaitain_featured_box_content($post) {
     // These three values will be echoed out as JavaScript variables.
     $is_featured = kaitain_is_featured_post($post);
     $is_sticky = false;
+    $is_sticky = kaitain_is_post_sticky($post);
     $expiry = false;
 
     if ($is_featured) {
@@ -56,16 +57,7 @@ function kaitain_featured_box_content($post) {
             }
         }
     }
-
     ?>
-
-    <script>
-        var postmetaFeatured = {
-            featured: <?php printf('%s', $is_featured ? 'true' : 'false'); ?>,
-            sticky: <?php printf('%s', $is_sticky ? 'true' : 'false'); ?>,
-            expiry: <?php printf('%u', $expiry); ?>
-        };
-    </script>
 
     <p>
         <?php _e('Featured posts are displayed on the website\'s homepage in the lead articles widget.', 'kaitain'); ?>
@@ -78,19 +70,29 @@ function kaitain_featured_box_content($post) {
                 <label for="kaitain-featured-checkbox"><?php _e('Feature Post', 'kaitain'); ?></label>
             </fieldset>
         </li>
-        <li class="kaitain-stickycheck">
+        <li class="kaitain-stickycheck6">
             <fieldset>
                 <input id="kaitain-sticky-checkbox" name="make_sticky" type="checkbox">
-                <label for="meta-kaitain-sticky"><?php _e('Sticky Post', 'kaitain'); ?></label>
+                <label for="kaitain-sticky-checkbox"><?php _e('Sticky Post', 'kaitain'); ?></label>
             </fieldset>
         </li>
         <li class="kaitain-sticky-expiryinfo" id="kaitain-sticky-expiry">
             <?php // Inputs are added and set via JS. ?>
         </li>
+        <p class="kaitain-sticky-expiryinfo" id="meta-kaitain-sticky-info">
+            <em><?php _e('A sticky post will remain in the top position on the front page until either the set time passes, or another post is set to replace it.', 'kaitain'); ?></em>
+        </p>   
     </ul>
-    <p class="kaitain-sticky-expiryinfo" id="meta-kaitain-sticky-info">
-        <em><?php _e('A sticky post will remain in the top position on the front page until either the set time passes, or another post is set to replace it.', 'kaitain'); ?></em>
-   </p>
+    
+    <script>
+        var postmetaFeatured = {
+            featured: <?php printf('%s', $is_featured ? 'true' : 'false'); ?>,
+            sticky: <?php printf('%s', $is_sticky ? 'true' : 'false'); ?>,
+            expiry: <?php printf('%u', $expiry); ?>
+        };
+        jQuery('#kaitain-featured-checkbox').prop('checked', postmetaFeatured['featured'] );
+        jQuery('#kaitain-sticky-checkbox').prop('checked', postmetaFeatured['sticky'] );
+    </script>
 
     <?php
 }

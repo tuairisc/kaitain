@@ -618,7 +618,7 @@ function kaitain_youtube_embed_resize( $data , $postarr ) {
 
 }*/
 
-function kaitain_enqueque_custom_admin_scripts($hook) {
+function kaitain_enqueue_custom_admin_scripts($hook) {
 
     if ( 'post.php' != $hook ) {
         error_log( "!= post.php" );
@@ -628,6 +628,6 @@ function kaitain_enqueque_custom_admin_scripts($hook) {
     }
 
 }
-//add_action( 'admin_enqueue_scripts', 'kaitain_enqueque_custom_admin_scripts' );
+//add_action( 'admin_enqueue_scripts', 'kaitain_enqueue_custom_admin_scripts' );
 
 ?>

@@ -42,7 +42,18 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
         ); 
 
         $instance = wp_parse_args($instance, $defaults);
-        
+
+        $featured = array();
+        $featured_list = kaitain_get_featured_list(false);
+        //$sticky_id = kaitain_get_sticky_id();
+        $featured = get_posts(array(
+                        'numberposts' => -1,
+                        'post_status' => 'publish',
+                        'post__in' => $featured_list,
+                        'orderby' => 'date',
+                        'order' => 'DESC',
+                       // 'exclude' => array($sticky_id)
+                    ));
         ?>
         <p>Enabling this widget will insert the Featured Recent Posts into the selected widget area.</p>
         <ul>
@@ -52,6 +63,54 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                     <?php printf('<option value="%s">%s</option>', $defaults['count'], $defaults['count']); ?>
                 </select>
             </li>
+        <?php
+        if (!empty($featured)) { ?>
+            <hr>
+            <li>
+                <table>
+                    <caption>
+                    <label for="<?php printf($this->get_field_id('featured_post_actions')); ?>" style="text-align:left;"><?php _e('<p>This table is a list of current featured posts.<br/>Select action and click Save to process.</p>', 'kaitain');?></label>
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th>Pos.
+                            </th>
+                            <th>Post Title
+                            </th>
+                            <th>Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+
+                    $i = 0;
+                    foreach ($featured as $post) {
+                        setup_postdata($post);
+                        echo '<tr><td>'.($i+1).'</td>';
+                        echo '<td><a href="'.get_permalink($post->ID).'">'.kaitain_excerpt(get_the_title($post->ID), 5).'</a>';
+                        echo '</td><td>';
+                        ?>
+                        <select id="<?php printf( $this->get_field_id('featured_post_actions') ); ?>" name="<?php printf($this->get_field_name('featured_post_actions'). '[%d]', $i ); ?>">
+                            <option value="">No Action</option>
+                            <option value="<?php echo $post->ID; ?>,remove">Remove</option>
+                        </select><?php
+                        echo "</td></tr>";
+                        wp_reset_postdata();
+                        $i++;
+                    }
+                    unset($i);
+
+                    ?>
+                    </tbody>
+                </table>
+            </li>
+        <?php
+        } else {
+            echo "<em>No featured gallery posts found.</em><p>To enable from Posts menu:<ol><li>Open the Posts admin panel.</li><li>Select Gailearaithe category and click Filter.</li><li>Browse to desired post and click Edit.</li>Scroll to the Featured Gallery Post option and tick the checkbox.</li><li>Update the post.</li></ol>Any posts enabled using this method will display here, along with available options.</p>";
+        } 
+
+        ?>
         </ul>
         <?php
     }
@@ -85,6 +144,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
         $featured = array();
         $featured = array_merge($featured, kaitain_get_featured(8, true));
 
+        // Set trim colour for each post
         $trim = array();
         for ($i = 0; $i < count($featured); $i++) {
             $cat_id = get_the_category($featured[$i]->ID);
@@ -96,6 +156,30 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
         // 1st large article
          ?>
     <div class="container-fluid">
+    <?php
+    /////////////////////////////
+    //  DEBUG
+    /////////////////////////////
+    //echo "<pre>";
+    // print_r(kaitain_get_featured_list(false));
+    // $test = kaitain_get_featured(8, true);
+    // foreach ($test as $feature) {
+    //     print_r($feature->ID." ".$feature->post_title);
+    //     echo "\r\n";
+    // }
+    //echo "Featured Global: ";
+    // print_r get_option( $GLOBALS['kaitain_featured_keys']['featured']);
+    // print_r(kaitain_get_featured(8, true));
+    //echo "</pre>";
+    //highlight_string( '<?php ' . var_export( get_option( $GLOBALS['kaitain_featured_keys']['featured']), true) . ' ');
+    //foreach ($featured as $f) {
+    //   print_r( $f->ID . ' ' );
+    //}?>
+    <?
+    /////////////////////////////
+    //  DEBUG END
+    /////////////////////////////
+    ?>
         <div class="featured-top-row-1 row">
             <div class="featured-top-70 col-sm-6 col-xs-12">
                 <div class="col-xs-12">
