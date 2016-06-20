@@ -165,7 +165,7 @@ class Kaitain_Gallery_Widget extends WP_Widget {
      * -------------------------------------------------------------------------
      * @param  array    $new_args       New options variables.
      * @param  array    $old_args       Old options variables.
-     * @return array    $options           New widget settings.
+     * @return array    $options        New widget settings.
      */
 
     function update($new_args, $old_args) {
