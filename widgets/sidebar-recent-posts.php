@@ -41,6 +41,7 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
             'widget_title' => __('Úrnua', 'kaitain'),
             'max_posts' => 10,
             'category' => 0,
+            'word_limit' => 20,
             'widget_mode' => 'production'
         ); 
 
@@ -52,21 +53,7 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
             'order' => 'ASC',
             'pad_counts' => 'false'
         ));
-        
         ?>
-
-        <script>
-            // This jQuery is easier for me to parse and debug than a mess of inline PHP.
-            jQuery(function($) {
-                // Set 'category' selected option.
-                $('<?php printf('#%s', $this->get_field_id("category")); ?>').val('<?php printf($instance["category"]); ?>');
-                // Set 'max_posts' selected option. 
-                $('<?php printf('#%s', $this->get_field_id("max_posts")); ?>').val('<?php printf($instance["max_posts"]); ?>');
-                // Set development mode or production mode radio menu checked or unchecked.
-                $('<?php printf('#%s-development', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'development' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
-                $('<?php printf('#%s-production', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'production' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
-            });
-        </script>
         <ul>
             <li>
                 <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', 'kaitain'); ?></label>
@@ -95,6 +82,10 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
                     } ?>
                 </select>
             </li>
+            <li>
+                <label for="<?php printf($this->get_field_id('word_limit')); ?>"><?php _e('Word limit for post titles:', 'kaitain'); ?></label>
+                <input id="<?php printf($this->get_field_id('word_limit')); ?>" type="number" name="<?php printf($this->get_field_name('word_limit')); ?>">
+            </li>
             <hr>
             <li style="font-size: smaller;">
                 <input id="<?php printf($this->get_field_id('widget_mode').'-development'); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="development" />
@@ -105,6 +96,19 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
                 <label for="<?php printf($this->get_field_id('widget_mode')); ?>"><?php _e('Production Mode', 'kaitain'); ?></label>
             </li>
         </ul>
+        <script>
+            // This jQuery is easier for me to parse and debug than a mess of inline PHP.
+            jQuery(function($) {
+                // Set 'category' selected option.
+                $('<?php printf('#%s', $this->get_field_id("category")); ?>').val('<?php printf($instance["category"]); ?>');
+                // Set 'max_posts' selected option. 
+                $('<?php printf('#%s', $this->get_field_id("max_posts")); ?>').val('<?php printf($instance["max_posts"]); ?>');
+                $('<?php printf('#%s', $this->get_field_id("word_limit")); ?>').val('<?php printf($instance["word_limit"]); ?>');
+                // Set development mode or production mode radio menu checked or unchecked.
+                $('<?php printf('#%s-development', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'development' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
+                $('<?php printf('#%s-production', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'production' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
+            });
+        </script>
 
         <?php
     }
@@ -122,6 +126,7 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
         $options['widget_title'] = strip_tags($new_args['widget_title']);
         $options['max_posts'] = $new_args['max_posts'];
         $options['category'] = $new_args['category'];
+        $options['word_limit'] = $new_args['word_limit'];
         $options['widget_mode'] = $new_args['widget_mode'];
         return $options;
     }
@@ -174,7 +179,34 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
 
             foreach ($recent as $post) {
                 setup_postdata($post);
-                kaitain_partial('article', 'sidebar');
+               // kaitain_partial('article', 'sidebar');
+
+                $trim = kaitain_section_css(get_the_category()[0]);
+
+                $post_classes = array(
+                    'article--sidebar', 'vspace--full', 'col-xs-12'
+                );
+
+                ?>
+                <article <?php post_class($post_classes); ?> id="article--sidebar--<?php the_id(); ?>">
+                    <a class="<?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+                        <div class="thumbnail img-frame col-xs-4 col-sm-4 col-md-3">
+                            <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>
+                            <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
+                        </div>
+                        <div class="post-content article__postcontent col-xs-8 col-sm-8 col-md-9">
+                            <header class="article--sidebar__header">
+                                <h5 class="title article--sidebar__title vspace--quarter">
+                                    <?php echo kaitain_excerpt( get_the_title(), $instance['word_limit'] ); ?>
+                                </h5>
+                                <h6 class="post-date article__postmeta">
+                                    <time datetime="<?php the_time('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time>
+                                </h6>
+                            </header>
+                        </div>
+                    </a>
+                </article>
+                <?php
             }
 
             printf('</div>');

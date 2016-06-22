@@ -125,6 +125,7 @@ function kaitain_includes() {
         // Featured/Sticky post meta box.
         'featured-edit-box.php',
         'notice-edit-box.php',
+        'toggle-featured-image.php'
     );
 
     foreach ($includes as $script) {
@@ -461,7 +462,7 @@ $kaitain_social_meta = new Social_Meta(array(
  * Helper Functions used in theme
  * -----------------------------------------------------------------------------
  */
-function kaitain_excerpt($excerpt, $limit=20) {
+function kaitain_excerpt( $excerpt, $limit=20 ) {
     $excerpt = explode(' ', $excerpt, $limit+1);
     if (count($excerpt)>=$limit) {
         array_pop($excerpt);
@@ -563,60 +564,6 @@ if (!function_exists('write_log')) {
 // }
 // add_action( 'personal_options_update', 'my_save_extra_profile_fields' );
 // add_action( 'edit_user_profile_update', 'my_save_extra_profile_fields' );
-
-
-/*
-function kaitain_youtube_embed_resize( $data , $postarr ) {
-    // When updating the post, use the post id to grab and update the post_meta.
-    // Still experimenting with this. 
-    // todo make a wp_options entry to set & get these dimensions
-    $width = 360;
-    $height = 190;
-
-    if($data['post_type'] == 'post') {
-
-        error_log("Data: ");
-        error_log($data);
-
-        error_log("PostArr: ");
-        error_log(print_r($postarr, TRUE));
-
-        $post_id = $data->ID;
-        // save the custom field value to variable
-        $youtube_embed_html_input = get_field('youtube_embed_code', $post_id);
-
-        $doc = new \DOMDocument();
-        $doc->loadHTML($youtube_embed_html_input);
-
-        $dimensions = array();
-        $arr = $doc->getElementsByTagName("iframe"); // DOMNodeList Object
-        foreach($arr as $item) { // DOMElement Object
-            $embed_width =  $item->getAttribute("width");
-            $embed_height =  $item->getAttribute("height");
-            $dimensions[] = array(
-                'embed_width' => $embed_width,
-                'embed_height' => $embed_height,
-                'width' => $width,
-                'height' => $height
-            );
-            error_log(print_r($dimensions, TRUE));
-            $item->removeAttribute('width');
-            $item->setAttribute('width', $width);
-            $item->removeAttribute('height');
-            $item->setAttribute('height', $height);
-        }
-
-        // $data['youtube_embed_code'] = $doc->saveHTML();
-        $value = $doc->saveHTML();
-        update_field('youtube_embed_code', $value, $post_id );
-        error_log("Value: ");
-        error_log(print_r($value, TRUE));
-
-        // Pass the post data through
-        return $data;
-    }
-
-}*/
 
 function kaitain_enqueue_custom_admin_scripts($hook) {
 

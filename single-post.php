@@ -22,7 +22,9 @@ if (have_posts()) {
     while (have_posts()) {
         the_post();
 
-        if ( has_post_thumbnail() ) {
+        if ( has_post_thumbnail() && ( empty(get_post_meta( $post->ID, 'kaitain_is_fullwidth_feature_image', true )) || !!(get_post_meta( $post->ID, 'kaitain_is_fullwidth_feature_image', true ) ) ) ) {
+
+
             kaitain_partial('article', 'full-featured-image');
         } else {
             ?>
