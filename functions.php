@@ -102,8 +102,8 @@ function kaitain_includes() {
         // Link to selected author profiles.
         'home-authors.php',
         // Front page featured and sticky article widget.
-        'home-featured-articles.php',
-        // Front page featured recent articles
+        //'home-featured-articles.php', // older version
+        // Front page featured and recent articles
         'home-featured-recent-articles.php',
         // Front page Gallery Widget, displays Gailleraithe category posts by date, with option for featured posts
         'home-gallery-widget.php',

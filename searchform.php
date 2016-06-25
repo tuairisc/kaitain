@@ -32,10 +32,14 @@ $result = $total === 1 ? 'torthaí' : 'tordagh';
     <div class="searchform__meta">
         <span class="searchform__meta--left float--left"><?php printf('%d %s', $total, $result); ?></span>
         <span class="searchform__meta--right float--right">
-            <?php _e('Saghas:', 'sheepie'); ?>
+            <?php _e('Saghas:', 'kaitain'); ?>
             <a class="green-link searchform__order--oldest" href="<?php arc_search_url('asc'); ?>"><?php _e('sine', 'kaitain'); ?></a> |
-            <a class="green-link searchform__order--newest" href="<?php arc_search_url('desc'); ?>"><?php _e('is nua', 'kaitain'); ?></a>
+            <a class="green-link searchform__order--newest" href="<?php arc_search_url('desc'); ?>"><?php _e('is nua', 'kaitain'); ?></a><br/>
+            <span class="advanced-search float--right">
+                <a href="#"><?php _e('Cuardach casta', 'kaitain'); ?></a>
+            </span>
         </span>
+        
     </div>
 </div>
 <hr>

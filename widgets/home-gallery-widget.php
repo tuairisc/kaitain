@@ -5,11 +5,11 @@
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Kaitain
- * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @author     Darren Kearney <info@educatedmachine.com>
+ * @copyright  Copyright (c) 2016, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/kaitain-theme
+ * @link       https://github.com/kaitain/kaitain
  * @link       http://www.tuairisc.ie
  */
 
@@ -212,21 +212,33 @@ class Kaitain_Gallery_Widget extends WP_Widget {
 
         $key = get_option('kaitain_view_counter_key');
         $title = apply_filters('widget_title', $instance['widget_title']);
-        
+
         // Get featured posts from category with custom field (see helper function)
         $featured = kaitain_get_featured_gallery_posts( $instance['max_posts'], ($instance['category']) ? $instance['category'] : '' );
 
-        printf('<div class="gallery-widget tuairisc-post-widget">');
+        $trim = kaitain_section_css(get_the_category()[0]);
 
+        printf('<div class="widget-gallery tuairisc-post-widget col-xs-12 col-sm-6 col-md-6">');
+
+        if (!empty($defaults['before_widget'])) {
+            printf($defaults['before_widget']);
+            printf('%s<a class="%s" href="%s">%s</a>%s',
+                '<h3 class="widget-gallery-title">',
+                $trim['texthover'],
+                get_category_link($instance['category']),
+                $title,
+                '</h3>'
+            );
+        }
 
         foreach ($featured as $post) {
             setup_postdata($post);
-            kaitain_partial('article', 'sidebar');
+            kaitain_partial('article', 'gallery');
             wp_reset_postdata();
         }
 
         // Default get recent posts from category
-        //if (!($recent = get_transient($trans_name))) {
+        if (!($recent = get_transient($trans_name)) || 'development' === $instance['widget_mode'] ) {
             
             $recent = get_posts(array(
                 'post_type' => 'post',
@@ -235,18 +247,15 @@ class Kaitain_Gallery_Widget extends WP_Widget {
                 'category' => ($instance['category']) ? $instance['category'] : ''
             ));
 
-            set_transient($trans_name, $recent, get_option('kaitain_transient_timeout')); 
-        //}
-
-        if (!empty($defaults['before_widget'])) {
-            printf($defaults['before_widget']);
-            printf($defaults['before_title'] . $title . $defaults['after_title']);
+            if ( 'production' ===  $instance['widget_mode'] ) {
+                set_transient($trans_name, $recent, get_option('kaitain_transient_timeout')); 
+            }
         }
-
 
         foreach ($recent as $post) {
             setup_postdata($post);
-            kaitain_partial('article', 'sidebar');
+            kaitain_partial('article', 'gallery');
+            wp_reset_postdata();
         }
 
         printf('</div>');
@@ -255,7 +264,7 @@ class Kaitain_Gallery_Widget extends WP_Widget {
             printf($defaults['after_widget']);
         }
 
-        wp_reset_postdata();
+        
     }
 }
 

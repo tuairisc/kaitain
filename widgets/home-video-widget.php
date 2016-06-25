@@ -5,11 +5,11 @@
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Kaitain
- * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @author     Darren Kearney <info@educatedmachine.com>
+ * @copyright  Copyright (c) 2016, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/kaitain-theme
+ * @link       https://github.com/kaitain/kaitain
  * @link       http://www.tuairisc.ie
  */
 
@@ -214,12 +214,22 @@ class Kaitain_Video_Widget extends WP_Widget {
         // Get featured posts from category with custom field (see helper function)
         $featured = kaitain_get_featured_video_posts( ($instance['category']) ? $instance['category'] : '' );
 
-        printf('<div class="video-widget tuairisc-post-widget">');
-
+        printf('<div class="widget-video tuairisc-post-widget col-xs-12 col-sm-6 col-md-6">');
+ 
+         if (!empty($defaults['before_widget'])) {
+            printf($defaults['before_widget']);
+            printf('%s<a class="%s" href="%s">%s</a>%s',
+                '<h3 class="widget-video-title">',
+                $trim['texthover'],
+                get_category_link($instance['category']),
+                $title,
+                '</h3>'
+            );
+        }
 
         foreach ($featured as $post) {
             setup_postdata($post);
-            kaitain_partial('article', 'sidebar');
+            kaitain_partial('article', 'video');
             wp_reset_postdata();
         }
 
@@ -236,15 +246,9 @@ class Kaitain_Video_Widget extends WP_Widget {
             set_transient($trans_name, $recent, get_option('kaitain_transient_timeout')); 
         }
 
-        if (!empty($defaults['before_widget'])) {
-            printf($defaults['before_widget']);
-            printf($defaults['before_title'] . $title . $defaults['after_title']);
-        }
-
-
         foreach ($recent as $post) {
             setup_postdata($post);
-            kaitain_partial('article', 'sidebar');
+            kaitain_partial('article', 'video');
         }
 
         printf('</div>');

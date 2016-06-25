@@ -26,7 +26,7 @@ $placeholder = __('curdaigh', 'kaitain');
 
 ?>
 
- <div class="trim-block noprint">
+ <div class="trim-block noprint trim-block-banner">
             <div class="advert-block adverts--banner" id="adverts--sidebar">
 
                 <?php if (is_active_sidebar('ad-top')) : ?>
