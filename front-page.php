@@ -41,7 +41,7 @@ $placeholder = __('curdaigh', 'kaitain');
         <div class="section--current--bg noprint" style="display:none;" id="bigsearch" data-bind="visible: state.search()">
             <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
                 <fieldset form="bigsearch-form">
-                    <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required" data-bind="hasFocus: state.search()">
+                    <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required" data-bind="hasFocus: state.search(), css: { navSearch: state.search() }">
                 </fieldset>
             </form>
             <button class="navrow__button navrow__button--search" id="searchtoggle__search" type="button" data-bind="click: showSearch">

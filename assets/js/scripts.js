@@ -47,6 +47,18 @@
         self.showSearch = function() {
             // Toggle search, true/false. Used on menu buttons.
             self.state.search(!self.state.search());
+            // if (self.state.search()) { 
+            //     // $('bigsearch-input').css('opacity', '100');
+            //     // $('.navrow').animate({
+            //     //     height: "80"
+            //     // }, 1000, function(){});
+            // }
+            // if (!self.state.search()) {
+            //     // $('bigsearch-input').css('opacity', '0');
+            //     // $('.navrow').animate({
+            //     //     height: "60"
+            //     // }, 1000, function(){});
+            // }
         };
 
         /**
