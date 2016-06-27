@@ -17,35 +17,45 @@ global $wp_query;
 
 $query = get_search_query();
 $action = esc_url(home_url('/'));
-$total = $wp_query->found_posts;
+
+
+if ( !isset($_GET['as-p']) ){
+    $total = $wp_query->found_posts;
+}
 
 // make custom GET request for advanced actions
 $authorsearch = home_url('/authors/');
-$authorsearch = $authorsearch.'?c='.$query;
+// $authorsearch = $authorsearch.'?c=';
 $advanced_action = esc_url(home_url('/'));
 
 $result = $total === 1 ? 'torthaí' : 'tordagh';
 
-
-
-
-function kaitain_search_all_posts_by_authors() {
-
-    // kaitain_verboten_users (get_option)
+if (isset($_GET['as-p'])){
     
+    // search for authors (exclude forbidden users)
+    $author_search = esc_attr($_GET['as-p']);
+    $exclude = get_option('kaitain_verboten_users');
+    if (!is_array($exclude)){
+        $exclude = array();
+    } 
 
+    $args = array(
+            'search'         => '*'.$author_search.'*',
+            'search_columns' => array( 'display_name', 'user_nicename' ),
+            'exclude'        => $exclude
+    );
+    $author_query = new WP_User_Query( $args );
 
-    // Display posts from multiple authors:
-    // $query = new WP_Query( array( 'author__in' => array( 2, 6 ) ) );
+    // add found author-ids into array
+    $found_authors = array();
+    foreach ($author_query->results as $author) {
+        array_push($found_authors, $author->ID);
+    }
+    // advanced search all posts by specific authors
+    $as_authors_posts_query = new WP_Query( array( 'author__in' => $found_authors ) );
 
-
-
+    $total = $as_authors_posts_query->found_posts;
 }
-
-
-
-
-
 
 ?>
 
@@ -62,66 +72,45 @@ function kaitain_search_all_posts_by_authors() {
             <a class="green-link searchform__order--oldest" href="<?php arc_search_url('asc'); ?>"><?php _e('sine', 'kaitain'); ?></a> |
             <a class="green-link searchform__order--newest" href="<?php arc_search_url('desc'); ?>"><?php _e('is nua', 'kaitain'); ?></a><br>
             <span class="advanced-search float--right">
-                <button href="#" data-bind="click: showSearchOptions"><?php _e('Cuardach níos mó', 'kaitain'); ?></button>
+                <button class="btn" href="#" data-bind="click: showSearchOptions"><?php _e('Cuardach níos mó', 'kaitain'); ?></button>
             </span>
         </span>
     </div>
-
-     <form class="advanced-search-options" id="advanced-search-form" name="advanced_search_form" method="get" action="<?php printf($advanced_action); ?>"  data-bind="css: { 'show-search-option': state.searchOptions() }">
-        <ul>
-            <li class="advanced-search-option">
-                <input id="search-authors" type="radio" name="advanced-search-options" value="search_authors" />
-                <label for="search-authors"><?php _e('Cuardach ar colúnaí', 'kaitain'); ?></label>
-                <input id="get-search-authors" type="hidden" name="c" value="<?php echo $query; ?>" />
-            </li>
-            <li class="advanced-search-option">
-                <input id="search-posts-by-authors" type="radio" name="advanced-search-options" value="search_posts_by_authors" />
-                <label for="search-posts-by-authors"><?php _e('
-Earraí chuardaigh ag colúnaithe mheaitseáil', 'kaitain'); ?></label>
-            </li>
-        </ul>
-        <button class="button" type="submit" name="advanced-search" id="advanced-search-submit" value="curdaigh">Curdaigh</button>
-         <script type="text/javascript">
-            var searchAuthors = document.getElementById('search-authors');
-            var searchTerm = document.getElementById('searchform__input').value;
-            var home = "<?php echo $action; ?>";
-            var authorSearch = "<?php echo $action."?c=" ?>" + searchTerm;
-            var advancedFormAction = document.getElementById('advanced-search-form').action;
-            document.getElementById('advanced-search-submit').addEventListener('click', advancedSearch());
-            var action = '';
-            function advancedSearch(e) {
-                e.preventDefault();
-                
-                searchTerm = document.getElementById('searchform__input').value;
-                
-                if (searchAuthors.checked){
-                    // home + "authors/?c=" + searchTerm;
-                    action = home + "authors/?c=" + searchTerm;
-                    advancedFormAction = action;
-                    //advancedFormAction = "authors/?c=" + searchTerm;
-
-                    document.getElementById('get-search-authors').value = searchTerm;
-
-                    //e.submit;
-                    e.submit;
-                    //location.assign(action);
-                }
-
-                // document.getElementById('advanced-search-form').action = action;
-                //location.assign(action);
-            }
-
-            searchAuthors.addEventListener('click', function(e){
-                
-                if (searchAuthors.checked) {
-                    searchTerm = document.getElementById('searchform__input').value;
-                    action = "<?php echo $action."authors/?c=" ?>" + searchTerm;
-                    advancedFormAction = action;
-                    document.getElementById('get-search-authors').value = searchTerm;
-                }
-            });
-        </script>
-    </form>
-
+    <div class="advanced-search-options" data-bind="css: { 'show-search-option': state.searchOptions() }">
+        <form id="as-authors" name="as-authors" method="get" action="<?php printf($authorsearch); ?>">
+            <ul>
+                <li class="advanced-search-option">
+                    <label for="search-authors"><?php _e('Cuardach ar colúnaí', 'kaitain'); ?></label><br>
+                    <input id="search-authors" type="text" name="c" value="" placeholder="Iontráil ainm an colúnaí" maxlength="144" />
+                    <button class="btn navrow__button navrow__button--search" type="submit" name="advanced-search" id="advanced-search-submit" value="authors"><span class="navrow__icon search" title="Curdaigh"></span></button>
+                </li>
+            </ul>
+        </form>
+        <form id="as-authorsposts" name="as-authorposts" method="get" action="<?php echo $action; ?>">
+            <ul>
+                <li class="advanced-search-option">
+                    <label for="search-posts-by-authors"><?php _e('Earraí chuardaigh ag colúnaithe mheaitseáil', 'kaitain'); ?></label><br>
+                    <input id="search-posts-by-authors" type="text" name="as-p" value="" placeholder="Iontráil ainm an colúnaí" maxlength="144" />
+                    <button class="btn navrow__button navrow__button--search" type="submit" name="s" id="" value=""><span class="navrow__icon search" title="Curdaigh"></span></button>
+                </li>
+            </ul>
+        </form>
+    </div>
 </div>
 <hr>
+<?php
+if (isset($_GET['as-p'])){
+    
+    if ( $as_authors_posts_query->have_posts() ) {
+        while ($as_authors_posts_query->have_posts() ) {
+           $as_authors_posts_query->the_post();
+           kaitain_partial('article', 'archive');
+        }
+    } else {
+       kaitain_partial('article', 'missing');
+    }
+
+    if ($as_authors_posts_query->found_posts) {
+        kaitain_partial('pagination', 'site');
+    }
+}
