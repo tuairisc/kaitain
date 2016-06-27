@@ -27,28 +27,28 @@ $placeholder = __('curdaigh', 'kaitain');
 ?>
 
  <div class="trim-block noprint trim-block-banner">
-            <div class="advert-block adverts--banner" id="adverts--sidebar">
+    <div class="advert-block adverts--banner" id="adverts--sidebar">
 
-                <?php if (is_active_sidebar('ad-top')) : ?>
-                    <div class="sidebar__widgets">
-                        <?php dynamic_sidebar('ad-top'); ?>
-                    </div>
-                <?php endif; ?>
-                
+        <?php if (is_active_sidebar('ad-top')) : ?>
+            <div class="sidebar__widgets">
+                <?php dynamic_sidebar('ad-top'); ?>
             </div>
-            <div class="stripe stripe__absolute-bottom top-trim"></div>
-        </div>
-        <div class="section--current--bg noprint" style="display:none;" id="bigsearch" data-bind="visible: state.search()">
-            <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
-                <fieldset form="bigsearch-form">
-                    <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required" data-bind="hasFocus: state.search(), css: { navSearch: state.search() }">
-                </fieldset>
-            </form>
-            <button class="navrow__button navrow__button--search" id="searchtoggle__search" type="button" data-bind="click: showSearch">
-                <span class="navrow__icon search" data-bind="css: { close: state.search() }"></span>
-            </button>
-        </div>
-            <main class="main "id="main">
+        <?php endif; ?>
+        
+    </div>
+    <div class="stripe stripe__absolute-bottom top-trim"></div>
+</div>
+<div class="section--current--bg noprint" style="display:none;" id="bigsearch" data-bind="visible: state.search(), css: { showSearch: state.search() }">
+    <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
+        <fieldset form="bigsearch-form">
+            <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required" data-bind="hasFocus: state.search(), css: { showSearch: state.search() }">
+        </fieldset>
+    </form>
+    <button class="navrow__button navrow__button--search" id="searchtoggle__search" type="button" data-bind="click: showSearch">
+        <span class="navrow__icon search" data-bind="css: { close: state.search() }"></span>
+    </button>
+</div>
+    <main class="main "id="main">
 <?php
 if (!$page_number) {
 

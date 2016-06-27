@@ -33,7 +33,7 @@ $placeholder = __('curdaigh', 'kaitain');
     <?php if (!is_404()) : ?>
         <?php // Disabled on 404 pages. ?>
         <header class="noprint" id="header">
-            <div class="section--current-bg flex--three-col--nav navrow" id="header__navrow" data-bind="css: { navSearch: state.search() }">
+            <div class="section--current-bg flex--three-col--nav navrow" id="header__navrow" data-bind="css: { showSearch: state.search() }">
                 <?php // Empty until I have something better. ?>
                 <nav class="navrow__left text--left">
                     <button class="navrow__button navrow__button--menu conceal" id="menutoggle__nav" type="button" data-bind="click: showMenu, css: { 'navrow__button--menu--display': state.menuButton() }">
@@ -71,10 +71,10 @@ $placeholder = __('curdaigh', 'kaitain');
             </div>
             <div class="stripe stripe__absolute-bottom top-trim"></div>
         </div>
-        <div class="section--current--bg noprint" style="display:none;" id="bigsearch" data-bind="visible: state.search()">
+        <div class="section--current--bg noprint" style="display:none;" id="bigsearch" data-bind="visible: state.search(), css: { showSearch: state.search() }">
             <form class="bigsearch-form" id="bigsearch-form" method="get" action="<?php printf($action); ?>" autocomplete="off" novalidate>
                 <fieldset form="bigsearch-form">
-                    <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required" data-bind="hasFocus: state.search()">
+                    <input class="bigsearch-input" name="s" placeholder="<?php printf($placeholder); ?>" type="search" required="required" data-bind="hasFocus: state.search(), css: { showSearch: state.search() }">
                 </fieldset>
             </form>
             <button class="navrow__button navrow__button--search" id="searchtoggle__search" type="button" data-bind="click: showSearch">
