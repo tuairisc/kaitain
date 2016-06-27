@@ -19,7 +19,7 @@
 */
 
 // If a search is done at this page then do the search on authors
-if (isset($_GET['c'])) {
+if (isset($_GET['c'] && $_GET != '') {
     $author_search_query = esc_attr($_GET['c']);
     $args = array(
             'search'         => $author_search_query,
@@ -28,8 +28,7 @@ if (isset($_GET['c'])) {
     $author_query = new WP_User_Query( $args );
     $total = count($author_query->results);
     $result = $total === 1 ? 'torthaí' : 'tordagh';
-}
-?>
+    ?>
     <div class="searchform vspace--full" id="searchform">
         <form class="searchform__form vspace--half" id="searchform__form" method="get" action="/authors/" autocomplete="off">
             <fieldset>
@@ -58,7 +57,21 @@ if (isset($_GET['c'])) {
         }
         ?>
     </ul>
-<?php
+    <?php
+} else { ?>
+
+    <div class="searchform vspace--full" id="searchform">
+        <form class="searchform__form vspace--half" id="searchform__form" method="get" action="/authors/" autocomplete="off">
+            <fieldset>
+                <input class="searchform__input" id="searchform__input" name="c" placeholder="<?php _e('curdaigh', 'kaitain'); ?>" type="text" value="<?php echo $author_search_query; ?>">
+            </fieldset>
+        </form>
+    </div>
+    <hr>
+    <?php
+}
+
+
 
 
 echo "<pre>";

@@ -15,9 +15,6 @@
 
 get_header();
 
-
-
-
 ///////////////////////////////////////////////////////////////////////////////
 //	Search form for Columnists
 ///////////////////////////////////////////////////////////////////////////////
@@ -28,18 +25,16 @@ get_header();
 if (isset($_GET['c'])) {
     $author_search_query = esc_attr($_GET['c']);
     $args = array(
-            'search'         => $author_search_query,
+            'search'         => '*'.$author_search_query.'*',
             'search_columns' => array( 'display_name', 'user_nicename' )
     );
     $author_query = new WP_User_Query( $args );
     $total = count($author_query->results);
-    $result = $total === 1 ? 'torthaí' : 'tordagh';
-}
-?>
+    $result = $total === 1 ? 'torthaí' : 'tordagh'; ?>
     <div class="searchform vspace--full" id="searchform">
         <form class="searchform__form vspace--half" id="searchform__form" method="get" action="/authors/" autocomplete="off">
             <fieldset>
-                <input class="searchform__input" id="searchform__input" name="c" placeholder="<?php _e('curdaigh', 'kaitain'); ?>" type="text" value="<?php echo $author_search_query; ?>">
+                <input class="searchform__input" id="searchform__input" name="c" placeholder="<?php _e('Cuardaigh údar', 'kaitain'); ?>" type="text" value="<?php echo $author_search_query; ?>">
             </fieldset>
         </form>
 
@@ -53,18 +48,31 @@ if (isset($_GET['c'])) {
         </div>
     </div>
     <hr>
-    <ul>
+<!--     <ul>
         <?php
-        if ( ! empty( $author_query->results ) ) {
-            foreach ( $author_query->results as $author ) {
-                echo '<li>' . $author->display_name . '</li>';
-            }
-        } else {
-            _e('No authors found', 'kaitain');
-        }
+        //if ( ! empty( $author_query->results ) ) {
+        //    foreach ( $author_query->results as $author ) {
+        //        echo '<li>' . $author->display_name . '</li>';
+        //    }
+        //} else {
+        //    _e('Gan torthaí', 'kaitain');
+        //}
         ?>
-    </ul>
-<?php
+    </ul> -->
+	<?php
+} else if (!isset($_GET['c']) || $_GET['c'] == '') {
+	?>
+	<div class="searchform vspace--full" id="searchform">
+        <form class="searchform__form vspace--half" id="searchform__form" method="get" action="/authors/" autocomplete="off">
+            <fieldset>
+                <input class="searchform__input" id="searchform__input" name="c" placeholder="<?php _e('
+Cuardaigh údar', 'kaitain'); ?>" type="text" value="">
+            </fieldset>
+        </form>
+    </div>
+    <hr>  
+	<?php
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //  Display Found Columnists

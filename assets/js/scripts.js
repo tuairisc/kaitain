@@ -36,7 +36,8 @@
             search: ko.observable(initialState),
             menu: ko.observable(true),
             menuButton: ko.observable(false),
-            oldWidth: false
+            oldWidth: false,
+            searchOptions: ko.observable(initialState)
         };
 
         /**
@@ -47,19 +48,18 @@
         self.showSearch = function() {
             // Toggle search, true/false. Used on menu buttons.
             self.state.search(!self.state.search());
-            // if (self.state.search()) { 
-            //     // $('bigsearch-input').css('opacity', '100');
-            //     // $('.navrow').animate({
-            //     //     height: "80"
-            //     // }, 1000, function(){});
-            // }
-            // if (!self.state.search()) {
-            //     // $('bigsearch-input').css('opacity', '0');
-            //     // $('.navrow').animate({
-            //     //     height: "60"
-            //     // }, 1000, function(){});
-            // }
         };
+
+      /**
+         * Toggle Search State
+         * ---------------------------------------------------------------------
+         */
+
+        self.showSearchOptions = function() {
+            // Toggle searchOptions, true/false. Used on search form advanced options.
+            self.state.searchOptions(!self.state.searchOptions());
+        };
+
 
         /**
          * Toggle Menu State
