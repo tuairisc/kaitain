@@ -21,10 +21,10 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
 
     public function __construct() {
         parent::__construct(
-            __('kaitain_recent_sidebar', 'kaitain'),
+            __('kaitain_recent_sidebar_widget', 'kaitain'),
             __('Tuairisc: Recent Posts Sidebar', 'kaitain'),
             array(
-                'description' => __('An ordered list of recent Tuairisc posts sorted by date. Choose from either one category, or all categories.', 'kaitain'),
+                'description' => __('For sidebar - does not display on front page. An ordered list of recent Tuairisc posts sorted by date. Choose from either one category, or all categories. ', 'kaitain'),
             )
         );
     }
@@ -150,25 +150,32 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
                     write_log("Home Gallery Widget debug:");
                     write_log($instance);
                 }
+                $recent = get_posts(array(
+                        'post_type' => 'post',
+                        'numberposts' => $instance['max_posts'],
+                        'order' => 'DESC',
+                        'category' => ($instance['category']) ? $instance['category'] : ''
+                ));
             }
             else if ( 'production' ===  $instance['widget_mode'] ) {
             // In production mode, set up transients for caching/speed.
                 $trans_name = 'recent_posts_sidebar';
+            
+                if (!($recent = get_transient($trans_name))) {
+                    $recent = get_posts(array(
+                        'post_type' => 'post',
+                        'numberposts' => $instance['max_posts'],
+                        'order' => 'DESC',
+                        'category' => ($instance['category']) ? $instance['category'] : ''
+                    ));
+
+                    set_transient($trans_name, $recent, get_option('kaitain_transient_timeout')); 
+                }
             }
 
             $key = get_option('kaitain_view_counter_key');
             $title = apply_filters('widget_title', $instance['widget_title']);
 
-            if (!($recent = get_transient($trans_name))) {
-                $recent = get_posts(array(
-                    'post_type' => 'post',
-                    'numberposts' => $instance['max_posts'],
-                    'order' => 'DESC',
-                    'category' => ($instance['category']) ? $instance['category'] : ''
-                ));
-
-                set_transient($trans_name, $recent, get_option('kaitain_transient_timeout')); 
-            }
 
             if (!empty($defaults['before_widget'])) {
                 printf($defaults['before_widget']);

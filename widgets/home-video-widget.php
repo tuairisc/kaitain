@@ -61,21 +61,6 @@ class Kaitain_Video_Widget extends WP_Widget {
         $featured = kaitain_get_featured_video_posts( ($instance['category']) ? $instance['category'] : '' );
 
         ?>
-
-        <script>
-            // This jQuery is easier for me to parse and debug than inline PHP.
-            jQuery(function($) {
-                // Set 'category' selected option.
-                $('<?php printf('#%s', $this->get_field_id("category")); ?>').val('<?php printf($instance["category"]); ?>');
-                // Set 'max_posts' selected option. 
-                $('<?php printf('#%s', $this->get_field_id("max_posts")); ?>').val('<?php printf($instance["max_posts"]); ?>');
-                // Set display featured checked or unchecked.
-                $('<?php printf('#%s', $this->get_field_id('display_featured')); ?>').prop('checked', <?php printf(($instance['display_featured']) ? 'true' : 'false'); ?>);
-                // Set development mode or production mode radio menu checked or unchecked.
-                $('<?php printf('#%s-development', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'development' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
-                $('<?php printf('#%s-production', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'production' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
-            });
-        </script>
         <ul>
             <li>
                 <label for="<?php printf($this->get_field_id('widget_title')); ?>"><?php _e('Widget title:', 'kaitain'); ?></label>
@@ -148,13 +133,27 @@ class Kaitain_Video_Widget extends WP_Widget {
             <hr>
             <li style="font-size: smaller;">
                 <input id="<?php printf($this->get_field_id('widget_mode').'-development'); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="development" />
-                <label for="<?php printf($this->get_field_id('widget_mode')); ?>"><?php _e('Development Mode (No transients)', 'kaitain'); ?></label>
+                <label for="<?php printf($this->get_field_id('widget_mode')); ?>-development"><?php _e('Development Mode (No transients)', 'kaitain'); ?></label>
             </li>
             <li style="font-size: smaller;">
                 <input id="<?php printf($this->get_field_id('widget_mode').'-production'); ?>" type="radio" name="<?php printf($this->get_field_name('widget_mode')); ?>" value="production" />
-                <label for="<?php printf($this->get_field_id('widget_mode')); ?>"><?php _e('Production Mode', 'kaitain'); ?></label>
+                <label for="<?php printf($this->get_field_id('widget_mode')); ?>-production"><?php _e('Production Mode', 'kaitain'); ?></label>
             </li>
         </ul>
+        <script>
+            // This jQuery is easier for me to parse and debug than inline PHP.
+            jQuery(function($) {
+                // Set 'category' selected option.
+                $('<?php printf('#%s', $this->get_field_id("category")); ?>').val('<?php printf($instance["category"]); ?>');
+                // Set 'max_posts' selected option. 
+                $('<?php printf('#%s', $this->get_field_id("max_posts")); ?>').val('<?php printf($instance["max_posts"]); ?>');
+                // Set display featured checked or unchecked.
+                $('<?php printf('#%s', $this->get_field_id('display_featured')); ?>').prop('checked', <?php printf(($instance['display_featured']) ? 'true' : 'false'); ?>);
+                // Set development mode or production mode radio menu checked or unchecked.
+                $('<?php printf('#%s-development', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'development' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
+                $('<?php printf('#%s-production', $this->get_field_id('widget_mode')); ?>').prop('checked', <?php printf(( 'production' === $instance['widget_mode'] ) ? 'true' : 'false'); ?>);
+            });
+        </script>
         <?php
     }
 

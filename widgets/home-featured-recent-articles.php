@@ -188,8 +188,9 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
     //highlight_string( '<?php ' . var_export( get_option( $GLOBALS['kaitain_featured_keys']['featured']), true) . ' ');
     //foreach ($featured as $f) {
     //   print_r( $f->ID . ' ' );
-    //}?>
-    <?
+    //}
+    ?>
+    <?php
     /////////////////////////////
     //  DEBUG END
     /////////////////////////////

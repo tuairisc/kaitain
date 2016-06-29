@@ -107,6 +107,8 @@ function kaitain_includes() {
         'home-featured-recent-articles.php',
         // Front page Gallery Widget, displays Gailleraithe category posts by date, with option for featured posts
         'home-gallery-widget.php',
+        // front page recent posts
+        'home-recent-posts.php',
         // Front page recent posts container
         'home-recent-posts-container-widget.php',
         // Home page recent posts in selected category.

@@ -235,15 +235,11 @@ class Kaitain_Recent_Posts_Container_Widget extends WP_Widget {
         // for loop for each column
         for ($i=0;$i<$total_columns;$i++) {
             global $post;
-            
-            $before_column = '<div id="kaitain_recent_container_'.$widget_id.'_column-'.($i+1).'" class="widget widget--home widget_kaitain_recent_container_column">';
-            $before_column_title = '<h3 class="widget--home__title vspace--half">';
-
-            echo '<div class="recent-post tuairisc-post-widget col-md-3 col-sm-3 col-xs-12 vspace--full">';
-
             $key = get_option('kaitain_view_counter_key');
-            $column_title = apply_filters('widget_title', $columns[$i]['column_title']);
-            
+
+            $category_link = get_category_link( $columns[$i]['column_category'] );
+            $title = '<a href="'.esc_url( $category_link ).'" title="'.$columns[$i]['column_title'].'">'. $columns[$i]['column_title'] .'</a>';
+                        
             // $trans_name = 'sidebar_recent_posts_container-'.($i+1);
             // check if its cached in transient
             // if (!($recent = get_transient($trans_name))) {
@@ -263,9 +259,14 @@ class Kaitain_Recent_Posts_Container_Widget extends WP_Widget {
                     'category' => ($columns[$i]['column_category']) ? $columns[$i]['column_category'] : ''
             ));
 
+            echo '<div class="recent-post tuairisc-post-widget col-md-3 col-sm-3 col-xs-12 vspace--full">';
+
+            $before_column = '<div id="kaitain_recent_container_'.$widget_id.'_column-'.($i+1).'" class="widget widget--home widget_kaitain_recent_container_column">';
+            $before_column_title = '<h3 class="widget--home__title vspace--half">';
+
             if (!empty($defaults['before_widget'])) {
                 echo $before_column;
-                echo $before_column_title . $column_title . $defaults['after_title'];
+                echo $before_column_title . $title . $defaults['after_title'];
             }
 
             foreach ($recent as $post) {
