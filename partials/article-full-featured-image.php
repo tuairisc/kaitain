@@ -49,7 +49,7 @@ $post_classes = array(
     <?php } ?>
     <?php // Featured image ?>
     <div class="thumbnail article--lead__thumb img-frame">
-        <?php post_image_html(get_the_ID(), 'tc_home_feature_lead', true); ?>
+        <?php post_image_html(get_the_ID(), 'full', true); ?>
         <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
     </div>
 
