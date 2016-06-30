@@ -5,11 +5,11 @@
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Kaitain
- * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @author     Darren Kearney <info@educatedmachine.com>
+ * @copyright  Copyright (c) 2016, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/kaitain-theme
+ * @link       https://github.com/kaitain/kaitain
  * @link       http://www.tuairisc.ie
  */
 
@@ -96,7 +96,7 @@ function kaitain_update_toggle_fullwidth_featured_image($post_id) {
         return;
     }
 
-    $is_fullwidth_featured_image = (isset($_POST['fullwidth_featured_image']) && $_POST['fullwidth_featured_image'] === 'on');
+    $is_fullwidth_featured_image = (isset($_POST['fullwidth_featured_image']) && $_POST['fullwidth_featured_image'] === 'on')? 1 : 0;
 
     // Update meta.
     update_post_meta($post_id, 'kaitain_is_fullwidth_feature_image', $is_fullwidth_featured_image);

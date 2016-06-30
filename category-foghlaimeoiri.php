@@ -19,7 +19,7 @@ global $cat;
 $page_number = intval(get_query_var('paged'));
 $meta_key = get_option('kaitain_featured_post_key');
 
-kaitain_education_section_pane('sraith-pictuir');
+kaitain_education_section_pane('sraith-pictiur');
 kaitain_education_section_pane('leamhthuiscinti');
 kaitain_education_section_pane('fiseain');
 kaitain_education_section_pane('crosfhocal');
