@@ -168,7 +168,7 @@ class Kaitain_Recent_Posts_Widget extends WP_Widget {
         $title = apply_filters('widget_title', $instance['widget_title']);
         $category = get_category($instance['category']);
 
-
+        $widget_id = $this->number;
         $before_widget = '<div id="kaitain_recent_posts_widget_'.$widget_id.'" class="widget widget--home widget_kaitain_recent_posts_widget">';
         $before_title = '<h3 class="widget--home__title vspace--half">';
 

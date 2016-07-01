@@ -31,7 +31,12 @@ $post_classes = array(
             <div class="article--full__postmeta">
 
                 <div class="article--full__author">
-                    <?php if (!kaitain_is_verboten_user($author)) : ?>
+                    <?php 
+                    // check that the avatar isn't the fallback avatar from the WP Avatar plugin that serves a fallback avatar
+                    $avatar = get_avatar($author);
+                    $has_avatar = ( strpos( $avatar, 'fallback-avatar' ) == false );
+
+                    if (!kaitain_is_verboten_user($author) && $has_avatar ) : ?>
                         <?php // Author photograph. ?>
                         <div class="article--full__avatar">
                             <?php kaitain_avatar_background_html($author, 'tc_post_avatar', 'author-photo'); ?>
@@ -39,7 +44,8 @@ $post_classes = array(
                     <?php endif; ?>
 
                     <div class="article--full__author-info">
-                        <?php if (!kaitain_is_verboten_user($author)) : ?>
+                        <?php
+                            if ( !kaitain_is_verboten_user($author) ) : ?>
                             <?php // Author name, if not verboten. ?>
                             <h5 class="author--meta__name">
                                 <a class="author-meta__link green-link--hover text--bold" href="<?php printf(get_author_posts_url($author)); ?>">

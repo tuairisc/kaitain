@@ -5,18 +5,18 @@
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Kaitain
- * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @author     Darren Kearney <info@educatedmachine.com>
+ * @copyright  Copyright (c) 2016, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/kaitain-theme
+ * @link       https://github.com/kaitain/kaitain
  * @link       http://www.tuairisc.ie
  */
 
 $author = get_the_author_meta('ID');
 
 $post_classes = array(
-    'article--full', 'vspace--full', 'article--full-featured-image'
+    'article--full', 'vspace--full', 'article-full-featured-image'
 );
 
 ?>
@@ -68,10 +68,16 @@ $post_classes = array(
                         <div class="article--full__postmeta">
 
                             <div class="article--full__author">
-                                <?php if (!kaitain_is_verboten_user($author)) : ?>
+                                <?php                             
+                                // check that the avatar isn't the fallback avatar from the WP Avatar plugin that serves a fallback avatar
+                                $avatar = get_avatar($author);
+                                $has_avatar = ( strpos( $avatar, 'fallback-avatar' ) == false );
+
+                                 if ( !kaitain_is_verboten_user($author) && $has_avatar ) : ?>
                                     <?php // Author photograph. ?>
                                     <div class="article--full__avatar">
-                                        <?php kaitain_avatar_background_html($author, 'tc_post_avatar', 'author-photo'); ?>
+                                        <?php 
+                                        kaitain_avatar_background_html($author, 'tc_post_avatar', 'author-photo'); ?>
                                     </div>
                                 <?php endif; ?>
 

@@ -185,7 +185,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
     // print_r get_option( $GLOBALS['kaitain_featured_keys']['featured']);
     // print_r(kaitain_get_featured(8, true));
     //echo "</pre>";
-    //highlight_string( '<?php ' . var_export( get_option( $GLOBALS['kaitain_featured_keys']['featured']), true) . ' ');
+    //highlight_string( '<?php ' . var_export( $featured[0], true ) . ' ');
     //foreach ($featured as $f) {
     //   print_r( $f->ID . ' ' );
     //}
@@ -210,14 +210,14 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                     <h1 class="title article--lead__title"><?php printf( kaitain_excerpt( $featured[0]->post_title, 55 )); ?></h1>
                                 </a>
                             <!-- Author Meta -->
-                            <!--<header class="article--lead__header vspace--half">
+                            <header class="article--lead__header">
                                  <h4 class="article--lead__author">
                                     <?php if (!kaitain_is_verboten_user($featured[0]->post_author)) : ?>
-                                        <a class="article--lead__author-link text--bold green-link--hover" href="<?php printf(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php the_author_meta('display_name', $featured[0]->post_author); ?></a>
+                                        <a class="article--lead__author-link text--bold green-link--hover" href="<?php printf(get_author_posts_url($featured[0]->post_author)); ?>"><?php the_author_meta('display_name', $featured[0]->post_author); ?></a>
                                         <?php endif; ?>
                                 </h4> 
                                 <h5 class="post-meta article--lead__meta"><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime($featured[0]->ID); ?></time></h5>
-                            </header> -->
+                            </header>
                             <p class="post-excerpt article--lead__excerpt"><?php printf( kaitain_excerpt( $featured[0]->post_excerpt, 55 )); ?></p>
                             </div>
                     </article>

@@ -41,7 +41,7 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
             'widget_title' => __('Úrnua', 'kaitain'),
             'max_posts' => 10,
             'category' => 0,
-            'word_limit' => 20,
+            'word_limit' => 11,
             'widget_mode' => 'production'
         ); 
 
@@ -176,13 +176,19 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
             $key = get_option('kaitain_view_counter_key');
             $title = apply_filters('widget_title', $instance['widget_title']);
 
+            $widget_id = $this->number;
+            $before_widget = '<div id="kaitain_recent_sidebar_'.$widget_id.'" class="widget widget_kaitain_recent_sidebar">';
+            $before_widget_title = '<h3 class="widget--home__title vspace--half">';
+            $widget_title = apply_filters('widget_title', $instance['widget_title']);
 
             if (!empty($defaults['before_widget'])) {
-                printf($defaults['before_widget']);
-                printf($defaults['before_title'] . $title . $defaults['after_title']);
+                // printf($defaults['before_widget']);
+                echo $before_widget;
+                //printf($defaults['before_title'] . $title . $defaults['after_title']);
+                echo $before_widget_title . $title . $defaults['after_title'];
             }
 
-            printf('<div class="recent-widget tuairisc-post-widget">');
+            printf('<div class="recent-widget tuairisc-post-widget row">');
 
             foreach ($recent as $post) {
                 setup_postdata($post);

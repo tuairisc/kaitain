@@ -29,7 +29,15 @@ $placeholder = __('curdaigh', 'kaitain');
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <?php wp_head(); ?>
 </head>
-<body <?php (is_single())? body_class('post-featured-image'): body_class(); ?> data-bind="event: { keyup: keyupHide }">
+
+<body <?php 
+if ( is_single() && get_post_meta( $post->ID, 'kaitain_is_fullwidth_feature_image', true ) == 1 ) {
+    $body_class = body_class('post-featured-image fullwidth-featured-image');
+} else if ( is_single() && get_post_meta( $post->ID, 'kaitain_is_fullwidth_feature_image', true ) != 1 ) {
+    $body_class = body_class('post-featured-image');
+} else {
+    $body_class = body_class();
+} ?> data-bind="event: { keyup: keyupHide }">
     <?php if (!is_404()) : ?>
         <?php // Disabled on 404 pages. ?>
         <header class="noprint" id="header">
