@@ -19,22 +19,22 @@ get_search_form();
 
 // code for advanced search options
 // option: find all posts for searched author name
-if (!isset($_GET['as-p'])){
+// if (!isset($_GET['as-p'])){
 
-	if (have_posts()) {
-	    while (have_posts()) {
-	        the_post();
-	       kaitain_partial('article', 'archive');
-	    }
-	} else {
-	   kaitain_partial('article', 'missing');
-	}
-
-	if ($wp_query->found_posts) {
-	    kaitain_partial('pagination', 'site');
-	}
-
+if (have_posts()) {
+    while (have_posts()) {
+        the_post();
+       kaitain_partial('article', 'archive');
+    }
+} else {
+   kaitain_partial('article', 'missing');
 }
+
+if ($wp_query->found_posts) {
+    kaitain_partial('pagination', 'site');
+}
+
+// }
 
 get_footer();
 
