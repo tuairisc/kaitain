@@ -5,11 +5,11 @@
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Kaitain
- * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @author     Darren Kearney <info@educatedmachine.com>
+ * @copyright  Copyright (c) 2016, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/kaitain-theme
+ * @link       https://github.com/kaitain/kaitain
  * @link       http://www.tuairisc.ie
  */
 
@@ -44,21 +44,15 @@ add_action('add_meta_boxes', 'kaitain_columnist_meta_box');
  */
 
 function kaitain_columnist_box_content($post) {
-
-    //$test =  get_post_meta($post->ID, 'kaitain_columnist_list');
-    
-    
-    // global $post_data;
     global $wpdb;
 
-    //wp_nonce_field('kaitain_columnist_box_data', 'kaitain_columnist_box_nonce');
-
+    wp_nonce_field('kaitain_columnist_box_data', 'kaitain_columnist_box_nonce');
     
     // get saved settings
     $columnist_list = get_post_meta($post->ID, 'kaitain_columnist_list', true);
 
-
-    //highlight_string( '<?php '. var_export($columnist_list, true));
+    // Debug code
+    // highlight_string( '<?php '. var_export($columnist_list, true));
 
     $defaults = array(
         'orderby' => 'name', 'order' => 'ASC', 'number' => '',
@@ -105,22 +99,8 @@ function kaitain_columnist_box_content($post) {
                     </label>
                 </fieldset>
             </li> 
-        <?php } 
-
-        ?>
-
-        <input type="text" name="test"> 
+        <?php } ?>
     </ul>
-    
-    <script>
-        //var postmetaFeatured = {
-        //    featured: <?php printf('%s', $is_featured ? 'true' : 'false'); ?>,
-        //    sticky: <?php printf('%s', $is_sticky ? 'true' : 'false'); ?>,
-        //    expiry: <?php printf('%u', $expiry); ?>
-        //};
-        //jQuery('#kaitain-featured-checkbox').prop('checked', postmetaFeatured['featured'] );
-        //jQuery('#kaitain-sticky-checkbox').prop('checked', postmetaFeatured['sticky'] );
-    </script>
     <?php
 }
 
@@ -133,34 +113,26 @@ function kaitain_columnist_box_content($post) {
  */
     
 function kaitain_update_columnist_meta_box($post_id) {
-    // if (!isset($_POST['kaitain_columnist_box_nonce'])) {
-    //     return;
-    // }
+    if (!isset($_POST['kaitain_columnist_box_nonce'])) {
+        return;
+    }
+    if (!wp_verify_nonce($_POST['kaitain_columnist_box_nonce'], 'kaitain_columnist_box_data')) {
+        return;
+    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return; 
+    }
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
 
-    // if (!wp_verify_nonce($_POST['kaitain_columnist_box_nonce'], 'kaitain_columnist_box_data')) {
-    //     return;
-    // }
-    
-    // if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-    //     return; 
-    // }
+    if (isset($_POST['make_columnist']) && $_POST['make_columnist'] != '' ) {
+        // If the checkbox is checked (returns 'on') put the ID into an array
+        $columnist_list = array_keys($_POST['make_columnist'], 'on');
 
-    // if (!current_user_can('edit_post', $post_id)) {
-    //     return;
-    // }
-
-
-    // if (isset($_POST['make_columnist']) && $_POST['make_columnist'] != '' ) {
-    //     $make_columnist = $_POST['make_columnist'];
-    //     update_post_meta( $post_id, 'kaitiain_columnist_list', $make_columnist );  
-    // }
-
-    $columnist_list = array_keys($_POST['make_columnist'], 'on');
-
-
-    
-    update_post_meta( $post_id, 'kaitain_columnist_list', $columnist_list ); 
-    update_option('kaitain_columnist_group', $columnist_list);
+        update_post_meta( $post_id, 'kaitain_columnist_list', $columnist_list ); 
+        update_option('kaitain_columnist_group', $columnist_list);
+    }
 }
 
 add_action('save_post', 'kaitain_update_columnist_meta_box');
