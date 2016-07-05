@@ -15,13 +15,12 @@
 
 get_header();
 
-///////////////////////////////////////////////////////////////////////////////
-//	Search form for Columnists
-///////////////////////////////////////////////////////////////////////////////
-// Add search form
-//kaitain_partial('searchform', 'columnist');
+/**
+ *	Search form for Columnists
+ *-----------------------------------------------------------------------------
+ */
 
-// 
+// Add search form
 $columnist_list = get_post_meta($post->ID, 'kaitain_columnist_list', true);
 // If a search is done at this page then do the search on authors
 if (isset($_GET['c'])) {
@@ -58,17 +57,6 @@ if (isset($_GET['c'])) {
         </div>
     </div>
     <hr>
-<!--     <ul>
-        <?php
-        //if ( ! empty( $author_query->results ) ) {
-        //    foreach ( $author_query->results as $author ) {
-        //        echo '<li>' . $author->display_name . '</li>';
-        //    }
-        //} else {
-        //    _e('Gan torthaí', 'kaitain');
-        //}
-        ?>
-    </ul> -->
 	<?php
 } else if (!isset($_GET['c']) || $_GET['c'] == '') {
 	?>
@@ -84,9 +72,10 @@ Cuardaigh údar', 'kaitain'); ?>" type="text" value="">
 	<?php
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//  Display Found Columnists
-///////////////////////////////////////////////////////////////////////////////
+/**
+ *  Display Found Columnists
+ *-----------------------------------------------------------------------------
+ */
 if (isset($_GET['c']) || $_GET['c'] != '') {
     $trim = kaitain_section_css(get_the_category()[0]);
     $row_count = 1;
@@ -98,9 +87,8 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
 
     foreach ( $author_query->results as $author ) {
         $author_id = $author->ID;
+        // Only display authors who are in the columnist_list 
         if ( in_array( $author_id, $columnist_list) ) {
-            //$author = get_userdata( $author_id );
-        //  $link = "<a href=\"$author->\"></a>";
             $name = "<span class=\"name\">$author->first_name $author->last_name</span>";
 
             $avatar =   kaitain_avatar_background_html(
@@ -119,8 +107,6 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
             );
 
             $buff .=    "<div class=\"columnist\">";
-            // Avatar
-            
             // Columnist name and link to author page
             $buff .=    $author_link;
             
@@ -136,23 +122,9 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
 
                 $trim = kaitain_section_css(get_the_category($author_posts[0]->ID)[0]);
                 $class = $trim['texthover'];
-                //print_r($authors_posts);
-                // print top post title
-                //$buff .= "<a href=\"".get_permalink($author_posts[0]->ID)."\">".$author_posts[0]->post_title."</a>";
                 $buff .=    "<h3 class=\"recent-post $class \"><a href=\"".get_permalink($author_posts[0]->ID)."\">".$author_posts[0]->post_title."</a></h3>";
             }
-            //$buff .=  "<h3 class=\"recent-post\"><a href=\"#\">Title of recent post by this author here that links to that post</a></h3>";
             $buff .=    "</div>";
-            
-            //the_author_posts_link();
-            /*
-            if ($row_count % 6 === 0 && $row_count !== 0){
-                $buff .= "</div>";
-                $buff .= "<div class=\"columnist-row\">";
-            }
-
-            $row_count++;
-            */
         }
     }
 
@@ -160,15 +132,13 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
     $buff = rtrim( $buff, ', ' );
     echo $buff;
 
-    $author_count = array();
-    foreach ( (array) $wpdb->get_results( "SELECT DISTINCT post_author, COUNT(ID) AS count FROM $wpdb->posts WHERE " .get_private_posts_cap_sql( 'post' ) . " GROUP BY post_author" ) as $row ) {
-        $author_count[$row->post_author] = $row->count;
-    }
 
 } else if (!isset($_GET['c']) || $_GET['c'] == '' ) {
-///////////////////////////////////////////////////////////////////////////////
-//	Normal Query for All columnists
-///////////////////////////////////////////////////////////////////////////////
+
+    /**
+     *  Normal Query for All columnists
+     *-------------------------------------------------------------------------
+     */
 
 	// Make a query to db for authors
 	global $wpdb;
@@ -210,10 +180,10 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
 	// Get authors
 	$authors = get_users( $query_args );
 
-	///////////////////////////////////////////////////////////////////////////////
-	//	Display results
-	///////////////////////////////////////////////////////////////////////////////
-
+    /**
+     *  Display results
+     *-------------------------------------------------------------------------
+     */
 	$trim = kaitain_section_css(get_the_category()[0]);
 	$row_count = 1;
 	$return = '';
@@ -221,9 +191,9 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
 	$buff .= "<div class=\"columnist-container\">";
 
 	foreach ( $authors as $author_id ) {
+        // Only display authors who are in the columnist_list 
         if ( in_array( $author_id, $columnist_list) ):
             $author = get_userdata( $author_id );
-        //  $link = "<a href=\"$author->\"></a>";
             $name = "<span class=\"name\">$author->first_name $author->last_name</span>";
 
             $avatar =   kaitain_avatar_background_html(
@@ -241,14 +211,10 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
                 $name
             );
 
-            
             $buff .=    "<div class=\"columnist\">";
-            // Avatar
-            
             // Columnist name and link to author page
             $buff .=    $author_link;
             
-
             $author_posts_args = array(
                 'author'    => $author_id,
                 'order'     => 'DESC',
@@ -257,28 +223,13 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
 
             $author_posts = get_posts( $author_posts_args );
 
-            if($author_posts) {
+            if( $author_posts ) {
 
                 $trim = kaitain_section_css(get_the_category($author_posts[0]->ID)[0]);
                 $class = $trim['texthover'];
-                //print_r($authors_posts);
-                // print top post title
-                //$buff .= "<a href=\"".get_permalink($author_posts[0]->ID)."\">".$author_posts[0]->post_title."</a>";
                 $buff .=    "<h3 class=\"recent-post $class \"><a href=\"".get_permalink($author_posts[0]->ID)."\">".$author_posts[0]->post_title."</a></h3>";
             }
-            //$buff .=  "<h3 class=\"recent-post\"><a href=\"#\">Title of recent post by this author here that links to that post</a></h3>";
             $buff .=    "</div>";
-            
-            //the_author_posts_link();
-
-            /*
-            if ($row_count % 6 === 0 && $row_count !== 0){
-                $buff .= "</div>";
-                $buff .= "<div class=\"columnist-row\">";
-            }
-
-            $row_count++;
-            */
         endif;
 	}
 
@@ -286,10 +237,6 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
 	$buff = rtrim( $buff, ', ' );
 	echo $buff;
 
-	$author_count = array();
-	foreach ( (array) $wpdb->get_results( "SELECT DISTINCT post_author, COUNT(ID) AS count FROM $wpdb->posts WHERE " .get_private_posts_cap_sql( 'post' ) . " GROUP BY post_author" ) as $row ) {
-		$author_count[$row->post_author] = $row->count;
-	}
 } else {
 	_e('No authors found', 'kaitain');
 }
