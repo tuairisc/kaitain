@@ -5,11 +5,11 @@
  * -----------------------------------------------------------------------------
  * @category   PHP Script
  * @package    Kaitain
- * @author     Mark Grealish <mark@bhalash.com>
- * @copyright  Copyright (c) 2014-2015, Tuairisc Bheo Teo
+ * @author     Darren Kearney <info@educatedmachine.com>
+ * @copyright  Copyright (c) 2016, Tuairisc Bheo Teo
  * @license    https://www.gnu.org/copyleft/gpl.html The GNU GPL v3.0
  * @version    2.0
- * @link       https://github.com/bhalash/kaitain-theme
+ * @link       https://github.com/kaitain/kaitain
  * @link       http://www.tuairisc.ie
  */
 
@@ -169,6 +169,11 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
 				
 	);
 	$exclude_users = get_option('kaitain_verboten_users');
+    $include_users = get_option('kaitain_columnist_group');
+
+    echo '<pre>';
+    var_dump($include_users);
+    echo '</pre>';
 
 	if (!empty($search)) {
 		$args = array(
@@ -186,9 +191,7 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
 	$args = wp_parse_args( $args, $defaults );
 
 	$query_args = wp_array_slice_assoc( $args, array( 'orderby', 'order', 'number', 'exclude', 'include', 
-
 	//	'meta_key', 'meta_compare', 'meta_value'
-
 	) );
 	$query_args['fields'] = 'id';
 
@@ -220,7 +223,7 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
 
 		$author_link = sprintf(
 	        '<a href="%1$s" title="%2$s" rel="author">%3$s %4$s</a>',
-	        esc_url( get_author_posts_url( $author_id, $author->nicename ) ),
+	        esc_url( get_author_posts_url( $author_id, $author->user_nicename ) ),
 	        esc_attr( sprintf( __( 'Articles by %s' ), $name ) ),
 	        $avatar,
 	        $name

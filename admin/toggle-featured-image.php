@@ -40,7 +40,7 @@ function kaitain_toggle_fullwith_featured_image_metabox($post) {
 
     // check if meta option is empty, if so set to default on, otherwise use whatever has been set
     if ( empty(get_post_meta($post->ID, 'kaitain_is_fullwidth_feature_image', true))  ) {
-        echo "IT's EMPTY when there are not set";
+        echo "It's empty when they are not set";
         $is_fullwidth_featured = true;
     } else {
         $is_fullwidth_featured = !!get_post_meta($post->ID, 'kaitain_is_fullwidth_feature_image', true);   

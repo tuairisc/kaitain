@@ -109,24 +109,21 @@ class Kaitain_Columnist_Widget extends WP_Widget {
     /**
      * Widget Update
      * -------------------------------------------------------------------------
-     * @param  array    $new_default       New default variables.
-     * @param  array    $old_default       Old default variables.
-     * @return array    $default           New widget settings.
+     * @param  array    $new_args           New default variables.
+     * @param  array    $old_args           Old default variables.
+     * @return array    $instance           New widget settings.
      */
 
-    function update($new_defaults, $old_defaults) {
-        $defaults = array();
-
-        $defaults['widget_title'] = filter_var(
-            $new_defaults['widget_title'],
+    function update($new_args, $old_args) {
+        $instance = array();
+        $instance['widget_title'] = filter_var(
+            $new_args['widget_title'],
             FILTER_SANITIZE_STRIPPED
         );
+        $instance['author_list'] = $new_args['author_list'];
+    	$instance['all_authors_link'] = $new_args['all_authors_link'];
 
-        $defaults['author_list'] = $new_defaults['author_list'];
-
-	$defaults['all_authors_link'] = $new_defaults['all_authors_link'];
-
-        return $defaults;
+        return $instance;
     }
 
     /**
