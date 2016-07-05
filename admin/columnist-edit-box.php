@@ -19,14 +19,22 @@
  */
 
 function kaitain_columnist_meta_box() {
-    add_meta_box(
-        'kaitain_columnist_meta',
-        __('Columnist List', 'kaitain'),
-        'kaitain_columnist_box_content',
-        'page'
-    );
-}
 
+    global $post;
+    
+    if(!empty($post)) {
+        $pageTemplate = get_post_meta($post->ID, '_wp_page_template', true);
+
+        if ( $pageTemplate == 'columnist-page.php' ) {       
+            add_meta_box(
+                'kaitain_columnist_meta',
+                __('Columnist List', 'kaitain'),
+                'kaitain_columnist_box_content',
+                'page'
+            );
+        }
+    }
+}
 add_action('add_meta_boxes', 'kaitain_columnist_meta_box');
 
 /**
@@ -37,17 +45,9 @@ add_action('add_meta_boxes', 'kaitain_columnist_meta_box');
 
 function kaitain_columnist_box_content($post) {
 
-
-    echo "<pre>";
-    var_dump($_POST);
-
-    echo " # ";
-    var_dump($_GET);
-
-    echo " # ";
-    var_dump($_REQUEST);
-    echo "</pre>";
-
+    //$test =  get_post_meta($post->ID, 'kaitain_columnist_list');
+    
+    
     // global $post_data;
     global $wpdb;
 
@@ -55,9 +55,10 @@ function kaitain_columnist_box_content($post) {
 
     
     // get saved settings
-    $columnist_list = get_option('kaitain_columnist_group');
+    $columnist_list = get_post_meta($post->ID, 'kaitain_columnist_list', true);
 
 
+    //highlight_string( '<?php '. var_export($columnist_list, true));
 
     $defaults = array(
         'orderby' => 'name', 'order' => 'ASC', 'number' => '',
@@ -93,18 +94,19 @@ function kaitain_columnist_box_content($post) {
         //  for each author
         //      add a checkbox to display them
         //      set the checkbox based on the saved setting
-        //foreach ( $authors as $author_id) {
-        //    $author = get_userdata( $author_id );
+        foreach ( $authors as $author_id) {
+            $author = get_userdata( $author_id );
             ?>
-          <!--   <li>
+             <li>
                 <fieldset>
-                    <input id="kaitain-columnist-checkbox-<?php echo $author_id;?>" name="make_columnist[<?php echo $author_id;?>]" type="checkbox">
+                    <input id="kaitain-columnist-checkbox-<?php echo $author_id;?>" name="make_columnist[<?php echo $author_id;?>]" type="checkbox" <?php if ( in_array( $author_id, $columnist_list ) ) echo "checked"; ?>>
                     <label for="kaitain-columnist-checkbox-<?php echo $author_id;?>">
                         <?php echo $author->first_name.' '.$author->last_name.' ('.$author->user_nicename.')'; ?>
                     </label>
                 </fieldset>
-            </li>-->  
-        <?php //} 
+            </li> 
+        <?php } 
+
         ?>
 
         <input type="text" name="test"> 
@@ -152,6 +154,13 @@ function kaitain_update_columnist_meta_box($post_id) {
     //     $make_columnist = $_POST['make_columnist'];
     //     update_post_meta( $post_id, 'kaitiain_columnist_list', $make_columnist );  
     // }
+
+    $columnist_list = array_keys($_POST['make_columnist'], 'on');
+
+
+    
+    update_post_meta( $post_id, 'kaitain_columnist_list', $columnist_list ); 
+    update_option('kaitain_columnist_group', $columnist_list);
 }
 
 add_action('save_post', 'kaitain_update_columnist_meta_box');

@@ -21,6 +21,8 @@ get_header();
 // Add search form
 //kaitain_partial('searchform', 'columnist');
 
+// 
+$columnist_list = get_post_meta($post->ID, 'kaitain_columnist_list', true);
 // If a search is done at this page then do the search on authors
 if (isset($_GET['c'])) {
     $author_search_query = esc_attr($_GET['c']);
@@ -29,7 +31,15 @@ if (isset($_GET['c'])) {
             'search_columns' => array( 'display_name', 'user_nicename' )
     );
     $author_query = new WP_User_Query( $args );
-    $total = count($author_query->results);
+
+    //$total = count($author_query->results);
+    $total = 0;
+    foreach ( $author_query->results as $author ) {
+        $author_id = $author->ID;
+        if ( in_array( $author_id, $columnist_list) ) {
+            $total++;
+        }
+    }
     $result = $total === 1 ? 'torthaí' : 'tordagh'; ?>
     <div class="searchform vspace--full" id="searchform">
         <form class="searchform__form vspace--half" id="searchform__form" method="get" action="/authors/" autocomplete="off">
@@ -85,62 +95,65 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
     $buff .= "<div class=\"columnist-container\">";
 
     $authors = $author_query;
+
     foreach ( $author_query->results as $author ) {
         $author_id = $author->ID;
-        //$author = get_userdata( $author_id );
-    //  $link = "<a href=\"$author->\"></a>";
-        $name = "<span class=\"name\">$author->first_name $author->last_name</span>";
+        if ( in_array( $author_id, $columnist_list) ) {
+            //$author = get_userdata( $author_id );
+        //  $link = "<a href=\"$author->\"></a>";
+            $name = "<span class=\"name\">$author->first_name $author->last_name</span>";
 
-        $avatar =   kaitain_avatar_background_html(
-                        $author->ID,
-                        'medium', 
-                        'columnist-avatar',
-                        false
-                    );
+            $avatar =   kaitain_avatar_background_html(
+                            $author->ID,
+                            'medium', 
+                            'columnist-avatar',
+                            false
+                        );
 
-        $author_link = sprintf(
-            '<a href="%1$s" title="%2$s" rel="author">%3$s %4$s</a>',
-            esc_url( get_author_posts_url( $author_id, $author->nicename ) ),
-            esc_attr( sprintf( __( 'Articles by %s' ), $name ) ),
-            $avatar,
-            $name
-        );
+            $author_link = sprintf(
+                '<a href="%1$s" title="%2$s" rel="author">%3$s %4$s</a>',
+                esc_url( get_author_posts_url( $author_id, $author->nicename ) ),
+                esc_attr( sprintf( __( 'Articles by %s' ), $name ) ),
+                $avatar,
+                $name
+            );
 
-        $buff .=    "<div class=\"columnist\">";
-        // Avatar
-        
-        // Columnist name and link to author page
-        $buff .=    $author_link;
-        
-        $author_posts_args = array(
-            'author'    => $author_id,
-            'order'     => 'DESC',
-            'orderby'   => 'date'   
-        );
+            $buff .=    "<div class=\"columnist\">";
+            // Avatar
+            
+            // Columnist name and link to author page
+            $buff .=    $author_link;
+            
+            $author_posts_args = array(
+                'author'    => $author_id,
+                'order'     => 'DESC',
+                'orderby'   => 'date'   
+            );
 
-        $author_posts = get_posts( $author_posts_args );
+            $author_posts = get_posts( $author_posts_args );
 
-        if($author_posts) {
+            if($author_posts) {
 
-            $trim = kaitain_section_css(get_the_category($author_posts[0]->ID)[0]);
-            $class = $trim['texthover'];
-            //print_r($authors_posts);
-            // print top post title
-            //$buff .= "<a href=\"".get_permalink($author_posts[0]->ID)."\">".$author_posts[0]->post_title."</a>";
-            $buff .=    "<h3 class=\"recent-post $class \"><a href=\"".get_permalink($author_posts[0]->ID)."\">".$author_posts[0]->post_title."</a></h3>";
+                $trim = kaitain_section_css(get_the_category($author_posts[0]->ID)[0]);
+                $class = $trim['texthover'];
+                //print_r($authors_posts);
+                // print top post title
+                //$buff .= "<a href=\"".get_permalink($author_posts[0]->ID)."\">".$author_posts[0]->post_title."</a>";
+                $buff .=    "<h3 class=\"recent-post $class \"><a href=\"".get_permalink($author_posts[0]->ID)."\">".$author_posts[0]->post_title."</a></h3>";
+            }
+            //$buff .=  "<h3 class=\"recent-post\"><a href=\"#\">Title of recent post by this author here that links to that post</a></h3>";
+            $buff .=    "</div>";
+            
+            //the_author_posts_link();
+            /*
+            if ($row_count % 6 === 0 && $row_count !== 0){
+                $buff .= "</div>";
+                $buff .= "<div class=\"columnist-row\">";
+            }
+
+            $row_count++;
+            */
         }
-        //$buff .=  "<h3 class=\"recent-post\"><a href=\"#\">Title of recent post by this author here that links to that post</a></h3>";
-        $buff .=    "</div>";
-        
-        //the_author_posts_link();
-        /*
-        if ($row_count % 6 === 0 && $row_count !== 0){
-            $buff .= "</div>";
-            $buff .= "<div class=\"columnist-row\">";
-        }
-
-        $row_count++;
-        */
     }
 
     $buff .=    "</div>"; // columnist-container div
@@ -168,12 +181,11 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
 		'style' => 'list', 'html' => true, 'exclude' => '', 'include' => '',
 				
 	);
-	$exclude_users = get_option('kaitain_verboten_users');
-    $include_users = get_option('kaitain_columnist_group');
 
-    echo '<pre>';
-    var_dump($include_users);
-    echo '</pre>';
+    // Include and exclude arguments cannot be used together in the same query
+    // Use the exclude_users array of id's for custom searches.
+    // when displaying results check the kaitain_columnist_list postmeta
+	$exclude_users = get_option('kaitain_verboten_users');
 
 	if (!empty($search)) {
 		$args = array(
@@ -184,7 +196,7 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
 	} else {
 		$args = array(
 	        'orderby' => 'name', 'order' => 'ASC', 'number' => '',
-			'exclude' => $exclude_users, 'include' => '',
+			'exclude' => '', 'include' => $columnist_list,
 		);	
 	}
 
@@ -209,64 +221,65 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
 	$buff .= "<div class=\"columnist-container\">";
 
 	foreach ( $authors as $author_id ) {
+        if ( in_array( $author_id, $columnist_list) ):
+            $author = get_userdata( $author_id );
+        //  $link = "<a href=\"$author->\"></a>";
+            $name = "<span class=\"name\">$author->first_name $author->last_name</span>";
 
-		$author = get_userdata( $author_id );
-	//	$link = "<a href=\"$author->\"></a>";
-		$name = "<span class=\"name\">$author->first_name $author->last_name</span>";
+            $avatar =   kaitain_avatar_background_html(
+                            $author->ID,
+                            'medium', 
+                            'columnist-avatar',
+                            false
+                        );
 
-		$avatar = 	kaitain_avatar_background_html(
-						$author->ID,
-						'medium', 
-						'columnist-avatar',
-						false
-					);
+            $author_link = sprintf(
+                '<a href="%1$s" title="%2$s" rel="author">%3$s %4$s</a>',
+                esc_url( get_author_posts_url( $author_id, $author->user_nicename ) ),
+                esc_attr( sprintf( __( 'Articles by %s' ), $name ) ),
+                $avatar,
+                $name
+            );
 
-		$author_link = sprintf(
-	        '<a href="%1$s" title="%2$s" rel="author">%3$s %4$s</a>',
-	        esc_url( get_author_posts_url( $author_id, $author->user_nicename ) ),
-	        esc_attr( sprintf( __( 'Articles by %s' ), $name ) ),
-	        $avatar,
-	        $name
-		);
+            
+            $buff .=    "<div class=\"columnist\">";
+            // Avatar
+            
+            // Columnist name and link to author page
+            $buff .=    $author_link;
+            
 
-		
-		$buff .= 	"<div class=\"columnist\">";
-		// Avatar
-		
-		// Columnist name and link to author page
-		$buff .= 	$author_link;
-		
+            $author_posts_args = array(
+                'author'    => $author_id,
+                'order'     => 'DESC',
+                'orderby'   => 'date'   
+            );
 
-		$author_posts_args = array(
-			'author'	=> $author_id,
-			'order'		=> 'DESC',
-			'orderby'	=> 'date'	
-		);
+            $author_posts = get_posts( $author_posts_args );
 
-		$author_posts = get_posts( $author_posts_args );
+            if($author_posts) {
 
-		if($author_posts) {
+                $trim = kaitain_section_css(get_the_category($author_posts[0]->ID)[0]);
+                $class = $trim['texthover'];
+                //print_r($authors_posts);
+                // print top post title
+                //$buff .= "<a href=\"".get_permalink($author_posts[0]->ID)."\">".$author_posts[0]->post_title."</a>";
+                $buff .=    "<h3 class=\"recent-post $class \"><a href=\"".get_permalink($author_posts[0]->ID)."\">".$author_posts[0]->post_title."</a></h3>";
+            }
+            //$buff .=  "<h3 class=\"recent-post\"><a href=\"#\">Title of recent post by this author here that links to that post</a></h3>";
+            $buff .=    "</div>";
+            
+            //the_author_posts_link();
 
-			$trim = kaitain_section_css(get_the_category($author_posts[0]->ID)[0]);
-			$class = $trim['texthover'];
-			//print_r($authors_posts);
-			// print top post title
-			//$buff .= "<a href=\"".get_permalink($author_posts[0]->ID)."\">".$author_posts[0]->post_title."</a>";
-			$buff .=	"<h3 class=\"recent-post $class \"><a href=\"".get_permalink($author_posts[0]->ID)."\">".$author_posts[0]->post_title."</a></h3>";
-		}
-		//$buff .=	"<h3 class=\"recent-post\"><a href=\"#\">Title of recent post by this author here that links to that post</a></h3>";
-		$buff .= 	"</div>";
-		
-		//the_author_posts_link();
+            /*
+            if ($row_count % 6 === 0 && $row_count !== 0){
+                $buff .= "</div>";
+                $buff .= "<div class=\"columnist-row\">";
+            }
 
-		/*
-		if ($row_count % 6 === 0 && $row_count !== 0){
-			$buff .= "</div>";
-			$buff .= "<div class=\"columnist-row\">";
-		}
-
-		$row_count++;
-		*/
+            $row_count++;
+            */
+        endif;
 	}
 
 	$buff .= 	"</div>"; // columnist-container div
