@@ -19,7 +19,8 @@ $query = get_search_query();
 $action = esc_url(home_url('/'));
 
 $total = $wp_query->found_posts;
-$result = $total === 1 ? 'torthaí' : 'tordagh';
+//$result = ($total === 1) ? 'torthaí' : 'tordagh';
+$result = ($total == 1) ? 'torthaí' : 'torthaí';
 
 ?>
 
@@ -34,10 +35,7 @@ $result = $total === 1 ? 'torthaí' : 'tordagh';
         <span class="searchform__meta--right float--right">
             <?php _e('Saghas:', 'kaitain'); ?>
             <a class="green-link searchform__order--oldest" href="<?php arc_search_url('asc'); ?>"><?php _e('sine', 'kaitain'); ?></a> |
-            <a class="green-link searchform__order--newest" href="<?php arc_search_url('desc'); ?>"><?php _e('is nua', 'kaitain'); ?></a><br>
-            <span class="advanced-search float--right">
-                <button class="btn" href="#" data-bind="click: showSearchOptions"><?php _e('Cuardach níos mó', 'kaitain'); ?></button>
-            </span>
+            <a class="green-link searchform__order--newest" href="<?php arc_search_url('desc'); ?>"><?php _e('is nua', 'kaitain'); ?></a>
         </span>
     </div>
 </div>

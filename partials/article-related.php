@@ -20,10 +20,10 @@ $trim = kaitain_section_css(get_the_category()[0]);
 
 <article <?php post_class('article--related'); ?> id="article--related--<?php the_ID(); ?>">
     <a class="<?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
-        <div class="thumbnail vspace--half">
+        <div class="thumbnail img-frame">
             <?php post_image_html(get_the_ID(), 'tc_post_related', true); ?>
-            <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
         </div>
+        <div class="archive-trim-bottom vspace--half <?php printf($trim['bg']); ?>"></div>
         <header>
             <?php the_title('<h5 class="title vspace--half">', '</h5>'); ?>
             <?php if (!is_page()) : ?>

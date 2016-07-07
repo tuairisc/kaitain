@@ -17,8 +17,8 @@ get_header(); ?>
 
 <div id="error">
     <h1><?php _e('Earráid 404', 'kaitain'); ?></h1>
-    <p><?php _e('Aistear amú – tada anseo. :&#40;', 'kaitain'); ?></p>
-    <p><small><a class="green-link" href="<?php printf(site_url()); ?>"><?php _e('téigh abhaile', 'kaitain'); ?></a></small></p>
+	<p><?php _e('Turas in aisce – tada anseo. :&#40;', 'kaitain'); ?></p> 
+    <p><small><a class="green-link" href="<?php printf(site_url()); ?>"><?php _e('Fill ar leathanach baile Tuairisc.ie', 'kaitain'); ?></a></small></p>
 </div>
 
 <?php get_footer(); ?>

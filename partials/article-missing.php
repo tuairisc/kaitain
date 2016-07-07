@@ -15,4 +15,4 @@
 
 ?>
 
-<p><?php _e('No matching posts were found! :&#40;', 'kaitain'); ?></p>
+<p><?php _e('Torthaí cuardaigh le haghaidh : 0', 'kaitain'); ?></p>

@@ -23,8 +23,8 @@ $trim = kaitain_section_css(get_the_category()[0]);
         <div class="col-md-4">
             <div class="thumbnail article-archive-thumbnail img-frame">
                 <?php post_image_html(get_the_ID(), 'tc_post_archive', true); ?>
-                <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
             </div>
+            <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
         </div>
         <div class="article-archive-content col-md-8">
             <header class="article-archive-header vspace--half">

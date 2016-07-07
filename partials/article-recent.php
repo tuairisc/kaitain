@@ -30,7 +30,7 @@ $post_classes = array(
         <div class="post-content article__postcontent col-sm-12 col-xs-8 <?php printf($trim['bg']); ?>">
             <header class="article-recent-header">
                 <h5 class="title article-recent-title vspace--quarter">
-                    <?php the_title(); ?>
+                    <?php echo kaitain_excerpt( get_the_title(), 15 ); ?>
                 </h5>
                 <h6 class="post-date article__postmeta">
                     <time datetime="<?php the_time('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time>
