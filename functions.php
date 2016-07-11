@@ -128,7 +128,8 @@ function kaitain_includes() {
         'featured-edit-box.php',
         'notice-edit-box.php',
         'toggle-featured-image.php',
-        'columnist-edit-box.php'
+        'columnist-edit-box.php',
+        'category-image-edit-foghlaimeoiri.php'
     );
 
     foreach ($includes as $script) {

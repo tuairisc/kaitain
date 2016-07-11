@@ -15,9 +15,19 @@
 
 get_header();
 global $cat;
-
 $page_number = intval(get_query_var('paged'));
 $meta_key = get_option('kaitain_featured_post_key');
+
+if ( $opt_array = get_option('foghlaimeoiri_'.$cat.'_meta') ){
+	$category_image = sanitize_text_field($opt_array['category_image']);
+	?>
+
+	<div class="foghlaimeoiri-image img-frame category-lead-image">
+		<img src="<?php echo $category_image; ?>" class="" />
+	</div>
+
+	<?php
+}
 
 kaitain_education_section_pane('sraith-pictiur');
 kaitain_education_section_pane('leamhthuiscinti');
