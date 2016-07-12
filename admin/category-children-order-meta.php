@@ -33,7 +33,6 @@ function kaitain_edit_children_order_meta_form($term_obj){
 	if ( $opt_array = get_option( $id.'_meta') ){
 		$children_order_meta = $opt_array['children_order_meta'];
 		$use_display_order = $opt_array['use_display_order'];
-		highlight_string('<?php '.var_export( get_option( $id.'_meta'), true ) );
 	}
 	?>
 
