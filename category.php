@@ -21,6 +21,9 @@ $page_number = intval(get_query_var('paged'));
 $meta_key = get_option('kaitain_featured_post_key');
 $children = get_categories(array('child_of' => $cat));
 $featured_post_id = 0;
+$opt_array = get_option( $cat.'_meta' );
+$use_display_order = $opt_array['use_display_order'];
+$children_order_meta = $opt_array['children_order_meta'];
 
 /**
  * Get Lead Featured Category Post
@@ -60,7 +63,14 @@ if ($page_number < 2) {
         'order' => 'ASC'
     ));
 
-    if (!empty($children_categories)) {
+    // get parent category term meta for displaying order of sub categories
+    if ( $use_display_order && !empty($children_order_meta) ){
+
+        foreach ($children_order_meta as $cat_ID => $order) {
+            bh_category_widget_output($cat_ID, 4);
+        }
+    } // if there is no display order set or it is disabled sort sub-categories by name
+    else if (!empty($children_categories) ) {
         foreach ($children_categories as $child) {
             bh_category_widget_output($child->cat_ID, 4);
         }

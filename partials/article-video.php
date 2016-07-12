@@ -24,7 +24,11 @@ $word_limit = 20;
     <a class="article-video-link <?php printf( $trim['texthover'] ); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <!-- <div class="section-trim <?php printf( $trim['bg'] ); ?>"></div> -->
         <div class="thumbnail article-video-thumb img-frame col-xs-6 col-sm-6 col-md-6">
-            <?php ( get_field('youtube_embed_code') )? the_field('youtube_embed_code') : post_image_html( get_the_ID(), 'tc_home_feature_small', true ) ; ?>
+            <div class="video-icon-overlay"></div>
+            <?php
+            //( get_field('youtube_embed_code') )? the_field('youtube_embed_code') : post_image_html( get_the_ID(), 'tc_home_feature_small', true );
+            post_image_html( get_the_ID(), 'small', true );
+            ?>
         </div>
         <div class="title-container col-xs-6 col-sm-6 col-md-6">
             <h5 class="title article--small__title"><?php printf( kaitain_excerpt( get_the_title(), $word_limit )); ?></h5>
