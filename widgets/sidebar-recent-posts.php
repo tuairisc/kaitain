@@ -213,7 +213,8 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
                                     <?php echo kaitain_excerpt( get_the_title(), $instance['word_limit'] ); ?>
                                 </h5>
                                 <h6 class="post-date article__postmeta">
-                                    <time datetime="<?php the_time('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time>
+                                    <time datetime="<?php the_time('Y-m-d H:i'); ?>">
+                                    <?php the_post_date_strftime(); ?></time>
                                 </h6>
                             </header>
                         </div>

@@ -492,7 +492,6 @@ if (!function_exists('write_log')) {
 }
 
 
-
 function kaitain_enqueue_custom_admin_scripts($hook) {
 
     if ( 'post.php' != $hook ) {
