@@ -95,7 +95,6 @@ $post_classes = array(
                                     <h5 class="post-date article--full__date">
                                         <time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php 
                                         printf("%s ag %s", get_the_time('l, F j Y'), get_the_time('g:i a'));
-                                        //the_post_date_strftime();
                                         ?></time>
                                     </h5>
 

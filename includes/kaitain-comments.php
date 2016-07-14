@@ -38,10 +38,11 @@ function kaitain_theme_comments($comment, $args, $depth) {
             <header class="comments__header vspace--quarter">
                 <h5 class="comments__meta">
                     <span class="comments__author-website"><?php comment_author_link(); ?></span>
-                    <?php printf('<span class="%s"><time datetime="%s">%s</time></span>',
+                    <?php printf('<span class="%s"><time datetime="%s">%s ag %s</time>/span>',
                         'post-date',
                         get_comment_date('Y-M-d H:i'),
-                        get_comment_date_strftime()
+                        get_comment_time('l, F j Y'),
+                        get_comment_time('g:i a')
                     ); ?>
                 </h5>
             </header>

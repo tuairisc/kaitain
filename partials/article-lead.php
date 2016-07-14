@@ -32,7 +32,7 @@ $trim = kaitain_section_css(get_the_category()[0]);
                 <a class="article--lead__author-link text--bold green-link--hover" href="<?php printf(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php the_author(); ?></a>
                 <?php endif; ?>
         </h4>
-        <h5 class="post-meta article--lead__meta"><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime(); ?></time></h5>
+        <h5 class="post-meta article--lead__meta"><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php printf("%s ag %s", get_the_time('l, F j Y'), get_the_time('g:i a')); ?></time></h5>
     </header>
     <p class="post-excerpt article--lead__excerpt"><?php printf(get_the_excerpt()); ?></p>
 </article>

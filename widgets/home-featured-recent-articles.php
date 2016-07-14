@@ -216,7 +216,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                         <a class="article--lead__author-link text--bold green-link--hover" href="<?php printf(get_author_posts_url($featured[0]->post_author)); ?>"><?php the_author_meta('display_name', $featured[0]->post_author); ?></a>
                                         <?php endif; ?>
                                 </h4> 
-                                <h5 class="post-meta article--lead__meta"><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php the_post_date_strftime($featured[0]->ID); ?></time></h5>
+                                <h5 class="post-meta article--lead__meta"><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php printf("%s ag %s", get_the_time('l, F j Y', $featured[0]->ID), get_the_time('g:i a', $featured[0]->ID)); ?></time></h5>
                             </header>
                             <p class="post-excerpt article--lead__excerpt"><?php printf( kaitain_excerpt( $featured[0]->post_excerpt, 55 )); ?></p>
                             </div>
