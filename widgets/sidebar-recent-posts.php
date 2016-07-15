@@ -199,7 +199,6 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
                 $post_classes = array(
                     'article--sidebar', 'vspace--full', 'col-xs-12'
                 );
-
                 ?>
                 <article <?php post_class($post_classes); ?> id="article--sidebar--<?php the_id(); ?>">
                     <a class="<?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
@@ -214,7 +213,7 @@ class Kaitain_Recent_Posts_Sidebar_Widget extends WP_Widget {
                                 </h5>
                                 <h6 class="post-date article__postmeta">
                                     <time datetime="<?php the_time('Y-m-d H:i'); ?>">
-                                    <?php printf("%s ag %s", get_the_time('l, F j Y'), get_the_time('g:i a')); ?></time>
+                                    <?php printf("%s", get_the_time('l, F j Y')); ?></time>
                                 </h6>
                             </header>
                         </div>

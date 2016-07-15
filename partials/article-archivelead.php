@@ -28,7 +28,7 @@ $trim = kaitain_section_css(get_the_category()[0]);
                         <a class="article--lead__author-link text--bold green-link--hover" href="<?php printf(get_author_posts_url($featured[0]->post_author)); ?>"><?php the_author_meta('display_name', get_the_author_ID()); ?></a>
                     <?php endif; ?>
                 </h4>
-                <h5 class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php printf("%s ag %s", get_the_time('l, F j Y'), get_the_time('g:i a')); ?></time></h5>
+                <h5 class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php printf("%s", get_the_time('l, F j Y')); ?></time></h5>
             </header>
             <p class="post-excerpt article-archivelead-excerpt"><?php printf(get_the_excerpt()); ?></p>
         </div>

@@ -33,7 +33,7 @@ $post_classes = array(
                     <?php echo kaitain_excerpt( get_the_title(), 15 ); ?>
                 </h5>
                 <h6 class="post-date article__postmeta">
-                    <time datetime="<?php the_time('Y-m-d H:i'); ?>"><?php printf("%s ag %s", get_the_time('l, F j Y'), get_the_time('g:i a')); ?></time>
+                    <time datetime="<?php the_time('Y-m-d H:i'); ?>"><?php printf("%s", get_the_time('l, F j Y')); ?></time>
                 </h6>
             </header>
         </div>

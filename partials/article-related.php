@@ -28,7 +28,7 @@ $trim = kaitain_section_css(get_the_category()[0]);
             <?php the_title('<h5 class="title vspace--half">', '</h5>'); ?>
             <?php if (!is_page()) : ?>
                 <h5 class="post-date">
-                    <time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php printf("%s ag %s", get_the_time('l, F j Y'), get_the_time('g:i a')); ?></time>
+                    <time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php printf("%s", get_the_time('l, F j Y')); ?></time>
                 </h5>
             <?php endif; ?>
         </header>
