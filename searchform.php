@@ -20,7 +20,7 @@ $action = esc_url(home_url('/'));
 
 $total = $wp_query->found_posts;
 //$result = ($total === 1) ? 'torthaí' : 'tordagh';
-$result = ($total === 1) ? 'tortha' : 'torthaí';
+//$result = ($total === 1) ? 'tortha' : 'torthaí';
 
 ?>
 
@@ -31,7 +31,7 @@ $result = ($total === 1) ? 'tortha' : 'torthaí';
         </fieldset>
     </form>
     <div class="searchform__meta">
-        <span class="searchform__meta--left float--left"><?php printf('%d %s', $total, $result); ?></span>
+        <span class="searchform__meta--left float--left"><?php printf('Torthaí: %d', $total); ?></span>
         <span class="searchform__meta--right float--right">
             <?php _e('Sórtáil:', 'kaitain'); ?>
             <a class="green-link searchform__order--oldest" href="<?php arc_search_url('asc'); ?>"><?php _e('is sine', 'kaitain'); ?></a> |
