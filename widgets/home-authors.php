@@ -163,7 +163,7 @@ class Kaitain_Columnist_Widget extends WP_Widget {
             printf('%s', $defaults['before_widget']);
         }
 
-        printf('<a href="%s">%s</a>',
+        printf('<a href="%s" class="widget-title-link">%s</a>',
 		$link,
 		$defaults['before_title'] . $title . $defaults['after_title']
 	);
