@@ -48,12 +48,12 @@ $post_classes = array(
         <p class="article--full__excerpt"><?php printf(get_the_excerpt()); ?></p>
     <?php } ?>
     <?php // Featured image ?>
-    <div class="thumbnail article--lead__thumb img-frame">
+    <div class="thumbnail article--lead__thumb img-frame vspace--full">
         <?php post_image_html(get_the_ID(), 'full', true); ?>
         <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
     </div>
 
-    <div class="flex-row">
+    <!-- <div class="flex-row"> -->
 
         <div class="main__content" id="main__content">
 

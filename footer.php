@@ -20,9 +20,9 @@ global $sections;
         </div><?php // End #content ?>
         <?php if (!is_404()) {
             get_sidebar(); 
-                if( is_single() ) {
-                    echo "</div>"; // ends the div.flex-row
-                }
+                // if( is_single() ) {
+                //     echo "</div>"; // ends the div.flex-row
+                // }
         } ?>
     </main><?php // End #main ?>
 

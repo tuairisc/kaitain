@@ -182,7 +182,7 @@ class Kaitain_Recent_Posts_Widget extends WP_Widget {
 
         foreach ($recent as $post) {
 
-            printf('<div class="recent-widget col-md-3 col-sm-3 col-xs-12 tuairisc-post-widget">');
+            printf('<div class="recent-widget col-md-3 col-sm-3 col-xs-12 tuairisc-post-widget vspace--full">');
             setup_postdata($post);
             kaitain_partial('article', 'recent');
             wp_reset_postdata();
