@@ -16,7 +16,6 @@
 global $sections;
 
 $action = esc_url(home_url('/'));
-$placeholder = __('curdaigh', 'kaitain');
 
 ?>
 

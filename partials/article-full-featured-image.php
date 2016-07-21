@@ -14,7 +14,7 @@
  */
 
 $author = get_the_author_meta('ID');
-
+$placeholder = __('Cuardaigh', 'kaitain');
 $post_classes = array(
     'article--full', 'vspace--full', 'article-full-featured-image'
 );
@@ -43,9 +43,9 @@ $post_classes = array(
 <main class="main "id="main">
 
 <?php // Article title ?>
-    <h1 class="title article--full__title"><a class="green-link--hover" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+    <h1 class="title article--full__title col-xs-12"><a class="green-link--hover" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
     <?php if (!is_page()) { ?>
-        <p class="article--full__excerpt"><?php printf(get_the_excerpt()); ?></p>
+        <p class="article--full__excerpt col-xs-12"><?php printf(get_the_excerpt()); ?></p>
     <?php } ?>
     <?php // Featured image ?>
     <div class="thumbnail article--lead__thumb img-frame vspace--full">

@@ -15,7 +15,7 @@
 
 $page_number = intval(get_query_var('paged'));
 get_header('post');
-$placeholder = __('curdaigh', 'kaitain');
+$placeholder = __('Cuardaigh', 'kaitain');
 
 /* 1. Big Lead Article.
  * 2. Second and third rows of articles.
