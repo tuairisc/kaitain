@@ -491,17 +491,51 @@ if (!function_exists('write_log')) {
     }
 }
 
-
-function kaitain_enqueue_custom_admin_scripts($hook) {
-
-    if ( 'post.php' != $hook ) {
-        error_log( "!= post.php" );
-        return;
-    } else if ( current_user_can('edit_post') ) {
-        wp_enqueue_script( 'youtube_embed_code', get_template_directory_uri() . "/assets/js/youtube-embed-code.js" );
+function kaitain_get_columnist_list () {
+    $columnist_list = get_post_meta($post->ID, 'kaitain_columnist_list', true);
+    if (empty($columnist_list)) {
+        $columnist_list = array (
+                        0 => 96,
+                        1 => 109,
+                        2 => 26,
+                        3 => 38,
+                        4 => 39,
+                        5 => 74,
+                        6 => 27,
+                        7 => 47,
+                        8 => 32,
+                        9 => 14,
+                        10 => 92,
+                        11 => 67,
+                        12 => 19,
+                        13 => 28,
+                        14 => 93,
+                        15 => 20,
+                        16 => 68,
+                        17 => 73,
+                        18 => 41,
+                        19 => 21,
+                        20 => 15,
+                        21 => 9,
+                        22 => 57,
+                        23 => 8,
+                        24 => 23,
+                        25 => 34,
+                        26 => 18,
+                        27 => 89,
+                        28 => 40,
+                        29 => 17,
+                        30 => 10,
+                        31 => 104,
+                        32 => 42,
+                        33 => 63,
+                        34 => 2,
+                        35 => 138,
+                        36 => 97,
+                    );
+        print_r("<!-- hard list -->");
     }
-
+    return $columnist_list;
 }
-//add_action( 'admin_enqueue_scripts', 'kaitain_enqueue_custom_admin_scripts' );
 
 ?>
