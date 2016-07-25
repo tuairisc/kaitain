@@ -50,6 +50,9 @@ function kaitain_columnist_box_content($post) {
     
     // get saved settings
     $columnist_list = get_post_meta($post->ID, 'kaitain_columnist_list', true);
+    if ( empty($columnist_list) && function_exists('kaitain_get_columnist_list') ){
+        $columnist_list = kaitain_get_columnist_list();
+    }
 
     // Debug code
     // highlight_string( '<?php '. var_export($columnist_list, true));
