@@ -22,6 +22,18 @@ get_header();
 
 // Add search form
 $columnist_list = get_post_meta($post->ID, 'kaitain_columnist_list', true);
+
+// DEBUG CODE ////////////////////
+
+?>
+<div style="display:none">
+<?php
+print_r($columnist_list);
+?>
+</div>
+<?php
+//////////////////////////////////
+
 // If a search is done at this page then do the search on authors
 if (isset($_GET['c'])) {
     $author_search_query = esc_attr($_GET['c']);
