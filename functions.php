@@ -492,7 +492,7 @@ if (!function_exists('write_log')) {
 }
 
 if (!function_exists('kaitain_get_columnist_list')) {
-    function kaitain_get_columnist_list {
+    function kaitain_get_columnist_list (){
         $columnist_list = get_post_meta($post->ID, 'kaitain_columnist_list', true);
         if (empty($columnist_list)) {
             $columnist_list = array (
