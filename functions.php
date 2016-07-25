@@ -491,6 +491,8 @@ if (!function_exists('write_log')) {
     }
 }
 
+// Columnist page author list
+// Use hard coded values when initialy switching to live server
 if (!function_exists('kaitain_get_columnist_list')) {
     function kaitain_get_columnist_list (){
         $columnist_list = get_post_meta($post->ID, 'kaitain_columnist_list', true);
@@ -539,4 +541,24 @@ if (!function_exists('kaitain_get_columnist_list')) {
         return $columnist_list;
     }
 }
+
+// Home page author list
+// Use hard coded values when initialy switching to live server
+if (!function_exists('kaitain_get_home_authors')) {
+    function kaitain_get_home_authors( $instance ) {
+        $author_list = $instance['author_list'];
+        if ( empty( $author_list ) ) {
+            $author_list = array (
+                0 => '8',
+                1 => '17',
+                2 => '19',
+                3 => '32'
+            );
+        }
+        return $author_list;
+    }
+}
+
+
+
 ?>

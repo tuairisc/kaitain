@@ -45,6 +45,10 @@ class Kaitain_Columnist_Widget extends WP_Widget {
 
         $instance = wp_parse_args($instance, $defaults);
 
+        if ( empty($instance['author_list']) && function_exists('kaitain_get_home_authors')) {
+            $instance['author_list'] = kaitain_get_home_authors($instance);
+        }
+
         $exclude_users = get_option('kaitain_verboten_users');
 
         $site_users = get_users(array(
@@ -144,10 +148,15 @@ class Kaitain_Columnist_Widget extends WP_Widget {
         );
 
         $title = apply_filters('widget_title', $instance['widget_title']);
-	$link = $instance['all_authors_link'];
+        $link = $instance['all_authors_link'];
+
+        $author_list = $instance['author_list'];
+        if ( empty($instance['author_list']) && function_exists('kaitain_get_home_authors') ) {
+            $author_list = kaitain_get_home_authors($instance);
+        }
 
         $author_query = get_users(array(
-            'include' => $instance['author_list'],
+            'include' => $author_list,
         ));
 
         /*
