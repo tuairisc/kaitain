@@ -559,6 +559,85 @@ if (!function_exists('kaitain_get_home_authors')) {
     }
 }
 
+// For the shortcodes from gazeti
+
+$education_categories = array(
+    /* There are five sub-categories within the education category, 187 being
+     * the parent. */
+    187, 202, 203, 204, 205, 206, 344
+);
+
+
+function education_landing_shortcode($atts) {
+    /**
+     * Education Landing Shortcode
+     * ---------------------------
+     * The education landing page links through to the five different segments.
+     * These are boxy clickable boxes complete with title and description.
+     *
+     * @param {array} $attributes Shortcode values.
+     * @return {string} $education
+     */
+
+    global $education_categories;
+    $shortcode_atts = shortcode_atts(array('id' => 0), $atts);
+    $category_id = '';
+    $education_html = '';
+
+    // Change $id to 0 if it falls outside 0-5 range.
+    if ($shortcode_atts['id'] < 0 || $shortcode_atts['id'] > 6) {
+        $category_id = $education_categories[0];
+    } else {
+        $category_id = $education_categories[$shortcode_atts['id']];
+    }
+
+    $education_html = '<div class="education-box education-'
+        . $category_id . '"><a href="' . get_category_link($category_id)
+        . '"><p><span>' . get_cat_name($category_id) . '</span><br />'
+        . category_description($category_id) . '</a></p></div>';
+
+    return $education_html;
+}
+
+function education_banner_shortcode($attributes, $content = null) {
+    /**
+     * Education Banner Shortcode
+     * --------------------------
+     * Generate either a tall or short dividing subheading banners for within
+     * education section posts.
+     *
+     * @param {array} $attributes Shortcode attributes.
+     * @param {string} $content Banner message.
+     * @return {string} $banner Dividing banner.
+     */
+
+    $banner = array();
+    // h2
+    $headline_type = 2;
+    $headline_class = 'edu-heading';
+    $shortcode_atts = shortcode_atts(array('type' => 'main'), $attributes);
+
+    if (is_null($content)) {
+        $content = 'Did you forget to include text?';
+    }
+
+    if ('main' !== $shortcode_atts['type']) {
+        // If the banner is not 'main', change h2 to h2 and heading to subheading.
+        $headline_type = 3;
+        $headline_class = str_replace('-h', '-subh', $headline_class);
+    }
+
+    $banner[] = '<h' . $headline_type . ' class="' . $headline_class . '">';
+    $banner[] = $content;
+    $banner[] = '</h' . $headline_type . '>';
+
+    return implode('', $banner);
+}
+
+// Add shortcode for landing.
+add_shortcode('landing', 'education_landing_shortcode');
+// Add shortcode for education banners.
+add_shortcode('banner', 'education_banner_shortcode');
 
 
 ?>
