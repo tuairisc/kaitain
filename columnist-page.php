@@ -24,7 +24,10 @@ $page_slug = $post->post_name;
  */
 
 // Add search form
-$columnist_list = kaitain_get_columnist_list();
+//$columnist_list = kaitain_get_columnist_list();
+$columnist_list = get_post_meta($post->ID, 'kaitain_columnist_list', true);
+
+
 
 // If a search is done at this page then do the search on authors
 if (isset($_GET['c'])) {
@@ -93,7 +96,8 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
         $author_id = $author->ID;
         // Only display authors who are in the columnist_list 
         if ( in_array( $author_id, $columnist_list) ) {
-            $name = "<span class=\"name\">$author->first_name $author->last_name</span>";
+            $name1 = "<span class=\"name\">$author->first_name $author->last_name</span>";
+            $name2 = $author->first_name . ' ' . $author->last_name;
 
             $avatar =   kaitain_avatar_background_html(
                             $author->ID,
@@ -105,9 +109,9 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
             $author_link = sprintf(
                 '<a href="%1$s" title="%2$s" rel="author">%3$s %4$s</a>',
                 esc_url( get_author_posts_url( $author_id, $author->nicename ) ),
-                esc_attr( sprintf( __( 'Articles by %s' ), $name ) ),
+                esc_attr( sprintf( __( 'Articles by %s' ), $name2 ) ),
                 $avatar,
-                $name
+                $name1
             );
 
             $buff .=    "<div class=\"columnist\">";
@@ -198,7 +202,8 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
         // Only display authors who are in the columnist_list 
         if ( in_array( $author_id, $columnist_list) ):
             $author = get_userdata( $author_id );
-            $name = "<span class=\"name\">$author->first_name $author->last_name</span>";
+            $name1 = "<span class=\"name\">$author->first_name $author->last_name</span>";
+            $name2 = $author->first_name . ' ' . $author->last_name;
 
             $avatar =   kaitain_avatar_background_html(
                             $author->ID,
@@ -210,9 +215,9 @@ if (isset($_GET['c']) || $_GET['c'] != '') {
             $author_link = sprintf(
                 '<a href="%1$s" title="%2$s" rel="author">%3$s %4$s</a>',
                 esc_url( get_author_posts_url( $author_id, $author->user_nicename ) ),
-                esc_attr( sprintf( __( 'Articles by %s' ), $name ) ),
+                esc_attr( sprintf( __( 'Articles by %s' ), $name2 ) ),
                 $avatar,
-                $name
+                $name1
             );
 
             $buff .=    "<div class=\"columnist\">";
