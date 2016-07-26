@@ -15,6 +15,9 @@
 
 get_header();
 
+global $post;
+$page_slug = $post->post_name;
+
 /**
  *	Search form for Columnists
  *-----------------------------------------------------------------------------
@@ -42,7 +45,7 @@ if (isset($_GET['c'])) {
     }
     $result = $total === 1 ? 'torthaí' : 'tordagh'; ?>
     <div class="searchform vspace--full" id="searchform">
-        <form class="searchform__form vspace--half" id="searchform__form" method="get" action="/authors/" autocomplete="off">
+        <form class="searchform__form vspace--half" id="searchform__form" method="get" action="/<?php echo $page_slug; ?>/" autocomplete="off">
             <fieldset>
                 <input class="searchform__input" id="searchform__input" name="c" placeholder="<?php _e('Cuardaigh údar', 'kaitain'); ?>" type="text" value="<?php echo $author_search_query; ?>">
             </fieldset>
@@ -62,7 +65,7 @@ if (isset($_GET['c'])) {
 } else if (!isset($_GET['c']) || $_GET['c'] == '') {
 	?>
 	<div class="searchform vspace--full" id="searchform">
-        <form class="searchform__form vspace--half" id="searchform__form" method="get" action="/authors/" autocomplete="off">
+        <form class="searchform__form vspace--half" id="searchform__form" method="get" action="/<?php echo $page_slug; ?>/" autocomplete="off">
             <fieldset>
                 <input class="searchform__input" id="searchform__input" name="c" placeholder="<?php _e('
 Cuardaigh údar', 'kaitain'); ?>" type="text" value="">
