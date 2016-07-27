@@ -23,14 +23,19 @@
 function kaitain_edit_foghlaimeoiri_form($term_obj){	
 
 	if ( $term_obj->slug == 'foghlaimeoiri' ) {
+		highlight_string('<?php '.var_export($term_obj, true) );
+
+		highlight_string('<?php '.var_export($_GET, true) );
 
 		// clear values.
 		$category_image = 'http://';
 
 		// Clean tag id
-		$id = sanitize_text_field($_GET['tag_ID']);
+		$term_id = sanitize_text_field($_GET['tag_ID']);
 
-		if ( $opt_array = get_option('foghlaimeoiri_'.$id.'_meta') ){
+		echo "option: ";
+		highlight_string('<?php '.var_export(get_option('foghlaimeoiri_'.$term_id.'_meta'), true) );
+		if ( $opt_array = get_option('foghlaimeoiri_'.$term_id.'_meta') ){
 			$category_image = sanitize_text_field($opt_array['category_image']);
 		}
 

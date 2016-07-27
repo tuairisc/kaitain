@@ -21,19 +21,24 @@
 
 // Add field to edit category screen
 function kaitain_edit_children_order_meta_form($term_obj){	
-
-	highlight_string('<?php '.var_export($term_obj, true) );
+	//	debug code
+	//highlight_string('<?php '.var_export($term_obj, true) );
 
 	// clear values.
 	$children_order_meta = array();
 
 	// Clean tag id
-	$id = sanitize_text_field($_GET['tag_ID']);
+	$id = sanitize_text_field($term_obj->term_id);
 
 	if ( $opt_array = get_option( $id.'_meta') ){
 		$children_order_meta = $opt_array['children_order_meta'];
 		$use_display_order = $opt_array['use_display_order'];
+	} else {
+		$children_order_meta = array();
+		$use_display_order = false;
 	}
+	//	debug code
+	//highlight_string('<?php '.var_export(get_option( $id.'_meta'), true) );
 	?>
 
 	<tr class="form-field">
@@ -101,7 +106,7 @@ function kaitain_create_update_children_order_meta($term_id,$tt_id){
 
 
 	function input_validation($value) {
-		
+		// if value not negative use it, otherwise set it to -1
 		if ( $value == absint( $value ) ) {
 			return $value;
 		} else {
@@ -114,30 +119,29 @@ function kaitain_create_update_children_order_meta($term_id,$tt_id){
 
 		$input = array_map( 'input_validation', $_POST['children_order_meta'] );
 
-		if ( !is_array( $input ) ) {
-			return;
+		if ( is_array( $input ) ) {
+
+			// $input = array_filter($input, function ($v, $k) {
+			// 	// returns true when both key and value are integers 
+			// 	return is_int($k) && is_int($v);
+			// }, ARRAY_FILTER_USE_BOTH);
+
+			// sort array keys by value (display order);
+			asort( $input );
+
+			// reset values to ascending display order
+			$i = 1;
+			$ordered_input = array();
+			foreach ( $input as $k => $v ) {
+			 	if ( $v != '-1' ){
+			 		$ordered_input[$k] = $i;
+			 		$i++;
+			 	}
+			}
+			unset($i);
+
+			$update['children_order_meta'] = $ordered_input;
 		}
-
-		$input = array_filter($input, function ($v, $k) {
-			// returns true when both key and value are integers 
-			return (int)$k && (int)$v;
-		}, ARRAY_FILTER_USE_BOTH);
-
-		// sort array keys by value (display order);
-		asort( $input );
-
-		// reset values to ascending display order
-		$i = 1;
-		$ordered_input = array();
-		foreach ( $input as $k => $v ) {
-		 	if ( $v != '-1' ){
-		 		$ordered_input[$k] = $i;
-		 		$i++;
-		 	}
-		}
-		unset($i);
-
-		$update['children_order_meta'] = $ordered_input;
 
 	}
 
