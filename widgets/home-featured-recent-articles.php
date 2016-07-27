@@ -46,6 +46,9 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
 
         $featured = array();
         $featured_list = kaitain_get_featured_list(false);
+        echo "<pre>";
+        highlight_string( '<?php '. var_export($featured_list, true) . ' ');
+        echo "</pre>";
         //$sticky_id = kaitain_get_sticky_id();
         $featured = get_posts(array(
                         'numberposts' => -1,

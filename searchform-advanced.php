@@ -24,7 +24,17 @@ if ( !isset($_GET['as-p']) ){
 }
 
 // make custom GET request for advanced actions
-$authorsearch = home_url('/authors/');
+
+$pages = get_pages(array(
+    'meta_key' => '_wp_page_template',
+    'meta_value' => 'columnist-page.php'
+));
+
+$authorsearch = home_url( '/'.$pages[0]->post_title.'/44444' );
+
+
+
+//$authorsearch = home_url('/authors/');
 // $authorsearch = $authorsearch.'?c=';
 $advanced_action = esc_url(home_url('/'));
 

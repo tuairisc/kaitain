@@ -615,7 +615,7 @@ function education_landing_shortcode($atts) {
 }
 
 function education_banner_shortcode($attributes, $content = null) {
-    /**
+    *
      * Education Banner Shortcode
      * --------------------------
      * Generate either a tall or short dividing subheading banners for within
@@ -624,7 +624,7 @@ function education_banner_shortcode($attributes, $content = null) {
      * @param {array} $attributes Shortcode attributes.
      * @param {string} $content Banner message.
      * @return {string} $banner Dividing banner.
-     */
+     
 
     $banner = array();
     // h2
