@@ -92,7 +92,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                     foreach ($featured as $post) {
                         setup_postdata($post);
                         echo '<tr><td>'.($i+1).'</td>';
-                        echo '<td><a href="'.get_permalink($post->ID).'">'.kaitain_excerpt(get_the_title($post->ID), 5).'</a>';
+                        echo '<td><a href="'.get_permalink($post->ID).'">'.kaitain_excerpt(get_the_title($post->ID), 40).'</a>';
                         echo '</td><td>';
                         ?>
                         <select id="<?php printf( $this->get_field_id('featured_post_actions') ); ?>" name="<?php printf($this->get_field_name('featured_post_actions'). '[%d]', $i ); ?>">
@@ -210,7 +210,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                         </a>
                             <div class="featured-top-70-text">
                                 <a class="article--lead__link <?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php echo get_permalink($featured[0]->ID); ?>">
-                                    <h1 class="title article--lead__title"><?php printf( kaitain_excerpt( $featured[0]->post_title, 55 )); ?></h1>
+                                    <h1 class="title article--lead__title"><?php printf( kaitain_excerpt( $featured[0]->post_title, 300)); ?></h1>
                                 </a>
                             <!-- Author Meta -->
                             <header class="article--lead__header">
@@ -221,7 +221,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                 </h4> 
                                 <h5 class="post-meta article--lead__meta"><time datetime="<?php echo the_date('Y-m-d H:i'); ?>"><?php printf("%s ag %s", get_the_time('l, F j Y', $featured[0]->ID), get_the_time('g:i a', $featured[0]->ID)); ?></time></h5>
                             </header>
-                            <p class="post-excerpt article--lead__excerpt"><?php printf( kaitain_excerpt( $featured[0]->post_excerpt, 55 )); ?></p>
+                            <p class="post-excerpt article--lead__excerpt"><?php printf( kaitain_excerpt( $featured[0]->post_excerpt, false )); ?></p>
                             </div>
                     </article>
                 </div>
@@ -238,7 +238,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                 <?php post_image_html($featured[1]->ID, 'tc_home_feature_small featured-post-image-inner', true); ?>
                             </div>
                             <div class="title-container col-sm-12 col-xs-8">
-                                <h5 class="title article--small__title"><?php printf( kaitain_excerpt( $featured[1]->post_title, 30 ) ); ?></h5>
+                                <h5 class="title article--small__title"><?php printf( kaitain_excerpt( $featured[1]->post_title, 160 ) ); ?></h5>
                             </div>
                         </a>
                     </article>
@@ -255,7 +255,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                     <?php post_image_html($featured[2]->ID, 'tc_home_feature_small featured-post-image-inner', true); ?>
                                 </div>
                                 <div class="title-container col-md-12 col-sm-8 col-xs-8">
-                                    <h6 class="title article--small__title"><?php printf( kaitain_excerpt( $featured[2]->post_title, 20 )); ?></h6>
+                                    <h6 class="title article--small__title"><?php printf( kaitain_excerpt( $featured[2]->post_title, 160 )); ?></h6>
                                 </div>
                             </a>
                         </article>
@@ -271,7 +271,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                     <?php post_image_html($featured[3]->ID, 'tc_home_feature_small featured-post-image-inner', true); ?>
                                 </div>
                                 <div class="title-container col-md-12 col-sm-8 col-xs-8">
-                                    <h6 class="title article--small__title"><?php printf( kaitain_excerpt( $featured[3]->post_title, 20 )); ?></h6>
+                                    <h6 class="title article--small__title"><?php printf( kaitain_excerpt( $featured[3]->post_title, 160 )); ?></h6>
                                 </div>
                             </a>
                         </article>
@@ -289,7 +289,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                     <?php post_image_html($featured[4]->ID, 'tc_home_feature_small', true); ?>
                                 </div>
                                 <div class="title-container col-md-9 col-sm-8 col-xs-8">
-                                    <h6 class="title article--small__title"><?php printf( kaitain_excerpt( $featured[4]->post_title, 12 )); ?></h6>
+                                    <h6 class="title article--small__title"><?php printf( kaitain_excerpt( $featured[4]->post_title, 144 )); ?></h6>
                                 </div>
                             </a>
                         </article>
@@ -320,7 +320,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                 <?php post_image_html($featured[5]->ID, 'tc_home_feature_small', true); ?>
                             </div>
                             <div class="title-container col-sm-12 col-xs-8">
-                                <h5 class="title article--small__title"><?php printf( kaitain_excerpt( $featured[5]->post_title, 30 )); ?></h5>
+                                <h5 class="title article--small__title"><?php printf( kaitain_excerpt( $featured[5]->post_title, 200 )); ?></h5>
                             </div>
                         </a>
                     </article>
@@ -336,7 +336,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                 <?php post_image_html($featured[6]->ID, 'tc_home_feature_small', true); ?>
                             </div>
                             <div class="title-container col-md-12 col-sm-8 col-xs-8">
-                                <h5 class="title article--small__title"><?php printf(kaitain_excerpt($featured[6]->post_title, 55)); ?></h5>
+                                <h5 class="title article--small__title"><?php printf(kaitain_excerpt($featured[6]->post_title, 160)); ?></h5>
                             </div>
                         </a>
                     </article>
@@ -352,7 +352,7 @@ class Kaitain_Featured_Recent_Post_Widget extends WP_Widget {
                                 <?php post_image_html($featured[7]->ID, 'tc_home_feature_small', true); ?>
                             </div>
                             <div class="title-container col-md-12 col-sm-8 col-xs-8">
-                                <h5 class="title article--small__title"><?php printf(kaitain_excerpt($featured[7]->post_title, 55)); ?></h5>
+                                <h5 class="title article--small__title"><?php printf(kaitain_excerpt($featured[7]->post_title, 160)); ?></h5>
                             </div>
                         </a>
                     </article>

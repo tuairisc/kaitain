@@ -19,6 +19,8 @@ $post_classes = array(
     'article-recent', 'vspace--full'
 );
 
+$character_limit = 145;
+
 ?>
 
 <article <?php post_class($post_classes); ?> id="article-recent-<?php the_id(); ?>">
@@ -30,7 +32,7 @@ $post_classes = array(
         <div class="post-content article__postcontent col-sm-12 col-xs-8 <?php printf($trim['bg']); ?>">
             <header class="article-recent-header">
                 <h5 class="title article-recent-title vspace--quarter">
-                    <?php echo kaitain_excerpt( get_the_title(), 15 ); ?>
+                    <?php echo kaitain_excerpt( get_the_title(), $character_limit ); ?>
                 </h5>
                 <h6 class="post-date article__postmeta">
                     <time datetime="<?php the_time('Y-m-d H:i'); ?>"><?php printf("%s", get_the_time('l, F j Y')); ?></time>

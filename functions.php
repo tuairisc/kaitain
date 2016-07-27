@@ -467,7 +467,10 @@ $kaitain_social_meta = new Social_Meta(array(
  * Helper Functions used in theme
  * -----------------------------------------------------------------------------
  */
-function kaitain_excerpt( $excerpt, $limit=20 ) {
+function kaitain_excerpt( $excerpt, $limit=60 ) {
+
+    // Do a word limit excerpt 
+    /*
     $excerpt = explode(' ', $excerpt, $limit+1);
     if (count($excerpt)>=$limit) {
         array_pop($excerpt);
@@ -475,6 +478,19 @@ function kaitain_excerpt( $excerpt, $limit=20 ) {
     } else {
         $excerpt = implode(" ",$excerpt);
     } 
+    */
+
+    // Do a character limit excerpt
+    $limit = intval($limit);
+    if ($limit != false && $limit != 0 ){
+        $excerpt = substr($excerpt, 0, $limit);
+        if (strlen($excerpt)>=$limit) {
+            $excerpt = $excerpt . '...';
+        }
+    } else {
+        $excerpt = substr($excerpt, 0);
+    }
+
     $excerpt = preg_replace('`\[[^\]]*\]`','',$excerpt);
     return $excerpt;
 }

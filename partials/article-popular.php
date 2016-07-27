@@ -19,7 +19,7 @@ $post_classes = array(
     'article-popular', 'vspace--full', 'col-md-12', 'col-sm-12', 'col-xs-12'
 );
 
-$limit = 7; // words in title excerpt
+$limit = 60; // characters in title excerpt
 ?>
 
 <article <?php post_class($post_classes); ?> id="article-popular-<?php the_id(); ?>">
