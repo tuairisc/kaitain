@@ -73,7 +73,7 @@ $post_classes = array(
                                 $avatar = get_avatar($author);
                                 $has_avatar = ( strpos( $avatar, 'fallback-avatar' ) == false );
 
-                                 if ( !kaitain_is_verboten_user($author) && $has_avatar ) : ?>
+                                 if ( !kaitain_is_verboten_user($author) && $has_avatar  && !is_singular('foluntais')) : ?>
                                     <?php // Author photograph. ?>
                                     <div class="article--full__avatar">
                                         <?php 
@@ -82,7 +82,7 @@ $post_classes = array(
                                 <?php endif; ?>
 
                                 <div class="article--full__author-info">
-                                    <?php if (!kaitain_is_verboten_user($author)) : ?>
+                                    <?php if (!kaitain_is_verboten_user($author) && !is_singular('foluntais')) : ?>
                                         <?php // Author name, if not verboten. ?>
                                         <h5 class="author--meta__name">
                                             <a class="author-meta__link green-link--hover text--bold" href="<?php printf(get_author_posts_url($author)); ?>">

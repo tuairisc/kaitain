@@ -27,7 +27,7 @@ $query = new WP_Query( $args );
 if ( $query->have_posts() ) {
     while ( $query->have_posts() ) {
         $query->the_post();
-    	kaitain_partial('article', 'archive');
+    	kaitain_partial('archive', 'foluntais');
     }
 }
 
