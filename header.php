@@ -82,5 +82,5 @@ $placeholder = __('Cuardaigh', 'kaitain');
             </button>
         </div>
     <?php endif; ?>
-    <main class="main "id="main">
+    <main class="main " id="main">
         <div class="main__content" id="main__content">

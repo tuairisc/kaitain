@@ -18,7 +18,7 @@ get_header();
 if (have_posts()) {
     while (have_posts()) {
         the_post();
-       kaitain_partial('article', 'archive');
+    	kaitain_partial('article', 'archive');
     }
 }
 
