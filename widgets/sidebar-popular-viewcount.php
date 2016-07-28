@@ -41,7 +41,7 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
             'widget_title' => __('Most Viewed', 'kaitain'),
             'max_posts' => 10,
             'elapsed_days' => '7',
-            'word_limit' => 7
+            'character_limit' => 7
         );
 
         $instance = wp_parse_args($instance, $defaults);
@@ -90,8 +90,8 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
                 </select>
             </li>
              <li>
-                <label for="<?php printf($this->get_field_id('word_limit')); ?>"><?php _e('Word limit for post titles:', 'kaitain'); ?></label>
-                <input id="<?php printf($this->get_field_id('word_limit')); ?>" type="number" name="<?php printf($this->get_field_name('word_limit')); ?>">
+                <label for="<?php printf($this->get_field_id('character_limit')); ?>"><?php _e('Word limit for post titles:', 'kaitain'); ?></label>
+                <input id="<?php printf($this->get_field_id('character_limit')); ?>" type="number" name="<?php printf($this->get_field_name('character_limit')); ?>">
             </li>
         </ul>
         <script>
@@ -101,7 +101,7 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
                 $('<?php printf('#%s', $this->get_field_id("elapsed_days")); ?>').val('<?php printf($instance["elapsed_days"]); ?>');
                 // Set 'max_posts' selected option. 
                 $('<?php printf('#%s', $this->get_field_id("max_posts")); ?>').val('<?php printf($instance["max_posts"]); ?>');
-                $('<?php printf('#%s', $this->get_field_id("word_limit")); ?>').val('<?php printf($instance["word_limit"]); ?>');
+                $('<?php printf('#%s', $this->get_field_id("character_limit")); ?>').val('<?php printf($instance["character_limit"]); ?>');
             });
         </script>
         <?php
@@ -120,7 +120,7 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
         $defaults['widget_title'] = strip_tags($new_args['widget_title']);
         $defaults['max_posts'] = $new_args['max_posts'];
         $defaults['elapsed_days'] = $new_args['elapsed_days'];
-        $defaults['word_limit'] = $new_args['word_limit'];
+        $defaults['character_limit'] = $new_args['character_limit'];
         return $defaults;
     }
 
@@ -135,6 +135,7 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
         global $post;
 
         $key = get_option('kaitain_view_counter_key');
+
         $title = apply_filters('widget_title', $instance['widget_title']);
 
         $widget_id = $this->number;
@@ -144,7 +145,7 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
         $before_widget_title = '<h3 class="widget--home__title vspace--half">';
         $widget_title = apply_filters('widget_title', $instance['widget_title']);
 
-        if (!($popular = get_transient('sidebar_popular_posts'))) {
+        //if (!($popular = get_transient('sidebar_popular_posts'))) {
             $popular = get_posts(array(
                 'post_type' => 'post',
                 'meta_key' => $key, 
@@ -157,9 +158,14 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
                     'inclusive' => true
                 )
             ));
-
+        echo "<Pre>";
+        echo ' ###### after_date : ';
+        var_dump($start_date->format('Y-m-d'));
+        echo "  Before: ";
+        var_dump(date('Y-m-d'));
+        echo "</pre>";
             set_transient('sidebar_popular_posts', $popular, get_option('kaitain_transient_timeout')); 
-        }
+        //}
 
         if (!empty($defaults['before_widget'])) {
             //printf($defaults['before_widget']);
@@ -172,6 +178,11 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
 
         foreach ($popular as $index => $post) {
             setup_postdata($post);
+
+            // debug  
+            //print_r('  @   post id: '. $post->ID);
+            //print_r(' '.kaitain_get_view_count($post) .' # ');
+
             // kaitain_partial('article', 'popular');
 
             $trim = kaitain_section_css(get_the_category()[0]);
@@ -190,7 +201,7 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
                     <div class="post-content article__postcontent col-md-9 col-sm-8 col-xs-8">
                         <header class="article-popular-header <?php //printf($trim['bg']); ?>">
                             <h5 class="title article-popular-title vspace--quarter">
-                                <?php echo kaitain_excerpt(get_the_title(), $instance['word_limit']); ?>
+                                <?php echo kaitain_excerpt(get_the_title(), $instance['character_limit']); ?>
                             </h5>
                             <h6 class="post-date article__postmeta">
                                 <time datetime="<?php the_time('Y-m-d H:i'); ?>"><?php printf("%s", get_the_time('l, F j Y')); ?></time>

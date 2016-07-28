@@ -57,6 +57,9 @@ add_option('kaitain_transient_timeout', 60 * 20, '', true);
 // Flag post as job.
 add_option('kaitain_notice_post_key', 'kaitain_is_notice', '', true);
 
+// name of the meta key used for tracking post viewcount
+add_option('kaitain_view_counter_key', 'kaitain_single_post_view_count', '', true );
+
 // Users whose name and photo should not appear next to posts.
 add_option('kaitain_verboten_users', array(1, 4, 37, 54), '', true);
 
