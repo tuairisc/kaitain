@@ -145,7 +145,7 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
         $before_widget_title = '<h3 class="widget--home__title vspace--half">';
         $widget_title = apply_filters('widget_title', $instance['widget_title']);
 
-        //if (!($popular = get_transient('sidebar_popular_posts'))) {
+        if (!($popular = get_transient('sidebar_popular_posts'))) {
             $popular = get_posts(array(
                 'post_type' => 'post',
                 'meta_key' => $key, 
@@ -158,14 +158,9 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
                     'inclusive' => true
                 )
             ));
-        echo "<Pre>";
-        echo ' ###### after_date : ';
-        var_dump($start_date->format('Y-m-d'));
-        echo "  Before: ";
-        var_dump(date('Y-m-d'));
-        echo "</pre>";
+
             set_transient('sidebar_popular_posts', $popular, get_option('kaitain_transient_timeout')); 
-        //}
+        }
 
         if (!empty($defaults['before_widget'])) {
             //printf($defaults['before_widget']);
@@ -178,10 +173,6 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
 
         foreach ($popular as $index => $post) {
             setup_postdata($post);
-
-            // debug  
-            //print_r('  @   post id: '. $post->ID);
-            //print_r(' '.kaitain_get_view_count($post) .' # ');
 
             // kaitain_partial('article', 'popular');
 
