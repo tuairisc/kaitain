@@ -52,7 +52,16 @@ $post_classes = array(
         <?php post_image_html(get_the_ID(), 'full', true); ?>
         <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
     </div>
-
+    <?php
+    if ( get_field('featured-image-caption') ) { ?>
+        <div class="col-xs-12 caption vspace--full">
+            <p>
+                <?php the_field('featured-image-caption'); ?>
+            </p>
+        </div>
+    <?php 
+    }
+    ?>
     <!-- <div class="flex-row"> -->
 
         <div class="main__content" id="main__content">

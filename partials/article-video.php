@@ -18,7 +18,7 @@ $trim = kaitain_section_css(get_the_category()[0]);
 $post_classes = array(
     'widget-video-article', 'col-xs-12'
 );
-$word_limit = 20;
+$character_limit = 120;
 ?>
 <article <?php post_class($post_classes); ?> id="article--video--<?php the_id(); ?>">
     <a class="article-video-link <?php printf( $trim['texthover'] ); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
@@ -31,7 +31,7 @@ $word_limit = 20;
             ?>
         </div>
         <div class="title-container col-xs-6 col-sm-6 col-md-6">
-            <h5 class="title article--small__title"><?php printf( kaitain_excerpt( get_the_title(), $word_limit )); ?></h5>
+            <h5 class="title article--small__title"><?php printf( kaitain_excerpt( get_the_title(), $character_limit )); ?></h5>
         </div>
     </a>
 </article>

@@ -18,7 +18,7 @@ $trim = kaitain_section_css(get_the_category()[0]);
 $post_classes = array(
     'widget-gallery-article', 'col-xs-12'
 );
-$word_limit = 20;
+$character_limit = 120;
 ?>
 <article <?php post_class($post_classes); ?> id="article--gallery--<?php the_id(); ?>">
     <a class="article-gallery-link <?php printf( $trim['texthover'] ); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
@@ -27,7 +27,7 @@ $word_limit = 20;
             <?php post_image_html( get_the_ID(), 'tc_home_feature_small', true ); ?>
         </div>
         <div class="title-container col-xs-12 col-sm-12 col-md-12">
-            <h5 class="title article--small__title"><?php printf( kaitain_excerpt( get_the_title(), $word_limit )); ?></h5>
+            <h5 class="title article--small__title"><?php printf( kaitain_excerpt( get_the_title(), $character_limit )); ?></h5>
         </div>
     </a>
 </article>
