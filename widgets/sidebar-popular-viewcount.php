@@ -41,7 +41,7 @@ class Kaitain_Popular_Posts_Widget extends WP_Widget {
             'widget_title' => __('Most Viewed', 'kaitain'),
             'max_posts' => 10,
             'elapsed_days' => '7',
-            'character_limit' => 7
+            'character_limit' => 80
         );
 
         $instance = wp_parse_args($instance, $defaults);
