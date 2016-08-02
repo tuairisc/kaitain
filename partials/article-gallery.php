@@ -24,7 +24,7 @@ $character_limit = 120;
     <a class="article-gallery-link <?php printf( $trim['texthover'] ); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
         <!-- <div class="section-trim <?php printf( $trim['bg'] ); ?>"></div> -->
         <div class="thumbnail article-gallery-thumb img-frame col-xs-12 col-sm-12 col-md-12 ">
-            <?php post_image_html( get_the_ID(), 'tc_home_feature_small', true ); ?>
+            <?php post_image_html( get_the_ID(), 'tc_home_category_lead', true ); ?>
         </div>
         <div class="title-container col-xs-12 col-sm-12 col-md-12">
             <h5 class="title article--small__title"><?php printf( kaitain_excerpt( get_the_title(), $character_limit )); ?></h5>
