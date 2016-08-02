@@ -44,6 +44,18 @@ function kaitain_featured_box_content($post) {
     $is_sticky = kaitain_is_post_sticky($post);
     $expiry = false;
 
+
+    // check if meta option is empty, if so set to default on, otherwise use whatever has been set
+    if ( get_post_meta($post->ID, 'kaitain_is_featured_post', true) == '' ) {
+        echo "It's empty when they are not set";
+        $is_featured = true;
+    } else {
+        $is_featured = !!get_post_meta($post->ID, 'kaitain_is_featured_post', true);   
+    }
+
+
+
+
     if ($is_featured) {
         $is_sticky = kaitain_is_post_sticky($post);
 
@@ -126,6 +138,9 @@ function kaitain_update_featured_meta_box($post_id) {
     $make_sticky = (isset($_POST['make_sticky']) && $_POST['make_sticky'] === 'on');
 
     // Update meta.
+    update_post_meta($post_id, 'kaitain_is_featured_post', $make_featured);
+
+    // Update Featured Post list (managed by includes/kaitain-featured-posts.php)
     kaitain_update_featured_posts($post_id, $make_featured);
 
     if ($make_featured && $make_sticky) {
