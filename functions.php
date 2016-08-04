@@ -254,10 +254,12 @@ function kaitain_image_sizes() {
     add_image_size('tc_home_feature_small', 190, 125, $crop);
 
     // Home authot widget.
-    add_image_size('tc_home_author', 180, 150, $crop);
+    //add_image_size('tc_home_author', 180, 150, $crop);
+    add_image_size('tc_home_author', 152, 152, $crop);
 
     // Sidebar widget post.
-    add_image_size('tc_post_sidebar', 136, 68, $crop);
+    //add_image_size('tc_post_sidebar', 136, 68, $crop);
+    add_image_size('tc_post_sidebar', 173, 100, $crop);
 
     // Category archive.
     add_image_size('tc_post_archive', 390, 195, $crop);
@@ -273,7 +275,8 @@ function kaitain_image_sizes() {
 
     // Main column category widget.
     add_image_size('tc_home_category_lead', 390, 200, $crop);
-    add_image_size('tc_home_category_small', 110, 60, $crop);
+    add_image_size('tc_home_category_small', 90, 76, $crop);
+
 }
 
 /**
