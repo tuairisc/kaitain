@@ -19,7 +19,7 @@ $post_classes = array(
     'article--full', 'vspace--full', 'article-full-featured-image'
 );
 
-$caption = get_field('featured-image-caption');
+$caption = get_field('featured_image_caption');
 
 
 ?>
@@ -63,6 +63,8 @@ $caption = get_field('featured-image-caption');
             </p>
         </div>
     <?php 
+    } else {
+        echo "<!-- no caption -->";
     }
     ?>
 

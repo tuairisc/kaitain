@@ -58,6 +58,8 @@ add_action('wp_head', function() {
         'ie-fallback' => array($css_path . 'ie.css', 'lte IE 9')
     );
 
+    wp_enqueue_script('font-awesome', "https://use.fontawesome.com/b744d232cf.js");
+
     kaitain_js($kaitain_js, $kaitain_conditional_js, $js_path);
     kaitain_css($kaitain_css, $kaitain_conditional_css, $kaitain_fonts);
 });
