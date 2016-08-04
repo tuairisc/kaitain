@@ -19,6 +19,9 @@ $post_classes = array(
     'article--full', 'vspace--full', 'article-full-featured-image'
 );
 
+$caption = get_field('featured-image-caption');
+
+
 ?>
 
 <div class="trim-block noprint">
@@ -53,27 +56,22 @@ $post_classes = array(
         <div class="archive-trim-bottom <?php printf($trim['bg']); ?>"></div>
     </div>
     <?php
-    if ( get_field('featured-image-caption') ) { ?>
+    if ( $caption ) { ?>
         <div class="col-xs-12 caption vspace--full">
             <p>
-                <?php the_field('featured-image-caption'); ?>
+                <?php echo esc_html($caption); ?>
             </p>
         </div>
     <?php 
     }
     ?>
-    <!-- <div class="flex-row"> -->
 
         <div class="main__content" id="main__content">
 
             <article <?php post_class($post_classes); ?> id="article--full--<?php the_ID(); ?>">
                 <header class="article--full__header">
 
-                    <!-- <?php // Article title ?>
-                    <h1 class="title article--full__title"><a class="green-link--hover" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1> -->
-
                     <?php if (!is_page()) : ?>
-                        <!-- <p class="article--full__excerpt"><?php printf(get_the_excerpt()); ?></p> -->
                         <div class="article--full__postmeta">
 
                             <div class="article--full__author">
