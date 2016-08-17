@@ -271,7 +271,39 @@ class Kaitain_Recent_Posts_Container_Widget extends WP_Widget {
 
             foreach ($recent as $post) {
                 setup_postdata($post);
-                kaitain_partial('article', 'recent');
+
+                // was using the partials template however the category trim colours were getting a bit messed up
+                // commenting this out and using modified code here to use the scoped category
+                // kaitain_partial('article', 'recent'); 
+
+                // use this categories css
+                $trim = kaitain_section_css($columns[$i]['column_category']);
+
+                $post_classes = array(
+                    'article-recent', 'vspace--full'
+                );
+                ?>
+
+                <article <?php post_class($post_classes); ?> id="article-recent-<?php the_id(); ?>">
+                    <a class="<?php printf($trim['texthover']); ?>" rel="bookmark" href="<?php the_permalink(); ?>">
+                        <div class="archive-trim-top <?php printf($trim['bg']); ?>"></div>
+                        <div class="thumbnail article-recent-thumbnail img-frame col-sm-12 col-xs-4">
+                            <?php post_image_html(get_the_ID(), 'tc_post_sidebar', true); ?>
+                        </div>
+                        <div class="post-content article__postcontent col-sm-12 col-xs-8 <?php printf($trim['bg']); ?>">
+                            <header class="article-recent-header">
+                                <h5 class="title article-recent-title vspace--quarter">
+                                    <?php echo kaitain_excerpt( get_the_title(), $character_limit ); ?>
+                                </h5>
+                                <h6 class="post-date article__postmeta">
+                                    <time datetime="<?php the_time('Y-m-d H:i'); ?>"><?php printf("%s", get_the_time('l, F j Y')); ?></time>
+                                </h6>
+                            </header>
+                        </div>
+                    </a>
+                </article>
+                <?php
+
             }
 
             echo '</div></div>';
