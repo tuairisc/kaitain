@@ -25,7 +25,7 @@ $placeholder = __('Cuardaigh', 'kaitain');
 <head>
 <meta charset="<?php printf(get_option('blog_charset')); ?>" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1, user-scalable=yes">
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
