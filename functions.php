@@ -595,6 +595,31 @@ function change_author_permalinks() {
 
 add_action('init','change_author_permalinks');
 
+// For custom template authoroutput
+function get_view_count($post_id = null) {
+    /**
+     * Fetch Article View Count
+     * ------------------------
+     * @param {int} $post_id
+     * @return {int} $count Post view count.
+     */
+
+    global $custom_post_fields;
+
+    if (is_null($post_id)) {
+        return;
+    }
+
+    $key = $custom_post_fields[0];
+    $count = (int) get_post_meta($post_id, $key, true);
+
+    if (!is_integer($count)) {
+        update_post_meta($post_id, $key, 0);
+        return 0;
+    }
+
+    return $count;
+}
 
 
 // // For the shortcodes from gazeti
