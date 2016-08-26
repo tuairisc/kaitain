@@ -20,6 +20,7 @@ $section_cat = kaitain_current_section_category();
 
 if (have_posts()) {
     while (have_posts()) {
+    	increment_view_counter();
         the_post();
 
         // checks post for fullwidth image postmeta existance

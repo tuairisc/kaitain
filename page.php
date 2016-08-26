@@ -18,6 +18,7 @@ get_header();
 if (have_posts()) {
     while (have_posts()) {
         the_post();
+    	increment_view_counter();
        kaitain_partial('article', 'full');
     }
 } else {

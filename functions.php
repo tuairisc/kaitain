@@ -15,6 +15,11 @@
 
 $GLOBALS['kaitain_version'] = 1.0;
 
+$custom_post_fields = array(
+    // All important custom fields.
+    'tuairisc_view_counter'
+);
+
 /**
  * Kaitain Setup
  * -----------------------------------------------------------------------------
@@ -619,6 +624,31 @@ function get_view_count($post_id = null) {
     }
 
     return $count;
+}
+
+function increment_view_counter($post_id = null) {
+    /**
+     * Increment Post View Count
+     * -------------------------
+     * Requested by Sean. If post is not of custom type and viewer is not logged
+     * in, then increment counter by +1.
+     *
+     * @param {int} $post_id
+     * @return {none}
+     */
+
+    global $custom_post_fields;
+
+    if (is_null($post_id)) {
+        $post_id = get_the_ID();
+    }
+
+    if (!is_custom_type() && !is_user_logged_in()) {
+        $key = $custom_post_fields[0];
+        $count = (int) get_post_meta($post_id, $key, true);
+        $count++;
+        update_post_meta($post_id, $key, $count);
+    }
 }
 
 
