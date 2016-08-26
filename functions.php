@@ -20,6 +20,7 @@ $custom_post_fields = array(
     'tuairisc_view_counter'
 );
 
+
 /**
  * Kaitain Setup
  * -----------------------------------------------------------------------------
@@ -643,7 +644,7 @@ function increment_view_counter($post_id = null) {
         $post_id = get_the_ID();
     }
 
-    if (!is_custom_type() && !is_user_logged_in()) {
+    if (!is_user_logged_in()) {
         $key = $custom_post_fields[0];
         $count = (int) get_post_meta($post_id, $key, true);
         $count++;
