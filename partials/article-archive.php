@@ -36,7 +36,7 @@ $trim = kaitain_section_css(get_the_category()[0]);
                 </h4>
                 <h5 class="post-date"><time datetime="<?php the_date('Y-m-d H:i'); ?>"><?php printf("%s", get_the_time('l, F j Y')); ?></time></h5>
             </header>
-            <p class="post-excerpt article-archive-excerpt"><?php printf(get_the_excerpt()); ?></p>
+            <p class="post-excerpt article-archive-excerpt"><?php the_excerpt(); ?></p>
         </div>
     </a>
 </article>

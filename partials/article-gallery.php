@@ -27,7 +27,7 @@ $character_limit = 120;
             <?php post_image_html( get_the_ID(), 'tc_home_category_lead', true ); ?>
         </div>
         <div class="title-container col-xs-12 col-sm-12 col-md-12">
-            <h5 class="title article--small__title"><?php printf( kaitain_excerpt( get_the_title(), $character_limit )); ?></h5>
+            <h5 class="title article--small__title"><?php echo kaitain_excerpt( get_the_title(), $character_limit ); ?></h5>
         </div>
     </a>
 </article>

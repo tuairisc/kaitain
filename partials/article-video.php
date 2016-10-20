@@ -31,7 +31,7 @@ $character_limit = 120;
             ?>
         </div>
         <div class="title-container col-xs-6 col-sm-6 col-md-6">
-            <h5 class="title article--small__title"><?php printf( kaitain_excerpt( get_the_title(), $character_limit )); ?></h5>
+            <h5 class="title article--small__title"><?php echo kaitain_excerpt( get_the_title(), $character_limit ); ?></h5>
         </div>
     </a>
 </article>
