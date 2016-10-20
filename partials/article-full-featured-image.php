@@ -48,8 +48,9 @@ $caption = get_field('featured_image_caption');
 <?php // Article title ?>
     <h1 class="title article--full__title col-xs-12"><a class="green-link--hover" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
     <?php if (!is_page()) { ?>
-        <p class="article--full__excerpt col-xs-12"><?php printf("%s", get_the_excerpt() ); ?></p>
-    <?php } ?>
+        <!-- 0 -->
+	<p class="article--full__excerpt col-xs-12"><?php echo get_the_excerpt(); ?><!-- 1 --></p>
+    <!-- 2 --><?php } ?>
     <?php // Featured image ?>
     <div class="thumbnail article--lead__thumb img-frame vspace--full">
         <?php post_image_html(get_the_ID(), 'full', true); ?>

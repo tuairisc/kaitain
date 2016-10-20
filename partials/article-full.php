@@ -27,7 +27,7 @@ $post_classes = array(
         <h1 class="title article--full__title"><a class="green-link--hover" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
 
         <?php if (!is_page()) : ?>
-            <p class="article--full__excerpt"><?php the_excerpt(); ?></p>
+            <p class="article--full__excerpt"><?php echo get_the_excerpt(); ?></p>
             <div class="article--full__postmeta">
 
                 <div class="article--full__author">
